@@ -111,6 +111,9 @@ export const StreamingResponseExtension = {
       // Append to buffer
       buffer += text;
       
+      // Log the received content
+      console.log('Received content:', text);
+      
       // Convert markdown to HTML
       const formattedHtml = markdownToHtml(buffer);
       
@@ -247,7 +250,34 @@ export const StreamingResponseExtension = {
           lastLineWasHeader = true;
           continue;
         }
-        // ... similar handling for h2 and h1 ...
+
+        if (line.startsWith('##')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<h2>${line.slice(2).trim()}</h2>`);
+          lastLineWasHeader = true;
+          continue;
+        }
+
+        if (line.startsWith('#')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<h1>${line.slice(1).trim()}</h1>`);
+          lastLineWasHeader = true;
+          continue;
+        }
 
         // Handle lists
         const orderedListMatch = line.match(/^\d+\.\s+(.+)/);
@@ -276,8 +306,29 @@ export const StreamingResponseExtension = {
           continue;
         }
 
-        // Handle paragraphs and other formatting
-        // ... rest of the markdown processing logic ...
+        // Handle regular text content
+        if (line.length > 0) {
+          if (!isInParagraph) {
+            processedLines.push('<p>');
+            isInParagraph = true;
+          }
+          processedLines.push(line);
+          if (nextLine.length === 0) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+        } else if (isInParagraph) {
+          processedLines.push('</p>');
+          isInParagraph = false;
+        }
+      }
+
+      // Close any open tags
+      if (currentList) {
+        processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+      }
+      if (isInParagraph) {
+        processedLines.push('</p>');
       }
 
       // Join lines and apply remaining markdown formatting
