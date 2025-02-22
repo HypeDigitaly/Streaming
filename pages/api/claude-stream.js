@@ -5,9 +5,8 @@ import { Anthropic } from '@anthropic-ai/sdk';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 export default async function handler(req, res) {
-  // Set CORS headers with specific origin
-  const origin = req.headers.origin || '*';
-  res.setHeader('Access-Control-Allow-Origin', origin);
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
