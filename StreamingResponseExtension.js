@@ -1,14 +1,14 @@
 export const StreamingResponseExtension = {
-  name: 'StreamingResponse',
-  type: 'response',
+  name: "StreamingResponse",
+  type: "response",
   match: ({ trace }) =>
-    trace.type === 'ext_streamingResponse' ||
-    trace.payload?.name === 'ext_streamingResponse',
+    trace.type === "ext_streamingResponse" ||
+    trace.payload?.name === "ext_streamingResponse",
   render: async ({ trace, element }) => {
-    console.log('🚀 StreamingResponseExtension: Starting render', { trace })
-    
-    const container = document.createElement('div')
-    container.className = 'streaming-response-container'
+    console.log("🚀 StreamingResponseExtension: Starting render", { trace });
+
+    const container = document.createElement("div");
+    container.className = "streaming-response-container";
 
     // Add enhanced styles for debug messages
     container.innerHTML = `
@@ -47,124 +47,137 @@ export const StreamingResponseExtension = {
       </style>
       <div class="debug-message debug-info">🔄 Initializing streaming response...</div>
       <div class="response-content" id="response-content"></div>
-    `
+    `;
 
     // Add container to element
-    element.appendChild(container)
+    element.appendChild(container);
 
     // Get reference to content div
-    const responseContent = container.querySelector('#response-content')
+    const responseContent = container.querySelector("#response-content");
 
     // Function to add debug messages to UI
-    function addDebugMessage(message, type = 'info') {
-      const debugDiv = document.createElement('div')
-      debugDiv.className = `debug-message debug-${type}`
-      debugDiv.textContent = message
-      container.insertBefore(debugDiv, responseContent)
-      console.log(`Debug ${type}:`, message)
+    function addDebugMessage(message, type = "info") {
+      const debugDiv = document.createElement("div");
+      debugDiv.className = `debug-message debug-${type}`;
+      debugDiv.textContent = message;
+      container.insertBefore(debugDiv, responseContent);
+      console.log(`Debug ${type}:`, message);
     }
 
     // Function to update content
     function updateContent(text) {
-      responseContent.textContent += text
+      responseContent.textContent += text;
       // Scroll to bottom
-      element.scrollIntoView({ behavior: 'smooth', block: 'end' })
+      element.scrollIntoView({ behavior: "smooth", block: "end" });
     }
 
     // Function to make Claude API call through proxy
     async function callClaudeAPI(payload) {
       try {
-        const proxyUrl = 'https://hypedigitaly-streaming.replit.app/api/claude-stream'
-        console.log('📤 Extension -> Proxy: Sending request to:', proxyUrl, payload)
-        addDebugMessage(`🌐 Connecting to Claude API via proxy: ${proxyUrl}`)
+        const proxyUrl =
+          "https://hypedigitaly-streaming.replit.app/api/claude-stream";
+        console.log(
+          "📤 Extension -> Proxy: Sending request to:",
+          proxyUrl,
+          payload,
+        );
+        addDebugMessage(`🌐 Connecting to Claude API via proxy: ${proxyUrl}`);
 
-        // Add CORS headers to the request
+        // Add CORS headers to the requests
         const response = await fetch(proxyUrl, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type',
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
           },
-          mode: 'cors', // Explicitly set CORS mode
-          credentials: 'include', // Include credentials if needed
-          body: JSON.stringify(payload)
-        })
+          mode: "cors", // Explicitly set CORS mode
+          credentials: "include", // Include credentials if needed
+          body: JSON.stringify(payload),
+        });
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        console.log('📥 Proxy -> Extension: Stream connection established')
-        addDebugMessage('✅ Stream connection established')
+        console.log("📥 Proxy -> Extension: Stream connection established");
+        addDebugMessage("✅ Stream connection established");
 
-        const reader = response.body.getReader()
-        const decoder = new TextDecoder()
-        let isFirstChunk = true
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let isFirstChunk = true;
 
-        while (true) { 
-          const { done, value } = await reader.read()
-          
+        while (true) {
+          const { done, value } = await reader.read();
+
           if (done) {
-            console.log('📥 Proxy -> Extension: Stream completed')
-            addDebugMessage('✅ Streaming completed')
-            break
+            console.log("📥 Proxy -> Extension: Stream completed");
+            addDebugMessage("✅ Streaming completed");
+            break;
           }
 
           // Process the stream chunks
-          const chunk = decoder.decode(value)
-          const lines = chunk.split('\n')
+          const chunk = decoder.decode(value);
+          const lines = chunk.split("\n");
 
           for (const line of lines) {
-            if (!line.trim() || !line.startsWith('data: ')) continue
-            if (line === 'data: [DONE]') continue
+            if (!line.trim() || !line.startsWith("data: ")) continue;
+            if (line === "data: [DONE]") continue;
 
             try {
-              const data = JSON.parse(line.slice(5))
-              console.log('📥 Claude -> Proxy -> Extension: Received chunk', data)
-              
+              const data = JSON.parse(line.slice(5));
+              console.log(
+                "📥 Claude -> Proxy -> Extension: Received chunk",
+                data,
+              );
+
               if (isFirstChunk) {
-                console.log('📝 First chunk received, starting content display')
-                addDebugMessage('🎯 Starting to receive Claude\'s response')
-                isFirstChunk = false
+                console.log(
+                  "📝 First chunk received, starting content display",
+                );
+                addDebugMessage("🎯 Starting to receive Claude's response");
+                isFirstChunk = false;
               }
 
               // Handle different event types
-              if (data.type === 'content_block_delta' && 
-                  data.delta.type === 'text_delta') {
-                updateContent(data.delta.text)
+              if (
+                data.type === "content_block_delta" &&
+                data.delta.type === "text_delta"
+              ) {
+                updateContent(data.delta.text);
               }
             } catch (e) {
-              console.warn('⚠️ Error processing chunk:', e)
+              console.warn("⚠️ Error processing chunk:", e);
               // Skip incomplete chunks silently
             }
           }
         }
       } catch (error) {
-        console.error('❌ Error in streaming response:', error)
-        addDebugMessage(`❌ Error: ${error.message}`, 'error')
-        responseContent.textContent = 'Error: Failed to get response from Claude API'
+        console.error("❌ Error in streaming response:", error);
+        addDebugMessage(`❌ Error: ${error.message}`, "error");
+        responseContent.textContent =
+          "Error: Failed to get response from Claude API";
       }
     }
 
     if (trace.payload) {
-      console.log('🎯 UI -> Extension: Received payload', trace.payload)
+      console.log("🎯 UI -> Extension: Received payload", trace.payload);
       await callClaudeAPI({
         model: trace.payload.model,
         max_tokens: trace.payload.max_tokens,
         temperature: trace.payload.temperature,
         userData: trace.payload.userData,
-        systemPrompt: trace.payload.systemPrompt
-      })
+        systemPrompt: trace.payload.systemPrompt,
+      });
     } else {
-      console.error('❌ No payload received from UI')
-      addDebugMessage('❌ Error: No payload received', 'error')
+      console.error("❌ No payload received from UI");
+      addDebugMessage("❌ Error: No payload received", "error");
     }
 
-    console.log('🏁 StreamingResponseExtension: Completing render')
+    console.log("🏁 StreamingResponseExtension: Completing render");
     window.voiceflow.chat.interact({
-      type: 'continue',
-    })
+      type: "continue",
+    });
   },
-}
+};
