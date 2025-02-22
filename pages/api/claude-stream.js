@@ -1,13 +1,22 @@
+
 import { Anthropic } from '@anthropic-ai/sdk'
 
 // Load environment variables
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY
 
 export default async function handler(req, res) {
-  console.log('🎯 Proxy: Received request from extension at:', req.headers.host)
-  console.log('🔍 Request URL:', req.url)
-  console.log('🌐 Full URL:', `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}${req.url}`)
-  
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
+
   if (req.method !== 'POST') {
     console.error('❌ Proxy: Invalid method', req.method)
     return res.status(405).json({ error: 'Method not allowed' })
@@ -75,4 +84,4 @@ export default async function handler(req, res) {
       details: error.message
     })
   }
-} 
+}
