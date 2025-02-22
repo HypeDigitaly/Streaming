@@ -10,7 +10,6 @@ export const StreamingResponseExtension = {
     const container = document.createElement("div");
     container.className = "streaming-response-container";
 
-    // Add enhanced styles for debug messages
     container.innerHTML = `
       <style>
         .streaming-response-container {
@@ -18,14 +17,17 @@ export const StreamingResponseExtension = {
           width: 100%;
           max-width: none;
           margin: 0;
-          padding: 0;
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
         }
         .response-content {
           font-size: 14px;
           line-height: 1.4;
           color: #374151;
-          margin: 0;
-          padding: 0;
+          white-space: pre-wrap;
+          word-break: break-word;
         }
         .debug-message {
           font-size: 12px;
@@ -33,6 +35,13 @@ export const StreamingResponseExtension = {
           margin: 4px 0;
           border-radius: 4px;
           font-family: monospace;
+          opacity: 0;
+          transform: translateY(-10px);
+          transition: all 0.3s ease;
+        }
+        .debug-message.visible {
+          opacity: 1;
+          transform: translateY(0);
         }
         .debug-info {
           background: #e5f6fd;
@@ -46,111 +55,95 @@ export const StreamingResponseExtension = {
         }
       </style>
       <div class="debug-message debug-info">🔄 Initializing streaming response...</div>
-      <div class="response-content" id="response-content"></div>
+      <div class="response-content"></div>
     `;
 
-    // Add container to element
     element.appendChild(container);
+    const responseContent = container.querySelector(".response-content");
+    let buffer = '';
 
-    // Get reference to content div
-    const responseContent = container.querySelector("#response-content");
-
-    // Function to add debug messages to UI
     function addDebugMessage(message, type = "info") {
       const debugDiv = document.createElement("div");
       debugDiv.className = `debug-message debug-${type}`;
       debugDiv.textContent = message;
-      container.insertBefore(debugDiv, responseContent);
-      console.log(`Debug ${type}:`, message);
-    }
 
-    // Function to update content
-    function updateContent(text) {
-      // Create a new text node with the chunk
-      const textNode = document.createTextNode(text);
-      
-      // Immediately append the new text node
-      responseContent.appendChild(textNode);
-      
-      // Force reflow to ensure content is displayed
-      void responseContent.offsetHeight;
-      
-      // Scroll to bottom immediately
-      const scrollContainer = findScrollableParent(responseContent) || window;
-      scrollContainer.scrollTo({
-        top: scrollContainer.scrollHeight,
-        behavior: 'auto'
-      });
-      
-      // Backup scroll after a short delay
+      // Add visible class after a brief delay for animation
       requestAnimationFrame(() => {
-        scrollContainer.scrollTo({
-          top: scrollContainer.scrollHeight,
-          behavior: 'smooth'
-        });
+        debugDiv.classList.add('visible');
       });
-    }
-    
-    // Helper function to find scrollable parent
-    function findScrollableParent(element) {
-      let parent = element.parentElement;
-      while (parent) {
-        const hasScroll = parent.scrollHeight > parent.clientHeight;
-        const style = window.getComputedStyle(parent);
-        const isScrollable = style.overflowY === 'auto' || style.overflowY === 'scroll';
-        
-        if (hasScroll && isScrollable) {
-          return parent;
-        }
-        parent = parent.parentElement;
+
+      container.insertBefore(debugDiv, responseContent);
+
+      // Remove old debug messages
+      const debugMessages = container.querySelectorAll('.debug-message');
+      if (debugMessages.length > 3) {
+        debugMessages[0].remove();
       }
-      return null;
     }
 
-    // Function to make Claude API call through proxy
+    function updateContent(text) {
+      if (!text) return;
+
+      buffer += text;
+      responseContent.textContent = buffer;
+
+      // Force layout recalculation
+      void responseContent.offsetHeight;
+
+      // Find scrollable container
+      const scrollContainer = findScrollableParent(element);
+      if (scrollContainer) {
+        const scrollOptions = { behavior: 'smooth' };
+        const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+
+        // Check if we're already near the bottom
+        const isNearBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= maxScroll - 100;
+
+        if (isNearBottom) {
+          scrollContainer.scrollTo({
+            top: scrollContainer.scrollHeight,
+            ...scrollOptions
+          });
+        }
+      }
+    }
+
+    function findScrollableParent(el) {
+      while (el) {
+        const style = window.getComputedStyle(el);
+        const overflowY = style.overflowY;
+
+        if (overflowY === 'auto' || overflowY === 'scroll') {
+          return el;
+        }
+        el = el.parentElement;
+      }
+      return window;
+    }
+
     async function callClaudeAPI(payload) {
       try {
-        const proxyUrl =
-          "https://hypedigitaly-streaming.replit.app/api/claude-stream";
-        console.log(
-          "📤 Extension -> Proxy: Sending request to:",
-          proxyUrl,
-          payload,
-        );
-        addDebugMessage(`🌐 Connecting to Claude API via proxy: ${proxyUrl}`);
+        const proxyUrl = "https://hypedigitaly-streaming.replit.app/api/claude-stream";
+        addDebugMessage(`🌐 Connecting to Claude API...`);
 
-        // Add CORS headers to the requests
         const response = await fetch(proxyUrl, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           mode: "cors",
           credentials: "omit",
           body: JSON.stringify(payload),
         });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-        console.log("📥 Proxy -> Extension: Stream connection established");
-        addDebugMessage("✅ Stream connection established");
-
+        addDebugMessage("✅ Stream connected");
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
-        let isFirstChunk = true;
 
         while (true) {
           const { done, value } = await reader.read();
+          if (done) break;
 
-          if (done) {
-            console.log("📥 Proxy -> Extension: Stream completed");
-            addDebugMessage("✅ Streaming completed");
-            break;
-          }
-
-          // Process the stream chunks
           const chunk = decoder.decode(value, { stream: true });
           const lines = chunk.split("\n");
 
@@ -160,43 +153,24 @@ export const StreamingResponseExtension = {
 
             try {
               const data = JSON.parse(line.slice(5));
-              console.log(
-                "📥 Claude -> Proxy -> Extension: Received chunk",
-                data,
-              );
-
-              if (isFirstChunk) {
-                console.log(
-                  "📝 First chunk received, starting content display",
-                );
-                addDebugMessage("🎯 Starting to receive Claude's response");
-                isFirstChunk = false;
-              }
-
-              // Immediately process and display each chunk
               if (data.type === "content_block_delta" && data.delta.type === "text_delta") {
-                const text = data.delta.text;
-                updateContent(text);
-                
-                // Force immediate DOM update
-                void container.offsetHeight;
+                updateContent(data.delta.text);
               }
             } catch (e) {
-              console.warn("⚠️ Error processing chunk:", e);
-              // Skip incomplete chunks silently
+              console.warn("Warning: Skipping incomplete chunk");
             }
           }
         }
+
+        addDebugMessage("✅ Streaming completed");
       } catch (error) {
-        console.error("❌ Error in streaming response:", error);
+        console.error("Error in streaming response:", error);
         addDebugMessage(`❌ Error: ${error.message}`, "error");
-        responseContent.textContent =
-          "Error: Failed to get response from Claude API";
+        responseContent.textContent = "Error: Failed to get response from Claude API";
       }
     }
 
     if (trace.payload) {
-      console.log("🎯 UI -> Extension: Received payload", trace.payload);
       await callClaudeAPI({
         model: trace.payload.model,
         max_tokens: trace.payload.max_tokens,
@@ -205,13 +179,9 @@ export const StreamingResponseExtension = {
         systemPrompt: trace.payload.systemPrompt,
       });
     } else {
-      console.error("❌ No payload received from UI");
       addDebugMessage("❌ Error: No payload received", "error");
     }
 
-    console.log("🏁 StreamingResponseExtension: Completing render");
-    window.voiceflow.chat.interact({
-      type: "continue",
-    });
+    window.voiceflow.chat.interact({ type: "continue" });
   },
 };
