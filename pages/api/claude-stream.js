@@ -62,8 +62,22 @@ export default async function handler(req, res) {
       })
     });
 
-    // Pipe the response directly to client
-    response.body.pipe(res);
+    // Instead of piping, manually forward the stream
+    const reader = response.body.getReader();
+    
+    // Read the stream
+    while (true) {
+      const { done, value } = await reader.read();
+      
+      if (done) {
+        break;
+      }
+      
+      // Forward the chunks to the client
+      res.write(value);
+    }
+
+    res.end();
 
   } catch (error) {
     console.error('❌ Proxy: Error in stream handling:', error);
