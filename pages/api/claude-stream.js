@@ -1,4 +1,3 @@
-
 import { Anthropic } from '@anthropic-ai/sdk';
 
 // Load environment variables 
@@ -84,4 +83,15 @@ export default async function handler(req, res) {
       details: error.message
     });
   }
+}
+
+function updateContent(text) {
+  // Create a new text node for better performance
+  const textNode = document.createTextNode(text);
+  responseContent.appendChild(textNode);
+  
+  // Ensure smooth scrolling with each update
+  requestAnimationFrame(() => {
+    element.scrollIntoView({ behavior: "smooth", block: "end" });
+  });
 }
