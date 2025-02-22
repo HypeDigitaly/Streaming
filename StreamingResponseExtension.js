@@ -85,24 +85,38 @@ export const StreamingResponseExtension = {
       if (!text) return;
 
       buffer += text;
-      responseContent.textContent = buffer;
+      
+      // Create temporary container for new content
+      const tempContainer = document.createElement('span');
+      tempContainer.textContent = text;
+      tempContainer.style.opacity = '0';
+      responseContent.appendChild(tempContainer);
+
+      // Trigger animation
+      requestAnimationFrame(() => {
+        tempContainer.style.transition = 'opacity 0.3s ease';
+        tempContainer.style.opacity = '1';
+      });
 
       // Force layout recalculation
       void responseContent.offsetHeight;
 
-      // Find scrollable container
+      // Enhanced scroll handling with multiple attempts
       const scrollContainer = findScrollableParent(element);
       if (scrollContainer) {
         const scrollOptions = { behavior: 'smooth' };
         const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-
-        // Check if we're already near the bottom
         const isNearBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= maxScroll - 100;
 
         if (isNearBottom) {
-          scrollContainer.scrollTo({
-            top: scrollContainer.scrollHeight,
-            ...scrollOptions
+          // Multiple scroll attempts for reliability
+          [0, 50, 100].forEach(delay => {
+            setTimeout(() => {
+              scrollContainer.scrollTo({
+                top: scrollContainer.scrollHeight,
+                ...scrollOptions
+              });
+            }, delay);
           });
         }
       }
