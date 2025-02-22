@@ -87,13 +87,10 @@ export const StreamingResponseExtension = {
         const response = await fetch(proxyUrl, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type",
+            "Content-Type": "application/json"
           },
-          mode: "cors", // Explicitly set CORS mode
-          credentials: "include", // Include credentials if needed
+          mode: "cors",
+          credentials: "omit",
           body: JSON.stringify(payload),
         });
 
