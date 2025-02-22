@@ -10,7 +10,6 @@ export const StreamingResponseExtension = {
     const container = document.createElement('div');
     container.className = 'streaming-response-container';
     
-    // Create the base structure with similar UI to PerplexityReasoner
     container.innerHTML = `
       <style>
         .streaming-response-container {
@@ -19,122 +18,81 @@ export const StreamingResponseExtension = {
           max-width: none;
           margin: 0;
           padding: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-        }
-        .thinking-section {
-          background-color: #F9FAFB;
-          border-radius: 12px;
-          padding: 16px;
-          margin: 0;
-          width: 100%;
-          box-sizing: border-box;
-          transition: all 0.3s ease;
-        }
-        .thinking-section.collapsed {
-          padding: 10px 16px;
-          cursor: pointer;
-        }
-        .thinking-header {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          margin-bottom: 12px;
-        }
-        .thinking-icon {
-          width: 28px;
-          height: 28px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .thinking-title {
-          font-size: 13px;
-          font-weight: 600;
-          color: #111827;
-        }
-        .thinking-intro {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 12px;
-          line-height: 1.4;
-          color: #6B7280;
-          margin-bottom: 12px;
-        }
-        .loading-dots {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          height: 20px;
-        }
-        .loading-dots .dot {
-          width: 4px;
-          height: 4px;
-          background-color: #6B7280;
-          border-radius: 50%;
-          animation: dotPulse 1.5s infinite;
-        }
-        .loading-dots .dot:nth-child(2) {
-          animation-delay: 0.2s;
-        }
-        .loading-dots .dot:nth-child(3) {
-          animation-delay: 0.4s;
-        }
-        @keyframes dotPulse {
-          0%, 100% {
-            opacity: 0.4;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.3);
-          }
         }
         .response-section {
           padding: 0;
           margin: 0;
           width: 100%;
           box-sizing: border-box;
-          opacity: 0;
-          height: 0;
-          overflow: hidden;
-          transition: opacity 0.3s ease;
-        }
-        .response-section.visible {
-          opacity: 1;
-          height: auto;
-          overflow: visible;
         }
         .response-content {
           font-size: 14px;
           line-height: 1.4;
           color: #374151;
-          white-space: pre-wrap;
-          word-break: break-word;
+          margin: 0;
           padding: 16px;
         }
+        /* Add markdown styling */
+        .response-content p {
+          margin: 4px 0;
+          padding: 0;
+        }
+        .response-content p:first-child {
+          margin-top: 0;
+        }
+        .response-content ul, .response-content ol {
+          margin: 2px 0;
+          padding-left: 20px;
+        }
+        .response-content li {
+          margin: 2px 0;
+          padding: 0;
+        }
+        .response-content h1 {
+          font-size: 16px;
+          margin: 12px 0 8px;
+          font-weight: 600;
+        }
+        .response-content h1:first-child {
+          margin-top: 0;
+        }
+        .response-content h2 {
+          font-size: 14px;
+          margin: 10px 0 6px;
+          font-weight: 600;
+        }
+        .response-content h2:first-child {
+          margin-top: 0;
+        }
+        .response-content h3 {
+          font-size: 13px;
+          margin: 8px 0 4px;
+          font-weight: 600;
+        }
+        .response-content h3:first-child {
+          margin-top: 0;
+        }
+        .response-content br {
+          display: block;
+          margin: 2px 0;
+        }
+        .response-content strong {
+          font-weight: 600;
+        }
+        .response-content code {
+          background-color: #F3F4F6;
+          padding: 2px 4px;
+          border-radius: 4px;
+          font-family: monospace;
+        }
+        .response-content a {
+          color: #2563EB;
+          text-decoration: none;
+        }
+        .response-content a:hover {
+          text-decoration: underline;
+        }
       </style>
-      <div class="thinking-section">
-        <div class="thinking-header">
-          <div class="thinking-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 28 28">
-              <path fill="#111827" d="M14 2C7.373 2 2 7.373 2 14s5.373 12 12 12 12-5.373 12-12S20.627 2 14 2zm0 22c-5.514 0-10-4.486-10-10S8.486 4 14 4s10 4.486 10 10-4.486 10-10 10z"/>
-              <path fill="#111827" d="M14.5 7h-1v7.5l5.4 3.6.6-.9-5-3.3V7z"/>
-            </svg>
-          </div>
-          <div class="thinking-title">Claude is thinking...</div>
-        </div>
-        <div class="thinking-intro">
-          <span>Processing</span>
-          <div class="loading-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-      </div>
       <div class="response-section">
         <div class="response-content"></div>
       </div>
@@ -143,32 +101,21 @@ export const StreamingResponseExtension = {
     element.appendChild(container);
 
     // Get references to elements
-    const thinkingSection = container.querySelector('.thinking-section');
-    const thinkingIntro = container.querySelector('.thinking-intro');
-    const thinkingTitle = container.querySelector('.thinking-title');
     const responseSection = container.querySelector('.response-section');
     const responseContent = container.querySelector('.response-content');
-    let isFirstChunk = true;
     let buffer = '';
-    let deltaCounter = 0;
 
     function updateContent(text) {
       if (!text) return;
-
-      // Handle first chunk
-      if (isFirstChunk) {
-        thinkingIntro.style.display = 'none';
-        thinkingTitle.textContent = 'Claude is responding...';
-        thinkingSection.classList.add('collapsed');
-        responseSection.classList.add('visible');
-        isFirstChunk = false;
-      }
-
+      
       // Append to buffer
       buffer += text;
       
-      // Update content immediately without creating temporary container
-      responseContent.textContent = buffer;
+      // Convert markdown to HTML
+      const formattedHtml = markdownToHtml(buffer);
+      
+      // Update content
+      responseContent.innerHTML = formattedHtml;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -255,23 +202,98 @@ export const StreamingResponseExtension = {
 
       } catch (error) {
         console.error("Stream error:", error);
-        thinkingTitle.textContent = 'Error occurred';
         responseContent.textContent = `Error: ${error.message}`;
       }
     }
 
-    if (trace.payload) {
-      await callClaudeAPI({
-        model: trace.payload.model,
-        max_tokens: trace.payload.max_tokens,
-        temperature: trace.payload.temperature,
-        userData: trace.payload.userData,
-        systemPrompt: trace.payload.systemPrompt,
-      });
-    } else {
-      addDebugMessage("❌ Error: No payload received", "error");
-    }
+    // Add markdown conversion function
+    function markdownToHtml(markdown) {
+      // First trim and clean the input
+      let cleanedMarkdown = markdown
+        .trim()
+        .replace(/^\s+/gm, '') // Remove leading spaces from each line
+        .replace(/\n{3,}/g, '\n\n') // Clean up excessive newlines
 
-    window.voiceflow.chat.interact({ type: "continue" });
-  },
-};
+      // Process common introductory phrases
+      cleanedMarkdown = cleanedMarkdown
+        .replace(/^(here'?s?( is)?|let me|i will|i'll|allow me to|let's|okay,|so,|well,|now,|alright,).*?(:|->|\n)/i, '')
+        .replace(/^(here'?s?( is)?|let me|i will|i'll|allow me to|let's) /i, '')
+        .replace(/^(a |the )?(breakdown|list|summary|overview) (of|for|about) /i, '')
+        .replace(/^(talking|speaking) about /i, '')
+        .trim();
+
+      // Split content into lines for better processing
+      const lines = cleanedMarkdown.split('\n');
+      const processedLines = [];
+      let currentList = null;
+      let isInParagraph = false;
+      let lastLineWasHeader = false;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        const nextLine = i < lines.length - 1 ? lines[i + 1].trim() : '';
+        
+        // Handle headers
+        if (line.startsWith('###')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<h3>${line.slice(3).trim()}</h3>`);
+          lastLineWasHeader = true;
+          continue;
+        }
+        // ... similar handling for h2 and h1 ...
+
+        // Handle lists
+        const orderedListMatch = line.match(/^\d+\.\s+(.+)/);
+        const unorderedListMatch = line.match(/^-\s+(.+)/);
+
+        if (orderedListMatch || unorderedListMatch) {
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+
+          const listContent = (orderedListMatch || unorderedListMatch)[1];
+          const listType = orderedListMatch ? 'ol' : 'ul';
+
+          if (!currentList) {
+            currentList = { type: listType };
+            processedLines.push(`<${listType}>`);
+          } else if (currentList.type !== listType) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = { type: listType };
+            processedLines.push(`<${listType}>`);
+          }
+
+          processedLines.push(`<li>${listContent}</li>`);
+          lastLineWasHeader = false;
+          continue;
+        }
+
+        // Handle paragraphs and other formatting
+        // ... rest of the markdown processing logic ...
+      }
+
+      // Join lines and apply remaining markdown formatting
+      return processedLines
+        .join('\n')
+        // Bold
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Italic
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Code
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+        // Links
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+        // Clean up any extra newlines between elements
+        .replace(/>\n</g, '>\n<')
+        .trim();
+    }
+  }
+}
