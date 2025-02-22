@@ -78,12 +78,17 @@ export const StreamingResponseExtension = {
         console.log('📤 Extension -> Proxy: Sending request to:', proxyUrl, payload)
         addDebugMessage(`🌐 Connecting to Claude API via proxy: ${proxyUrl}`)
 
-        // Call proxy endpoint
+        // Add CORS headers to the request
         const response = await fetch(proxyUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
           },
+          mode: 'cors', // Explicitly set CORS mode
+          credentials: 'include', // Include credentials if needed
           body: JSON.stringify(payload)
         })
 
