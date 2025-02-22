@@ -1,7 +1,8 @@
 import { Anthropic } from '@anthropic-ai/sdk';
 
-// Load environment variables 
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+});
 
 export default async function handler(req, res) {
   const origin = req.headers.origin || 'https://hypedigitaly.ai';
@@ -28,66 +29,63 @@ export default async function handler(req, res) {
 
   try {
     const { model, max_tokens, temperature, userData, systemPrompt } = req.body;
-    console.log('📤 Proxy -> Claude: Preparing request with payload:', {
+    
+    console.log('Received request:', {
       model,
       max_tokens,
       temperature,
-      systemPrompt: systemPrompt.substring(0, 100) + '...', // Truncate for logging
-      userDataLength: userData.length
+      systemPrompt: systemPrompt?.substring(0, 100) + '...'
     });
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'anthropic-version': '2023-06-01',
-        'anthropic-beta': 'prompt-caching-2024-07-31',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'Accept': 'text/event-stream'
-      },
-      body: JSON.stringify({
-        model,
-        max_tokens,
-        temperature,
-        stream: true,
-        system: [{
-          type: "text",
-          text: systemPrompt,
-          cache_control: { type: "ephemeral" }
-        }],
-        messages: [{
-          role: "user",
-          content: userData
-        }]
-      })
+    // Set up SSE headers
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
     });
 
-    // Instead of piping, manually forward the stream
-    const reader = response.body.getReader();
-    
-    // Read the stream
-    while (true) {
-      const { done, value } = await reader.read();
-      
-      if (done) {
-        break;
+    const response = await anthropic.messages.create({
+      model: model || 'claude-3-haiku-20240307',
+      max_tokens: max_tokens || 1024,
+      temperature: temperature || 0.7,
+      messages: [{
+        role: 'user',
+        content: userData
+      }],
+      system: systemPrompt,
+      stream: true,
+    });
+
+    // Process the stream
+    for await (const messageChunk of response) {
+      if (messageChunk.type === 'message_start') {
+        continue;
       }
       
-      // Forward the chunks to the client
-      res.write(value);
+      if (messageChunk.type === 'content_block_start') {
+        continue;
+      }
+
+      if (messageChunk.type === 'content_block_delta') {
+        const data = {
+          type: 'content',
+          content: messageChunk.delta?.text || ''
+        };
+        res.write(`data: ${JSON.stringify(data)}\n\n`);
+        res.flush?.();
+      }
+
+      if (messageChunk.type === 'message_stop') {
+        res.write('data: [DONE]\n\n');
+        break;
+      }
     }
 
     res.end();
 
   } catch (error) {
-    console.error('❌ Proxy: Error in stream handling:', error);
-    
-    // Send error as SSE event instead of JSON response
-    res.write(`event: error\n`);
-    res.write(`data: ${JSON.stringify({
-      type: 'error',
-      error: { message: error.message }
-    })}\n\n`);
+    console.error('Stream Error:', error);
+    res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
 }

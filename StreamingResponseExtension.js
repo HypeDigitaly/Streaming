@@ -201,97 +201,60 @@ export const StreamingResponseExtension = {
     async function callClaudeAPI(payload) {
       try {
         const proxyUrl = "https://hypedigitaly-streaming.replit.app/api/claude-stream";
-        console.log("🚀 Starting Claude API call with payload:", {
-          model: payload.model,
-          max_tokens: payload.max_tokens,
-          temperature: payload.temperature
-        });
+        console.log("Starting Claude API call with payload:", payload);
 
         const response = await fetch(proxyUrl, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
-            "Accept": "text/event-stream"
           },
-          mode: "cors",
-          credentials: "omit",
           body: JSON.stringify(payload),
         });
 
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-        // Create an EventSource-like stream parser
-        const stream = response.body
-          .pipeThrough(new TextDecoderStream())
-          .pipeThrough(new TransformStream({
-            transform(chunk, controller) {
-              // Split chunk into SSE events
-              const events = chunk.split('\n\n');
-              for (const event of events) {
-                if (!event.trim()) continue;
-                
-                // Parse SSE event
-                const lines = event.split('\n');
-                const eventData = {};
-                
-                for (const line of lines) {
-                  if (line.startsWith('event: ')) {
-                    eventData.event = line.slice(7);
-                  } else if (line.startsWith('data: ')) {
-                    try {
-                      eventData.data = JSON.parse(line.slice(6));
-                    } catch (e) {
-                      console.warn('Failed to parse event data:', line);
-                    }
-                  }
-                }
-                
-                if (eventData.event && eventData.data) {
-                  controller.enqueue(eventData);
-                }
-              }
-            }
-          }));
-
-        const reader = stream.getReader();
-        let messageStarted = false;
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
 
         while (true) {
-          const { done, value: event } = await reader.read();
-          
+          const { value, done } = await reader.read();
           if (done) break;
-
-          console.log(`📦 Received event: ${event.event}`, event.data);
-
-          switch (event.event) {
-            case 'message_start':
-              messageStarted = true;
-              console.log('✨ Message started');
-              break;
-
-            case 'content_block_delta':
-              if (event.data.delta.type === 'text_delta') {
-                const text = event.data.delta.text;
-                console.log('📝 Text delta:', { content: text, length: text.length });
-                updateContent(text);
-              }
-              break;
-
-            case 'error':
-              throw new Error(`Stream error: ${event.data.error.message}`);
-              break;
-
-            case 'message_stop':
-              console.log('🏁 Message completed');
+          
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          
+          // Process all complete lines
+          buffer = lines.pop() || ''; // Keep the incomplete line in buffer
+          
+          for (const line of lines) {
+            if (!line.trim() || !line.startsWith('data: ')) continue;
+            
+            const data = line.slice(6); // Remove 'data: ' prefix
+            if (data === '[DONE]') {
+              console.log('Stream completed');
               return;
+            }
+
+            try {
+              const parsed = JSON.parse(data);
+              
+              if (parsed.error) {
+                throw new Error(parsed.error);
+              }
+
+              if (parsed.type === 'content' && parsed.content) {
+                console.log('Received content:', parsed.content);
+                updateContent(parsed.content);
+              }
+            } catch (e) {
+              console.warn('Failed to parse SSE data:', e);
+            }
           }
         }
 
       } catch (error) {
-        console.error("❌ Stream error:", {
-          message: error.message,
-          stack: error.stack
-        });
+        console.error("Stream error:", error);
         thinkingTitle.textContent = 'Error occurred';
         responseContent.textContent = `Error: ${error.message}`;
       }
