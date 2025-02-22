@@ -98,7 +98,7 @@ export const StreamingResponseExtension = {
         const decoder = new TextDecoder()
         let isFirstChunk = true
 
-        while (true) {
+        while (true) { 
           const { done, value } = await reader.read()
           
           if (done) {
