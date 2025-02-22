@@ -66,10 +66,25 @@ export const StreamingResponseExtension = {
 
     // Function to update content
     function updateContent(text) {
-      responseContent.textContent += text;
-      // Force immediate DOM update and scroll
-      responseContent.scrollIntoView({ behavior: "smooth", block: "end" });
-      container.scrollIntoView({ behavior: "smooth", block: "end" });
+      // Use requestAnimationFrame to ensure smooth UI updates
+      requestAnimationFrame(() => {
+        // Append new text and force immediate update
+        responseContent.textContent += text;
+        
+        // Force layout recalculation
+        void responseContent.offsetHeight;
+        
+        // Scroll into view with multiple attempts to ensure visibility
+        setTimeout(() => {
+          responseContent.scrollIntoView({ behavior: 'smooth', block: 'end' });
+          container.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }, 10);
+        
+        setTimeout(() => {
+          responseContent.scrollIntoView({ behavior: 'smooth', block: 'end' });
+          container.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }, 50);
+      });
     }
 
     // Function to make Claude API call through proxy
@@ -138,11 +153,13 @@ export const StreamingResponseExtension = {
                 isFirstChunk = false;
               }
 
-              // Immediately process and display each chunk as it arrives
+              // Immediately process and display each chunk
               if (data.type === "content_block_delta" && data.delta.type === "text_delta") {
-                requestAnimationFrame(() => {
-                  updateContent(data.delta.text);
-                });
+                const text = data.delta.text;
+                updateContent(text);
+                
+                // Force immediate DOM update
+                void container.offsetHeight;
               }
             } catch (e) {
               console.warn("⚠️ Error processing chunk:", e);
