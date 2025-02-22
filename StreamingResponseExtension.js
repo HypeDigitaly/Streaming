@@ -150,6 +150,7 @@ export const StreamingResponseExtension = {
     const responseContent = container.querySelector('.response-content');
     let isFirstChunk = true;
     let buffer = '';
+    let deltaCounter = 0;
 
     function updateContent(text) {
       if (!text) return;
@@ -166,21 +167,8 @@ export const StreamingResponseExtension = {
       // Append to buffer
       buffer += text;
       
-      // Create temporary container for new content
-      const tempContainer = document.createElement('span');
-      tempContainer.textContent = text;
-      tempContainer.style.opacity = '0';
-      tempContainer.style.transform = 'translateY(8px)';
-      
-      // Add the new content immediately
-      responseContent.appendChild(tempContainer);
-
-      // Trigger animations in next frame
-      requestAnimationFrame(() => {
-        tempContainer.style.transition = 'all 0.3s ease';
-        tempContainer.style.opacity = '1';
-        tempContainer.style.transform = 'translateY(0)';
-      });
+      // Update content immediately without creating temporary container
+      responseContent.textContent = buffer;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -221,7 +209,10 @@ export const StreamingResponseExtension = {
 
         const response = await fetch(proxyUrl, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            "Accept": "text/event-stream"
+          },
           mode: "cors",
           credentials: "omit",
           body: JSON.stringify(payload),
@@ -229,64 +220,70 @@ export const StreamingResponseExtension = {
 
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-        console.log("✅ Stream connected, starting to receive chunks");
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
-        let chunkCounter = 0;
-        let totalBytes = 0;
+        // Create an EventSource-like stream parser
+        const stream = response.body
+          .pipeThrough(new TextDecoderStream())
+          .pipeThrough(new TransformStream({
+            transform(chunk, controller) {
+              // Split chunk into SSE events
+              const events = chunk.split('\n\n');
+              for (const event of events) {
+                if (!event.trim()) continue;
+                
+                // Parse SSE event
+                const lines = event.split('\n');
+                const eventData = {};
+                
+                for (const line of lines) {
+                  if (line.startsWith('event: ')) {
+                    eventData.event = line.slice(7);
+                  } else if (line.startsWith('data: ')) {
+                    try {
+                      eventData.data = JSON.parse(line.slice(6));
+                    } catch (e) {
+                      console.warn('Failed to parse event data:', line);
+                    }
+                  }
+                }
+                
+                if (eventData.event && eventData.data) {
+                  controller.enqueue(eventData);
+                }
+              }
+            }
+          }));
+
+        const reader = stream.getReader();
+        let messageStarted = false;
 
         while (true) {
-          const { done, value } = await reader.read();
+          const { done, value: event } = await reader.read();
           
-          if (done) {
-            console.log("🏁 Stream completed:", {
-              totalChunks: chunkCounter,
-              totalBytes: totalBytes,
-              finalBufferSize: buffer.length
-            });
-            break;
-          }
+          if (done) break;
 
-          const chunk = decoder.decode(value, { stream: true });
-          totalBytes += chunk.length;
-          console.log(`📦 Received raw chunk #${++chunkCounter}:`, {
-            size: chunk.length,
-            preview: chunk.substring(0, 50) + '...'
-          });
+          console.log(`📦 Received event: ${event.event}`, event.data);
 
-          const lines = chunk.split("\n");
+          switch (event.event) {
+            case 'message_start':
+              messageStarted = true;
+              console.log('✨ Message started');
+              break;
 
-          for (const line of lines) {
-            if (!line.trim() || !line.startsWith("data: ")) continue;
-            if (line === "data: [DONE]") {
-              console.log("✨ Received DONE signal");
-              continue;
-            }
-
-            try {
-              const data = JSON.parse(line.slice(5));
-              if (data.type === "content_block_delta" && data.delta.type === "text_delta") {
-                console.log("📝 Processed text delta:", {
-                  content: data.delta.text,
-                  length: data.delta.text.length
-                });
-                
-                requestAnimationFrame(() => {
-                  updateContent(data.delta.text);
-                });
-              } else {
-                console.log("ℹ️ Received non-text delta:", {
-                  type: data.type,
-                  deltaType: data.delta?.type
-                });
+            case 'content_block_delta':
+              if (event.data.delta.type === 'text_delta') {
+                const text = event.data.delta.text;
+                console.log('📝 Text delta:', { content: text, length: text.length });
+                updateContent(text);
               }
-            } catch (e) {
-              console.warn("⚠️ Warning: Error processing chunk:", {
-                error: e.message,
-                line: line.substring(0, 50) + '...'
-              });
-            }
+              break;
+
+            case 'error':
+              throw new Error(`Stream error: ${event.data.error.message}`);
+              break;
+
+            case 'message_stop':
+              console.log('🏁 Message completed');
+              return;
           }
         }
 

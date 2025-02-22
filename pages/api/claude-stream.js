@@ -36,51 +36,44 @@ export default async function handler(req, res) {
       userDataLength: userData.length
     });
 
-    const anthropic = new Anthropic({
-      apiKey: ANTHROPIC_API_KEY,
-    });
-
-    console.log('🌐 Proxy: Initiating Claude API stream');
-    const stream = await anthropic.messages.create({
-      model: model,
-      max_tokens: max_tokens,
-      temperature: temperature,
-      stream: true,
-      system: [
-        {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'anthropic-version': '2023-06-01',
+        'anthropic-beta': 'prompt-caching-2024-07-31',
+        'x-api-key': ANTHROPIC_API_KEY,
+        'Accept': 'text/event-stream'
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens,
+        temperature,
+        stream: true,
+        system: [{
           type: "text",
           text: systemPrompt,
-          cache_control: {
-            type: "ephemeral"
-          }
-        }
-      ],
-      messages: [
-        {
+          cache_control: { type: "ephemeral" }
+        }],
+        messages: [{
           role: "user",
           content: userData
-        }
-      ]
+        }]
+      })
     });
 
-    console.log('✅ Proxy: Claude stream connected, forwarding to extension');
+    // Pipe the response directly to client
+    response.body.pipe(res);
 
-    // Forward the stream to the client
-    for await (const chunk of stream) {
-      console.log('📤 Claude -> Proxy -> Extension: Forwarding chunk', {
-        type: chunk.type,
-        contentLength: JSON.stringify(chunk).length
-      });
-      res.write(`data: ${JSON.stringify(chunk)}\n\n`);
-    }
-
-    console.log('🏁 Proxy: Stream completed');
-    res.end();
   } catch (error) {
     console.error('❌ Proxy: Error in stream handling:', error);
-    res.status(500).json({ 
-      error: 'Failed to process request',
-      details: error.message
-    });
+    
+    // Send error as SSE event instead of JSON response
+    res.write(`event: error\n`);
+    res.write(`data: ${JSON.stringify({
+      type: 'error',
+      error: { message: error.message }
+    })}\n\n`);
+    res.end();
   }
 }
