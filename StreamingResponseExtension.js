@@ -84,39 +84,33 @@ export const StreamingResponseExtension = {
     function updateContent(text) {
       if (!text) return;
 
+      // Append to buffer
       buffer += text;
       
       // Create temporary container for new content
       const tempContainer = document.createElement('span');
       tempContainer.textContent = text;
       tempContainer.style.opacity = '0';
+      
+      // Add the new content immediately
       responseContent.appendChild(tempContainer);
 
-      // Trigger animation
+      // Trigger fade-in animation in next frame
       requestAnimationFrame(() => {
-        tempContainer.style.transition = 'opacity 0.3s ease';
+        tempContainer.style.transition = 'opacity 0.15s ease';
         tempContainer.style.opacity = '1';
       });
 
-      // Force layout recalculation
-      void responseContent.offsetHeight;
-
-      // Enhanced scroll handling with multiple attempts
+      // Enhanced scroll handling
       const scrollContainer = findScrollableParent(element);
       if (scrollContainer) {
-        const scrollOptions = { behavior: 'smooth' };
         const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
         const isNearBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= maxScroll - 100;
 
         if (isNearBottom) {
-          // Multiple scroll attempts for reliability
-          [0, 50, 100].forEach(delay => {
-            setTimeout(() => {
-              scrollContainer.scrollTo({
-                top: scrollContainer.scrollHeight,
-                ...scrollOptions
-              });
-            }, delay);
+          scrollContainer.scrollTo({
+            top: scrollContainer.scrollHeight,
+            behavior: 'smooth'
           });
         }
       }
@@ -153,6 +147,7 @@ export const StreamingResponseExtension = {
         addDebugMessage("✅ Stream connected");
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
+        let buffer = '';
 
         while (true) {
           const { done, value } = await reader.read();
@@ -168,7 +163,10 @@ export const StreamingResponseExtension = {
             try {
               const data = JSON.parse(line.slice(5));
               if (data.type === "content_block_delta" && data.delta.type === "text_delta") {
-                updateContent(data.delta.text);
+                // Immediately update UI with each text delta
+                requestAnimationFrame(() => {
+                  updateContent(data.delta.text);
+                });
               }
             } catch (e) {
               console.warn("Warning: Skipping incomplete chunk");
