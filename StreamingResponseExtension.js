@@ -67,8 +67,9 @@ export const StreamingResponseExtension = {
     // Function to update content
     function updateContent(text) {
       responseContent.textContent += text;
-      // Scroll to bottom
-      element.scrollIntoView({ behavior: "smooth", block: "end" });
+      // Force immediate DOM update and scroll
+      responseContent.scrollIntoView({ behavior: "smooth", block: "end" });
+      container.scrollIntoView({ behavior: "smooth", block: "end" });
     }
 
     // Function to make Claude API call through proxy
@@ -115,7 +116,7 @@ export const StreamingResponseExtension = {
           }
 
           // Process the stream chunks
-          const chunk = decoder.decode(value);
+          const chunk = decoder.decode(value, { stream: true });
           const lines = chunk.split("\n");
 
           for (const line of lines) {
@@ -137,12 +138,11 @@ export const StreamingResponseExtension = {
                 isFirstChunk = false;
               }
 
-              // Handle different event types
-              if (
-                data.type === "content_block_delta" &&
-                data.delta.type === "text_delta"
-              ) {
-                updateContent(data.delta.text);
+              // Immediately process and display each chunk as it arrives
+              if (data.type === "content_block_delta" && data.delta.type === "text_delta") {
+                requestAnimationFrame(() => {
+                  updateContent(data.delta.text);
+                });
               }
             } catch (e) {
               console.warn("⚠️ Error processing chunk:", e);
