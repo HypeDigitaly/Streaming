@@ -74,7 +74,7 @@ export const StreamingResponseExtension = {
     // Function to make Claude API call through proxy
     async function callClaudeAPI(payload) {
       try {
-        const proxyUrl = window.location.origin + '/api/claude-stream'
+        const proxyUrl = 'https://hypedigitaly-streaming.replit.app/api/claude-stream'
         console.log('📤 Extension -> Proxy: Sending request to:', proxyUrl, payload)
         addDebugMessage(`🌐 Connecting to Claude API via proxy: ${proxyUrl}`)
 
