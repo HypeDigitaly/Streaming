@@ -66,25 +66,45 @@ export const StreamingResponseExtension = {
 
     // Function to update content
     function updateContent(text) {
-      // Use requestAnimationFrame to ensure smooth UI updates
-      requestAnimationFrame(() => {
-        // Append new text and force immediate update
-        responseContent.textContent += text;
-        
-        // Force layout recalculation
-        void responseContent.offsetHeight;
-        
-        // Scroll into view with multiple attempts to ensure visibility
-        setTimeout(() => {
-          responseContent.scrollIntoView({ behavior: 'smooth', block: 'end' });
-          container.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        }, 10);
-        
-        setTimeout(() => {
-          responseContent.scrollIntoView({ behavior: 'smooth', block: 'end' });
-          container.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        }, 50);
+      // Create a new text node with the chunk
+      const textNode = document.createTextNode(text);
+      
+      // Immediately append the new text node
+      responseContent.appendChild(textNode);
+      
+      // Force reflow to ensure content is displayed
+      void responseContent.offsetHeight;
+      
+      // Scroll to bottom immediately
+      const scrollContainer = findScrollableParent(responseContent) || window;
+      scrollContainer.scrollTo({
+        top: scrollContainer.scrollHeight,
+        behavior: 'auto'
       });
+      
+      // Backup scroll after a short delay
+      requestAnimationFrame(() => {
+        scrollContainer.scrollTo({
+          top: scrollContainer.scrollHeight,
+          behavior: 'smooth'
+        });
+      });
+    }
+    
+    // Helper function to find scrollable parent
+    function findScrollableParent(element) {
+      let parent = element.parentElement;
+      while (parent) {
+        const hasScroll = parent.scrollHeight > parent.clientHeight;
+        const style = window.getComputedStyle(parent);
+        const isScrollable = style.overflowY === 'auto' || style.overflowY === 'scroll';
+        
+        if (hasScroll && isScrollable) {
+          return parent;
+        }
+        parent = parent.parentElement;
+      }
+      return null;
     }
 
     // Function to make Claude API call through proxy
