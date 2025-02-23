@@ -223,4 +223,8 @@ export const StreamingResponseExtension = {
 
       } catch (error) {
         console.error("Stream error:", error);
-        responseContent.textContent = `Error: ${error.message}`
+        responseContent.textContent = `Error: ${error.message}`;
+      }
+    }
+  }
+};
