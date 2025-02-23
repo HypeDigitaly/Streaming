@@ -5,26 +5,67 @@ export const StreamingResponseExtension = {
     trace.type === "ext_streamingResponse" ||
     trace.payload?.name === "ext_streamingResponse",
   render: async ({ trace, element }) => {
-    // Create observer for typing indicator
+    // Create loading container that replaces typing indicator
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.target.classList.contains('vfrc-typing-indicator')) {
           const isVisible = window.getComputedStyle(mutation.target).display !== 'none';
-          const customIndicator = document.querySelector('.custom-typing-indicator');
-          if (customIndicator) {
-            customIndicator.style.display = isVisible ? 'flex' : 'none';
-          } else if (isVisible) {
-            const indicator = document.createElement('div');
-            indicator.className = 'custom-typing-indicator';
-            indicator.innerHTML = `
-              <div class="typing-animation">
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
+          let loadingContainer = document.querySelector('.loading-container');
+          
+          if (!loadingContainer && isVisible) {
+            // Create loading container
+            loadingContainer = document.createElement('div');
+            loadingContainer.className = 'loading-container';
+            loadingContainer.innerHTML = `
+              <div class="loading-animation">
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
               </div>
-              <div class="typing-message">Zpracovávám dotaz</div>
+              <div class="loading-message">Zpracovávám dotaz</div>
             `;
-            mutation.target.parentNode.insertBefore(indicator, mutation.target.nextSibling);
+            
+            // Add styles
+            const style = document.createElement('style');
+            style.textContent = `
+              .loading-container {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 16px;
+                background: transparent;
+              }
+              .loading-animation {
+                display: flex;
+                gap: 4px;
+              }
+              .loading-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #9aaa13;
+                animation: loadingPulse 1s infinite;
+              }
+              .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+              .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+              .loading-message {
+                color: #111827;
+                font-size: 14px;
+              }
+              @keyframes loadingPulse {
+                0%, 100% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(1.2); opacity: 0.5; }
+              }
+            `;
+            document.head.appendChild(style);
+            
+            // Insert before the typing indicator
+            const typingIndicator = document.querySelector('.vfrc-typing-indicator');
+            typingIndicator.style.display = 'none';
+            typingIndicator.parentNode.insertBefore(loadingContainer, typingIndicator);
+          } else if (loadingContainer) {
+            loadingContainer.style.display = isVisible ? 'flex' : 'none';
+          }
             
             const messages = [
               "Zpracovávám dotaz",
