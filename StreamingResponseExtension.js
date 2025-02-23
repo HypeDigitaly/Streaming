@@ -21,6 +21,9 @@ export const StreamingResponseExtension = {
         </div>
         <style>
           .vfrc-typing-indicator {
+            display: none !important;
+          }
+          .vfrc-typing-indicator.active {
             display: flex !important;
             align-items: center;
             gap: 6px;
