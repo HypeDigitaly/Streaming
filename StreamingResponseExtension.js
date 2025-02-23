@@ -9,7 +9,7 @@ export const StreamingResponseExtension = {
 
     const container = document.createElement('div');
     container.className = 'streaming-response-container';
-    
+
     // Create the base structure with similar UI to PerplexityReasoner
     container.innerHTML = `
       <style>
@@ -115,6 +115,19 @@ export const StreamingResponseExtension = {
           word-break: break-word;
           padding: 16px;
         }
+        strong {
+          font-weight: 600;
+        }
+        .markdown-content {
+          font-family: monospace;
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          font-size: 14px;
+          line-height: 1.5;
+          color: #374151;
+          margin: 0;
+          padding: 0;
+        }
       </style>
       <div class="thinking-section">
         <div class="thinking-header">
@@ -152,23 +165,40 @@ export const StreamingResponseExtension = {
     let buffer = '';
     let deltaCounter = 0;
 
-    function updateContent(text) {
+    // Convert HTML to Markdown
+    function htmlToMarkdown(html) {
+      return html
+        // Headers
+        .replace(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/g, (_, content) => `# ${content}\n\n`)
+        // Bold
+        .replace(/<strong>(.*?)<\/strong>/g, '**$1**')
+        // Italic
+        .replace(/<em>(.*?)<\/em>/g, '*$1*')
+        // Lists
+        .replace(/<ul[^>]*>(.*?)<\/ul>/gs, (_, content) => {
+          return content.replace(/<li[^>]*>(.*?)<\/li>/g, '- $1\n');
+        })
+        .replace(/<ol[^>]*>(.*?)<\/ol>/gs, (_, content) => {
+          let counter = 1;
+          return content.replace(/<li[^>]*>(.*?)<\/li>/g, () => `${counter++}. $1\n`);
+        })
+        // Paragraphs
+        .replace(/<p[^>]*>(.*?)<\/p>/g, '$1\n\n')
+        // Links
+        .replace(/<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/g, '[$2]($1)')
+        // Code
+        .replace(/<code>(.*?)<\/code>/g, '`$1`')
+        // Clean up
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+    }
+
+    // Update the answer content with markdown support
+    function updateAnswerContent(text) {
       if (!text) return;
-
-      // Handle first chunk
-      if (isFirstChunk) {
-        thinkingIntro.style.display = 'none';
-        thinkingTitle.textContent = 'Claude is responding...';
-        thinkingSection.classList.add('collapsed');
-        responseSection.classList.add('visible');
-        isFirstChunk = false;
-      }
-
-      // Append to buffer
-      buffer += text;
-      
-      // Update content immediately without creating temporary container
-      responseContent.textContent = buffer;
+      const trimmedText = text.trim()
+      const markdown = htmlToMarkdown(trimmedText)
+      responseContent.innerHTML = `<pre class="markdown-content">${markdown}</pre>`
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -220,16 +250,16 @@ export const StreamingResponseExtension = {
         while (true) {
           const { value, done } = await reader.read();
           if (done) break;
-          
+
           buffer += decoder.decode(value, { stream: true });
           const lines = buffer.split('\n');
-          
+
           // Process all complete lines
           buffer = lines.pop() || ''; // Keep the incomplete line in buffer
-          
+
           for (const line of lines) {
             if (!line.trim() || !line.startsWith('data: ')) continue;
-            
+
             const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
               console.log('Stream completed');
@@ -238,14 +268,14 @@ export const StreamingResponseExtension = {
 
             try {
               const parsed = JSON.parse(data);
-              
+
               if (parsed.error) {
                 throw new Error(parsed.error);
               }
 
               if (parsed.type === 'content' && parsed.content) {
                 console.log('Received content:', parsed.content);
-                updateContent(parsed.content);
+                updateAnswerContent(parsed.content);
               }
             } catch (e) {
               console.warn('Failed to parse SSE data:', e);
