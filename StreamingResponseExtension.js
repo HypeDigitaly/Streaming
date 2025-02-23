@@ -5,6 +5,87 @@ export const StreamingResponseExtension = {
     trace.type === "ext_streamingResponse" ||
     trace.payload?.name === "ext_streamingResponse",
   render: async ({ trace, element }) => {
+    // Create observer for typing indicator
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target.classList.contains('vfrc-typing-indicator')) {
+          const isVisible = window.getComputedStyle(mutation.target).display !== 'none';
+          const customIndicator = document.querySelector('.custom-typing-indicator');
+          if (customIndicator) {
+            customIndicator.style.display = isVisible ? 'flex' : 'none';
+          } else if (isVisible) {
+            const indicator = document.createElement('div');
+            indicator.className = 'custom-typing-indicator';
+            indicator.innerHTML = `
+              <div class="typing-animation">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+              </div>
+              <div class="typing-message">Zpracovávám dotaz</div>
+            `;
+            mutation.target.parentNode.insertBefore(indicator, mutation.target.nextSibling);
+            
+            const messages = [
+              "Zpracovávám dotaz",
+              "Prohledávám svou databázi",
+              "Ověřuji nalezené informace",
+              "Formuluji svou odpověď"
+            ];
+            let currentIndex = 0;
+            
+            setInterval(() => {
+              if (indicator.style.display !== 'none') {
+                currentIndex = (currentIndex + 1) % messages.length;
+                indicator.querySelector('.typing-message').textContent = messages[currentIndex];
+              }
+            }, 3000);
+          }
+        }
+      });
+    });
+
+    // Start observing the chat container
+    observer.observe(element, { 
+      subtree: true, 
+      attributes: true, 
+      attributeFilter: ['style', 'class'] 
+    });
+
+    // Add styles for the custom typing indicator
+    const style = document.createElement('style');
+    style.textContent = `
+      .custom-typing-indicator {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        background: transparent;
+      }
+      .typing-animation {
+        display: flex;
+        gap: 4px;
+      }
+      .typing-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: #9aaa13;
+        animation: pulse 1s infinite;
+      }
+      .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+      .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+      .typing-message {
+        color: #111827;
+        font-size: 14px;
+        transition: opacity 0.3s ease;
+      }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.2); opacity: 0.5; }
+      }
+    `;
+    document.head.appendChild(style);
     console.log("🚀 StreamingResponseExtension: Starting render", { trace });
 
     const container = document.createElement('div');
