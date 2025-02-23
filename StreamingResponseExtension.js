@@ -118,15 +118,33 @@ export const StreamingResponseExtension = {
         strong {
           font-weight: 600;
         }
-        .markdown-content {
-          font-family: monospace;
-          white-space: pre-wrap;
-          word-wrap: break-word;
-          font-size: 14px;
-          line-height: 1.5;
-          color: #374151;
-          margin: 0;
-          padding: 0;
+        .response-content {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          font-size: 16px;
+          line-height: 1.6;
+          color: #f0f0f0;
+        }
+        .response-content h1, 
+        .response-content h2, 
+        .response-content h3 {
+          margin: 1.5em 0 0.5em;
+          font-weight: 600;
+        }
+        .response-content h1 { font-size: 2em; }
+        .response-content h2 { font-size: 1.5em; }
+        .response-content h3 { font-size: 1.2em; }
+        .response-content ul {
+          margin: 0.5em 0;
+          padding-left: 1.5em;
+        }
+        .response-content li {
+          margin: 0.3em 0;
+        }
+        .response-content li.sublist {
+          margin-left: 1.5em;
+        }
+        .response-content br {
+          margin: 0.5em 0;
         }
       </style>
       <div class="thinking-section">
@@ -209,8 +227,22 @@ export const StreamingResponseExtension = {
       // Append to buffer
       buffer += text;
       
-      // Update content
-      responseContent.innerHTML = buffer;
+      // Format markdown content
+      const formattedContent = buffer
+        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+        .replace(/^\* (.*$)/gm, '<li>$1</li>')
+        .replace(/^- (.*$)/gm, '<li>$1</li>')
+        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
+        .replace(/<\/li>\n/g, '</li>')
+        .replace(/<li>/g, '<ul><li>')
+        .replace(/<\/li>/g, '</li></ul>')
+        .replace(/<\/ul>\n<ul>/g, '')
+        .replace(/\n\n/g, '<br><br>');
+      
+      // Update content with formatting
+      responseContent.innerHTML = formattedContent;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
