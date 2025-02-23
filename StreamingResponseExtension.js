@@ -241,6 +241,8 @@ export const StreamingResponseExtension = {
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
+        .replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">')
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
         .replace(/<\/li>\n/g, '</li>')
         .replace(/<li>/g, '<ul><li>')
         .replace(/<\/li>/g, '</li></ul>')
