@@ -20,49 +20,6 @@ export const StreamingResponseExtension = {
           </div>
         </div>
         <style>
-          .vfrc-typing-indicator {
-            display: none !important;
-          }
-          .vfrc-typing-indicator.active {
-            display: flex !important;
-            align-items: center;
-            gap: 6px;
-            height: 24px;
-            padding: 2px;
-          }
-          .vfrc-typing-indicator span {
-            width: 8px !important;
-            height: 8px !important;
-            position: relative;
-            background: none !important;
-          }
-          .vfrc-typing-indicator span::before,
-          .vfrc-typing-indicator span::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            animation: dotRotate 1.5s infinite ease-in-out;
-          }
-          .vfrc-typing-indicator span::before {
-            background-color: #111827;
-            transform-origin: 50% 50%;
-          }
-          .vfrc-typing-indicator span::after {
-            background-color: #6B7280;
-            animation-delay: -0.75s;
-          }
-          .vfrc-typing-indicator span:nth-child(2)::before,
-          .vfrc-typing-indicator span:nth-child(2)::after {
-            animation-delay: -0.5s, -1.25s;
-          }
-          .vfrc-typing-indicator span:nth-child(3)::before,
-          .vfrc-typing-indicator span:nth-child(3)::after {
-            animation-delay: -1s, -1.75s;
-          }
           .thinking-header {
             padding: 8px 16px;
             display: flex;
@@ -80,50 +37,30 @@ export const StreamingResponseExtension = {
           .loading-dots {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            height: 24px;
-            padding: 2px;
+            gap: 4px;
+            height: 20px;
           }
           .loading-dots .dot {
-            width: 8px;
-            height: 8px;
-            position: relative;
-          }
-          .loading-dots .dot::before,
-          .loading-dots .dot::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            animation: dotRotate 1.5s infinite ease-in-out;
-          }
-          .loading-dots .dot::before {
-            background-color: #111827;
-            transform-origin: 50% 50%;
-          }
-          .loading-dots .dot::after {
+            width: 4px;
+            height: 4px;
             background-color: #6B7280;
-            animation-delay: -0.75s;
+            border-radius: 50%;
+            animation: dotPulse 1.5s infinite;
           }
-          .loading-dots .dot:nth-child(2)::before,
-          .loading-dots .dot:nth-child(2)::after {
-            animation-delay: -0.5s, -1.25s;
+          .loading-dots .dot:nth-child(2) {
+            animation-delay: 0.2s;
           }
-          .loading-dots .dot:nth-child(3)::before,
-          .loading-dots .dot:nth-child(3)::after {
-            animation-delay: -1s, -1.75s;
+          .loading-dots .dot:nth-child(3) {
+            animation-delay: 0.4s;
           }
-          @keyframes dotRotate {
+          @keyframes dotPulse {
             0%, 100% {
-              transform: scale(0.6) rotate(0deg);
-              opacity: 0.8;
+              opacity: 0.4;
+              transform: scale(1);
             }
             50% {
-              transform: scale(1) rotate(180deg);
               opacity: 1;
+              transform: scale(1.3);
             }
           }
           .streaming-response-container {
