@@ -28,7 +28,8 @@ export const StreamingResponseExtension = {
           margin: 0;
           width: 100%;
           box-sizing: border-box;
-          transition: opacity 0.3s ease;
+          opacity: 1;
+          display: block;
         }
         .response-content {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -39,6 +40,8 @@ export const StreamingResponseExtension = {
           padding: 16px;
           white-space: pre-wrap;
           word-break: break-word;
+          display: block;
+          opacity: 1;
         }
         .response-content h1, 
         .response-content h2, 
