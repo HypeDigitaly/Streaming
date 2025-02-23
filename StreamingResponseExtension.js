@@ -194,11 +194,23 @@ export const StreamingResponseExtension = {
     }
 
     // Update the answer content with markdown support
-    function updateAnswerContent(text) {
+    function updateContent(text) {
       if (!text) return;
-      const trimmedText = text.trim()
-      const markdown = htmlToMarkdown(trimmedText)
-      responseContent.innerHTML = `<pre class="markdown-content">${markdown}</pre>`
+
+      // Handle first chunk
+      if (isFirstChunk) {
+        thinkingIntro.style.display = 'none';
+        thinkingTitle.textContent = 'Claude is responding...';
+        thinkingSection.classList.add('collapsed');
+        responseSection.classList.add('visible');
+        isFirstChunk = false;
+      }
+
+      // Append to buffer
+      buffer += text;
+      
+      // Update content
+      responseContent.innerHTML = buffer;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -275,7 +287,7 @@ export const StreamingResponseExtension = {
 
               if (parsed.type === 'content' && parsed.content) {
                 console.log('Received content:', parsed.content);
-                updateAnswerContent(parsed.content);
+                updateContent(parsed.content);
               }
             } catch (e) {
               console.warn('Failed to parse SSE data:', e);
