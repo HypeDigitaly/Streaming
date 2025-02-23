@@ -145,6 +145,10 @@ export const StreamingResponseExtension = {
           margin-left: 1.5em;
         }
         .response-content br {
+          margin: 0;
+          line-height: 1;
+        }
+        .response-content p {
           margin: 0.5em 0;
         }
       </style>
