@@ -8,7 +8,9 @@ export const StreamingResponseExtension = {
     // Create loading container that replaces typing indicator
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.target.classList.contains('vfrc-typing-indicator')) {
+        // More specific targeting of the typing indicator
+        if (mutation.target.classList.contains('vfrc-typing-indicator') && mutation.target.closest('.vfrc-message-input')) {
+          console.log('Found typing indicator:', mutation.target);
           const isVisible = window.getComputedStyle(mutation.target).display !== 'none';
           let loadingContainer = document.querySelector('.loading-container');
           
