@@ -234,9 +234,10 @@ export const StreamingResponseExtension = {
       
       // Format markdown content
       const formattedContent = buffer
-        .replace(/^#{3}\s+(.*$)/gm, '### $1\n')
-        .replace(/^#{2}\s+(.*$)/gm, '## $1\n')
-        .replace(/^#{1}\s+(.*$)/gm, '# $1\n')
+        .replace(/^#{3}\s+(.*$)/gm, '<h3>$1</h3>')
+        .replace(/^#{2}\s+(.*$)/gm, '<h2>$1</h2>')
+        .replace(/^#{1}\s+(.*$)/gm, '<h1>$1</h1>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
