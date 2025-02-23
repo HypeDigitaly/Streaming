@@ -13,11 +13,6 @@ export const StreamingResponseExtension = {
     // Create the base structure
     container.innerHTML = `
         <div class="thinking-header">
-          <div class="loading-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
         </div>
         <style>
           .thinking-header {
@@ -33,35 +28,6 @@ export const StreamingResponseExtension = {
             opacity: 0;
             height: 0;
             padding: 0;
-          }
-          .loading-dots {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            height: 20px;
-          }
-          .loading-dots .dot {
-            width: 4px;
-            height: 4px;
-            background-color: #6B7280;
-            border-radius: 50%;
-            animation: dotPulse 1.5s infinite;
-          }
-          .loading-dots .dot:nth-child(2) {
-            animation-delay: 0.2s;
-          }
-          .loading-dots .dot:nth-child(3) {
-            animation-delay: 0.4s;
-          }
-          @keyframes dotPulse {
-            0%, 100% {
-              opacity: 0.4;
-              transform: scale(1);
-            }
-            50% {
-              opacity: 1;
-              transform: scale(1.3);
-            }
           }
           .streaming-response-container {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
