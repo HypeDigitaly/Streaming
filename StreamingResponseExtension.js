@@ -247,7 +247,9 @@ export const StreamingResponseExtension = {
         .replace(/<li>/g, '<ul><li>')
         .replace(/<\/li>/g, '</li></ul>')
         .replace(/<\/ul>\n<ul>/g, '')
-        .replace(/\n\n/g, '<br><br>');
+        .replace(/\n{2,}/g, '\n')
+        .replace(/(<\/h[1-3]>|<\/p>|<\/ul>)\n+/g, '$1')
+        .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '$1');
       
       // Update content with formatting
       responseContent.innerHTML = formattedContent;
