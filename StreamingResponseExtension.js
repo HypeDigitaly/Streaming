@@ -13,18 +13,18 @@ export const StreamingResponseExtension = {
     // Create the base structure
     container.innerHTML = `
         <div class="thinking-header">
-          <div class="loading-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+          <div class="loading-animation">
+            <div class="loading-circle"></div>
+            <div class="loading-inner"></div>
           </div>
+          <div class="thinking-message">Zpracovávám dotaz</div>
         </div>
         <style>
           .thinking-header {
             padding: 8px 16px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             opacity: 1;
             height: auto;
             transition: opacity 0.3s ease, height 0.3s ease;
@@ -34,33 +34,51 @@ export const StreamingResponseExtension = {
             height: 0;
             padding: 0;
           }
-          .loading-dots {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+          .thinking-message {
+            color: #111827;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(5px);
+            animation: messageAppear 0.3s ease forwards;
+          }
+          .loading-animation {
+            position: relative;
+            width: 24px;
+            height: 24px;
+          }
+          .loading-circle {
+            position: absolute;
+            width: 20px;
             height: 20px;
-          }
-          .loading-dots .dot {
-            width: 4px;
-            height: 4px;
-            background-color: #6B7280;
+            border: 2px solid #E5E7EB;
+            border-top-color: #111827;
             border-radius: 50%;
-            animation: dotPulse 1.5s infinite;
+            animation: rotate 1s linear infinite;
           }
-          .loading-dots .dot:nth-child(2) {
-            animation-delay: 0.2s;
+          .loading-inner {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 12px;
+            height: 12px;
+            border: 2px solid #9CA3AF;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: rotate 0.8s linear infinite reverse;
           }
-          .loading-dots .dot:nth-child(3) {
-            animation-delay: 0.4s;
-          }
-          @keyframes dotPulse {
-            0%, 100% {
-              opacity: 0.4;
-              transform: scale(1);
+          @keyframes rotate {
+            100% {
+              transform: rotate(360deg);
             }
-            50% {
+          }
+          @keyframes messageAppear {
+            0% {
+              opacity: 0;
+              transform: translateY(5px);
+            }
+            100% {
               opacity: 1;
-              transform: scale(1.3);
+              transform: translateY(0);
             }
           }
           .streaming-response-container {
@@ -139,6 +157,44 @@ export const StreamingResponseExtension = {
       `;
 
     element.appendChild(container);
+
+    // Setup rotating messages
+    const thinkingMessages = [
+      "Zpracovávám dotaz",
+      "Prohledávám svou databázi",
+      "Ověřuji nalezené informace", 
+      "Formuluji svou odpověď"
+    ];
+    let currentMessageIndex = 0;
+    
+    const rotateThinkingMessage = () => {
+      const messageEl = container.querySelector('.thinking-message');
+      if (messageEl) {
+        messageEl.style.opacity = '0';
+        messageEl.style.transform = 'translateY(5px)';
+        
+        setTimeout(() => {
+          currentMessageIndex = (currentMessageIndex + 1) % thinkingMessages.length;
+          messageEl.textContent = thinkingMessages[currentMessageIndex];
+          messageEl.style.opacity = '1';
+          messageEl.style.transform = 'translateY(0)';
+        }, 300);
+      }
+    };
+
+    // Start message rotation
+    const messageRotationInterval = setInterval(rotateThinkingMessage, 3000);
+
+    // Clear interval when streaming ends
+    const originalHidden = container.querySelector('.thinking-header').classList.add.bind(
+      container.querySelector('.thinking-header').classList,
+      'hidden'
+    );
+
+    container.querySelector('.thinking-header').classList.add = function(...args) {
+      clearInterval(messageRotationInterval);
+      originalHidden.apply(this, args);
+    };
 
     // Get references to elements
     const responseSection = container.querySelector('.response-section');
