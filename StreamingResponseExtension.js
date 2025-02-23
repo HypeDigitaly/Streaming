@@ -122,7 +122,8 @@ export const StreamingResponseExtension = {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           font-size: 16px;
           line-height: 1.6;
-          color: #f0f0f0;
+          color: #374151;
+          background: transparent;
         }
         .response-content h1, 
         .response-content h2, 
