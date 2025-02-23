@@ -37,30 +37,50 @@ export const StreamingResponseExtension = {
           .loading-dots {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            height: 20px;
+            gap: 6px;
+            height: 24px;
+            padding: 2px;
           }
           .loading-dots .dot {
-            width: 4px;
-            height: 4px;
-            background-color: #6B7280;
+            width: 8px;
+            height: 8px;
+            position: relative;
+          }
+          .loading-dots .dot::before,
+          .loading-dots .dot::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            animation: dotPulse 1.5s infinite;
+            animation: dotRotate 1.5s infinite ease-in-out;
           }
-          .loading-dots .dot:nth-child(2) {
-            animation-delay: 0.2s;
+          .loading-dots .dot::before {
+            background-color: #111827;
+            transform-origin: 50% 50%;
           }
-          .loading-dots .dot:nth-child(3) {
-            animation-delay: 0.4s;
+          .loading-dots .dot::after {
+            background-color: #6B7280;
+            animation-delay: -0.75s;
           }
-          @keyframes dotPulse {
+          .loading-dots .dot:nth-child(2)::before,
+          .loading-dots .dot:nth-child(2)::after {
+            animation-delay: -0.5s, -1.25s;
+          }
+          .loading-dots .dot:nth-child(3)::before,
+          .loading-dots .dot:nth-child(3)::after {
+            animation-delay: -1s, -1.75s;
+          }
+          @keyframes dotRotate {
             0%, 100% {
-              opacity: 0.4;
-              transform: scale(1);
+              transform: scale(0.6) rotate(0deg);
+              opacity: 0.8;
             }
             50% {
+              transform: scale(1) rotate(180deg);
               opacity: 1;
-              transform: scale(1.3);
             }
           }
           .streaming-response-container {
