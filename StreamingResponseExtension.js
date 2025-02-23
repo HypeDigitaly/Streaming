@@ -13,12 +13,10 @@ export const StreamingResponseExtension = {
     // Create the base structure
     container.innerHTML = `
         <div class="thinking-header">
-          <div class="typing-message">Zpracovávám dotaz</div>
-          <div class="loading-animation">
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
+          <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
           </div>
         </div>
         <style>
@@ -36,56 +34,33 @@ export const StreamingResponseExtension = {
             height: 0;
             padding: 0;
           }
-          .typing-message {
-            font-size: 14px;
-            color: #1a1a1a;
-            margin-right: 12px;
-            animation: messageChange 12s steps(1) infinite;
-          }
-          .loading-animation {
+          .loading-dots {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
+            height: 20px;
           }
-          .circle {
-            width: 8px;
-            height: 8px;
-            background-color: #1a1a1a;
+          .loading-dots .dot {
+            width: 4px;
+            height: 4px;
+            background-color: #6B7280;
             border-radius: 50%;
-            animation: circleAnimation 2s infinite;
+            animation: dotPulse 1.5s infinite;
           }
-          .circle:nth-child(2) {
-            animation-delay: 0.5s;
-            background-color: #4a4a4a;
+          .loading-dots .dot:nth-child(2) {
+            animation-delay: 0.2s;
           }
-          .circle:nth-child(3) {
-            animation-delay: 1s;
-            background-color: #1a1a1a;
+          .loading-dots .dot:nth-child(3) {
+            animation-delay: 0.4s;
           }
-          .circle:nth-child(4) {
-            animation-delay: 1.5s;
-            background-color: #4a4a4a;
-          }
-          @keyframes circleAnimation {
+          @keyframes dotPulse {
             0%, 100% {
-              transform: scale(0.5) translateY(0);
+              opacity: 0.4;
+              transform: scale(1);
             }
             50% {
-              transform: scale(1) translateY(-6px);
-            }
-          }
-          @keyframes messageChange {
-            0%, 24% {
-              content: "Zpracovávám dotaz";
-            }
-            25%, 49% {
-              content: "Prohledávám svou databázi";
-            }
-            50%, 74% {
-              content: "Ověřuji nalezené informace";
-            }
-            75%, 100% {
-              content: "Formuluji svou odpověď";
+              opacity: 1;
+              transform: scale(1.3);
             }
           }
           .streaming-response-container {
