@@ -10,178 +10,87 @@ export const StreamingResponseExtension = {
     const container = document.createElement('div');
     container.className = 'streaming-response-container';
 
-    // Create the base structure with similar UI to PerplexityReasoner
+    // Create the base structure
     container.innerHTML = `
-      <style>
-        .streaming-response-container {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-          width: 100%;
-          max-width: none;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-        }
-        .thinking-section {
-          background-color: #F9FAFB;
-          border-radius: 12px;
-          padding: 16px;
-          margin: 0;
-          width: 100%;
-          box-sizing: border-box;
-          transition: all 0.3s ease;
-        }
-        .thinking-section.collapsed {
-          padding: 10px 16px;
-          cursor: pointer;
-        }
-        .thinking-header {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          margin-bottom: 12px;
-        }
-        .thinking-icon {
-          width: 28px;
-          height: 28px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .thinking-title {
-          font-size: 13px;
-          font-weight: 600;
-          color: #111827;
-        }
-        .thinking-intro {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 12px;
-          line-height: 1.4;
-          color: #6B7280;
-          margin-bottom: 12px;
-        }
-        .loading-dots {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          height: 20px;
-        }
-        .loading-dots .dot {
-          width: 4px;
-          height: 4px;
-          background-color: #6B7280;
-          border-radius: 50%;
-          animation: dotPulse 1.5s infinite;
-        }
-        .loading-dots .dot:nth-child(2) {
-          animation-delay: 0.2s;
-        }
-        .loading-dots .dot:nth-child(3) {
-          animation-delay: 0.4s;
-        }
-        @keyframes dotPulse {
-          0%, 100% {
-            opacity: 0.4;
-            transform: scale(1);
+        <style>
+          .streaming-response-container {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
           }
-          50% {
+          .response-section {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+          }
+          .response-section.visible {
             opacity: 1;
-            transform: scale(1.3);
+            height: auto;
+            overflow: visible;
           }
-        }
-        .response-section {
-          padding: 0;
-          margin: 0;
-          width: 100%;
-          box-sizing: border-box;
-          opacity: 0;
-          height: 0;
-          overflow: hidden;
-          transition: opacity 0.3s ease;
-        }
-        .response-section.visible {
-          opacity: 1;
-          height: auto;
-          overflow: visible;
-        }
-        .response-content {
-          font-size: 14px;
-          line-height: 1.4;
-          color: #374151;
-          white-space: pre-wrap;
-          word-break: break-word;
-          padding: 16px;
-        }
-        strong {
-          font-weight: 600;
-        }
-        .response-content {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-          font-size: 16px;
-          line-height: 1.6;
-          color: #374151;
-          background: transparent;
-        }
-        .response-content h1, 
-        .response-content h2, 
-        .response-content h3 {
-          margin: 1.5em 0 0.5em;
-          font-weight: 600;
-        }
-        .response-content h1 { font-size: 2em; }
-        .response-content h2 { font-size: 1.5em; }
-        .response-content h3 { font-size: 1.2em; }
-        .response-content ul {
-          margin: 0.5em 0;
-          padding-left: 1.5em;
-        }
-        .response-content li {
-          margin: 0.3em 0;
-        }
-        .response-content li.sublist {
-          margin-left: 1.5em;
-        }
-        .response-content br {
-          margin: 0;
-          line-height: 1;
-        }
-        .response-content p {
-          margin: 0.5em 0;
-        }
-      </style>
-      <div class="thinking-section">
-        <div class="thinking-header">
-          <div class="thinking-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 28 28">
-              <path fill="#111827" d="M14 2C7.373 2 2 7.373 2 14s5.373 12 12 12 12-5.373 12-12S20.627 2 14 2zm0 22c-5.514 0-10-4.486-10-10S8.486 4 14 4s10 4.486 10 10-4.486 10-10 10z"/>
-              <path fill="#111827" d="M14.5 7h-1v7.5l5.4 3.6.6-.9-5-3.3V7z"/>
-            </svg>
-          </div>
-          <div class="thinking-title">Claude is thinking...</div>
+          .response-content {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #374151;
+            white-space: pre-wrap;
+            word-break: break-word;
+            padding: 16px;
+          }
+          strong {
+            font-weight: 600;
+          }
+          .response-content {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #374151;
+            background: transparent;
+          }
+          .response-content h1, 
+          .response-content h2, 
+          .response-content h3 {
+            margin: 1.5em 0 0.5em;
+            font-weight: 600;
+          }
+          .response-content h1 { font-size: 2em; }
+          .response-content h2 { font-size: 1.5em; }
+          .response-content h3 { font-size: 1.2em; }
+          .response-content ul {
+            margin: 0.5em 0;
+            padding-left: 1.5em;
+          }
+          .response-content li {
+            margin: 0.3em 0;
+          }
+          .response-content li.sublist {
+            margin-left: 1.5em;
+          }
+          .response-content br {
+            margin: 0;
+            line-height: 1;
+          }
+          .response-content p {
+            margin: 0.5em 0;
+          }
+        </style>
+        <div class="response-section">
+          <div class="response-content"></div>
         </div>
-        <div class="thinking-intro">
-          <span>Processing</span>
-          <div class="loading-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-      </div>
-      <div class="response-section">
-        <div class="response-content"></div>
-      </div>
-    `;
+      `;
 
     element.appendChild(container);
 
     // Get references to elements
-    const thinkingSection = container.querySelector('.thinking-section');
-    const thinkingIntro = container.querySelector('.thinking-intro');
-    const thinkingTitle = container.querySelector('.thinking-title');
     const responseSection = container.querySelector('.response-section');
     const responseContent = container.querySelector('.response-content');
     let isFirstChunk = true;
@@ -222,16 +131,13 @@ export const StreamingResponseExtension = {
 
       // Handle first chunk
       if (isFirstChunk) {
-        thinkingIntro.style.display = 'none';
-        thinkingTitle.textContent = 'Claude is responding...';
-        thinkingSection.classList.add('collapsed');
         responseSection.classList.add('visible');
         isFirstChunk = false;
       }
 
       // Append to buffer
       buffer += text;
-      
+
       // Format markdown content
       const formattedContent = buffer
         .replace(/^#{3}\s+(.*$)/gm, '<h3>$1</h3>')
@@ -252,7 +158,7 @@ export const StreamingResponseExtension = {
         .replace(/\n{2,}/g, '\n')
         .replace(/(<\/h[1-3]>|<\/p>|<\/ul>)\n+/g, '$1')
         .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '$1');
-      
+
       // Update content with formatting
       responseContent.innerHTML = formattedContent;
 
@@ -341,7 +247,6 @@ export const StreamingResponseExtension = {
 
       } catch (error) {
         console.error("Stream error:", error);
-        thinkingTitle.textContent = 'Error occurred';
         responseContent.textContent = `Error: ${error.message}`;
       }
     }
