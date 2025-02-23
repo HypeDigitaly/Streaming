@@ -243,9 +243,12 @@ export const StreamingResponseExtension = {
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
         .replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">')
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
-        .replace(/^- (.*$)/gm, '<li>$1</li>')
-        .replace(/(?<!<\/ul>)\n<li>/g, '<ul><li>')
-        .replace(/<\/li>\n(?!<li>)/g, '</li></ul>')
+        .replace(/^- (.*$)/gm, (match, content) => {
+          const indentation = match.match(/^\s*/)[0].length;
+          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
+        })
+        .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>')
         .replace(/\n{2,}/g, '\n')
         .replace(/(<\/h[1-3]>|<\/p>|<\/ul>)\n+/g, '$1')
         .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '$1');
