@@ -61,13 +61,14 @@ export default async function handler(req, res) {
       apiKey: apiKey,
     });
 
-    console.log('Project Name:', projectName);
-    console.log('Received request:', {
-      model,
-      max_tokens,
-      temperature,
-      systemPrompt: systemPrompt?.substring(0, 100) + '...'
-    });
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Received request:', {
+        model,
+        max_tokens,
+        temperature,
+        // Omit sensitive data from logs
+      });
+    }
 
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
