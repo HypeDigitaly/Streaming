@@ -258,13 +258,6 @@ export const StreamingResponseExtension = {
           console.log("📡 StreamingResponseExtension: Calling Claude API with payload:", payload);
         }
 
-        // Reset UI elements for fresh error handling
-        const thinkingHeader = container.querySelector('.thinking-header');
-        if (thinkingHeader) thinkingHeader.style.display = 'none';
-        responseSection.classList.add('visible');
-        responseContent.innerHTML = 'Connecting to API...';
-
-
         const response = await fetch(proxyUrl, {
           method: "POST",
           headers: { 
