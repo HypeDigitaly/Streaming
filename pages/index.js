@@ -4,7 +4,7 @@ import React from 'react';
 export default function Home() {
   return (
     <div style={{ padding: '20px', textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
-      <h1>HypeDigitaly AI Streaming API</h1>
+      <h1>Interní API endpointy HypeDigitaly</h1>
       <p style={{ fontSize: '18px', marginTop: '20px' }}>
         Official API endpoint for HypeDigitaly AI streaming messages:
       </p>
