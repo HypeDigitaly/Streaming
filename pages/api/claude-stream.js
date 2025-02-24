@@ -23,26 +23,13 @@ export default async function handler(req, res) {
   res.setHeader('Connection', 'keep-alive');
 
   try {
-    const { model, max_tokens, temperature, userData, systemPrompt, keyType } = req.body;
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName } = req.body;
     
-    // Select API key based on keyType
-    let apiKey;
-    switch (keyType) {
-      case 'primary':
-        apiKey = process.env.ANTHROPIC_API_KEY_PRIMARY;
-        break;
-      case 'secondary':
-        apiKey = process.env.ANTHROPIC_API_KEY_SECONDARY;
-        break;
-      case 'tertiary':
-        apiKey = process.env.ANTHROPIC_API_KEY_TERTIARY;
-        break;
-      default:
-        apiKey = process.env.ANTHROPIC_API_KEY;
-    }
+    // Select API key based on projectName
+    const apiKey = process.env[`ANTHROPIC_API_KEY_${projectName?.toUpperCase()}`] || process.env.ANTHROPIC_API_KEY;
 
     if (!apiKey) {
-      throw new Error(`API key not found for type: ${keyType}`);
+      throw new Error(`API key not found for project: ${projectName}`);
     }
 
     const anthropic = new Anthropic({
@@ -53,7 +40,7 @@ export default async function handler(req, res) {
       model,
       max_tokens,
       temperature,
-      keyType,
+      projectName,
       systemPrompt: systemPrompt?.substring(0, 100) + '...'
     });
 
