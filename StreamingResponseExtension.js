@@ -248,7 +248,7 @@ export const StreamingResponseExtension = {
 
     async function callClaudeAPI(payload) {
       try {
-        const proxyUrl = "https://hypedigitaly-streaming.replit.app/api/claude-stream";
+        const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
         console.log("Starting Claude API call with payload:", payload);
 
         const response = await fetch(proxyUrl, {
