@@ -54,13 +54,33 @@ export default async function handler(req, res) {
       apiKey: apiKey,
     });
 
-    console.log('Received request:', {
+    console.log('📡 API Call:', {
       model,
       max_tokens,
       temperature,
-      projectName,
-      systemPrompt: systemPrompt?.substring(0, 100) + '...'
+      projectName,  
+      messages: trace.payload?.messages,
+      systemPrompt
     });
+    
+    // Log the full request payload
+    console.log('📤 Full Request Payload:', JSON.stringify({
+      model: model || 'claude-3-sonnet-20241022',
+      max_tokens: max_tokens || 4096,
+      temperature: temperature || 0,
+      messages: [{
+        role: 'user',
+        content: userData
+      }],
+      system: [{
+        type: "text",
+        text: systemPrompt,
+        cache_control: {
+          type: "ephemeral"
+        }
+      }],
+      stream: true
+    }, null, 2));
 
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
@@ -100,6 +120,10 @@ export default async function handler(req, res) {
           type: 'content',
           content: messageChunk.delta?.text || ''
         };
+        
+        // Log each chunk
+        console.log('📥 Response Chunk:', messageChunk);
+        
         res.write(`data: ${JSON.stringify(data)}\n\n`);
         res.flush?.();
       }
