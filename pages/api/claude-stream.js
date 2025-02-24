@@ -36,11 +36,11 @@ export default async function handler(req, res) {
       apiKey: apiKey,
     });
 
+    console.log('Project Name:', projectName);
     console.log('Received request:', {
       model,
       max_tokens,
       temperature,
-      projectName,
       systemPrompt: systemPrompt?.substring(0, 100) + '...'
     });
 
