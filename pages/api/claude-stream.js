@@ -54,17 +54,18 @@ export default async function handler(req, res) {
       apiKey: apiKey,
     });
 
-    console.log('📡 API Call:', {
-      model,
-      max_tokens,
-      temperature,
-      projectName,  
-      messages: trace.payload?.messages,
-      systemPrompt
-    });
-    
-    // Log the full request payload
-    console.log('📤 Full Request Payload:', JSON.stringify({
+    if (debug === 1) {
+      console.log('📡 API Call:', {
+        model,
+        max_tokens,
+        temperature,
+        projectName,  
+        messages: trace.payload?.messages,
+        systemPrompt
+      });
+      
+      // Log the full request payload
+      console.log('📤 Full Request Payload:', JSON.stringify({
       model: model || 'claude-3-sonnet-20241022',
       max_tokens: max_tokens || 4096,
       temperature: temperature || 0,
@@ -121,8 +122,10 @@ export default async function handler(req, res) {
           content: messageChunk.delta?.text || ''
         };
         
-        // Log each chunk
-        console.log('📥 Response Chunk:', messageChunk);
+        // Log each chunk if debug mode is enabled
+        if (debug === 1) {
+          console.log('📥 Response Chunk:', messageChunk);
+        }
         
         res.write(`data: ${JSON.stringify(data)}\n\n`);
         res.flush?.();
