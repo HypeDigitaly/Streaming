@@ -1,8 +1,5 @@
-import { Anthropic } from '@anthropic-ai/sdk';
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+import { Anthropic } from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
   const origin = req.headers.origin || 'https://hypedigitaly.ai';
@@ -11,7 +8,6 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'false');
 
-  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
@@ -22,22 +18,45 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Set headers for SSE
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
 
   try {
-    const { model, max_tokens, temperature, userData, systemPrompt } = req.body;
+    const { model, max_tokens, temperature, userData, systemPrompt, keyType } = req.body;
     
+    // Select API key based on keyType
+    let apiKey;
+    switch (keyType) {
+      case 'primary':
+        apiKey = process.env.ANTHROPIC_API_KEY_PRIMARY;
+        break;
+      case 'secondary':
+        apiKey = process.env.ANTHROPIC_API_KEY_SECONDARY;
+        break;
+      case 'tertiary':
+        apiKey = process.env.ANTHROPIC_API_KEY_TERTIARY;
+        break;
+      default:
+        apiKey = process.env.ANTHROPIC_API_KEY;
+    }
+
+    if (!apiKey) {
+      throw new Error(`API key not found for type: ${keyType}`);
+    }
+
+    const anthropic = new Anthropic({
+      apiKey: apiKey,
+    });
+
     console.log('Received request:', {
       model,
       max_tokens,
       temperature,
+      keyType,
       systemPrompt: systemPrompt?.substring(0, 100) + '...'
     });
 
-    // Set up SSE headers
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
@@ -62,7 +81,6 @@ export default async function handler(req, res) {
       stream: true,
     });
 
-    // Process the stream
     for await (const messageChunk of response) {
       if (messageChunk.type === 'message_start') {
         continue;
