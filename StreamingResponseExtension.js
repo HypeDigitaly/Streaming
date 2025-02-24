@@ -10,7 +10,7 @@ export const StreamingResponseExtension = {
     const container = document.createElement('div');
     container.className = 'streaming-response-container';
 
-    // Create the base structure 
+    // Create the base structure
     container.innerHTML = `
         <div class="thinking-header">
         </div>
@@ -248,7 +248,7 @@ export const StreamingResponseExtension = {
 
     async function callClaudeAPI(payload) {
       try {
-        const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
+        const proxyUrl = "https://hypedigitaly-streaming.replit.app/api/claude-stream";
         console.log("Starting Claude API call with payload:", payload);
 
         const response = await fetch(proxyUrl, {
