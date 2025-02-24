@@ -2,7 +2,23 @@
 import { Anthropic } from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
-  const origin = req.headers.origin || 'https://hypedigitaly.ai';
+  const whitelistedDomains = [
+    'www.icuk.cz',
+    'www.kr-ustecky.cz',
+    'www.kr-vysocina.cz',
+    'www.setrivodou.cz',
+    'www.healthytwenty.cz',
+    'www.barber-mnb.cz',
+    'www.teplice.cz'
+  ];
+
+  const origin = req.headers.origin;
+  
+  // Check if origin is in whitelist
+  if (!origin || !whitelistedDomains.includes(new URL(origin).hostname)) {
+    return res.status(403).json({ error: 'Access denied - domain not whitelisted' });
+  }
+  
   res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
