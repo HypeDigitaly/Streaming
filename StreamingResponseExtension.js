@@ -256,7 +256,6 @@ export const StreamingResponseExtension = {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
-            "X-API-Key": process.env.ENDPOINT_API_KEY
           },
           body: JSON.stringify(payload),
         });
