@@ -249,9 +249,19 @@ export const StreamingResponseExtension = {
     async function callClaudeAPI(payload) {
       try {
         const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
+        // Always log payload values
+        console.log("📦 Payload values:", {
+          model: payload.model,
+          max_tokens: payload.max_tokens,
+          temperature: payload.temperature,
+          debug: payload.debug,
+          projectName: payload.projectName,
+          systemPrompt: payload.systemPrompt
+        });
+        
         if (payload.debug === 1) {
           console.log("🌐 Calling proxy URL:", proxyUrl);
-          console.log("📦 Starting Claude API call with payload:", payload);
+          console.log("📦 Full Claude API call payload:", payload);
         }
 
         const response = await fetch(proxyUrl, {

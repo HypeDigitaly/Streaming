@@ -54,8 +54,18 @@ export default async function handler(req, res) {
       apiKey: apiKey,
     });
 
+    // Always log payload values
+    console.log('📡 Payload values:', {
+      model,
+      max_tokens,
+      temperature,
+      projectName,
+      debug,
+      systemPrompt
+    });
+
     if (debug === 1) {
-      console.log('📡 API Call:', {
+      console.log('📡 Full API Call:', {
         model,
         max_tokens,
         temperature,
