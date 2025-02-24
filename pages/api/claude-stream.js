@@ -1,4 +1,3 @@
-
 import { Anthropic } from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
@@ -13,6 +12,12 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Validate API key from request header
+  const apiKeyHeader = req.headers['x-api-key'];
+  if (!apiKeyHeader || apiKeyHeader !== process.env.ENDPOINT_API_KEY) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
   if (req.method !== 'POST') {
     console.error('❌ Proxy: Invalid method', req.method);
     return res.status(405).json({ error: 'Method not allowed' });
@@ -24,7 +29,7 @@ export default async function handler(req, res) {
 
   try {
     const { model, max_tokens, temperature, userData, systemPrompt, projectName } = req.body;
-    
+
     // Select API key based on projectName
     const apiKey = process.env[`ANTHROPIC_API_KEY_${projectName?.toUpperCase()}`] || process.env.ANTHROPIC_API_KEY;
 
@@ -72,7 +77,7 @@ export default async function handler(req, res) {
       if (messageChunk.type === 'message_start') {
         continue;
       }
-      
+
       if (messageChunk.type === 'content_block_start') {
         continue;
       }
