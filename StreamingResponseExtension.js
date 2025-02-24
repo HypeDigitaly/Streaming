@@ -315,6 +315,7 @@ export const StreamingResponseExtension = {
         temperature: trace.payload.temperature,
         userData: trace.payload.userData,
         systemPrompt: trace.payload.systemPrompt,
+        debug: trace.payload.debug || 0,
       });
     } else {
       addDebugMessage("❌ Error: No payload received", "error");
