@@ -4,7 +4,7 @@ import { Anthropic } from '@anthropic-ai/sdk';
 export default async function handler(req, res) {
   // Validate API key
   const apiKeyHeader = req.headers['x-api-key'];
-  if (!apiKeyHeader || apiKeyHeader !== process.env.API_ACCESS_KEY) {
+  if (!apiKeyHeader || apiKeyHeader !== process.env.ENDPOINT_API_KEY) {
     return res.status(401).json({ error: 'Unauthorized - Invalid API key' });
   }
 
