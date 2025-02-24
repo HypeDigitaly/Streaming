@@ -106,6 +106,34 @@ export const StreamingResponseExtension = {
           .response-content p {
             margin: 0.5em 0;
           }
+          /* Added styles for headings */
+          .response-content .answer-h1 {
+            font-size: 1.4em;
+            margin: 0.5em 0 0.3em;
+            font-weight: 600;
+            line-height: 1.2;
+          }
+          .response-content .answer-h1:first-child {
+            margin-top: 0;
+          }
+          .response-content .answer-h2 {
+            font-size: 1.2em;
+            margin: 0.4em 0 0.2em;
+            font-weight: 600;
+            line-height: 1.2;
+          }
+          .response-content .answer-h2:first-child {
+            margin-top: 0;
+          }
+          .response-content .answer-h3 {
+            font-size: 1.1em;
+            margin: 0.3em 0 0.2em;
+            font-weight: 600;
+            line-height: 1.2;
+          }
+          .response-content .answer-h3:first-child {
+            margin-top: 0;
+          }
         </style>
         <div class="response-section">
           <div class="response-content"></div>
