@@ -2,6 +2,12 @@
 import { Anthropic } from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
+  // Validate API key
+  const apiKeyHeader = req.headers['x-api-key'];
+  if (!apiKeyHeader || apiKeyHeader !== process.env.API_ACCESS_KEY) {
+    return res.status(401).json({ error: 'Unauthorized - Invalid API key' });
+  }
+
   const origin = req.headers.origin || 'https://hypedigitaly.ai';
   res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
