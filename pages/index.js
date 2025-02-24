@@ -10,7 +10,7 @@ export default function Home() {
         <h2>Endpoints</h2>
         
         <div style={{ background: '#f5f5f5', padding: '20px', borderRadius: '5px', marginTop: '20px' }}>
-          <h3>POST /api/claude-stream</h3>
+          <h3>POST /api/chat/claude-streaming</h3>
           <p><strong>Description:</strong> Streams Claude AI responses using Server-Sent Events (SSE)</p>
           
           <h4>Headers Required:</h4>
