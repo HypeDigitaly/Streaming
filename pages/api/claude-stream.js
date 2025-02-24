@@ -1,10 +1,22 @@
 import { Anthropic } from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
-  const origin = req.headers.origin || 'https://hypedigitaly.ai';
-  res.setHeader('Access-Control-Allow-Origin', origin);
+  const allowedDomains = [
+    'https://www.kr-vysocina.cz',
+    'https://www.kr-ustecky.cz',
+    'https://www.teplice.cz',
+    'https://www.setrivodou.cz',
+    'https://www.barber-mnb.cz',
+    'https://www.healthytwenty.cz',
+    'https://www.icuk.cz'
+  ];
+  
+  const origin = req.headers.origin;
+  if (origin && allowedDomains.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-API-Key');
   res.setHeader('Access-Control-Allow-Credentials', 'false');
 
   if (req.method === 'OPTIONS') {
