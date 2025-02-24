@@ -45,13 +45,7 @@ export default async function handler(req, res) {
     });
 
     const response = await anthropic.messages.create({
-      headers: {
-        'Content-Type': 'application/json',
-        'Anthropic-Version': '2023-06-01',  // or latest version
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-beta': 'prompt-caching-2024-07-31'
-      },
-      model: model || 'claude-3-5-sonnet-20241022',
+      model: model || 'claude-3-sonnet-20241022',
       max_tokens: max_tokens || 4096,
       temperature: temperature || 0,
       messages: [{
