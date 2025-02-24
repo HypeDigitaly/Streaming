@@ -41,7 +41,7 @@ export const StreamingResponseExtension = {
             gap: 0;
           }
           .response-section {
-            padding: 8px 12px;
+            padding: 8px 0;
             margin: 0;
             width: 100%;
             box-sizing: border-box;
