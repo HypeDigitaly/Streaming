@@ -16,13 +16,14 @@ export const StreamingResponseExtension = {
         </div>
         <style>
           .thinking-header {
-            padding: 8px 16px;
+            padding: 0;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             opacity: 1;
             height: auto;
             transition: opacity 0.3s ease, height 0.3s ease;
+            margin: 0;
           }
           .thinking-header.hidden {
             opacity: 0;
@@ -55,22 +56,16 @@ export const StreamingResponseExtension = {
             overflow: visible;
           }
           .response-content {
+            font-family: var(--_1bof89na), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             font-size: 14px;
-            line-height: 1.4;
-            color: #374151;
+            line-height: 20px;
+            color: #1a1e23;
             white-space: pre-wrap;
             word-break: break-word;
-            padding: 16px;
+            padding: 0;
           }
           strong {
             font-weight: 600;
-          }
-          .response-content {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #374151;
-            background: transparent;
           }
           .response-content h1, 
           .response-content h2, 
