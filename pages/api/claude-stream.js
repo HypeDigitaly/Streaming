@@ -3,19 +3,20 @@ import { Anthropic } from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
   const whitelistedDomains = [
-    'www.icuk.cz',
-    'www.kr-ustecky.cz',
-    'www.kr-vysocina.cz',
-    'www.setrivodou.cz',
-    'www.healthytwenty.cz',
-    'www.barber-mnb.cz',
-    'www.teplice.cz'
+    'icuk.cz',
+    'kr-ustecky.cz',
+    'kr-vysocina.cz',
+    'setrivodou.cz',
+    'healthytwenty.cz',
+    'barber-mnb.cz',
+    'teplice.cz'
   ];
 
   const origin = req.headers.origin;
   
   // Check if origin is in whitelist
-  if (!origin || !whitelistedDomains.includes(new URL(origin).hostname)) {
+  const hostname = new URL(origin).hostname.replace(/^www\./, '');
+  if (!origin || !whitelistedDomains.includes(hostname)) {
     return res.status(403).json({ error: 'Access denied - domain not whitelisted' });
   }
   
