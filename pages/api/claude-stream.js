@@ -1,4 +1,3 @@
-
 import { Anthropic } from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
@@ -14,13 +13,13 @@ export default async function handler(req, res) {
   ];
 
   const origin = req.headers.origin;
-  
+
   // Check if origin is in whitelist
   const hostname = new URL(origin).hostname.replace(/^www\./, '');
   if (!origin || !whitelistedDomains.includes(hostname)) {
     return res.status(403).json({ error: 'Access denied - domain not whitelisted' });
   }
-  
+
   res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -41,8 +40,8 @@ export default async function handler(req, res) {
   res.setHeader('Connection', 'keep-alive');
 
   try {
-    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debug } = req.body;
-    
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode } = req.body;
+
     // Select API key based on projectName
     const apiKey = process.env[`ANTHROPIC_API_KEY_${projectName?.toUpperCase()}`] || process.env.ANTHROPIC_API_KEY;
 
@@ -60,11 +59,11 @@ export default async function handler(req, res) {
       max_tokens,
       temperature,
       projectName,
-      debug,
+      debugMode,
       systemPrompt
     });
 
-    if (debug === 1) {
+    if (debugMode === 1) {
       console.log('📡 Full API Call:', {
         model,
         max_tokens,
@@ -73,7 +72,7 @@ export default async function handler(req, res) {
         messages: trace.payload?.messages,
         systemPrompt
       });
-      
+
       // Log the full request payload
       console.log('📤 Full Request Payload:', JSON.stringify({
       model: model || 'claude-3-sonnet-20241022',
@@ -92,6 +91,8 @@ export default async function handler(req, res) {
       }],
       stream: true
     }, null, 2));
+
+    }
 
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
@@ -121,7 +122,7 @@ export default async function handler(req, res) {
       if (messageChunk.type === 'message_start') {
         continue;
       }
-      
+
       if (messageChunk.type === 'content_block_start') {
         continue;
       }
@@ -131,12 +132,12 @@ export default async function handler(req, res) {
           type: 'content',
           content: messageChunk.delta?.text || ''
         };
-        
+
         // Log each chunk if debug mode is enabled
-        if (debug === 1) {
+        if (debugMode === 1) {
           console.log('📥 Response Chunk:', messageChunk);
         }
-        
+
         res.write(`data: ${JSON.stringify(data)}\n\n`);
         res.flush?.();
       }

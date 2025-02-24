@@ -254,12 +254,12 @@ export const StreamingResponseExtension = {
           model: payload.model,
           max_tokens: payload.max_tokens,
           temperature: payload.temperature,
-          debug: payload.debug,
+          debugMode: payload.debugMode,
           projectName: payload.projectName,
           systemPrompt: payload.systemPrompt
         });
-        
-        if (payload.debug === 1) {
+
+        if (payload.debugMode === 1) {
           console.log("🌐 Calling proxy URL:", proxyUrl);
           console.log("📦 Full Claude API call payload:", payload);
         }
@@ -305,9 +305,9 @@ export const StreamingResponseExtension = {
               }
 
               if (parsed.type === 'content' && parsed.content) {
-                if (trace.payload.debug === 1) {
-                console.log('Received content:', parsed.content);
-              }
+                if (trace.payload.debugMode === 1) {
+                  console.log('Received content:', parsed.content);
+                }
                 updateContent(parsed.content);
               }
             } catch (e) {
@@ -329,7 +329,7 @@ export const StreamingResponseExtension = {
         temperature: trace.payload.temperature,
         userData: trace.payload.userData,
         systemPrompt: trace.payload.systemPrompt,
-        debug: trace.payload.debug || 0,
+        debugMode: trace.payload.debug || 0, // Assuming debug defaults to 0 if not present.
       });
     } else {
       addDebugMessage("❌ Error: No payload received", "error");
