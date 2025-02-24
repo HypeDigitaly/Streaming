@@ -1,3 +1,5 @@
+import config from './config.js';
+
 export const StreamingResponseExtension = {
   name: "StreamingResponse",
   type: "response",
@@ -5,7 +7,9 @@ export const StreamingResponseExtension = {
     trace.type === "ext_streamingResponse" ||
     trace.payload?.name === "ext_streamingResponse",
   render: async ({ trace, element }) => {
-    console.log("🚀 StreamingResponseExtension: Starting render", { trace });
+    if (config.EnableLogging) {
+      console.log("🚀 StreamingResponseExtension: Starting render", { trace });
+    }
 
     const container = document.createElement('div');
     container.className = 'streaming-response-container';
@@ -249,8 +253,10 @@ export const StreamingResponseExtension = {
     async function callClaudeAPI(payload) {
       try {
         const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
-        console.log("📡 StreamingResponseExtension: proxyURL:", proxyUrl);
-        console.log("📡 StreamingResponseExtension: Calling Claude API with payload:", payload);
+        if (config.EnableLogging) {
+          console.log("📡 StreamingResponseExtension: proxyURL:", proxyUrl);
+          console.log("📡 StreamingResponseExtension: Calling Claude API with payload:", payload);
+        }
 
         const response = await fetch(proxyUrl, {
           method: "POST",
@@ -281,7 +287,9 @@ export const StreamingResponseExtension = {
 
             const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
-              console.log('Stream completed');
+              if (config.EnableLogging) {
+                console.log('Stream completed');
+              }
               return;
             }
 
@@ -293,17 +301,23 @@ export const StreamingResponseExtension = {
               }
 
               if (parsed.type === 'content' && parsed.content) {
-                console.log('Received content:', parsed.content);
+                if (config.EnableLogging) {
+                  console.log('Received content:', parsed.content);
+                }
                 updateContent(parsed.content);
               }
             } catch (e) {
-              console.warn('Failed to parse SSE data:', e);
+              if (config.EnableLogging) {
+                console.warn('Failed to parse SSE data:', e);
+              }
             }
           }
         }
 
       } catch (error) {
-        console.error("Stream error:", error);
+        if (config.EnableLogging) {
+          console.error("Stream error:", error);
+        }
         responseContent.textContent = `Error: ${error.message}`;
       }
     }
