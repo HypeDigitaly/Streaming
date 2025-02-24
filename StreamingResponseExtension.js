@@ -16,7 +16,7 @@ export const StreamingResponseExtension = {
         </div>
         <style>
           .thinking-header {
-            padding: 0;
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -41,7 +41,7 @@ export const StreamingResponseExtension = {
             gap: 0;
           }
           .response-section {
-            padding: 0;
+            padding: 16px 20px;
             margin: 0;
             width: 100%;
             box-sizing: border-box;
@@ -63,6 +63,7 @@ export const StreamingResponseExtension = {
             white-space: pre-wrap;
             word-break: break-word;
             padding: 0;
+            margin: 0;
           }
           .response-content h1, 
           .response-content h2, 
