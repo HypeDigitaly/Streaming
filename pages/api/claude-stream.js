@@ -1,41 +1,16 @@
+
 import { Anthropic } from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
-  const allowedDomainNames = [
-    'kr-vysocina.cz',
-    'kr-ustecky.cz',
-    'teplice.cz',
-    'setrivodou.cz',
-    'barber-mnb.cz',
-    'healthytwenty.cz',
-    'icuk.cz'
-  ];
-  
-  const origin = req.headers.origin;
-  if (origin) {
-    try {
-      const originDomain = new URL(origin).hostname;
-      const isAllowed = allowedDomainNames.some(domain => originDomain.endsWith(domain));
-      if (isAllowed) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-      }
-    } catch (e) {
-      console.error('Invalid origin:', origin);
-    }
-  }
+  const origin = req.headers.origin || 'https://hypedigitaly.ai';
+  res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-API-Key');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'false');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
-  }
-
-  // Validate API key from request header
-  const apiKeyHeader = req.headers['x-api-key'];
-  if (!apiKeyHeader || apiKeyHeader !== process.env.ENDPOINT_API_KEY) {
-    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   if (req.method !== 'POST') {
@@ -49,7 +24,7 @@ export default async function handler(req, res) {
 
   try {
     const { model, max_tokens, temperature, userData, systemPrompt, projectName } = req.body;
-
+    
     // Select API key based on projectName
     const apiKey = process.env[`ANTHROPIC_API_KEY_${projectName?.toUpperCase()}`] || process.env.ANTHROPIC_API_KEY;
 
@@ -61,14 +36,13 @@ export default async function handler(req, res) {
       apiKey: apiKey,
     });
 
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('Received request:', {
-        model,
-        max_tokens,
-        temperature,
-        // Omit sensitive data from logs
-      });
-    }
+    console.log('Received request:', {
+      model,
+      max_tokens,
+      temperature,
+      projectName,
+      systemPrompt: systemPrompt?.substring(0, 100) + '...'
+    });
 
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
@@ -98,7 +72,7 @@ export default async function handler(req, res) {
       if (messageChunk.type === 'message_start') {
         continue;
       }
-
+      
       if (messageChunk.type === 'content_block_start') {
         continue;
       }
