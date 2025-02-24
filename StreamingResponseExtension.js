@@ -10,7 +10,7 @@ export const StreamingResponseExtension = {
     const container = document.createElement('div');
     container.className = 'streaming-response-container';
 
-    // Create the base structure
+    // Create the base structure 
     container.innerHTML = `
         <div class="thinking-header">
         </div>
