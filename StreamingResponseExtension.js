@@ -255,7 +255,10 @@ export const StreamingResponseExtension = {
         const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
         if (config.EnableLogging) {
           console.log("📡 StreamingResponseExtension: proxyURL:", proxyUrl);
-          console.log("📡 StreamingResponseExtension: Calling Claude API with payload:", payload);
+          // Log payload without sensitive headers
+          const safePayload = { ...payload };
+          delete safePayload.headers;
+          console.log("📡 StreamingResponseExtension: Calling Claude API with payload:", safePayload);
         }
 
         const response = await fetch(proxyUrl, {
