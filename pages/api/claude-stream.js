@@ -1,6 +1,13 @@
 
 import { Anthropic } from '@anthropic-ai/sdk';
 
+// Debug logging function
+const debugLog = (debug, ...args) => {
+  if (debug) {
+    console.log(...args);
+  }
+};
+
 export default async function handler(req, res) {
   const whitelistedDomains = [
     'icuk.cz',
@@ -54,7 +61,9 @@ export default async function handler(req, res) {
       apiKey: apiKey,
     });
 
-    console.log('📡 API Call:', {
+    const { debug = 0 } = req.body;
+    
+    debugLog(debug, '📡 API Call:', {
       model,
       max_tokens,
       temperature,
@@ -64,7 +73,7 @@ export default async function handler(req, res) {
     });
     
     // Log the full request payload
-    console.log('📤 Full Request Payload:', JSON.stringify({
+    debugLog(debug, '📤 Full Request Payload:', JSON.stringify({
       model: model || 'claude-3-sonnet-20241022',
       max_tokens: max_tokens || 4096,
       temperature: temperature || 0,
@@ -122,7 +131,7 @@ export default async function handler(req, res) {
         };
         
         // Log each chunk
-        console.log('📥 Response Chunk:', messageChunk);
+        debugLog(debug, '📥 Response Chunk:', messageChunk);
         
         res.write(`data: ${JSON.stringify(data)}\n\n`);
         res.flush?.();
@@ -137,7 +146,7 @@ export default async function handler(req, res) {
     res.end();
 
   } catch (error) {
-    console.error('Stream Error:', error);
+    debugLog(debug, '❌ Stream Error:', error);
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
