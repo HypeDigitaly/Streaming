@@ -64,6 +64,18 @@ export const StreamingResponseExtension = {
             word-break: break-word;
             padding: 0;
           }
+          .response-content h1, 
+          .response-content h2, 
+          .response-content h3,
+          .response-content h4 {
+            font-family: var(--_1bof89na), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #1a1e23;
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 20px;
+          }
           strong {
             font-weight: 600;
           }
@@ -155,9 +167,9 @@ export const StreamingResponseExtension = {
 
       // Format markdown content
       const formattedContent = buffer
-        .replace(/^#{3}\s+(.*$)/gm, '<h3>$1</h3>')
-        .replace(/^#{2}\s+(.*$)/gm, '<h2>$1</h2>')
-        .replace(/^#{1}\s+(.*$)/gm, '<h1>$1</h1>')
+        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
