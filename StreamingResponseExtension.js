@@ -262,6 +262,7 @@ export const StreamingResponseExtension = {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
+            "X-API-Key": process.env.ENDPOINT_API_KEY || "", // Add API key header
           },
           body: JSON.stringify(payload),
         });
@@ -318,7 +319,20 @@ export const StreamingResponseExtension = {
         if (config.EnableLogging) {
           console.error("Stream error:", error);
         }
-        responseContent.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`; // Display error message in the UI
+        // Clear any existing content and show error prominently
+        responseSection.classList.add('visible');
+        responseContent.innerHTML = `
+          <div style="
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 8px 0;
+          ">
+            <strong>Error:</strong> ${error.message}
+          </div>
+        `;
       }
     }
 
