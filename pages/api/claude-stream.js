@@ -100,6 +100,23 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
+    console.log('🚀 Making Claude API call with config:', {
+      model: model || 'claude-3-sonnet-20241022',
+      max_tokens: max_tokens || 4096,
+      temperature: temperature || 0,
+      messages: [{
+        role: 'user',
+        content: userData
+      }],
+      system: [{
+        type: "text",
+        text: systemPrompt,
+        cache_control: {
+          type: "ephemeral"
+        }
+      }]
+    });
+
     const response = await anthropic.messages.create({
       model: model || 'claude-3-sonnet-20241022',
       max_tokens: max_tokens || 4096,
@@ -118,6 +135,8 @@ export default async function handler(req, res) {
       stream: true,
     });
 
+    console.log('📥 Claude API Response Object:', JSON.stringify(response, null, 2));
+
     for await (const messageChunk of response) {
       if (messageChunk.type === 'message_start') {
         continue;
@@ -133,10 +152,8 @@ export default async function handler(req, res) {
           content: messageChunk.delta?.text || ''
         };
 
-        // Log each chunk if debug mode is enabled
-        if (debugMode === 1) {
-          console.log('📥 Response Chunk:', messageChunk);
-        }
+        // Log each chunk with full details
+        console.log('📥 Response Chunk (Full):', JSON.stringify(messageChunk, null, 2));
 
         res.write(`data: ${JSON.stringify(data)}\n\n`);
         res.flush?.();
