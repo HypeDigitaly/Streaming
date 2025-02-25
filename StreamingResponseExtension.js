@@ -304,9 +304,9 @@ export const StreamingResponseExtension = {
                 throw new Error(parsed.error);
               }
 
-              console.log('Full Response:', data); // Added line to log full response
-              if (parsed.type === 'content' && parsed.content) {
-                if (trace.payload.debugMode === 1) {
+              if (trace.payload.debugMode === 1) {
+                console.log('Full Response:', data);
+                if (parsed.type === 'content' && parsed.content) {
                   console.log('Received content:', parsed.content);
                 }
                 updateContent(parsed.content);
