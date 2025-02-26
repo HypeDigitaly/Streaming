@@ -177,6 +177,33 @@ export const StreamingResponseExtension = {
         .trim();
     }
 
+
+        // Make final PATCH request to update variables after stream completion
+        try {
+          const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
+            method: 'PATCH',
+            headers: {
+              'accept': 'application/json',
+              'content-type': 'application/json',
+              'versionID': 'production'
+            },
+            body: JSON.stringify({
+              "LLM_Main_Response": completeResponse
+            })
+          });
+
+          if (!patchResponse.ok) {
+            console.error('Failed to update variables:', await patchResponse.text());
+          } else {
+            console.log('Successfully updated variables with complete response');
+            if (trace.payload.debugMode === 1) {
+              console.log('Final completeResponse:', completeResponse);
+            }
+          }
+        } catch (error) {
+          console.error('Error updating variables:', error);
+        }
+
     // Update the answer content with markdown support
     function updateContent(text) {
       if (!text) return;
@@ -284,34 +311,7 @@ export const StreamingResponseExtension = {
           const { done, value } = await reader.read();
           if (done) {
             console.log('Stream completed');
-
-            // Make PATCH request to update variables
-            try {
-              const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
-                method: 'PATCH',
-                headers: {
-                  'accept': 'application/json',
-                  'content-type': 'application/json',
-                  'versionID': 'production'
-                },
-                body: JSON.stringify({
-                  "LLM_Main_Response": completeResponse
-                })
-              });
-
-              if (!patchResponse.ok) {
-                console.error('Failed to update variables:', await patchResponse.text());
-              } else {
-                console.log('Successfully updated variables with complete response');
-                if (trace.payload.debugMode === 1) {
-                  console.log('Final completeResponse:', completeResponse);
-                }
-              }
-            } catch (error) {
-              console.error('Error updating variables:', error);
-            }
-
-            return;
+            break;
           }
 
           buffer += decoder.decode(value, { stream: true });
@@ -328,30 +328,7 @@ export const StreamingResponseExtension = {
               console.log('Stream completed');
 
               // Make PATCH request to update variables
-              try {
-                const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
-                  method: 'PATCH',
-                  headers: {
-                    'accept': 'application/json',
-                    'content-type': 'application/json',
-                    'versionID': 'production'
-                    // Authorization header will be added by backend
-                  },
-                  body: JSON.stringify({
-                    "LLM_Main_Response": completeResponse
-                  })
-                });
-
-                if (!patchResponse.ok) {
-                  console.error('Failed to update variables:', await patchResponse.text());
-                } else {
-                  console.log('Successfully updated variables with complete response');
-                }
-              } catch (error) {
-                console.error('Error updating variables:', error);
-              }
-
-              return;
+              break;
             }
 
             try {
