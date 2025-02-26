@@ -341,8 +341,28 @@ export const StreamingResponseExtension = {
             const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
               console.log('Stream completed');
+              
+              // Make final PATCH request to update variables after stream completion
+              try {
+                const patchResponse = await fetch('/api/update-voiceflow-variables', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    user_id: trace.payload.user_id,
+                    response: completeResponse
+                  })
+                });
 
-              // Make PATCH request to update variables
+                if (!patchResponse.ok) {
+                  console.error('Failed to update variables:', await patchResponse.text());
+                } else {
+                  console.log('Successfully updated variables with complete response');
+                }
+              } catch (error) {
+                console.error('Error updating variables:', error);
+              }
               break;
             }
 
