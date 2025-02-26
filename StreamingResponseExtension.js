@@ -6,6 +6,7 @@ export const StreamingResponseExtension = {
     trace.payload?.name === "ext_streamingResponse",
   render: async ({ trace, element }) => {
     console.log("🚀 StreamingResponseExtension: Starting render", { trace });
+    console.log("📦 Full trace payload:", JSON.stringify(trace.payload, null, 2));
 
     const container = document.createElement('div');
     container.className = 'streaming-response-container';
@@ -379,6 +380,7 @@ export const StreamingResponseExtension = {
         userData: trace.payload.userData,
         systemPrompt: trace.payload.systemPrompt,
         debugMode: trace.payload.debugMode || 0,
+        projectName: trace.payload.projectName,
         user_id: trace.payload.user_id,
       });
     } else {
