@@ -180,16 +180,14 @@ export const StreamingResponseExtension = {
 
         // Make final PATCH request to update variables after stream completion
         try {
-          const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
-            method: 'PATCH',
+          const patchResponse = await fetch('/api/update-voiceflow-variables', {
+            method: 'POST',
             headers: {
-              'accept': 'application/json',
-              'content-type': 'application/json',
-              'versionID': 'production',
-              'Authorization': voiceflowApiKey
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              "LLM_Main_Response": completeResponse
+              user_id: payload.user_id,
+              response: completeResponse
             })
           });
 

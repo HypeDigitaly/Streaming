@@ -145,8 +145,7 @@ export default async function handler(req, res) {
       if (messageChunk.type === 'content_block_delta') {
         const data = {
           type: 'content',
-          content: messageChunk.delta?.text || '',
-          voiceflowApiKey: voiceflowApiKey
+          content: messageChunk.delta?.text || ''
         };
 
         if (debugMode === 1) {
