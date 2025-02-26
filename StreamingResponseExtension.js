@@ -281,7 +281,12 @@ export const StreamingResponseExtension = {
         while (true) {
           const { value, done } = await reader.read();
           if (done) {
-            // When stream is complete, return the accumulated response
+            if (payload.debugMode === 1) {
+              console.log("📝 Complete LLM Response:", {
+                length: completeResponse.length,
+                content: completeResponse
+              });
+            }
             window.voiceflow.chat.interact({
               type: 'complete',
               payload: {
