@@ -177,100 +177,6 @@ export const StreamingResponseExtension = {
         .trim();
     }
 
-
-        try {
-          const response = await callClaudeAPI({
-            model: trace.payload.model,
-            max_tokens: trace.payload.max_tokens,
-            temperature: trace.payload.temperature,
-            userData: trace.payload.userData,
-            systemPrompt: trace.payload.systemPrompt,
-            debugMode: trace.payload.debugMode || 0,
-            user_id: trace.payload.user_id,
-          });
-
-          // Make the API call first
-          const response = await fetch("https://utils.hypedigitaly.ai/api/claude-stream", {
-            method: "POST",
-            headers: { 
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload)
-          });
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          // Initialize response collection
-          let completeResponse = '';
-          const reader = response.body.getReader();
-          const decoder = new TextDecoder();
-
-          while (true) {
-            try {
-              const { done, value } = await reader.read();
-              
-              if (done) {
-                if (trace.payload.debugMode === 1) {
-                  console.log('🏁 Stream completed');
-                  console.log('📝 Final complete response:', completeResponse);
-                }
-                break;
-              }
-          } catch (error) {
-            console.error('Error reading stream:', error);
-            break;
-          }
-              
-              // Make the PATCH request after stream completion
-              try {
-                if (trace.payload.debugMode === 1) {
-                  console.log('🔄 Attempting PATCH request with payload:', {
-                    user_id: trace.payload.user_id,
-                    responseLength: completeResponse.length
-                  });
-                }
-
-                const patchResponse = await fetch('/api/update-voiceflow-variables', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    user_id: trace.payload.user_id,
-                    response: completeResponse
-                  })
-                });
-
-                if (!patchResponse.ok) {
-                  const errorText = await patchResponse.text();
-                  console.error('❌ Failed to update variables:', {
-                    status: patchResponse.status,
-                    statusText: patchResponse.statusText,
-                    error: errorText
-                  });
-                } else {
-                  if (trace.payload.debugMode === 1) {
-                    console.log('✅ Successfully updated variables');
-                    const responseData = await patchResponse.json();
-                    console.log('📦 PATCH response data:', responseData);
-                  }
-                }
-              } catch (patchError) {
-                console.error('❌ Error during PATCH request:', {
-                  name: patchError.name,
-                  message: patchError.message,
-                  stack: patchError.stack
-                });
-              }
-              break;
-            }
-
-          const chunk = decoder.decode(value, { stream: true });
-          buffer += chunk;
-          completeResponse += chunk;
-
     // Update the answer content with markdown support
     function updateContent(text) {
       if (!text) return;
@@ -378,7 +284,34 @@ export const StreamingResponseExtension = {
           const { done, value } = await reader.read();
           if (done) {
             console.log('Stream completed');
-            break;
+
+            // Make PATCH request to update variables
+            try {
+              const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
+                method: 'PATCH',
+                headers: {
+                  'accept': 'application/json',
+                  'content-type': 'application/json',
+                  'versionID': 'production'
+                },
+                body: JSON.stringify({
+                  "LLM_Main_Response": completeResponse
+                })
+              });
+
+              if (!patchResponse.ok) {
+                console.error('Failed to update variables:', await patchResponse.text());
+              } else {
+                console.log('Successfully updated variables with complete response');
+                if (trace.payload.debugMode === 1) {
+                  console.log('Final completeResponse:', completeResponse);
+                }
+              }
+            } catch (error) {
+              console.error('Error updating variables:', error);
+            }
+
+            return;
           }
 
           buffer += decoder.decode(value, { stream: true });
@@ -393,17 +326,18 @@ export const StreamingResponseExtension = {
             const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
               console.log('Stream completed');
-              
-              // Make final PATCH request to update variables after stream completion
+
+              // Make PATCH request to update variables
               try {
-                const patchResponse = await fetch('/api/update-voiceflow-variables', {
-                  method: 'POST',
+                const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
+                  method: 'PATCH',
                   headers: {
-                    'Content-Type': 'application/json'
+                    'accept': 'application/json',
+                    'content-type': 'application/json',
+                    'versionID': 'production'
                   },
                   body: JSON.stringify({
-                    user_id: trace.payload.user_id,
-                    response: completeResponse
+                    "LLM_Main_Response": completeResponse
                   })
                 });
 
@@ -415,7 +349,8 @@ export const StreamingResponseExtension = {
               } catch (error) {
                 console.error('Error updating variables:', error);
               }
-              break;
+
+              return;
             }
 
             try {

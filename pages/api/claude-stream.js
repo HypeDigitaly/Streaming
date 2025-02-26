@@ -9,8 +9,7 @@ export default async function handler(req, res) {
     'healthytwenty.cz',
     'barber-mnb.cz',
     'teplice.cz',
-    'hypedigitaly.ai',
-    'litomerice.cz'
+    'hypedigitaly.ai'
   ];
 
   const origin = req.headers.origin;
@@ -45,8 +44,6 @@ export default async function handler(req, res) {
 
     // Select API key based on projectName
     const apiKey = process.env[`ANTHROPIC_API_KEY_${projectName?.toUpperCase()}`] || process.env.ANTHROPIC_API_KEY;
-    const voiceflowApiKey = process.env[`VOICEFLOW_API_KEY_${projectName?.toUpperCase()}`] || process.env.VOICEFLOW_API_KEY;
-
 
     if (!apiKey) {
       throw new Error(`API key not found for project: ${projectName}`);
@@ -127,7 +124,7 @@ export default async function handler(req, res) {
           type: "ephemeral"
         }
       }],
-      stream: true
+      stream: true,
     });
 
     if (debugMode === 1) {
