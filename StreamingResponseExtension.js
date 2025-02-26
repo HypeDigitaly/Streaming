@@ -192,6 +192,12 @@ export const StreamingResponseExtension = {
                 console.log('🏁 Stream completed');
                 console.log('📝 Final complete response:', completeResponse);
               }
+              break;
+            }
+          } catch (error) {
+            console.error('Error reading stream:', error);
+            break;
+          }
               
               // Make the PATCH request after stream completion
               try {
