@@ -278,10 +278,38 @@ export const StreamingResponseExtension = {
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let buffer = '';
+        let completeResponse = '';
 
         while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
+          const { done, value } = await reader.read();
+          if (done) {
+            console.log('Stream completed');
+
+            // Make PATCH request to update variables
+            try {
+              const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
+                method: 'PATCH',
+                headers: {
+                  'accept': 'application/json',
+                  'content-type': 'application/json',
+                  'versionID': 'production'
+                },
+                body: JSON.stringify({
+                  "LLM_Main_Response": completeResponse
+                })
+              });
+
+              if (!patchResponse.ok) {
+                console.error('Failed to update variables:', await patchResponse.text());
+              } else {
+                console.log('Successfully updated variables with complete response');
+              }
+            } catch (error) {
+              console.error('Error updating variables:', error);
+            }
+
+            return;
+          }
 
           buffer += decoder.decode(value, { stream: true });
           const lines = buffer.split('\n');
@@ -295,6 +323,30 @@ export const StreamingResponseExtension = {
             const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
               console.log('Stream completed');
+
+              // Make PATCH request to update variables
+              try {
+                const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
+                  method: 'PATCH',
+                  headers: {
+                    'accept': 'application/json',
+                    'content-type': 'application/json',
+                    'versionID': 'production'
+                  },
+                  body: JSON.stringify({
+                    "LLM_Main_Response": completeResponse
+                  })
+                });
+
+                if (!patchResponse.ok) {
+                  console.error('Failed to update variables:', await patchResponse.text());
+                } else {
+                  console.log('Successfully updated variables with complete response');
+                }
+              } catch (error) {
+                console.error('Error updating variables:', error);
+              }
+
               return;
             }
 
@@ -312,6 +364,7 @@ export const StreamingResponseExtension = {
                 }
                 updateContent(parsed.content);
               }
+              completeResponse += parsed.content; // Collect complete response
             } catch (e) {
               console.warn('Failed to parse SSE data:', e);
             }
