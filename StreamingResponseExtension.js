@@ -178,30 +178,46 @@ export const StreamingResponseExtension = {
     }
 
 
-        // Make final PATCH request to update variables after stream completion
-        try {
-          const patchResponse = await fetch('/api/update-voiceflow-variables', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              user_id: payload.user_id,
-              response: completeResponse
-            })
-          });
+        // Stream is complete, now make the final PATCH request
+        let completeResponse = '';
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
 
-          if (!patchResponse.ok) {
-            console.error('Failed to update variables:', await patchResponse.text());
-          } else {
-            console.log('Successfully updated variables with complete response');
-            if (trace.payload.debugMode === 1) {
-              console.log('Final completeResponse:', completeResponse);
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) {
+            console.log('Stream completed');
+            
+            // Now make the PATCH request after stream is complete
+            try {
+              const patchResponse = await fetch('/api/update-voiceflow-variables', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  user_id: trace.payload.user_id,
+                  response: completeResponse
+                })
+              });
+
+              if (!patchResponse.ok) {
+                console.error('Failed to update variables:', await patchResponse.text());
+              } else {
+                console.log('Successfully updated variables with complete response');
+                if (trace.payload.debugMode === 1) {
+                  console.log('Final completeResponse:', completeResponse);
+                }
+              }
+            } catch (error) {
+              console.error('Error updating variables:', error);
             }
+            break;
           }
-        } catch (error) {
-          console.error('Error updating variables:', error);
-        }
+
+          buffer += decoder.decode(value, { stream: true });
+          completeResponse += buffer;
 
     // Update the answer content with markdown support
     function updateContent(text) {
