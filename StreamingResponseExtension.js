@@ -178,22 +178,33 @@ export const StreamingResponseExtension = {
     }
 
 
-        // Initialize response collection
-        let completeResponse = '';
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
+        try {
+          const response = await callClaudeAPI({
+            model: trace.payload.model,
+            max_tokens: trace.payload.max_tokens,
+            temperature: trace.payload.temperature,
+            userData: trace.payload.userData,
+            systemPrompt: trace.payload.systemPrompt,
+            debugMode: trace.payload.debugMode || 0,
+            user_id: trace.payload.user_id,
+          });
 
-        while (true) {
-          try {
-            const { done, value } = await reader.read();
-            
-            if (done) {
-              if (trace.payload.debugMode === 1) {
-                console.log('🏁 Stream completed');
-                console.log('📝 Final complete response:', completeResponse);
+          // Initialize response collection
+          let completeResponse = '';
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+
+          while (true) {
+            try {
+              const { done, value } = await reader.read();
+              
+              if (done) {
+                if (trace.payload.debugMode === 1) {
+                  console.log('🏁 Stream completed');
+                  console.log('📝 Final complete response:', completeResponse);
+                }
+                break;
               }
-              break;
-            }
           } catch (error) {
             console.error('Error reading stream:', error);
             break;
