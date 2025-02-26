@@ -40,7 +40,7 @@ export default async function handler(req, res) {
   res.setHeader('Connection', 'keep-alive');
 
   try {
-    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode } = req.body;
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id } = req.body;
 
     // Select API key based on projectName
     const apiKey = process.env[`ANTHROPIC_API_KEY_${projectName?.toUpperCase()}`] || process.env.ANTHROPIC_API_KEY;

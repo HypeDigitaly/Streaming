@@ -256,7 +256,8 @@ export const StreamingResponseExtension = {
           temperature: payload.temperature,
           debugMode: payload.debugMode,
           projectName: payload.projectName,
-          systemPrompt: payload.systemPrompt
+          systemPrompt: payload.systemPrompt,
+          user_id: payload.user_id
         });
 
         if (payload.debugMode === 1) {
@@ -330,7 +331,8 @@ export const StreamingResponseExtension = {
         temperature: trace.payload.temperature,
         userData: trace.payload.userData,
         systemPrompt: trace.payload.systemPrompt,
-        debugMode: trace.payload.debugMode || 0, // Using consistent property name
+        debugMode: trace.payload.debugMode || 0,
+        user_id: trace.payload.user_id,
       });
     } else {
       addDebugMessage("❌ Error: No payload received", "error");
