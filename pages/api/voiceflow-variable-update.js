@@ -9,7 +9,8 @@ export default async function handler(req, res) {
     'healthytwenty.cz',
     'barber-mnb.cz',
     'teplice.cz',
-    'hypedigitaly.ai'
+    'hypedigitaly.ai',
+    'litomerice.cz'
   ];
 
   const origin = req.headers.origin;
