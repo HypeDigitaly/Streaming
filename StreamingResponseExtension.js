@@ -148,6 +148,7 @@ export const StreamingResponseExtension = {
     let isFirstChunk = true;
     let buffer = '';
     let deltaCounter = 0;
+    let completeResponse = '';
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -276,22 +277,28 @@ export const StreamingResponseExtension = {
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
-        let buffer = '';
 
         while (true) {
           const { value, done } = await reader.read();
-          if (done) break;
+          if (done) {
+            // When stream is complete, return the accumulated response
+            window.voiceflow.chat.interact({
+              type: 'complete',
+              payload: {
+                LLM_Main_Response: completeResponse
+              }
+            });
+            break;
+          }
 
           buffer += decoder.decode(value, { stream: true });
           const lines = buffer.split('\n');
-
-          // Process all complete lines
-          buffer = lines.pop() || ''; // Keep the incomplete line in buffer
+          buffer = lines.pop() || '';
 
           for (const line of lines) {
             if (!line.trim() || !line.startsWith('data: ')) continue;
 
-            const data = line.slice(6); // Remove 'data: ' prefix
+            const data = line.slice(6);
             if (data === '[DONE]') {
               console.log('Stream completed');
               return;
@@ -304,11 +311,8 @@ export const StreamingResponseExtension = {
                 throw new Error(parsed.error);
               }
 
-              if (trace.payload.debugMode === 1) {
-                console.log('Full Response:', data);
-                if (parsed.type === 'content' && parsed.content) {
-                  console.log('Received content:', parsed.content);
-                }
+              if (parsed.type === 'content' && parsed.content) {
+                completeResponse += parsed.content; // Accumulate the response
                 updateContent(parsed.content);
               }
             } catch (e) {
@@ -335,7 +339,5 @@ export const StreamingResponseExtension = {
     } else {
       addDebugMessage("❌ Error: No payload received", "error");
     }
-
-    window.voiceflow.chat.interact({ type: "continue" });
   },
 };
