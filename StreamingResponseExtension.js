@@ -361,10 +361,10 @@ export const StreamingResponseExtension = {
                 console.log('Full Response:', data);
                 if (parsed.type === 'content' && parsed.content) {
                   console.log('Received content:', parsed.content);
+                  console.log('Current completeResponse:', completeResponse + parsed.content);
                 }
-                updateContent(parsed.content);
-                console.log('Current completeResponse:', completeResponse + parsed.content);
               }
+              updateContent(parsed.content);
               completeResponse += parsed.content; // Collect complete response
             } catch (e) {
               console.warn('Failed to parse SSE data:', e);
