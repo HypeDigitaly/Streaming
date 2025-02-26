@@ -363,6 +363,7 @@ export const StreamingResponseExtension = {
                   console.log('Received content:', parsed.content);
                 }
                 updateContent(parsed.content);
+                console.log('Current completeResponse:', completeResponse + parsed.content);
               }
               completeResponse += parsed.content; // Collect complete response
             } catch (e) {
