@@ -284,33 +284,7 @@ export const StreamingResponseExtension = {
           const { done, value } = await reader.read();
           if (done) {
             console.log('Stream completed');
-
-            // Make PATCH request to update variables
-            try {
-              const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
-                method: 'PATCH',
-                headers: {
-                  'accept': 'application/json',
-                  'content-type': 'application/json',
-                  'versionID': 'production'
-                },
-                body: JSON.stringify({
-                  "LLM_Main_Response": completeResponse
-                })
-              });
-
-              if (!patchResponse.ok) {
-                console.error('Failed to update variables:', await patchResponse.text());
-              } else {
-                console.log('Successfully updated variables with complete response');
-                if (trace.payload.debugMode === 1) {
-                  console.log('Final completeResponse:', completeResponse);
-                }
-              }
-            } catch (error) {
-              console.error('Error updating variables:', error);
-            }
-
+            // No PATCH request here - we'll only do it when we receive [DONE]
             return;
           }
 
@@ -325,26 +299,43 @@ export const StreamingResponseExtension = {
 
             const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
-              console.log('Stream completed');
+              console.log('Stream completed via [DONE] signal');
 
-              // Make PATCH request to update variables
+              // This is the ONLY place we should make the PATCH request
               try {
-                const patchResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${payload.user_id}/variables`, {
-                  method: 'PATCH',
+                if (payload.debugMode === 1) {
+                  console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
+                }
+                
+                const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                  method: 'POST',
                   headers: {
-                    'accept': 'application/json',
-                    'content-type': 'application/json',
-                    'versionID': 'production'
+                    'Content-Type': 'application/json',
                   },
                   body: JSON.stringify({
-                    "LLM_Main_Response": completeResponse
-                  })
+                    user_id: payload.user_id,
+                    projectName: payload.projectName,
+                    variables: {
+                      "LLM_Main_Response": completeResponse
+                    },
+                    debugMode: payload.debugMode || 0
+                  }),
                 });
 
-                if (!patchResponse.ok) {
-                  console.error('Failed to update variables:', await patchResponse.text());
+                if (!updateResponse.ok) {
+                  const errorText = await updateResponse.text();
+                  console.error('Failed to update variables:', errorText);
                 } else {
                   console.log('Successfully updated variables with complete response');
+                  if (payload.debugMode === 1) {
+                    console.log('Final completeResponse length:', completeResponse.length);
+                    try {
+                      const responseData = await updateResponse.json();
+                      console.log('Voiceflow update response:', responseData);
+                    } catch (e) {
+                      console.log('Voiceflow update status:', updateResponse.status);
+                    }
+                  }
                 }
               } catch (error) {
                 console.error('Error updating variables:', error);
@@ -360,7 +351,7 @@ export const StreamingResponseExtension = {
                 throw new Error(parsed.error);
               }
 
-              if (trace.payload.debugMode === 1) {
+              if (payload.debugMode === 1) {
                 console.log('Full Response:', data);
                 if (parsed.type === 'content' && parsed.content) {
                   console.log('Received content:', parsed.content);
