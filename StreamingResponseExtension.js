@@ -185,7 +185,8 @@ export const StreamingResponseExtension = {
             headers: {
               'accept': 'application/json',
               'content-type': 'application/json',
-              'versionID': 'production'
+              'versionID': 'production',
+              'Authorization': voiceflowApiKey
             },
             body: JSON.stringify({
               "LLM_Main_Response": completeResponse
