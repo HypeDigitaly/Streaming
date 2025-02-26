@@ -126,8 +126,7 @@ export default async function handler(req, res) {
           type: "ephemeral"
         }
       }],
-      stream: true,
-      voiceflowApiKey // Pass the API key to be used in StreamingResponseExtension
+      stream: true
     });
 
     if (debugMode === 1) {
