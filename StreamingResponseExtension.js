@@ -187,6 +187,31 @@ export const StreamingResponseExtension = {
           const { done, value } = await reader.read();
           if (done) {
             console.log('Stream completed');
+            
+            // Now make the PATCH request after stream is complete
+            try {
+              const patchResponse = await fetch('/api/update-voiceflow-variables', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  user_id: trace.payload.user_id,
+                  response: completeResponse
+                })
+              });
+
+              if (!patchResponse.ok) {
+                console.error('Failed to update variables:', await patchResponse.text());
+              } else {
+                console.log('Successfully updated variables with complete response');
+                if (trace.payload.debugMode === 1) {
+                  console.log('Final completeResponse:', completeResponse);
+                }
+              }
+            } catch (error) {
+              console.error('Error updating variables:', error);
+            }
             break;
           }
 
