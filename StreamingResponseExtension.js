@@ -189,6 +189,19 @@ export const StreamingResponseExtension = {
             user_id: trace.payload.user_id,
           });
 
+          // Make the API call first
+          const response = await fetch("https://utils.hypedigitaly.ai/api/claude-stream", {
+            method: "POST",
+            headers: { 
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
           // Initialize response collection
           let completeResponse = '';
           const reader = response.body.getReader();
