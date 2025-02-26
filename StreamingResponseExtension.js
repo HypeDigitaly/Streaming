@@ -303,6 +303,9 @@ export const StreamingResponseExtension = {
                 console.error('Failed to update variables:', await patchResponse.text());
               } else {
                 console.log('Successfully updated variables with complete response');
+                if (trace.payload.debugMode === 1) {
+                  console.log('Final completeResponse:', completeResponse);
+                }
               }
             } catch (error) {
               console.error('Error updating variables:', error);
@@ -361,7 +364,6 @@ export const StreamingResponseExtension = {
                 console.log('Full Response:', data);
                 if (parsed.type === 'content' && parsed.content) {
                   console.log('Received content:', parsed.content);
-                  console.log('Current completeResponse:', completeResponse + parsed.content);
                 }
               }
               updateContent(parsed.content);
