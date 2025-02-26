@@ -60,7 +60,8 @@ export default async function handler(req, res) {
         temperature,
         projectName,
         debugMode,
-        systemPrompt
+        systemPrompt,
+        user_id
       });
 
       console.log('📤 Full Request Payload:', JSON.stringify({
