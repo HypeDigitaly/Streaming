@@ -178,42 +178,64 @@ export const StreamingResponseExtension = {
     }
 
 
-        // Stream is complete, now make the final PATCH request
+        // Initialize response collection
         let completeResponse = '';
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
 
         while (true) {
-          const { done, value } = await reader.read();
-          if (done) {
-            console.log('Stream completed');
+          try {
+            const { done, value } = await reader.read();
             
-            // Now make the PATCH request after stream is complete
-            try {
-              const patchResponse = await fetch('/api/update-voiceflow-variables', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  user_id: trace.payload.user_id,
-                  response: completeResponse
-                })
-              });
-
-              if (!patchResponse.ok) {
-                console.error('Failed to update variables:', await patchResponse.text());
-              } else {
-                console.log('Successfully updated variables with complete response');
-                if (trace.payload.debugMode === 1) {
-                  console.log('Final completeResponse:', completeResponse);
-                }
+            if (done) {
+              if (trace.payload.debugMode === 1) {
+                console.log('🏁 Stream completed');
+                console.log('📝 Final complete response:', completeResponse);
               }
-            } catch (error) {
-              console.error('Error updating variables:', error);
+              
+              // Make the PATCH request after stream completion
+              try {
+                if (trace.payload.debugMode === 1) {
+                  console.log('🔄 Attempting PATCH request with payload:', {
+                    user_id: trace.payload.user_id,
+                    responseLength: completeResponse.length
+                  });
+                }
+
+                const patchResponse = await fetch('/api/update-voiceflow-variables', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    user_id: trace.payload.user_id,
+                    response: completeResponse
+                  })
+                });
+
+                if (!patchResponse.ok) {
+                  const errorText = await patchResponse.text();
+                  console.error('❌ Failed to update variables:', {
+                    status: patchResponse.status,
+                    statusText: patchResponse.statusText,
+                    error: errorText
+                  });
+                } else {
+                  if (trace.payload.debugMode === 1) {
+                    console.log('✅ Successfully updated variables');
+                    const responseData = await patchResponse.json();
+                    console.log('📦 PATCH response data:', responseData);
+                  }
+                }
+              } catch (patchError) {
+                console.error('❌ Error during PATCH request:', {
+                  name: patchError.name,
+                  message: patchError.message,
+                  stack: patchError.stack
+                });
+              }
+              break;
             }
-            break;
-          }
 
           const chunk = decoder.decode(value, { stream: true });
           buffer += chunk;
