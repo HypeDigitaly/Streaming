@@ -149,6 +149,7 @@ export const StreamingResponseExtension = {
     let isFirstChunk = true;
     let buffer = '';
     let deltaCounter = 0;
+    let completeResponse = '';
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -232,6 +233,12 @@ export const StreamingResponseExtension = {
           });
         }
       }
+
+      // This is likely where the response is being built
+      completeResponse += text;
+      
+      // Ensure we're updating the LLM_Main_Response variable as well
+      LLM_Main_Response = completeResponse;
     }
 
     function findScrollableParent(el) {
@@ -285,7 +292,8 @@ export const StreamingResponseExtension = {
           const { done, value } = await reader.read();
           if (done) {
             console.log('Stream completed');
-            // No PATCH request here - we'll only do it when we receive [DONE]
+            // Make sure LLM_Main_Response has the final complete value
+            LLM_Main_Response = completeResponse;
             return;
           }
 
@@ -301,7 +309,10 @@ export const StreamingResponseExtension = {
             const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
               console.log('Stream completed via [DONE] signal');
-
+              
+              // Final assignment to ensure LLM_Main_Response contains everything
+              LLM_Main_Response = completeResponse;
+              
               // This is the ONLY place we should make the PATCH request
               try {
                 if (payload.debugMode === 1) {
