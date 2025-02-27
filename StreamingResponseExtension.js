@@ -149,6 +149,7 @@ export const StreamingResponseExtension = {
     let isFirstChunk = true;
     let buffer = '';
     let deltaCounter = 0;
+    let completeResponse = '';
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -279,13 +280,15 @@ export const StreamingResponseExtension = {
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let buffer = '';
-        let completeResponse = '';
 
         while (true) {
           const { done, value } = await reader.read();
           if (done) {
             console.log('Stream completed');
             // No PATCH request here - we'll only do it when we receive [DONE]
+            console.log('📝 COMPLETE_RESPONSE_BEGIN');
+            console.log(completeResponse);
+            console.log('📝 COMPLETE_RESPONSE_END');
             return;
           }
 
