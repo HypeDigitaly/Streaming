@@ -305,6 +305,11 @@ export const StreamingResponseExtension = {
             if (data === '[DONE]') {
               console.log('Stream completed via [DONE] signal');
 
+              // Log the entire LLM_Main_Response for debugging
+              console.log('📝 COMPLETE_RESPONSE_BEGIN');
+              console.log(completeResponse);
+              console.log('📝 COMPLETE_RESPONSE_END');
+
               // This is the ONLY place we should make the PATCH request
               try {
                 if (payload.debugMode === 1) {
