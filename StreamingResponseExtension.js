@@ -5,8 +5,10 @@ export const StreamingResponseExtension = {
     trace.type === "ext_streamingResponse" ||
     trace.payload?.name === "ext_streamingResponse",
   render: async ({ trace, element }) => {
-    console.log("🚀 StreamingResponseExtension: Starting render", { trace });
-    console.log("📦 Full trace payload:", JSON.stringify(trace.payload, null, 2));
+    if (trace.payload?.debugMode === 1) {
+      console.log("🚀 StreamingResponseExtension: Starting render", { trace });
+      console.log("📦 Full trace payload:", JSON.stringify(trace.payload, null, 2));
+    }
 
     const container = document.createElement('div');
     container.className = 'streaming-response-container';
@@ -251,18 +253,16 @@ export const StreamingResponseExtension = {
     async function callClaudeAPI(payload) {
       try {
         const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
-        // Always log payload values
-        console.log("📦 Payload values:", {
-          model: payload.model,
-          max_tokens: payload.max_tokens,
-          temperature: payload.temperature,
-          debugMode: payload.debugMode,
-          projectName: payload.projectName,
-          systemPrompt: payload.systemPrompt,
-          user_id: payload.user_id
-        });
-
         if (payload.debugMode === 1) {
+          console.log("📦 Payload values:", {
+            model: payload.model,
+            max_tokens: payload.max_tokens,
+            temperature: payload.temperature,
+            debugMode: payload.debugMode,
+            projectName: payload.projectName,
+            systemPrompt: payload.systemPrompt,
+            user_id: payload.user_id
+          });
           console.log("🌐 Calling proxy URL:", proxyUrl);
           console.log("📦 Full Claude API call payload:", payload);
         }
@@ -284,11 +284,13 @@ export const StreamingResponseExtension = {
         while (true) {
           const { done, value } = await reader.read();
           if (done) {
-            console.log('Stream completed');
-            // No PATCH request here - we'll only do it when we receive [DONE]
-            console.log('📝 COMPLETE_RESPONSE_BEGIN');
-            console.log(completeResponse);
-            console.log('📝 COMPLETE_RESPONSE_END');
+            if (payload.debugMode === 1) {
+              console.log('Stream completed');
+              // No PATCH request here - we'll only do it when we receive [DONE]
+              console.log('📝 COMPLETE_RESPONSE_BEGIN');
+              console.log(completeResponse);
+              console.log('📝 COMPLETE_RESPONSE_END');
+            }
             return;
           }
 
@@ -303,12 +305,14 @@ export const StreamingResponseExtension = {
 
             const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
-              console.log('Stream completed via [DONE] signal');
+              if (payload.debugMode === 1) {
+                console.log('Stream completed via [DONE] signal');
 
-              // Log the entire LLM_Main_Response for debugging
-              console.log('📝 COMPLETE_RESPONSE_BEGIN');
-              console.log(completeResponse);
-              console.log('📝 COMPLETE_RESPONSE_END');
+                // Log the entire LLM_Main_Response for debugging
+                console.log('📝 COMPLETE_RESPONSE_BEGIN');
+                console.log(completeResponse);
+                console.log('📝 COMPLETE_RESPONSE_END');
+              }
 
               // This is the ONLY place we should make the PATCH request
               try {
@@ -333,11 +337,15 @@ export const StreamingResponseExtension = {
 
                 if (!updateResponse.ok) {
                   const errorText = await updateResponse.text();
-                  console.error('Failed to update variables:', errorText);
+                  if (payload.debugMode === 1) {
+                    console.error('Failed to update variables:', errorText);
+                  }
                 } else {
-                  console.log('Successfully updated variables with complete response');
-                  // Log the entire LLM_Main_Response for dashboard logging
-                  console.log('📝 Complete LLM_Main_Response:', completeResponse);
+                  if (payload.debugMode === 1) {
+                    console.log('Successfully updated variables with complete response');
+                    // Log the entire LLM_Main_Response for dashboard logging
+                    console.log('📝 Complete LLM_Main_Response:', completeResponse);
+                  }
 
                   if (payload.debugMode === 1) {
                     console.log('Final completeResponse length:', completeResponse.length);
@@ -350,7 +358,9 @@ export const StreamingResponseExtension = {
                   }
                 }
               } catch (error) {
-                console.error('Error updating variables:', error);
+                if (payload.debugMode === 1) {
+                  console.error('Error updating variables:', error);
+                }
               }
 
               return;
@@ -372,13 +382,17 @@ export const StreamingResponseExtension = {
               updateContent(parsed.content);
               completeResponse += parsed.content; // Collect complete response
             } catch (e) {
-              console.warn('Failed to parse SSE data:', e);
+              if (payload.debugMode === 1) {
+                console.warn('Failed to parse SSE data:', e);
+              }
             }
           }
         }
 
       } catch (error) {
-        console.error("Stream error:", error);
+        if (payload.debugMode === 1) {
+          console.error("Stream error:", error);
+        }
         responseContent.textContent = `Error: ${error.message}`;
       }
     }
