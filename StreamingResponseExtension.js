@@ -149,7 +149,6 @@ export const StreamingResponseExtension = {
     let isFirstChunk = true;
     let buffer = '';
     let deltaCounter = 0;
-    let completeResponse = '';
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -233,12 +232,6 @@ export const StreamingResponseExtension = {
           });
         }
       }
-
-      // This is likely where the response is being built
-      completeResponse += text;
-      
-      // Ensure we're updating the LLM_Main_Response variable as well
-      LLM_Main_Response = completeResponse;
     }
 
     function findScrollableParent(el) {
@@ -291,9 +284,40 @@ export const StreamingResponseExtension = {
         while (true) {
           const { done, value } = await reader.read();
           if (done) {
-            console.log('Stream completed');
-            // Make sure LLM_Main_Response has the final complete value
-            LLM_Main_Response = completeResponse;
+            console.log('Stream completed without [DONE] signal');
+            // Make sure we update the variable even if we don't get a [DONE] signal
+            try {
+              if (payload.debugMode === 1) {
+                console.log('📤 Updating Voiceflow variable with complete response after stream end. Length:', completeResponse.length);
+              }
+              
+              const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  user_id: payload.user_id,
+                  projectName: payload.projectName,
+                  variables: {
+                    "LLM_Main_Response": completeResponse
+                  },
+                  debugMode: payload.debugMode || 0
+                }),
+              });
+
+              if (!updateResponse.ok) {
+                const errorText = await updateResponse.text();
+                console.error('Failed to update variables on stream end:', errorText);
+              } else {
+                console.log('Successfully updated variables with complete response on stream end');
+                if (payload.debugMode === 1) {
+                  console.log('Final completeResponse length on stream end:', completeResponse.length);
+                }
+              }
+            } catch (error) {
+              console.error('Error updating variables on stream end:', error);
+            }
             return;
           }
 
@@ -309,10 +333,7 @@ export const StreamingResponseExtension = {
             const data = line.slice(6); // Remove 'data: ' prefix
             if (data === '[DONE]') {
               console.log('Stream completed via [DONE] signal');
-              
-              // Final assignment to ensure LLM_Main_Response contains everything
-              LLM_Main_Response = completeResponse;
-              
+
               // This is the ONLY place we should make the PATCH request
               try {
                 if (payload.debugMode === 1) {
@@ -371,6 +392,12 @@ export const StreamingResponseExtension = {
               }
               updateContent(parsed.content);
               completeResponse += parsed.content; // Collect complete response
+              
+              // Log the accumulated response length periodically
+              deltaCounter++;
+              if (payload.debugMode === 1 && deltaCounter % 10 === 0) {
+                console.log(`Current completeResponse length: ${completeResponse.length} (after ${deltaCounter} chunks)`);
+              }
             } catch (e) {
               console.warn('Failed to parse SSE data:', e);
             }
@@ -380,6 +407,36 @@ export const StreamingResponseExtension = {
       } catch (error) {
         console.error("Stream error:", error);
         responseContent.textContent = `Error: ${error.message}`;
+        
+        // Try to save whatever response we've accumulated so far, even on error
+        if (completeResponse && completeResponse.length > 0) {
+          try {
+            console.log('Attempting to save partial response after error. Length:', completeResponse.length);
+            
+            const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                user_id: payload.user_id,
+                projectName: payload.projectName,
+                variables: {
+                  "LLM_Main_Response": completeResponse
+                },
+                debugMode: payload.debugMode || 0
+              }),
+            });
+
+            if (!updateResponse.ok) {
+              console.error('Failed to update variables after error:', await updateResponse.text());
+            } else {
+              console.log('Successfully saved partial response after error');
+            }
+          } catch (secondaryError) {
+            console.error('Error saving partial response:', secondaryError);
+          }
+        }
       }
     }
 
