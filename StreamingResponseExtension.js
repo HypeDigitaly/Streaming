@@ -10,6 +10,9 @@ export const StreamingResponseExtension = {
 
     const container = document.createElement('div');
     container.className = 'streaming-response-container';
+    
+    // Initialize here to prevent reference errors
+    let LLM_Main_Response = '';
 
     // Create the base structure
     container.innerHTML = `
@@ -147,7 +150,7 @@ export const StreamingResponseExtension = {
     const responseSection = container.querySelector('.response-section');
     const responseContent = container.querySelector('.response-content');
     let isFirstChunk = true;
-    let buffer = '';
+    let contentBuffer = '';
     let deltaCounter = 0;
 
     // Convert HTML to Markdown
@@ -193,10 +196,10 @@ export const StreamingResponseExtension = {
       }
 
       // Append to buffer
-      buffer += text;
+      contentBuffer += text;
 
       // Format markdown content
-      const formattedContent = buffer
+      const formattedContent = contentBuffer
         .replace(/^### (.*$)/gm, '<h3>$1</h3>')
         .replace(/^## (.*$)/gm, '<h2>$1</h2>')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>')
@@ -390,8 +393,15 @@ export const StreamingResponseExtension = {
                   console.log('Received content:', parsed.content);
                 }
               }
-              updateContent(parsed.content);
-              completeResponse += parsed.content; // Collect complete response
+              
+              try {
+                updateContent(parsed.content);
+                completeResponse += parsed.content; // Collect complete response
+              } catch (error) {
+                console.error('Error updating content:', error);
+                // Still try to accumulate the response even if display fails
+                completeResponse += parsed.content;
+              }
               
               // Log the accumulated response length periodically
               deltaCounter++;
