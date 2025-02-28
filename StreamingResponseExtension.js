@@ -219,7 +219,11 @@ export const StreamingResponseExtension = {
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
-        .replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">')
+        .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
+          // Convert HTTP to HTTPS if it's not already
+          const secureUrl = url.replace(/^http:\/\//i, 'https://');
+          return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
+        })
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
