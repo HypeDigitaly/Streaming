@@ -109,6 +109,13 @@ export const StreamingResponseExtension = {
           .response-content p {
             margin: 0.5em 0;
           }
+          /* Responsive image styles to prevent overflow */
+          .response-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0.5em 0;
+          }
           /* Added styles for headings */
           .response-content .answer-h1 {
             font-size: 1.4em;
@@ -137,6 +144,11 @@ export const StreamingResponseExtension = {
           .response-content .answer-h3:first-child {
             margin-top: 0;
           }
+          .response-content code {
+            margin: 0;
+            line-height: 1;
+          }
+
         </style>
         <div class="response-section">
           <div class="response-content"></div>
