@@ -219,12 +219,20 @@ export const StreamingResponseExtension = {
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
+        // Make sure any existing <a> tags also have target="_blank"
+        .replace(/<a\s+(?![^>]*target=)[^>]*href=["']([^"']+)["'][^>]*>/gi, '<a href="$1" target="_blank" rel="noopener noreferrer">')
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        // Also handle plain URLs that might be in the text
+        .replace(/(https?:\/\/[^\s<]+)/g, (match) => {
+          // Skip if already in an <a> tag
+          if (match.includes('<a') || match.includes('</a>')) return match;
+          return `<a href="${match}" target="_blank" rel="noopener noreferrer">${match}</a>`;
+        })
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
