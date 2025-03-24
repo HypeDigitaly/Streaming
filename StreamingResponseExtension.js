@@ -164,6 +164,9 @@ export const StreamingResponseExtension = {
     let buffer = '';
     let deltaCounter = 0;
     let completeResponse = '';
+    
+    // Initially hide the container until we receive content
+    container.style.display = 'none';
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -199,6 +202,9 @@ export const StreamingResponseExtension = {
 
       // Handle first chunk
       if (isFirstChunk) {
+        // Show container only when we receive the first content
+        container.style.display = 'block';
+        
         const thinkingHeader = container.querySelector('.thinking-header');
         if (thinkingHeader) {
           thinkingHeader.classList.add('hidden');
