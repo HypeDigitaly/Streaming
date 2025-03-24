@@ -165,8 +165,12 @@ export const StreamingResponseExtension = {
     let deltaCounter = 0;
     let completeResponse = '';
     
-    // Initially hide the container until we receive content
-    container.style.display = 'none';
+    // Initially hide the container completely until we receive content
+    container.style.opacity = '0';
+    container.style.height = '0';
+    container.style.overflow = 'hidden';
+    container.style.margin = '0';
+    container.style.padding = '0';
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -203,7 +207,11 @@ export const StreamingResponseExtension = {
       // Handle first chunk
       if (isFirstChunk) {
         // Show container only when we receive the first content
-        container.style.display = 'block';
+        container.style.opacity = '1';
+        container.style.height = 'auto';
+        container.style.overflow = 'visible';
+        container.style.margin = '';
+        container.style.padding = '';
         
         const thinkingHeader = container.querySelector('.thinking-header');
         if (thinkingHeader) {
