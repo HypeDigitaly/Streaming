@@ -16,10 +16,15 @@ export const StreamingResponseExtension = {
     // Create the base structure
     container.innerHTML = `
         <div class="thinking-header">
+          <div class="loading-animation">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+          </div>
         </div>
         <style>
           .thinking-header {
-            padding: 0;
+            padding: 12px 0;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -32,6 +37,32 @@ export const StreamingResponseExtension = {
             opacity: 0;
             height: 0;
             padding: 0;
+          }
+          .loading-animation {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+          .loading-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #6B7280;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+          }
+          .loading-dot:nth-child(1) {
+            animation-delay: -0.32s;
+          }
+          .loading-dot:nth-child(2) {
+            animation-delay: -0.16s;
+          }
+          @keyframes bounce {
+            0%, 80%, 100% { 
+              transform: scale(0);
+            } 
+            40% { 
+              transform: scale(1.0);
+            }
           }
           .streaming-response-container {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -165,8 +196,8 @@ export const StreamingResponseExtension = {
     let deltaCounter = 0;
     let completeResponse = '';
     
-    // Initially hide the container until we receive content
-    container.style.display = 'none';
+    // Show container immediately with loading animation
+    container.style.display = 'block';
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -202,9 +233,7 @@ export const StreamingResponseExtension = {
 
       // Handle first chunk
       if (isFirstChunk) {
-        // Show container only when we receive the first content
-        container.style.display = 'block';
-        
+        // Hide loading animation when we receive the first content
         const thinkingHeader = container.querySelector('.thinking-header');
         if (thinkingHeader) {
           thinkingHeader.classList.add('hidden');
