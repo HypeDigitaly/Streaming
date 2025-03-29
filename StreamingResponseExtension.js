@@ -44,8 +44,8 @@ export const StreamingResponseExtension = {
             gap: 6px;
           }
           .loading-dot {
-            width: 8px;
-            height: 8px;
+            width: 4px;
+            height: 4px;
             background-color: #6B7280;
             border-radius: 50%;
             animation: bounce 1.4s infinite ease-in-out both;
