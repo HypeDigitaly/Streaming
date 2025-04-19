@@ -58,6 +58,10 @@ export default async function handler(req, res) {
       });
     }
 
+    if (debugMode === 1) {
+      console.log('📤 Voiceflow variables to update:', variables);
+    }
+
     const response = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}/variables`, {
       method: 'PATCH',
       headers: {
@@ -69,7 +73,14 @@ export default async function handler(req, res) {
       body: JSON.stringify(variables)
     });
 
-    const responseData = await response.text();
+    // Handle text or JSON response appropriately
+    let responseData;
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      responseData = await response.json();
+    } else {
+      responseData = await response.text();
+    }
     
     if (!response.ok) {
       if (debugMode === 1) {

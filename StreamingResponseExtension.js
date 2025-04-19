@@ -402,11 +402,21 @@ export const StreamingResponseExtension = {
 
                 // Update Voiceflow variables
                 try {
-                  if (payload.debugMode === 1) {
-                    console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
+                  if (payload.user_id) {
+                    if (payload.debugMode === 1) {
+                      console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
+                      console.log('📤 Using user_id:', payload.user_id);
+                    }e.length);
                   }
 
-                  const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                  if (!payload.user_id) {
+                    if (payload.debugMode === 1) {
+                      console.warn('⚠️ No user_id provided, skipping Voiceflow variable update');
+                    }
+                    return;
+                  }
+
+                  const updateResponse = await fetch("/api/voiceflow-variable-update", {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
@@ -425,13 +435,18 @@ export const StreamingResponseExtension = {
 
                   if (!updateResponse.ok) {
                     const errorText = await updateResponse.text();
+                    console.error('❌ Failed to update Voiceflow variables:', errorText);
                     if (payload.debugMode === 1) {
-                      console.error('Failed to update variables:', errorText);
+                      console.error('Failed update details:', {
+                        status: updateResponse.status,
+                        statusText: updateResponse.statusText,
+                        response: errorText
+                      });
                     }
                   } else {
                     if (payload.debugMode === 1) {
-                      console.log('Successfully updated variables with complete response');
-                      console.log('📝 Complete LLM_Main_Response:', completeResponse);
+                      console.log('✅ Successfully updated Voiceflow variables');
+                      console.log('📝 Complete LLM_Main_Response:', completeResponse.substring(0, 100) + '...');
                       console.log('📝 Provider used:', activeProvider);
                       console.log('📝 Model used:', activeModel);
                     }
@@ -447,8 +462,38 @@ export const StreamingResponseExtension = {
                     }
                   }
                 } catch (error) {
-                  if (payload.debugMode === 1) {
-                    console.error('Error updating variables:', error);
+                  console.error('❌ Error updating Voiceflow variables:', error);
+                  
+                  // Retry with alternative endpoint if the first attempt fails
+                  if (payload.user_id) {
+                    try {
+                      if (payload.debugMode === 1) {
+                        console.log('🔄 Retrying variable update with alternative endpoint...');
+                      }
+                      
+                      const retryResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                          user_id: payload.user_id,
+                          projectName: payload.projectName,
+                          variables: {
+                            "LLM_Main_Response": completeResponse,
+                            "LLM_Provider_Used": activeProvider || "unknown",
+                            "LLM_Model_Used": activeModel || payload.model || "unknown"
+                          },
+                          debugMode: payload.debugMode || 0
+                        }),
+                      });
+                      
+                      if (payload.debugMode === 1) {
+                        console.log('🔄 Retry status:', retryResponse.status);
+                      }
+                    } catch (retryError) {
+                      console.error('❌ Retry also failed:', retryError);
+                    }
                   }
                 }
 
