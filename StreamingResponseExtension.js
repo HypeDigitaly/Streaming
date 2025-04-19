@@ -544,26 +544,33 @@ export const StreamingResponseExtension = {
 
     async function updateVoiceflowVariables(userId, projectName, response, provider, model, debugMode) {
       try {
-        if (debugMode === 1) {
-          console.log('📤 Updating Voiceflow variable with complete response length:', response.length);
-          console.log('📤 Using user_id:', userId);
-        }
+        // Always log these regardless of debug mode to troubleshoot the current issue
+        console.log('📤 VOICEFLOW UPDATE TRIGGERED');
+        console.log('📤 Updating Voiceflow variable with complete response length:', response.length);
+        console.log('📤 Using user_id:', userId);
+        console.log('📤 Project name:', projectName);
 
+        // Create request body object
+        const requestBody = {
+          user_id: userId,
+          projectName: projectName,
+          variables: {
+            "LLM_Main_Response": response,
+            "LLM_Provider_Used": provider || "unknown",
+            "LLM_Model_Used": model || "unknown"
+          },
+          debugMode: debugMode || 0
+        };
+
+        // Log the exact request body
+        console.log('📤 EXACT VOICEFLOW UPDATE REQUEST BODY:', JSON.stringify(requestBody, null, 2));
+        
         const updateResponse = await fetch("/api/voiceflow-variable-update", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            user_id: userId,
-            projectName: projectName,
-            variables: {
-              "LLM_Main_Response": response,
-              "LLM_Provider_Used": provider || "unknown",
-              "LLM_Model_Used": model || "unknown"
-            },
-            debugMode: debugMode || 0
-          }),
+          body: JSON.stringify(requestBody),
         });
 
         if (!updateResponse.ok) {

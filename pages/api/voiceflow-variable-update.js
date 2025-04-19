@@ -49,18 +49,20 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: `API key not found for project: ${projectName}` });
     }
 
-    if (debugMode === 1) {
-      console.log('📡 Voiceflow Variable Update Request:', {
-        user_id,
-        projectName,
-        variableKeys: Object.keys(variables),
-        endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`
-      });
-    }
-
-    if (debugMode === 1) {
-      console.log('📤 Voiceflow variables to update:', variables);
-    }
+    // Always log detailed information to debug the current issue
+    console.log('📡 VOICEFLOW API REQUEST RECEIVED');
+    console.log('📡 Voiceflow Variable Update Request:', {
+      user_id,
+      projectName,
+      variableKeys: Object.keys(variables),
+      endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`
+    });
+    
+    console.log('📤 Voiceflow variables to update:', variables);
+    
+    // Create the actual API request that will be sent to Voiceflow
+    const voiceflowRequestBody = JSON.stringify(variables);
+    console.log('📤 EXACT BODY SENT TO VOICEFLOW API:', voiceflowRequestBody);
 
     const response = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}/variables`, {
       method: 'PATCH',
