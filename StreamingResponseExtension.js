@@ -379,6 +379,10 @@ export const StreamingResponseExtension = {
                 console.log(completeResponse);
                 console.log('📝 COMPLETE_RESPONSE_END');
               }
+              // Update Voiceflow variables after stream completion
+              if (payload.user_id) {
+                updateVoiceflowVariables(payload.user_id, payload.projectName, completeResponse, activeProvider, activeModel, payload.debugMode);
+              }
               return;
             }
 
@@ -407,6 +411,7 @@ export const StreamingResponseExtension = {
                       console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
                       console.log('📤 Using user_id:', payload.user_id);
                     }
+                    updateVoiceflowVariables(payload.user_id, payload.projectName, completeResponse, activeProvider, activeModel, payload.debugMode);
                   }
 
                   if (!payload.user_id) {
@@ -416,61 +421,17 @@ export const StreamingResponseExtension = {
                     return;
                   }
 
-                  const updateResponse = await fetch("/api/voiceflow-variable-update", {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      user_id: payload.user_id,
-                      projectName: payload.projectName,
-                      variables: {
-                        "LLM_Main_Response": completeResponse,
-                        "LLM_Provider_Used": activeProvider || "unknown",
-                        "LLM_Model_Used": activeModel || payload.model || "unknown"
-                      },
-                      debugMode: payload.debugMode || 0
-                    }),
-                  });
 
-                  if (!updateResponse.ok) {
-                    const errorText = await updateResponse.text();
-                    console.error('❌ Failed to update Voiceflow variables:', errorText);
-                    if (payload.debugMode === 1) {
-                      console.error('Failed update details:', {
-                        status: updateResponse.status,
-                        statusText: updateResponse.statusText,
-                        response: errorText
-                      });
-                    }
-                  } else {
-                    if (payload.debugMode === 1) {
-                      console.log('✅ Successfully updated Voiceflow variables');
-                      console.log('📝 Complete LLM_Main_Response:', completeResponse.substring(0, 100) + '...');
-                      console.log('📝 Provider used:', activeProvider);
-                      console.log('📝 Model used:', activeModel);
-                    }
-
-                    if (payload.debugMode === 1) {
-                      console.log('Final completeResponse length:', completeResponse.length);
-                      try {
-                        const responseData = await updateResponse.json();
-                        console.log('Voiceflow update response:', responseData);
-                      } catch (e) {
-                        console.log('Voiceflow update status:', updateResponse.status);
-                      }
-                    }
-                  }
                 } catch (error) {
                   console.error('❌ Error updating Voiceflow variables:', error);
-                  
+
                   // Retry with alternative endpoint if the first attempt fails
                   if (payload.user_id) {
                     try {
                       if (payload.debugMode === 1) {
                         console.log('🔄 Retrying variable update with alternative endpoint...');
                       }
-                      
+
                       const retryResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
                         method: 'POST',
                         headers: {
@@ -487,7 +448,7 @@ export const StreamingResponseExtension = {
                           debugMode: payload.debugMode || 0
                         }),
                       });
-                      
+
                       if (payload.debugMode === 1) {
                         console.log('🔄 Retry status:', retryResponse.status);
                       }
@@ -580,6 +541,96 @@ export const StreamingResponseExtension = {
           responseContent.textContent = `Error: ${error.message}`;
         }
       }
+
+    async function updateVoiceflowVariables(userId, projectName, response, provider, model, debugMode) {
+      try {
+        if (debugMode === 1) {
+          console.log('📤 Updating Voiceflow variable with complete response length:', response.length);
+          console.log('📤 Using user_id:', userId);
+        }
+
+        const updateResponse = await fetch("/api/voiceflow-variable-update", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            projectName: projectName,
+            variables: {
+              "LLM_Main_Response": response,
+              "LLM_Provider_Used": provider || "unknown",
+              "LLM_Model_Used": model || "unknown"
+            },
+            debugMode: debugMode || 0
+          }),
+        });
+
+        if (!updateResponse.ok) {
+          const errorText = await updateResponse.text();
+          console.error('❌ Failed to update Voiceflow variables:', errorText);
+          if (debugMode === 1) {
+            console.error('Failed update details:', {
+              status: updateResponse.status,
+              statusText: updateResponse.statusText,
+              response: errorText
+            });
+          }
+        } else {
+          if (debugMode === 1) {
+            console.log('✅ Successfully updated Voiceflow variables');
+            console.log('📝 Complete LLM_Main_Response:', response.substring(0, 100) + '...');
+            console.log('📝 Provider used:', provider);
+            console.log('📝 Model used:', model);
+          }
+
+          if (debugMode === 1) {
+            console.log('Final completeResponse length:', response.length);
+            try {
+              const responseData = await updateResponse.json();
+              console.log('Voiceflow update response:', responseData);
+            } catch (e) {
+              console.log('Voiceflow update status:', updateResponse.status);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('❌ Error updating Voiceflow variables:', error);
+
+        // Retry with alternative endpoint if the first attempt fails
+        if (userId) {
+          try {
+            if (debugMode === 1) {
+              console.log('🔄 Retrying variable update with alternative endpoint...');
+            }
+
+            const retryResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                user_id: userId,
+                projectName: projectName,
+                variables: {
+                  "LLM_Main_Response": response,
+                  "LLM_Provider_Used": provider || "unknown",
+                  "LLM_Model_Used": model || "unknown"
+                },
+                debugMode: debugMode || 0
+              }),
+            });
+
+            if (debugMode === 1) {
+              console.log('🔄 Retry status:', retryResponse.status);
+            }
+          } catch (retryError) {
+            console.error('❌ Retry also failed:', retryError);
+          }
+        }
+      }
+    }
+
 
     if (trace.payload) {
       await callMultiLLMAPI({
