@@ -573,33 +573,31 @@ export const StreamingResponseExtension = {
           body: JSON.stringify(requestBody),
         });
 
-        if (!updateResponse.ok) {
-          const errorText = await updateResponse.text();
-          console.error('❌ Failed to update Voiceflow variables:', errorText);
-          if (debugMode === 1) {
-            console.error('Failed update details:', {
-              status: updateResponse.status,
-              statusText: updateResponse.statusText,
-              response: errorText
-            });
-          }
-        } else {
-          if (debugMode === 1) {
-            console.log('✅ Successfully updated Voiceflow variables');
-            console.log('📝 Complete LLM_Main_Response:', response.substring(0, 100) + '...');
-            console.log('📝 Provider used:', provider);
-            console.log('📝 Model used:', model);
-          }
+        // Always log the response from the Voiceflow variable update
+        console.log('📥 CLIENT-SIDE VOICEFLOW UPDATE RESPONSE:', {
+          status: updateResponse.status,
+          statusText: updateResponse.statusText
+        });
+        
+        let responseContent;
+        try {
+          // Try to parse as JSON first
+          responseContent = await updateResponse.json();
+          console.log('📥 VOICEFLOW UPDATE RESPONSE BODY (JSON):', responseContent);
+        } catch (e) {
+          // If not JSON, get as text
+          const responseText = await updateResponse.text();
+          console.log('📥 VOICEFLOW UPDATE RESPONSE BODY (TEXT):', responseText);
+          responseContent = responseText;
+        }
 
-          if (debugMode === 1) {
-            console.log('Final completeResponse length:', response.length);
-            try {
-              const responseData = await updateResponse.json();
-              console.log('Voiceflow update response:', responseData);
-            } catch (e) {
-              console.log('Voiceflow update status:', updateResponse.status);
-            }
-          }
+        if (!updateResponse.ok) {
+          console.error('❌ Failed to update Voiceflow variables:', responseContent);
+        } else {
+          console.log('✅ Successfully updated Voiceflow variables');
+          console.log('📝 Complete LLM_Main_Response length:', response.length);
+          console.log('📝 Provider used:', provider);
+          console.log('📝 Model used:', model);
         }
       } catch (error) {
         console.error('❌ Error updating Voiceflow variables:', error);

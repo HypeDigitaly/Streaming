@@ -64,6 +64,19 @@ export default async function handler(req, res) {
     const voiceflowRequestBody = JSON.stringify(variables);
     console.log('📤 EXACT BODY SENT TO VOICEFLOW API:', voiceflowRequestBody);
 
+    // Log the complete request details
+    console.log('📤 COMPLETE VOICEFLOW API REQUEST:', {
+      url: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`,
+      method: 'PATCH',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+        'versionID': 'production',
+        'Authorization': `${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}` // Show only first/last 4 chars of API key
+      },
+      body: JSON.stringify(variables)
+    });
+
     const response = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}/variables`, {
       method: 'PATCH',
       headers: {
@@ -84,14 +97,20 @@ export default async function handler(req, res) {
       responseData = await response.text();
     }
     
+    // Always log the complete response
+    console.log('📥 COMPLETE VOICEFLOW API RESPONSE:', {
+      status: response.status,
+      statusText: response.statusText,
+      headers: Object.fromEntries([...response.headers.entries()]),
+      body: responseData
+    });
+    
     if (!response.ok) {
-      if (debugMode === 1) {
-        console.error('❌ Voiceflow Variable Update Error:', {
-          status: response.status,
-          statusText: response.statusText,
-          response: responseData
-        });
-      }
+      console.error('❌ Voiceflow Variable Update Error:', {
+        status: response.status,
+        statusText: response.statusText,
+        response: responseData
+      });
       
       return res.status(response.status).json({ 
         error: 'Failed to update Voiceflow variables',
