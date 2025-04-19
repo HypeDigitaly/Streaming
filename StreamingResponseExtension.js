@@ -550,19 +550,18 @@ export const StreamingResponseExtension = {
         console.log('📤 Using user_id:', userId);
         console.log('📤 Project name:', projectName);
 
-        // Create request body object
-        const requestBody = {
+        // First update the main response
+        const mainRequestBody = {
           user_id: userId,
           projectName: projectName,
           variables: {
             "LLM_Main_Response": response
-            // Other variables have been removed as requested
           },
           debugMode: debugMode || 0
         };
 
         // Log the exact request body with extensive details
-        console.log('📤 EXACT VOICEFLOW UPDATE REQUEST BODY:', JSON.stringify(requestBody, null, 2));
+        console.log('📤 EXACT VOICEFLOW UPDATE REQUEST BODY (MAIN):', JSON.stringify(mainRequestBody, null, 2));
         console.log(`📤 VOICEFLOW UPDATE REQUEST DETAILS:
 - User ID: ${userId}
 - Project Name: ${projectName}
@@ -570,36 +569,90 @@ export const StreamingResponseExtension = {
 - Response Sample: "${response.substring(0, 50)}${response.length > 50 ? '...' : ''}"
 - Debug Mode: ${debugMode || 0}`);
 
-        const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+        // Update the main response first
+        const mainUpdateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(requestBody),
+          body: JSON.stringify(mainRequestBody),
         });
 
         // Always log the response from the Voiceflow variable update
-        console.log('📥 CLIENT-SIDE VOICEFLOW UPDATE RESPONSE:', {
-          status: updateResponse.status,
-          statusText: updateResponse.statusText
+        console.log('📥 CLIENT-SIDE VOICEFLOW UPDATE RESPONSE (MAIN):', {
+          status: mainUpdateResponse.status,
+          statusText: mainUpdateResponse.statusText
         });
 
-        let responseContent;
+        let mainResponseContent;
         try {
           // Try to parse as JSON first
-          responseContent = await updateResponse.json();
-          console.log('📥 VOICEFLOW UPDATE RESPONSE BODY (JSON):', responseContent);
+          mainResponseContent = await mainUpdateResponse.json();
+          console.log('📥 VOICEFLOW UPDATE RESPONSE BODY (MAIN JSON):', mainResponseContent);
         } catch (e) {
           // If not JSON, get as text
-          const responseText = await updateResponse.text();
-          console.log('📥 VOICEFLOW UPDATE RESPONSE BODY (TEXT):', responseText);
-          responseContent = responseText;
+          const responseText = await mainUpdateResponse.text();
+          console.log('📥 VOICEFLOW UPDATE RESPONSE BODY (MAIN TEXT):', responseText);
+          mainResponseContent = responseText;
         }
 
-        if (!updateResponse.ok) {
-          console.error('❌ Failed to update Voiceflow variables:', responseContent);
+        if (!mainUpdateResponse.ok) {
+          console.error('❌ Failed to update main Voiceflow variable:', mainResponseContent);
         } else {
-          console.log('✅ Successfully updated Voiceflow variables');
+          console.log('✅ Successfully updated main Voiceflow variable');
+          
+          // Now split the response into 5 parts and update each sequentially
+          const partLength = Math.ceil(response.length / 5);
+          console.log(`📤 Splitting response into 5 parts of approximately ${partLength} characters each`);
+          
+          for (let i = 1; i <= 5; i++) {
+            const start = (i - 1) * partLength;
+            const end = Math.min(i * partLength, response.length);
+            const part = response.substring(start, end);
+            
+            console.log(`📤 Updating part ${i} (characters ${start}-${end})`);
+            
+            // Create request for this part
+            const partRequestBody = {
+              user_id: userId,
+              projectName: projectName,
+              variables: {
+                [`LLM_Main_Response_${i}`]: part
+              },
+              debugMode: debugMode || 0
+            };
+            
+            console.log(`📤 PART ${i} REQUEST BODY:`, JSON.stringify(partRequestBody, null, 2));
+            
+            try {
+              // Execute the request for this part
+              const partUpdateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(partRequestBody),
+              });
+              
+              console.log(`📥 PART ${i} UPDATE RESPONSE:`, {
+                status: partUpdateResponse.status,
+                statusText: partUpdateResponse.statusText
+              });
+              
+              if (!partUpdateResponse.ok) {
+                console.error(`❌ Failed to update part ${i}:`, await partUpdateResponse.text());
+              } else {
+                console.log(`✅ Successfully updated part ${i}`);
+              }
+            } catch (partError) {
+              console.error(`❌ Error updating part ${i}:`, partError);
+            }
+            
+            // Add a small delay between requests to avoid rate limiting
+            await new Promise(resolve => setTimeout(resolve, 100));
+          }
+          
+          console.log('✅ All parts updated successfully');
           console.log('📝 Complete LLM_Main_Response length:', response.length);
           console.log('📝 Provider used:', provider);
           console.log('📝 Model used:', model);
@@ -611,7 +664,7 @@ export const StreamingResponseExtension = {
         if (userId) {
           try {
             if (debugMode === 1) {
-              console.log('🔄 Retrying variable update with alternative endpoint...');
+              console.log('🔄 Retrying main variable update with alternative endpoint...');
             }
 
             const retryResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
@@ -631,6 +684,44 @@ export const StreamingResponseExtension = {
 
             if (debugMode === 1) {
               console.log('🔄 Retry status:', retryResponse.status);
+            }
+            
+            if (retryResponse.ok) {
+              // If main retry succeeded, also retry the part updates
+              console.log('🔄 Main retry succeeded, now retrying part updates');
+              
+              const partLength = Math.ceil(response.length / 5);
+              for (let i = 1; i <= 5; i++) {
+                const start = (i - 1) * partLength;
+                const end = Math.min(i * partLength, response.length);
+                const part = response.substring(start, end);
+                
+                try {
+                  await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      user_id: userId,
+                      projectName: projectName,
+                      variables: {
+                        [`LLM_Main_Response_${i}`]: part
+                      },
+                      debugMode: debugMode || 0
+                    }),
+                  });
+                  
+                  if (debugMode === 1) {
+                    console.log(`🔄 Retry part ${i} succeeded`);
+                  }
+                } catch (partRetryError) {
+                  console.error(`❌ Retry for part ${i} failed:`, partRetryError);
+                }
+                
+                // Small delay between requests
+                await new Promise(resolve => setTimeout(resolve, 100));
+              }
             }
           } catch (retryError) {
             console.error('❌ Retry also failed:', retryError);
