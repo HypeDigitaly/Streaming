@@ -53,12 +53,83 @@ export default async function handler(req, res) {
       projectName, 
       debugMode,
       user_id,
-      modelSequence = "claude" // Default to Claude if no sequence provided
+      modelSequence = "1" // Default to Claude 3.7 Sonnet (ID 1) if no sequence provided
     } = req.body;
 
-    // Define available models with their details
+    // Define available models with their details using numeric IDs
     const models = [
       // Claude models
+      {
+        id: 1,
+        name: 'claude-3-7-sonnet-20250219',
+        type: 'claude',
+        url: 'https://api.anthropic.com/v1/messages',
+        description: 'Claude 3.7 Sonnet - Anthropic\'s advanced reasoning model'
+      },
+      {
+        id: 2,
+        name: 'claude-3-5-haiku-20241022',
+        type: 'claude',
+        url: 'https://api.anthropic.com/v1/messages',
+        description: 'Claude 3.5 Haiku - Anthropic\'s fast model with good capabilities'
+      },
+      
+      // GPT models
+      {
+        id: 3,
+        name: 'gpt-4.1-2025-04-14',
+        type: 'gpt',
+        url: 'https://api.openai.com/v1/responses',
+        description: 'GPT-4.1 - OpenAI\'s most capable vision-language model'
+      },
+      {
+        id: 4,
+        name: 'gpt-4.1-mini-2025-04-14',
+        type: 'gpt',
+        url: 'https://api.openai.com/v1/responses',
+        description: 'GPT-4.1 Mini - Lighter and more affordable version of GPT-4o'
+      },
+      
+      // Gemini models
+      {
+        id: 5,
+        name: 'gemini-2.5-pro-preview-03-25',
+        type: 'gemini',
+        url: 'https://generativelanguage.googleapis.com/v1beta/models',
+        description: 'Gemini 2.5 Pro - Google\'s advanced reasoning model'
+      },
+      {
+        id: 6,
+        name: 'gemini-2.5-flash-preview-04-17',
+        type: 'gemini',
+        url: 'https://generativelanguage.googleapis.com/v1beta/models',
+        description: 'Gemini 2.5 Flash - Google\'s fast response model'
+      },
+      
+      // Groq models
+      {
+        id: 7,
+        name: 'deepseek-r1-distill-llama-70b',
+        type: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        description: 'DeepSeek Llama 70B - High-performance Llama model optimized by Groq'
+      },
+      {
+        id: 8,
+        name: 'qwen-qwq-32b',
+        type: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        description: 'Qwen 32B - Fast Qwen model optimized by Groq'
+      },
+      {
+        id: 9,
+        name: 'deepseek-r1-distill-qwen-32b',
+        type: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        description: 'DeepSeek Qwen 32B - DeepSeek\'s optimized version of Qwen'
+      },
+      
+      // Legacy model entries (for backward compatibility)
       {
         id: 'claude-3-sonnet-20241022',
         type: 'claude',
@@ -77,8 +148,6 @@ export default async function handler(req, res) {
         name: model || 'claude-3-sonnet-20241022', // Uses the provided model or defaults
         description: 'Claude Default - Based on request parameter'
       },
-      
-      // OpenAI models
       {
         id: 'gpt-4o',
         type: 'openai',
@@ -91,8 +160,6 @@ export default async function handler(req, res) {
         name: 'gpt-4-turbo',
         description: 'GPT-4 Turbo - OpenAI\'s advanced reasoning model'
       },
-      
-      // Gemini models
       {
         id: 'gemini-1.5-pro',
         type: 'gemini',
@@ -105,8 +172,6 @@ export default async function handler(req, res) {
         name: 'gemini-1.5-flash',
         description: 'Gemini 1.5 Flash - Google\'s fast model'
       },
-      
-      // Groq models
       {
         id: 'llama-3-70b-8192',
         type: 'groq',
@@ -121,14 +186,14 @@ export default async function handler(req, res) {
       }
     ];
 
-    // Parse model sequence
+    // Parse model sequence - now supporting integer IDs or string model identifiers
     let modelSequenceArray = [];
     if (typeof modelSequence === 'string') {
       modelSequenceArray = modelSequence.split(',').map(id => id.trim());
     } else if (Array.isArray(modelSequence)) {
       modelSequenceArray = modelSequence;
     } else {
-      modelSequenceArray = ['claude']; // Default to Claude if invalid
+      modelSequenceArray = ['1']; // Default to Claude 3.7 Sonnet (ID 1) if invalid
     }
 
     if (debugMode === 1) {
@@ -154,7 +219,11 @@ export default async function handler(req, res) {
     for (const modelId of modelSequenceArray) {
       if (success) break; // Stop if we've already had a successful response
       
-      const modelConfig = models.find(m => m.id === modelId);
+      // Find model by ID (numeric or string)
+      const modelConfig = models.find(m => 
+        String(m.id) === String(modelId) || // Match by ID (string comparison)
+        m.name === modelId // Fallback to name for backward compatibility
+      );
       
       if (!modelConfig) {
         if (debugMode === 1) {
@@ -170,6 +239,7 @@ export default async function handler(req, res) {
           apiKey = process.env[`ANTHROPIC_API_KEY_${projectName?.toUpperCase()}`] || process.env.ANTHROPIC_API_KEY;
           break;
         case 'openai':
+        case 'gpt':
           apiKey = process.env[`OPENAI_API_KEY_${projectName?.toUpperCase()}`] || process.env.OPENAI_API_KEY;
           break;
         case 'gemini':
@@ -267,8 +337,8 @@ export default async function handler(req, res) {
           if (success) break; // Successfully streamed, so break the loop
         }
         
-        // Handle OpenAI API
-        else if (modelConfig.type === 'openai') {
+        // Handle OpenAI/GPT API
+        else if (modelConfig.type === 'openai' || modelConfig.type === 'gpt') {
           if (debugMode === 1) {
             console.log('📡 OpenAI Request:', {
               model: modelConfig.name,

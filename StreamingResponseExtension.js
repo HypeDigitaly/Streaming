@@ -195,7 +195,7 @@ export const StreamingResponseExtension = {
     let buffer = '';
     let deltaCounter = 0;
     let completeResponse = '';
-    
+
     // Show container immediately with loading animation
     container.style.display = 'block';
 
@@ -302,221 +302,239 @@ export const StreamingResponseExtension = {
     }
 
     async function callMultiLLMAPI(payload) {
-      try {
-        const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
-        let activeProvider = null;
-        let activeModel = null;
-        
-        if (payload.debugMode === 1) {
-          console.log("📦 Payload values:", {
-            model: payload.model,
-            max_tokens: payload.max_tokens,
-            temperature: payload.temperature,
-            debugMode: payload.debugMode,
-            projectName: payload.projectName,
-            systemPrompt: payload.systemPrompt,
-            user_id: payload.user_id,
-            modelSequence: payload.modelSequence
-          });
-          console.log("🌐 Calling proxy URL:", proxyUrl);
-          console.log("📦 Full API call payload:", payload);
-        }
+        try {
+          const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
+          let activeProvider = null;
+          let activeModel = null;
 
-        // Add provider label container at the top of the response
-        const providerLabelContainer = document.createElement('div');
-        providerLabelContainer.className = 'provider-label-container';
-        providerLabelContainer.style.cssText = `
-          position: relative;
-          padding: 4px 8px;
-          margin-bottom: 8px;
-          font-size: 12px;
-          color: #6B7280;
-          border-radius: 4px;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        `;
-        providerLabelContainer.innerHTML = 'Loading...';
-        responseSection.insertBefore(providerLabelContainer, responseContent);
-
-        const response = await fetch(proxyUrl, {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) {
-            if (payload.debugMode === 1) {
-              console.log('Stream completed');
-              console.log('📝 COMPLETE_RESPONSE_BEGIN');
-              console.log(completeResponse);
-              console.log('📝 COMPLETE_RESPONSE_END');
+          // Ensure modelSequence is properly formatted
+          // Convert model names to IDs if needed
+          if (payload.modelSequence && typeof payload.modelSequence === 'string') {
+            // If the sequence contains model names instead of IDs, handle appropriately
+            if (payload.modelSequence.includes('claude') || 
+                payload.modelSequence.includes('gpt') || 
+                payload.modelSequence.includes('gemini') || 
+                payload.modelSequence.includes('llama')) {
+              // Keep as is - the API will handle string model names for backward compatibility
+            } else {
+              // Ensure IDs are properly separated
+              payload.modelSequence = payload.modelSequence
+                .split(',')
+                .map(id => id.trim())
+                .join(',');
             }
-            return;
           }
 
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n');
+          if (payload.debugMode === 1) {
+            console.log("📦 Payload values:", {
+              model: payload.model,
+              max_tokens: payload.max_tokens,
+              temperature: payload.temperature,
+              debugMode: payload.debugMode,
+              projectName: payload.projectName,
+              systemPrompt: payload.systemPrompt,
+              user_id: payload.user_id,
+              modelSequence: payload.modelSequence
+            });
+            console.log("🌐 Calling proxy URL:", proxyUrl);
+            console.log("📦 Full API call payload:", payload);
+          }
 
-          // Process all complete lines
-          buffer = lines.pop() || ''; // Keep the incomplete line in buffer
+          // Add provider label container at the top of the response
+          const providerLabelContainer = document.createElement('div');
+          providerLabelContainer.className = 'provider-label-container';
+          providerLabelContainer.style.cssText = `
+            position: relative;
+            padding: 4px 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #6B7280;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          `;
+          providerLabelContainer.innerHTML = 'Loading...';
+          responseSection.insertBefore(providerLabelContainer, responseContent);
 
-          for (const line of lines) {
-            if (!line.trim() || !line.startsWith('data: ')) continue;
+          const response = await fetch(proxyUrl, {
+            method: "POST",
+            headers: { 
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
 
-            const data = line.slice(6); // Remove 'data: ' prefix
-            if (data === '[DONE]') {
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) {
               if (payload.debugMode === 1) {
-                console.log('Stream completed via [DONE] signal');
+                console.log('Stream completed');
                 console.log('📝 COMPLETE_RESPONSE_BEGIN');
                 console.log(completeResponse);
                 console.log('📝 COMPLETE_RESPONSE_END');
               }
-
-              // Update Voiceflow variables
-              try {
-                if (payload.debugMode === 1) {
-                  console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
-                }
-
-                const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    user_id: payload.user_id,
-                    projectName: payload.projectName,
-                    variables: {
-                      "LLM_Main_Response": completeResponse,
-                      "LLM_Provider_Used": activeProvider || "unknown",
-                      "LLM_Model_Used": activeModel || payload.model || "unknown"
-                    },
-                    debugMode: payload.debugMode || 0
-                  }),
-                });
-
-                if (!updateResponse.ok) {
-                  const errorText = await updateResponse.text();
-                  if (payload.debugMode === 1) {
-                    console.error('Failed to update variables:', errorText);
-                  }
-                } else {
-                  if (payload.debugMode === 1) {
-                    console.log('Successfully updated variables with complete response');
-                    console.log('📝 Complete LLM_Main_Response:', completeResponse);
-                    console.log('📝 Provider used:', activeProvider);
-                    console.log('📝 Model used:', activeModel);
-                  }
-
-                  if (payload.debugMode === 1) {
-                    console.log('Final completeResponse length:', completeResponse.length);
-                    try {
-                      const responseData = await updateResponse.json();
-                      console.log('Voiceflow update response:', responseData);
-                    } catch (e) {
-                      console.log('Voiceflow update status:', updateResponse.status);
-                    }
-                  }
-                }
-              } catch (error) {
-                if (payload.debugMode === 1) {
-                  console.error('Error updating variables:', error);
-                }
-              }
-
               return;
             }
 
-            try {
-              const parsed = JSON.parse(data);
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
 
-              if (parsed.error) {
-                throw new Error(parsed.error);
-              }
+            // Process all complete lines
+            buffer = lines.pop() || ''; // Keep the incomplete line in buffer
 
-              if (payload.debugMode === 1) {
-                console.log('Full Response:', data);
-              }
-              
-              // Handle different message types
-              if (parsed.type === 'content' && parsed.content) {
+            for (const line of lines) {
+              if (!line.trim() || !line.startsWith('data: ')) continue;
+
+              const data = line.slice(6); // Remove 'data: ' prefix
+              if (data === '[DONE]') {
                 if (payload.debugMode === 1) {
-                  console.log('Received content:', parsed.content);
+                  console.log('Stream completed via [DONE] signal');
+                  console.log('📝 COMPLETE_RESPONSE_BEGIN');
+                  console.log(completeResponse);
+                  console.log('📝 COMPLETE_RESPONSE_END');
                 }
-                
-                // Update provider info if available
-                if (parsed.provider && parsed.model && !activeProvider) {
-                  activeProvider = parsed.provider;
-                  activeModel = parsed.model;
-                  
-                  // Update provider label with logo and name
-                  let providerLogo = '';
-                  let providerColor = '#6B7280';
-                  
-                  switch (parsed.provider) {
-                    case 'claude':
-                      providerLogo = '🟣';
-                      providerColor = '#9333EA';
-                      break;
-                    case 'openai':
-                      providerLogo = '🟢';
-                      providerColor = '#10B981';
-                      break;
-                    case 'gemini':
-                      providerLogo = '🔵';
-                      providerColor = '#3B82F6';
-                      break;
-                    case 'groq':
-                      providerLogo = '🟠';
-                      providerColor = '#F59E0B';
-                      break;
+
+                // Update Voiceflow variables
+                try {
+                  if (payload.debugMode === 1) {
+                    console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
                   }
-                  
-                  providerLabelContainer.innerHTML = `${providerLogo} Powered by ${parsed.provider.charAt(0).toUpperCase() + parsed.provider.slice(1)} (${parsed.model})`;
-                  providerLabelContainer.style.color = providerColor;
-                  providerLabelContainer.style.opacity = '1';
+
+                  const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      user_id: payload.user_id,
+                      projectName: payload.projectName,
+                      variables: {
+                        "LLM_Main_Response": completeResponse,
+                        "LLM_Provider_Used": activeProvider || "unknown",
+                        "LLM_Model_Used": activeModel || payload.model || "unknown"
+                      },
+                      debugMode: payload.debugMode || 0
+                    }),
+                  });
+
+                  if (!updateResponse.ok) {
+                    const errorText = await updateResponse.text();
+                    if (payload.debugMode === 1) {
+                      console.error('Failed to update variables:', errorText);
+                    }
+                  } else {
+                    if (payload.debugMode === 1) {
+                      console.log('Successfully updated variables with complete response');
+                      console.log('📝 Complete LLM_Main_Response:', completeResponse);
+                      console.log('📝 Provider used:', activeProvider);
+                      console.log('📝 Model used:', activeModel);
+                    }
+
+                    if (payload.debugMode === 1) {
+                      console.log('Final completeResponse length:', completeResponse.length);
+                      try {
+                        const responseData = await updateResponse.json();
+                        console.log('Voiceflow update response:', responseData);
+                      } catch (e) {
+                        console.log('Voiceflow update status:', updateResponse.status);
+                      }
+                    }
+                  }
+                } catch (error) {
+                  if (payload.debugMode === 1) {
+                    console.error('Error updating variables:', error);
+                  }
                 }
-                
-                updateContent(parsed.content);
-                completeResponse += parsed.content; // Collect complete response
+
+                return;
               }
-              // Handle info messages
-              else if (parsed.type === 'info' && parsed.message) {
+
+              try {
+                const parsed = JSON.parse(data);
+
+                if (parsed.error) {
+                  throw new Error(parsed.error);
+                }
+
                 if (payload.debugMode === 1) {
-                  console.log('Info message:', parsed.message);
+                  console.log('Full Response:', data);
                 }
-              }
-              // Handle done messages
-              else if (parsed.type === 'done') {
+
+                // Handle different message types
+                if (parsed.type === 'content' && parsed.content) {
+                  if (payload.debugMode === 1) {
+                    console.log('Received content:', parsed.content);
+                  }
+
+                  // Update provider info if available
+                  if (parsed.provider && parsed.model && !activeProvider) {
+                    activeProvider = parsed.provider;
+                    activeModel = parsed.model;
+
+                    // Update provider label with logo and name
+                    let providerLogo = '';
+                    let providerColor = '#6B7280';
+
+                    switch (parsed.provider) {
+                      case 'claude':
+                        providerLogo = '🟣';
+                        providerColor = '#9333EA';
+                        break;
+                      case 'openai':
+                        providerLogo = '🟢';
+                        providerColor = '#10B981';
+                        break;
+                      case 'gemini':
+                        providerLogo = '🔵';
+                        providerColor = '#3B82F6';
+                        break;
+                      case 'groq':
+                        providerLogo = '🟠';
+                        providerColor = '#F59E0B';
+                        break;
+                    }
+
+                    providerLabelContainer.innerHTML = `${providerLogo} Powered by ${parsed.provider.charAt(0).toUpperCase() + parsed.provider.slice(1)} (${parsed.model})`;
+                    providerLabelContainer.style.color = providerColor;
+                    providerLabelContainer.style.opacity = '1';
+                  }
+
+                  updateContent(parsed.content);
+                  completeResponse += parsed.content; // Collect complete response
+                }
+                // Handle info messages
+                else if (parsed.type === 'info' && parsed.message) {
+                  if (payload.debugMode === 1) {
+                    console.log('Info message:', parsed.message);
+                  }
+                }
+                // Handle done messages
+                else if (parsed.type === 'done') {
+                  if (payload.debugMode === 1) {
+                    console.log('Stream done signal received');
+                  }
+                }
+              } catch (e) {
                 if (payload.debugMode === 1) {
-                  console.log('Stream done signal received');
+                  console.warn('Failed to parse SSE data:', e);
                 }
-              }
-            } catch (e) {
-              if (payload.debugMode === 1) {
-                console.warn('Failed to parse SSE data:', e);
               }
             }
           }
-        }
 
-      } catch (error) {
-        if (payload.debugMode === 1) {
-          console.error("Stream error:", error);
+        } catch (error) {
+          if (payload.debugMode === 1) {
+            console.error("Stream error:", error);
+          }
+          responseContent.textContent = `Error: ${error.message}`;
         }
-        responseContent.textContent = `Error: ${error.message}`;
       }
-    }
 
     if (trace.payload) {
       await callMultiLLMAPI({
