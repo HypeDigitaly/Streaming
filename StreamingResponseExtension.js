@@ -406,7 +406,7 @@ export const StreamingResponseExtension = {
                     if (payload.debugMode === 1) {
                       console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
                       console.log('📤 Using user_id:', payload.user_id);
-                    }e.length);
+                    }
                   }
 
                   if (!payload.user_id) {
