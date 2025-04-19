@@ -1,4 +1,3 @@
-
 import { Anthropic } from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
@@ -73,7 +72,7 @@ export default async function handler(req, res) {
         url: 'https://api.anthropic.com/v1/messages',
         description: 'Claude 3.5 Haiku - Anthropic\'s fast model with good capabilities'
       },
-      
+
       // GPT models
       {
         id: 3,
@@ -89,7 +88,7 @@ export default async function handler(req, res) {
         url: 'https://api.openai.com/v1/responses',
         description: 'GPT-4.1 Mini - Lighter and more affordable version of GPT-4o'
       },
-      
+
       // Gemini models
       {
         id: 5,
@@ -105,7 +104,7 @@ export default async function handler(req, res) {
         url: 'https://generativelanguage.googleapis.com/v1beta/models',
         description: 'Gemini 2.5 Flash - Google\'s fast response model'
       },
-      
+
       // Groq models
       {
         id: 7,
@@ -128,7 +127,7 @@ export default async function handler(req, res) {
         url: 'https://api.groq.com/openai/v1/chat/completions',
         description: 'DeepSeek Qwen 32B - DeepSeek\'s optimized version of Qwen'
       },
-      
+
       // Legacy model entries (for backward compatibility)
       {
         id: 'claude-3-sonnet-20241022',
@@ -218,13 +217,13 @@ export default async function handler(req, res) {
 
     for (const modelId of modelSequenceArray) {
       if (success) break; // Stop if we've already had a successful response
-      
+
       // Find model by ID (numeric or string)
       const modelConfig = models.find(m => 
         String(m.id) === String(modelId) || // Match by ID (string comparison)
         m.name === modelId // Fallback to name for backward compatibility
       );
-      
+
       if (!modelConfig) {
         if (debugMode === 1) {
           console.warn(`⚠️ Unknown model ID: ${modelId}, skipping`);
@@ -312,9 +311,12 @@ export default async function handler(req, res) {
             }
 
             if (messageChunk.type === 'content_block_delta') {
+              let content = messageChunk.delta?.text || '';
+              content = stripColorfulPrefixes(content);
+
               const data = {
                 type: 'content',
-                content: messageChunk.delta?.text || '',
+                content: content,
                 provider: 'claude',
                 model: modelConfig.name
               };
@@ -333,10 +335,10 @@ export default async function handler(req, res) {
               break;
             }
           }
-          
+
           if (success) break; // Successfully streamed, so break the loop
         }
-        
+
         // Handle OpenAI/GPT API
         else if (modelConfig.type === 'openai' || modelConfig.type === 'gpt') {
           if (debugMode === 1) {
@@ -382,14 +384,14 @@ export default async function handler(req, res) {
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
-            
+
             buffer += decoder.decode(value, { stream: true });
             const lines = buffer.split('\n');
             buffer = lines.pop() || '';
 
             for (const line of lines) {
               if (!line.trim() || !line.startsWith('data: ')) continue;
-              
+
               const data = line.slice(6).trim();
               if (data === '[DONE]') {
                 writeSSE({ type: 'info', message: 'Model used: ' + modelConfig.name });
@@ -416,10 +418,10 @@ export default async function handler(req, res) {
               }
             }
           }
-          
+
           if (success) break;
         }
-        
+
         // Handle Gemini API
         else if (modelConfig.type === 'gemini') {
           if (debugMode === 1) {
@@ -465,14 +467,14 @@ export default async function handler(req, res) {
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
-            
+
             buffer += decoder.decode(value, { stream: true });
             const lines = buffer.split('\n');
             buffer = lines.pop() || '';
 
             for (const line of lines) {
               if (!line.trim() || !line.startsWith('[')) continue;
-              
+
               try {
                 const parsed = JSON.parse(line);
                 if (parsed.candidates?.[0]?.content?.parts?.[0]?.text) {
@@ -492,13 +494,13 @@ export default async function handler(req, res) {
               }
             }
           }
-          
+
           writeSSE({ type: 'info', message: 'Model used: ' + modelConfig.name });
           writeSSE({ type: 'done', provider: 'gemini', model: modelConfig.name });
-          
+
           if (success) break;
         }
-        
+
         // Handle Groq API
         else if (modelConfig.type === 'groq') {
           if (debugMode === 1) {
@@ -544,14 +546,14 @@ export default async function handler(req, res) {
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
-            
+
             buffer += decoder.decode(value, { stream: true });
             const lines = buffer.split('\n');
             buffer = lines.pop() || '';
 
             for (const line of lines) {
               if (!line.trim() || !line.startsWith('data: ')) continue;
-              
+
               const data = line.slice(6).trim();
               if (data === '[DONE]') {
                 writeSSE({ type: 'info', message: 'Model used: ' + modelConfig.name });
@@ -578,7 +580,7 @@ export default async function handler(req, res) {
               }
             }
           }
-          
+
           if (success) break;
         }
       } catch (error) {
@@ -606,4 +608,13 @@ export default async function handler(req, res) {
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
+}
+
+function stripColorfulPrefixes(text) {
+  // This is a placeholder.  A robust solution would require a more sophisticated regex
+  // to handle a wider variety of emoji and colorful prefixes.  Consider using a library
+  // for emoji detection and removal.
+
+  //This simple example removes prefixes that start with a colon and end with a space.
+  return text.replace(/^[:].*?\s/, '');
 }
