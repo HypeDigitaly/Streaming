@@ -312,7 +312,6 @@ export default async function handler(req, res) {
 
             if (messageChunk.type === 'content_block_delta') {
               let content = messageChunk.delta?.text || '';
-              content = stripColorfulPrefixes(content);
 
               const data = {
                 type: 'content',
@@ -608,17 +607,4 @@ export default async function handler(req, res) {
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
-}
-
-function stripColorfulPrefixes(text) {
-  // Remove emoji and colorful prefixes from text content
-  // This removes common prefixes like ":thinking:" or "🤔" at the beginning
-  
-  // Remove emoji-style prefixes like :emoji: at start of text
-  let cleaned = text.replace(/^[:][^:]*[:]\s*/, '');
-  
-  // Also try to remove Unicode emoji characters at the beginning (simpler approach)
-  cleaned = cleaned.replace(/^[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}]+\s*/u, '');
-  
-  return cleaned;
 }
