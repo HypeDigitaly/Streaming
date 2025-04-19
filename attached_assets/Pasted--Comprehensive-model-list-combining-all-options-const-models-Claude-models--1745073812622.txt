@@ -1,0 +1,73 @@
+// Comprehensive model list combining all options
+    const models = [
+      // Claude models
+      {
+        id: 1,
+        name: 'claude-3-7-sonnet-20250219',
+        type: 'claude',
+        url: 'https://api.anthropic.com/v1/messages',
+        description: 'Claude 3.7 Sonnet - Anthropic\'s advanced reasoning model'
+      },
+      {
+        id: 2,
+        name: 'claude-3-5-haiku-20241022',
+        type: 'claude',
+        url: 'https://api.anthropic.com/v1/messages',
+        description: 'Claude 3.5 Haiku - Anthropic\'s fast model with good capabilities'
+      },
+      
+      // GPT models
+      {
+        id: 3,
+        name: 'gpt-4.1-2025-04-14',
+        type: 'gpt',
+        url: 'https://api.openai.com/v1/responses',
+        description: 'GPT-4.1 - OpenAI\'s most capable vision-language model'
+      },
+      {
+        id: 4,
+        name: 'gpt-4.1-mini-2025-04-14',
+        type: 'gpt',
+        url: 'https://api.openai.com/v1/responses',
+        description: 'GPT-4.1 Mini - Lighter and more affordable version of GPT-4o'
+      },
+      
+      // Gemini models
+      {
+        id: 5,
+        name: 'gemini-2.5-pro-preview-03-25',
+        type: 'gemini',
+        url: 'https://generativelanguage.googleapis.com/v1beta/models',
+        description: 'Gemini 2.5 Pro - Google\'s advanced reasoning model'
+      },
+      {
+        id: 6,
+        name: 'gemini-2.5-flash-preview-04-17',
+        type: 'gemini',
+        url: 'https://generativelanguage.googleapis.com/v1beta/models',
+        description: 'Gemini 2.5 Flash - Google\'s fast response model'
+      },
+      
+      // Groq models
+      {
+        id: 7,
+        name: 'deepseek-r1-distill-llama-70b',
+        type: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        description: 'DeepSeek Llama 70B - High-performance Llama model optimized by Groq'
+      },
+      {
+        id: 8,
+        name: 'qwen-qwq-32b',
+        type: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        description: 'Qwen 32B - Fast Qwen model optimized by Groq'
+      },
+      {
+        id: 9,
+        name: 'deepseek-r1-distill-qwen-32b',
+        type: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        description: 'DeepSeek Qwen 32B - DeepSeek\'s optimized version of Qwen'
+      }
+    ];
