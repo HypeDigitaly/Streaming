@@ -64,17 +64,28 @@ export default async function handler(req, res) {
     const voiceflowRequestBody = JSON.stringify(variables);
     console.log('📤 EXACT BODY SENT TO VOICEFLOW API:', voiceflowRequestBody);
 
+    // Create and log the actual CURL command (with masked API key)
+    const maskedKey = `${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}`;
+    console.log('\n🔄 EXACT VOICEFLOW PATCH CURL COMMAND:');
+    console.log(`curl --request PATCH \\
+     --url https://general-runtime.voiceflow.com/state/user/${user_id}/variables \\
+     --header 'Authorization: ${maskedKey}' \\
+     --header 'accept: application/json' \\
+     --header 'content-type: application/json' \\
+     --header 'versionID: production' \\
+     --data '${voiceflowRequestBody}'`);
+
     // Log the complete request details
     console.log('📤 COMPLETE VOICEFLOW API REQUEST:', {
       url: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`,
       method: 'PATCH',
       headers: {
+        'Authorization': `${maskedKey}`,
         'accept': 'application/json',
         'content-type': 'application/json',
-        'versionID': 'production',
-        'Authorization': `${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}` // Show only first/last 4 chars of API key
+        'versionID': 'production'
       },
-      body: JSON.stringify(variables)
+      body: voiceflowRequestBody
     });
 
     const response = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}/variables`, {
@@ -98,12 +109,18 @@ export default async function handler(req, res) {
     }
     
     // Always log the complete response
-    console.log('📥 COMPLETE VOICEFLOW API RESPONSE:', {
-      status: response.status,
-      statusText: response.statusText,
-      headers: Object.fromEntries([...response.headers.entries()]),
-      body: responseData
-    });
+    console.log('\n📥 COMPLETE VOICEFLOW API RESPONSE:');
+    console.log('Status:', response.status, response.statusText);
+    console.log('Headers:', Object.fromEntries([...response.headers.entries()]));
+    console.log('Body:', responseData);
+    
+    // Log the raw response in JSON format
+    console.log('\n📥 RAW VOICEFLOW API RESPONSE JSON:');
+    if (typeof responseData === 'object') {
+      console.log(JSON.stringify(responseData, null, 2));
+    } else {
+      console.log(responseData);
+    }
     
     if (!response.ok) {
       console.error('❌ Voiceflow Variable Update Error:', {

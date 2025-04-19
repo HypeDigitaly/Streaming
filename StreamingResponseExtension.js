@@ -561,8 +561,14 @@ export const StreamingResponseExtension = {
           debugMode: debugMode || 0
         };
 
-        // Log the exact request body
+        // Log the exact request body with extensive details
         console.log('📤 EXACT VOICEFLOW UPDATE REQUEST BODY:', JSON.stringify(requestBody, null, 2));
+        console.log(`📤 VOICEFLOW UPDATE REQUEST DETAILS:
+- User ID: ${userId}
+- Project Name: ${projectName}
+- Response Length: ${response.length}
+- Response Sample: "${response.substring(0, 50)}${response.length > 50 ? '...' : ''}"
+- Debug Mode: ${debugMode || 0}`);
 
         const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
           method: 'POST',
