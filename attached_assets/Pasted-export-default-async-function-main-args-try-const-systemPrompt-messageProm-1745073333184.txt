@@ -1,0 +1,710 @@
+export default async function main(args) {
+  try {
+    const {
+      systemPrompt,
+      messagePrompt,
+      claudeKey,
+      openaiKey, 
+      geminiKey,
+      groqKey,
+      modelOrder = "1,2,3,4,5,6,7,8,9", // Default model order
+      
+      // Model configurations
+      claude_temperature = 0,
+      claude_max_tokens = 8000,
+      gpt_temperature = 0,
+      gpt_max_tokens = 8000,
+      gemini_temperature = 0,
+      gemini_max_tokens = 8000,
+      groq_temperature = 0,
+      groq_max_tokens = 8000,
+      
+      // Cache configuration
+      enable_claude_cache = true  // Optional: allow turning Claude cache on/off
+    } = args.inputVars;
+
+    // Initialize trace array
+    const traces = [
+      {
+        type: 'debug',
+        payload: {
+          message: `Starting Multi-LLM Orchestrator with input: ${messagePrompt.substring(0, 50)}${messagePrompt.length > 50 ? '...' : ''}`
+        }
+      }
+    ];
+
+    if (!systemPrompt || !messagePrompt) {
+      return {
+        outputVars: {
+          llm_success: false,
+          llm_error: "Missing required inputs: systemPrompt and messagePrompt"
+        },
+        next: { path: 'error' },
+        trace: [
+          ...traces,
+          {
+            type: 'debug',
+            payload: {
+              message: "Error: Missing required inputs (systemPrompt or messagePrompt)"
+            }
+          }
+        ]
+      };
+    }
+
+    // Comprehensive model list combining all options
+    const models = [
+      // Claude models
+      {
+        id: 1,
+        name: 'claude-3-7-sonnet-20250219',
+        type: 'claude',
+        url: 'https://api.anthropic.com/v1/messages',
+        description: 'Claude 3.7 Sonnet - Anthropic\'s advanced reasoning model'
+      },
+      {
+        id: 2,
+        name: 'claude-3-5-haiku-20241022',
+        type: 'claude',
+        url: 'https://api.anthropic.com/v1/messages',
+        description: 'Claude 3.5 Haiku - Anthropic\'s fast model with good capabilities'
+      },
+      
+      // GPT models
+      {
+        id: 3,
+        name: 'gpt-4.1-2025-04-14',
+        type: 'gpt',
+        url: 'https://api.openai.com/v1/responses',
+        description: 'GPT-4.1 - OpenAI\'s most capable vision-language model'
+      },
+      {
+        id: 4,
+        name: 'gpt-4.1-mini-2025-04-14',
+        type: 'gpt',
+        url: 'https://api.openai.com/v1/responses',
+        description: 'GPT-4.1 Mini - Lighter and more affordable version of GPT-4o'
+      },
+      
+      // Gemini models
+      {
+        id: 5,
+        name: 'gemini-2.5-pro-preview-03-25',
+        type: 'gemini',
+        url: 'https://generativelanguage.googleapis.com/v1beta/models',
+        description: 'Gemini 2.5 Pro - Google\'s advanced reasoning model'
+      },
+      {
+        id: 6,
+        name: 'gemini-2.5-flash-preview-04-17',
+        type: 'gemini',
+        url: 'https://generativelanguage.googleapis.com/v1beta/models',
+        description: 'Gemini 2.5 Flash - Google\'s fast response model'
+      },
+      
+      // Groq models
+      {
+        id: 7,
+        name: 'deepseek-r1-distill-llama-70b',
+        type: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        description: 'DeepSeek Llama 70B - High-performance Llama model optimized by Groq'
+      },
+      {
+        id: 8,
+        name: 'qwen-qwq-32b',
+        type: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        description: 'Qwen 32B - Fast Qwen model optimized by Groq'
+      },
+      {
+        id: 9,
+        name: 'deepseek-r1-distill-qwen-32b',
+        type: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        description: 'DeepSeek Qwen 32B - DeepSeek\'s optimized version of Qwen'
+      }
+    ];
+
+    // Parse model order - handle both string and numeric inputs
+    let modelSequence = [];
+    const orderStr = String(modelOrder || "1,2,3,4,5,6,7,8,9"); // Convert to string with default
+    modelSequence = orderStr.split(',')
+      .map(num => parseInt(num.trim()))
+      .filter(num => !isNaN(num) && models.some(m => m.id === num));
+
+    // If we couldn't parse any valid models, provide a helpful error
+    if (modelSequence.length === 0) {
+      return {
+        outputVars: {
+          llm_success: false,
+          llm_error: `Invalid model order "${modelOrder}". Use format with model IDs: 1-2=Claude, 3-4=GPT, 5-6=Gemini, 7-9=Groq`
+        },
+        next: { path: 'error' },
+        trace: [
+          ...traces,
+          {
+            type: 'debug',
+            payload: {
+              message: `Error: Invalid model order "${modelOrder}"`
+            }
+          }
+        ]
+      };
+    }
+
+    // Add model sequence info to traces
+    const modelSequenceInfo = modelSequence.map(id => {
+      const model = models.find(m => m.id === id);
+      return model ? `${id}=${model.type}(${model.name})` : id;
+    }).join(' → ');
+    
+    traces.push({
+      type: 'debug',
+      payload: {
+        message: `Model sequence: ${modelSequenceInfo}`
+      }
+    });
+
+    // Check available API keys
+    const availableProviders = [
+      claudeKey ? 'Claude' : null,
+      openaiKey ? 'GPT' : null,
+      geminiKey ? 'Gemini' : null,
+      groqKey ? 'Groq' : null
+    ].filter(Boolean);
+    
+    traces.push({
+      type: 'debug',
+      payload: {
+        message: `Available API providers: ${availableProviders.join(', ')}`
+      }
+    });
+
+    // Try each model in sequence
+    for (const modelId of modelSequence) {
+      const model = models.find(m => m.id === modelId);
+      if (!model) {
+        traces.push({
+          type: 'debug',
+          payload: {
+            message: `Skipping unknown model ID: ${modelId}`
+          }
+        });
+        continue;
+      }
+
+      // Skip models without API keys
+      if ((model.type === 'claude' && !claudeKey) || 
+          (model.type === 'gpt' && !openaiKey) || 
+          (model.type === 'gemini' && !geminiKey) ||
+          (model.type === 'groq' && !groqKey)) {
+        traces.push({
+          type: 'debug',
+          payload: {
+            message: `Skipping ${model.type} (${model.name}) - API key missing`
+          }
+        });
+        continue;
+      }
+
+      traces.push({
+        type: 'debug',
+        payload: {
+          message: `Attempting to use model: ${model.name} (${model.type})`
+        }
+      });
+
+      try {
+        // Handle Claude models
+        if (model.type === 'claude') {
+          // Prepare Claude request body with caching
+          const claudeBody = {
+            model: model.name,
+            max_tokens: parseInt(claude_max_tokens),
+            temperature: parseFloat(claude_temperature),
+            messages: [
+              {
+                role: "user",
+                content: [
+                  {
+                    type: "text",
+                    text: messagePrompt
+                  }
+                ]
+              }
+            ]
+          };
+
+          // Add system prompt with caching if enabled
+          if (enable_claude_cache) {
+            claudeBody.system = [
+              {
+                type: "text",
+                text: systemPrompt,
+                cache_control: { type: "ephemeral" }
+              }
+            ];
+          } else {
+            claudeBody.system = systemPrompt;
+          }
+
+          traces.push({
+            type: 'debug',
+            payload: {
+              message: `Claude request prepared: ${model.name}, temp=${claude_temperature}, max_tokens=${claude_max_tokens}, cache=${enable_claude_cache}`
+            }
+          });
+
+          const response = await fetch(model.url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-key': claudeKey,
+              'anthropic-version': '2023-06-01'
+            },
+            body: JSON.stringify(claudeBody)
+          });
+
+          if (!response.ok) {
+            const errorMsg = `Claude API error: ${response.status} ${response.statusText}`;
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: errorMsg
+              }
+            });
+            throw new Error(errorMsg);
+          }
+
+          traces.push({
+            type: 'debug',
+            payload: {
+              message: `Claude API response received (HTTP ${response.status})`
+            }
+          });
+
+          const data = response.json;
+
+          if (data?.content?.[0]?.text) {
+            const responseLength = data.content[0].text.length;
+            const responsePreview = data.content[0].text.substring(0, 50) + (responseLength > 50 ? '...' : '');
+            const totalTokens = (data.usage?.input_tokens || 0) + (data.usage?.output_tokens || 0);
+            
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: `Success with ${model.name}: ${responseLength} chars, Tokens: ${totalTokens}, Preview: "${responsePreview}"`
+              }
+            });
+
+            return {
+              outputVars: {
+                llm_success: true,
+                llm_model_used: model.name,
+                llm_response_text: data.content[0].text,
+                llm_model_type: 'claude',
+                llm_model_id: modelId,
+                
+                // Claude-specific outputs
+                claude_message_id: data.id,
+                claude_stop_reason: data.stop_reason,
+                
+                // Token usage with cache metrics
+                claude_input_tokens: data.usage?.input_tokens || 0,
+                claude_output_tokens: data.usage?.output_tokens || 0,
+                claude_total_tokens: totalTokens,
+                claude_cache_creation_tokens: data.usage?.cache_creation_input_tokens || 0,
+                claude_cache_read_tokens: data.usage?.cache_read_input_tokens || 0,
+                
+                // Cache status
+                claude_cache_enabled: enable_claude_cache,
+                claude_cache_hit: (data.usage?.cache_read_input_tokens || 0) > 0,
+                claude_cache_hit_percentage: data.usage?.input_tokens ? 
+                  ((data.usage?.cache_read_input_tokens || 0) / data.usage.input_tokens * 100).toFixed(2) + '%' : '0%'
+              },
+              next: { path: 'success' },
+              trace: traces
+            };
+          } else {
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: `Claude response missing expected content structure`
+              }
+            });
+          }
+        } 
+        // Handle GPT models
+        else if (model.type === 'gpt') {
+          // Using new OpenAI responses endpoint
+          const gptBody = {
+            model: model.name,
+            input: [
+              {
+                role: "system",
+                content: [
+                  {
+                    type: "input_text",
+                    text: systemPrompt
+                  }
+                ]
+              },
+              {
+                role: "user",
+                content: [
+                  {
+                    type: "input_text",
+                    text: messagePrompt
+                  }
+                ]
+              }
+            ],
+            text: {
+              format: {
+                type: "text"
+              }
+            },
+            tools: [],
+            temperature: parseFloat(gpt_temperature),
+            max_output_tokens: parseInt(gpt_max_tokens),
+            top_p: 0.95,
+            stream: false,
+            store: true,
+            truncation: "auto"
+          };
+
+          traces.push({
+            type: 'debug',
+            payload: {
+              message: `GPT request prepared: ${model.name}, temp=${gpt_temperature}, max_tokens=${gpt_max_tokens}`
+            }
+          });
+
+          const response = await fetch(model.url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${openaiKey}`
+            },
+            body: JSON.stringify(gptBody)
+          });
+
+          if (!response.ok) {
+            const errorMsg = `GPT API error: ${response.status} ${response.statusText}`;
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: errorMsg
+              }
+            });
+            throw new Error(errorMsg);
+          }
+
+          traces.push({
+            type: 'debug',
+            payload: {
+              message: `GPT API response received (HTTP ${response.status})`
+            }
+          });
+
+          const data = response.json;
+
+          // Extract response text from the new API format
+          if (data?.output && data.output.length > 0) {
+            const messageOutput = data.output.find(item => item.type === "message");
+            if (messageOutput?.content && messageOutput.content.length > 0) {
+              const textOutput = messageOutput.content.find(content => content.type === "output_text");
+              if (textOutput?.text) {
+                const responseLength = textOutput.text.length;
+                const responsePreview = textOutput.text.substring(0, 50) + (responseLength > 50 ? '...' : '');
+                const totalTokens = data.usage?.total_tokens || data.usage?.input_tokens + data.usage?.output_tokens || 0;
+                
+                traces.push({
+                  type: 'debug',
+                  payload: {
+                    message: `Success with ${model.name}: ${responseLength} chars, Tokens: ${totalTokens}, Preview: "${responsePreview}"`
+                  }
+                });
+
+                return {
+                  outputVars: {
+                    llm_success: true,
+                    llm_model_used: model.name,
+                    llm_response_text: textOutput.text,
+                    llm_model_type: 'gpt',
+                    llm_model_id: modelId,
+                    
+                    // GPT-specific outputs
+                    gpt_response_id: data.id,
+                    gpt_status: data.status,
+                    
+                    // Token usage
+                    gpt_prompt_tokens: data.usage?.input_tokens || 0,
+                    gpt_completion_tokens: data.usage?.output_tokens || 0,
+                    gpt_total_tokens: totalTokens,
+                    
+                    // Cache metrics
+                    gpt_cached_tokens: data.usage?.input_tokens_details?.cached_tokens || 0
+                  },
+                  next: { path: 'success' },
+                  trace: traces
+                };
+              }
+            }
+          }
+          
+          traces.push({
+            type: 'debug',
+            payload: {
+              message: `GPT response missing expected content structure`
+            }
+          });
+        } 
+        // Handle Gemini models
+        else if (model.type === 'gemini') {
+          const geminiUrl = `${model.url}/${model.name}:generateContent?key=${geminiKey}`;
+          
+          traces.push({
+            type: 'debug',
+            payload: {
+              message: `Gemini request prepared: ${model.name}, temp=${gemini_temperature}, max_tokens=${gemini_max_tokens}`
+            }
+          });
+
+          const response = await fetch(geminiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [
+                    {
+                      text: `System: ${systemPrompt}\n\nUser: ${messagePrompt}`
+                    }
+                  ]
+                }
+              ],
+              generationConfig: {
+                temperature: parseFloat(gemini_temperature),
+                maxOutputTokens: parseInt(gemini_max_tokens),
+                topP: 0.95,
+                topK: 64
+              }
+            })
+          });
+
+          if (!response.ok) {
+            const errorMsg = `Gemini API error: ${response.status} ${response.statusText}`;
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: errorMsg
+              }
+            });
+            throw new Error(errorMsg);
+          }
+
+          traces.push({
+            type: 'debug',
+            payload: {
+              message: `Gemini API response received (HTTP ${response.status})`
+            }
+          });
+
+          const data = response.json;
+          
+          if (data?.candidates?.[0]?.content?.parts) {
+            const parts = data.candidates[0].content.parts;
+            const textParts = parts.filter(part => part.text).map(part => part.text);
+            const combinedText = textParts.join('\n');
+            const responseLength = combinedText.length;
+            const responsePreview = combinedText.substring(0, 50) + (responseLength > 50 ? '...' : '');
+            const totalTokens = data.usageMetadata?.totalTokenCount || 0;
+            
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: `Success with ${model.name}: ${responseLength} chars, Tokens: ${totalTokens}, Preview: "${responsePreview}"`
+              }
+            });
+            
+            return {
+              outputVars: {
+                llm_success: true,
+                llm_model_used: model.name,
+                llm_response_text: combinedText,
+                llm_model_type: 'gemini',
+                llm_model_id: modelId,
+                
+                gemini_finish_reason: data.candidates[0].finishReason,
+                gemini_model_version: data.modelVersion,
+                gemini_prompt_tokens: data.usageMetadata?.promptTokenCount || 0,
+                gemini_completion_tokens: data.usageMetadata?.candidatesTokenCount || 0,
+                gemini_total_tokens: totalTokens
+              },
+              next: { path: 'success' },
+              trace: traces
+            };
+          } else {
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: `Gemini response missing expected content structure`
+              }
+            });
+          }
+        } 
+        // Handle Groq models
+        else if (model.type === 'groq') {
+          traces.push({
+            type: 'debug',
+            payload: {
+              message: `Groq request prepared: ${model.name}, temp=${groq_temperature}, max_tokens=${groq_max_tokens}`
+            }
+          });
+
+          // Prepare Groq API request
+          const response = await fetch(model.url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${groqKey}`
+            },
+            body: JSON.stringify({
+              messages: [
+                {
+                  role: "user",
+                  content: systemPrompt
+                },
+                {
+                  role: "user",
+                  content: messagePrompt
+                }
+              ],
+              model: model.name,
+              temperature: parseFloat(groq_temperature),
+              max_completion_tokens: parseInt(groq_max_tokens),
+              top_p: 0.95,
+              stream: false,
+              stop: null,
+              reasoning_format: "parsed"
+            })
+          });
+
+          if (!response.ok) {
+            const errorMsg = `Groq API error: ${response.status} ${response.statusText}`;
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: errorMsg
+              }
+            });
+            throw new Error(errorMsg);
+          }
+
+          traces.push({
+            type: 'debug',
+            payload: {
+              message: `Groq API response received (HTTP ${response.status})`
+            }
+          });
+
+          const data = response.json;
+          
+          if (data?.choices?.[0]?.message?.content) {
+            const responseText = data.choices[0].message.content;
+            const responseLength = responseText.length;
+            const responsePreview = responseText.substring(0, 50) + (responseLength > 50 ? '...' : '');
+            const totalTokens = data.usage?.total_tokens || 0;
+            
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: `Success with ${model.name}: ${responseLength} chars, Tokens: ${totalTokens}, Preview: "${responsePreview}"`
+              }
+            });
+            
+            return {
+              outputVars: {
+                llm_success: true,
+                llm_model_used: model.name,
+                llm_response_text: responseText,
+                llm_model_type: 'groq',
+                llm_model_id: modelId,
+                
+                // Groq-specific outputs
+                groq_message_id: data.id,
+                groq_finish_reason: data.choices[0].finish_reason,
+                groq_reasoning: data.choices[0].message.reasoning || null,
+                
+                // Token usage
+                groq_prompt_tokens: data.usage?.prompt_tokens || 0,
+                groq_completion_tokens: data.usage?.completion_tokens || 0,
+                groq_total_tokens: totalTokens,
+                
+                // Performance metrics
+                groq_queue_time: data.usage?.queue_time || 0,
+                groq_prompt_time: data.usage?.prompt_time || 0,
+                groq_completion_time: data.usage?.completion_time || 0,
+                groq_total_time: data.usage?.total_time || 0
+              },
+              next: { path: 'success' },
+              trace: traces
+            };
+          } else {
+            traces.push({
+              type: 'debug',
+              payload: {
+                message: `Groq response missing expected content structure`
+              }
+            });
+          }
+        }
+      } catch (error) {
+        traces.push({
+          type: 'debug',
+          payload: {
+            message: `Error with ${model.name}: ${error.message}`
+          }
+        });
+        continue;
+      }
+    }
+
+    traces.push({
+      type: 'debug',
+      payload: {
+        message: `All models failed to generate a response`
+      }
+    });
+
+    return {
+      outputVars: {
+        llm_success: false,
+        llm_error: "All models failed to generate a response"
+      },
+      next: { path: 'error' },
+      trace: traces
+    };
+
+  } catch (error) {
+    return {
+      outputVars: {
+        llm_success: false,
+        llm_error: error.message || "Unknown error occurred"
+      },
+      next: { path: 'error' },
+      trace: [
+        {
+          type: 'debug',
+          payload: {
+            message: `Critical error in Multi-LLM Orchestrator: ${error.message || "Unknown error"}`
+          }
+        }
+      ]
+    };
+  }
+}
