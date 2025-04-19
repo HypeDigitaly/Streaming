@@ -564,7 +564,7 @@ export const StreamingResponseExtension = {
         // Log the exact request body
         console.log('📤 EXACT VOICEFLOW UPDATE REQUEST BODY:', JSON.stringify(requestBody, null, 2));
         
-        const updateResponse = await fetch("/api/voiceflow-variable-update", {
+        const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
