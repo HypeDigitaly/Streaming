@@ -555,9 +555,8 @@ export const StreamingResponseExtension = {
           user_id: userId,
           projectName: projectName,
           variables: {
-            "LLM_Main_Response": response,
-            "LLM_Provider_Used": provider || "unknown",
-            "LLM_Model_Used": model || "unknown"
+            "LLM_Main_Response": response
+            // Other variables have been removed as requested
           },
           debugMode: debugMode || 0
         };
@@ -618,9 +617,8 @@ export const StreamingResponseExtension = {
                 user_id: userId,
                 projectName: projectName,
                 variables: {
-                  "LLM_Main_Response": response,
-                  "LLM_Provider_Used": provider || "unknown",
-                  "LLM_Model_Used": model || "unknown"
+                  "LLM_Main_Response": response
+                  // Other variables have been removed as requested
                 },
                 debugMode: debugMode || 0
               }),
