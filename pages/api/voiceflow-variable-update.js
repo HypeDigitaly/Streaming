@@ -80,10 +80,10 @@ export default async function handler(req, res) {
     const response = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}/variables`, {
       method: 'PATCH',
       headers: {
+        'Authorization': apiKey,
         'accept': 'application/json',
         'content-type': 'application/json',
-        'versionID': 'production',
-        'Authorization': apiKey
+        'versionID': 'production'
       },
       body: JSON.stringify(variables)
     });

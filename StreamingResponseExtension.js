@@ -563,7 +563,7 @@ export const StreamingResponseExtension = {
 
         // Log the exact request body
         console.log('📤 EXACT VOICEFLOW UPDATE REQUEST BODY:', JSON.stringify(requestBody, null, 2));
-        
+
         const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
           method: 'POST',
           headers: {
@@ -577,7 +577,7 @@ export const StreamingResponseExtension = {
           status: updateResponse.status,
           statusText: updateResponse.statusText
         });
-        
+
         let responseContent;
         try {
           // Try to parse as JSON first
@@ -618,7 +618,6 @@ export const StreamingResponseExtension = {
                 projectName: projectName,
                 variables: {
                   "LLM_Main_Response": response
-                  // Other variables have been removed as requested
                 },
                 debugMode: debugMode || 0
               }),
