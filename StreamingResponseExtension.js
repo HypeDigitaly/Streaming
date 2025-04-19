@@ -303,7 +303,7 @@ export const StreamingResponseExtension = {
 
     async function callMultiLLMAPI(payload) {
         try {
-          const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
+          const proxyUrl = "https://utils.hypedigitaly.ai/api/llm-stream";
           let activeProvider = null;
           let activeModel = null;
 
