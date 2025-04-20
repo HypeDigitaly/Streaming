@@ -55,15 +55,14 @@ export default async function handler(req, res) {
 
     const genAI = new GoogleGenerativeAI(apiKey);
     
-    // Use a currently available model name - we're updating both the default and any passed model
-    const modelName = model === 'gemini-2.5-pro-preview-03-25' ? 'gemini-1.5-pro' : 
-                      model === 'gemini-2.5-flash-preview-04-17' ? 'gemini-1.5-flash' : 
-                      model || 'gemini-1.5-pro';
+    // Map to currently available Gemini models based on the latest API documentation
+    // Updated to use gemini-2.0-flash as the default model
+    const modelName = model === 'gemini-2.5-pro-preview-03-25' ? 'gemini-2.0-pro' : 
+                      model === 'gemini-2.5-flash-preview-04-17' ? 'gemini-2.0-flash' : 
+                      model === 'gemini-1.5-pro' ? 'gemini-2.0-pro' :
+                      model === 'gemini-1.5-flash' ? 'gemini-2.0-flash' :
+                      model || 'gemini-2.0-flash';
     
-    const genModel = genAI.getGenerativeModel({
-      model: modelName,
-    });
-
     if (debugMode === 1) {
       console.log('📡 Gemini Payload values:', {
         originalModel: model,
@@ -83,21 +82,37 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
-    const chat = genModel.startChat({
+    // Create a generation config
+    const generationConfig = {
+      maxOutputTokens: max_tokens || 4096,
+      temperature: temperature || 0,
+    };
+
+    if (debugMode === 1) {
+      console.log('🚀 Making Gemini API call with config:', {
+        model: modelName,
+        generationConfig,
+        systemPrompt
+      });
+    }
+
+    // Use streamGenerateContent for direct streaming
+    const model = genAI.getGenerativeModel({
+      model: modelName,
       systemInstruction: systemPrompt,
-      generationConfig: {
-        maxOutputTokens: max_tokens || 4096,
-        temperature: temperature || 0,
-      },
+      generationConfig
     });
 
-    const result = await chat.sendMessageStream(userData);
+    // Stream the response
+    const streamResponse = await model.generateContentStream({
+      contents: [{ role: 'user', parts: [{ text: userData }] }],
+    });
 
     if (debugMode === 1) {
       console.log('📥 Gemini API Response initialized');
     }
 
-    for await (const chunk of result.stream) {
+    for await (const chunk of streamResponse.stream) {
       if (debugMode === 1) {
         console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
       }
@@ -122,9 +137,12 @@ export default async function handler(req, res) {
     res.end();
 
   } catch (error) {
+    console.error('Stream Error:', error);
+    
     if (req.body.debugMode === 1) {
-      console.error('Stream Error:', error);
+      console.error('Stream Error Details:', error);
     }
+    
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
