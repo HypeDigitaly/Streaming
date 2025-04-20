@@ -354,49 +354,49 @@ export const StreamingResponseExtension = {
       // OpenAI models
       {
         id: 4,
-        name: 'gpt-4o',
+        name: 'gpt-4.1-2025-04-14',
         type: 'openai',
         endpoint: '/api/openai-stream',
-        displayName: 'GPT-4o'
+        displayName: 'GPT-4.1'
       },
       {
         id: 5,
-        name: 'gpt-4-turbo',
+        name: 'gpt-4.1-mini-2025-04-14',
         type: 'openai',
         endpoint: '/api/openai-stream',
-        displayName: 'GPT-4 Turbo'
+        displayName: 'GPT-4.1 Mini'
       },
       
       // Gemini models
       {
         id: 6,
-        name: 'gemini-1.5-pro',
+        name: 'gemini-2.5-pro-preview-03-25',
         type: 'gemini',
         endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 1.5 Pro'
+        displayName: 'Gemini 2.5 Pro'
       },
       {
         id: 7,
-        name: 'gemini-1.5-flash',
+        name: 'gemini-2.5-flash-preview-04-17',
         type: 'gemini',
         endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 1.5 Flash'
+        displayName: 'Gemini 2.5 Flash'
       },
       
       // Groq models
       {
         id: 8,
-        name: 'llama3-groq-70b-8192',
+        name: 'meta-llama/llama-4-maverick-17b-128e-instruct',
         type: 'groq',
         endpoint: '/api/groq-stream',
-        displayName: 'Llama 3 70B'
+        displayName: 'Llama 4 Maverick'
       },
       {
         id: 9,
-        name: 'mixtral-8x7b-32768',
+        name: 'meta-llama/llama-4-scout-17b-16e-instruct',
         type: 'groq',
         endpoint: '/api/groq-stream',
-        displayName: 'Mixtral 8x7B'
+        displayName: 'Llama 4 Scout'
       }
     ];
 

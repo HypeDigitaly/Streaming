@@ -76,7 +76,7 @@ export default async function handler(req, res) {
     });
 
     const stream = await groq.chat.completions.create({
-      model: model || 'llama3-groq-70b-8192',
+      model: model || 'meta-llama/llama-4-maverick-17b-128e-instruct',
       messages: [
         {
           role: 'system',

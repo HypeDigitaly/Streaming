@@ -55,7 +55,7 @@ export default async function handler(req, res) {
 
     const genAI = new GoogleGenerativeAI(apiKey);
     const genModel = genAI.getGenerativeModel({
-      model: model || 'gemini-1.5-pro',
+      model: model || 'gemini-2.5-pro-preview-03-25',
     });
 
     if (debugMode === 1) {

@@ -76,7 +76,7 @@ export default async function handler(req, res) {
     });
 
     const response = await openai.chat.completions.create({
-      model: model || 'gpt-4',
+      model: model || 'gpt-4.1-2025-04-14',
       max_tokens: max_tokens || 4096,
       temperature: temperature || 0,
       messages: [
