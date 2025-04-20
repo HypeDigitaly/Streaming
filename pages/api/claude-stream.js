@@ -158,11 +158,20 @@ export default async function handler(req, res) {
       }
 
       if (messageChunk.type === 'message_stop') {
+        if (debugMode === 1) {
+          console.log('📤 Received message_stop, sending [DONE] signal');
+        }
         res.write('data: [DONE]\n\n');
         break;
       }
     }
 
+    // Explicitly send DONE signal to ensure it's always sent
+    // This serves as a fallback in case message_stop event is missed
+    if (debugMode === 1) {
+      console.log('📤 Sending final [DONE] signal to complete stream');
+    }
+    res.write('data: [DONE]\n\n');
     res.end();
 
   } catch (error) {
