@@ -1,3 +1,4 @@
+
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export default async function handler(req, res) {
@@ -53,13 +54,20 @@ export default async function handler(req, res) {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
+    
+    // Use a currently available model name - we're updating both the default and any passed model
+    const modelName = model === 'gemini-2.5-pro-preview-03-25' ? 'gemini-1.5-pro' : 
+                      model === 'gemini-2.5-flash-preview-04-17' ? 'gemini-1.5-flash' : 
+                      model || 'gemini-1.5-pro';
+    
     const genModel = genAI.getGenerativeModel({
-      model: model || 'gemini-2.5-pro-preview-03-25',
+      model: modelName,
     });
 
     if (debugMode === 1) {
       console.log('📡 Gemini Payload values:', {
-        model,
+        originalModel: model,
+        updatedModel: modelName,
         max_tokens,
         temperature,
         projectName,
