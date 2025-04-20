@@ -179,70 +179,49 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
-          .model-info-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 8px;
-            margin-right: 6px;
-          }
-          .model-info-dropdown {
-            cursor: pointer;
+          .ai-info-footer {
             display: flex;
             align-items: center;
-            justify-content: center;
-            background-color: #F3F4F6;
-            border-radius: 4px;
-            padding: 4px 8px;
-            transition: background-color 0.2s;
             gap: 6px;
-          }
-          .model-info-dropdown:hover {
-            background-color: #E5E7EB;
-          }
-          
-          .dropdown-arrow {
-            width: 12px;
-            height: 12px;
-            transition: transform 0.2s;
-          }
-          .dropdown-arrow.open {
-            transform: rotate(180deg);
-          }
-          .model-tag {
-            position: absolute;
-            top: 30px;
-            left: 0;
-            z-index: 10;
-            background-color: #F3F4F6;
+            margin-top: 8px;
+            font-size: 12px;
             color: #6B7280;
-            font-size: 10px;
-            padding: .75rem;
-            border-radius: 4px;
+          }
+          .ai-icon {
+            font-weight: bold;
+          }
+          .model-info-tooltip {
             display: none;
-            align-items: center;
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background-color: #f3f4f6;
+            padding: 4px 8px;
+            border-radius: 4px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             white-space: nowrap;
-            max-width: 250px;
+            z-index: 1;
           }
-          .model-tag.visible {
-            display: inline-flex;
+          .ai-info-footer:hover .model-info-tooltip {
+            display: inline-block;
           }
-          .model-tag.claude {
+          .model-info-tooltip.claude {
             background-color: #E5F6FF;
             color: #0080C9;
           }
-          .model-tag.openai {
+          .model-info-tooltip.openai {
             background-color: #E7F7EF;
             color: #10A37F;
           }
-          .model-tag.gemini {
+          .model-info-tooltip.gemini {
             background-color: #F0E7FB;
             color: #8E44AD;
           }
-          .model-tag.groq {
+          .model-info-tooltip.groq {
             background-color: #FFF1E5;
             color: #F17C23;
           }
+
         </style>
         <div class="response-section">
           <div class="response-content"></div>
@@ -258,7 +237,7 @@ export const StreamingResponseExtension = {
     let buffer = '';
     let deltaCounter = 0;
     let completeResponse = '';
-    
+
     // Show container immediately with loading animation
     container.style.display = 'block';
 
@@ -388,7 +367,7 @@ export const StreamingResponseExtension = {
         endpoint: '/api/claude-stream',
         displayName: 'Claude 3 Sonnet'
       },
-      
+
       // OpenAI models
       {
         id: 4,
@@ -404,7 +383,7 @@ export const StreamingResponseExtension = {
         endpoint: '/api/openai-stream',
         displayName: 'GPT-4.1 Mini'
       },
-      
+
       // Gemini models
       {
         id: 6,
@@ -420,7 +399,7 @@ export const StreamingResponseExtension = {
         endpoint: '/api/gemini-stream',
         displayName: 'Gemini 2.5 Flash'
       },
-      
+
       // Groq models
       {
         id: 8,
@@ -441,7 +420,7 @@ export const StreamingResponseExtension = {
     // Function to process model sequence
     function parseModelSequence(sequenceStr) {
       if (!sequenceStr) return [1]; // Default to first model if none specified
-      
+
       // Parse sequence string to array of numbers
       return sequenceStr.split(',')
         .map(id => parseInt(id.trim()))
@@ -456,58 +435,34 @@ export const StreamingResponseExtension = {
         `Unknown model ID: ${modelId}`;
     }
 
-    // Adds a dropdown model tag to the UI
-    function addModelTag(modelType, modelName) {
-      // Create container for the dropdown and model tag
-      const modelInfoContainer = document.createElement('div');
-      modelInfoContainer.className = 'model-info-container';
-      
-      // Create dropdown button container
-      const modelInfoDropdown = document.createElement('div');
-      modelInfoDropdown.className = 'model-info-dropdown';
-      modelInfoDropdown.title = 'Click to view model info';
-      
-      // Create dropdown label
-      const dropdownLabel = document.createElement('span');
-      dropdownLabel.textContent = 'AI Info';
-      dropdownLabel.style.fontSize = '11px';
-      
-      // Create dropdown arrow
-      const dropdownArrow = document.createElement('div');
-      dropdownArrow.className = 'dropdown-arrow';
-      dropdownArrow.innerHTML = `<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none">
-        <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>`;
-      
-      // Create model tag (hidden by default)
-      const modelTag = document.createElement('div');
-      modelTag.className = `model-tag ${modelType}`;
-      modelTag.textContent = modelName;
-      
-      // Add click event to toggle visibility
-      modelInfoDropdown.addEventListener('click', (e) => {
-        e.stopPropagation();
-        modelTag.classList.toggle('visible');
-        dropdownArrow.classList.toggle('open');
-      });
-      
-      // Add click event to document to hide tag when clicking elsewhere
-      document.addEventListener('click', () => {
-        modelTag.classList.remove('visible');
-        dropdownArrow.classList.remove('open');
-      });
-      
+    // Adds AI info footer to the UI
+    function addAIInfoFooter(modelType, modelName) {
+      // Create footer container
+      const aiInfoFooter = document.createElement('div');
+      aiInfoFooter.className = 'ai-info-footer';
+
+      // Create AI icon
+      const aiIcon = document.createElement('div');
+      aiIcon.className = 'ai-icon';
+      aiIcon.textContent = 'AI';
+
+      // Create info text
+      const aiInfoText = document.createElement('div');
+      aiInfoText.className = 'ai-info-text';
+      aiInfoText.textContent = 'Pomocné informace generované AI.';
+
+      // Create tooltip with model info
+      const modelInfoTooltip = document.createElement('div');
+      modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
+      modelInfoTooltip.textContent = modelName;
+
       // Assemble the elements
-      modelInfoDropdown.appendChild(dropdownLabel);
-      modelInfoDropdown.appendChild(dropdownArrow);
-      
-      // Center align the container
-      modelInfoContainer.style.display = "flex";
-      modelInfoContainer.style.justifyContent = "center";
-      
-      modelInfoContainer.appendChild(modelInfoDropdown);
-      modelInfoContainer.appendChild(modelTag);
-      responseSection.insertBefore(modelInfoContainer, responseContent);
+      aiInfoFooter.appendChild(aiIcon);
+      aiInfoFooter.appendChild(aiInfoText);
+      aiInfoFooter.appendChild(modelInfoTooltip);
+
+      // Add the footer after the response content
+      responseSection.appendChild(aiInfoFooter);
     }
 
     // Generic function to call any LLM API provider
@@ -660,13 +615,13 @@ export const StreamingResponseExtension = {
 
       // Parse the model sequence
       const modelSequence = parseModelSequence(trace.payload.modelSequence);
-      
+
       if (trace.payload.debugMode === 1) {
         console.log("📊 MODEL SEQUENCE DEBUG INFO:");
         console.log("=== CONFIGURED MODEL SEQUENCE ===");
         console.log(`📋 Raw sequence: ${trace.payload.modelSequence || "Default"}`);
         console.log(`📋 Parsed IDs: ${JSON.stringify(modelSequence)}`);
-        
+
         // Print detailed model info
         console.log("=== MODELS IN SEQUENCE ===");
         modelSequence.forEach((modelId, index) => {
@@ -678,7 +633,7 @@ export const StreamingResponseExtension = {
       // Try each model in sequence
       for (const modelId of modelSequence) {
         const model = modelsRegistry.find(m => m.id === modelId);
-        
+
         if (!model) {
           if (trace.payload.debugMode === 1) {
             console.log(`⚠️ Unknown model ID ${modelId}, skipping`);
@@ -694,10 +649,6 @@ export const StreamingResponseExtension = {
           console.log(`📌 Status: STARTING REQUEST`);
         }
 
-        // Add model tag to UI if this is the first attempt
-        if (isFirstChunk) {
-          addModelTag(model.type, model.displayName);
-        }
 
         // Prepare payload for API call
         const payload = {
@@ -713,7 +664,7 @@ export const StreamingResponseExtension = {
 
         // Call the LLM API
         const success = await callLLMAPI(model.endpoint, payload);
-        
+
         // If successful, stop trying other models
         if (success) {
           if (trace.payload.debugMode === 1) {
@@ -724,16 +675,17 @@ export const StreamingResponseExtension = {
             console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
             console.log(`=============================`);
           }
+          addAIInfoFooter(model.type, model.displayName); // Add AI info footer after successful response
           return;
         }
-        
+
         if (trace.payload.debugMode === 1) {
           console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
           console.log(`📌 Model: ${model.displayName} (${model.type})`);
           console.log(`📌 Model name: ${model.name}`);
           console.log(`📌 Status: REQUEST FAILED`);
           console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
-          
+
           // Check if there are more models to try
           const nextModelIndex = modelSequence.indexOf(modelId) + 1;
           if (nextModelIndex < modelSequence.length) {
@@ -764,7 +716,7 @@ export const StreamingResponseExtension = {
 
     // Start the LLM orchestration
     await orchestrateLLMCalls(trace);
-    
+
     window.voiceflow.chat.interact({ type: "continue" });
   },
 };
