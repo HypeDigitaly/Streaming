@@ -190,7 +190,7 @@ export const StreamingResponseExtension = {
             color: #6B7280;
             cursor: pointer;
             position: relative;
-            padding: 8px 10px 8px 0;
+            padding: 8px 10px 0px 0;
             margin-bottom: 0;
             border-radius: 4px;
             transition: background-color 0.2s ease;
