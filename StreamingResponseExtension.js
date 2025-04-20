@@ -183,16 +183,17 @@ export const StreamingResponseExtension = {
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-top: 8px;
             font-size: 12px;
             color: #6B7280;
             background-color: #f0f0f0;
             padding: 8px 12px;
-            border-radius: 4px;
-            width: 100%; /* Make footer full width */
-            position: fixed; /* Pin to bottom */
-            bottom: 0; /* Pin to bottom */
-            left: 0; /* Pin to left */
+            width: 100vw;
+            box-sizing: border-box;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+            cursor: pointer;
           }
           .ai-icon {
             font-weight: bold;
@@ -206,7 +207,7 @@ export const StreamingResponseExtension = {
           .model-info-tooltip {
             display: none;
             position: absolute;
-            top: 100%;
+            top: -40px;
             left: 0;
             background-color: #f3f4f6;
             padding: 4px 8px;
@@ -214,7 +215,6 @@ export const StreamingResponseExtension = {
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             white-space: nowrap;
             z-index: 1;
-            margin-top: 5px;
           }
           .ai-info-footer:hover .model-info-tooltip {
             display: inline-block;
@@ -475,20 +475,19 @@ export const StreamingResponseExtension = {
         modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
         modelInfoTooltip.textContent = modelName;
 
-        // Create model display container
-        const modelDisplay = document.createElement('div');
-        modelDisplay.className = 'model-display';
-        modelDisplay.textContent = modelName;
-        modelDisplay.style.marginLeft = 'auto'; // Push to the right
-
         // Assemble the elements
         aiInfoFooter.appendChild(aiIcon);
         aiInfoFooter.appendChild(aiInfoText);
-        aiInfoFooter.appendChild(modelDisplay); // Add visible model name
         aiInfoFooter.appendChild(modelInfoTooltip);
 
-        // Add the footer after the response content
-        responseSection.appendChild(aiInfoFooter);
+        // Add click event to toggle tooltip visibility
+        aiInfoFooter.addEventListener('click', () => {
+          modelInfoTooltip.style.display = 
+            modelInfoTooltip.style.display === 'inline-block' ? 'none' : 'inline-block';
+        });
+
+        // Add the footer to the body to ensure full width
+        document.body.appendChild(aiInfoFooter);
       }
 
     // Generic function to call any LLM API provider
