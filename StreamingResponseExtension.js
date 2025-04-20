@@ -191,6 +191,7 @@ export const StreamingResponseExtension = {
             cursor: pointer;
             position: relative;
             padding: 8px 10px 8px 0;
+            margin-bottom: 0;
             border-radius: 4px;
             transition: background-color 0.2s ease;
             user-select: none;
@@ -209,11 +210,12 @@ export const StreamingResponseExtension = {
             width: 100%;
             box-sizing: border-box;
             margin-top: 5px;
-            background-color: #f3f4f6;
-            color: #333;
-            padding: 10px;
+            background-color: #ffffff;
+            color: #1a1e23;
+            padding: 12px;
             border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 1px solid #E5E7EB;
             z-index: 10;
             transition: opacity 0.3s ease;
             user-select: text;
@@ -464,7 +466,8 @@ export const StreamingResponseExtension = {
       // Create tooltip with model info
       const modelInfoTooltip = document.createElement('div');
       modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
-      modelInfoTooltip.textContent = `Použitý AI model: ${modelName}`;
+      // Use innerHTML to allow for bold tag
+      modelInfoTooltip.innerHTML = `<strong>Použitý AI model:</strong> ${modelName}`;
 
       // Assemble the elements
       aiInfoFooter.appendChild(aiIcon);
