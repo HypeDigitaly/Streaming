@@ -194,6 +194,7 @@ export const StreamingResponseExtension = {
             border-radius: 4px;
             transition: background-color 0.2s ease;
             user-select: none;
+            margin-bottom: 40px;
           }
           .ai-info-footer:hover {
             background-color: #f3f4f6;
@@ -204,8 +205,8 @@ export const StreamingResponseExtension = {
           .model-info-tooltip {
             display: none;
             position: absolute;
-            top: 100%;
-            left: 0;
+            top: -40px;
+            left: -20px;
             background-color: #E2F2D9;
             color: #333;
             padding: 8px 12px;
@@ -213,7 +214,8 @@ export const StreamingResponseExtension = {
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             white-space: nowrap;
             z-index: 10;
-            margin-top: 8px;
+            width: 100%;
+            min-width: 300px;
             transition: opacity 0.3s ease;
             user-select: text;
             text-align: left;
