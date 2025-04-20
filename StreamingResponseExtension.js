@@ -370,17 +370,17 @@ export const StreamingResponseExtension = {
       // Gemini models
       {
         id: 6,
-        name: 'gemini-2.0-pro',
+        name: 'gemini-2.5-pro-preview-03-25',
         type: 'gemini',
         endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 2.0 Pro'
+        displayName: 'Gemini 2.5 Pro'
       },
       {
         id: 7,
-        name: 'gemini-2.0-flash',
+        name: 'gemini-2.5-flash-preview-04-17',
         type: 'gemini',
         endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 2.0 Flash'
+        displayName: 'Gemini 2.5 Flash'
       },
       
       // Groq models
