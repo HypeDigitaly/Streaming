@@ -459,11 +459,13 @@ export const StreamingResponseExtension = {
     }
 
     // Adds AI info footer to the UI
-    function addAIInfoFooter(modelSequence, successfulModelId) {
-      // Find the details of the successful model, if any
-      const successfulModel = successfulModelId !== null 
-        ? modelsRegistry.find(m => m.id === successfulModelId) 
+    function addAIInfoFooter(attemptedModels) {
+      // Determine overall success and find the successful model details
+      const successfulAttempt = attemptedModels.find(m => m.success === true);
+      const successfulModel = successfulAttempt 
+        ? modelsRegistry.find(m => m.id === successfulAttempt.id)
         : null;
+      const wasSuccess = !!successfulModel;
 
       // Create footer container
       const aiInfoFooter = document.createElement('div');
@@ -479,28 +481,33 @@ export const StreamingResponseExtension = {
       // Create info text
       const aiInfoText = document.createElement('div');
       aiInfoText.className = 'ai-info-text';
-      if (successfulModel) {
+      if (wasSuccess) {
         aiInfoText.textContent = 'Pomocné informace generované AI.';
       } else {
         aiInfoText.textContent = 'AI generování selhalo.'; // AI generation failed.
         aiInfoFooter.style.color = '#DC2626'; // Indicate failure visually
       }
 
-      // Create tooltip with detailed model sequence info
+      // Create tooltip with simplified model sequence info
       const modelInfoTooltip = document.createElement('div');
       const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
       modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
 
-      let tooltipHTML = '<strong>Pokusy o generování:</strong><br>';
-      modelSequence.forEach((modelId, index) => {
-        const modelDetail = getModelDetailById(modelId);
-        const isSuccess = modelId === successfulModelId;
-        const statusIcon = isSuccess ? '✅' : '❌';
-        tooltipHTML += `${index + 1}. ${statusIcon} ${modelDetail}${isSuccess ? ' (<strong>Úspěch</strong>)' : ''}<br>`;
-      });
+      let tooltipHTML = '<strong>Spuštěné AI modely:</strong> ';
+      if (attemptedModels.length > 0) {
+        tooltipHTML += attemptedModels.map(attempt => {
+          const modelInfo = modelsRegistry.find(m => m.id === attempt.id);
+          const displayName = modelInfo ? modelInfo.displayName : `Neznámý ID:${attempt.id}`;
+          const statusIcon = attempt.success === true ? '✅' : '❌';
+          return `${statusIcon} ${displayName}`;
+        }).join(' → '); // Use arrow separator
+      } else {
+        tooltipHTML += 'Žádné modely nebyly spuštěny.'; // Fallback message
+      }
 
-      if (!successfulModel) {
-         tooltipHTML += '<br><strong>Výsledek:</strong> Všechny modely selhaly.';
+      // Add overall result if all failed
+      if (!wasSuccess && attemptedModels.length > 0) {
+        tooltipHTML += ' (Všechny selhaly)';
       }
 
       modelInfoTooltip.innerHTML = tooltipHTML;
@@ -710,6 +717,9 @@ export const StreamingResponseExtension = {
         console.log("=============================");
       }
 
+      // Keep track of models attempted and their outcome
+      const attemptedModels = []; 
+
       // Try each model in sequence
       for (const modelId of modelSequence) {
         const model = modelsRegistry.find(m => m.id === modelId);
@@ -721,6 +731,10 @@ export const StreamingResponseExtension = {
           continue;
         }
 
+        // Record the attempt before calling the API
+        const currentAttempt = { id: model.id, success: null };
+        attemptedModels.push(currentAttempt);
+
         if (trace.payload.debugMode === 1) {
           console.log(`\n🔄 ATTEMPT ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}: Using model ID:${model.id}`);
           console.log(`📌 Model: ${model.displayName} (${model.type})`);
@@ -728,7 +742,6 @@ export const StreamingResponseExtension = {
           console.log(`📌 Endpoint: ${model.endpoint}`);
           console.log(`📌 Status: STARTING REQUEST`);
         }
-
 
         // Prepare payload for API call
         const payload = {
@@ -745,7 +758,10 @@ export const StreamingResponseExtension = {
         // Call the LLM API
         const success = await callLLMAPI(model.endpoint, payload);
 
-        // If successful, stop trying other models
+        // Update the status of the current attempt
+        currentAttempt.success = success;
+
+        // If successful, stop trying other models and add footer
         if (success) {
           if (trace.payload.debugMode === 1) {
             console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
@@ -755,10 +771,11 @@ export const StreamingResponseExtension = {
             console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
             console.log(`=============================`);
           }
-          addAIInfoFooter(modelSequence, model.id); // Add AI info footer after successful response
+          addAIInfoFooter(attemptedModels); // Pass the list of attempted models
           return;
         }
 
+        // --- Failure case within the loop ---
         if (trace.payload.debugMode === 1) {
           console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
           console.log(`📌 Model: ${model.displayName} (${model.type})`);
@@ -781,17 +798,20 @@ export const StreamingResponseExtension = {
         }
       }
 
-      // If we get here, all models failed
+      // --- All models failed case (after the loop) ---
+      // If we get here, all attempted models failed
       if (trace.payload.debugMode === 1) {
-        console.log(`\n❌ ALL MODELS FAILED`);
-        console.log(`📌 Attempted ${modelSequence.length} models in sequence:`);
-        modelSequence.forEach((modelId, index) => {
-          console.log(`   ${index + 1}. ${getModelDetailById(modelId)}`);
+        console.log(`\n❌ ALL ATTEMPTED MODELS FAILED`);
+        console.log(`📌 Attempted models:`);
+        attemptedModels.forEach((attempt, index) => {
+          const detail = getModelDetailById(attempt.id);
+          console.log(`   ${index + 1}. ${detail} (Failed)`);
         });
         console.log(`📌 Result: No successful responses`);
         console.log(`=============================`);
       }
-      addAIInfoFooter(modelSequence, null);
+      // Add the footer indicating failure, showing all attempts
+      addAIInfoFooter(attemptedModels); 
     }
 
     // Start the LLM orchestration
