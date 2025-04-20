@@ -482,7 +482,7 @@ export const StreamingResponseExtension = {
       // Create info text
       const aiInfoText = document.createElement('div');
       aiInfoText.className = 'ai-info-text';
-      
+
       // Language support for messages
       const languageMessages = {
         cs: {
@@ -502,12 +502,12 @@ export const StreamingResponseExtension = {
           failure: 'Генерація ШІ не вдалася.'
         }
       };
-      
+
       // Get language from payload, default to Czech
       const lang = trace.payload?.lang || 'cs';
       // Get language messages or fall back to Czech if not supported
       const messages = languageMessages[lang] || languageMessages.cs;
-      
+
       if (wasSuccess) {
         aiInfoText.textContent = messages.success;
       } else {
@@ -519,10 +519,7 @@ export const StreamingResponseExtension = {
       const modelInfoTooltip = document.createElement('div');
       const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
       modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
-      
-      // Get language from payload, default to Czech
-      const lang = trace.payload?.lang || 'cs';
-      
+
       // Language support for tooltip messages
       const tooltipMessages = {
         cs: {
@@ -550,7 +547,7 @@ export const StreamingResponseExtension = {
           unknown: 'Невідомий ID:'
         }
       };
-      
+
       // Get tooltip messages or fall back to Czech if not supported
       const tooltipText = tooltipMessages[lang] || tooltipMessages.cs;
 
