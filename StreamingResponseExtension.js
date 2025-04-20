@@ -189,6 +189,10 @@ export const StreamingResponseExtension = {
             background-color: #f0f0f0;
             padding: 8px 12px;
             border-radius: 4px;
+            width: 100%; /* Make footer full width */
+            position: fixed; /* Pin to bottom */
+            bottom: 0; /* Pin to bottom */
+            left: 0; /* Pin to left */
           }
           .ai-icon {
             font-weight: bold;
@@ -230,6 +234,9 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.groq {
             background-color: #FFF1E5;
             color: #F17C23;
+          }
+          .model-display {
+            margin-left: auto; /* Push model name to the right */
           }
 
         </style>
@@ -312,7 +319,7 @@ export const StreamingResponseExtension = {
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        .replace(/^- (.*$)/gm, (match, content) => {
+        .replace(/- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
         })
@@ -447,34 +454,42 @@ export const StreamingResponseExtension = {
 
     // Adds AI info footer to the UI
     function addAIInfoFooter(modelType, modelName) {
-      // Create footer container
-      const aiInfoFooter = document.createElement('div');
-      aiInfoFooter.className = 'ai-info-footer';
-      aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
+        // Create footer container
+        const aiInfoFooter = document.createElement('div');
+        aiInfoFooter.className = 'ai-info-footer';
+        aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
 
-      // Create AI icon
-      const aiIcon = document.createElement('div');
-      aiIcon.className = 'ai-icon';
-      aiIcon.textContent = 'AI';
+        // Create AI icon
+        const aiIcon = document.createElement('div');
+        aiIcon.className = 'ai-icon';
+        aiIcon.textContent = 'AI';
 
-      // Create info text
-      const aiInfoText = document.createElement('div');
-      aiInfoText.className = 'ai-info-text';
-      aiInfoText.textContent = 'Pomocné informace generované AI.';
+        // Create info text
+        const aiInfoText = document.createElement('div');
+        aiInfoText.className = 'ai-info-text';
+        aiInfoText.textContent = 'Pomocné informace generované AI.';
+        aiInfoText.style.flexGrow = '1'; // Allow text to take up space
 
-      // Create tooltip with model info
-      const modelInfoTooltip = document.createElement('div');
-      modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
-      modelInfoTooltip.textContent = modelName;
+        // Create tooltip with model info
+        const modelInfoTooltip = document.createElement('div');
+        modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
+        modelInfoTooltip.textContent = modelName;
 
-      // Assemble the elements
-      aiInfoFooter.appendChild(aiIcon);
-      aiInfoFooter.appendChild(aiInfoText);
-      aiInfoFooter.appendChild(modelInfoTooltip);
+        // Create model display container
+        const modelDisplay = document.createElement('div');
+        modelDisplay.className = 'model-display';
+        modelDisplay.textContent = modelName;
+        modelDisplay.style.marginLeft = 'auto'; // Push to the right
 
-      // Add the footer after the response content
-      responseSection.appendChild(aiInfoFooter);
-    }
+        // Assemble the elements
+        aiInfoFooter.appendChild(aiIcon);
+        aiInfoFooter.appendChild(aiInfoText);
+        aiInfoFooter.appendChild(modelDisplay); // Add visible model name
+        aiInfoFooter.appendChild(modelInfoTooltip);
+
+        // Add the footer after the response content
+        responseSection.appendChild(aiInfoFooter);
+      }
 
     // Generic function to call any LLM API provider
     async function callLLMAPI(endpoint, payload) {
