@@ -410,6 +410,14 @@ export const StreamingResponseExtension = {
         .filter(id => !isNaN(id) && modelsRegistry.some(m => m.id === id));
     }
 
+    // Function to get detailed model info by ID
+    function getModelDetailById(modelId) {
+      const model = modelsRegistry.find(m => m.id === modelId);
+      return model ? 
+        `ID:${model.id} | ${model.displayName} (${model.type}) | Model: ${model.name}` : 
+        `Unknown model ID: ${modelId}`;
+    }
+
     // Adds a model tag to the UI
     function addModelTag(modelType, modelName) {
       const modelTag = document.createElement('div');
@@ -570,7 +578,17 @@ export const StreamingResponseExtension = {
       const modelSequence = parseModelSequence(trace.payload.modelSequence);
       
       if (trace.payload.debugMode === 1) {
-        console.log("📊 Using model sequence:", modelSequence);
+        console.log("📊 MODEL SEQUENCE DEBUG INFO:");
+        console.log("=== CONFIGURED MODEL SEQUENCE ===");
+        console.log(`📋 Raw sequence: ${trace.payload.modelSequence || "Default"}`);
+        console.log(`📋 Parsed IDs: ${JSON.stringify(modelSequence)}`);
+        
+        // Print detailed model info
+        console.log("=== MODELS IN SEQUENCE ===");
+        modelSequence.forEach((modelId, index) => {
+          console.log(`📌 Position ${index}: ${getModelDetailById(modelId)}`);
+        });
+        console.log("=============================");
       }
 
       // Try each model in sequence
@@ -585,7 +603,11 @@ export const StreamingResponseExtension = {
         }
 
         if (trace.payload.debugMode === 1) {
-          console.log(`🧪 Trying model: ${model.name} (${model.type}) via ${model.endpoint}`);
+          console.log(`\n🔄 ATTEMPT ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}: Using model ID:${model.id}`);
+          console.log(`📌 Model: ${model.displayName} (${model.type})`);
+          console.log(`📌 Model name: ${model.name}`);
+          console.log(`📌 Endpoint: ${model.endpoint}`);
+          console.log(`📌 Status: STARTING REQUEST`);
         }
 
         // Add model tag to UI if this is the first attempt
@@ -611,17 +633,48 @@ export const StreamingResponseExtension = {
         // If successful, stop trying other models
         if (success) {
           if (trace.payload.debugMode === 1) {
-            console.log(`✅ Successfully used model: ${model.name}`);
+            console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
+            console.log(`📌 Model: ${model.displayName} (${model.type})`);
+            console.log(`📌 Model name: ${model.name}`);
+            console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
+            console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
+            console.log(`=============================`);
           }
           return;
         }
         
         if (trace.payload.debugMode === 1) {
-          console.log(`❌ Failed with model: ${model.name}, trying next`);
+          console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
+          console.log(`📌 Model: ${model.displayName} (${model.type})`);
+          console.log(`📌 Model name: ${model.name}`);
+          console.log(`📌 Status: REQUEST FAILED`);
+          console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
+          
+          // Check if there are more models to try
+          const nextModelIndex = modelSequence.indexOf(modelId) + 1;
+          if (nextModelIndex < modelSequence.length) {
+            const nextModelId = modelSequence[nextModelIndex];
+            const nextModel = modelsRegistry.find(m => m.id === nextModelId);
+            if (nextModel) {
+              console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
+            }
+          } else {
+            console.log(`📌 No more models to try in sequence`);
+          }
+          console.log(`-----------------------------`);
         }
       }
 
       // If we get here, all models failed
+      if (trace.payload.debugMode === 1) {
+        console.log(`\n❌ ALL MODELS FAILED`);
+        console.log(`📌 Attempted ${modelSequence.length} models in sequence:`);
+        modelSequence.forEach((modelId, index) => {
+          console.log(`   ${index + 1}. ${getModelDetailById(modelId)}`);
+        });
+        console.log(`📌 Result: No successful responses`);
+        console.log(`=============================`);
+      }
       responseContent.textContent = "Error: All LLM providers failed to respond.";
     }
 
