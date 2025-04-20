@@ -179,15 +179,44 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
-          .model-tag {
+          .model-info-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 8px;
+          }
+          .model-info-icon {
+            cursor: pointer;
             background-color: #F3F4F6;
             color: #6B7280;
             font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
             display: inline-flex;
             align-items: center;
-            margin-bottom: 8px;
+            justify-content: center;
+            margin-bottom: 2px;
+          }
+          .model-info-icon:hover {
+            background-color: #E5E7EB;
+          }
+          .model-tag {
+            position: absolute;
+            top: 18px;
+            left: 0;
+            z-index: 10;
+            background-color: #F3F4F6;
+            color: #6B7280;
+            font-size: 10px;
+            padding:.5rem .75rem;
+            border-radius: 4px;
+            display: none;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            white-space: nowrap;
+          }
+          .model-tag.visible {
+            display: inline-flex;
           }
           .model-tag.claude {
             background-color: #E5F6FF;
@@ -418,12 +447,38 @@ export const StreamingResponseExtension = {
         `Unknown model ID: ${modelId}`;
     }
 
-    // Adds a model tag to the UI
+    // Adds a collapsible model tag to the UI
     function addModelTag(modelType, modelName) {
+      // Create container for the info icon and model tag
+      const modelInfoContainer = document.createElement('div');
+      modelInfoContainer.className = 'model-info-container';
+      
+      // Create info icon
+      const modelInfoIcon = document.createElement('div');
+      modelInfoIcon.className = 'model-info-icon';
+      modelInfoIcon.innerHTML = 'i';
+      modelInfoIcon.title = 'Click to view model info';
+      
+      // Create model tag (hidden by default)
       const modelTag = document.createElement('div');
       modelTag.className = `model-tag ${modelType}`;
       modelTag.textContent = modelName;
-      responseSection.insertBefore(modelTag, responseContent);
+      
+      // Add click event to toggle visibility
+      modelInfoIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        modelTag.classList.toggle('visible');
+      });
+      
+      // Add click event to document to hide tag when clicking elsewhere
+      document.addEventListener('click', () => {
+        modelTag.classList.remove('visible');
+      });
+      
+      // Assemble the elements
+      modelInfoContainer.appendChild(modelInfoIcon);
+      modelInfoContainer.appendChild(modelTag);
+      responseSection.insertBefore(modelInfoContainer, responseContent);
     }
 
     // Generic function to call any LLM API provider
