@@ -179,7 +179,32 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
-
+          .model-tag {
+            background-color: #F3F4F6;
+            color: #6B7280;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 8px;
+          }
+          .model-tag.claude {
+            background-color: #E5F6FF;
+            color: #0080C9;
+          }
+          .model-tag.openai {
+            background-color: #E7F7EF;
+            color: #10A37F;
+          }
+          .model-tag.gemini {
+            background-color: #F0E7FB;
+            color: #8E44AD;
+          }
+          .model-tag.groq {
+            background-color: #FFF1E5;
+            color: #F17C23;
+          }
         </style>
         <div class="response-section">
           <div class="response-content"></div>
@@ -301,11 +326,104 @@ export const StreamingResponseExtension = {
       return window;
     }
 
-    async function callClaudeAPI(payload) {
+    // Main models registry
+    const modelsRegistry = [
+      // Claude models
+      {
+        id: 1,
+        name: 'claude-3-7-sonnet-20250219',
+        type: 'claude',
+        endpoint: '/api/claude-stream',
+        displayName: 'Claude 3.7 Sonnet'
+      },
+      {
+        id: 2,
+        name: 'claude-3-5-haiku-20241022',
+        type: 'claude',
+        endpoint: '/api/claude-stream',
+        displayName: 'Claude 3.5 Haiku'
+      },
+      {
+        id: 3,
+        name: 'claude-3-sonnet-20240229',
+        type: 'claude',
+        endpoint: '/api/claude-stream',
+        displayName: 'Claude 3 Sonnet'
+      },
+      
+      // OpenAI models
+      {
+        id: 4,
+        name: 'gpt-4o',
+        type: 'openai',
+        endpoint: '/api/openai-stream',
+        displayName: 'GPT-4o'
+      },
+      {
+        id: 5,
+        name: 'gpt-4-turbo',
+        type: 'openai',
+        endpoint: '/api/openai-stream',
+        displayName: 'GPT-4 Turbo'
+      },
+      
+      // Gemini models
+      {
+        id: 6,
+        name: 'gemini-1.5-pro',
+        type: 'gemini',
+        endpoint: '/api/gemini-stream',
+        displayName: 'Gemini 1.5 Pro'
+      },
+      {
+        id: 7,
+        name: 'gemini-1.5-flash',
+        type: 'gemini',
+        endpoint: '/api/gemini-stream',
+        displayName: 'Gemini 1.5 Flash'
+      },
+      
+      // Groq models
+      {
+        id: 8,
+        name: 'llama3-groq-70b-8192',
+        type: 'groq',
+        endpoint: '/api/groq-stream',
+        displayName: 'Llama 3 70B'
+      },
+      {
+        id: 9,
+        name: 'mixtral-8x7b-32768',
+        type: 'groq',
+        endpoint: '/api/groq-stream',
+        displayName: 'Mixtral 8x7B'
+      }
+    ];
+
+    // Function to process model sequence
+    function parseModelSequence(sequenceStr) {
+      if (!sequenceStr) return [1]; // Default to first model if none specified
+      
+      // Parse sequence string to array of numbers
+      return sequenceStr.split(',')
+        .map(id => parseInt(id.trim()))
+        .filter(id => !isNaN(id) && modelsRegistry.some(m => m.id === id));
+    }
+
+    // Adds a model tag to the UI
+    function addModelTag(modelType, modelName) {
+      const modelTag = document.createElement('div');
+      modelTag.className = `model-tag ${modelType}`;
+      modelTag.textContent = modelName;
+      responseSection.insertBefore(modelTag, responseContent);
+    }
+
+    // Generic function to call any LLM API provider
+    async function callLLMAPI(endpoint, payload) {
       try {
-        const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
+        const proxyUrl = `https://utils.hypedigitaly.ai${endpoint}`;
         if (payload.debugMode === 1) {
-          console.log("📦 Payload values:", {
+          console.log(`📦 Payload for ${endpoint}:`, {
             model: payload.model,
             max_tokens: payload.max_tokens,
             temperature: payload.temperature,
@@ -314,8 +432,7 @@ export const StreamingResponseExtension = {
             systemPrompt: payload.systemPrompt,
             user_id: payload.user_id
           });
-          console.log("🌐 Calling proxy URL:", proxyUrl);
-          console.log("📦 Full Claude API call payload:", payload);
+          console.log(`🌐 Calling proxy URL:`, proxyUrl);
         }
 
         const response = await fetch(proxyUrl, {
@@ -337,7 +454,6 @@ export const StreamingResponseExtension = {
           if (done) {
             if (payload.debugMode === 1) {
               console.log('Stream completed');
-              // No PATCH request here - we'll only do it when we receive [DONE]
               console.log('📝 COMPLETE_RESPONSE_BEGIN');
               console.log(completeResponse);
               console.log('📝 COMPLETE_RESPONSE_END');
@@ -358,8 +474,6 @@ export const StreamingResponseExtension = {
             if (data === '[DONE]') {
               if (payload.debugMode === 1) {
                 console.log('Stream completed via [DONE] signal');
-
-                // Log the entire LLM_Main_Response for debugging
                 console.log('📝 COMPLETE_RESPONSE_BEGIN');
                 console.log(completeResponse);
                 console.log('📝 COMPLETE_RESPONSE_END');
@@ -394,7 +508,6 @@ export const StreamingResponseExtension = {
                 } else {
                   if (payload.debugMode === 1) {
                     console.log('Successfully updated variables with complete response');
-                    // Log the entire LLM_Main_Response for dashboard logging
                     console.log('📝 Complete LLM_Main_Response:', completeResponse);
                   }
 
@@ -414,7 +527,7 @@ export const StreamingResponseExtension = {
                 }
               }
 
-              return;
+              return true; // Success
             }
 
             try {
@@ -425,9 +538,8 @@ export const StreamingResponseExtension = {
               }
 
               if (payload.debugMode === 1) {
-                console.log('Full Response:', data);
                 if (parsed.type === 'content' && parsed.content) {
-                  console.log('Received content:', parsed.content);
+                  console.log(`Received content from ${endpoint}:`, parsed.content);
                 }
               }
               updateContent(parsed.content);
@@ -442,27 +554,80 @@ export const StreamingResponseExtension = {
 
       } catch (error) {
         if (payload.debugMode === 1) {
-          console.error("Stream error:", error);
+          console.error(`Stream error from ${endpoint}:`, error);
         }
-        responseContent.textContent = `Error: ${error.message}`;
+        return false; // Failure
       }
     }
 
-    if (trace.payload) {
-      await callClaudeAPI({
-        model: trace.payload.model,
-        max_tokens: trace.payload.max_tokens,
-        temperature: trace.payload.temperature,
-        userData: trace.payload.userData,
-        systemPrompt: trace.payload.systemPrompt,
-        debugMode: trace.payload.debugMode || 0,
-        projectName: trace.payload.projectName,
-        user_id: trace.payload.user_id,
-      });
-    } else {
-      addDebugMessage("❌ Error: No payload received", "error");
+    async function orchestrateLLMCalls(trace) {
+      if (!trace.payload) {
+        responseContent.textContent = "Error: No payload received";
+        return;
+      }
+
+      // Parse the model sequence
+      const modelSequence = parseModelSequence(trace.payload.modelSequence);
+      
+      if (trace.payload.debugMode === 1) {
+        console.log("📊 Using model sequence:", modelSequence);
+      }
+
+      // Try each model in sequence
+      for (const modelId of modelSequence) {
+        const model = modelsRegistry.find(m => m.id === modelId);
+        
+        if (!model) {
+          if (trace.payload.debugMode === 1) {
+            console.log(`⚠️ Unknown model ID ${modelId}, skipping`);
+          }
+          continue;
+        }
+
+        if (trace.payload.debugMode === 1) {
+          console.log(`🧪 Trying model: ${model.name} (${model.type}) via ${model.endpoint}`);
+        }
+
+        // Add model tag to UI if this is the first attempt
+        if (isFirstChunk) {
+          addModelTag(model.type, model.displayName);
+        }
+
+        // Prepare payload for API call
+        const payload = {
+          model: model.name,
+          max_tokens: trace.payload.max_tokens,
+          temperature: trace.payload.temperature,
+          userData: trace.payload.userData,
+          systemPrompt: trace.payload.systemPrompt,
+          debugMode: trace.payload.debugMode || 0,
+          projectName: trace.payload.projectName,
+          user_id: trace.payload.user_id,
+        };
+
+        // Call the LLM API
+        const success = await callLLMAPI(model.endpoint, payload);
+        
+        // If successful, stop trying other models
+        if (success) {
+          if (trace.payload.debugMode === 1) {
+            console.log(`✅ Successfully used model: ${model.name}`);
+          }
+          return;
+        }
+        
+        if (trace.payload.debugMode === 1) {
+          console.log(`❌ Failed with model: ${model.name}, trying next`);
+        }
+      }
+
+      // If we get here, all models failed
+      responseContent.textContent = "Error: All LLM providers failed to respond.";
     }
 
+    // Start the LLM orchestration
+    await orchestrateLLMCalls(trace);
+    
     window.voiceflow.chat.interact({ type: "continue" });
   },
 };
