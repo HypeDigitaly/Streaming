@@ -189,11 +189,12 @@ export const StreamingResponseExtension = {
             cursor: pointer;
             display: flex;
             align-items: center;
+            justify-content: center;
             background-color: #F3F4F6;
             border-radius: 4px;
             padding: 4px 8px;
             transition: background-color 0.2s;
-            gap: 4px;
+            gap: 6px;
           }
           .model-info-dropdown:hover {
             background-color: #E5E7EB;
@@ -205,7 +206,7 @@ export const StreamingResponseExtension = {
             width: 18px;
             height: 18px;
             border-radius: 50%;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
@@ -516,6 +517,11 @@ export const StreamingResponseExtension = {
       modelInfoDropdown.appendChild(modelInfoIcon);
       modelInfoDropdown.appendChild(dropdownLabel);
       modelInfoDropdown.appendChild(dropdownArrow);
+      
+      // Center align the container
+      modelInfoContainer.style.display = "flex";
+      modelInfoContainer.style.justifyContent = "center";
+      
       modelInfoContainer.appendChild(modelInfoDropdown);
       modelInfoContainer.appendChild(modelTag);
       responseSection.insertBefore(modelInfoContainer, responseContent);
