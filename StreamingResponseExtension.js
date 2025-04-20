@@ -459,12 +459,17 @@ export const StreamingResponseExtension = {
     }
 
     // Adds AI info footer to the UI
-    function addAIInfoFooter(modelType, modelName) {
+    function addAIInfoFooter(modelSequence, successfulModelId) {
+      // Find the details of the successful model, if any
+      const successfulModel = successfulModelId !== null 
+        ? modelsRegistry.find(m => m.id === successfulModelId) 
+        : null;
+
       // Create footer container
       const aiInfoFooter = document.createElement('div');
       aiInfoFooter.className = 'ai-info-footer';
       aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
-      aiInfoFooter.setAttribute('title', 'Click to show/hide AI model information');
+      aiInfoFooter.setAttribute('title', 'Click to show/hide AI model execution details');
 
       // Create AI icon
       const aiIcon = document.createElement('div');
@@ -474,13 +479,31 @@ export const StreamingResponseExtension = {
       // Create info text
       const aiInfoText = document.createElement('div');
       aiInfoText.className = 'ai-info-text';
-      aiInfoText.textContent = 'Pomocné informace generované AI.';
+      if (successfulModel) {
+        aiInfoText.textContent = 'Pomocné informace generované AI.';
+      } else {
+        aiInfoText.textContent = 'AI generování selhalo.'; // AI generation failed.
+        aiInfoFooter.style.color = '#DC2626'; // Indicate failure visually
+      }
 
-      // Create tooltip with model info
+      // Create tooltip with detailed model sequence info
       const modelInfoTooltip = document.createElement('div');
-      modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
-      // Use innerHTML to allow for bold tag
-      modelInfoTooltip.innerHTML = `<strong>Použitý AI model:</strong> ${modelName}`;
+      const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
+      modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
+
+      let tooltipHTML = '<strong>Pokusy o generování:</strong><br>';
+      modelSequence.forEach((modelId, index) => {
+        const modelDetail = getModelDetailById(modelId);
+        const isSuccess = modelId === successfulModelId;
+        const statusIcon = isSuccess ? '✅' : '❌';
+        tooltipHTML += `${index + 1}. ${statusIcon} ${modelDetail}${isSuccess ? ' (<strong>Úspěch</strong>)' : ''}<br>`;
+      });
+
+      if (!successfulModel) {
+         tooltipHTML += '<br><strong>Výsledek:</strong> Všechny modely selhaly.';
+      }
+
+      modelInfoTooltip.innerHTML = tooltipHTML;
 
       // Assemble the elements
       aiInfoFooter.appendChild(aiIcon);
@@ -514,6 +537,11 @@ export const StreamingResponseExtension = {
       });
 
       // Add the footer after the response content
+      // Ensure it's added only once (important if called on failure after potential partial success render)
+      const existingFooter = responseSection.querySelector('.ai-info-footer');
+      if (existingFooter) {
+        existingFooter.remove();
+      }
       responseSection.appendChild(aiInfoFooter);
     }
 
@@ -727,7 +755,7 @@ export const StreamingResponseExtension = {
             console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
             console.log(`=============================`);
           }
-          addAIInfoFooter(model.type, model.displayName); // Add AI info footer after successful response
+          addAIInfoFooter(modelSequence, model.id); // Add AI info footer after successful response
           return;
         }
 
@@ -763,7 +791,7 @@ export const StreamingResponseExtension = {
         console.log(`📌 Result: No successful responses`);
         console.log(`=============================`);
       }
-      responseContent.textContent = "Error: All LLM providers failed to respond.";
+      addAIInfoFooter(modelSequence, null);
     }
 
     // Start the LLM orchestration
