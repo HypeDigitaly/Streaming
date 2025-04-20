@@ -183,18 +183,17 @@ export const StreamingResponseExtension = {
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-top: 24px;
-            padding-top: 16px;
+            margin-top: 16px;
+            padding-top: 8px;
             border-top: 1px solid #E5E7EB;
             font-size: 12px;
             color: #6B7280;
             cursor: pointer;
             position: relative;
-            padding: 6px 10px;
+            padding: 8px 10px 8px 0;
             border-radius: 4px;
             transition: background-color 0.2s ease;
             user-select: none;
-            margin-bottom: 40px;
           }
           .ai-info-footer:hover {
             background-color: #f3f4f6;
@@ -205,17 +204,17 @@ export const StreamingResponseExtension = {
           .model-info-tooltip {
             display: none;
             position: absolute;
-            top: -40px;
-            left: -20px;
-            background-color: #E2F2D9;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 5px;
+            background-color: #f3f4f6;
             color: #333;
-            padding: 8px 12px;
+            padding: 10px;
             border-radius: 6px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            white-space: nowrap;
             z-index: 10;
-            width: 100%;
-            min-width: 300px;
             transition: opacity 0.3s ease;
             user-select: text;
             text-align: left;
