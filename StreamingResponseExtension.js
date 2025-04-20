@@ -183,33 +183,17 @@ export const StreamingResponseExtension = {
             display: flex;
             align-items: center;
             gap: 6px;
+            margin-top: 8px;
             font-size: 12px;
             color: #6B7280;
-            background-color: #f0f0f0;
-            padding: 8px 12px;
-            width: 100%;
-            box-sizing: border-box;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            margin: 0;
-            cursor: pointer;
-            z-index: 1000;
-            border-top: 1px solid #ddd;
           }
           .ai-icon {
             font-weight: bold;
-            display: inline-block;
-            background-color: #4B5563;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-right: 6px;
           }
           .model-info-tooltip {
             display: none;
             position: absolute;
-            top: -40px;
+            top: 100%;
             left: 0;
             background-color: #f3f4f6;
             padding: 4px 8px;
@@ -217,6 +201,7 @@ export const StreamingResponseExtension = {
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             white-space: nowrap;
             z-index: 1;
+            margin-top: 5px;
           }
           .ai-info-footer:hover .model-info-tooltip {
             display: inline-block;
@@ -236,9 +221,6 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.groq {
             background-color: #FFF1E5;
             color: #F17C23;
-          }
-          .model-display {
-            margin-left: auto; /* Push model name to the right */
           }
 
         </style>
@@ -321,7 +303,7 @@ export const StreamingResponseExtension = {
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        .replace(/- (.*$)/gm, (match, content) => {
+        .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
         })
@@ -456,65 +438,34 @@ export const StreamingResponseExtension = {
 
     // Adds AI info footer to the UI
     function addAIInfoFooter(modelType, modelName) {
-        // Create footer container
-        const aiInfoFooter = document.createElement('div');
-        aiInfoFooter.className = 'ai-info-footer';
-        
-        // Apply additional styles to ensure visibility and full width
-        aiInfoFooter.style.position = 'fixed'; // Fixed at the bottom
-        aiInfoFooter.style.bottom = '0';
-        aiInfoFooter.style.left = '0';
-        aiInfoFooter.style.width = '100%';
-        aiInfoFooter.style.zIndex = '1000'; // Ensure it's on top
-        aiInfoFooter.style.display = 'flex';
-        aiInfoFooter.style.alignItems = 'center';
-        aiInfoFooter.style.padding = '8px 12px';
-        aiInfoFooter.style.backgroundColor = '#f0f0f0';
-        aiInfoFooter.style.borderTop = '1px solid #ddd';
-        aiInfoFooter.style.boxSizing = 'border-box';
+      // Create footer container
+      const aiInfoFooter = document.createElement('div');
+      aiInfoFooter.className = 'ai-info-footer';
+      aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
 
-        // Create AI icon
-        const aiIcon = document.createElement('div');
-        aiIcon.className = 'ai-icon';
-        aiIcon.textContent = 'AI';
+      // Create AI icon
+      const aiIcon = document.createElement('div');
+      aiIcon.className = 'ai-icon';
+      aiIcon.textContent = 'AI';
 
-        // Create info text
-        const aiInfoText = document.createElement('div');
-        aiInfoText.className = 'ai-info-text';
-        aiInfoText.textContent = 'Pomocné informace generované AI.';
-        aiInfoText.style.flexGrow = '1'; // Allow text to take up space
+      // Create info text
+      const aiInfoText = document.createElement('div');
+      aiInfoText.className = 'ai-info-text';
+      aiInfoText.textContent = 'Pomocné informace generované AI.';
 
-        // Create model display
-        const modelDisplay = document.createElement('div');
-        modelDisplay.className = 'model-display';
-        modelDisplay.textContent = modelName;
-        modelDisplay.style.marginLeft = 'auto'; // Push to right
+      // Create tooltip with model info
+      const modelInfoTooltip = document.createElement('div');
+      modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
+      modelInfoTooltip.textContent = modelName;
 
-        // Create tooltip with model info
-        const modelInfoTooltip = document.createElement('div');
-        modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
-        modelInfoTooltip.textContent = modelName;
-        modelInfoTooltip.style.display = 'none';
+      // Assemble the elements
+      aiInfoFooter.appendChild(aiIcon);
+      aiInfoFooter.appendChild(aiInfoText);
+      aiInfoFooter.appendChild(modelInfoTooltip);
 
-        // Assemble the elements
-        aiInfoFooter.appendChild(aiIcon);
-        aiInfoFooter.appendChild(aiInfoText);
-        aiInfoFooter.appendChild(modelDisplay);
-        aiInfoFooter.appendChild(modelInfoTooltip);
-
-        // Add click event to toggle tooltip visibility
-        aiInfoFooter.addEventListener('click', () => {
-          modelInfoTooltip.style.display = 
-            modelInfoTooltip.style.display === 'inline-block' ? 'none' : 'inline-block';
-        });
-
-        // Add the footer to the body to ensure full width
-        document.body.appendChild(aiInfoFooter);
-        
-        // Add padding to the bottom of the page to prevent content from being hidden behind the footer
-        const existingPadding = parseInt(document.body.style.paddingBottom) || 0;
-        document.body.style.paddingBottom = (existingPadding + aiInfoFooter.offsetHeight) + 'px';
-      }
+      // Add the footer after the response content
+      responseSection.appendChild(aiInfoFooter);
+    }
 
     // Generic function to call any LLM API provider
     async function callLLMAPI(endpoint, payload) {
