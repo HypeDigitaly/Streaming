@@ -462,7 +462,7 @@ export const StreamingResponseExtension = {
       // Create tooltip with model info
       const modelInfoTooltip = document.createElement('div');
       modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
-      modelInfoTooltip.textContent = modelName;
+      modelInfoTooltip.textContent = `Použitý AI model: ${modelName}`;
 
       // Assemble the elements
       aiInfoFooter.appendChild(aiIcon);
