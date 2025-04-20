@@ -200,8 +200,8 @@ export const StreamingResponseExtension = {
             background-color: #E5E7EB;
           }
           .model-info-icon {
-            background-color: #E5F6FF;
-            color: #0080C9;
+            background-color: #4B5563;
+            color: #F3F4F6;
             font-size: 12px;
             width: 18px;
             height: 18px;
