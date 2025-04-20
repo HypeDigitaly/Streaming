@@ -199,21 +199,7 @@ export const StreamingResponseExtension = {
           .model-info-dropdown:hover {
             background-color: #E5E7EB;
           }
-          .model-info-icon {
-            background-color: #4B5563;
-            color: #F3F4F6;
-            font-size: 12px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            line-height: 1;
-            padding-bottom: 1px;
-            text-align: center;
-          }
+          
           .dropdown-arrow {
             width: 12px;
             height: 12px;
@@ -481,11 +467,6 @@ export const StreamingResponseExtension = {
       modelInfoDropdown.className = 'model-info-dropdown';
       modelInfoDropdown.title = 'Click to view model info';
       
-      // Create info icon
-      const modelInfoIcon = document.createElement('div');
-      modelInfoIcon.className = 'model-info-icon';
-      modelInfoIcon.innerHTML = 'i';
-      
       // Create dropdown label
       const dropdownLabel = document.createElement('span');
       dropdownLabel.textContent = 'AI Info';
@@ -517,7 +498,6 @@ export const StreamingResponseExtension = {
       });
       
       // Assemble the elements
-      modelInfoDropdown.appendChild(modelInfoIcon);
       modelInfoDropdown.appendChild(dropdownLabel);
       modelInfoDropdown.appendChild(dropdownArrow);
       
