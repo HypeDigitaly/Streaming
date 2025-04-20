@@ -187,13 +187,15 @@ export const StreamingResponseExtension = {
             color: #6B7280;
             background-color: #f0f0f0;
             padding: 8px 12px;
-            width: 100vw;
+            width: 100%;
             box-sizing: border-box;
             position: fixed;
             bottom: 0;
             left: 0;
             margin: 0;
             cursor: pointer;
+            z-index: 1000;
+            border-top: 1px solid #ddd;
           }
           .ai-icon {
             font-weight: bold;
@@ -457,7 +459,19 @@ export const StreamingResponseExtension = {
         // Create footer container
         const aiInfoFooter = document.createElement('div');
         aiInfoFooter.className = 'ai-info-footer';
-        aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
+        
+        // Apply additional styles to ensure visibility and full width
+        aiInfoFooter.style.position = 'fixed'; // Fixed at the bottom
+        aiInfoFooter.style.bottom = '0';
+        aiInfoFooter.style.left = '0';
+        aiInfoFooter.style.width = '100%';
+        aiInfoFooter.style.zIndex = '1000'; // Ensure it's on top
+        aiInfoFooter.style.display = 'flex';
+        aiInfoFooter.style.alignItems = 'center';
+        aiInfoFooter.style.padding = '8px 12px';
+        aiInfoFooter.style.backgroundColor = '#f0f0f0';
+        aiInfoFooter.style.borderTop = '1px solid #ddd';
+        aiInfoFooter.style.boxSizing = 'border-box';
 
         // Create AI icon
         const aiIcon = document.createElement('div');
@@ -470,14 +484,22 @@ export const StreamingResponseExtension = {
         aiInfoText.textContent = 'Pomocné informace generované AI.';
         aiInfoText.style.flexGrow = '1'; // Allow text to take up space
 
+        // Create model display
+        const modelDisplay = document.createElement('div');
+        modelDisplay.className = 'model-display';
+        modelDisplay.textContent = modelName;
+        modelDisplay.style.marginLeft = 'auto'; // Push to right
+
         // Create tooltip with model info
         const modelInfoTooltip = document.createElement('div');
         modelInfoTooltip.className = `model-info-tooltip ${modelType}`;
         modelInfoTooltip.textContent = modelName;
+        modelInfoTooltip.style.display = 'none';
 
         // Assemble the elements
         aiInfoFooter.appendChild(aiIcon);
         aiInfoFooter.appendChild(aiInfoText);
+        aiInfoFooter.appendChild(modelDisplay);
         aiInfoFooter.appendChild(modelInfoTooltip);
 
         // Add click event to toggle tooltip visibility
@@ -488,6 +510,10 @@ export const StreamingResponseExtension = {
 
         // Add the footer to the body to ensure full width
         document.body.appendChild(aiInfoFooter);
+        
+        // Add padding to the bottom of the page to prevent content from being hidden behind the footer
+        const existingPadding = parseInt(document.body.style.paddingBottom) || 0;
+        document.body.style.paddingBottom = (existingPadding + aiInfoFooter.offsetHeight) + 'px';
       }
 
     // Generic function to call any LLM API provider
