@@ -206,8 +206,8 @@ export const StreamingResponseExtension = {
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #0096EF;
-            color: white;
+            background-color: #E2F2D9;
+            color: #333;
             padding: 8px 12px;
             border-radius: 6px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
@@ -216,16 +216,17 @@ export const StreamingResponseExtension = {
             margin-top: 8px;
             transition: opacity 0.3s ease;
             user-select: text;
+            text-align: left;
           }
           .model-info-tooltip.visible {
-            display: inline-block;
+            display: block;
           }
           .model-info-tooltip.claude,
           .model-info-tooltip.openai,
           .model-info-tooltip.gemini,
           .model-info-tooltip.groq {
-            background-color: #0096EF;
-            color: white;
+            background-color: #E2F2D9;
+            color: #333;
           }
 
         </style>
