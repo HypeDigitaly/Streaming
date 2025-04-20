@@ -519,22 +519,56 @@ export const StreamingResponseExtension = {
       const modelInfoTooltip = document.createElement('div');
       const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
       modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
+      
+      // Get language from payload, default to Czech
+      const lang = trace.payload?.lang || 'cs';
+      
+      // Language support for tooltip messages
+      const tooltipMessages = {
+        cs: {
+          title: 'Spuštěné AI modely:',
+          noModels: 'Žádné modely nebyly spuštěny.',
+          allFailed: '(Všechny selhaly)',
+          unknown: 'Neznámý ID:'
+        },
+        en: {
+          title: 'AI models executed:',
+          noModels: 'No models were executed.',
+          allFailed: '(All failed)',
+          unknown: 'Unknown ID:'
+        },
+        de: {
+          title: 'Ausgeführte KI-Modelle:',
+          noModels: 'Es wurden keine Modelle ausgeführt.',
+          allFailed: '(Alle fehlgeschlagen)',
+          unknown: 'Unbekannte ID:'
+        },
+        uk: {
+          title: 'Виконані моделі ШІ:',
+          noModels: 'Жодна модель не була виконана.',
+          allFailed: '(Усі не вдалися)',
+          unknown: 'Невідомий ID:'
+        }
+      };
+      
+      // Get tooltip messages or fall back to Czech if not supported
+      const tooltipText = tooltipMessages[lang] || tooltipMessages.cs;
 
-      let tooltipHTML = '<strong>Spuštěné AI modely:</strong> ';
+      let tooltipHTML = `<strong>${tooltipText.title}</strong> `;
       if (attemptedModels.length > 0) {
         tooltipHTML += attemptedModels.map(attempt => {
           const modelInfo = modelsRegistry.find(m => m.id === attempt.id);
-          const displayName = modelInfo ? modelInfo.displayName : `Neznámý ID:${attempt.id}`;
+          const displayName = modelInfo ? modelInfo.displayName : `${tooltipText.unknown}${attempt.id}`;
           const statusIcon = attempt.success === true ? '✅' : '❌';
           return `${statusIcon} ${displayName}`;
         }).join(' → '); // Use arrow separator
       } else {
-        tooltipHTML += 'Žádné modely nebyly spuštěny.'; // Fallback message
+        tooltipHTML += tooltipText.noModels; // Fallback message
       }
 
       // Add overall result if all failed
       if (!wasSuccess && attemptedModels.length > 0) {
-        tooltipHTML += ' (Všechny selhaly)';
+        tooltipHTML += ` ${tooltipText.allFailed}`;
       }
 
       modelInfoTooltip.innerHTML = tooltipHTML;
