@@ -485,7 +485,7 @@ export const StreamingResponseExtension = {
       
       // Create dropdown label
       const dropdownLabel = document.createElement('span');
-      dropdownLabel.textContent = 'Model Info';
+      dropdownLabel.textContent = 'AI Info';
       dropdownLabel.style.fontSize = '11px';
       
       // Create dropdown arrow
