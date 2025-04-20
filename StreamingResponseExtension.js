@@ -516,7 +516,11 @@ export const StreamingResponseExtension = {
     }
 
     // Function to update response metrics when generation completes
-    function updateResponseMetrics() {
+    // Track failed models
+    let failedModels = [];
+
+    // Function to update response metrics when generation completes
+    function updateResponseMetrics(modelSequence) {
       responseEndTime = Date.now();
       const responseTime = (responseEndTime - responseStartTime) / 1000; // in seconds
 
@@ -526,15 +530,38 @@ export const StreamingResponseExtension = {
       // Calculate tokens per second
       const tokensPerSecond = Math.round(estimatedTokens / responseTime);
 
+      // Generate model sequence information
+      let modelSequenceInfo = '';
+      if (modelSequence && modelSequence.length > 0) {
+        const successModelId = modelSequence.find(id => !failedModels.includes(id));
+        const successModel = successModelId ? modelsRegistry.find(m => m.id === successModelId) : null;
+
+        if (failedModels.length > 0) {
+          const failedModelDetails = failedModels.map(id => {
+            const model = modelsRegistry.find(m => m.id === id);
+            return model ? `${model.displayName}` : `Unknown (ID:${id})`;
+          }).join(', ');
+
+          modelSequenceInfo = `
+          <div class="model-details-item"><span class="model-details-label">Failed models:</span>${failedModelDetails}</div>`;
+        }
+
+        if (successModel) {
+          modelSequenceInfo += `
+          <div class="model-details-item"><span class="model-details-label">Success model:</span>${successModel.displayName}</div>`;
+        }
+      }
+
       // Update the model details if they exist
       const modelDetails = document.getElementById('model-details');
       if (modelDetails) {
         modelDetails.innerHTML = `
+          <div class="model-details-item"><span class="model-details-label">UserID:</span>${trace.payload.user_id || 'N/A'}</div>
           <div class="model-details-item"><span class="model-details-label">Generování:</span>Dokončeno</div>
           <div class="model-details-item"><span class="model-details-label">Čas:</span>${responseTime.toFixed(2)}s</div>
           <div class="model-details-item"><span class="model-details-label">~Tokens:</span>${estimatedTokens}</div>
           <div class="model-details-item"><span class="model-details-label">Rychlost:</span>${tokensPerSecond} tokens/s</div>
-          <div class="model-details-item"><span class="model-details-label">Znaky:</span>${completeResponse.length}</div>
+          <div class="model-details-item"><span class="model-details-label">Znaky:</span>${completeResponse.length}</div>${modelSequenceInfo}
         `;
       }
     }
@@ -648,7 +675,7 @@ export const StreamingResponseExtension = {
                 }
               }
 
-              updateResponseMetrics(); // Update metrics after response completion
+              updateResponseMetrics(modelSequence); // Update metrics after response completion
               return true; // Success
             }
 
@@ -678,6 +705,7 @@ export const StreamingResponseExtension = {
         if (payload.debugMode === 1) {
           console.error(`Stream error from ${endpoint}:`, error);
         }
+        failedModels.push(payload.model); // Add failed model to the array
         return false; // Failure
       }
     }
