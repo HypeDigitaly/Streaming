@@ -49,109 +49,36 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: `API key not found for project: ${projectName}` });
     }
 
-    // Always log detailed information to debug the current issue
-    console.log('📡 VOICEFLOW API REQUEST RECEIVED');
-    console.log('📡 Voiceflow Variable Update Request:', {
-      user_id,
-      projectName,
-      variableKeys: Object.keys(variables),
-      endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`
-    });
-    
-    console.log('📤 Voiceflow variables to update:', variables);
-    
-    // Create the actual API request that will be sent to Voiceflow
-    const voiceflowRequestBody = JSON.stringify(variables);
-    console.log('📤 EXACT BODY SENT TO VOICEFLOW API:', voiceflowRequestBody);
+    if (debugMode === 1) {
+      console.log('📡 Voiceflow Variable Update Request:', {
+        user_id,
+        projectName,
+        variableKeys: Object.keys(variables),
+        endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`
+      });
+    }
 
-    // Create and log the actual CURL command (with masked API key)
-    const maskedKey = `${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}`;
-    console.log('\n🔄 EXACT VOICEFLOW PATCH CURL COMMAND:');
-    console.log(`curl --request PATCH \\
-     --url https://general-runtime.voiceflow.com/state/user/${user_id}/variables \\
-     --header 'Authorization: ${maskedKey}' \\
-     --header 'accept: application/json' \\
-     --header 'content-type: application/json' \\
-     --header 'versionID: production' \\
-     --data '${voiceflowRequestBody}'`);
-
-    // Log the complete request details
-    console.log('📤 COMPLETE VOICEFLOW API REQUEST:', {
-      url: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`,
-      method: 'PATCH',
-      headers: {
-        'Authorization': `${maskedKey}`,
-        'accept': 'application/json',
-        'content-type': 'application/json',
-        'versionID': 'production'
-      },
-      body: voiceflowRequestBody
-    });
-
-    // Add a very visible log marker that will be easy to spot in any log output
-    console.log('\n\n');
-    console.log('**************************************************************');
-    console.log('**************** VOICEFLOW PATCH REQUEST START ***************');
-    console.log('**************************************************************');
-    console.log('\n');
-    
-    // Log complete request details with easy-to-spot formatting
-    console.log(`🔴 SENDING PATCH REQUEST TO: https://general-runtime.voiceflow.com/state/user/${user_id}/variables`);
-    console.log('🔴 REQUEST METHOD: PATCH');
-    console.log('🔴 REQUEST HEADERS:', {
-      'Authorization': `${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}`,
-      'accept': 'application/json',
-      'content-type': 'application/json',
-      'versionID': 'production'
-    });
-    console.log('🔴 REQUEST BODY:', JSON.stringify(variables, null, 2));
-    
     const response = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}/variables`, {
       method: 'PATCH',
       headers: {
-        'Authorization': apiKey,
         'accept': 'application/json',
         'content-type': 'application/json',
-        'versionID': 'production'
+        'versionID': 'production',
+        'Authorization': apiKey
       },
       body: JSON.stringify(variables)
     });
 
-    // Handle text or JSON response appropriately
-    let responseData;
-    const contentType = response.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
-      responseData = await response.json();
-    } else {
-      responseData = await response.text();
-    }
-    
-    // Always log the complete response with clear formatting
-    console.log('\n🟢 COMPLETE VOICEFLOW API RESPONSE:');
-    console.log('🟢 Status:', response.status, response.statusText);
-    console.log('🟢 Headers:', Object.fromEntries([...response.headers.entries()]));
-    console.log('🟢 Body:', responseData);
-    
-    // Log the raw response in JSON format
-    console.log('\n🟢 RAW VOICEFLOW API RESPONSE JSON:');
-    if (typeof responseData === 'object') {
-      console.log(JSON.stringify(responseData, null, 2));
-    } else {
-      console.log(responseData);
-    }
-    
-    console.log('\n');
-    console.log('**************************************************************');
-    console.log('**************** VOICEFLOW PATCH REQUEST END *****************');
-    console.log('**************************************************************');
-    console.log('\n\n');
+    const responseData = await response.text();
     
     if (!response.ok) {
-      console.error('❌ Voiceflow Variable Update Error:', {
-        status: response.status,
-        statusText: response.statusText,
-        response: responseData
-      });
+      if (debugMode === 1) {
+        console.error('❌ Voiceflow Variable Update Error:', {
+          status: response.status,
+          statusText: response.statusText,
+          response: responseData
+        });
+      }
       
       return res.status(response.status).json({ 
         error: 'Failed to update Voiceflow variables',
@@ -167,30 +94,10 @@ export default async function handler(req, res) {
       });
     }
 
-    // Include request and response details in the response body
-    // This will make the logs visible in the client-side console too
     res.status(200).json({ 
       success: true,
       status: response.status,
-      message: responseData || 'Variables updated successfully',
-      debug_info: {
-        request: {
-          url: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`,
-          method: 'PATCH',
-          headers: {
-            'Authorization': `${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}`,
-            'accept': 'application/json',
-            'content-type': 'application/json',
-            'versionID': 'production'
-          },
-          body: variables
-        },
-        response: {
-          status: response.status,
-          statusText: response.statusText,
-          body: responseData
-        }
-      }
+      message: responseData || 'Variables updated successfully'
     });
   } catch (error) {
     console.error('Error updating Voiceflow variables:', error);

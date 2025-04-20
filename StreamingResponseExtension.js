@@ -195,7 +195,7 @@ export const StreamingResponseExtension = {
     let buffer = '';
     let deltaCounter = 0;
     let completeResponse = '';
-
+    
     // Show container immediately with loading animation
     container.style.display = 'block';
 
@@ -301,438 +301,155 @@ export const StreamingResponseExtension = {
       return window;
     }
 
-    async function callMultiLLMAPI(payload) {
-        try {
-          const proxyUrl = "https://utils.hypedigitaly.ai/api/llm-stream";
-          let activeProvider = null;
-          let activeModel = null;
-
-          // Ensure modelSequence is properly formatted
-          // Convert model names to IDs if needed
-          if (payload.modelSequence && typeof payload.modelSequence === 'string') {
-            // If the sequence contains model names instead of IDs, handle appropriately
-            if (payload.modelSequence.includes('claude') || 
-                payload.modelSequence.includes('gpt') || 
-                payload.modelSequence.includes('gemini') || 
-                payload.modelSequence.includes('llama')) {
-              // Keep as is - the API will handle string model names for backward compatibility
-            } else {
-              // Ensure IDs are properly separated
-              payload.modelSequence = payload.modelSequence
-                .split(',')
-                .map(id => id.trim())
-                .join(',');
-            }
-          }
-
-          if (payload.debugMode === 1) {
-            console.log("📦 Payload values:", {
-              model: payload.model,
-              max_tokens: payload.max_tokens,
-              temperature: payload.temperature,
-              debugMode: payload.debugMode,
-              projectName: payload.projectName,
-              systemPrompt: payload.systemPrompt,
-              user_id: payload.user_id,
-              modelSequence: payload.modelSequence
-            });
-            console.log("🌐 Calling proxy URL:", proxyUrl);
-            console.log("📦 Full API call payload:", payload);
-          }
-
-          // Add provider label container at the top of the response
-          const providerLabelContainer = document.createElement('div');
-          providerLabelContainer.className = 'provider-label-container';
-          providerLabelContainer.style.cssText = `
-            position: relative;
-            padding: 4px 8px;
-            margin-bottom: 8px;
-            font-size: 12px;
-            color: #6B7280;
-            border-radius: 4px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-          `;
-          providerLabelContainer.innerHTML = 'Loading...';
-          responseSection.insertBefore(providerLabelContainer, responseContent);
-
-          const response = await fetch(proxyUrl, {
-            method: "POST",
-            headers: { 
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
+    async function callClaudeAPI(payload) {
+      try {
+        const proxyUrl = "https://utils.hypedigitaly.ai/api/claude-stream";
+        if (payload.debugMode === 1) {
+          console.log("📦 Payload values:", {
+            model: payload.model,
+            max_tokens: payload.max_tokens,
+            temperature: payload.temperature,
+            debugMode: payload.debugMode,
+            projectName: payload.projectName,
+            systemPrompt: payload.systemPrompt,
+            user_id: payload.user_id
           });
+          console.log("🌐 Calling proxy URL:", proxyUrl);
+          console.log("📦 Full Claude API call payload:", payload);
+        }
 
-          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch(proxyUrl, {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
 
-          const reader = response.body.getReader();
-          const decoder = new TextDecoder();
-          let buffer = '';
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) {
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) {
+            if (payload.debugMode === 1) {
+              console.log('Stream completed');
+              // No PATCH request here - we'll only do it when we receive [DONE]
+              console.log('📝 COMPLETE_RESPONSE_BEGIN');
+              console.log(completeResponse);
+              console.log('📝 COMPLETE_RESPONSE_END');
+            }
+            return;
+          }
+
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+
+          // Process all complete lines
+          buffer = lines.pop() || ''; // Keep the incomplete line in buffer
+
+          for (const line of lines) {
+            if (!line.trim() || !line.startsWith('data: ')) continue;
+
+            const data = line.slice(6); // Remove 'data: ' prefix
+            if (data === '[DONE]') {
               if (payload.debugMode === 1) {
-                console.log('Stream completed');
+                console.log('Stream completed via [DONE] signal');
+
+                // Log the entire LLM_Main_Response for debugging
                 console.log('📝 COMPLETE_RESPONSE_BEGIN');
                 console.log(completeResponse);
                 console.log('📝 COMPLETE_RESPONSE_END');
               }
-              // Update Voiceflow variables after stream completion
-              if (payload.user_id) {
-                updateVoiceflowVariables(payload.user_id, payload.projectName, completeResponse, activeProvider, activeModel, payload.debugMode);
+
+              // This is the ONLY place we should make the PATCH request
+              try {
+                if (payload.debugMode === 1) {
+                  console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
+                }
+
+                const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    user_id: payload.user_id,
+                    projectName: payload.projectName,
+                    variables: {
+                      "LLM_Main_Response": completeResponse
+                    },
+                    debugMode: payload.debugMode || 0
+                  }),
+                });
+
+                if (!updateResponse.ok) {
+                  const errorText = await updateResponse.text();
+                  if (payload.debugMode === 1) {
+                    console.error('Failed to update variables:', errorText);
+                  }
+                } else {
+                  if (payload.debugMode === 1) {
+                    console.log('Successfully updated variables with complete response');
+                    // Log the entire LLM_Main_Response for dashboard logging
+                    console.log('📝 Complete LLM_Main_Response:', completeResponse);
+                  }
+
+                  if (payload.debugMode === 1) {
+                    console.log('Final completeResponse length:', completeResponse.length);
+                    try {
+                      const responseData = await updateResponse.json();
+                      console.log('Voiceflow update response:', responseData);
+                    } catch (e) {
+                      console.log('Voiceflow update status:', updateResponse.status);
+                    }
+                  }
+                }
+              } catch (error) {
+                if (payload.debugMode === 1) {
+                  console.error('Error updating variables:', error);
+                }
               }
+
               return;
             }
 
-            buffer += decoder.decode(value, { stream: true });
-            const lines = buffer.split('\n');
-
-            // Process all complete lines
-            buffer = lines.pop() || ''; // Keep the incomplete line in buffer
-
-            for (const line of lines) {
-              if (!line.trim() || !line.startsWith('data: ')) continue;
-
-              const data = line.slice(6); // Remove 'data: ' prefix
-              if (data === '[DONE]') {
-                if (payload.debugMode === 1) {
-                  console.log('Stream completed via [DONE] signal');
-                  console.log('📝 COMPLETE_RESPONSE_BEGIN');
-                  console.log(completeResponse);
-                  console.log('📝 COMPLETE_RESPONSE_END');
-                }
-
-                // Update Voiceflow variables
-                try {
-                  if (payload.user_id) {
-                    if (payload.debugMode === 1) {
-                      console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
-                      console.log('📤 Using user_id:', payload.user_id);
-                    }
-                    updateVoiceflowVariables(payload.user_id, payload.projectName, completeResponse, activeProvider, activeModel, payload.debugMode);
-                  }
-
-                  if (!payload.user_id) {
-                    if (payload.debugMode === 1) {
-                      console.warn('⚠️ No user_id provided, skipping Voiceflow variable update');
-                    }
-                    return;
-                  }
-
-
-                } catch (error) {
-                  console.error('❌ Error updating Voiceflow variables:', error);
-
-                  // Retry with alternative endpoint if the first attempt fails
-                  if (payload.user_id) {
-                    try {
-                      if (payload.debugMode === 1) {
-                        console.log('🔄 Retrying variable update with alternative endpoint...');
-                      }
-
-                      const retryResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-                        method: 'POST',
-                        headers: {
-                          'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                          user_id: payload.user_id,
-                          projectName: payload.projectName,
-                          variables: {
-                            "LLM_Main_Response": completeResponse,
-                            "LLM_Provider_Used": activeProvider || "unknown",
-                            "LLM_Model_Used": activeModel || payload.model || "unknown"
-                          },
-                          debugMode: payload.debugMode || 0
-                        }),
-                      });
-
-                      if (payload.debugMode === 1) {
-                        console.log('🔄 Retry status:', retryResponse.status);
-                      }
-                    } catch (retryError) {
-                      console.error('❌ Retry also failed:', retryError);
-                    }
-                  }
-                }
-
-                return;
-              }
-
-              try {
-                const parsed = JSON.parse(data);
-
-                if (parsed.error) {
-                  throw new Error(parsed.error);
-                }
-
-                if (payload.debugMode === 1) {
-                  console.log('Full Response:', data);
-                }
-
-                // Handle different message types
-                if (parsed.type === 'content' && parsed.content) {
-                  if (payload.debugMode === 1) {
-                    console.log('Received content:', parsed.content);
-                  }
-
-                  // Update provider info if available
-                  if (parsed.provider && parsed.model && !activeProvider) {
-                    activeProvider = parsed.provider;
-                    activeModel = parsed.model;
-
-                    // Update provider label with logo and name
-                    let providerLogo = '';
-                    let providerColor = '#6B7280';
-
-                    switch (parsed.provider) {
-                      case 'claude':
-                        providerLogo = '🟣';
-                        providerColor = '#9333EA';
-                        break;
-                      case 'openai':
-                        providerLogo = '🟢';
-                        providerColor = '#10B981';
-                        break;
-                      case 'gemini':
-                        providerLogo = '🔵';
-                        providerColor = '#3B82F6';
-                        break;
-                      case 'groq':
-                        providerLogo = '🟠';
-                        providerColor = '#F59E0B';
-                        break;
-                    }
-
-                    providerLabelContainer.innerHTML = `${providerLogo} Powered by ${parsed.provider.charAt(0).toUpperCase() + parsed.provider.slice(1)} (${parsed.model})`;
-                    providerLabelContainer.style.color = providerColor;
-                    providerLabelContainer.style.opacity = '1';
-                  }
-
-                  updateContent(parsed.content);
-                  completeResponse += parsed.content; // Collect complete response
-                }
-                // Handle info messages
-                else if (parsed.type === 'info' && parsed.message) {
-                  if (payload.debugMode === 1) {
-                    console.log('Info message:', parsed.message);
-                  }
-                }
-                // Handle done messages
-                else if (parsed.type === 'done') {
-                  if (payload.debugMode === 1) {
-                    console.log('Stream done signal received');
-                  }
-                }
-              } catch (e) {
-                if (payload.debugMode === 1) {
-                  console.warn('Failed to parse SSE data:', e);
-                }
-              }
-            }
-          }
-
-        } catch (error) {
-          if (payload.debugMode === 1) {
-            console.error("Stream error:", error);
-          }
-          responseContent.textContent = `Error: ${error.message}`;
-        }
-      }
-
-    async function updateVoiceflowVariables(userId, projectName, response, provider, model, debugMode) {
-      try {
-        // Always log these regardless of debug mode to troubleshoot the current issue
-        console.log('📤 VOICEFLOW UPDATE TRIGGERED');
-        console.log('📤 Updating Voiceflow variable with complete response length:', response.length);
-        console.log('📤 Using user_id:', userId);
-        console.log('📤 Project name:', projectName);
-
-        // First update the main response
-        const mainRequestBody = {
-          user_id: userId,
-          projectName: projectName,
-          variables: {
-            "LLM_Main_Response": response
-          },
-          debugMode: debugMode || 0
-        };
-
-        // Log the exact request body with extensive details
-        console.log('📤 EXACT VOICEFLOW UPDATE REQUEST BODY (MAIN):', JSON.stringify(mainRequestBody, null, 2));
-        console.log(`📤 VOICEFLOW UPDATE REQUEST DETAILS:
-- User ID: ${userId}
-- Project Name: ${projectName}
-- Response Length: ${response.length}
-- Response Sample: "${response.substring(0, 50)}${response.length > 50 ? '...' : ''}"
-- Debug Mode: ${debugMode || 0}`);
-
-        // Update the main response first
-        const mainUpdateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(mainRequestBody),
-        });
-
-        // Always log the response from the Voiceflow variable update
-        console.log('📥 CLIENT-SIDE VOICEFLOW UPDATE RESPONSE (MAIN):', {
-          status: mainUpdateResponse.status,
-          statusText: mainUpdateResponse.statusText
-        });
-
-        let mainResponseContent;
-        try {
-          // Try to parse as JSON first
-          mainResponseContent = await mainUpdateResponse.json();
-          console.log('📥 VOICEFLOW UPDATE RESPONSE BODY (MAIN JSON):', mainResponseContent);
-        } catch (e) {
-          // If not JSON, get as text
-          const responseText = await mainUpdateResponse.text();
-          console.log('📥 VOICEFLOW UPDATE RESPONSE BODY (MAIN TEXT):', responseText);
-          mainResponseContent = responseText;
-        }
-
-        if (!mainUpdateResponse.ok) {
-          console.error('❌ Failed to update main Voiceflow variable:', mainResponseContent);
-        } else {
-          console.log('✅ Successfully updated main Voiceflow variable');
-          
-          // Now split the response into 5 parts and update each sequentially
-          const partLength = Math.ceil(response.length / 5);
-          console.log(`📤 Splitting response into 5 parts of approximately ${partLength} characters each`);
-          
-          for (let i = 1; i <= 5; i++) {
-            const start = (i - 1) * partLength;
-            const end = Math.min(i * partLength, response.length);
-            const part = response.substring(start, end);
-            
-            console.log(`📤 Updating part ${i} (characters ${start}-${end})`);
-            
-            // Create request for this part
-            const partRequestBody = {
-              user_id: userId,
-              projectName: projectName,
-              variables: {
-                [`LLM_Main_Response_${i}`]: part
-              },
-              debugMode: debugMode || 0
-            };
-            
-            console.log(`📤 PART ${i} REQUEST BODY:`, JSON.stringify(partRequestBody, null, 2));
-            
             try {
-              // Execute the request for this part
-              const partUpdateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(partRequestBody),
-              });
-              
-              console.log(`📥 PART ${i} UPDATE RESPONSE:`, {
-                status: partUpdateResponse.status,
-                statusText: partUpdateResponse.statusText
-              });
-              
-              if (!partUpdateResponse.ok) {
-                console.error(`❌ Failed to update part ${i}:`, await partUpdateResponse.text());
-              } else {
-                console.log(`✅ Successfully updated part ${i}`);
+              const parsed = JSON.parse(data);
+
+              if (parsed.error) {
+                throw new Error(parsed.error);
               }
-            } catch (partError) {
-              console.error(`❌ Error updating part ${i}:`, partError);
-            }
-            
-            // Add a small delay between requests to avoid rate limiting
-            await new Promise(resolve => setTimeout(resolve, 100));
-          }
-          
-          console.log('✅ All parts updated successfully');
-          console.log('📝 Complete LLM_Main_Response length:', response.length);
-          console.log('📝 Provider used:', provider);
-          console.log('📝 Model used:', model);
-        }
-      } catch (error) {
-        console.error('❌ Error updating Voiceflow variables:', error);
 
-        // Retry with alternative endpoint if the first attempt fails
-        if (userId) {
-          try {
-            if (debugMode === 1) {
-              console.log('🔄 Retrying main variable update with alternative endpoint...');
-            }
-
-            const retryResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                user_id: userId,
-                projectName: projectName,
-                variables: {
-                  "LLM_Main_Response": response
-                },
-                debugMode: debugMode || 0
-              }),
-            });
-
-            if (debugMode === 1) {
-              console.log('🔄 Retry status:', retryResponse.status);
-            }
-            
-            if (retryResponse.ok) {
-              // If main retry succeeded, also retry the part updates
-              console.log('🔄 Main retry succeeded, now retrying part updates');
-              
-              const partLength = Math.ceil(response.length / 5);
-              for (let i = 1; i <= 5; i++) {
-                const start = (i - 1) * partLength;
-                const end = Math.min(i * partLength, response.length);
-                const part = response.substring(start, end);
-                
-                try {
-                  await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      user_id: userId,
-                      projectName: projectName,
-                      variables: {
-                        [`LLM_Main_Response_${i}`]: part
-                      },
-                      debugMode: debugMode || 0
-                    }),
-                  });
-                  
-                  if (debugMode === 1) {
-                    console.log(`🔄 Retry part ${i} succeeded`);
-                  }
-                } catch (partRetryError) {
-                  console.error(`❌ Retry for part ${i} failed:`, partRetryError);
+              if (payload.debugMode === 1) {
+                console.log('Full Response:', data);
+                if (parsed.type === 'content' && parsed.content) {
+                  console.log('Received content:', parsed.content);
                 }
-                
-                // Small delay between requests
-                await new Promise(resolve => setTimeout(resolve, 100));
+              }
+              updateContent(parsed.content);
+              completeResponse += parsed.content; // Collect complete response
+            } catch (e) {
+              if (payload.debugMode === 1) {
+                console.warn('Failed to parse SSE data:', e);
               }
             }
-          } catch (retryError) {
-            console.error('❌ Retry also failed:', retryError);
           }
         }
+
+      } catch (error) {
+        if (payload.debugMode === 1) {
+          console.error("Stream error:", error);
+        }
+        responseContent.textContent = `Error: ${error.message}`;
       }
     }
 
-
     if (trace.payload) {
-      await callMultiLLMAPI({
+      await callClaudeAPI({
         model: trace.payload.model,
         max_tokens: trace.payload.max_tokens,
         temperature: trace.payload.temperature,
@@ -741,10 +458,9 @@ export const StreamingResponseExtension = {
         debugMode: trace.payload.debugMode || 0,
         projectName: trace.payload.projectName,
         user_id: trace.payload.user_id,
-        modelSequence: trace.payload.modelSequence || "claude" // New parameter for model sequence
       });
     } else {
-      responseContent.textContent = "❌ Error: No payload received";
+      addDebugMessage("❌ Error: No payload received", "error");
     }
 
     window.voiceflow.chat.interact({ type: "continue" });
