@@ -185,8 +185,20 @@ export const StreamingResponseExtension = {
             margin-bottom: 8px;
             margin-right: 6px;
           }
-          .model-info-icon {
+          .model-info-dropdown {
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            background-color: #F3F4F6;
+            border-radius: 4px;
+            padding: 4px 8px;
+            transition: background-color 0.2s;
+            gap: 4px;
+          }
+          .model-info-dropdown:hover {
+            background-color: #E5E7EB;
+          }
+          .model-info-icon {
             background-color: #E5F6FF;
             color: #0080C9;
             font-size: 12px;
@@ -196,26 +208,31 @@ export const StreamingResponseExtension = {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2px;
             font-weight: bold;
           }
-          .model-info-icon:hover {
-            background-color: #D0EEFF;
+          .dropdown-arrow {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.2s;
+          }
+          .dropdown-arrow.open {
+            transform: rotate(180deg);
           }
           .model-tag {
             position: absolute;
-            top: 22px;
+            top: 30px;
             left: 0;
             z-index: 10;
             background-color: #F3F4F6;
             color: #6B7280;
             font-size: 10px;
-            padding:.5rem .75rem;
+            padding: .75rem;
             border-radius: 4px;
             display: none;
             align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             white-space: nowrap;
+            max-width: 250px;
           }
           .model-tag.visible {
             display: inline-flex;
@@ -449,17 +466,33 @@ export const StreamingResponseExtension = {
         `Unknown model ID: ${modelId}`;
     }
 
-    // Adds a collapsible model tag to the UI
+    // Adds a dropdown model tag to the UI
     function addModelTag(modelType, modelName) {
-      // Create container for the info icon and model tag
+      // Create container for the dropdown and model tag
       const modelInfoContainer = document.createElement('div');
       modelInfoContainer.className = 'model-info-container';
+      
+      // Create dropdown button container
+      const modelInfoDropdown = document.createElement('div');
+      modelInfoDropdown.className = 'model-info-dropdown';
+      modelInfoDropdown.title = 'Click to view model info';
       
       // Create info icon
       const modelInfoIcon = document.createElement('div');
       modelInfoIcon.className = 'model-info-icon';
       modelInfoIcon.innerHTML = 'i';
-      modelInfoIcon.title = 'Click to view model info';
+      
+      // Create dropdown label
+      const dropdownLabel = document.createElement('span');
+      dropdownLabel.textContent = 'Model Info';
+      dropdownLabel.style.fontSize = '11px';
+      
+      // Create dropdown arrow
+      const dropdownArrow = document.createElement('div');
+      dropdownArrow.className = 'dropdown-arrow';
+      dropdownArrow.innerHTML = `<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none">
+        <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>`;
       
       // Create model tag (hidden by default)
       const modelTag = document.createElement('div');
@@ -467,18 +500,23 @@ export const StreamingResponseExtension = {
       modelTag.textContent = modelName;
       
       // Add click event to toggle visibility
-      modelInfoIcon.addEventListener('click', (e) => {
+      modelInfoDropdown.addEventListener('click', (e) => {
         e.stopPropagation();
         modelTag.classList.toggle('visible');
+        dropdownArrow.classList.toggle('open');
       });
       
       // Add click event to document to hide tag when clicking elsewhere
       document.addEventListener('click', () => {
         modelTag.classList.remove('visible');
+        dropdownArrow.classList.remove('open');
       });
       
       // Assemble the elements
-      modelInfoContainer.appendChild(modelInfoIcon);
+      modelInfoDropdown.appendChild(modelInfoIcon);
+      modelInfoDropdown.appendChild(dropdownLabel);
+      modelInfoDropdown.appendChild(dropdownArrow);
+      modelInfoContainer.appendChild(modelInfoDropdown);
       modelInfoContainer.appendChild(modelTag);
       responseSection.insertBefore(modelInfoContainer, responseContent);
     }
