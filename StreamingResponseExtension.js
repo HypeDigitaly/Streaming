@@ -183,26 +183,28 @@ export const StreamingResponseExtension = {
             position: relative;
             display: inline-block;
             margin-bottom: 8px;
+            margin-right: 6px;
           }
           .model-info-icon {
             cursor: pointer;
-            background-color: #F3F4F6;
-            color: #6B7280;
-            font-size: 10px;
-            width: 14px;
-            height: 14px;
+            background-color: #E5F6FF;
+            color: #0080C9;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 2px;
+            font-weight: bold;
           }
           .model-info-icon:hover {
-            background-color: #E5E7EB;
+            background-color: #D0EEFF;
           }
           .model-tag {
             position: absolute;
-            top: 18px;
+            top: 22px;
             left: 0;
             z-index: 10;
             background-color: #F3F4F6;
