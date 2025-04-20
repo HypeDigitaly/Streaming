@@ -210,6 +210,9 @@ export const StreamingResponseExtension = {
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            line-height: 1;
+            padding-bottom: 1px;
+            text-align: center;
           }
           .dropdown-arrow {
             width: 12px;
