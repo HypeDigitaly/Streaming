@@ -54,6 +54,10 @@ export default async function handler(req, res) {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
+    // Get the generative model
+    const genModel = genAI.getGenerativeModel({
+      model: model || 'gemini-2.5-pro-preview-03-25',
+    });
 
     if (debugMode === 1) {
       console.log('📡 Gemini Payload values:', {
@@ -73,27 +77,28 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
-    // Using the direct generateContentStream approach from official docs
-    const response = await genAI.models.generateContentStream({
-      model: model || 'gemini-2.5-pro-preview-03-25',
-      contents: userData,
-      config: {
+    // Create a chat instance with system instruction
+    const chat = genModel.startChat({
+      systemInstruction: systemPrompt,
+      generationConfig: {
         maxOutputTokens: max_tokens || 4096,
         temperature: temperature || 0,
-        systemInstruction: systemPrompt,
       },
     });
+
+    // Send message and get streamed response
+    const response = await chat.sendMessageStream(userData);
 
     if (debugMode === 1) {
       console.log('📥 Gemini API Response initialized');
     }
 
-    for await (const chunk of response) {
+    for await (const chunk of response.stream) {
       if (debugMode === 1) {
         console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
       }
 
-      const text = chunk.text;
+      const text = chunk.text();
       if (text) {
         const data = {
           type: 'content',
