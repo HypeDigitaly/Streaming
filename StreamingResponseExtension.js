@@ -183,9 +183,17 @@ export const StreamingResponseExtension = {
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-top: 8px;
+            margin-top: 24px;
             font-size: 12px;
             color: #6B7280;
+            cursor: pointer;
+            position: relative;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+          }
+          .ai-info-footer:hover {
+            background-color: #f3f4f6;
           }
           .ai-icon {
             font-weight: bold;
@@ -196,31 +204,23 @@ export const StreamingResponseExtension = {
             top: 100%;
             left: 0;
             background-color: #f3f4f6;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 4px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             white-space: nowrap;
             z-index: 1;
-            margin-top: 5px;
+            margin-top: 8px;
+            transition: opacity 0.3s ease;
           }
-          .ai-info-footer:hover .model-info-tooltip {
+          .model-info-tooltip.visible {
             display: inline-block;
           }
-          .model-info-tooltip.claude {
-            background-color: #E5F6FF;
-            color: #0080C9;
-          }
-          .model-info-tooltip.openai {
-            background-color: #E7F7EF;
-            color: #10A37F;
-          }
-          .model-info-tooltip.gemini {
-            background-color: #F0E7FB;
-            color: #8E44AD;
-          }
+          .model-info-tooltip.claude,
+          .model-info-tooltip.openai,
+          .model-info-tooltip.gemini,
           .model-info-tooltip.groq {
-            background-color: #FFF1E5;
-            color: #F17C23;
+            background-color: #f3f4f6;
+            color: #4B5563;
           }
 
         </style>
@@ -462,6 +462,20 @@ export const StreamingResponseExtension = {
       aiInfoFooter.appendChild(aiIcon);
       aiInfoFooter.appendChild(aiInfoText);
       aiInfoFooter.appendChild(modelInfoTooltip);
+
+      // Add toggle functionality
+      aiInfoFooter.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        modelInfoTooltip.classList.toggle('visible');
+      });
+
+      // Close tooltip when clicking elsewhere
+      document.addEventListener('click', function(e) {
+        if (!aiInfoFooter.contains(e.target)) {
+          modelInfoTooltip.classList.remove('visible');
+        }
+      });
 
       // Add the footer after the response content
       responseSection.appendChild(aiInfoFooter);
