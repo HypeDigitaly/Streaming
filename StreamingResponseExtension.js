@@ -75,7 +75,7 @@ export const StreamingResponseExtension = {
             gap: 0;
           }
           .response-section {
-            padding: 8px 0;
+            padding: 8px 0 0 0;
             margin: 0;
             width: 100%;
             box-sizing: border-box;
@@ -201,6 +201,19 @@ export const StreamingResponseExtension = {
           }
           .ai-icon {
             font-weight: bold;
+            margin-right: 4px;
+          }
+          .ai-info-text {
+            flex-grow: 1;
+          }
+          .ai-info-footer::after {
+            content: '▼';
+            font-size: 10px;
+            margin-left: 8px;
+            transition: transform 0.2s ease;
+          }
+          .ai-info-footer.tooltip-visible::after {
+            transform: rotate(180deg);
           }
           .model-info-tooltip {
             display: none;
@@ -478,7 +491,13 @@ export const StreamingResponseExtension = {
       aiInfoFooter.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        modelInfoTooltip.classList.toggle('visible');
+        const isVisible = modelInfoTooltip.classList.toggle('visible');
+        // Toggle class on footer for icon rotation
+        if (isVisible) {
+          aiInfoFooter.classList.add('tooltip-visible');
+        } else {
+          aiInfoFooter.classList.remove('tooltip-visible');
+        }
       });
 
       // Prevent tooltip from closing when clicking inside it
@@ -490,6 +509,7 @@ export const StreamingResponseExtension = {
       document.addEventListener('click', function(e) {
         if (!aiInfoFooter.contains(e.target) && !modelInfoTooltip.contains(e.target)) {
           modelInfoTooltip.classList.remove('visible');
+          aiInfoFooter.classList.remove('tooltip-visible'); // Also remove class here
         }
       });
 
