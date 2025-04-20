@@ -192,6 +192,12 @@ export const StreamingResponseExtension = {
           }
           .ai-icon {
             font-weight: bold;
+            display: inline-block;
+            background-color: #4B5563;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 6px;
           }
           .model-info-tooltip {
             display: none;
