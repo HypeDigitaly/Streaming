@@ -188,8 +188,6 @@ export const StreamingResponseExtension = {
             display: inline-flex;
             align-items: center;
             margin-bottom: 8px;
-            position: relative;
-            cursor: pointer;
           }
           .model-tag.claude {
             background-color: #E5F6FF;
@@ -207,47 +205,6 @@ export const StreamingResponseExtension = {
             background-color: #FFF1E5;
             color: #F17C23;
           }
-          .model-tag .info-icon {
-            margin-left: 4px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(0,0,0,0.1);
-            font-size: 8px;
-            font-weight: bold;
-          }
-          .model-details {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 8px;
-            min-width: 200px;
-            z-index: 100;
-            margin-top: 4px;
-            display: none;
-            font-size: 11px;
-            color: #4B5563;
-          }
-          .model-details.visible {
-            display: block;
-          }
-          .model-details-item {
-            margin-bottom: 4px;
-          }
-          .model-details-item:last-child {
-            margin-bottom: 0;
-          }
-          .model-details-label {
-            font-weight: 600;
-            margin-right: 4px;
-          }
         </style>
         <div class="response-section">
           <div class="response-content"></div>
@@ -263,7 +220,7 @@ export const StreamingResponseExtension = {
     let buffer = '';
     let deltaCounter = 0;
     let completeResponse = '';
-
+    
     // Show container immediately with loading animation
     container.style.display = 'block';
 
@@ -393,7 +350,7 @@ export const StreamingResponseExtension = {
         endpoint: '/api/claude-stream',
         displayName: 'Claude 3 Sonnet'
       },
-
+      
       // OpenAI models
       {
         id: 4,
@@ -409,7 +366,7 @@ export const StreamingResponseExtension = {
         endpoint: '/api/openai-stream',
         displayName: 'GPT-4.1 Mini'
       },
-
+      
       // Gemini models
       {
         id: 6,
@@ -425,7 +382,7 @@ export const StreamingResponseExtension = {
         endpoint: '/api/gemini-stream',
         displayName: 'Gemini 2.5 Flash'
       },
-
+      
       // Groq models
       {
         id: 8,
@@ -446,7 +403,7 @@ export const StreamingResponseExtension = {
     // Function to process model sequence
     function parseModelSequence(sequenceStr) {
       if (!sequenceStr) return [1]; // Default to first model if none specified
-
+      
       // Parse sequence string to array of numbers
       return sequenceStr.split(',')
         .map(id => parseInt(id.trim()))
@@ -461,109 +418,12 @@ export const StreamingResponseExtension = {
         `Unknown model ID: ${modelId}`;
     }
 
-    // Timing variables for response generation
-    let responseStartTime = 0;
-    let responseEndTime = 0;
-
-    // Adds a model tag to the UI with additional info
+    // Adds a model tag to the UI
     function addModelTag(modelType, modelName) {
-      // Find the model details from registry
-      const model = modelsRegistry.find(m => m.displayName === modelName);
-
-      // Start timing the response generation
-      responseStartTime = Date.now();
-
       const modelTag = document.createElement('div');
       modelTag.className = `model-tag ${modelType}`;
-      modelTag.id = 'model-tag';
-
-      // Create main tag content - simplified format
-      const modelText = document.createTextNode(`AI model: ${model ? model.name : modelName}`);
-      modelTag.appendChild(modelText);
-
-      // Create info icon for dropdown
-      const infoIcon = document.createElement('span');
-      infoIcon.className = 'info-icon';
-      infoIcon.textContent = 'i';
-      modelTag.appendChild(infoIcon);
-
-      // Create dropdown with model details
-      const modelDetails = document.createElement('div');
-      modelDetails.className = 'model-details';
-      modelDetails.id = 'model-details';
-
-      // Initial content - will be updated when response completes
-      modelDetails.innerHTML = `
-        <div class="model-details-item"><span class="model-details-label">Generování:</span>Probíhá...</div>
-        <div class="model-details-item"><span class="model-details-label">Tokens:</span>Počítá se...</div>
-        <div class="model-details-item"><span class="model-details-label">Rychlost:</span>Měří se...</div>
-      `;
-
-      modelTag.appendChild(modelDetails);
-
-      // Toggle dropdown on click
-      modelTag.addEventListener('click', (e) => {
-        e.stopPropagation();
-        modelDetails.classList.toggle('visible');
-      });
-
-      // Close dropdown when clicking outside
-      document.addEventListener('click', () => {
-        modelDetails.classList.remove('visible');
-      });
-
+      modelTag.textContent = modelName;
       responseSection.insertBefore(modelTag, responseContent);
-    }
-
-    // Function to update response metrics when generation completes
-    // Track failed models
-    let failedModels = [];
-
-    // Function to update response metrics when generation completes
-    function updateResponseMetrics(modelSequence) {
-      responseEndTime = Date.now();
-      const responseTime = (responseEndTime - responseStartTime) / 1000; // in seconds
-
-      // Estimate tokens (very rough approximation - 4 chars per token)
-      const estimatedTokens = Math.ceil(completeResponse.length / 4);
-
-      // Calculate tokens per second
-      const tokensPerSecond = Math.round(estimatedTokens / responseTime);
-
-      // Generate model sequence information
-      let modelSequenceInfo = '';
-      if (modelSequence && modelSequence.length > 0) {
-        const successModelId = modelSequence.find(id => !failedModels.includes(id));
-        const successModel = successModelId ? modelsRegistry.find(m => m.id === successModelId) : null;
-
-        if (failedModels.length > 0) {
-          const failedModelDetails = failedModels.map(id => {
-            const model = modelsRegistry.find(m => m.id === id);
-            return model ? `${model.displayName}` : `Unknown (ID:${id})`;
-          }).join(', ');
-
-          modelSequenceInfo = `
-          <div class="model-details-item"><span class="model-details-label">Failed models:</span>${failedModelDetails}</div>`;
-        }
-
-        if (successModel) {
-          modelSequenceInfo += `
-          <div class="model-details-item"><span class="model-details-label">Success model:</span>${successModel.displayName}</div>`;
-        }
-      }
-
-      // Update the model details if they exist
-      const modelDetails = document.getElementById('model-details');
-      if (modelDetails) {
-        modelDetails.innerHTML = `
-          <div class="model-details-item"><span class="model-details-label">UserID:</span>${trace.payload.user_id || 'N/A'}</div>
-          <div class="model-details-item"><span class="model-details-label">Generování:</span>Dokončeno</div>
-          <div class="model-details-item"><span class="model-details-label">Čas:</span>${responseTime.toFixed(2)}s</div>
-          <div class="model-details-item"><span class="model-details-label">~Tokens:</span>${estimatedTokens}</div>
-          <div class="model-details-item"><span class="model-details-label">Rychlost:</span>${tokensPerSecond} tokens/s</div>
-          <div class="model-details-item"><span class="model-details-label">Znaky:</span>${completeResponse.length}</div>${modelSequenceInfo}
-        `;
-      }
     }
 
     // Generic function to call any LLM API provider
@@ -675,7 +535,6 @@ export const StreamingResponseExtension = {
                 }
               }
 
-              updateResponseMetrics(modelSequence); // Update metrics after response completion
               return true; // Success
             }
 
@@ -705,7 +564,6 @@ export const StreamingResponseExtension = {
         if (payload.debugMode === 1) {
           console.error(`Stream error from ${endpoint}:`, error);
         }
-        failedModels.push(payload.model); // Add failed model to the array
         return false; // Failure
       }
     }
@@ -718,13 +576,13 @@ export const StreamingResponseExtension = {
 
       // Parse the model sequence
       const modelSequence = parseModelSequence(trace.payload.modelSequence);
-
+      
       if (trace.payload.debugMode === 1) {
         console.log("📊 MODEL SEQUENCE DEBUG INFO:");
         console.log("=== CONFIGURED MODEL SEQUENCE ===");
         console.log(`📋 Raw sequence: ${trace.payload.modelSequence || "Default"}`);
         console.log(`📋 Parsed IDs: ${JSON.stringify(modelSequence)}`);
-
+        
         // Print detailed model info
         console.log("=== MODELS IN SEQUENCE ===");
         modelSequence.forEach((modelId, index) => {
@@ -736,7 +594,7 @@ export const StreamingResponseExtension = {
       // Try each model in sequence
       for (const modelId of modelSequence) {
         const model = modelsRegistry.find(m => m.id === modelId);
-
+        
         if (!model) {
           if (trace.payload.debugMode === 1) {
             console.log(`⚠️ Unknown model ID ${modelId}, skipping`);
@@ -771,7 +629,7 @@ export const StreamingResponseExtension = {
 
         // Call the LLM API
         const success = await callLLMAPI(model.endpoint, payload);
-
+        
         // If successful, stop trying other models
         if (success) {
           if (trace.payload.debugMode === 1) {
@@ -784,14 +642,14 @@ export const StreamingResponseExtension = {
           }
           return;
         }
-
+        
         if (trace.payload.debugMode === 1) {
           console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
           console.log(`📌 Model: ${model.displayName} (${model.type})`);
           console.log(`📌 Model name: ${model.name}`);
           console.log(`📌 Status: REQUEST FAILED`);
           console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
-
+          
           // Check if there are more models to try
           const nextModelIndex = modelSequence.indexOf(modelId) + 1;
           if (nextModelIndex < modelSequence.length) {
@@ -822,7 +680,7 @@ export const StreamingResponseExtension = {
 
     // Start the LLM orchestration
     await orchestrateLLMCalls(trace);
-
+    
     window.voiceflow.chat.interact({ type: "continue" });
   },
 };
