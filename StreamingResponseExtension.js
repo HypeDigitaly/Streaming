@@ -188,6 +188,8 @@ export const StreamingResponseExtension = {
             display: inline-flex;
             align-items: center;
             margin-bottom: 8px;
+            position: relative;
+            cursor: pointer;
           }
           .model-tag.claude {
             background-color: #E5F6FF;
@@ -204,6 +206,47 @@ export const StreamingResponseExtension = {
           .model-tag.groq {
             background-color: #FFF1E5;
             color: #F17C23;
+          }
+          .model-tag .info-icon {
+            margin-left: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.1);
+            font-size: 8px;
+            font-weight: bold;
+          }
+          .model-details {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 8px;
+            min-width: 200px;
+            z-index: 100;
+            margin-top: 4px;
+            display: none;
+            font-size: 11px;
+            color: #4B5563;
+          }
+          .model-details.visible {
+            display: block;
+          }
+          .model-details-item {
+            margin-bottom: 4px;
+          }
+          .model-details-item:last-child {
+            margin-bottom: 0;
+          }
+          .model-details-label {
+            font-weight: 600;
+            margin-right: 4px;
           }
         </style>
         <div class="response-section">
@@ -420,9 +463,50 @@ export const StreamingResponseExtension = {
 
     // Adds a model tag to the UI
     function addModelTag(modelType, modelName) {
+      // Find the model details from registry
+      const model = modelsRegistry.find(m => m.displayName === modelName);
+      
       const modelTag = document.createElement('div');
       modelTag.className = `model-tag ${modelType}`;
-      modelTag.textContent = modelName;
+      
+      // Create main tag content
+      const modelText = document.createTextNode(modelName);
+      modelTag.appendChild(modelText);
+      
+      // Create info icon
+      const infoIcon = document.createElement('span');
+      infoIcon.className = 'info-icon';
+      infoIcon.textContent = 'i';
+      modelTag.appendChild(infoIcon);
+      
+      // Create dropdown with model details
+      const modelDetails = document.createElement('div');
+      modelDetails.className = 'model-details';
+      
+      // Add model details to dropdown
+      let modelDetailsContent = '';
+      if (model) {
+        modelDetailsContent += `<div class="model-details-item"><span class="model-details-label">Model:</span>${model.name}</div>`;
+        modelDetailsContent += `<div class="model-details-item"><span class="model-details-label">Type:</span>${model.type}</div>`;
+        modelDetailsContent += `<div class="model-details-item"><span class="model-details-label">ID:</span>${model.id}</div>`;
+      } else {
+        modelDetailsContent += `<div class="model-details-item"><span class="model-details-label">Name:</span>${modelName}</div>`;
+      }
+      
+      modelDetails.innerHTML = modelDetailsContent;
+      modelTag.appendChild(modelDetails);
+      
+      // Toggle dropdown on click
+      modelTag.addEventListener('click', (e) => {
+        e.stopPropagation();
+        modelDetails.classList.toggle('visible');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', () => {
+        modelDetails.classList.remove('visible');
+      });
+      
       responseSection.insertBefore(modelTag, responseContent);
     }
 
