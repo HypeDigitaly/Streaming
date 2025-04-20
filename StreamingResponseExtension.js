@@ -188,8 +188,6 @@ export const StreamingResponseExtension = {
             display: inline-flex;
             align-items: center;
             margin-bottom: 8px;
-            position: relative;
-            cursor: help;
           }
           .model-tag.claude {
             background-color: #E5F6FF;
@@ -206,32 +204,6 @@ export const StreamingResponseExtension = {
           .model-tag.groq {
             background-color: #FFF1E5;
             color: #F17C23;
-          }
-          .model-tag .model-details {
-            display: none;
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            background-color: #FFFFFF;
-            border: 1px solid #E5E7EB;
-            border-radius: 4px;
-            padding: 8px 12px;
-            width: 280px;
-            font-size: 11px;
-            color: #374151;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 10;
-            margin-bottom: 5px;
-          }
-          .model-tag:hover .model-details {
-            display: block;
-          }
-          .model-tag .model-id {
-            font-family: monospace;
-            margin-top: 4px;
-            font-size: 10px;
-            color: #6B7280;
-            word-break: break-all;
           }
         </style>
         <div class="response-section">
@@ -362,24 +334,21 @@ export const StreamingResponseExtension = {
         name: 'claude-3-7-sonnet-20250219',
         type: 'claude',
         endpoint: '/api/claude-stream',
-        displayName: 'Claude 3.7 Sonnet',
-        description: 'Anthropic\'s Claude 3.7 Sonnet - Latest Sonnet model with enhanced reasoning and context window'
+        displayName: 'Claude 3.7 Sonnet'
       },
       {
         id: 2,
         name: 'claude-3-5-haiku-20241022',
         type: 'claude',
         endpoint: '/api/claude-stream',
-        displayName: 'Claude 3.5 Haiku',
-        description: 'Anthropic\'s Claude 3.5 Haiku - Fast, efficient model for shorter responses'
+        displayName: 'Claude 3.5 Haiku'
       },
       {
         id: 3,
         name: 'claude-3-sonnet-20240229',
         type: 'claude',
         endpoint: '/api/claude-stream',
-        displayName: 'Claude 3 Sonnet',
-        description: 'Anthropic\'s Claude 3 Sonnet - Balanced performance model with 200K token context'
+        displayName: 'Claude 3 Sonnet'
       },
       
       // OpenAI models
@@ -388,16 +357,14 @@ export const StreamingResponseExtension = {
         name: 'gpt-4.1-2025-04-14',
         type: 'openai',
         endpoint: '/api/openai-stream',
-        displayName: 'GPT-4.1',
-        description: 'OpenAI\'s GPT-4.1 - Latest flagship model with advanced reasoning capabilities'
+        displayName: 'GPT-4.1'
       },
       {
         id: 5,
         name: 'gpt-4.1-mini-2025-04-14',
         type: 'openai',
         endpoint: '/api/openai-stream',
-        displayName: 'GPT-4.1 Mini',
-        description: 'OpenAI\'s GPT-4.1 Mini - Smaller, faster model with good performance/cost balance'
+        displayName: 'GPT-4.1 Mini'
       },
       
       // Gemini models
@@ -406,16 +373,14 @@ export const StreamingResponseExtension = {
         name: 'gemini-2.5-pro-preview-03-25',
         type: 'gemini',
         endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 2.5 Pro',
-        description: 'Google\'s Gemini 2.5 Pro - Multimodal model with strong reasoning capabilities'
+        displayName: 'Gemini 2.5 Pro'
       },
       {
         id: 7,
         name: 'gemini-2.5-flash-preview-04-17',
         type: 'gemini',
         endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 2.5 Flash',
-        description: 'Google\'s Gemini 2.5 Flash - Fast, efficient model for quicker responses'
+        displayName: 'Gemini 2.5 Flash'
       },
       
       // Groq models
@@ -424,16 +389,14 @@ export const StreamingResponseExtension = {
         name: 'meta-llama/llama-4-maverick-17b-128e-instruct',
         type: 'groq',
         endpoint: '/api/groq-stream',
-        displayName: 'Llama 4 Maverick',
-        description: 'Meta\'s Llama 4 Maverick (17B) - 128-epoch instruct model optimized for Groq'
+        displayName: 'Llama 4 Maverick'
       },
       {
         id: 9,
         name: 'meta-llama/llama-4-scout-17b-16e-instruct',
         type: 'groq',
         endpoint: '/api/groq-stream',
-        displayName: 'Llama 4 Scout',
-        description: 'Meta\'s Llama 4 Scout (17B) - 16-epoch instruct model optimized for Groq'
+        displayName: 'Llama 4 Scout'
       }
     ];
 
@@ -447,28 +410,11 @@ export const StreamingResponseExtension = {
         .filter(id => !isNaN(id) && modelsRegistry.some(m => m.id === id));
     }
 
-    // Adds a model tag to the UI with detailed model information
+    // Adds a model tag to the UI
     function addModelTag(modelType, modelName) {
-      const modelId = modelsRegistry.find(m => m.displayName === modelName)?.name || '';
-      const modelDescription = modelsRegistry.find(m => m.displayName === modelName)?.description || 'Model description not available';
-      
       const modelTag = document.createElement('div');
       modelTag.className = `model-tag ${modelType}`;
-      
-      // Create model name display
-      const nameSpan = document.createElement('span');
-      nameSpan.textContent = modelName;
-      modelTag.appendChild(nameSpan);
-      
-      // Create tooltip with model details
-      const detailsDiv = document.createElement('div');
-      detailsDiv.className = 'model-details';
-      detailsDiv.innerHTML = `
-        <div>${modelDescription}</div>
-        <div class="model-id">Model ID: ${modelId}</div>
-      `;
-      modelTag.appendChild(detailsDiv);
-      
+      modelTag.textContent = modelName;
       responseSection.insertBefore(modelTag, responseContent);
     }
 
