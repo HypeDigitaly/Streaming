@@ -504,9 +504,9 @@ export const StreamingResponseExtension = {
       };
 
       // Get language from payload, default to Czech
-      const lang = trace.payload?.lang || 'cs';
+      const userLang = trace.payload?.lang || 'cs';
       // Get language messages or fall back to Czech if not supported
-      const messages = languageMessages[lang] || languageMessages.cs;
+      const messages = languageMessages[userLang] || languageMessages.cs;
 
       if (wasSuccess) {
         aiInfoText.textContent = messages.success;
@@ -549,7 +549,7 @@ export const StreamingResponseExtension = {
       };
 
       // Get tooltip messages or fall back to Czech if not supported
-      const tooltipText = tooltipMessages[lang] || tooltipMessages.cs;
+      const tooltipText = tooltipMessages[userLang] || tooltipMessages.cs;
 
       let tooltipHTML = `<strong>${tooltipText.title}</strong> `;
       if (attemptedModels.length > 0) {
