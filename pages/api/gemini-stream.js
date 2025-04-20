@@ -1,4 +1,3 @@
-
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export default async function handler(req, res) {
@@ -107,6 +106,10 @@ export default async function handler(req, res) {
       }
     }
 
+    // Explicitly send DONE signal to trigger Voiceflow variable update
+    if (debugMode === 1) {
+      console.log('📤 Sending [DONE] signal to complete stream');
+    }
     res.write('data: [DONE]\n\n');
     res.end();
 
