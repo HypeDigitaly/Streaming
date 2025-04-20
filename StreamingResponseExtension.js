@@ -186,6 +186,9 @@ export const StreamingResponseExtension = {
             margin-top: 8px;
             font-size: 12px;
             color: #6B7280;
+            background-color: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 4px;
           }
           .ai-icon {
             font-weight: bold;
