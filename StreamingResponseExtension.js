@@ -193,7 +193,7 @@ export const StreamingResponseExtension = {
           .model-info-tooltip {
             display: none;
             position: absolute;
-            bottom: 100%;
+            top: 100%;
             left: 0;
             background-color: #f3f4f6;
             padding: 4px 8px;
@@ -201,6 +201,7 @@ export const StreamingResponseExtension = {
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             white-space: nowrap;
             z-index: 1;
+            margin-top: 5px;
           }
           .ai-info-footer:hover .model-info-tooltip {
             display: inline-block;
@@ -440,6 +441,7 @@ export const StreamingResponseExtension = {
       // Create footer container
       const aiInfoFooter = document.createElement('div');
       aiInfoFooter.className = 'ai-info-footer';
+      aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
 
       // Create AI icon
       const aiIcon = document.createElement('div');
