@@ -183,7 +183,9 @@ export const StreamingResponseExtension = {
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-top: 32px;
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #E5E7EB;
             font-size: 12px;
             color: #6B7280;
             cursor: pointer;
