@@ -183,14 +183,15 @@ export const StreamingResponseExtension = {
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-top: 24px;
+            margin-top: 32px;
             font-size: 12px;
             color: #6B7280;
             cursor: pointer;
             position: relative;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 4px;
             transition: background-color 0.2s ease;
+            user-select: none;
           }
           .ai-info-footer:hover {
             background-color: #f3f4f6;
@@ -203,14 +204,16 @@ export const StreamingResponseExtension = {
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #f3f4f6;
-            padding: 6px 10px;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: #0096EF;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             white-space: nowrap;
-            z-index: 1;
+            z-index: 10;
             margin-top: 8px;
             transition: opacity 0.3s ease;
+            user-select: text;
           }
           .model-info-tooltip.visible {
             display: inline-block;
@@ -219,8 +222,8 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.openai,
           .model-info-tooltip.gemini,
           .model-info-tooltip.groq {
-            background-color: #f3f4f6;
-            color: #4B5563;
+            background-color: #0096EF;
+            color: white;
           }
 
         </style>
@@ -442,6 +445,7 @@ export const StreamingResponseExtension = {
       const aiInfoFooter = document.createElement('div');
       aiInfoFooter.className = 'ai-info-footer';
       aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
+      aiInfoFooter.setAttribute('title', 'Click to show/hide AI model information');
 
       // Create AI icon
       const aiIcon = document.createElement('div');
@@ -463,16 +467,21 @@ export const StreamingResponseExtension = {
       aiInfoFooter.appendChild(aiInfoText);
       aiInfoFooter.appendChild(modelInfoTooltip);
 
-      // Add toggle functionality
+      // Toggle dropdown visibility on click
       aiInfoFooter.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         modelInfoTooltip.classList.toggle('visible');
       });
 
-      // Close tooltip when clicking elsewhere
+      // Prevent tooltip from closing when clicking inside it
+      modelInfoTooltip.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+
+      // Close tooltip only when clicking outside both the footer and tooltip
       document.addEventListener('click', function(e) {
-        if (!aiInfoFooter.contains(e.target)) {
+        if (!aiInfoFooter.contains(e.target) && !modelInfoTooltip.contains(e.target)) {
           modelInfoTooltip.classList.remove('visible');
         }
       });
