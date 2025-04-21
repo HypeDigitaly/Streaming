@@ -133,21 +133,17 @@ export const StreamingResponseExtension = {
           .response-content h3 {
             font-size: 1.2em;
           }
-          .response-content ul {
-            margin: 0.2em 0; /* Reduced list margins */
-            padding-left: 1.5em;
-            line-height: 1.5;
-          }
           .response-content li {
-            margin: 0.2em 0;
+            margin: 0.05em 0; /* Further reduced list item margin */
             line-height: 1.5;
           }
           .response-content li.sublist {
             margin-left: 1.5em;
-            margin: 0.2em 0;
+            margin-top: 0.05em; /* Ensure consistent small margin */
+            margin-bottom: 0.05em; /* Ensure consistent small margin */
           }
           .response-content ul, .response-content ol {
-            margin: 0.2em 0; /* Reduced list margins */
+            margin: 0.1em 0; /* Further reduced list margins */
             padding-left: 1.5em;
             line-height: 1.5;
           }
@@ -156,7 +152,7 @@ export const StreamingResponseExtension = {
             line-height: 1;
           }
           .response-content p {
-            margin: 0.3em 0; /* Reduced paragraph margin */
+            margin: 0.15em 0; /* Further reduced paragraph margin */
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
