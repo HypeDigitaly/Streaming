@@ -411,14 +411,14 @@ export const StreamingResponseExtension = {
       // Gemini models
       {
         id: 6,
-        name: 'gemini-2.5-pro-preview-03-25',
+        name: 'gemini-2.5-pro',
         type: 'gemini',
         endpoint: '/api/gemini-stream',
         displayName: 'Gemini 2.5 Pro'
       },
       {
         id: 7,
-        name: 'gemini-2.5-flash-preview-04-17',
+        name: 'gemini-2.5-flash',
         type: 'gemini',
         endpoint: '/api/gemini-stream',
         displayName: 'Gemini 2.5 Flash'
