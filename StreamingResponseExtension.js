@@ -132,9 +132,18 @@ export const StreamingResponseExtension = {
             padding-left: 1.5em;
             list-style-position: outside;
           }
-          .response-content li {
+          /* Add rules for ordered lists to match unordered */
+          .response-content ol {
+            margin: 0.5em 0; /* Match ul margins */
+            padding-left: 1.5em; /* Match ul padding */
+            list-style-position: outside; /* Ensure numbers are outside */
+          }
+          /* Apply consistent styling to all list items */
+          .response-content ul li,
+          .response-content ol li {
             margin: 0 0 0.3em 0;
             padding-left: 0.5em;
+            line-height: 20px; /* Ensure consistent line height */
           }
           .response-content li.sublist {
             margin: 0.5em 0;
@@ -157,7 +166,7 @@ export const StreamingResponseExtension = {
           .response-content p > a {
             display: block; /* Force onto new line */
             margin-top: 2em; /* Space above */
-            margin-bottom: 2em; /* Space below */
+            margin-bottom: 0.5em; /* Reduced space below */
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
