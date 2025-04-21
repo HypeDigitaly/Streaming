@@ -338,7 +338,7 @@ export const StreamingResponseExtension = {
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">\n\n`;
         })
         // Process links
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<br><a href="$2" target="_blank" rel="noopener noreferrer">$1</a><br>')
         // Process indented list items
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
