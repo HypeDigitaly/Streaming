@@ -312,8 +312,12 @@ export const StreamingResponseExtension = {
       buffer += text;
 
       // Format markdown content
-      const formattedContent = buffer
-        // Handle headers with better spacing
+      // First, trim any leading whitespace from the entire buffer
+      let formattedContent = buffer.trimStart();
+      
+      // Then apply markdown formatting
+      formattedContent = formattedContent
+        // Handle headers with better spacing (no extra space before first heading)
         .replace(/^### (.*$)/gm, '<h3>$1</h3>\n\n')
         .replace(/^## (.*$)/gm, '<h2>$1</h2>\n\n')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>\n\n')
@@ -346,6 +350,9 @@ export const StreamingResponseExtension = {
         // Ensure spacing after blocks
         .replace(/(<\/h[1-3]>|<\/p>|<\/ul>)(?!\n\n)/g, '$1\n\n')
         .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '\n\n$1');
+        
+      // Remove any leading whitespace that might have been added during processing
+      formattedContent = formattedContent.trimStart();
 
       // Update content with formatting
       responseContent.innerHTML = formattedContent;
