@@ -100,6 +100,9 @@ export const StreamingResponseExtension = {
             padding: 0;
             margin: 0;
           }
+          .response-content > *:first-child {
+            margin-top: 0;
+          }
           .response-content h1, 
           .response-content h2, 
           .response-content h3,
@@ -140,6 +143,11 @@ export const StreamingResponseExtension = {
           }
           .response-content p {
             margin: 0.5em 0;
+          }
+          .response-content a {
+            display: block;
+            margin-top: 1em;
+            word-break: break-all;
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
@@ -325,7 +333,7 @@ export const StreamingResponseExtension = {
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(/\[(.*?)\]\((.*?)\)/g, '→ <a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
