@@ -111,7 +111,7 @@ export const StreamingResponseExtension = {
           .response-content h4 {
             font-family: var(--_1bof89na), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #1a1e23;
-            margin: 0;
+            margin: 0; /* Base margin reset */
             padding: 0;
             font-weight: normal;
             font-size: 14px;
@@ -125,6 +125,7 @@ export const StreamingResponseExtension = {
           .response-content h3 {
             font-weight: 600;
             line-height: 1.3;
+            margin-bottom: 0; /* Remove space below headers */
           }
           .response-content h1 { font-size: 2em; }
           .response-content h2 {
@@ -134,13 +135,13 @@ export const StreamingResponseExtension = {
             font-size: 1.2em;
           }
           .response-content li {
-            margin: 0.05em 0; /* Further reduced list item margin */
+            margin: 0; /* Remove list item margin */
             line-height: 1.5;
           }
           .response-content li.sublist {
             margin-left: 1.5em;
-            margin-top: 0.05em; /* Ensure consistent small margin */
-            margin-bottom: 0.05em; /* Ensure consistent small margin */
+            margin-top: 0; /* Ensure no top margin */
+            margin-bottom: 0; /* Ensure no bottom margin */
           }
           .response-content ul, .response-content ol {
             margin: 0.1em 0; /* Further reduced list margins */
