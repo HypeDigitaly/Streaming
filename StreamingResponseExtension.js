@@ -163,9 +163,11 @@ export const StreamingResponseExtension = {
           .response-content a::before {
             content: "→ ";
           }
-          /* Add spacing for adjacent links */
+          /* Add spacing and separator for adjacent links */
           .response-content a + a {
-            margin-top: 1em; /* Increased space above links that follow other links */
+            margin-top: 1em; /* Space above the separator */
+            border-top: 1px solid #e0e0e0; /* Thin grey separator line */
+            padding-top: 1em; /* Space between separator and link text */
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
