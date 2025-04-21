@@ -136,12 +136,12 @@ export const StreamingResponseExtension = {
             padding-left: 1.5em;
           }
           .response-content li {
-            margin: 0.5em 0;
+            margin: 0.2em 0;
             line-height: 1.5;
           }
           .response-content li.sublist {
             margin-left: 1.5em;
-            margin: 0.5em 0;
+            margin: 0.2em 0;
           }
           .response-content ul, .response-content ol {
             margin: 0.5em 0;
@@ -351,10 +351,10 @@ export const StreamingResponseExtension = {
         .replace(/\n*^# (.*$)\n*/gm, '<h1>$1</h1>')
         // Format bold text
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        // Handle list items with moderate spacing between items
-        .replace(/^\* (.*$)/gm, '<li>$1</li>\n')
-        .replace(/^- (.*$)/gm, '<li>$1</li>\n')
-        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>\n')
+        // Handle list items without adding trailing newline
+        .replace(/^\* (.*$)/gm, '<li>$1</li>') 
+        .replace(/^- (.*$)/gm, '<li>$1</li>') 
+        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>') 
         // Process images
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
@@ -363,13 +363,13 @@ export const StreamingResponseExtension = {
         })
         // Process links
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        // Process indented list items
+        // Process indented list items (Revised logic to avoid adding trailing newline)
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
-          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>\n`;
+          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`; 
         })
-        // Add paragraph breaks for empty lines (single newline for better spacing)
-        .replace(/\n\s*\n/g, '\n<br>\n')
+        // Removed the rule that added <br> for double newlines
+        // .replace(/\n\s*\n/g, '\n<br>\n') 
         // Determine list type (ordered or unordered) and format appropriately
         .replace(/(?:^|\n)(<li value="\d+")/g, '\n<ol>$1')
         .replace(/(?:^|\n)(<li)(?! value)/g, '\n<ul>$1')
@@ -379,13 +379,13 @@ export const StreamingResponseExtension = {
           const isOrderedList = /<li value="\d+"/.test(precedingContent.split('<ul').pop().split('<ol').pop());
           return isOrderedList ? p1 + '</ol>\n' : p1 + '</ul>\n';
         })
-        // Clean up excessive newlines but keep enough for readability
-        .replace(/\n{3,}/g, '\n\n')
+        // Clean up excessive newlines (replace 2+ newlines with a single one)
+        .replace(/\n{2,}/g, '\n') 
         // Ensure no extra spaces before or after headers
         .replace(/\n+(<h[1-3]>)/g, '$1')
-        .replace(/(<\/h[1-3]>)\n+/g, '$1')
-        // Ensure moderate spacing after blocks except headings
-        .replace(/(<\/p>|<\/ul>|<\/ol>)(?!\n)/g, '$1\n');
+        .replace(/(<\/h[1-3]>)\n+/g, '$1');
+        // Removed the rule adding trailing newline after p/ul/ol
+        // .replace(/(<\/p>|<\/ul>|<\/ol>)(?!\n)/g, '$1\n');
 
       // Remove any leading whitespace that might have been added during processing
       formattedContent = formattedContent.trimStart();
