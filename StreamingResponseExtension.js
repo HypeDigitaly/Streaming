@@ -197,6 +197,7 @@ export const StreamingResponseExtension = {
           .response-content li > a {
             padding-left: 0;
             margin-bottom: 0;
+            display: inline; /* Ensure link flows inline for correct wrapping alignment */
           }
           .response-content li > a::before {
             content: none;
