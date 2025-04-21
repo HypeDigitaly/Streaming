@@ -99,6 +99,7 @@ export const StreamingResponseExtension = {
             word-break: break-word;
             padding: 0;
             margin: 0;
+            line-height: 1.5; /* Ensure base line height */
           }
           .response-content h1, 
           .response-content h2, 
@@ -123,8 +124,14 @@ export const StreamingResponseExtension = {
             line-height: 1.3;
           }
           .response-content h1 { font-size: 2em; }
-          .response-content h2 { font-size: 1.5em; }
-          .response-content h3 { font-size: 1.2em; }
+          .response-content h2 {
+            font-size: 1.5em;
+            margin-top: 1.5em;
+          }
+          .response-content h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+          }
           /* Add extra top margin to first headings to maintain spacing */
           .response-content h1:first-child,
           .response-content h2:first-child,
@@ -191,12 +198,11 @@ export const StreamingResponseExtension = {
             margin-top: 0;
           }
           .response-content a {
-            margin: 0;
-            line-height: 1;
             display: inline-block;
             margin-bottom: 1em;
             position: relative;
             padding-left: 1.5em;
+            text-decoration: underline;
           }
           .response-content a::before {
             content: "🔗";
@@ -204,9 +210,46 @@ export const StreamingResponseExtension = {
             left: 0;
             font-size: 1em;
           }
+          .response-content li > a {
+            padding-left: 0;
+            margin-bottom: 0;
+          }
+          .response-content li > a::before {
+            content: none;
+          }
           .response-content code {
-            margin: 0;
-            line-height: 1;
+            background-color: #f3f4f6; /* Light grey background */
+            padding: 0.1em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em; /* Slightly smaller */
+            font-family: monospace;
+          }
+          .response-content pre {
+            background-color: #f3f4f6; /* Consistent background */
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 6px;
+            overflow-x: auto; /* Allow horizontal scrolling */
+            white-space: pre-wrap; /* Wrap long lines but preserve spacing */
+            word-wrap: break-word; /* Break long words if necessary */
+          }
+          .response-content pre code {
+            background-color: transparent; /* Inherit pre background */
+            padding: 0;
+            border-radius: 0;
+            font-size: inherit; /* Inherit pre font size */
+            white-space: pre-wrap; /* Ensure wrapping/spacing is consistent */
+          }
+          .response-content blockquote {
+            margin: 1em 0 1em 1.5em;
+            padding: 0.5em 1em;
+            border-left: 4px solid #e5e7eb; /* Subtle left border */
+            color: #4b5563; /* Slightly muted text color */
+          }
+          .response-content hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 1.5em 0;
           }
           .ai-info-footer {
             display: flex;
@@ -224,6 +267,16 @@ export const StreamingResponseExtension = {
             border-radius: 4px;
             transition: background-color 0.2s ease;
             user-select: none;
+          }
+          button.ai-info-footer {
+            background: none;
+            color: inherit;
+            border: none;
+            padding: 0;
+            font: inherit;
+            text-align: inherit;
+            width: 100%;
+            position: relative;
           }
           .ai-info-footer:hover {
             background-color: #f3f4f6;
@@ -327,7 +380,6 @@ export const StreamingResponseExtension = {
 
       // Handle first chunk
       if (isFirstChunk) {
-        // Hide loading animation when we receive the first content
         const thinkingHeader = container.querySelector('.thinking-header');
         if (thinkingHeader) {
           thinkingHeader.classList.add('hidden');
@@ -339,56 +391,105 @@ export const StreamingResponseExtension = {
       // Append to buffer
       buffer += text;
 
-      // Format markdown content
-      // First, trim any leading whitespace from the entire buffer
+      // --- Start Formatting ---
       let formattedContent = buffer.trimStart();
 
-      // Then apply markdown formatting
+      // 0. Preserve fenced code blocks first (to avoid markdown processing inside them)
+      const codeBlocks = [];
+      formattedContent = formattedContent.replace(/```([\s\S]*?)```/g, (match, code) => {
+        const placeholder = `__CODEBLOCK_${codeBlocks.length}__`;
+        codeBlocks.push(code.trim()); // Store the raw code
+        return placeholder;
+      });
+
+      // 1. Basic paragraph handling (wrap blocks separated by \n\n)
+      // Temporarily replace list/header/hr/blockquote markers
+      const listMarkerPlaceholder = "__LIST_MARKER_PLACEHOLDER__";
+      const headerMarkerPlaceholder = "__HEADER_MARKER_PLACEHOLDER__";
       formattedContent = formattedContent
-        // Handle headers without extra newlines before or after
-        .replace(/\n*^### (.*$)\n*/gm, '<h3>$1</h3>')
-        .replace(/\n*^## (.*$)\n*/gm, '<h2>$1</h2>')
-        .replace(/\n*^# (.*$)\n*/gm, '<h1>$1</h1>')
+        .replace(/^([\*\-\d]+\.|[\*\-])\s/gm, listMarkerPlaceholder)
+        .replace(/^#{1,3}\s/gm, headerMarkerPlaceholder);
+
+      // Wrap text blocks in <p> tags
+      formattedContent = formattedContent
+        .split(/\n{2,}/) // Split by two or more newlines
+        .map(paragraph => {
+          paragraph = paragraph.trim();
+          if (!paragraph) return '';
+          // Restore markers before wrapping
+          paragraph = paragraph
+            .replace(new RegExp(listMarkerPlaceholder, 'g'), '* ') // Assume * for simplicity here, real marker handled later
+            .replace(new RegExp(headerMarkerPlaceholder, 'g'), '# '); // Assume # for simplicity
+          
+          // Avoid wrapping content that starts like a list or header *after* restoration
+          if (paragraph.match(/^([\*\-\d]+\.|[\*\-])\s/) || paragraph.match(/^#{1,3}\s/)) {
+             return paragraph;
+          }
+          return `<p>${paragraph}</p>`;
+        })
+        .join('\n\n'); // Join paragraphs with double newline for separation before next steps
+
+      // 2. Process other Markdown elements (Headers, Bold, Lists, Images, Links, HR, Blockquotes)
+      formattedContent = formattedContent
+        // Handle headers (trim newlines around them)
+        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
         // Format bold text
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        // Handle list items without adding trailing newline
-        .replace(/^\* (.*$)/gm, '<li>$1</li>') 
-        .replace(/^- (.*$)/gm, '<li>$1</li>') 
-        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>') 
+        // Handle unordered list items
+        .replace(/^\* (.*$)/gm, '<li>$1</li>')
+        .replace(/^- (.*$)/gm, '<li>$1</li>')
+        .replace(/^\s{2,}[\*\-] (.*$)/gm, '<li class="sublist">$1</li>') // Indented lists
+        // Handle numbered list items
+        .replace(/^(\d+)\. (.*$)/gm, '<li value="$1">$2</li>')
         // Process images
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
-          // Convert HTTP to HTTPS if it's not already
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         // Process links
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        // Process indented list items (Revised logic to avoid adding trailing newline)
-        .replace(/^- (.*$)/gm, (match, content) => {
-          const indentation = match.match(/^\s*/)[0].length;
-          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`; 
-        })
-        // Removed the rule that added <br> for double newlines
-        // .replace(/\n\s*\n/g, '\n<br>\n') 
-        // Determine list type (ordered or unordered) and format appropriately
-        .replace(/(?:^|\n)(<li value="\d+")/g, '\n<ol>$1')
-        .replace(/(?:^|\n)(<li)(?! value)/g, '\n<ul>$1')
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, function(match, p1, offset, string) {
-          // Check if we're in an ordered list by looking backward for <li value=
-          const precedingContent = string.substring(0, offset);
-          const isOrderedList = /<li value="\d+"/.test(precedingContent.split('<ul').pop().split('<ol').pop());
-          return isOrderedList ? p1 + '</ol>\n' : p1 + '</ul>\n';
-        })
-        // Clean up excessive newlines (replace 2+ newlines with a single one)
-        .replace(/\n{2,}/g, '\n') 
-        // Ensure no extra spaces before or after headers
-        .replace(/\n+(<h[1-3]>)/g, '$1')
-        .replace(/(<\/h[1-3]>)\n+/g, '$1');
-        // Removed the rule adding trailing newline after p/ul/ol
-        // .replace(/(<\/p>|<\/ul>|<\/ol>)(?!\n)/g, '$1\n');
+        // Process Horizontal Rules
+        .replace(/^(\*\*\*|---|___)\s*$/gm, '<hr>')
+        // Process Blockquotes (handle multi-line)
+        .replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>')
+        // Merge adjacent blockquotes
+        .replace(/<\/blockquote>\n<blockquote>/g, '<br>'); 
 
-      // Remove any leading whitespace that might have been added during processing
-      formattedContent = formattedContent.trimStart();
+      // 3. Wrap adjacent list items in <ul> or <ol>
+      formattedContent = formattedContent.replace(/(<li>.*?<\/li>)(?=\n<li>)/gs, '$1'); // Remove newline between li
+      formattedContent = formattedContent.replace(/^(<li value="\d+">.*?<\/li>\s*)+/gm, (match) => `<ol>\n${match.trim()}\n</ol>`);
+      formattedContent = formattedContent.replace(/^(<li>.*?<\/li>\s*)+/gm, (match) => `<ul>\n${match.trim()}\n</ul>`);
+
+      // 4. Clean up whitespace and paragraph structure
+      formattedContent = formattedContent
+         // Remove <p> tags wrapping only lists
+        .replace(/<p>\s*(<(ul|ol)>.*?<\/\2>)\s*<\/p>/gs, '$1')
+        // Remove <p> tags wrapping only headers
+        .replace(/<p>\s*(<h[1-3]>.*?<\/h[1-3]>)\s*<\/p>/gs, '$1')
+        // Collapse extra newlines (allow double newlines, remove 3+)
+        .replace(/\n{3,}/g, '\n\n')
+        // Remove paragraphs around HR and Blockquotes
+        .replace(/<p>\s*(<(hr|blockquote)>.*?<\/\2>)\s*<\/p>/gs, '$1') 
+        .replace(/<p>\s*(<hr>)\s*<\/p>/gs, '$1')
+        // Remove leading/trailing whitespace from final content
+        .trim();
+        
+      // 5. Restore code blocks (and apply basic styling)
+      formattedContent = formattedContent.replace(/__CODEBLOCK_(\d+)__/g, (match, index) => {
+        const rawCode = codeBlocks[parseInt(index, 10)];
+        // Basic HTML escaping for code content
+        const escapedCode = rawCode
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+        return `<pre><code>${escapedCode}</code></pre>`;
+      });
+
+      // --- End Formatting ---
 
       // Update content with formatting
       responseContent.innerHTML = formattedContent;
@@ -522,11 +623,14 @@ export const StreamingResponseExtension = {
         : null;
       const wasSuccess = !!successfulModel;
 
-      // Create footer container
-      const aiInfoFooter = document.createElement('div');
+      // Create footer container as a button for accessibility
+      const aiInfoFooter = document.createElement('button');
       aiInfoFooter.className = 'ai-info-footer';
-      aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
-      aiInfoFooter.setAttribute('title', 'Click to show/hide AI model execution details');
+      
+      // Generate a unique ID for the tooltip for aria-controls
+      const tooltipId = `model-info-tooltip-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+      aiInfoFooter.setAttribute('aria-controls', tooltipId);
+      aiInfoFooter.setAttribute('aria-expanded', 'false'); // Initially collapsed
 
       // Create AI icon
       const aiIcon = document.createElement('div');
@@ -573,6 +677,7 @@ export const StreamingResponseExtension = {
       const modelInfoTooltip = document.createElement('div');
       const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
       modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
+      modelInfoTooltip.id = tooltipId; // Assign the unique ID
 
       // Language support for tooltip messages
       const tooltipMessages = {
@@ -634,6 +739,8 @@ export const StreamingResponseExtension = {
         e.preventDefault();
         e.stopPropagation();
         const isVisible = modelInfoTooltip.classList.toggle('visible');
+        // Toggle ARIA attribute
+        aiInfoFooter.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
         // Toggle class on footer for icon rotation
         if (isVisible) {
           aiInfoFooter.classList.add('tooltip-visible');
