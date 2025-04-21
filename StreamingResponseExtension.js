@@ -76,7 +76,7 @@ export const StreamingResponseExtension = {
             gap: 0;
           }
           .response-section {
-            padding: 8px 0 0 0;
+            padding: 0;
             margin: 0;
             width: 100%;
             box-sizing: border-box;
@@ -123,24 +123,15 @@ export const StreamingResponseExtension = {
           .response-content h1, 
           .response-content h2, 
           .response-content h3 {
-            margin: 0.8em 0 0.3em; /* Reduced margins */
             font-weight: 600;
             line-height: 1.3;
           }
           .response-content h1 { font-size: 2em; }
           .response-content h2 {
             font-size: 1.5em;
-            /* margin-top is now handled by the general h1,h2,h3 rule above */
           }
           .response-content h3 {
             font-size: 1.2em;
-            /* margin-top is now handled by the general h1,h2,h3 rule above */
-          }
-          /* Add extra top margin to first headings to maintain spacing */
-          .response-content h1:first-child,
-          .response-content h2:first-child,
-          .response-content h3:first-child {
-            margin-top: 0.4em;
           }
           .response-content ul {
             margin: 0.5em 0;
@@ -176,30 +167,21 @@ export const StreamingResponseExtension = {
           /* Added styles for headings */
           .response-content .answer-h1 {
             font-size: 1.4em;
-            margin: 0.5em 0 0.3em;
+            margin: 0;
             font-weight: 600;
             line-height: 1.2;
-          }
-          .response-content .answer-h1:first-child {
-            margin-top: 0;
           }
           .response-content .answer-h2 {
             font-size: 1.2em;
-            margin: 0.4em 0 0.2em;
+            margin: 0;
             font-weight: 600;
             line-height: 1.2;
-          }
-          .response-content .answer-h2:first-child {
-            margin-top: 0;
           }
           .response-content .answer-h3 {
             font-size: 1.1em;
-            margin: 0.3em 0 0.2em;
+            margin: 0;
             font-weight: 600;
             line-height: 1.2;
-          }
-          .response-content .answer-h3:first-child {
-            margin-top: 0;
           }
           .response-content a {
             display: inline-block;
@@ -261,12 +243,12 @@ export const StreamingResponseExtension = {
             gap: 6px;
             margin-top: 12px;
             padding-top: 8px;
-            border-top: 1px solid #E5E7EB;
+            border-top: 1px solid #D1D5DB;
             font-size: 12px;
             color: #6B7280;
             cursor: pointer;
             position: relative;
-            padding: 8px 10px 0px 0;
+            padding: 12px 10px 0 0;
             margin-bottom: 0;
             border-radius: 4px;
             transition: background-color 0.2s ease;
