@@ -76,7 +76,7 @@ export const StreamingResponseExtension = {
             gap: 0;
           }
           .response-section {
-            padding: 0;
+            padding: 8px 0 0 0;
             margin: 0;
             width: 100%;
             box-sizing: border-box;
@@ -99,52 +99,47 @@ export const StreamingResponseExtension = {
             word-break: break-word;
             padding: 0;
             margin: 0;
-            line-height: 1.5; /* Ensure base line height */
           }
-          /* Remove top margin from the very first element */
-          .response-content > *:first-child {
-            margin-top: 0 !important; /* Use !important to override specificity if needed */
+          .response-content h1, 
+          .response-content h2, 
+          .response-content h3,
+          .response-content h4 {
+            font-family: var(--_1bof89na), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #1a1e23;
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 20px;
+          }
+          strong {
+            font-weight: 600;
           }
           .response-content h1, 
           .response-content h2, 
           .response-content h3 {
+            margin: 1.5em 0 0.5em;
             font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 0; /* Reverted: Remove space below headers */
           }
           .response-content h1 { font-size: 2em; }
-          .response-content h2 {
-            font-size: 1.5em;
-          }
-          .response-content h3 {
-            font-size: 1.2em;
+          .response-content h2 { font-size: 1.5em; }
+          .response-content h3 { font-size: 1.2em; }
+          .response-content ul {
+            margin: 0.5em 0;
+            padding-left: 1.5em;
           }
           .response-content li {
-            margin: 0; /* Keep list item margin 0 */
-            line-height: 1.5;
-          }
-          /* Removed rules for ol > li margin-bottom */
-          /* Removed rules for li > ul/ol margin-top */
-          /* Ensure nested list items themselves have no extra margin */
-          .response-content ul li,
-          .response-content ol li {
-             margin-bottom: 0; /* Ensure no margin */
-             margin-top: 0; /* Ensure no margin */
+            margin: 0.3em 0;
           }
           .response-content li.sublist {
             margin-left: 1.5em;
-          }
-          .response-content ul, .response-content ol {
-            margin: 0; /* Keep general list margin 0 */
-            padding-left: 1.5em;
-            line-height: 1.5;
           }
           .response-content br {
             margin: 0;
             line-height: 1;
           }
           .response-content p {
-            margin: 0; /* Removed paragraph margin */
+            margin: 0.5em 0;
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
@@ -156,76 +151,34 @@ export const StreamingResponseExtension = {
           /* Added styles for headings */
           .response-content .answer-h1 {
             font-size: 1.4em;
-            margin: 0;
+            margin: 0.5em 0 0.3em;
             font-weight: 600;
             line-height: 1.2;
+          }
+          .response-content .answer-h1:first-child {
+            margin-top: 0;
           }
           .response-content .answer-h2 {
             font-size: 1.2em;
-            margin: 0;
+            margin: 0.4em 0 0.2em;
             font-weight: 600;
             line-height: 1.2;
+          }
+          .response-content .answer-h2:first-child {
+            margin-top: 0;
           }
           .response-content .answer-h3 {
             font-size: 1.1em;
-            margin: 0;
+            margin: 0.3em 0 0.2em;
             font-weight: 600;
             line-height: 1.2;
           }
-          .response-content a {
-            display: inline-block;
-            margin-bottom: 1em;
-            position: relative;
-            padding-left: 1.5em;
-            text-decoration: underline;
-          }
-          .response-content a::before {
-            content: "🔗";
-            position: absolute;
-            left: 0;
-            font-size: 1em;
-          }
-          .response-content li > a {
-            padding-left: 0;
-            margin-bottom: 0;
-            display: inline; /* Ensure link flows inline for correct wrapping alignment */
-          }
-          .response-content li > a::before {
-            content: none;
+          .response-content .answer-h3:first-child {
+            margin-top: 0;
           }
           .response-content code {
-            background-color: #f3f4f6; /* Light grey background */
-            padding: 0.1em 0.4em;
-            border-radius: 4px;
-            font-size: 0.9em; /* Slightly smaller */
-            font-family: monospace;
-          }
-          .response-content pre {
-            background-color: #f3f4f6; /* Consistent background */
-            padding: 1em;
-            margin: 1em 0;
-            border-radius: 6px;
-            overflow-x: auto; /* Allow horizontal scrolling */
-            white-space: pre-wrap; /* Wrap long lines but preserve spacing */
-            word-wrap: break-word; /* Break long words if necessary */
-          }
-          .response-content pre code {
-            background-color: transparent; /* Inherit pre background */
-            padding: 0;
-            border-radius: 0;
-            font-size: inherit; /* Inherit pre font size */
-            white-space: pre-wrap; /* Ensure wrapping/spacing is consistent */
-          }
-          .response-content blockquote {
-            margin: 1em 0 1em 1.5em;
-            padding: 0.5em 1em;
-            border-left: 4px solid #e5e7eb; /* Subtle left border */
-            color: #4b5563; /* Slightly muted text color */
-          }
-          .response-content hr {
-            border: none;
-            border-top: 1px solid #e5e7eb;
-            margin: 1.5em 0;
+            margin: 0;
+            line-height: 1;
           }
           .ai-info-footer {
             display: flex;
@@ -233,27 +186,16 @@ export const StreamingResponseExtension = {
             gap: 6px;
             margin-top: 12px;
             padding-top: 8px;
-            border-top: 1px solid #D1D5DB;
+            border-top: 1px solid #E5E7EB;
             font-size: 12px;
             color: #6B7280;
             cursor: pointer;
             position: relative;
-            padding: 12px 10px 0 0;
+            padding: 8px 10px 0px 0;
             margin-bottom: 0;
             border-radius: 4px;
             transition: background-color 0.2s ease;
             user-select: none;
-          }
-          button.ai-info-footer {
-            background: none;
-            color: #6B7280; /* Restore original grey color */
-            border: none;
-            padding: 0; /* Adjust if the original div had padding */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Assuming original font */
-            font-size: 12px; /* Restore original small size */
-            text-align: inherit;
-            width: 100%; /* Make it full width like the div */
-            position: relative;
           }
           .ai-info-footer:hover {
             background-color: #f3f4f6;
@@ -277,12 +219,12 @@ export const StreamingResponseExtension = {
           .model-info-tooltip {
             display: none;
             position: absolute;
-            top: 100%; /* Restore original position below */
+            top: 100%;
             left: 0;
             width: 100%;
             box-sizing: border-box;
-            margin-top: 5px; /* Restore original margin */
-            background-color: #f3f4f6; /* Set background to light grey */
+            margin-top: 5px;
+            background-color: #ffffff;
             color: #1a1e23;
             padding: 12px;
             border-radius: 6px;
@@ -300,7 +242,7 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.openai,
           .model-info-tooltip.gemini,
           .model-info-tooltip.groq {
-            background-color: #e5e7eb; /* Changed from green to light grey */
+            background-color: #E2F2D9;
             color: #333;
           }
 
@@ -357,6 +299,7 @@ export const StreamingResponseExtension = {
 
       // Handle first chunk
       if (isFirstChunk) {
+        // Hide loading animation when we receive the first content
         const thinkingHeader = container.querySelector('.thinking-header');
         if (thinkingHeader) {
           thinkingHeader.classList.add('hidden');
@@ -368,105 +311,30 @@ export const StreamingResponseExtension = {
       // Append to buffer
       buffer += text;
 
-      // --- Start Formatting ---
-      let formattedContent = buffer.trimStart();
-
-      // 0. Preserve fenced code blocks first (to avoid markdown processing inside them)
-      const codeBlocks = [];
-      formattedContent = formattedContent.replace(/```([\s\S]*?)```/g, (match, code) => {
-        const placeholder = `__CODEBLOCK_${codeBlocks.length}__`;
-        codeBlocks.push(code.trim()); // Store the raw code
-        return placeholder;
-      });
-
-      // 1. Basic paragraph handling (wrap blocks separated by \n\n)
-      // Temporarily replace list/header/hr/blockquote markers
-      const listMarkerPlaceholder = "__LIST_MARKER_PLACEHOLDER__";
-      const headerMarkerPlaceholder = "__HEADER_MARKER_PLACEHOLDER__";
-      formattedContent = formattedContent
-        .replace(/^([\*\-\d]+\.|[\*\-])\s/gm, listMarkerPlaceholder)
-        .replace(/^#{1,3}\s/gm, headerMarkerPlaceholder);
-
-      // Wrap text blocks in <p> tags
-      formattedContent = formattedContent
-        .split(/\n{2,}/) // Split by two or more newlines
-        .map(paragraph => {
-          paragraph = paragraph.trim();
-          if (!paragraph) return '';
-          // Restore markers before wrapping
-          paragraph = paragraph
-            .replace(new RegExp(listMarkerPlaceholder, 'g'), '* ') // Assume * for simplicity here, real marker handled later
-            .replace(new RegExp(headerMarkerPlaceholder, 'g'), '# '); // Assume # for simplicity
-          
-          // Avoid wrapping content that starts like a list or header *after* restoration
-          if (paragraph.match(/^([\*\-\d]+\.|[\*\-])\s/) || paragraph.match(/^#{1,3}\s/)) {
-             return paragraph;
-          }
-          return `<p>${paragraph}</p>`;
-        })
-        .join('\n\n'); // Join paragraphs with double newline for separation before next steps
-
-      // 2. Process other Markdown elements (Headers, Bold, Lists, Images, Links, HR, Blockquotes)
-      formattedContent = formattedContent
-        // Handle headers (trim newlines around them)
+      // Format markdown content
+      const formattedContent = buffer
         .replace(/^### (.*$)/gm, '<h3>$1</h3>')
         .replace(/^## (.*$)/gm, '<h2>$1</h2>')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-        // Format bold text
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        // Handle unordered list items
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
-        .replace(/^\s{2,}[\*\-] (.*$)/gm, '<li class="sublist">$1</li>') // Indented lists
-        // Handle numbered list items
-        .replace(/^(\d+)\. (.*$)/gm, '<li value="$1">$2</li>')
-        // Process images
+        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
+          // Convert HTTP to HTTPS if it's not already
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
-        // Process links
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        // Process Horizontal Rules
-        .replace(/^(\*\*\*|---|___)\s*$/gm, '<hr>')
-        // Process Blockquotes (handle multi-line)
-        .replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>')
-        // Merge adjacent blockquotes
-        .replace(/<\/blockquote>\n<blockquote>/g, '<br>'); 
-
-      // 3. Wrap adjacent list items in <ul> or <ol>
-      formattedContent = formattedContent.replace(/(<li>.*?<\/li>)(?=\n<li>)/gs, '$1'); // Remove newline between li
-      formattedContent = formattedContent.replace(/^(<li value="\d+">.*?<\/li>\s*)+/gm, (match) => `<ol>\n${match.trim()}\n</ol>`);
-      formattedContent = formattedContent.replace(/^(<li>.*?<\/li>\s*)+/gm, (match) => `<ul>\n${match.trim()}\n</ul>`);
-
-      // 4. Clean up whitespace and paragraph structure
-      formattedContent = formattedContent
-         // Remove <p> tags wrapping only lists
-        .replace(/<p>\s*(<(ul|ol)>.*?<\/\2>)\s*<\/p>/gs, '$1')
-        // Remove <p> tags wrapping only headers
-        .replace(/<p>\s*(<h[1-3]>.*?<\/h[1-3]>)\s*<\/p>/gs, '$1')
-        // Collapse extra newlines (allow double newlines, remove 3+)
-        .replace(/\n{3,}/g, '\n\n')
-        // Remove paragraphs around HR and Blockquotes
-        .replace(/<p>\s*(<(hr|blockquote)>.*?<\/\2>)\s*<\/p>/gs, '$1') 
-        .replace(/<p>\s*(<hr>)\s*<\/p>/gs, '$1')
-        // Remove leading/trailing whitespace from final content
-        .trim();
-        
-      // 5. Restore code blocks (and apply basic styling)
-      formattedContent = formattedContent.replace(/__CODEBLOCK_(\d+)__/g, (match, index) => {
-        const rawCode = codeBlocks[parseInt(index, 10)];
-        // Basic HTML escaping for code content
-        const escapedCode = rawCode
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-        return `<pre><code>${escapedCode}</code></pre>`;
-      });
-
-      // --- End Formatting ---
+        .replace(/^- (.*$)/gm, (match, content) => {
+          const indentation = match.match(/^\s*/)[0].length;
+          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
+        })
+        .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>')
+        .replace(/\n{2,}/g, '\n')
+        .replace(/(<\/h[1-3]>|<\/p>|<\/ul>)\n+/g, '$1')
+        .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '$1');
 
       // Update content with formatting
       responseContent.innerHTML = formattedContent;
@@ -600,14 +468,11 @@ export const StreamingResponseExtension = {
         : null;
       const wasSuccess = !!successfulModel;
 
-      // Create footer container as a button for accessibility
-      const aiInfoFooter = document.createElement('button');
+      // Create footer container
+      const aiInfoFooter = document.createElement('div');
       aiInfoFooter.className = 'ai-info-footer';
-      
-      // Generate a unique ID for the tooltip for aria-controls
-      const tooltipId = `model-info-tooltip-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-      aiInfoFooter.setAttribute('aria-controls', tooltipId);
-      aiInfoFooter.setAttribute('aria-expanded', 'false'); // Initially collapsed
+      aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
+      aiInfoFooter.setAttribute('title', 'Click to show/hide AI model execution details');
 
       // Create AI icon
       const aiIcon = document.createElement('div');
@@ -654,7 +519,6 @@ export const StreamingResponseExtension = {
       const modelInfoTooltip = document.createElement('div');
       const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
       modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
-      modelInfoTooltip.id = tooltipId; // Assign the unique ID
 
       // Language support for tooltip messages
       const tooltipMessages = {
@@ -716,8 +580,6 @@ export const StreamingResponseExtension = {
         e.preventDefault();
         e.stopPropagation();
         const isVisible = modelInfoTooltip.classList.toggle('visible');
-        // Toggle ARIA attribute
-        aiInfoFooter.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
         // Toggle class on footer for icon rotation
         if (isVisible) {
           aiInfoFooter.classList.add('tooltip-visible');
@@ -745,15 +607,6 @@ export const StreamingResponseExtension = {
       if (existingFooter) {
         existingFooter.remove();
       }
-      
-      // Create and style the separator HR element
-      const separatorHr = document.createElement('hr');
-      separatorHr.style.border = 'none';
-      separatorHr.style.borderTop = '1px solid #D1D5DB'; // Match footer border color
-      separatorHr.style.marginTop = '12px'; // Space above the line
-      separatorHr.style.marginBottom = '8px'; // Space below the line
-      responseSection.appendChild(separatorHr); // Add the line before the footer
-
       responseSection.appendChild(aiInfoFooter);
     }
 
