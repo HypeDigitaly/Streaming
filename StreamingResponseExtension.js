@@ -325,7 +325,7 @@ export const StreamingResponseExtension = {
       // Format markdown content
       // First, trim any leading whitespace from the entire buffer
       let formattedContent = buffer.trimStart();
-      
+
       // Then apply markdown formatting
       formattedContent = formattedContent
         // Handle headers without extra newlines before or after
@@ -353,17 +353,23 @@ export const StreamingResponseExtension = {
         })
         // Add paragraph breaks for empty lines (single newline for better spacing)
         .replace(/\n\s*\n/g, '\n<br>\n')
-        // Properly format lists
-        .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>\n')
+        // Determine list type (ordered or unordered) and format appropriately
+        .replace(/(?:^|\n)(<li value="\d+")/g, '\n<ol>$1')
+        .replace(/(?:^|\n)(<li)(?! value)/g, '\n<ul>$1')
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, function(match, p1, offset, string) {
+          // Check if we're in an ordered list by looking backward for <li value=
+          const precedingContent = string.substring(0, offset);
+          const isOrderedList = /<li value="\d+"/.test(precedingContent.split('<ul').pop().split('<ol').pop());
+          return isOrderedList ? p1 + '</ol>\n' : p1 + '</ul>\n';
+        })
         // Clean up excessive newlines but keep enough for readability
         .replace(/\n{3,}/g, '\n\n')
         // Ensure no extra spaces before or after headers
         .replace(/\n+(<h[1-3]>)/g, '$1')
         .replace(/(<\/h[1-3]>)\n+/g, '$1')
         // Ensure moderate spacing after blocks except headings
-        .replace(/(<\/p>|<\/ul>)(?!\n)/g, '$1\n');
-        
+        .replace(/(<\/p>|<\/ul>|<\/ol>)(?!\n)/g, '$1\n');
+
       // Remove any leading whitespace that might have been added during processing
       formattedContent = formattedContent.trimStart();
 
