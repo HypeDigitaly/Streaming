@@ -172,6 +172,7 @@ export const StreamingResponseExtension = {
           }
           /* Add spacing and separator for adjacent links */
           .response-content a + a {
+            display: block; /* Make it block-level to respect padding */
             margin-top: 1em; /* Space above the separator */
             border-top: 1px solid #e0e0e0; /* Thin grey separator line */
             padding-top: 1em; /* Space between separator and link text */
