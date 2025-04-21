@@ -118,12 +118,19 @@ export const StreamingResponseExtension = {
           .response-content h1, 
           .response-content h2, 
           .response-content h3 {
-            margin: 0.8em 0 0.3em;
+            margin: 1.2em 0 0.5em;
             font-weight: 600;
+            line-height: 1.3;
           }
           .response-content h1 { font-size: 2em; }
           .response-content h2 { font-size: 1.5em; }
           .response-content h3 { font-size: 1.2em; }
+          /* Add extra top margin to first headings to maintain spacing */
+          .response-content h1:first-child,
+          .response-content h2:first-child,
+          .response-content h3:first-child {
+            margin-top: 0.4em;
+          }
           .response-content ul {
             margin: 0.5em 0;
             padding-left: 1.5em;
@@ -321,10 +328,10 @@ export const StreamingResponseExtension = {
       
       // Then apply markdown formatting
       formattedContent = formattedContent
-        // Handle headers with moderate spacing (no extra space before first heading)
-        .replace(/^### (.*$)/gm, '<h3>$1</h3>\n')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>\n')
-        .replace(/^# (.*$)/gm, '<h1>$1</h1>\n')
+        // Handle headers without extra newlines before or after
+        .replace(/\n*^### (.*$)\n*/gm, '<h3>$1</h3>')
+        .replace(/\n*^## (.*$)\n*/gm, '<h2>$1</h2>')
+        .replace(/\n*^# (.*$)\n*/gm, '<h1>$1</h1>')
         // Format bold text
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         // Handle list items with moderate spacing between items
@@ -335,10 +342,10 @@ export const StreamingResponseExtension = {
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
-          return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">\n\n`;
+          return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         // Process links
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<br><a href="$2" target="_blank" rel="noopener noreferrer">$1</a><br>')
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         // Process indented list items
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
@@ -351,10 +358,11 @@ export const StreamingResponseExtension = {
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>\n')
         // Clean up excessive newlines but keep enough for readability
         .replace(/\n{3,}/g, '\n\n')
-        // Ensure moderate spacing after blocks
-        .replace(/(<\/h[1-3]>)(?!\n)/g, '$1\n')
-        .replace(/(<\/p>|<\/ul>)(?!\n)/g, '$1\n')
-        .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '\n$1');
+        // Ensure no extra spaces before or after headers
+        .replace(/\n+(<h[1-3]>)/g, '$1')
+        .replace(/(<\/h[1-3]>)\n+/g, '$1')
+        // Ensure moderate spacing after blocks except headings
+        .replace(/(<\/p>|<\/ul>)(?!\n)/g, '$1\n');
         
       // Remove any leading whitespace that might have been added during processing
       formattedContent = formattedContent.trimStart();
