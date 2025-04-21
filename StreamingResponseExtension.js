@@ -118,7 +118,7 @@ export const StreamingResponseExtension = {
           .response-content h1, 
           .response-content h2, 
           .response-content h3 {
-            margin: 1.5em 0 0.5em;
+            margin: 0.8em 0 0.3em;
             font-weight: 600;
           }
           .response-content h1 { font-size: 2em; }
@@ -129,10 +129,14 @@ export const StreamingResponseExtension = {
             padding-left: 1.5em;
           }
           .response-content li {
-            margin: 0.3em 0;
+            margin: 0.15em 0;
           }
           .response-content li.sublist {
             margin-left: 1.5em;
+          }
+          .response-content ul {
+            margin: 0.3em 0;
+            padding-left: 1.5em;
           }
           .response-content br {
             margin: 0;
@@ -317,13 +321,13 @@ export const StreamingResponseExtension = {
       
       // Then apply markdown formatting
       formattedContent = formattedContent
-        // Handle headers with better spacing (no extra space before first heading)
-        .replace(/^### (.*$)/gm, '<h3>$1</h3>\n\n')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>\n\n')
-        .replace(/^# (.*$)/gm, '<h1>$1</h1>\n\n')
+        // Handle headers with moderate spacing (no extra space before first heading)
+        .replace(/^### (.*$)/gm, '<h3>$1</h3>\n')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>\n')
+        .replace(/^# (.*$)/gm, '<h1>$1</h1>\n')
         // Format bold text
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        // Handle list items with better spacing
+        // Handle list items with moderate spacing between items
         .replace(/^\* (.*$)/gm, '<li>$1</li>\n')
         .replace(/^- (.*$)/gm, '<li>$1</li>\n')
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>\n')
@@ -340,16 +344,17 @@ export const StreamingResponseExtension = {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>\n`;
         })
-        // Add paragraph breaks for empty lines (double newlines)
-        .replace(/\n\s*\n/g, '\n<br><br>\n')
+        // Add paragraph breaks for empty lines (single newline for better spacing)
+        .replace(/\n\s*\n/g, '\n<br>\n')
         // Properly format lists
         .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>\n')
         // Clean up excessive newlines but keep enough for readability
         .replace(/\n{3,}/g, '\n\n')
-        // Ensure spacing after blocks
-        .replace(/(<\/h[1-3]>|<\/p>|<\/ul>)(?!\n\n)/g, '$1\n\n')
-        .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '\n\n$1');
+        // Ensure moderate spacing after blocks
+        .replace(/(<\/h[1-3]>)(?!\n)/g, '$1\n')
+        .replace(/(<\/p>|<\/ul>)(?!\n)/g, '$1\n')
+        .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '\n$1');
         
       // Remove any leading whitespace that might have been added during processing
       formattedContent = formattedContent.trimStart();
