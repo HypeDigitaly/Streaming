@@ -146,13 +146,6 @@ export const StreamingResponseExtension = {
             line-height: 20px; /* Ensure consistent line height */
             margin-bottom: 0.6em; /* Increase bottom margin specifically for ordered lists */
           }
-          /* Add spacing and separator for consecutive list items */
-          .response-content ul > li + li, 
-          .response-content ol > li + li {
-            margin-top: 1em;            /* Space above the separator */
-            border-top: 1px solid #e0e0e0; /* Thin grey separator line */
-            padding-top: 1em;           /* Space between separator and li content */
-          }
           .response-content li.sublist {
             margin: 0.5em 0;
           }
@@ -170,12 +163,9 @@ export const StreamingResponseExtension = {
           .response-content a::before {
             content: "→ ";
           }
-          /* Add spacing and separator for adjacent links */
+          /* Add spacing for adjacent links */
           .response-content a + a {
-            display: block; /* Make it block-level to respect padding */
-            margin-top: 1em; /* Space above the separator */
-            border-top: 1px solid #e0e0e0; /* Thin grey separator line */
-            padding-top: 1em; /* Space between separator and link text */
+            margin-top: 1em; /* Increased space above links that follow other links */
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
