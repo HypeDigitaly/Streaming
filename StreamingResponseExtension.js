@@ -165,7 +165,6 @@ export const StreamingResponseExtension = {
           }
           /* Add spacing for adjacent links */
           .response-content a + a {
-            display: block; 
             margin-top: 0.6em; /* Space above links that follow other links */
           }
           /* Responsive image styles to prevent overflow */
