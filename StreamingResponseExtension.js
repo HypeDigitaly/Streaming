@@ -190,6 +190,12 @@ export const StreamingResponseExtension = {
           .response-content .answer-h3:first-child {
             margin-top: 0;
           }
+          .response-content a {
+            margin: 0;
+            line-height: 1;
+            display: inline-block;
+            margin-bottom: 1em;
+          }
           .response-content code {
             margin: 0;
             line-height: 1;
