@@ -130,9 +130,11 @@ export const StreamingResponseExtension = {
           .response-content ul {
             margin: 0.5em 0;
             padding-left: 1.5em;
+            list-style-position: outside;
           }
           .response-content li {
             margin: 0 0 0.3em 0;
+            padding-left: 0.5em;
           }
           .response-content li.sublist {
             margin: 0.5em 0;
@@ -147,10 +149,11 @@ export const StreamingResponseExtension = {
           .response-content a {
             word-break: break-all;
           }
+          .response-content a::before {
+            content: "→ ";
+          }
           .response-content > a, 
           .response-content p > a {
-            display: block;
-            margin-top: 1em;
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
@@ -336,7 +339,8 @@ export const StreamingResponseExtension = {
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
-        .replace(/\[(.*?)\]\((.*?)\)/g, '→ <a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        // Convert markdown links to HTML links (arrow removed, handled by CSS now)
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
