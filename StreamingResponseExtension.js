@@ -113,7 +113,7 @@ export const StreamingResponseExtension = {
             padding: 0;
             font-weight: normal;
             font-size: 14px;
-            line-height: 1.4;
+            line-height: 1.2;
           }
           strong {
             font-weight: 600;
@@ -165,7 +165,7 @@ export const StreamingResponseExtension = {
           }
           /* Add spacing for adjacent links */
           .response-content a + a {
-            margin-top: 0.6em; /* Space above links that follow other links */
+            margin-top: 1em; /* Increased space above links that follow other links */
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
@@ -179,7 +179,7 @@ export const StreamingResponseExtension = {
             font-size: 1.4em;
             margin: 0.5em 0 0.3em;
             font-weight: 600;
-            line-height: 1.4;
+            line-height: 1.2;
           }
           .response-content .answer-h1:first-child {
             margin-top: 0;
@@ -188,7 +188,7 @@ export const StreamingResponseExtension = {
             font-size: 1.2em;
             margin: 0.4em 0 0.2em;
             font-weight: 600;
-            line-height: 1.4;
+            line-height: 1.2;
           }
           .response-content .answer-h2:first-child {
             margin-top: 0;
@@ -197,7 +197,7 @@ export const StreamingResponseExtension = {
             font-size: 1.1em;
             margin: 0.3em 0 0.2em;
             font-weight: 600;
-            line-height: 1.4;
+            line-height: 1.2;
           }
           .response-content .answer-h3:first-child {
             margin-top: 0;
