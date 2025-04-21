@@ -136,14 +136,17 @@ export const StreamingResponseExtension = {
             padding-left: 1.5em;
           }
           .response-content li {
-            margin: 0.15em 0;
+            margin: 0.5em 0;
+            line-height: 1.5;
           }
           .response-content li.sublist {
             margin-left: 1.5em;
+            margin: 0.5em 0;
           }
-          .response-content ul {
-            margin: 0.3em 0;
+          .response-content ul, .response-content ol {
+            margin: 0.5em 0;
             padding-left: 1.5em;
+            line-height: 1.5;
           }
           .response-content br {
             margin: 0;
