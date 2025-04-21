@@ -152,8 +152,12 @@ export const StreamingResponseExtension = {
           .response-content a::before {
             content: "→ ";
           }
+          /* Add spacing for standalone links */
           .response-content > a, 
           .response-content p > a {
+            display: block; /* Force onto new line */
+            margin-top: 2em; /* Space above */
+            margin-bottom: 2em; /* Space below */
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
