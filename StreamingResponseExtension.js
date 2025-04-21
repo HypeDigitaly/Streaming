@@ -163,15 +163,11 @@ export const StreamingResponseExtension = {
           .response-content a::before {
             content: "→ ";
           }
-          /* Add spacing for standalone links - REMOVED */
-          /* 
-          .response-content > a, 
-          .response-content p > a {
+          /* Add spacing for adjacent links */
+          .response-content a + a {
             display: block; 
-            margin-top: 2em; 
-            margin-bottom: 0.5em; 
+            margin-top: 0.6em; /* Space above links that follow other links */
           }
-          */
           /* Responsive image styles to prevent overflow */
           .response-content img {
             max-width: 100%;
