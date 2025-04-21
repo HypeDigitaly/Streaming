@@ -195,6 +195,14 @@ export const StreamingResponseExtension = {
             line-height: 1;
             display: inline-block;
             margin-bottom: 1em;
+            position: relative;
+            padding-left: 1.5em;
+          }
+          .response-content a::before {
+            content: "🔗";
+            position: absolute;
+            left: 0;
+            font-size: 1em;
           }
           .response-content code {
             margin: 0;
