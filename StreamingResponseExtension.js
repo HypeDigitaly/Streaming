@@ -313,28 +313,39 @@ export const StreamingResponseExtension = {
 
       // Format markdown content
       const formattedContent = buffer
-        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+        // Handle headers with better spacing
+        .replace(/^### (.*$)/gm, '<h3>$1</h3>\n\n')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>\n\n')
+        .replace(/^# (.*$)/gm, '<h1>$1</h1>\n\n')
+        // Format bold text
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/^\* (.*$)/gm, '<li>$1</li>')
-        .replace(/^- (.*$)/gm, '<li>$1</li>')
-        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
+        // Handle list items with better spacing
+        .replace(/^\* (.*$)/gm, '<li>$1</li>\n')
+        .replace(/^- (.*$)/gm, '<li>$1</li>\n')
+        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>\n')
+        // Process images
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
-          return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
+          return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">\n\n`;
         })
+        // Process links
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        // Process indented list items
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
-          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
+          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>\n`;
         })
+        // Add paragraph breaks for empty lines (double newlines)
+        .replace(/\n\s*\n/g, '\n<br><br>\n')
+        // Properly format lists
         .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>')
-        .replace(/\n{2,}/g, '\n')
-        .replace(/(<\/h[1-3]>|<\/p>|<\/ul>)\n+/g, '$1')
-        .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '$1');
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>\n')
+        // Clean up excessive newlines but keep enough for readability
+        .replace(/\n{3,}/g, '\n\n')
+        // Ensure spacing after blocks
+        .replace(/(<\/h[1-3]>|<\/p>|<\/ul>)(?!\n\n)/g, '$1\n\n')
+        .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '\n\n$1');
 
       // Update content with formatting
       responseContent.innerHTML = formattedContent;
