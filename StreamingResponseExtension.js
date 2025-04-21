@@ -132,10 +132,10 @@ export const StreamingResponseExtension = {
             padding-left: 1.5em;
           }
           .response-content li {
-            margin: 0.3em 0;
+            margin: 0 0 0.3em 0;
           }
           .response-content li.sublist {
-            margin-left: 1.5em;
+            margin: 0.5em 0;
           }
           .response-content br {
             margin: 0;
@@ -145,9 +145,12 @@ export const StreamingResponseExtension = {
             margin: 0.5em 0;
           }
           .response-content a {
+            word-break: break-all;
+          }
+          .response-content > a, 
+          .response-content p > a {
             display: block;
             margin-top: 1em;
-            word-break: break-all;
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
