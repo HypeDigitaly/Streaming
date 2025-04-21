@@ -101,6 +101,10 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1.5; /* Ensure base line height */
           }
+          /* Remove top margin from the very first element */
+          .response-content > *:first-child {
+            margin-top: 0 !important; /* Use !important to override specificity if needed */
+          }
           .response-content h1, 
           .response-content h2, 
           .response-content h3,
@@ -119,18 +123,18 @@ export const StreamingResponseExtension = {
           .response-content h1, 
           .response-content h2, 
           .response-content h3 {
-            margin: 1.2em 0 0.5em;
+            margin: 0.8em 0 0.3em; /* Reduced margins */
             font-weight: 600;
             line-height: 1.3;
           }
           .response-content h1 { font-size: 2em; }
           .response-content h2 {
             font-size: 1.5em;
-            margin-top: 1.5em;
+            /* margin-top is now handled by the general h1,h2,h3 rule above */
           }
           .response-content h3 {
             font-size: 1.2em;
-            margin-top: 1.2em;
+            /* margin-top is now handled by the general h1,h2,h3 rule above */
           }
           /* Add extra top margin to first headings to maintain spacing */
           .response-content h1:first-child,
@@ -151,7 +155,7 @@ export const StreamingResponseExtension = {
             margin: 0.2em 0;
           }
           .response-content ul, .response-content ol {
-            margin: 0.5em 0;
+            margin: 0.3em 0; /* Reduced list margins */
             padding-left: 1.5em;
             line-height: 1.5;
           }
@@ -270,12 +274,13 @@ export const StreamingResponseExtension = {
           }
           button.ai-info-footer {
             background: none;
-            color: inherit;
+            color: #6B7280; /* Restore original grey color */
             border: none;
-            padding: 0;
-            font: inherit;
+            padding: 0; /* Adjust if the original div had padding */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Assuming original font */
+            font-size: 12px; /* Restore original small size */
             text-align: inherit;
-            width: 100%;
+            width: 100%; /* Make it full width like the div */
             position: relative;
           }
           .ai-info-footer:hover {
@@ -300,12 +305,12 @@ export const StreamingResponseExtension = {
           .model-info-tooltip {
             display: none;
             position: absolute;
-            top: 100%;
+            top: 100%; /* Restore original position below */
             left: 0;
             width: 100%;
             box-sizing: border-box;
-            margin-top: 5px;
-            background-color: #ffffff;
+            margin-top: 5px; /* Restore original margin */
+            background-color: #f3f4f6; /* Set background to light grey */
             color: #1a1e23;
             padding: 12px;
             border-radius: 6px;
