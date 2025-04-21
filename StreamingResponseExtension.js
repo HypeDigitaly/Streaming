@@ -352,6 +352,7 @@ export const StreamingResponseExtension = {
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
+        .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
         .replace(/`([^`]+)`/g, '<code>$1</code>')
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
