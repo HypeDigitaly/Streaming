@@ -144,6 +144,7 @@ export const StreamingResponseExtension = {
             margin: 0 0 0.3em 0;
             padding-left: 0.5em;
             line-height: 20px; /* Ensure consistent line height */
+            margin-bottom: 0.6em; /* Increase bottom margin specifically for ordered lists */
           }
           .response-content li.sublist {
             margin: 0.5em 0;
@@ -154,6 +155,7 @@ export const StreamingResponseExtension = {
           }
           .response-content p {
             margin: 0.5em 0;
+            margin-bottom: 1em; /* Increased bottom margin for better paragraph separation */
           }
           .response-content a {
             word-break: break-all;
@@ -204,6 +206,11 @@ export const StreamingResponseExtension = {
             margin-top: 0;
           }
           .response-content code {
+            /* Style for inline code */
+            background-color: #f0f0f0; /* Light grey background */
+            padding: 0.1em 0.4em; /* Small padding */
+            border-radius: 4px; /* Rounded corners */
+            font-family: monospace; /* Monospace font */
             margin: 0;
             line-height: 1;
           }
@@ -347,6 +354,7 @@ export const StreamingResponseExtension = {
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
@@ -359,10 +367,7 @@ export const StreamingResponseExtension = {
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
         })
         .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>')
-        .replace(/\n{2,}/g, '\n')
-        .replace(/(<\/h[1-3]>|<\/p>|<\/ul>)\n+/g, '$1')
-        .replace(/\n+(<h[1-3]>|<p>|<ul>)/g, '$1');
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
 
       // Update content with formatting
       responseContent.innerHTML = formattedContent;
