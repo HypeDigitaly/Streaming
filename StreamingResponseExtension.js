@@ -134,8 +134,9 @@ export const StreamingResponseExtension = {
             font-size: 1.2em;
           }
           .response-content ul {
-            margin: 0.5em 0;
+            margin: 0.2em 0; /* Reduced list margins */
             padding-left: 1.5em;
+            line-height: 1.5;
           }
           .response-content li {
             margin: 0.2em 0;
@@ -146,7 +147,7 @@ export const StreamingResponseExtension = {
             margin: 0.2em 0;
           }
           .response-content ul, .response-content ol {
-            margin: 0.3em 0; /* Reduced list margins */
+            margin: 0.2em 0; /* Reduced list margins */
             padding-left: 1.5em;
             line-height: 1.5;
           }
@@ -155,7 +156,7 @@ export const StreamingResponseExtension = {
             line-height: 1;
           }
           .response-content p {
-            margin: 0.5em 0;
+            margin: 0.3em 0; /* Reduced paragraph margin */
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
@@ -310,7 +311,7 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.openai,
           .model-info-tooltip.gemini,
           .model-info-tooltip.groq {
-            background-color: #E2F2D9;
+            background-color: #e5e7eb; /* Changed from green to light grey */
             color: #333;
           }
 
@@ -755,6 +756,15 @@ export const StreamingResponseExtension = {
       if (existingFooter) {
         existingFooter.remove();
       }
+      
+      // Create and style the separator HR element
+      const separatorHr = document.createElement('hr');
+      separatorHr.style.border = 'none';
+      separatorHr.style.borderTop = '1px solid #D1D5DB'; // Match footer border color
+      separatorHr.style.marginTop = '12px'; // Space above the line
+      separatorHr.style.marginBottom = '8px'; // Space below the line
+      responseSection.appendChild(separatorHr); // Add the line before the footer
+
       responseSection.appendChild(aiInfoFooter);
     }
 
