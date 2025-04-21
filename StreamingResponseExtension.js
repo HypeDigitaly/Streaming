@@ -367,8 +367,26 @@ export const StreamingResponseExtension = {
         .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
 
-      // Update content with formatting
-      responseContent.innerHTML = formattedContent;
+      // --- BEGIN: Clean up empty numbered list items ---
+      const tempContainer = document.createElement('div');
+      tempContainer.innerHTML = formattedContent;
+      
+      const orderedListItems = tempContainer.querySelectorAll('ol > li');
+      orderedListItems.forEach(li => {
+        // Check if the list item primarily contains just the number marker (e.g., "2.")
+        if (li.textContent.trim().match(/^\d+\.\s*$/)) {
+           // More robust check: ensure it doesn't contain other significant elements like links
+           if (!li.querySelector('a')) { 
+             li.remove(); 
+           }
+        }
+      });
+
+      const cleanedHtml = tempContainer.innerHTML;
+      // --- END: Clean up empty numbered list items ---
+
+      // Update content with formatting using the cleaned HTML
+      responseContent.innerHTML = cleanedHtml;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
