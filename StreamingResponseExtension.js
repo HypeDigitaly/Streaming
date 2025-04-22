@@ -613,7 +613,7 @@ export const StreamingResponseExtension = {
         aiInfoFooter.style.color = '#DC2626'; // Indicate failure visually
       }
 
-      // Create tooltip with detailed model sequence info
+      // Create tooltip with simplified model sequence info
       const modelInfoTooltip = document.createElement('div');
       const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
       modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
@@ -624,28 +624,24 @@ export const StreamingResponseExtension = {
           title: 'Spuštěné AI modely:',
           noModels: 'Žádné modely nebyly spuštěny.',
           allFailed: '(Všechny selhaly)',
-          unknown: 'Neznámý ID:',
-          allTimedOut: '(Všechny vypršely)'
+          unknown: 'Neznámý ID:'
         },
         en: {
           title: 'AI models executed:',
           noModels: 'No models were executed.',
           allFailed: '(All failed)',
-          unknown: 'Unknown ID:',
-          allTimedOut: '(All Timed Out)'
+          unknown: 'Unknown ID:'
         },
         de: {
           title: 'Ausgeführte KI-Modelle:',
           noModels: 'Es wurden keine Modelle ausgeführt.',
           allFailed: '(Alle fehlgeschlagen)',
-          unknown: 'Unbekannte ID:',
-          allTimedOut: '(Alle Zeitüberschreitungen)'
+          unknown: 'Unbekannte ID:'
         },
         uk: {
           title: 'Виконані моделі ШІ:',
           noModels: 'Жодна модель не була виконана.',
           allFailed: '(Усі не вдалися)',
-          allTimedOut: '(Усі за часом)',
           unknown: 'Невідомий ID:'
         }
       };
@@ -658,14 +654,7 @@ export const StreamingResponseExtension = {
         tooltipHTML += attemptedModels.map(attempt => {
           const modelInfo = modelsRegistry.find(m => m.id === attempt.id);
           const displayName = modelInfo ? modelInfo.displayName : `${tooltipText.unknown}${attempt.id}`;
-          
-          let statusIcon = '❓'; // Default for unknown/not run state
-          if (attempt.success === true) {
-            statusIcon = '✅';
-          } else if (attempt.success === false) {
-            statusIcon = attempt.reason === 'timeout' ? '⏱️' : '❌'; // Use stopwatch for timeout
-          }
-          
+          const statusIcon = attempt.success === true ? '✅' : '❌';
           return `${statusIcon} ${displayName}`;
         }).join(' → '); // Use arrow separator
       } else {
@@ -674,16 +663,7 @@ export const StreamingResponseExtension = {
 
       // Add overall result if all failed
       if (!wasSuccess && attemptedModels.length > 0) {
-        const allFailedReason = attemptedModels.every(a => a.success === false && a.reason === 'timeout') ? '(All Timed Out)' : '(All Failed)';
-        // Use specific text based on user language
-        let allFailedText = tooltipText.allFailed; // Default
-        if (attemptedModels.every(a => a.success === false && a.reason === 'timeout')) {
-            // Use the specific 'allTimedOut' translation if available, otherwise fallback to 'allFailed'
-            allFailedText = tooltipText.allTimedOut || tooltipText.allFailed;
-        }
-        // Add more languages as needed
-
-        tooltipHTML += ` ${allFailedText}`; // Add specific failure reason
+        tooltipHTML += ` ${tooltipText.allFailed}`;
       }
 
       modelInfoTooltip.innerHTML = tooltipHTML;
@@ -864,7 +844,7 @@ export const StreamingResponseExtension = {
                     }
                     // Similarly, decide if this error should reject the promise. For now, log and continue.
                   }
-                  resolve({ success: true }); // Explicitly resolve with success object
+                  resolve(true); // Explicitly resolve with true after [DONE] and update attempt
                   return; // Exit the function after successful completion
                 }
 
@@ -873,7 +853,7 @@ export const StreamingResponseExtension = {
 
                   if (parsed.error) {
                     // If the stream itself reports an error, reject the promise
-                    reject(new Error(parsed.error)); // Reject with the error from stream
+                    reject(new Error(parsed.error));
                     return;
                   }
 
@@ -926,30 +906,27 @@ export const StreamingResponseExtension = {
       // Promise for the timeout
       const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => {
-          // Reject with a specific error type/message for timeout
-          const timeoutError = new Error(`API call timed out after ${TIMEOUT_MS}ms for endpoint: ${endpoint}`);
-          timeoutError.name = 'TimeoutError'; // Add a specific name
-          reject(timeoutError);
+          reject(new Error(`API call timed out after ${TIMEOUT_MS}ms for endpoint: ${endpoint}`));
         }, TIMEOUT_MS);
       });
 
       // Race the fetch against the timeout
       try {
-        const result = await Promise.race([fetchPromise, timeoutPromise]);
-        return result; // Should be { success: true } if fetchPromise resolved
+        const success = await Promise.race([fetchPromise, timeoutPromise]);
+        return success; // Should be true if fetchPromise resolved
       } catch (error) {
         // This catches both timeout errors and fetch/processing errors from fetchPromise
         if (payload.debugMode === 1) {
           console.error(`Error during callLLMAPI for ${endpoint}:`, error.message);
         }
-        // IMPORTANT: Abort the fetch request if it hasn't been aborted yet
+        // IMPORTANT: Abort the fetch request if it hasn't been aborted yet (e.g., timeout occurred)
         if (!abortController.signal.aborted) {
           if (payload.debugMode === 1) {
              console.log(`Aborting fetch for ${endpoint} due to error/timeout.`);
           }
           abortController.abort();
         }
-        // Ensure the response section is visible even on failure
+        // Ensure the response section is visible even on failure, if it hasn't already been made visible
         if (isFirstChunk) {
             const thinkingHeader = container.querySelector('.thinking-header');
             if (thinkingHeader) {
@@ -958,10 +935,7 @@ export const StreamingResponseExtension = {
             responseSection.classList.add('visible');
             isFirstChunk = false; // Mark as not first chunk anymore
         }
-
-        // Determine the reason for failure
-        const reason = error.name === 'TimeoutError' ? 'timeout' : 'error';
-        return { success: false, reason: reason, message: error.message }; // Indicate failure with reason
+        return false; // Indicate failure
       }
     }
 
@@ -1006,8 +980,8 @@ export const StreamingResponseExtension = {
           continue;
         }
 
-        // Record the attempt *before* calling the API (status will be updated later)
-        const currentAttempt = { id: model.id, success: null, reason: null }; // Initialize reason
+        // Record the attempt before calling the API
+        const currentAttempt = { id: model.id, success: null };
         attemptedModels.push(currentAttempt);
 
         if (trace.payload.debugMode === 1) {
@@ -1031,14 +1005,13 @@ export const StreamingResponseExtension = {
         };
 
         // Call the LLM API
-        const result = await callLLMAPI(model.endpoint, payload);
+        const success = await callLLMAPI(model.endpoint, payload);
 
-        // Update the status of the current attempt based on the result object
-        currentAttempt.success = result.success;
-        currentAttempt.reason = result.reason || null; // Store reason if present
+        // Update the status of the current attempt
+        currentAttempt.success = success;
 
         // If successful, stop trying other models and add footer
-        if (result.success) {
+        if (success) {
           successfulModelFound = true; // Set the flag
           if (trace.payload.debugMode === 1) {
             console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
@@ -1049,17 +1022,14 @@ export const StreamingResponseExtension = {
             console.log(`=============================`);
           }
           addAIInfoFooter(attemptedModels); // Pass the list of attempted models
-          // Let loop break naturally
+          // No return here, let loop break naturally or finish
         } else {
             // --- Failure case within the loop ---
-            const failureType = result.reason === 'timeout' ? 'TIMEOUT' : 'FAILED';
-            const failureEmoji = result.reason === 'timeout' ? '⏱️' : '❌';
-
             if (trace.payload.debugMode === 1) {
-                console.log(`\n${failureEmoji} ${failureType}: MODEL ID:${model.id}`);
+                console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
                 console.log(`📌 Model: ${model.displayName} (${model.type})`);
                 console.log(`📌 Model name: ${model.name}`);
-                console.log(`📌 Status: REQUEST ${failureType} (${result.message})`);
+                console.log(`📌 Status: REQUEST FAILED OR TIMED OUT`);
                 console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
             }
 
@@ -1070,18 +1040,20 @@ export const StreamingResponseExtension = {
                  }
                  responseContent.innerHTML = ''; // Clear the displayed content
                  completeResponse = ''; // Reset the global complete response accumulator
+                 // We might potentially reset isFirstChunk = true here if we want the loader again
+                 // For now, just clearing content.
             }
 
             // Check if there are more models to try
             const nextModelIndex = modelSequence.indexOf(modelId) + 1;
             if (nextModelIndex < modelSequence.length) {
-                const nextModelId = modelSequence[nextModelIndex];
-                const nextModel = modelsRegistry.find(m => m.id === nextModelId);
-                if (nextModel && trace.payload.debugMode === 1) {
-                  console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
-                }
+              const nextModelId = modelSequence[nextModelIndex];
+              const nextModel = modelsRegistry.find(m => m.id === nextModelId);
+              if (nextModel && trace.payload.debugMode === 1) {
+                console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
+              }
             } else if (trace.payload.debugMode === 1) {
-                console.log(`📌 No more models to try in sequence`);
+              console.log(`📌 No more models to try in sequence`);
             }
             if (trace.payload.debugMode === 1) {
                 console.log(`-----------------------------`);
@@ -1090,18 +1062,15 @@ export const StreamingResponseExtension = {
       } // End of model sequence loop
 
       // --- After the loop ---
-      // Add the footer only if no successful model was found
+      // Add the footer only if no successful model was found OR if it hasn't been added yet
+      // The successful case inside the loop already adds the footer.
       if (!successfulModelFound) {
         if (trace.payload.debugMode === 1) {
           console.log(`\n❌ ALL ATTEMPTED MODELS FAILED`);
           console.log(`📌 Attempted models:`);
           attemptedModels.forEach((attempt, index) => {
             const detail = getModelDetailById(attempt.id);
-            let status = '(Not Run)';
-            if (attempt.success === true) status = '(Success - Error in Logic?)';
-            else if (attempt.success === false) {
-                status = attempt.reason === 'timeout' ? '⏱️ (Timeout)' : '❌ (Failed)';
-            }
+            const status = attempt.success === null ? '(Not Run)' : (attempt.success ? '(Success - Error in Logic?)' : '(Failed/Timed Out)');
             console.log(`   ${index + 1}. ${detail} ${status}`);
           });
           console.log(`📌 Result: No successful responses`);
