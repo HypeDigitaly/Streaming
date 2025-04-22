@@ -708,14 +708,44 @@ export const StreamingResponseExtension = {
       responseSection.appendChild(aiInfoFooter);
     }
 
-    // Generic function to call any LLM API provider
+    // Generic function to call any LLM API provider with TTFT timeout
     async function callLLMAPI(endpoint, payload) {
-      const TIMEOUT_MS = 8000; // 8 seconds timeout
-      const abortController = new AbortController(); // Create an AbortController
+      const TTFT_TIMEOUT_MS = 8000; // Time To First Token timeout (8 seconds)
+      const abortController = new AbortController();
+      let ttftTimeoutId = null;
+      let firstChunkReceived = false;
+      let resolveFirstChunkPromise = null;
+      let rejectFirstChunkPromise = null;
 
-      // Promise for the actual API call and streaming
-      const fetchPromise = new Promise(async (resolve, reject) => {
-        let response; // Declare response here to access it in finally block if needed
+      // Promise that resolves ONLY when the first chunk arrives or rejects on early error
+      const firstChunkPromise = new Promise((resolve, reject) => {
+        resolveFirstChunkPromise = resolve;
+        rejectFirstChunkPromise = reject; // To handle errors *before* the first chunk
+      });
+
+      // Promise for the TTFT timeout
+      const ttftTimeoutPromise = new Promise((_, reject) => {
+        ttftTimeoutId = setTimeout(() => {
+          // Check if first chunk has already been received; if so, timeout is irrelevant
+          if (firstChunkReceived) return;
+
+          if (payload.debugMode === 1) {
+            console.log(`⏰ TTFT Timeout (${TTFT_TIMEOUT_MS}ms) reached for ${endpoint}. Aborting fetch.`);
+          }
+          // Abort the fetch *before* rejecting due to timeout
+          if (!abortController.signal.aborted) {
+            abortController.abort('TTFT Timeout'); // Use a reason for clarity
+          }
+          reject(new Error(`TTFT timeout after ${TTFT_TIMEOUT_MS}ms for ${endpoint}`));
+        }, TTFT_TIMEOUT_MS);
+      });
+
+      // This function handles the actual fetch and stream processing
+      const processStream = async () => {
+        let response;
+        let localCompleteResponse = '';
+        let receivedAnyContent = false; // Track if *any* content was processed successfully
+
         try {
           const proxyUrl = `https://utils.hypedigitaly.ai${endpoint}`;
           if (payload.debugMode === 1) {
@@ -728,276 +758,214 @@ export const StreamingResponseExtension = {
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
             });
-            console.log(`🌐 Calling proxy URL:`, proxyUrl);
+            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
 
           response = await fetch(proxyUrl, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
-            signal: abortController.signal // Pass the abort signal to fetch
+            signal: abortController.signal // Use the abort signal
           });
 
           if (!response.ok) {
-            // Try to read error body for better debugging
             let errorText = `HTTP error! status: ${response.status}`;
-            try {
-              const body = await response.text();
-              errorText += `, body: ${body}`;
-            } catch (e) {
-              // Ignore if reading body fails
-            }
+            try { errorText += `, body: ${await response.text()}`; } catch (e) { /* ignore */ }
+            // Reject the firstChunkPromise if the initial fetch fails
             throw new Error(errorText);
           }
 
           const reader = response.body.getReader();
           const decoder = new TextDecoder();
-          let streamBuffer = ''; // Buffer for incoming data chunks
-          let localCompleteResponse = ''; // Accumulates the complete response for this attempt
-          let receivedContent = false; // Flag to track if any actual content was processed
+          let streamBuffer = '';
 
-          // Wrap the reading loop in try/catch to handle potential abort errors
-          try {
-            while (true) {
-              const { done, value } = await reader.read();
-
-              // Decode and append to buffer if value exists
-              if (value) {
-                streamBuffer += decoder.decode(value, { stream: true });
-              }
-
-              // Process buffer line by line
-              // SSE messages are separated by double newlines, but sometimes platforms send line by line.
-              // Let's process per line, checking for 'data: ' prefix.
-              let lines = streamBuffer.split('\n');
-
-              // If the stream is done, we process all lines.
-              // Otherwise, keep the last (potentially incomplete) line for the next iteration.
-              streamBuffer = done ? '' : lines.pop() || '';
-
-              for (const line of lines) {
-                // Check if the controller has aborted (e.g., due to timeout)
-                if (abortController.signal.aborted) {
-                    if (payload.debugMode === 1) {
-                        console.log(`Stream processing aborted for ${endpoint}.`);
-                    }
-                    // Rely on the outer race condition to reject/handle the abort.
-                    return;
-                }
-
-                if (!line.trim() || !line.startsWith('data: ')) continue; // Skip empty lines or non-data lines
-
-                const data = line.slice(6).trim(); // Remove 'data: ' prefix and trim whitespace
-
-                // Check for the explicit DONE signal
-                if (data === '[DONE]') {
-                  if (payload.debugMode === 1) {
-                    console.log('Stream completed via [DONE] signal');
-                    console.log('📝 COMPLETE_RESPONSE_BEGIN (on DONE)');
-                    console.log(localCompleteResponse);
-                    console.log('📝 COMPLETE_RESPONSE_END (on DONE)');
-                  }
-
-                  // Attempt Voiceflow update only if content was received
-                  try {
-                    if (receivedContent) {
-                      if (payload.debugMode === 1) {
-                        console.log('📤 Updating Voiceflow variable with complete response length:', localCompleteResponse.length);
-                      }
-                      const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                          user_id: payload.user_id,
-                          projectName: payload.projectName,
-                          variables: { "LLM_Main_Response": localCompleteResponse },
-                          debugMode: payload.debugMode || 0
-                        }),
-                      });
-                      // Handle update response logging (optional)
-                      if (!updateResponse.ok) {
-                        const errorText = await updateResponse.text();
-                        if (payload.debugMode === 1) console.error('Failed to update variables:', errorText);
-                      } else if (payload.debugMode === 1) {
-                         console.log('✅ Successfully attempted variable update on [DONE].');
-                         try {
-                           const responseData = await updateResponse.json();
-                           console.log('Voiceflow update response:', responseData);
-                         } catch (e) { console.log('Voiceflow update status:', updateResponse.status); }
-                      }
-                    } else if (payload.debugMode === 1) {
-                      console.log("⚠️ No content received before [DONE], skipping Voiceflow update.");
-                    }
-                  } catch (error) {
-                    if (payload.debugMode === 1) console.error('Error updating variables on [DONE]:', error);
-                  }
-                  resolve(true); // Explicitly resolve with true after [DONE] and update attempt
-                  return; // Exit the function after successful completion
-                }
-
-                // Attempt to parse JSON data if it's not [DONE]
-                try {
-                  // Check if data looks like JSON before parsing
-                  if (data.startsWith('{') && data.endsWith('}')) {
-                    const parsed = JSON.parse(data);
-
-                    if (parsed.error) {
-                      // If the stream itself reports an error, reject the promise
-                      reject(new Error(`Stream error from ${endpoint}: ${parsed.error}`));
-                      return;
-                    }
-
-                    const content = parsed.content || '';
-                    if (content) {
-                      if (payload.debugMode === 1 /* && content */ ) { // Log even empty chunks if debug is on
-                         console.log(`Received content chunk from ${endpoint}:`, JSON.stringify(content)); // Log content safely
-                      }
-                      updateContent(content); // Update UI
-                      localCompleteResponse += content; // Append to local complete response for this attempt
-                      receivedContent = true; // Mark that we have received actual content
-                    }
-                  } else if (payload.debugMode === 1 && data) {
-                      // Log non-JSON data if in debug mode (e.g., maybe just text streams)
-                      console.log(`Received non-JSON data chunk from ${endpoint}:`, data);
-                      // Decide if non-JSON data should be appended or handled differently
-                      // For now, let's assume content comes in JSON structure as per original code
-                      // updateContent(data); // Uncomment if plain text stream is possible
-                      // localCompleteResponse += data;
-                      // receivedContent = true;
-                  }
-
-                } catch (e) {
-                  // Log parsing errors but continue - maybe it's a multi-line message or noise
-                  if (payload.debugMode === 1) {
-                    console.warn(`Failed to parse SSE data line for ${endpoint}:`, e, 'Data:', data);
-                  }
-                   // Don't reject here, maybe the next chunk is fine or it wasn't critical
-                }
-              } // End for loop processing lines
-
-              // If the stream is done, break the main loop
-              if (done) {
-                 if (payload.debugMode === 1) {
-                   console.log(`Stream loop finished (done=true) for ${endpoint}. Checking status.`);
-                 }
-                 break; // Exit the while loop
-              }
-            } // End while(true) loop
-
-            // --- After the loop (done === true) ---
-            // The [DONE] case is handled inside the loop and returns/resolves.
-            // If we reach here, the stream ended without an explicit [DONE].
-
-            if (receivedContent) {
-              // Stream ended, no explicit [DONE], but we *did* receive content.
-              // Consider this a success for robustness. Attempt final update.
-              if (payload.debugMode === 1) {
-                console.log(`✅ Stream ended for ${endpoint} without [DONE], but content was received. Treating as success.`);
-                console.log('📝 FINAL COMPLETE_RESPONSE (on stream end)');
-                console.log(localCompleteResponse);
-                console.log('📝 COMPLETE_RESPONSE_END (on stream end)');
-                console.log('📤 Attempting final Voiceflow variable update...');
-              }
-              try {
-                 const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-                   method: 'POST',
-                   headers: { 'Content-Type': 'application/json' },
-                   body: JSON.stringify({
-                     user_id: payload.user_id,
-                     projectName: payload.projectName,
-                     variables: { "LLM_Main_Response": localCompleteResponse },
-                     debugMode: payload.debugMode || 0
-                   }),
-                 });
-                 // Handle update response logging (optional)
-                 if (!updateResponse.ok) {
-                   const errorText = await updateResponse.text();
-                   if (payload.debugMode === 1) console.error('Failed final variable update:', errorText);
-                 } else if (payload.debugMode === 1) {
-                   console.log('✅ Final Voiceflow update attempted successfully.');
-                 }
-              } catch (error) {
-                if (payload.debugMode === 1) console.error('Error during final variable update:', error);
-              }
-              resolve(true); // Resolve as success because content was received
-            } else {
-              // Stream ended, no [DONE], and no content received. This is likely an error.
-              if (payload.debugMode === 1) {
-                console.error(`❌ Stream ended for ${endpoint} without [DONE] and no content was received.`);
-              }
-              reject(new Error(`Stream ended abruptly for ${endpoint} without [DONE] signal or any content.`));
+          while (true) {
+            // Check for abort *before* reading - handles external aborts or quick timeouts
+            if (abortController.signal.aborted) {
+               throw new Error(`Fetch aborted during read for ${endpoint}. Reason: ${abortController.signal.reason || 'Unknown'}`);
             }
 
-          } catch (streamError) {
-             // Catch errors during reader.read() or processing, potentially including abort errors
-             if (streamError.name === 'AbortError') {
-                 if (payload.debugMode === 1) {
-                     console.log(`Stream reading aborted for ${endpoint}.`);
-                 }
-                 // Let the outer race condition handle the rejection/timeout logic.
-             } else {
-                 if (payload.debugMode === 1) {
-                    console.error(`Error during stream processing for ${endpoint}:`, streamError);
-                 }
-                 reject(streamError); // Reject on other stream processing errors
-             }
-             // No return needed here, error is propagated via reject.
-          }
+            const { done, value } = await reader.read();
+
+            if (value) {
+              streamBuffer += decoder.decode(value, { stream: true });
+            }
+
+            let lines = streamBuffer.split('\n');
+            streamBuffer = done ? '' : lines.pop() || '';
+
+            for (const line of lines) {
+              if (abortController.signal.aborted) {
+                  // Stop processing immediately if aborted (e.g., by timeout while processing buffer)
+                  throw new Error(`Fetch aborted during line processing for ${endpoint}. Reason: ${abortController.signal.reason || 'Unknown'}`);
+              }
+
+              if (!line.trim() || !line.startsWith('data: ')) continue;
+              const data = line.slice(6).trim();
+
+              if (data === '[DONE]') {
+                if (payload.debugMode === 1) console.log(`[DONE] received for ${endpoint}.`);
+                // Attempt Voiceflow update only if content was actually received and processed
+                if (receivedAnyContent) {
+                   await updateVoiceflowVariable(payload, localCompleteResponse);
+                } else if (payload.debugMode === 1) {
+                   console.log("⚠️ No content received before [DONE], skipping Voiceflow update.");
+                }
+                return { success: true }; // Signal successful completion
+              }
+
+              try {
+                if (data.startsWith('{') && data.endsWith('}')) {
+                  const parsed = JSON.parse(data);
+
+                  if (parsed.error) {
+                    throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
+                  }
+
+                  const content = parsed.content || '';
+                  if (content || typeof content === 'string') { // Handle empty string content too
+                    receivedAnyContent = true; // Mark that we have received processable content
+
+                    // --- TTFT Logic ---
+                    if (!firstChunkReceived) {
+                      firstChunkReceived = true;
+                      if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
+                      // Crucially, clear the TTFT timer now
+                      if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
+                      // Signal that the TTFT hurdle is passed
+                      resolveFirstChunkPromise();
+                    }
+                    // --- End TTFT Logic ---
+
+                    // Update UI only if the fetch wasn't aborted *before* this point
+                    if (!abortController.signal.aborted) {
+                        updateContent(content);
+                        localCompleteResponse += content;
+                    } else {
+                        // Should theoretically not happen if abort check is robust, but good failsafe
+                        if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
+                        // Do not update UI or localCompleteResponse if aborted
+                    }
+                  }
+                } else if (payload.debugMode === 1 && data) {
+                   console.log(`Received non-JSON data chunk from ${endpoint}:`, data);
+                }
+              } catch (parseError) {
+                 if (payload.debugMode === 1) console.warn(`Failed to parse SSE data line for ${endpoint}:`, parseError, 'Data:', data);
+              }
+            } // End line processing loop
+
+            if (done) {
+              if (payload.debugMode === 1) console.log(`Stream ended naturally (done=true) for ${endpoint}.`);
+              // If stream ends without [DONE], but we got content, consider it success
+              if (receivedAnyContent) {
+                if (payload.debugMode === 1) console.log("Attempting Voiceflow update on natural stream end.");
+                await updateVoiceflowVariable(payload, localCompleteResponse);
+                return { success: true };
+              } else {
+                // No content AND no [DONE] -> Treat as failure for this provider
+                throw new Error(`Stream ended for ${endpoint} without [DONE] signal or any valid content.`);
+              }
+            }
+          } // End while true loop
 
         } catch (error) {
-          // Catch fetch errors (network, initial status check, etc.)
-          if (payload.debugMode === 1) {
-            console.error(`Initial fetch or setup error for ${endpoint}:`, error);
-          }
-          // Ensure the AbortController is triggered even if the fetch failed early
-          if (!abortController.signal.aborted) {
-            abortController.abort();
-          }
-          reject(error); // Reject the promise on fetch/setup errors
-        }
-      });
-
-      // Promise for the timeout
-      const timeoutPromise = new Promise((_, reject) => {
-        const timeoutId = setTimeout(() => {
-          // Abort the fetch *before* rejecting due to timeout
-          if (!abortController.signal.aborted) {
-            if (payload.debugMode === 1) {
-               console.log(`Aborting fetch for ${endpoint} due to timeout.`);
+            // Catch all errors from fetch, reading, processing
+            if (error.name === 'AbortError') {
+                // Log abort reason, but the failure is handled by the Promise.race outcome
+                if (payload.debugMode === 1) console.log(`Fetch aborted for ${endpoint}. Reason: ${abortController.signal.reason || 'Unknown'}`);
+            } else {
+                // Log other errors
+                if (payload.debugMode === 1) console.error(`Error during stream processing for ${endpoint}:`, error);
             }
-            abortController.abort();
-          }
-          reject(new Error(`API call timed out after ${TIMEOUT_MS}ms for endpoint: ${endpoint}`));
-        }, TIMEOUT_MS);
-
-        // IMPORTANT: Clean up the timeout if fetchPromise settles first
-        fetchPromise
-          .then(() => clearTimeout(timeoutId)) // Clear on resolve
-          .catch(() => clearTimeout(timeoutId)); // Clear on reject
-      });
-
-      // Race the fetch against the timeout
-      try {
-        const success = await Promise.race([fetchPromise, timeoutPromise]);
-        // If fetchPromise resolved (even if Voiceflow update failed), it's a "success" in terms of getting a response stream
-        return success; // Should be true if fetchPromise resolved successfully
-      } catch (error) {
-        // This catches both timeout errors and fetch/processing errors from fetchPromise's reject path
-        if (payload.debugMode === 1) {
-          console.error(`Error during callLLMAPI race for ${endpoint}:`, error.message); // Log the specific error (timeout or otherwise)
+            // If an error occurs *before* the first chunk, reject the firstChunkPromise
+            if (!firstChunkReceived) {
+                try { rejectFirstChunkPromise(error); } catch (e) { /* ignore if already settled */ }
+            }
+            // Ensure the process signals failure
+            return { success: false };
+        } finally {
+          // Always clear the timeout if it's still pending when processing finishes/errors
+          if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
         }
-        // Ensure the response section is visible even on failure, if it hasn't already been made visible
+      };
+
+      // Helper function for Voiceflow update to keep main logic cleaner
+      async function updateVoiceflowVariable(payload, completeResponse) {
+         if (!completeResponse) {
+             if (payload.debugMode === 1) console.log("Skipping Voiceflow update: No content generated.");
+             return;
+         }
+         try {
+            if (payload.debugMode === 1) console.log('📤 Updating Voiceflow variable with response length:', completeResponse.length);
+            const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify({
+                  user_id: payload.user_id,
+                  projectName: payload.projectName,
+                  variables: { "LLM_Main_Response": completeResponse },
+                  debugMode: payload.debugMode || 0
+               }),
+            });
+            if (!updateResponse.ok) {
+               const errorText = await updateResponse.text();
+               if (payload.debugMode === 1) console.error('Failed to update Voiceflow variables:', errorText);
+            } else if (payload.debugMode === 1) {
+               console.log('✅ Voiceflow update attempted successfully.');
+               try { const responseData = await updateResponse.json(); console.log('Voiceflow update response:', responseData); }
+               catch (e) { console.log('Voiceflow update status:', updateResponse.status); }
+            }
+         } catch (error) {
+            if (payload.debugMode === 1) console.error('Error during Voiceflow variable update:', error);
+         }
+      }
+
+      // --- Main Execution Logic ---
+      try {
+        // Start processing the stream in the background. We don't await it here directly.
+        const streamProcessingResultPromise = processStream();
+
+        // Race: Wait for EITHER the first chunk OR the TTFT timeout.
+        await Promise.race([firstChunkPromise, ttftTimeoutPromise]);
+
+        // ---- If we reach this point, firstChunkPromise resolved successfully (TTFT met) ----
+        if (payload.debugMode === 1) console.log(`TTFT met for ${endpoint}. Waiting for stream completion...`);
+
+        // Now, wait for the *rest* of the stream processing to finish.
+        const result = await streamProcessingResultPromise;
+
+        // Return true only if the full stream processing completed successfully *after* TTFT was met.
+        return result.success;
+
+      } catch (error) {
+        // ---- This catch block handles: ----
+        // 1. Rejection from ttftTimeoutPromise (TTFT timeout occurred before first chunk)
+        // 2. Rejection from firstChunkPromise (e.g., fetch failed *before* first chunk)
+        if (payload.debugMode === 1) {
+          // Differentiate log based on error type
+          if (error.message.startsWith('TTFT timeout')) {
+             console.warn(`callLLMAPI failed for ${endpoint} due to TTFT timeout.`);
+          } else {
+             console.error(`callLLMAPI failed for ${endpoint} before first chunk. Reason:`, error.message);
+          }
+        }
+
+        // Ensure fetch is aborted if it hasn't been already (especially for non-timeout errors)
+        if (!abortController.signal.aborted) {
+          abortController.abort('callLLMAPI error before first chunk');
+        }
+
+        // Make sure thinking animation is hidden if we fail early
         if (isFirstChunk) {
             const thinkingHeader = container.querySelector('.thinking-header');
-            if (thinkingHeader) {
+            if (thinkingHeader && !thinkingHeader.classList.contains('hidden')) {
                 thinkingHeader.classList.add('hidden');
+                responseSection.classList.add('visible'); // Show section even on failure
             }
-            responseSection.classList.add('visible');
             isFirstChunk = false; // Mark as not first chunk anymore
         }
-        return false; // Indicate failure of this attempt
+        return false; // Indicate failure for this attempt
       }
     }
 
