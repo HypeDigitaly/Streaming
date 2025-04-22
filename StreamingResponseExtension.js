@@ -710,7 +710,7 @@ export const StreamingResponseExtension = {
 
     // Generic function to call any LLM API provider
     async function callLLMAPI(endpoint, payload) {
-      const TIMEOUT_MS = 3000; // 3 seconds timeout
+      const TIMEOUT_MS = 8000; // 8 seconds timeout
       const abortController = new AbortController(); // Create an AbortController
 
       // Promise for the actual API call and streaming
