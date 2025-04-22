@@ -7,12 +7,18 @@ export const StreamingResponseExtension = {
   render: async ({ trace, element }) => {
     if (trace.payload?.debugMode === 1) {
       console.log("🚀 StreamingResponseExtension: Starting render", { trace });
-      console.log("📦 Full trace payload:", JSON.stringify(trace.payload, null, 2));
-      console.log("🌍 Language setting:", trace.payload?.lang || "cs (default)");
+      console.log(
+        "📦 Full trace payload:",
+        JSON.stringify(trace.payload, null, 2),
+      );
+      console.log(
+        "🌍 Language setting:",
+        trace.payload?.lang || "cs (default)",
+      );
     }
 
-    const container = document.createElement('div');
-    container.className = 'streaming-response-container';
+    const container = document.createElement("div");
+    container.className = "streaming-response-container";
 
     // Create the base structure
     container.innerHTML = `
@@ -286,42 +292,50 @@ export const StreamingResponseExtension = {
     element.appendChild(container);
 
     // Get references to elements
-    const responseSection = container.querySelector('.response-section');
-    const responseContent = container.querySelector('.response-content');
+    const responseSection = container.querySelector(".response-section");
+    const responseContent = container.querySelector(".response-content");
     let isFirstChunk = true;
-    let buffer = '';
+    let buffer = "";
     let deltaCounter = 0;
-    let completeResponse = '';
+    let completeResponse = "";
 
     // Show container immediately with loading animation
-    container.style.display = 'block';
+    container.style.display = "block";
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
-      return html
-        // Headers
-        .replace(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/g, (_, content) => `# ${content}\n\n`)
-        // Bold
-        .replace(/<strong>(.*?)<\/strong>/g, '**$1**')
-        // Italic
-        .replace(/<em>(.*?)<\/em>/g, '*$1*')
-        // Lists
-        .replace(/<ul[^>]*>(.*?)<\/ul>/gs, (_, content) => {
-          return content.replace(/<li[^>]*>(.*?)<\/li>/g, '- $1\n');
-        })
-        .replace(/<ol[^>]*>(.*?)<\/ol>/gs, (_, content) => {
-          let counter = 1;
-          return content.replace(/<li[^>]*>(.*?)<\/li>/g, () => `${counter++}. $1\n`);
-        })
-        // Paragraphs
-        .replace(/<p[^>]*>(.*?)<\/p>/g, '$1\n\n')
-        // Links
-        .replace(/<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/g, '[$2]($1)')
-        // Code
-        .replace(/<code>(.*?)<\/code>/g, '`$1`')
-        // Clean up
-        .replace(/\n{3,}/g, '\n\n')
-        .trim();
+      return (
+        html
+          // Headers
+          .replace(
+            /<h[1-3][^>]*>(.*?)<\/h[1-3]>/g,
+            (_, content) => `# ${content}\n\n`,
+          )
+          // Bold
+          .replace(/<strong>(.*?)<\/strong>/g, "**$1**")
+          // Italic
+          .replace(/<em>(.*?)<\/em>/g, "*$1*")
+          // Lists
+          .replace(/<ul[^>]*>(.*?)<\/ul>/gs, (_, content) => {
+            return content.replace(/<li[^>]*>(.*?)<\/li>/g, "- $1\n");
+          })
+          .replace(/<ol[^>]*>(.*?)<\/ol>/gs, (_, content) => {
+            let counter = 1;
+            return content.replace(
+              /<li[^>]*>(.*?)<\/li>/g,
+              () => `${counter++}. $1\n`,
+            );
+          })
+          // Paragraphs
+          .replace(/<p[^>]*>(.*?)<\/p>/g, "$1\n\n")
+          // Links
+          .replace(/<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/g, "[$2]($1)")
+          // Code
+          .replace(/<code>(.*?)<\/code>/g, "`$1`")
+          // Clean up
+          .replace(/\n{3,}/g, "\n\n")
+          .trim()
+      );
     }
 
     // Update the answer content with markdown support
@@ -331,11 +345,11 @@ export const StreamingResponseExtension = {
       // Handle first chunk
       if (isFirstChunk) {
         // Hide loading animation when we receive the first content
-        const thinkingHeader = container.querySelector('.thinking-header');
+        const thinkingHeader = container.querySelector(".thinking-header");
         if (thinkingHeader) {
-          thinkingHeader.classList.add('hidden');
+          thinkingHeader.classList.add("hidden");
         }
-        responseSection.classList.add('visible');
+        responseSection.classList.add("visible");
         isFirstChunk = false;
       }
 
@@ -344,58 +358,69 @@ export const StreamingResponseExtension = {
 
       // Format markdown content
       const formattedContent = buffer
-        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/^\* (.*$)/gm, '<li>$1</li>')
-        .replace(/^- (.*$)/gm, '<li>$1</li>')
+        .replace(/^### (.*$)/gm, "<h3>$1</h3>")
+        .replace(/^## (.*$)/gm, "<h2>$1</h2>")
+        .replace(/^# (.*$)/gm, "<h1>$1</h1>")
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/^\* (.*$)/gm, "<li>$1</li>")
+        .replace(/^- (.*$)/gm, "<li>$1</li>")
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
-        .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
-        .replace(/`([^`]+)`/g, '<code>$1</code>')
-        .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
+        .replace(/^\\d+\\.\\s+(.*$)/gm, "<li>$1</li>")
+        .replace(/`([^`]+)`/g, "<code>$1</code>")
+        .replace(/!\[(.*?)\]\((.*?)\)/g, function (match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
-          const secureUrl = url.replace(/^http:\/\//i, 'https://');
+          const secureUrl = url.replace(/^http:\/\//i, "https://");
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(
+          /\[(.*?)\]\((.*?)\)/g,
+          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
+        )
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
-          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
+          return `<li class="${indentation > 0 ? "sublist" : ""}">${content.trim()}</li>`;
         })
-        .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
+        .replace(/(?:^|\n)(<li)/g, "\n<ul>$1")
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, "$1</ul>");
 
       // --- BEGIN: Post-process lists and clean up empty items ---
-      const tempContainer = document.createElement('div');
+      const tempContainer = document.createElement("div");
       // Use DOMParser for potentially cleaner initial parsing if needed, but innerHTML is often sufficient
-      tempContainer.innerHTML = formattedContent; 
+      tempContainer.innerHTML = formattedContent;
 
       // Function to wrap consecutive LIs
       function wrapListItems(listType /* 'ol' or 'ul' */) {
-        const items = tempContainer.querySelectorAll('li'); // Get all LIs
+        const items = tempContainer.querySelectorAll("li"); // Get all LIs
         let currentList = null;
 
         items.forEach((li, index) => {
           // Rough heuristic: Check if it looks like a numbered list item was intended
           // This relies on the number potentially being left as text by the simple regex
-          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim()); 
-          const targetListType = looksNumbered ? 'ol' : 'ul';
+          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim());
+          const targetListType = looksNumbered ? "ol" : "ul";
 
           // Only process items matching the current function call type (ol or ul)
           if (targetListType !== listType) return;
 
           // Skip items already inside a list (e.g., nested lists - handle later if needed)
-          if (li.parentElement.tagName === 'OL' || li.parentElement.tagName === 'UL') {
+          if (
+            li.parentElement.tagName === "OL" ||
+            li.parentElement.tagName === "UL"
+          ) {
             currentList = null; // Reset sequence if we encounter an already nested item
-            return; 
+            return;
           }
 
           const prevSibling = li.previousElementSibling;
 
           // Start a new list if needed
-          if (!currentList || !prevSibling || prevSibling.tagName !== 'LI' || (prevSibling.parentElement.tagName !== listType.toUpperCase())) {
+          if (
+            !currentList ||
+            !prevSibling ||
+            prevSibling.tagName !== "LI" ||
+            prevSibling.parentElement.tagName !== listType.toUpperCase()
+          ) {
             currentList = document.createElement(listType);
             li.parentNode.insertBefore(currentList, li);
           }
@@ -408,24 +433,24 @@ export const StreamingResponseExtension = {
       }
 
       // Wrap OL items first, then UL items
-      wrapListItems('ol');
-      wrapListItems('ul');
-      
+      wrapListItems("ol");
+      wrapListItems("ul");
+
       // Clean up empty numbered list items (modified check)
-      const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
-      listItems.forEach(li => {
+      const listItems = tempContainer.querySelectorAll("ol > li, ul > li");
+      listItems.forEach((li) => {
         // Check if the list item is effectively empty or just a marker
-        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, '').trim(); // Remove number marker for check
-        if (contentCheck === '' || contentCheck === '<br>') {
+        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, "").trim(); // Remove number marker for check
+        if (contentCheck === "" || contentCheck === "<br>") {
           // Check if it's truly empty, not containing other important tags
-          if (!li.querySelector('a, img, code, strong, em, ul, ol')) {
-             li.remove();
+          if (!li.querySelector("a, img, code, strong, em, ul, ol")) {
+            li.remove();
           }
         }
       });
-      
+
       // Remove any potentially empty OL/UL tags left after cleaning LIs
-      tempContainer.querySelectorAll('ol, ul').forEach(list => {
+      tempContainer.querySelectorAll("ol, ul").forEach((list) => {
         if (!list.hasChildNodes()) {
           list.remove();
         }
@@ -440,13 +465,16 @@ export const StreamingResponseExtension = {
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
       if (scrollContainer) {
-        const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-        const isNearBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= maxScroll - 100;
+        const maxScroll =
+          scrollContainer.scrollHeight - scrollContainer.clientHeight;
+        const isNearBottom =
+          scrollContainer.scrollTop + scrollContainer.clientHeight >=
+          maxScroll - 100;
 
         if (isNearBottom) {
           scrollContainer.scrollTo({
             top: scrollContainer.scrollHeight,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }
       }
@@ -457,7 +485,7 @@ export const StreamingResponseExtension = {
         const style = window.getComputedStyle(el);
         const overflowY = style.overflowY;
 
-        if (overflowY === 'auto' || overflowY === 'scroll') {
+        if (overflowY === "auto" || overflowY === "scroll") {
           return el;
         }
         el = el.parentElement;
@@ -470,73 +498,73 @@ export const StreamingResponseExtension = {
       // Claude models
       {
         id: 1,
-        name: 'claude-3-7-sonnet-20250219',
-        type: 'claude',
-        endpoint: '/api/claude-stream',
-        displayName: 'Claude 3.7 Sonnet'
+        name: "claude-3-7-sonnet-20250219",
+        type: "claude",
+        endpoint: "/api/claude-stream",
+        displayName: "Claude 3.7 Sonnet",
       },
       {
         id: 2,
-        name: 'claude-3-5-haiku-20241022',
-        type: 'claude',
-        endpoint: '/api/claude-stream',
-        displayName: 'Claude 3.5 Haiku'
+        name: "claude-3-5-haiku-20241022",
+        type: "claude",
+        endpoint: "/api/claude-stream",
+        displayName: "Claude 3.5 Haiku",
       },
       {
         id: 3,
-        name: 'claude-3-sonnet-20240229',
-        type: 'claude',
-        endpoint: '/api/claude-stream',
-        displayName: 'Claude 3 Sonnet'
+        name: "claude-3-sonnet-20240229",
+        type: "claude",
+        endpoint: "/api/claude-stream",
+        displayName: "Claude 3 Sonnet",
       },
 
       // OpenAI models
       {
         id: 4,
-        name: 'gpt-4.1-2025-04-14',
-        type: 'openai',
-        endpoint: '/api/openai-stream',
-        displayName: 'GPT-4.1'
+        name: "gpt-4.1-2025-04-14",
+        type: "openai",
+        endpoint: "/api/openai-stream",
+        displayName: "GPT-4.1",
       },
       {
         id: 5,
-        name: 'gpt-4.1-mini-2025-04-14',
-        type: 'openai',
-        endpoint: '/api/openai-stream',
-        displayName: 'GPT-4.1 Mini'
+        name: "gpt-4.1-mini-2025-04-14",
+        type: "openai",
+        endpoint: "/api/openai-stream",
+        displayName: "GPT-4.1 Mini",
       },
 
       // Gemini models
       {
         id: 6,
-        name: 'gemini-2.5-pro',
-        type: 'gemini',
-        endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 2.5 Pro'
+        name: "gemini-2.5-pro",
+        type: "gemini",
+        endpoint: "/api/gemini-stream",
+        displayName: "Gemini 2.5 Pro",
       },
       {
         id: 7,
-        name: 'gemini-2.5-flash',
-        type: 'gemini',
-        endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 2.5 Flash'
+        name: "gemini-2.5-flash",
+        type: "gemini",
+        endpoint: "/api/gemini-stream",
+        displayName: "Gemini 2.5 Flash",
       },
 
       // Groq models
       {
         id: 8,
-        name: 'meta-llama/llama-4-maverick-17b-128e-instruct',
-        type: 'groq',
-        endpoint: '/api/groq-stream',
-        displayName: 'Llama 4 Maverick'
+        name: "meta-llama/llama-4-maverick-17b-128e-instruct",
+        type: "groq",
+        endpoint: "/api/groq-stream",
+        displayName: "Llama 4 Maverick",
       },
       {
         id: 9,
-        name: 'meta-llama/llama-4-scout-17b-16e-instruct',
-        type: 'groq',
-        endpoint: '/api/groq-stream',
-        displayName: 'Llama 4 Scout'
-      }
+        name: "meta-llama/llama-4-scout-17b-16e-instruct",
+        type: "groq",
+        endpoint: "/api/groq-stream",
+        displayName: "Llama 4 Scout",
+      },
     ];
 
     // Function to process model sequence
@@ -544,65 +572,69 @@ export const StreamingResponseExtension = {
       if (!sequenceStr) return [1]; // Default to first model if none specified
 
       // Parse sequence string to array of numbers
-      return sequenceStr.split(',')
-        .map(id => parseInt(id.trim()))
-        .filter(id => !isNaN(id) && modelsRegistry.some(m => m.id === id));
+      return sequenceStr
+        .split(",")
+        .map((id) => parseInt(id.trim()))
+        .filter((id) => !isNaN(id) && modelsRegistry.some((m) => m.id === id));
     }
 
     // Function to get detailed model info by ID
     function getModelDetailById(modelId) {
-      const model = modelsRegistry.find(m => m.id === modelId);
-      return model ? 
-        `ID:${model.id} | ${model.displayName} (${model.type}) | Model: ${model.name}` : 
-        `Unknown model ID: ${modelId}`;
+      const model = modelsRegistry.find((m) => m.id === modelId);
+      return model
+        ? `ID:${model.id} | ${model.displayName} (${model.type}) | Model: ${model.name}`
+        : `Unknown model ID: ${modelId}`;
     }
 
     // Adds AI info footer to the UI
     function addAIInfoFooter(attemptedModels) {
       // Determine overall success and find the successful model details
-      const successfulAttempt = attemptedModels.find(m => m.success === true);
-      const successfulModel = successfulAttempt 
-        ? modelsRegistry.find(m => m.id === successfulAttempt.id)
+      const successfulAttempt = attemptedModels.find((m) => m.success === true);
+      const successfulModel = successfulAttempt
+        ? modelsRegistry.find((m) => m.id === successfulAttempt.id)
         : null;
       const wasSuccess = !!successfulModel;
 
       // Create footer container
-      const aiInfoFooter = document.createElement('div');
-      aiInfoFooter.className = 'ai-info-footer';
-      aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
-      aiInfoFooter.setAttribute('title', 'Click to show/hide AI model execution details');
+      const aiInfoFooter = document.createElement("div");
+      aiInfoFooter.className = "ai-info-footer";
+      aiInfoFooter.style.position = "relative"; // Add relative positioning for tooltip
+      aiInfoFooter.setAttribute(
+        "title",
+        "Click to show/hide AI model execution details",
+      );
 
       // Create AI icon
-      const aiIcon = document.createElement('div');
-      aiIcon.className = 'ai-icon';
-      aiIcon.textContent = 'AI';
+      const aiIcon = document.createElement("div");
+      aiIcon.className = "ai-icon";
+      aiIcon.textContent = "AI";
 
       // Create info text
-      const aiInfoText = document.createElement('div');
-      aiInfoText.className = 'ai-info-text';
+      const aiInfoText = document.createElement("div");
+      aiInfoText.className = "ai-info-text";
 
       // Language support for messages
       const languageMessages = {
         cs: {
-          success: 'Odpověď generována pomocí AI.',
-          failure: 'AI generování selhalo.'
+          success: "Odpověď generována pomocí AI.",
+          failure: "AI generování selhalo.",
         },
         en: {
-          success: 'Response generated by AI.',
-          failure: 'AI generation failed.'
+          success: "Response generated by AI.",
+          failure: "AI generation failed.",
         },
         de: {
-          success: 'Antwort durch KI generiert.',
-          failure: 'KI-Generierung fehlgeschlagen.'
+          success: "Antwort durch KI generiert.",
+          failure: "KI-Generierung fehlgeschlagen.",
         },
         uk: {
-          success: 'Відповідь згенерована ШІ.',
-          failure: 'Генерація ШІ не вдалася.'
-        }
+          success: "Відповідь згенерована ШІ.",
+          failure: "Генерація ШІ не вдалася.",
+        },
       };
 
       // Get language from payload, default to Czech
-      const userLang = trace.payload?.lang || 'cs';
+      const userLang = trace.payload?.lang || "cs";
       // Get language messages or fall back to Czech if not supported
       const messages = languageMessages[userLang] || languageMessages.cs;
 
@@ -610,40 +642,40 @@ export const StreamingResponseExtension = {
         aiInfoText.textContent = messages.success;
       } else {
         aiInfoText.textContent = messages.failure;
-        aiInfoFooter.style.color = '#DC2626'; // Indicate failure visually
+        aiInfoFooter.style.color = "#DC2626"; // Indicate failure visually
       }
 
       // Create tooltip with simplified model sequence info
-      const modelInfoTooltip = document.createElement('div');
-      const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
+      const modelInfoTooltip = document.createElement("div");
+      const modelTypeClass = successfulModel ? successfulModel.type : "failed"; // Use type for styling or 'failed'
       modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
 
       // Language support for tooltip messages
       const tooltipMessages = {
         cs: {
-          title: 'Spuštěné AI modely:',
-          noModels: 'Žádné modely nebyly spuštěny.',
-          allFailed: '(Všechny selhaly)',
-          unknown: 'Neznámý ID:'
+          title: "Spuštěné AI modely:",
+          noModels: "Žádné modely nebyly spuštěny.",
+          allFailed: "(Všechny selhaly)",
+          unknown: "Neznámý ID:",
         },
         en: {
-          title: 'AI models executed:',
-          noModels: 'No models were executed.',
-          allFailed: '(All failed)',
-          unknown: 'Unknown ID:'
+          title: "AI models executed:",
+          noModels: "No models were executed.",
+          allFailed: "(All failed)",
+          unknown: "Unknown ID:",
         },
         de: {
-          title: 'Ausgeführte KI-Modelle:',
-          noModels: 'Es wurden keine Modelle ausgeführt.',
-          allFailed: '(Alle fehlgeschlagen)',
-          unknown: 'Unbekannte ID:'
+          title: "Ausgeführte KI-Modelle:",
+          noModels: "Es wurden keine Modelle ausgeführt.",
+          allFailed: "(Alle fehlgeschlagen)",
+          unknown: "Unbekannte ID:",
         },
         uk: {
-          title: 'Виконані моделі ШІ:',
-          noModels: 'Жодна модель не була виконана.',
-          allFailed: '(Усі не вдалися)',
-          unknown: 'Невідомий ID:'
-        }
+          title: "Виконані моделі ШІ:",
+          noModels: "Жодна модель не була виконана.",
+          allFailed: "(Усі не вдалися)",
+          unknown: "Невідомий ID:",
+        },
       };
 
       // Get tooltip messages or fall back to Czech if not supported
@@ -651,12 +683,16 @@ export const StreamingResponseExtension = {
 
       let tooltipHTML = `<strong>${tooltipText.title}</strong> `;
       if (attemptedModels.length > 0) {
-        tooltipHTML += attemptedModels.map(attempt => {
-          const modelInfo = modelsRegistry.find(m => m.id === attempt.id);
-          const displayName = modelInfo ? modelInfo.displayName : `${tooltipText.unknown}${attempt.id}`;
-          const statusIcon = attempt.success === true ? '✅' : '❌';
-          return `${statusIcon} ${displayName}`;
-        }).join(' → '); // Use arrow separator
+        tooltipHTML += attemptedModels
+          .map((attempt) => {
+            const modelInfo = modelsRegistry.find((m) => m.id === attempt.id);
+            const displayName = modelInfo
+              ? modelInfo.displayName
+              : `${tooltipText.unknown}${attempt.id}`;
+            const statusIcon = attempt.success === true ? "✅" : "❌";
+            return `${statusIcon} ${displayName}`;
+          })
+          .join(" → "); // Use arrow separator
       } else {
         tooltipHTML += tooltipText.noModels; // Fallback message
       }
@@ -674,34 +710,37 @@ export const StreamingResponseExtension = {
       aiInfoFooter.appendChild(modelInfoTooltip);
 
       // Toggle dropdown visibility on click
-      aiInfoFooter.addEventListener('click', function(e) {
+      aiInfoFooter.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        const isVisible = modelInfoTooltip.classList.toggle('visible');
+        const isVisible = modelInfoTooltip.classList.toggle("visible");
         // Toggle class on footer for icon rotation
         if (isVisible) {
-          aiInfoFooter.classList.add('tooltip-visible');
+          aiInfoFooter.classList.add("tooltip-visible");
         } else {
-          aiInfoFooter.classList.remove('tooltip-visible');
+          aiInfoFooter.classList.remove("tooltip-visible");
         }
       });
 
       // Prevent tooltip from closing when clicking inside it
-      modelInfoTooltip.addEventListener('click', function(e) {
+      modelInfoTooltip.addEventListener("click", function (e) {
         e.stopPropagation();
       });
 
       // Close tooltip only when clicking outside both the footer and tooltip
-      document.addEventListener('click', function(e) {
-        if (!aiInfoFooter.contains(e.target) && !modelInfoTooltip.contains(e.target)) {
-          modelInfoTooltip.classList.remove('visible');
-          aiInfoFooter.classList.remove('tooltip-visible'); // Also remove class here
+      document.addEventListener("click", function (e) {
+        if (
+          !aiInfoFooter.contains(e.target) &&
+          !modelInfoTooltip.contains(e.target)
+        ) {
+          modelInfoTooltip.classList.remove("visible");
+          aiInfoFooter.classList.remove("tooltip-visible"); // Also remove class here
         }
       });
 
       // Add the footer after the response content
       // Ensure it's added only once (important if called on failure after potential partial success render)
-      const existingFooter = responseSection.querySelector('.ai-info-footer');
+      const existingFooter = responseSection.querySelector(".ai-info-footer");
       if (existingFooter) {
         existingFooter.remove();
       }
@@ -720,100 +759,118 @@ export const StreamingResponseExtension = {
             debugMode: payload.debugMode,
             projectName: payload.projectName,
             systemPrompt: payload.systemPrompt,
-            user_id: payload.user_id
+            user_id: payload.user_id,
           });
           console.log(`🌐 Calling proxy URL:`, proxyUrl);
         }
 
         const response = await fetch(proxyUrl, {
           method: "POST",
-          headers: { 
+          headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
         });
 
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok)
+          throw new Error(`HTTP error! status: ${response.status}`);
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
-        let buffer = '';
+        let buffer = "";
 
         while (true) {
           const { done, value } = await reader.read();
           if (done) {
             if (payload.debugMode === 1) {
-              console.log('Stream completed');
-              console.log('📝 COMPLETE_RESPONSE_BEGIN');
+              console.log("Stream completed");
+              console.log("📝 COMPLETE_RESPONSE_BEGIN");
               console.log(completeResponse);
-              console.log('📝 COMPLETE_RESPONSE_END');
+              console.log("📝 COMPLETE_RESPONSE_END");
             }
             return;
           }
 
           buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n');
+          const lines = buffer.split("\n");
 
           // Process all complete lines
-          buffer = lines.pop() || ''; // Keep the incomplete line in buffer
+          buffer = lines.pop() || ""; // Keep the incomplete line in buffer
 
           for (const line of lines) {
-            if (!line.trim() || !line.startsWith('data: ')) continue;
+            if (!line.trim() || !line.startsWith("data: ")) continue;
 
             const data = line.slice(6); // Remove 'data: ' prefix
-            if (data === '[DONE]') {
+            if (data === "[DONE]") {
               if (payload.debugMode === 1) {
-                console.log('Stream completed via [DONE] signal');
-                console.log('📝 COMPLETE_RESPONSE_BEGIN');
+                console.log("Stream completed via [DONE] signal");
+                console.log("📝 COMPLETE_RESPONSE_BEGIN");
                 console.log(completeResponse);
-                console.log('📝 COMPLETE_RESPONSE_END');
+                console.log("📝 COMPLETE_RESPONSE_END");
               }
 
               // This is the ONLY place we should make the PATCH request
               try {
                 if (payload.debugMode === 1) {
-                  console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
+                  console.log(
+                    "📤 Updating Voiceflow variable with complete response length:",
+                    completeResponse.length,
+                  );
                 }
 
-                const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    user_id: payload.user_id,
-                    projectName: payload.projectName,
-                    variables: {
-                      "LLM_Main_Response": completeResponse
+                const updateResponse = await fetch(
+                  "https://utils.hypedigitaly.ai/api/voiceflow-variable-update",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
                     },
-                    debugMode: payload.debugMode || 0
-                  }),
-                });
+                    body: JSON.stringify({
+                      user_id: payload.user_id,
+                      projectName: payload.projectName,
+                      variables: {
+                        LLM_Main_Response: completeResponse,
+                      },
+                      debugMode: payload.debugMode || 0,
+                    }),
+                  },
+                );
 
                 if (!updateResponse.ok) {
                   const errorText = await updateResponse.text();
                   if (payload.debugMode === 1) {
-                    console.error('Failed to update variables:', errorText);
+                    console.error("Failed to update variables:", errorText);
                   }
                 } else {
                   if (payload.debugMode === 1) {
-                    console.log('Successfully updated variables with complete response');
-                    console.log('📝 Complete LLM_Main_Response:', completeResponse);
+                    console.log(
+                      "Successfully updated variables with complete response",
+                    );
+                    console.log(
+                      "📝 Complete LLM_Main_Response:",
+                      completeResponse,
+                    );
                   }
 
                   if (payload.debugMode === 1) {
-                    console.log('Final completeResponse length:', completeResponse.length);
+                    console.log(
+                      "Final completeResponse length:",
+                      completeResponse.length,
+                    );
                     try {
                       const responseData = await updateResponse.json();
-                      console.log('Voiceflow update response:', responseData);
+                      console.log("Voiceflow update response:", responseData);
                     } catch (e) {
-                      console.log('Voiceflow update status:', updateResponse.status);
+                      console.log(
+                        "Voiceflow update status:",
+                        updateResponse.status,
+                      );
                     }
                   }
                 }
               } catch (error) {
                 if (payload.debugMode === 1) {
-                  console.error('Error updating variables:', error);
+                  console.error("Error updating variables:", error);
                 }
               }
 
@@ -828,20 +885,22 @@ export const StreamingResponseExtension = {
               }
 
               if (payload.debugMode === 1) {
-                if (parsed.type === 'content' && parsed.content) {
-                  console.log(`Received content from ${endpoint}:`, parsed.content);
+                if (parsed.type === "content" && parsed.content) {
+                  console.log(
+                    `Received content from ${endpoint}:`,
+                    parsed.content,
+                  );
                 }
               }
               updateContent(parsed.content);
               completeResponse += parsed.content; // Collect complete response
             } catch (e) {
               if (payload.debugMode === 1) {
-                console.warn('Failed to parse SSE data:', e);
+                console.warn("Failed to parse SSE data:", e);
               }
             }
           }
         }
-
       } catch (error) {
         if (payload.debugMode === 1) {
           console.error(`Stream error from ${endpoint}:`, error);
@@ -862,7 +921,9 @@ export const StreamingResponseExtension = {
       if (trace.payload.debugMode === 1) {
         console.log("📊 MODEL SEQUENCE DEBUG INFO:");
         console.log("=== CONFIGURED MODEL SEQUENCE ===");
-        console.log(`📋 Raw sequence: ${trace.payload.modelSequence || "Default"}`);
+        console.log(
+          `📋 Raw sequence: ${trace.payload.modelSequence || "Default"}`,
+        );
         console.log(`📋 Parsed IDs: ${JSON.stringify(modelSequence)}`);
 
         // Print detailed model info
@@ -874,11 +935,11 @@ export const StreamingResponseExtension = {
       }
 
       // Keep track of models attempted and their outcome
-      const attemptedModels = []; 
+      const attemptedModels = [];
 
       // Try each model in sequence
       for (const modelId of modelSequence) {
-        const model = modelsRegistry.find(m => m.id === modelId);
+        const model = modelsRegistry.find((m) => m.id === modelId);
 
         if (!model) {
           if (trace.payload.debugMode === 1) {
@@ -892,7 +953,9 @@ export const StreamingResponseExtension = {
         attemptedModels.push(currentAttempt);
 
         if (trace.payload.debugMode === 1) {
-          console.log(`\n🔄 ATTEMPT ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}: Using model ID:${model.id}`);
+          console.log(
+            `\n🔄 ATTEMPT ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}: Using model ID:${model.id}`,
+          );
           console.log(`📌 Model: ${model.displayName} (${model.type})`);
           console.log(`📌 Model name: ${model.name}`);
           console.log(`📌 Endpoint: ${model.endpoint}`);
@@ -924,7 +987,9 @@ export const StreamingResponseExtension = {
             console.log(`📌 Model: ${model.displayName} (${model.type})`);
             console.log(`📌 Model name: ${model.name}`);
             console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
-            console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
+            console.log(
+              `📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`,
+            );
             console.log(`=============================`);
           }
           addAIInfoFooter(attemptedModels); // Pass the list of attempted models
@@ -937,15 +1002,19 @@ export const StreamingResponseExtension = {
           console.log(`📌 Model: ${model.displayName} (${model.type})`);
           console.log(`📌 Model name: ${model.name}`);
           console.log(`📌 Status: REQUEST FAILED`);
-          console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
+          console.log(
+            `📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`,
+          );
 
           // Check if there are more models to try
           const nextModelIndex = modelSequence.indexOf(modelId) + 1;
           if (nextModelIndex < modelSequence.length) {
             const nextModelId = modelSequence[nextModelIndex];
-            const nextModel = modelsRegistry.find(m => m.id === nextModelId);
+            const nextModel = modelsRegistry.find((m) => m.id === nextModelId);
             if (nextModel) {
-              console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
+              console.log(
+                `📌 Next attempt: ${getModelDetailById(nextModelId)}`,
+              );
             }
           } else {
             console.log(`📌 No more models to try in sequence`);
@@ -967,7 +1036,7 @@ export const StreamingResponseExtension = {
         console.log(`=============================`);
       }
       // Add the footer indicating failure, showing all attempts
-      addAIInfoFooter(attemptedModels); 
+      addAIInfoFooter(attemptedModels);
     }
 
     // Start the LLM orchestration
