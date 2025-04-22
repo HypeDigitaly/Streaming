@@ -74,22 +74,32 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
-    const response = await openai.chat.completions.create({
-      model: model || 'gpt-4.1-2025-04-14',
-      max_tokens: max_tokens || 4096,
-      temperature: temperature || 0,
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt
-        },
-        {
-          role: 'user',
-          content: userData
-        }
-      ],
-      stream: true,
-    });
+    // Create an AbortController for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+      if (debugMode === 1) {
+        console.log('⏱️ OpenAI API request timed out after 5 seconds');
+      }
+    }, 5000); // 5 seconds timeout
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: model || 'gpt-4.1-2025-04-14',
+        max_tokens: max_tokens || 4096,
+        temperature: temperature || 0,
+        messages: [
+          {
+            role: 'system',
+            content: systemPrompt
+          },
+          {
+            role: 'user',
+            content: userData
+          }
+        ],
+        stream: true,
+      }, { signal: controller.signal });
 
     if (debugMode === 1) {
       console.log('📥 OpenAI API Response initialized');
@@ -117,12 +127,21 @@ export default async function handler(req, res) {
     }
     res.write('data: [DONE]\n\n');
     res.end();
+    
+    // Clear the timeout
+    clearTimeout(timeoutId);
 
   } catch (error) {
-    if (req.body.debugMode === 1) {
+    clearTimeout(timeoutId);
+    if (error.name === 'AbortError') {
+      if (debugMode === 1) {
+        console.warn('⏱️ OpenAI request timed out after 5 seconds');
+      }
+      res.write(`data: ${JSON.stringify({ error: 'Request timed out after 5 seconds' })}\n\n`);
+    } else if (req.body.debugMode === 1) {
       console.error('Stream Error:', error);
+      res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     }
-    res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
 }

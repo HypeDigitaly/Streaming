@@ -86,8 +86,18 @@ export default async function handler(req, res) {
       },
     });
 
-    // Send message and get streamed response
-    const response = await chat.sendMessageStream(userData);
+    // Create an AbortController for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+      if (debugMode === 1) {
+        console.log('⏱️ Gemini API request timed out after 5 seconds');
+      }
+    }, 5000); // 5 seconds timeout
+
+    try {
+      // Send message and get streamed response
+      const response = await chat.sendMessageStream(userData, { signal: controller.signal });
 
     if (debugMode === 1) {
       console.log('📥 Gemini API Response initialized');
@@ -116,12 +126,21 @@ export default async function handler(req, res) {
     }
     res.write('data: [DONE]\n\n');
     res.end();
+    
+    // Clear the timeout
+    clearTimeout(timeoutId);
 
   } catch (error) {
-    if (req.body.debugMode === 1) {
+    clearTimeout(timeoutId);
+    if (error.name === 'AbortError') {
+      if (debugMode === 1) {
+        console.warn('⏱️ Gemini request timed out after 5 seconds');
+      }
+      res.write(`data: ${JSON.stringify({ error: 'Request timed out after 5 seconds' })}\n\n`);
+    } else if (req.body.debugMode === 1) {
       console.error('Stream Error:', error);
+      res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     }
-    res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
 }

@@ -116,23 +116,33 @@ export default async function handler(req, res) {
       });
     }
 
-    const response = await anthropic.messages.create({
-      model: model || 'claude-3-sonnet-20241022',
-      max_tokens: max_tokens || 4096,
-      temperature: temperature || 0,
-      messages: [{
-        role: 'user',
-        content: userData
-      }],
-      system: [{
-        type: "text",
-        text: systemPrompt,
-        cache_control: {
-          type: "ephemeral"
-        }
-      }],
-      stream: true,
-    });
+    // Create an AbortController for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+      if (debugMode === 1) {
+        console.log('⏱️ Claude API request timed out after 5 seconds');
+      }
+    }, 5000); // 5 seconds timeout
+
+    try {
+      const response = await anthropic.messages.create({
+        model: model || 'claude-3-sonnet-20241022',
+        max_tokens: max_tokens || 4096,
+        temperature: temperature || 0,
+        messages: [{
+          role: 'user',
+          content: userData
+        }],
+        system: [{
+          type: "text",
+          text: systemPrompt,
+          cache_control: {
+            type: "ephemeral"
+          }
+        }],
+        stream: true,
+      }, { signal: controller.signal });
 
     if (debugMode === 1) {
       console.log('📥 Claude API Response Object:', JSON.stringify(response, null, 2));
@@ -177,12 +187,21 @@ export default async function handler(req, res) {
     }
     res.write('data: [DONE]\n\n');
     res.end();
+    
+    // Clear the timeout
+    clearTimeout(timeoutId);
 
   } catch (error) {
-    if (debugMode === 1) {
+    clearTimeout(timeoutId);
+    if (error.name === 'AbortError') {
+      if (debugMode === 1) {
+        console.warn('⏱️ Claude request timed out after 5 seconds');
+      }
+      res.write(`data: ${JSON.stringify({ error: 'Request timed out after 5 seconds' })}\n\n`);
+    } else if (debugMode === 1) {
       console.error('Stream Error:', error);
+      res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     }
-    res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
 }
