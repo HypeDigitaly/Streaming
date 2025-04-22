@@ -93,6 +93,10 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
+    // Send immediate response to signal connection is established
+    res.write(`data: ${JSON.stringify({ type: 'status', status: 'connected' })}\n\n`);
+    res.flush?.();
+
     if (debugMode === 1) {
       console.log('🚀 Making Claude API call with config:', {
         model: model || 'claude-3-sonnet-20241022',
