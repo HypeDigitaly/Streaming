@@ -962,10 +962,20 @@ export const StreamingResponseExtension = {
       // Promise for the timeout
       const timeoutPromise = new Promise((_, reject) => {
         const timeoutId = setTimeout(() => {
+          // Abort the fetch *before* rejecting due to timeout
+          if (!abortController.signal.aborted) {
+            if (payload.debugMode === 1) {
+               console.log(`Aborting fetch for ${endpoint} due to timeout.`);
+            }
+            abortController.abort();
+          }
           reject(new Error(`API call timed out after ${TIMEOUT_MS}ms for endpoint: ${endpoint}`));
         }, TIMEOUT_MS);
-        // Clean up timeout if fetchPromise settles first
-        fetchPromise.finally(() => clearTimeout(timeoutId));
+
+        // IMPORTANT: Clean up the timeout if fetchPromise settles first
+        fetchPromise
+          .then(() => clearTimeout(timeoutId)) // Clear on resolve
+          .catch(() => clearTimeout(timeoutId)); // Clear on reject
       });
 
       // Race the fetch against the timeout
@@ -977,13 +987,6 @@ export const StreamingResponseExtension = {
         // This catches both timeout errors and fetch/processing errors from fetchPromise's reject path
         if (payload.debugMode === 1) {
           console.error(`Error during callLLMAPI race for ${endpoint}:`, error.message); // Log the specific error (timeout or otherwise)
-        }
-        // IMPORTANT: Abort the fetch request if it hasn't been aborted yet (e.g., timeout occurred before fetch finished/errored)
-        if (!abortController.signal.aborted) {
-          if (payload.debugMode === 1) {
-             console.log(`Aborting fetch for ${endpoint} due to error/timeout in race.`);
-          }
-          abortController.abort();
         }
         // Ensure the response section is visible even on failure, if it hasn't already been made visible
         if (isFirstChunk) {
