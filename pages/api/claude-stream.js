@@ -23,8 +23,8 @@ export default async function handler(req, res) {
 
   res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, debug');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'false');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -93,10 +93,6 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
-    // Send immediate response to signal connection is established
-    res.write(`data: ${JSON.stringify({ type: 'status', status: 'connected' })}\n\n`);
-    res.flush?.();
-
     if (debugMode === 1) {
       console.log('🚀 Making Claude API call with config:', {
         model: model || 'claude-3-sonnet-20241022',
@@ -116,33 +112,23 @@ export default async function handler(req, res) {
       });
     }
 
-    // Create an AbortController for timeout
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => {
-      controller.abort();
-      if (debugMode === 1) {
-        console.log('⏱️ Claude API request timed out after 10 seconds');
-      }
-    }, 10000); // 10 seconds timeout - increased from 5 seconds
-
-    try {
-      const response = await anthropic.messages.create({
-        model: model || 'claude-3-sonnet-20241022',
-        max_tokens: max_tokens || 4096,
-        temperature: temperature || 0,
-        messages: [{
-          role: 'user',
-          content: userData
-        }],
-        system: [{
-          type: "text",
-          text: systemPrompt,
-          cache_control: {
-            type: "ephemeral"
-          }
-        }],
-        stream: true,
-      }, { signal: controller.signal });
+    const response = await anthropic.messages.create({
+      model: model || 'claude-3-sonnet-20241022',
+      max_tokens: max_tokens || 4096,
+      temperature: temperature || 0,
+      messages: [{
+        role: 'user',
+        content: userData
+      }],
+      system: [{
+        type: "text",
+        text: systemPrompt,
+        cache_control: {
+          type: "ephemeral"
+        }
+      }],
+      stream: true,
+    });
 
     if (debugMode === 1) {
       console.log('📥 Claude API Response Object:', JSON.stringify(response, null, 2));
@@ -187,21 +173,12 @@ export default async function handler(req, res) {
     }
     res.write('data: [DONE]\n\n');
     res.end();
-    
-    // Clear the timeout
-    clearTimeout(timeoutId);
 
   } catch (error) {
-    clearTimeout(timeoutId);
-    if (error.name === 'AbortError') {
-      if (debugMode === 1) {
-        console.warn('⏱️ Claude request timed out after 5 seconds');
-      }
-      res.write(`data: ${JSON.stringify({ error: 'Request timed out after 5 seconds' })}\n\n`);
-    } else if (debugMode === 1) {
+    if (debugMode === 1) {
       console.error('Stream Error:', error);
-      res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     }
+    res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
 }
