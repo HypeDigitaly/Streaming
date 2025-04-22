@@ -710,143 +710,200 @@ export const StreamingResponseExtension = {
 
     // Generic function to call any LLM API provider
     async function callLLMAPI(endpoint, payload) {
-      try {
-        const proxyUrl = `https://utils.hypedigitaly.ai${endpoint}`;
-        if (payload.debugMode === 1) {
-          console.log(`📦 Payload for ${endpoint}:`, {
-            model: payload.model,
-            max_tokens: payload.max_tokens,
-            temperature: payload.temperature,
-            debugMode: payload.debugMode,
-            projectName: payload.projectName,
-            systemPrompt: payload.systemPrompt,
-            user_id: payload.user_id
-          });
-          console.log(`🌐 Calling proxy URL:`, proxyUrl);
-        }
+      const TIMEOUT_MS = 3000; // 3 seconds timeout
 
-        const response = await fetch(proxyUrl, {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) {
-            if (payload.debugMode === 1) {
-              console.log('Stream completed');
-              console.log('📝 COMPLETE_RESPONSE_BEGIN');
-              console.log(completeResponse);
-              console.log('📝 COMPLETE_RESPONSE_END');
-            }
-            return;
+      // Promise for the actual API call and streaming
+      const fetchPromise = new Promise(async (resolve, reject) => {
+        let response; // Declare response here to access it in finally block if needed
+        try {
+          const proxyUrl = `https://utils.hypedigitaly.ai${endpoint}`;
+          if (payload.debugMode === 1) {
+            console.log(`📦 Payload for ${endpoint}:`, {
+              model: payload.model,
+              max_tokens: payload.max_tokens,
+              temperature: payload.temperature,
+              debugMode: payload.debugMode,
+              projectName: payload.projectName,
+              systemPrompt: payload.systemPrompt,
+              user_id: payload.user_id
+            });
+            console.log(`🌐 Calling proxy URL:`, proxyUrl);
           }
 
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n');
+          response = await fetch(proxyUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
 
-          // Process all complete lines
-          buffer = lines.pop() || ''; // Keep the incomplete line in buffer
+          if (!response.ok) {
+            // Try to read error body for better debugging
+            let errorText = `HTTP error! status: ${response.status}`;
+            try {
+              const body = await response.text();
+              errorText += `, body: ${body}`;
+            } catch (e) {
+              // Ignore if reading body fails
+            }
+            throw new Error(errorText);
+          }
 
-          for (const line of lines) {
-            if (!line.trim() || !line.startsWith('data: ')) continue;
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let streamBuffer = ''; // Renamed to avoid conflict with outer buffer
+          let localCompleteResponse = ''; // Use a local variable for this attempt
 
-            const data = line.slice(6); // Remove 'data: ' prefix
-            if (data === '[DONE]') {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) {
               if (payload.debugMode === 1) {
-                console.log('Stream completed via [DONE] signal');
-                console.log('📝 COMPLETE_RESPONSE_BEGIN');
-                console.log(completeResponse);
-                console.log('📝 COMPLETE_RESPONSE_END');
+                console.log('Stream completed');
+                console.log('📝 COMPLETE_RESPONSE_BEGIN (Local)');
+                console.log(localCompleteResponse);
+                console.log('📝 COMPLETE_RESPONSE_END (Local)');
               }
+              // The [DONE] signal handling below should trigger the Voiceflow update
+              // We resolve with true here only if the stream finished *without* a [DONE] signal explicitly being processed?
+              // It's safer to resolve based on the [DONE] signal handling.
+              // This 'done' might just mean the underlying TCP stream closed.
+              // Let's rely on the explicit 'data: [DONE]' check.
+              break; // Exit the loop, wait for potential final buffer processing
+            }
 
-              // This is the ONLY place we should make the PATCH request
-              try {
+            streamBuffer += decoder.decode(value, { stream: true });
+            const lines = streamBuffer.split('\n');
+
+            // Process all complete lines
+            streamBuffer = lines.pop() || ''; // Keep the incomplete line in buffer
+
+            for (const line of lines) {
+              if (!line.trim() || !line.startsWith('data: ')) continue;
+
+              const data = line.slice(6); // Remove 'data: ' prefix
+              if (data === '[DONE]') {
                 if (payload.debugMode === 1) {
-                  console.log('📤 Updating Voiceflow variable with complete response length:', completeResponse.length);
+                  console.log('Stream completed via [DONE] signal');
+                  console.log('📝 COMPLETE_RESPONSE_BEGIN (on DONE)');
+                  console.log(localCompleteResponse);
+                  console.log('📝 COMPLETE_RESPONSE_END (on DONE)');
                 }
 
-                const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    user_id: payload.user_id,
-                    projectName: payload.projectName,
-                    variables: {
-                      "LLM_Main_Response": completeResponse
+                // This is the ONLY place we should make the PATCH request
+                try {
+                  if (payload.debugMode === 1) {
+                    console.log('📤 Updating Voiceflow variable with complete response length:', localCompleteResponse.length);
+                  }
+
+                  const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
                     },
-                    debugMode: payload.debugMode || 0
-                  }),
-                });
+                    body: JSON.stringify({
+                      user_id: payload.user_id,
+                      projectName: payload.projectName,
+                      variables: {
+                        "LLM_Main_Response": localCompleteResponse // Use the locally accumulated response
+                      },
+                      debugMode: payload.debugMode || 0
+                    }),
+                  });
 
-                if (!updateResponse.ok) {
-                  const errorText = await updateResponse.text();
-                  if (payload.debugMode === 1) {
-                    console.error('Failed to update variables:', errorText);
-                  }
-                } else {
-                  if (payload.debugMode === 1) {
-                    console.log('Successfully updated variables with complete response');
-                    console.log('📝 Complete LLM_Main_Response:', completeResponse);
-                  }
-
-                  if (payload.debugMode === 1) {
-                    console.log('Final completeResponse length:', completeResponse.length);
-                    try {
-                      const responseData = await updateResponse.json();
-                      console.log('Voiceflow update response:', responseData);
-                    } catch (e) {
-                      console.log('Voiceflow update status:', updateResponse.status);
+                  if (!updateResponse.ok) {
+                    const errorText = await updateResponse.text();
+                    if (payload.debugMode === 1) {
+                      console.error('Failed to update variables:', errorText);
+                    }
+                    // Decide if failure to update Voiceflow should fail the whole API call
+                    // For now, we let it proceed but log the error.
+                  } else {
+                    if (payload.debugMode === 1) {
+                      console.log('Successfully updated variables with complete response');
+                      console.log('📝 Complete LLM_Main_Response:', localCompleteResponse);
+                      try {
+                        const responseData = await updateResponse.json();
+                        console.log('Voiceflow update response:', responseData);
+                      } catch (e) {
+                        console.log('Voiceflow update status:', updateResponse.status);
+                      }
                     }
                   }
+                } catch (error) {
+                  if (payload.debugMode === 1) {
+                    console.error('Error updating variables:', error);
+                  }
+                  // Similarly, decide if this error should reject the promise. For now, log and continue.
                 }
-              } catch (error) {
+                resolve(true); // Explicitly resolve with true after [DONE] and update attempt
+                return; // Exit the function after successful completion
+              }
+
+              try {
+                const parsed = JSON.parse(data);
+
+                if (parsed.error) {
+                  throw new Error(parsed.error);
+                }
+
+                const content = parsed.content || '';
+                if (payload.debugMode === 1 && content) {
+                   console.log(`Received content chunk from ${endpoint}:`, content);
+                }
+                updateContent(content);
+                localCompleteResponse += content; // Append to local complete response
+                completeResponse += content; // Keep appending to the global complete response as well (for display)
+
+              } catch (e) {
                 if (payload.debugMode === 1) {
-                  console.error('Error updating variables:', error);
+                  console.warn('Failed to parse SSE data:', e, 'Data:', data);
                 }
-              }
-
-              return true; // Success
-            }
-
-            try {
-              const parsed = JSON.parse(data);
-
-              if (parsed.error) {
-                throw new Error(parsed.error);
-              }
-
-              if (payload.debugMode === 1) {
-                if (parsed.type === 'content' && parsed.content) {
-                  console.log(`Received content from ${endpoint}:`, parsed.content);
-                }
-              }
-              updateContent(parsed.content);
-              completeResponse += parsed.content; // Collect complete response
-            } catch (e) {
-              if (payload.debugMode === 1) {
-                console.warn('Failed to parse SSE data:', e);
+                 // Don't reject here, maybe the next chunk is fine
               }
             }
           }
-        }
+          // If the loop finishes without a '[DONE]', it might be an unexpected stream end.
+          // We should likely treat this as an error or incomplete response.
+          if (payload.debugMode === 1) {
+            console.warn(`Stream ended for ${endpoint} without explicit [DONE] signal.`);
+          }
+          reject(new Error(`Stream ended for ${endpoint} without explicit [DONE] signal.`));
 
-      } catch (error) {
-        if (payload.debugMode === 1) {
-          console.error(`Stream error from ${endpoint}:`, error);
+        } catch (error) {
+          if (payload.debugMode === 1) {
+            console.error(`Stream processing error for ${endpoint}:`, error);
+          }
+          reject(error); // Reject the promise on fetch or processing errors
         }
-        return false; // Failure
+      });
+
+      // Promise for the timeout
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => {
+          reject(new Error(`API call timed out after ${TIMEOUT_MS}ms for endpoint: ${endpoint}`));
+        }, TIMEOUT_MS);
+      });
+
+      // Race the fetch against the timeout
+      try {
+        const success = await Promise.race([fetchPromise, timeoutPromise]);
+        return success; // Should be true if fetchPromise resolved
+      } catch (error) {
+        // This catches both timeout errors and fetch/processing errors from fetchPromise
+        if (payload.debugMode === 1) {
+          console.error(`Error during callLLMAPI for ${endpoint}:`, error.message);
+        }
+        // Ensure the response section is visible even on failure, if it hasn't already been made visible
+        if (isFirstChunk) {
+            const thinkingHeader = container.querySelector('.thinking-header');
+            if (thinkingHeader) {
+                thinkingHeader.classList.add('hidden');
+            }
+            responseSection.classList.add('visible');
+            isFirstChunk = false; // Mark as not first chunk anymore
+        }
+        return false; // Indicate failure
       }
     }
 
