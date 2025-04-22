@@ -613,7 +613,7 @@ export const StreamingResponseExtension = {
         aiInfoFooter.style.color = '#DC2626'; // Indicate failure visually
       }
 
-      // Create tooltip with simplified model sequence info
+      // Create tooltip with detailed model sequence info
       const modelInfoTooltip = document.createElement('div');
       const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
       modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
@@ -624,24 +624,28 @@ export const StreamingResponseExtension = {
           title: 'Spuštěné AI modely:',
           noModels: 'Žádné modely nebyly spuštěny.',
           allFailed: '(Všechny selhaly)',
-          unknown: 'Neznámý ID:'
+          unknown: 'Neznámý ID:',
+          allTimedOut: '(Všechny vypršely)'
         },
         en: {
           title: 'AI models executed:',
           noModels: 'No models were executed.',
           allFailed: '(All failed)',
-          unknown: 'Unknown ID:'
+          unknown: 'Unknown ID:',
+          allTimedOut: '(All Timed Out)'
         },
         de: {
           title: 'Ausgeführte KI-Modelle:',
           noModels: 'Es wurden keine Modelle ausgeführt.',
           allFailed: '(Alle fehlgeschlagen)',
-          unknown: 'Unbekannte ID:'
+          unknown: 'Unbekannte ID:',
+          allTimedOut: '(Alle Zeitüberschreitungen)'
         },
         uk: {
           title: 'Виконані моделі ШІ:',
           noModels: 'Жодна модель не була виконана.',
           allFailed: '(Усі не вдалися)',
+          allTimedOut: '(Усі за часом)',
           unknown: 'Невідомий ID:'
         }
       };
@@ -654,7 +658,14 @@ export const StreamingResponseExtension = {
         tooltipHTML += attemptedModels.map(attempt => {
           const modelInfo = modelsRegistry.find(m => m.id === attempt.id);
           const displayName = modelInfo ? modelInfo.displayName : `${tooltipText.unknown}${attempt.id}`;
-          const statusIcon = attempt.success === true ? '✅' : '❌';
+          
+          let statusIcon = '❓'; // Default for unknown/not run state
+          if (attempt.success === true) {
+            statusIcon = '✅';
+          } else if (attempt.success === false) {
+            statusIcon = attempt.reason === 'timeout' ? '⏱️' : '❌'; // Use stopwatch for timeout
+          }
+          
           return `${statusIcon} ${displayName}`;
         }).join(' → '); // Use arrow separator
       } else {
@@ -663,7 +674,16 @@ export const StreamingResponseExtension = {
 
       // Add overall result if all failed
       if (!wasSuccess && attemptedModels.length > 0) {
-        tooltipHTML += ` ${tooltipText.allFailed}`;
+        const allFailedReason = attemptedModels.every(a => a.success === false && a.reason === 'timeout') ? '(All Timed Out)' : '(All Failed)';
+        // Use specific text based on user language
+        let allFailedText = tooltipText.allFailed; // Default
+        if (attemptedModels.every(a => a.success === false && a.reason === 'timeout')) {
+            // Use the specific 'allTimedOut' translation if available, otherwise fallback to 'allFailed'
+            allFailedText = tooltipText.allTimedOut || tooltipText.allFailed;
+        }
+        // Add more languages as needed
+
+        tooltipHTML += ` ${allFailedText}`; // Add specific failure reason
       }
 
       modelInfoTooltip.innerHTML = tooltipHTML;
@@ -711,6 +731,7 @@ export const StreamingResponseExtension = {
     // Generic function to call any LLM API provider
     async function callLLMAPI(endpoint, payload) {
       const TIMEOUT_MS = 3000; // 3 seconds timeout
+      const abortController = new AbortController(); // Create an AbortController
 
       // Promise for the actual API call and streaming
       const fetchPromise = new Promise(async (resolve, reject) => {
@@ -736,6 +757,7 @@ export const StreamingResponseExtension = {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(payload),
+            signal: abortController.signal // Pass the abort signal to fetch
           });
 
           if (!response.ok) {
@@ -755,146 +777,179 @@ export const StreamingResponseExtension = {
           let streamBuffer = ''; // Renamed to avoid conflict with outer buffer
           let localCompleteResponse = ''; // Use a local variable for this attempt
 
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) {
-              if (payload.debugMode === 1) {
-                console.log('Stream completed');
-                console.log('📝 COMPLETE_RESPONSE_BEGIN (Local)');
-                console.log(localCompleteResponse);
-                console.log('📝 COMPLETE_RESPONSE_END (Local)');
+          // Wrap the reading loop in try/catch to handle potential abort errors
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) {
+                 if (payload.debugMode === 1) {
+                   console.log('Stream loop finished (done=true)');
+                 }
+                 // If the loop finishes without a '[DONE]', it's an unexpected end.
+                 reject(new Error(`Stream ended for ${endpoint} without explicit [DONE] signal.`));
+                 return; // Exit promise execution
               }
-              // The [DONE] signal handling below should trigger the Voiceflow update
-              // We resolve with true here only if the stream finished *without* a [DONE] signal explicitly being processed?
-              // It's safer to resolve based on the [DONE] signal handling.
-              // This 'done' might just mean the underlying TCP stream closed.
-              // Let's rely on the explicit 'data: [DONE]' check.
-              break; // Exit the loop, wait for potential final buffer processing
-            }
 
-            streamBuffer += decoder.decode(value, { stream: true });
-            const lines = streamBuffer.split('\n');
+              streamBuffer += decoder.decode(value, { stream: true });
+              const lines = streamBuffer.split('\\n');
 
-            // Process all complete lines
-            streamBuffer = lines.pop() || ''; // Keep the incomplete line in buffer
+              // Process all complete lines
+              streamBuffer = lines.pop() || ''; // Keep the incomplete line in buffer
 
-            for (const line of lines) {
-              if (!line.trim() || !line.startsWith('data: ')) continue;
-
-              const data = line.slice(6); // Remove 'data: ' prefix
-              if (data === '[DONE]') {
-                if (payload.debugMode === 1) {
-                  console.log('Stream completed via [DONE] signal');
-                  console.log('📝 COMPLETE_RESPONSE_BEGIN (on DONE)');
-                  console.log(localCompleteResponse);
-                  console.log('📝 COMPLETE_RESPONSE_END (on DONE)');
+              for (const line of lines) {
+                // Check if the controller has aborted (e.g., due to timeout)
+                if (abortController.signal.aborted) {
+                    if (payload.debugMode === 1) {
+                        console.log(`Stream processing aborted for ${endpoint}.`);
+                    }
+                    // No need to reject here, the outer race condition already handled it.
+                    // Just stop processing.
+                    return;
                 }
 
-                // This is the ONLY place we should make the PATCH request
-                try {
+                if (!line.trim() || !line.startsWith('data: ')) continue;
+
+                const data = line.slice(6); // Remove 'data: ' prefix
+                if (data === '[DONE]') {
                   if (payload.debugMode === 1) {
-                    console.log('📤 Updating Voiceflow variable with complete response length:', localCompleteResponse.length);
+                    console.log('Stream completed via [DONE] signal');
+                    console.log('📝 COMPLETE_RESPONSE_BEGIN (on DONE)');
+                    console.log(localCompleteResponse);
+                    console.log('📝 COMPLETE_RESPONSE_END (on DONE)');
                   }
 
-                  const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      user_id: payload.user_id,
-                      projectName: payload.projectName,
-                      variables: {
-                        "LLM_Main_Response": localCompleteResponse // Use the locally accumulated response
-                      },
-                      debugMode: payload.debugMode || 0
-                    }),
-                  });
-
-                  if (!updateResponse.ok) {
-                    const errorText = await updateResponse.text();
+                  // This is the ONLY place we should make the PATCH request
+                  try {
                     if (payload.debugMode === 1) {
-                      console.error('Failed to update variables:', errorText);
+                      console.log('📤 Updating Voiceflow variable with complete response length:', localCompleteResponse.length);
                     }
-                    // Decide if failure to update Voiceflow should fail the whole API call
-                    // For now, we let it proceed but log the error.
-                  } else {
-                    if (payload.debugMode === 1) {
-                      console.log('Successfully updated variables with complete response');
-                      console.log('📝 Complete LLM_Main_Response:', localCompleteResponse);
-                      try {
-                        const responseData = await updateResponse.json();
-                        console.log('Voiceflow update response:', responseData);
-                      } catch (e) {
-                        console.log('Voiceflow update status:', updateResponse.status);
+
+                    const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        user_id: payload.user_id,
+                        projectName: payload.projectName,
+                        variables: {
+                          "LLM_Main_Response": localCompleteResponse // Use the locally accumulated response
+                        },
+                        debugMode: payload.debugMode || 0
+                      }),
+                    });
+
+                    if (!updateResponse.ok) {
+                      const errorText = await updateResponse.text();
+                      if (payload.debugMode === 1) {
+                        console.error('Failed to update variables:', errorText);
+                      }
+                      // Decide if failure to update Voiceflow should fail the whole API call
+                      // For now, we let it proceed but log the error.
+                    } else {
+                      if (payload.debugMode === 1) {
+                        console.log('Successfully updated variables with complete response');
+                        console.log('📝 Complete LLM_Main_Response:', localCompleteResponse);
+                        try {
+                          const responseData = await updateResponse.json();
+                          console.log('Voiceflow update response:', responseData);
+                        } catch (e) {
+                          console.log('Voiceflow update status:', updateResponse.status);
+                        }
                       }
                     }
+                  } catch (error) {
+                    if (payload.debugMode === 1) {
+                      console.error('Error updating variables:', error);
+                    }
+                    // Similarly, decide if this error should reject the promise. For now, log and continue.
                   }
-                } catch (error) {
+                  resolve({ success: true }); // Explicitly resolve with success object
+                  return; // Exit the function after successful completion
+                }
+
+                try {
+                  const parsed = JSON.parse(data);
+
+                  if (parsed.error) {
+                    // If the stream itself reports an error, reject the promise
+                    reject(new Error(parsed.error)); // Reject with the error from stream
+                    return;
+                  }
+
+                  const content = parsed.content || '';
+                  if (payload.debugMode === 1 && content) {
+                     console.log(`Received content chunk from ${endpoint}:`, content);
+                  }
+                  updateContent(content); // Update UI
+                  localCompleteResponse += content; // Append to local complete response for this attempt
+
+                } catch (e) {
                   if (payload.debugMode === 1) {
-                    console.error('Error updating variables:', error);
+                    console.warn('Failed to parse SSE data:', e, 'Data:', data);
                   }
-                  // Similarly, decide if this error should reject the promise. For now, log and continue.
+                   // Don't reject here, maybe the next chunk is fine
                 }
-                resolve(true); // Explicitly resolve with true after [DONE] and update attempt
-                return; // Exit the function after successful completion
-              }
-
-              try {
-                const parsed = JSON.parse(data);
-
-                if (parsed.error) {
-                  throw new Error(parsed.error);
-                }
-
-                const content = parsed.content || '';
-                if (payload.debugMode === 1 && content) {
-                   console.log(`Received content chunk from ${endpoint}:`, content);
-                }
-                updateContent(content);
-                localCompleteResponse += content; // Append to local complete response
-                completeResponse += content; // Keep appending to the global complete response as well (for display)
-
-              } catch (e) {
-                if (payload.debugMode === 1) {
-                  console.warn('Failed to parse SSE data:', e, 'Data:', data);
-                }
-                 // Don't reject here, maybe the next chunk is fine
               }
             }
+          } catch (streamError) {
+             // Catch errors during reader.read() or processing, potentially including abort errors
+             if (streamError.name === 'AbortError') {
+                 if (payload.debugMode === 1) {
+                     console.log(`Stream reading aborted for ${endpoint}.`);
+                 }
+                 // Resolve or reject based on whether the abort was intentional (timeout/failure)
+                 // Since the outer race condition handles rejection, we might not need to do anything here,
+                 // or potentially resolve(false) if needed, but let's rely on the outer catch.
+             } else {
+                 if (payload.debugMode === 1) {
+                    console.error(`Error during stream processing for ${endpoint}:`, streamError);
+                 }
+                 reject(streamError); // Reject on other stream processing errors
+             }
+             return; // Stop processing
           }
-          // If the loop finishes without a '[DONE]', it might be an unexpected stream end.
-          // We should likely treat this as an error or incomplete response.
-          if (payload.debugMode === 1) {
-            console.warn(`Stream ended for ${endpoint} without explicit [DONE] signal.`);
-          }
-          reject(new Error(`Stream ended for ${endpoint} without explicit [DONE] signal.`));
 
         } catch (error) {
+          // Catch fetch errors (network, initial status check, etc.)
           if (payload.debugMode === 1) {
-            console.error(`Stream processing error for ${endpoint}:`, error);
+            console.error(`Initial fetch error for ${endpoint}:`, error);
           }
-          reject(error); // Reject the promise on fetch or processing errors
+          // Ensure the AbortController is triggered even if the fetch failed early
+          if (!abortController.signal.aborted) {
+            abortController.abort();
+          }
+          reject(error); // Reject the promise on fetch errors
         }
       });
 
       // Promise for the timeout
       const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => {
-          reject(new Error(`API call timed out after ${TIMEOUT_MS}ms for endpoint: ${endpoint}`));
+          // Reject with a specific error type/message for timeout
+          const timeoutError = new Error(`API call timed out after ${TIMEOUT_MS}ms for endpoint: ${endpoint}`);
+          timeoutError.name = 'TimeoutError'; // Add a specific name
+          reject(timeoutError);
         }, TIMEOUT_MS);
       });
 
       // Race the fetch against the timeout
       try {
-        const success = await Promise.race([fetchPromise, timeoutPromise]);
-        return success; // Should be true if fetchPromise resolved
+        const result = await Promise.race([fetchPromise, timeoutPromise]);
+        return result; // Should be { success: true } if fetchPromise resolved
       } catch (error) {
         // This catches both timeout errors and fetch/processing errors from fetchPromise
         if (payload.debugMode === 1) {
           console.error(`Error during callLLMAPI for ${endpoint}:`, error.message);
         }
-        // Ensure the response section is visible even on failure, if it hasn't already been made visible
+        // IMPORTANT: Abort the fetch request if it hasn't been aborted yet
+        if (!abortController.signal.aborted) {
+          if (payload.debugMode === 1) {
+             console.log(`Aborting fetch for ${endpoint} due to error/timeout.`);
+          }
+          abortController.abort();
+        }
+        // Ensure the response section is visible even on failure
         if (isFirstChunk) {
             const thinkingHeader = container.querySelector('.thinking-header');
             if (thinkingHeader) {
@@ -903,7 +958,10 @@ export const StreamingResponseExtension = {
             responseSection.classList.add('visible');
             isFirstChunk = false; // Mark as not first chunk anymore
         }
-        return false; // Indicate failure
+
+        // Determine the reason for failure
+        const reason = error.name === 'TimeoutError' ? 'timeout' : 'error';
+        return { success: false, reason: reason, message: error.message }; // Indicate failure with reason
       }
     }
 
@@ -931,10 +989,14 @@ export const StreamingResponseExtension = {
       }
 
       // Keep track of models attempted and their outcome
-      const attemptedModels = []; 
+      const attemptedModels = [];
+      let successfulModelFound = false; // Flag to track if we found a working model
 
       // Try each model in sequence
       for (const modelId of modelSequence) {
+        // If we already found a successful model, don't try others
+        if (successfulModelFound) break;
+
         const model = modelsRegistry.find(m => m.id === modelId);
 
         if (!model) {
@@ -944,12 +1006,12 @@ export const StreamingResponseExtension = {
           continue;
         }
 
-        // Record the attempt before calling the API
-        const currentAttempt = { id: model.id, success: null };
+        // Record the attempt *before* calling the API (status will be updated later)
+        const currentAttempt = { id: model.id, success: null, reason: null }; // Initialize reason
         attemptedModels.push(currentAttempt);
 
         if (trace.payload.debugMode === 1) {
-          console.log(`\n🔄 ATTEMPT ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}: Using model ID:${model.id}`);
+          console.log(`\n🔄 ATTEMPT ${attemptedModels.length}/${modelSequence.length}: Using model ID:${model.id}`);
           console.log(`📌 Model: ${model.displayName} (${model.type})`);
           console.log(`📌 Model name: ${model.name}`);
           console.log(`📌 Endpoint: ${model.endpoint}`);
@@ -969,62 +1031,85 @@ export const StreamingResponseExtension = {
         };
 
         // Call the LLM API
-        const success = await callLLMAPI(model.endpoint, payload);
+        const result = await callLLMAPI(model.endpoint, payload);
 
-        // Update the status of the current attempt
-        currentAttempt.success = success;
+        // Update the status of the current attempt based on the result object
+        currentAttempt.success = result.success;
+        currentAttempt.reason = result.reason || null; // Store reason if present
 
         // If successful, stop trying other models and add footer
-        if (success) {
+        if (result.success) {
+          successfulModelFound = true; // Set the flag
           if (trace.payload.debugMode === 1) {
             console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
             console.log(`📌 Model: ${model.displayName} (${model.type})`);
             console.log(`📌 Model name: ${model.name}`);
             console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
-            console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
+            console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
             console.log(`=============================`);
           }
           addAIInfoFooter(attemptedModels); // Pass the list of attempted models
-          return;
-        }
+          // Let loop break naturally
+        } else {
+            // --- Failure case within the loop ---
+            const failureType = result.reason === 'timeout' ? 'TIMEOUT' : 'FAILED';
+            const failureEmoji = result.reason === 'timeout' ? '⏱️' : '❌';
 
-        // --- Failure case within the loop ---
-        if (trace.payload.debugMode === 1) {
-          console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
-          console.log(`📌 Model: ${model.displayName} (${model.type})`);
-          console.log(`📌 Model name: ${model.name}`);
-          console.log(`📌 Status: REQUEST FAILED`);
-          console.log(`📌 Attempt: ${modelSequence.indexOf(modelId) + 1}/${modelSequence.length}`);
-
-          // Check if there are more models to try
-          const nextModelIndex = modelSequence.indexOf(modelId) + 1;
-          if (nextModelIndex < modelSequence.length) {
-            const nextModelId = modelSequence[nextModelIndex];
-            const nextModel = modelsRegistry.find(m => m.id === nextModelId);
-            if (nextModel) {
-              console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
+            if (trace.payload.debugMode === 1) {
+                console.log(`\n${failureEmoji} ${failureType}: MODEL ID:${model.id}`);
+                console.log(`📌 Model: ${model.displayName} (${model.type})`);
+                console.log(`📌 Model name: ${model.name}`);
+                console.log(`📌 Status: REQUEST ${failureType} (${result.message})`);
+                console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
             }
-          } else {
-            console.log(`📌 No more models to try in sequence`);
-          }
-          console.log(`-----------------------------`);
-        }
-      }
 
-      // --- All models failed case (after the loop) ---
-      // If we get here, all attempted models failed
-      if (trace.payload.debugMode === 1) {
-        console.log(`\n❌ ALL ATTEMPTED MODELS FAILED`);
-        console.log(`📌 Attempted models:`);
-        attemptedModels.forEach((attempt, index) => {
-          const detail = getModelDetailById(attempt.id);
-          console.log(`   ${index + 1}. ${detail} (Failed)`);
-        });
-        console.log(`📌 Result: No successful responses`);
-        console.log(`=============================`);
+            // *** IMPORTANT: Clear content before trying the next model ***
+            if (responseContent) {
+                 if (trace.payload.debugMode === 1) {
+                    console.log(`🧼 Clearing response content before next attempt.`);
+                 }
+                 responseContent.innerHTML = ''; // Clear the displayed content
+                 completeResponse = ''; // Reset the global complete response accumulator
+            }
+
+            // Check if there are more models to try
+            const nextModelIndex = modelSequence.indexOf(modelId) + 1;
+            if (nextModelIndex < modelSequence.length) {
+                const nextModelId = modelSequence[nextModelIndex];
+                const nextModel = modelsRegistry.find(m => m.id === nextModelId);
+                if (nextModel && trace.payload.debugMode === 1) {
+                  console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
+                }
+            } else if (trace.payload.debugMode === 1) {
+                console.log(`📌 No more models to try in sequence`);
+            }
+            if (trace.payload.debugMode === 1) {
+                console.log(`-----------------------------`);
+            }
+        }
+      } // End of model sequence loop
+
+      // --- After the loop ---
+      // Add the footer only if no successful model was found
+      if (!successfulModelFound) {
+        if (trace.payload.debugMode === 1) {
+          console.log(`\n❌ ALL ATTEMPTED MODELS FAILED`);
+          console.log(`📌 Attempted models:`);
+          attemptedModels.forEach((attempt, index) => {
+            const detail = getModelDetailById(attempt.id);
+            let status = '(Not Run)';
+            if (attempt.success === true) status = '(Success - Error in Logic?)';
+            else if (attempt.success === false) {
+                status = attempt.reason === 'timeout' ? '⏱️ (Timeout)' : '❌ (Failed)';
+            }
+            console.log(`   ${index + 1}. ${detail} ${status}`);
+          });
+          console.log(`📌 Result: No successful responses`);
+          console.log(`=============================`);
+        }
+        // Add the footer indicating failure, showing all attempts
+        addAIInfoFooter(attemptedModels);
       }
-      // Add the footer indicating failure, showing all attempts
-      addAIInfoFooter(attemptedModels); 
     }
 
     // Start the LLM orchestration
