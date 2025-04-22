@@ -23,8 +23,8 @@ export default async function handler(req, res) {
 
   res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'false');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, debug');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -121,9 +121,9 @@ export default async function handler(req, res) {
     const timeoutId = setTimeout(() => {
       controller.abort();
       if (debugMode === 1) {
-        console.log('⏱️ Claude API request timed out after 5 seconds');
+        console.log('⏱️ Claude API request timed out after 10 seconds');
       }
-    }, 5000); // 5 seconds timeout
+    }, 10000); // 10 seconds timeout - increased from 5 seconds
 
     try {
       const response = await anthropic.messages.create({

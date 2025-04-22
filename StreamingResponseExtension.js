@@ -780,7 +780,7 @@ export const StreamingResponseExtension = {
         }
 
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 seconds timeout
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 seconds timeout - increased from 5 seconds
 
         try {
           const response = await fetch(proxyUrl, {
@@ -889,8 +889,7 @@ export const StreamingResponseExtension = {
                       }
                     }
                   }
-                } catch (error) {
-                  if (payload.debugMode === 1) {
+                } catch (error) {                  if (payload.debugMode === 1) {
                     console.error("Error updating variables:", error);
                   }
                 }
@@ -902,6 +901,9 @@ export const StreamingResponseExtension = {
                 const parsed = JSON.parse(data);
 
                 if (parsed.error) {
+                  if (payload.debugMode === 1) {
+                    console.warn(`Error from ${endpoint}:`, parsed.error);
+                  }
                   throw new Error(parsed.error);
                 }
 
