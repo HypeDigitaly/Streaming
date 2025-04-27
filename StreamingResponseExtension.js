@@ -829,6 +829,11 @@ export const StreamingResponseExtension = {
             });
             console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
+          
+          if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
+            console.log('🔵 PERPLEXITY: Attempting fetch to:', proxyUrl);
+            console.log('🔵 PERPLEXITY: Payload being sent:', JSON.stringify(payload));
+          }
 
           response = await fetch(proxyUrl, {
             method: "POST",
@@ -836,12 +841,23 @@ export const StreamingResponseExtension = {
             body: JSON.stringify(payload),
             signal: abortController.signal // Use the abort signal
           });
+          
+          if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
+            console.log('🔵 PERPLEXITY: Fetch call completed. Response status:', response.status);
+          }
 
           if (!response.ok) {
             let errorText = `HTTP error! status: ${response.status}`;
+            if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
+                console.error('🔴 PERPLEXITY: Fetch failed! Status:', response.status);
+            }
             try { errorText += `, body: ${await response.text()}`; } catch (e) { /* ignore */ }
             // Reject the firstChunkPromise if the initial fetch fails
             throw new Error(errorText);
+          }
+          
+          if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
+            console.log('🟢 PERPLEXITY: Fetch successful (response.ok). Proceeding to read stream...');
           }
 
           const reader = response.body.getReader();
