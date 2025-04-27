@@ -2,6 +2,8 @@ import fetch from 'node-fetch';
 import { whitelistedDomains, isDomainWhitelisted } from '../../config/domains';
 
 export default async function handler(req, res) {
+  console.log('🚀 perplexity-stream: Handler invoked. Method:', req.method, 'Origin:', req.headers.origin);
+
   const origin = req.headers.origin;
 
   // Check if origin is in whitelist
@@ -19,6 +21,8 @@ export default async function handler(req, res) {
     return;
   }
   
+  console.log('🚀 perplexity-stream: Passed initial checks (CORS, Method).');
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -101,6 +105,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    console.log('🚀 perplexity-stream: Entering main try block.');
     // Select API key based on projectName
     const apiKey = process.env[`PERPLEXITY_API_KEY_${projectName?.toUpperCase()}`] || process.env.PERPLEXITY_API_KEY;
 
