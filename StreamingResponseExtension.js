@@ -5,6 +5,9 @@ export const StreamingResponseExtension = {
     trace.type === "ext_streamingResponse" ||
     trace.payload?.name === "ext_streamingResponse",
   render: async ({ trace, element }) => {
+    // ---> ADDED LOGGING <---
+    console.log("🚦 [Render Scope] Entering render function.");
+    // ---> END ADDED LOGGING <---
     if (trace.payload?.debugMode === 1) {
       console.log("🚀 StreamingResponseExtension: Starting render", { trace });
       console.log("📦 Full trace payload:", JSON.stringify(trace.payload, null, 2));
@@ -1162,7 +1165,11 @@ export const StreamingResponseExtension = {
 
     async function orchestrateLLMCalls(trace) {
       // ---> ADDED LOGGING <---
-      console.log('🚦 Entering orchestrateLLMCalls...');
+      if (typeof console === 'undefined' || typeof console.log === 'undefined') {
+         alert('CRITICAL: console.log is undefined in orchestrateLLMCalls!');
+      } else {
+         console.log('🚦 [Orchestrate Scope] Entering orchestrateLLMCalls...');
+      }
       // ---> END ADDED LOGGING <---
       if (!trace.payload) {
         responseContent.textContent = "Error: No payload received";
@@ -1296,6 +1303,9 @@ export const StreamingResponseExtension = {
         } // End of model sequence loop
       } catch (loopError) {
         console.error('🆘 UNCAUGHT ERROR during orchestrateLLMCalls model loop:', loopError);
+        // ---> ADDED LOGGING <---
+        console.log('🚦 [Orchestrate Scope] In loopError catch block, preparing to call addAIInfoFooter.');
+        // ---> END ADDED LOGGING <---
         // Attempt to add footer even if loop crashes
         if (!successfulModelFound) {
           addAIInfoFooter(attemptedModels.length > 0 ? attemptedModels : [{ id: 'LoopError', success: false }]);
@@ -1323,7 +1333,13 @@ export const StreamingResponseExtension = {
     }
 
     // Start the LLM orchestration
+    // ---> ADDED LOGGING <---
+    console.log("🚦 [Render Scope] BEFORE await orchestrateLLMCalls");
+    // ---> END ADDED LOGGING <---
     await orchestrateLLMCalls(trace);
+    // ---> ADDED LOGGING <---
+    console.log("🚦 [Render Scope] AFTER await orchestrateLLMCalls");
+    // ---> END ADDED LOGGING <---
 
     window.voiceflow.chat.interact({ type: "continue" });
   },
