@@ -1130,6 +1130,9 @@ export const StreamingResponseExtension = {
         // ---- This catch block handles: ----
         // 1. Rejection from ttftTimeoutPromise (TTFT timeout occurred before first chunk)
         // 2. Rejection from firstChunkPromise (e.g., fetch failed *before* first chunk)
+        console.error('💥 CAUGHT ERROR in callLLMAPI main catch block for endpoint:', endpoint);
+        console.error('💥 Error message:', error.message);
+        console.error('💥 Error object:', error);
         if (payload.debugMode === 1) {
           // Differentiate log based on error type
           if (error.message.startsWith('TTFT timeout')) {
@@ -1158,6 +1161,9 @@ export const StreamingResponseExtension = {
     }
 
     async function orchestrateLLMCalls(trace) {
+      // ---> ADDED LOGGING <---
+      console.log('🚦 Entering orchestrateLLMCalls...');
+      // ---> END ADDED LOGGING <---
       if (!trace.payload) {
         responseContent.textContent = "Error: No payload received";
         return;
@@ -1184,112 +1190,121 @@ export const StreamingResponseExtension = {
       const attemptedModels = [];
       let successfulModelFound = false; // Flag to track if we found a working model
 
-      // Try each model in sequence
-      for (const modelId of modelSequence) {
-        // If we already found a successful model, don't try others
-        if (successfulModelFound) break;
+      // ---> ADDED WRAPPING TRY...CATCH <---
+      try {
+        // Try each model in sequence
+        for (const modelId of modelSequence) {
+          // If we already found a successful model, don't try others
+          if (successfulModelFound) break;
 
-        const model = modelsRegistry.find(m => m.id === modelId);
+          const model = modelsRegistry.find(m => m.id === modelId);
 
-        if (!model) {
-          if (trace.payload.debugMode === 1) {
-            console.log(`⚠️ Unknown model ID ${modelId}, skipping`);
+          if (!model) {
+            if (trace.payload.debugMode === 1) {
+              console.log(`⚠️ Unknown model ID ${modelId}, skipping`);
+            }
+            continue;
           }
-          continue;
-        }
 
-        // Record the attempt before calling the API
-        const currentAttempt = { id: model.id, success: null };
-        attemptedModels.push(currentAttempt);
+          // Record the attempt before calling the API
+          const currentAttempt = { id: model.id, success: null };
+          attemptedModels.push(currentAttempt);
 
-        if (trace.payload.debugMode === 1) {
-          console.log(`\n🔄 ATTEMPT ${attemptedModels.length}/${modelSequence.length}: Using model ID:${model.id}`);
-          console.log(`📌 Model: ${model.displayName} (${model.type})`);
-          console.log(`📌 Model name: ${model.name}`);
-          console.log(`📌 Endpoint: ${model.endpoint}`);
-          console.log(`📌 Status: STARTING REQUEST`);
-        }
-
-        // Prepare payload for API call
-        const payload = {
-          model: model.name,
-          max_tokens: trace.payload.max_tokens,
-          temperature: trace.payload.temperature,
-          userData: trace.payload.userData,
-          systemPrompt: trace.payload.systemPrompt,
-          debugMode: trace.payload.debugMode || 0,
-          projectName: trace.payload.projectName,
-          user_id: trace.payload.user_id,
-        };
-
-        // Add allowedDomains parameter for Perplexity API
-        if (model.type === 'perplexity' && trace.payload.allowedDomains) {
-          payload.allowedDomains = trace.payload.allowedDomains;
           if (trace.payload.debugMode === 1) {
-            console.log(`📌 Adding allowed domains for Perplexity: ${trace.payload.allowedDomains}`);
-          }
-        }
-
-        // Call the LLM API
-        const success = await callLLMAPI(model.endpoint, payload);
-
-        // Update the status of the current attempt
-        currentAttempt.success = success;
-
-        // If successful, stop trying other models and add footer
-        if (success) {
-          successfulModelFound = true; // Set the flag
-          if (trace.payload.debugMode === 1) {
-            console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
+            console.log(`\n🔄 ATTEMPT ${attemptedModels.length}/${modelSequence.length}: Using model ID:${model.id}`);
             console.log(`📌 Model: ${model.displayName} (${model.type})`);
             console.log(`📌 Model name: ${model.name}`);
-            console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
-            console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
-            console.log(`=============================`);
+            console.log(`📌 Endpoint: ${model.endpoint}`);
+            console.log(`📌 Status: STARTING REQUEST`);
           }
-          addAIInfoFooter(attemptedModels); // Pass the list of attempted models
-          // No return here, let loop break naturally or finish
-        } else {
-            // --- Failure case within the loop ---
+
+          // Prepare payload for API call
+          const payload = {
+            model: model.name,
+            max_tokens: trace.payload.max_tokens,
+            temperature: trace.payload.temperature,
+            userData: trace.payload.userData,
+            systemPrompt: trace.payload.systemPrompt,
+            debugMode: trace.payload.debugMode || 0,
+            projectName: trace.payload.projectName,
+            user_id: trace.payload.user_id,
+          };
+
+          // Add allowedDomains parameter for Perplexity API
+          if (model.type === 'perplexity' && trace.payload.allowedDomains) {
+            payload.allowedDomains = trace.payload.allowedDomains;
             if (trace.payload.debugMode === 1) {
-                console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
-                console.log(`📌 Model: ${model.displayName} (${model.type})`);
-                console.log(`📌 Model name: ${model.name}`);
-                console.log(`📌 Status: REQUEST FAILED OR TIMED OUT`);
-                console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
+              console.log(`📌 Adding allowed domains for Perplexity: ${trace.payload.allowedDomains}`);
             }
+          }
 
-            // *** IMPORTANT: Clear content before trying the next model ***
-            if (responseContent) {
-                 if (trace.payload.debugMode === 1) {
-                    console.log(`🧼 Clearing response content before next attempt.`);
-                 }
-                 responseContent.innerHTML = ''; // Clear the displayed content
-                 completeResponse = ''; // Reset the global complete response accumulator
-                 // We might potentially reset isFirstChunk = true here if we want the loader again
-                 // For now, just clearing content.
+          // Call the LLM API
+          const success = await callLLMAPI(model.endpoint, payload);
+
+          // Update the status of the current attempt
+          currentAttempt.success = success;
+
+          // If successful, stop trying other models and add footer
+          if (success) {
+            successfulModelFound = true; // Set the flag
+            if (trace.payload.debugMode === 1) {
+              console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
+              console.log(`📌 Model: ${model.displayName} (${model.type})`);
+              console.log(`📌 Model name: ${model.name}`);
+              console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
+              console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
+              console.log(`=============================`);
             }
-
-            // Check if there are more models to try
-            const nextModelIndex = modelSequence.indexOf(modelId) + 1;
-            if (nextModelIndex < modelSequence.length) {
-              const nextModelId = modelSequence[nextModelIndex];
-              const nextModel = modelsRegistry.find(m => m.id === nextModelId);
-              if (nextModel && trace.payload.debugMode === 1) {
-                console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
+            addAIInfoFooter(attemptedModels); // Pass the list of attempted models
+            // No return here, let loop break naturally or finish
+          } else {
+              // --- Failure case within the loop ---
+              if (trace.payload.debugMode === 1) {
+                  console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
+                  console.log(`📌 Model: ${model.displayName} (${model.type})`);
+                  console.log(`📌 Model name: ${model.name}`);
+                  console.log(`📌 Status: REQUEST FAILED OR TIMED OUT`);
+                  console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
               }
-            } else if (trace.payload.debugMode === 1) {
-              console.log(`📌 No more models to try in sequence`);
-            }
-            if (trace.payload.debugMode === 1) {
-                console.log(`-----------------------------`);
-            }
+
+              // *** IMPORTANT: Clear content before trying the next model ***
+              if (responseContent) {
+                   if (trace.payload.debugMode === 1) {
+                      console.log(`🧼 Clearing response content before next attempt.`);
+                   }
+                   responseContent.innerHTML = ''; // Clear the displayed content
+                   completeResponse = ''; // Reset the global complete response accumulator
+                   // We might potentially reset isFirstChunk = true here if we want the loader again
+                   // For now, just clearing content.
+              }
+
+              // Check if there are more models to try
+              const nextModelIndex = modelSequence.indexOf(modelId) + 1;
+              if (nextModelIndex < modelSequence.length) {
+                const nextModelId = modelSequence[nextModelIndex];
+                const nextModel = modelsRegistry.find(m => m.id === nextModelId);
+                if (nextModel && trace.payload.debugMode === 1) {
+                  console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
+                }
+              } else if (trace.payload.debugMode === 1) {
+                console.log(`📌 No more models to try in sequence`);
+              }
+              if (trace.payload.debugMode === 1) {
+                  console.log(`-----------------------------`);
+              }
+          }
+        } // End of model sequence loop
+      } catch (loopError) {
+        console.error('🆘 UNCAUGHT ERROR during orchestrateLLMCalls model loop:', loopError);
+        // Attempt to add footer even if loop crashes
+        if (!successfulModelFound) {
+          addAIInfoFooter(attemptedModels.length > 0 ? attemptedModels : [{ id: 'LoopError', success: false }]);
         }
-      } // End of model sequence loop
+      }
+      // ---> END ADDED WRAPPING TRY...CATCH <---
 
       // --- After the loop ---
       // Add the footer only if no successful model was found OR if it hasn't been added yet
-      // The successful case inside the loop already adds the footer.
       if (!successfulModelFound) {
         if (trace.payload.debugMode === 1) {
           console.log(`\n❌ ALL ATTEMPTED MODELS FAILED`);
