@@ -841,7 +841,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
               allowedDomains: payload.allowedDomains
             });
-            console.log(` Calling proxy URL: ${proxyUrlwith TTFT ${currentTimeout}ms); // <-- Use conditional timeout in log
+            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${currentTimeout}ms`); // Fixed missing closing bracket and template string
           }
 
           if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
