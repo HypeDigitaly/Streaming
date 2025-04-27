@@ -231,7 +231,7 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
-          
+
           /* Perplexity specific styles */
           .perplexity-citations {
             margin-top: 15px;
@@ -269,7 +269,7 @@ export const StreamingResponseExtension = {
           .citations-list a:hover {
             text-decoration: underline;
           }
-          
+
           .ai-info-footer {
             display: flex;
             align-items: center;
@@ -470,7 +470,7 @@ export const StreamingResponseExtension = {
       // Wrap OL items first, then UL items
       wrapListItems('ol');
       wrapListItems('ul');
-      
+
       // Clean up empty numbered list items (modified check)
       const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
       listItems.forEach(li => {
@@ -483,7 +483,7 @@ export const StreamingResponseExtension = {
           }
         }
       });
-      
+
       // Remove any potentially empty OL/UL tags left after cleaning LIs
       tempContainer.querySelectorAll('ol, ul').forEach(list => {
         if (!list.hasChildNodes()) {
@@ -597,7 +597,7 @@ export const StreamingResponseExtension = {
         endpoint: '/api/groq-stream',
         displayName: 'Llama 4 Scout'
       },
-      
+
       // Perplexity models
       {
         id: 10,
@@ -786,6 +786,10 @@ export const StreamingResponseExtension = {
       let resolveFirstChunkPromise = null;
       let rejectFirstChunkPromise = null;
 
+      // Citation handling flags
+      let citationsHandled = false;
+      let citationsAddedToDOM = false;
+
       // ---> ADDED: Determine timeout based on endpoint <---
       const PERPLEXITY_TIMEOUT_MS = 20000; // 20 seconds for Perplexity
       const currentTimeout = endpoint === '/api/perplexity-stream'
@@ -837,9 +841,9 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
               allowedDomains: payload.allowedDomains
             });
-            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${currentTimeout}ms`); // <-- Use conditional timeout in log
+            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${currentTimeout}ms); // <-- Use conditional timeout in log
           }
-          
+
           if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
             console.log('🔵 PERPLEXITY: Attempting fetch to:', proxyUrl);
             console.log('🔵 PERPLEXITY: Payload being sent:', JSON.stringify(payload));
@@ -851,7 +855,7 @@ export const StreamingResponseExtension = {
             body: JSON.stringify(payload),
             signal: abortController.signal // Use the abort signal
           });
-          
+
           if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
             console.log('🔵 PERPLEXITY: Fetch call completed. Response status:', response.status);
           }
@@ -865,7 +869,7 @@ export const StreamingResponseExtension = {
             // Reject the firstChunkPromise if the initial fetch fails
             throw new Error(errorText);
           }
-          
+
           if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
             console.log('🟢 PERPLEXITY: Fetch successful (response.ok). Proceeding to read stream...');
           }
@@ -920,9 +924,10 @@ export const StreamingResponseExtension = {
                   // Special handling for Perplexity
                   if (endpoint === '/api/perplexity-stream') {
                     // Handle perplexity citations
-                    if (parsed.citations && Array.isArray(parsed.citations)) {
+                    if (parsed.citations && Array.isArray(parsed.citations) && !citationsHandled) {
                       perplexityCitations = parsed.citations;
                       if (payload.debugMode === 1) console.log(`📋 Perplexity citations received:`, perplexityCitations);
+                      citationsHandled = true; // Mark citations as handled
                       // Don't update UI directly for citations, but store them
                     }
 
@@ -966,14 +971,15 @@ export const StreamingResponseExtension = {
                           }
                           // Make response section visible
                           responseSection.classList.add('visible');
-                          
+
                           // If we have citations, format them and add to response
-                          if (perplexityCitations.length > 0) {
+                          if (perplexityCitations.length > 0 && !citationsAddedToDOM) {
                             const citationsHTML = formatPerplexityCitations(perplexityCitations);
                             const citationsDiv = document.createElement('div');
                             citationsDiv.className = 'perplexity-citations';
                             citationsDiv.innerHTML = citationsHTML;
                             responseContent.appendChild(citationsDiv);
+                            citationsAddedToDOM = true; // Mark citations as added to DOM
                           }
                         }
 
@@ -1073,17 +1079,17 @@ export const StreamingResponseExtension = {
       // Function to format Perplexity citations
       function formatPerplexityCitations(citations) {
         if (!citations || citations.length === 0) return '';
-        
+
         let html = '<div class="citations-container">';
         html += '<h3>Sources:</h3>';
         html += '<ol class="citations-list">';
-        
+
         citations.forEach((url, index) => {
           // Create a truncated version for display
           const displayUrl = url.length > 60 ? url.substring(0, 57) + '...' : url;
           html += `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${displayUrl}</a></li>`;
         });
-        
+
         html += '</ol></div>';
         return html;
       }

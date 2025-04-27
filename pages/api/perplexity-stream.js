@@ -124,19 +124,19 @@ export default async function handler(req, res) {
       });
     }
 
-    // ---> MODIFIED: Call Perplexity API using got <---
+    // Create request for Perplexity API
     const perplexityStream = got.stream.post('https://api.perplexity.ai/chat/completions', {
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'Accept': 'text/event-stream' // Explicitly accept event stream
+        'Accept': 'text/event-stream'
       },
-      json: requestBody, // Send body as JSON
-      timeout: { request: 30000 }, // Set a request timeout (e.g., 30 seconds)
-      retry: { limit: 0 } // Disable retries for streaming
+      json: requestBody,
+      timeout: { request: 30000 },
+      retry: { limit: 0 }
     });
 
-    // Event listener for the 'response' event to check status code and headers
+    // Event listener for response status/headers
     perplexityStream.on('response', (response) => {
       if (debugMode === 1) {
         console.log(`🚦 [got] Perplexity API Response Status: ${response.statusCode}`);
@@ -146,18 +146,17 @@ export default async function handler(req, res) {
       // Check if the status code indicates success
       if (response.statusCode < 200 || response.statusCode >= 300) {
          console.error(`❌ [got] Perplexity API error: Status ${response.statusCode}`);
-         // Attempt to close the client connection gracefully
          try {
             if (!res.headersSent) {
                res.status(response.statusCode).json({ error: `Perplexity API error: ${response.statusCode}` });
             } else {
-               res.end(); // End the stream if headers were already sent
+               res.end();
             }
          } catch (e) {
             console.error("Error sending error response to client:", e);
          }
-         perplexityStream.destroy(new Error(`Perplexity API error: ${response.statusCode}`)); // Destroy the got stream
-         return; // Stop further processing on this stream instance
+         perplexityStream.destroy(new Error(`Perplexity API error: ${response.statusCode}`));
+         return;
       }
 
       // Check Content-Type header
@@ -177,43 +176,121 @@ export default async function handler(req, res) {
         return;
       }
 
-      // Set up SSE response headers for the client *after* receiving a valid response from Perplexity
+      // Set up SSE response headers for the client
       res.setHeader('Content-Type', 'text/event-stream');
       res.setHeader('Cache-Control', 'no-cache');
       res.setHeader('Connection', 'keep-alive');
-      res.writeHead(200); // Send 200 OK to client now
+      res.writeHead(200);
       if (debugMode === 1) {
-        console.log('✅ [got] Perplexity stream response validated. Piping to client...');
+        console.log('✅ [got] Perplexity stream response validated. Processing stream...');
       }
     });
 
-    // ---> ADDED: Pipe the stream directly, handle data and errors using got events <---
-
-    // Pipe the data directly from Perplexity to the client response
-    perplexityStream.pipe(res);
-
-    // Optional: Log chunks for debugging (can be verbose)
-    if (debugMode === 1) {
-      perplexityStream.on('data', (chunk) => {
-        try {
-          const decodedChunk = chunk.toString();
-          console.log('📥 [got] Received chunk:', decodedChunk);
-        } catch (e) {
-          console.error('Error decoding/logging chunk:', e);
+    // Process stream data instead of piping directly
+    let buffer = '';
+    let lastCitationsHash = '';
+    let citationsSent = false;
+    
+    perplexityStream.on('data', (chunk) => {
+      try {
+        const decodedChunk = chunk.toString();
+        
+        if (debugMode === 1) {
+          console.log('📥 [got] Processing chunk:', decodedChunk.substring(0, 100) + (decodedChunk.length > 100 ? '...' : ''));
         }
-      });
-    }
+        
+        buffer += decodedChunk;
+        
+        // Process complete SSE events
+        let processedBuffer = '';
+        const lines = buffer.split('\n');
+        
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          
+          // Keep incomplete line in buffer
+          if (i === lines.length - 1 && !line.trim().endsWith('}}') && !line.includes('[DONE]')) {
+            processedBuffer = line;
+            continue;
+          }
+          
+          if (!line.trim() || !line.startsWith('data: ')) {
+            continue;
+          }
+          
+          const data = line.slice(6);
+          
+          // Handle end of stream
+          if (data === '[DONE]') {
+            res.write('data: [DONE]\n\n');
+            continue;
+          }
+          
+          // Parse JSON data
+          try {
+            const parsed = JSON.parse(data);
+            
+            // Handle citations only once per unique set (use hash to compare)
+            if (parsed.citations && Array.isArray(parsed.citations)) {
+              const citationsHash = JSON.stringify(parsed.citations);
+              
+              // Only send citations if they're new or we haven't sent any yet
+              if (citationsHash !== lastCitationsHash || !citationsSent) {
+                lastCitationsHash = citationsHash;
+                citationsSent = true;
+                
+                if (debugMode === 1) {
+                  console.log(`📋 Sending citations to client (once):`, parsed.citations.length);
+                }
+                
+                // Send citations as a separate event
+                res.write(`data: ${JSON.stringify({ citations: parsed.citations })}\n\n`);
+              }
+            }
+            
+            // Forward content data to client
+            if (parsed.choices && parsed.choices[0] && parsed.choices[0].delta) {
+              const delta = parsed.choices[0].delta;
+              if (delta.content) {
+                // Send content delta to client
+                res.write(`data: ${JSON.stringify({ 
+                  choices: [{ delta: { content: delta.content } }] 
+                })}\n\n`);
+              }
+            }
+            
+            // If isThinking is present, pass it through
+            if (parsed.isThinking !== undefined) {
+              res.write(`data: ${JSON.stringify({ 
+                content: parsed.content || '',
+                isThinking: parsed.isThinking
+              })}\n\n`);
+            }
+            
+          } catch (e) {
+            if (debugMode === 1) {
+              console.warn(`Failed to parse SSE data: ${e.message}`);
+            }
+          }
+        }
+        
+        // Update buffer with any unprocessed content
+        buffer = processedBuffer;
+        
+      } catch (e) {
+        console.error('Error processing chunk:', e);
+      }
+    });
 
     // Handle potential errors during the stream transfer
     perplexityStream.on('error', (error) => {
       console.error('❌ [got] Perplexity stream error:', error.message);
       try {
-        // If headers haven't been sent, send a 500 status
         if (!res.headersSent) {
           res.status(500).json({ error: 'Internal server error', details: error.message });
         } else {
-          // If headers were sent, try to end the response
-          // Avoid writing further data after piping has started
+          res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
+          res.write('data: [DONE]\n\n');
           res.end();
         }
       } catch (e) {
@@ -221,14 +298,20 @@ export default async function handler(req, res) {
       }
     });
 
-    // Handle the end of the stream from Perplexity
+    // Handle the end of the stream
     perplexityStream.on('end', () => {
       if (debugMode === 1) {
         console.log('📤 [got] Perplexity stream ended.');
       }
-      // Ensure the client response stream is properly ended
+      
+      // Make sure we send [DONE] at the end
       if (!res.writableEnded) {
-        res.end();
+        try {
+          res.write('data: [DONE]\n\n');
+          res.end();
+        } catch (e) {
+          console.error('Error ending response stream:', e);
+        }
       }
     });
 
