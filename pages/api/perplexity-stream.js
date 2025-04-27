@@ -32,6 +32,7 @@ export default async function handler(req, res) {
     debugMode,
     allowedDomains,
     projectName,
+    user_id,
   } = req.body;
 
   // Parse allowed domains from comma-separated string to array of strings
@@ -87,12 +88,35 @@ export default async function handler(req, res) {
     requestBody.search_domain_filter = search_domain_filter;
   }
 
+  // Console.log the full request body for debugging
+  if (debugMode === 1) {
+    console.log('📤 Perplexity: Full Request Payload:', JSON.stringify({
+      ...requestBody,
+      // Only log a few characters of userData to avoid polluting logs
+      messages: requestBody.messages.map(m => ({
+        ...m,
+        content: m.content && m.content.length > 50 ? `${m.content.substring(0, 50)}...` : m.content
+      }))
+    }, null, 2));
+  }
+
   try {
     // Select API key based on projectName
     const apiKey = process.env[`PERPLEXITY_API_KEY_${projectName?.toUpperCase()}`] || process.env.PERPLEXITY_API_KEY;
 
     if (!apiKey) {
+      console.error(`❌ API key not found for project: ${projectName}`);
       throw new Error(`API key not found for project: ${projectName}`);
+    }
+
+    if (debugMode === 1) {
+      console.log('📡 Perplexity API config:', {
+        apiKeyExists: !!apiKey,
+        apiKeyLength: apiKey ? apiKey.length : 0,
+        projectName,
+        model,
+        user_id
+      });
     }
 
     // Call Perplexity API
@@ -103,13 +127,14 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(requestBody)
+    }).catch(err => {
+      console.error('❌ Perplexity fetch error:', err.message);
+      throw err;
     });
 
     if (!perplexityResponse.ok) {
       const errorText = await perplexityResponse.text();
-      if (debugMode === 1) {
-        console.error('❌ perplexity-stream: API error:', perplexityResponse.status, errorText);
-      }
+      console.error('❌ perplexity-stream: API error:', perplexityResponse.status, errorText);
       return res.status(perplexityResponse.status).json({ 
         error: `Perplexity API error: ${perplexityResponse.status}`, 
         details: errorText 
@@ -121,6 +146,10 @@ export default async function handler(req, res) {
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
 
+    if (debugMode === 1) {
+      console.log('📥 Perplexity API Response initialized');
+    }
+
     const reader = perplexityResponse.body.getReader();
     const decoder = new TextDecoder();
     let thinkingContent = '';
@@ -129,89 +158,112 @@ export default async function handler(req, res) {
     let isThinking = false;
     let citationsSent = false;
 
-    while (true) {
-      const { done, value } = await reader.read();
-      
-      if (done) {
-        // Send final [DONE] signal
-        res.write('data: [DONE]\n\n');
-        break;
-      }
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) {
+          // Send final [DONE] signal
+          if (debugMode === 1) {
+            console.log('📤 Perplexity: Stream completed, sending [DONE]');
+          }
+          res.write('data: [DONE]\n\n');
+          break;
+        }
 
-      const chunk = decoder.decode(value, { stream: true });
-      const lines = chunk.split('\n');
-      
-      for (const line of lines) {
-        if (line.startsWith('data:') && line.trim() !== 'data: [DONE]') {
-          try {
-            const data = line.substring(6);
-            if (!data.trim()) continue;
-            
-            const parsed = JSON.parse(data);
-            
-            if (parsed.choices && parsed.choices[0]) {
-              const choice = parsed.choices[0];
-              const content = choice.delta?.content || choice.message?.content || '';
+        const chunk = decoder.decode(value, { stream: true });
+        if (debugMode === 1 && chunk.length < 1000) {
+          console.log('📥 Perplexity: Received chunk:', chunk);
+        }
+
+        const lines = chunk.split('\n');
+        
+        for (const line of lines) {
+          if (line.startsWith('data:') && line.trim() !== 'data: [DONE]') {
+            try {
+              const data = line.substring(6);
+              if (!data.trim()) continue;
               
-              // Handle thinking part
-              if (content.includes('<think>') && content.includes('</think>')) {
-                const thinkMatch = content.match(/<think>(.*?)<\/think>/s);
-                if (thinkMatch && thinkMatch[1]) {
-                  thinkingContent = thinkMatch[1].trim();
-                  isThinking = true;
-                  
-                  // Send thinking content
-                  res.write(`data: ${JSON.stringify({ content: thinkingContent, isThinking: true })}\n\n`);
-                }
+              const parsed = JSON.parse(data);
+              
+              if (parsed.choices && parsed.choices[0]) {
+                const choice = parsed.choices[0];
+                const content = choice.delta?.content || choice.message?.content || '';
                 
-                // Extract the actual response (after thinking)
-                const afterThink = content.split('</think>')[1]?.trim();
-                if (afterThink) {
-                  responseContent = afterThink;
-                }
-              } 
-              // Regular delta update (no thinking tags)
-              else if (content) {
-                if (isThinking) {
-                  // We've transitioned from thinking to response
-                  isThinking = false;
-                  
-                  // If we have citations and haven't sent them yet, send them
-                  if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
-                    citations = parsed.citations;
-                    res.write(`data: ${JSON.stringify({ citations })}\n\n`);
-                    citationsSent = true;
+                // Handle thinking part
+                if (content.includes('<think>') && content.includes('</think>')) {
+                  const thinkMatch = content.match(/<think>(.*?)<\/think>/s);
+                  if (thinkMatch && thinkMatch[1]) {
+                    thinkingContent = thinkMatch[1].trim();
+                    isThinking = true;
+                    
+                    // Send thinking content
+                    res.write(`data: ${JSON.stringify({ content: thinkingContent, isThinking: true })}\n\n`);
                   }
+                  
+                  // Extract the actual response (after thinking)
+                  const afterThink = content.split('</think>')[1]?.trim();
+                  if (afterThink) {
+                    responseContent = afterThink;
+                  }
+                } 
+                // Regular delta update (no thinking tags)
+                else if (content) {
+                  if (isThinking) {
+                    // We've transitioned from thinking to response
+                    isThinking = false;
+                    
+                    // If we have citations and haven't sent them yet, send them
+                    if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
+                      citations = parsed.citations;
+                      res.write(`data: ${JSON.stringify({ citations })}\n\n`);
+                      citationsSent = true;
+                    }
+                  }
+                  
+                  responseContent += content;
+                  // Send actual response content
+                  res.write(`data: ${JSON.stringify({ content })}\n\n`);
                 }
-                
-                responseContent += content;
-                // Send actual response content
-                res.write(`data: ${JSON.stringify({ content })}\n\n`);
               }
-            }
-            
-            // Handle citations if they weren't sent earlier
-            if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
-              citations = parsed.citations;
-              res.write(`data: ${JSON.stringify({ citations })}\n\n`);
-              citationsSent = true;
-            }
-            
-          } catch (error) {
-            if (debugMode === 1) {
-              console.error('❌ perplexity-stream: Error parsing SSE data:', error, line);
+              
+              // Handle citations if they weren't sent earlier
+              if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
+                citations = parsed.citations;
+                res.write(`data: ${JSON.stringify({ citations })}\n\n`);
+                citationsSent = true;
+              }
+              
+            } catch (error) {
+              if (debugMode === 1) {
+                console.error('❌ perplexity-stream: Error parsing SSE data:', error, line);
+              }
             }
           }
         }
       }
+      
+      res.end();
+      
+    } catch (error) {
+      console.error('❌ perplexity-stream: Error:', error.message, error.stack);
+      
+      // If headers haven't been sent yet, return error as JSON
+      if (!res.headersSent) {
+        return res.status(500).json({ error: 'Internal server error', details: error.message });
+      }
+      
+      // Otherwise send error as SSE message
+      try {
+        res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
+        res.write('data: [DONE]\n\n');
+        res.end();
+      } catch (sendError) {
+        console.error('❌ perplexity-stream: Error sending error message:', sendError);
+      }
     }
-    
-    res.end();
-    
   } catch (error) {
-    if (debugMode === 1) {
-      console.error('❌ perplexity-stream: Error:', error);
-    }
+    console.error('❌ perplexity-stream: Error:', error.message, error.stack);
     
     // If headers haven't been sent yet, return error as JSON
     if (!res.headersSent) {
@@ -219,8 +271,12 @@ export default async function handler(req, res) {
     }
     
     // Otherwise send error as SSE message
-    res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
-    res.write('data: [DONE]\n\n');
-    res.end();
+    try {
+      res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
+      res.write('data: [DONE]\n\n');
+      res.end();
+    } catch (sendError) {
+      console.error('❌ perplexity-stream: Error sending error message:', sendError);
+    }
   }
 } 
