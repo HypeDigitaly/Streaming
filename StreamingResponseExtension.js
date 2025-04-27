@@ -336,6 +336,14 @@ export const StreamingResponseExtension = {
             background-color: #E2F2D9;
             color: #333;
           }
+          .thinking-toggle {
+            padding: 4px 8px;
+            margin: 4px 0;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+          }
 
         </style>
         <div class="response-section">
@@ -352,6 +360,8 @@ export const StreamingResponseExtension = {
     let buffer = '';
     let deltaCounter = 0;
     let completeResponse = '';
+    // Added for accumulating thinking content
+    let accumulatedThinkingContent = '';
 
     // Show container immediately with loading animation
     container.style.display = 'block';
@@ -941,18 +951,20 @@ export const StreamingResponseExtension = {
                         isPerplexityThinking = true;
                         if (payload.debugMode === 1) console.log(`🤔 Processing thinking content: ${content.substring(0, 50)}...`);
 
-                        // Handle thinking mode differently - show loading animation with thinking content
+                        // Accumulate thinking content
+                        accumulatedThinkingContent += content;
+
                         const thinkingHeader = container.querySelector('.thinking-header');
                         if (thinkingHeader && !thinkingHeader.classList.contains('thinking-expanded')) {
                           thinkingHeader.classList.add('thinking-expanded');
                           const thinkingContent = document.createElement('div');
                           thinkingContent.className = 'thinking-content';
-                          thinkingContent.textContent = 'Thinking: ' + content;
+                          thinkingContent.textContent = 'Thinking: ' + accumulatedThinkingContent;
                           thinkingHeader.appendChild(thinkingContent);
                         } else if (thinkingHeader) {
                           const thinkingContent = thinkingHeader.querySelector('.thinking-content');
                           if (thinkingContent) {
-                            thinkingContent.textContent = 'Thinking: ' + content;
+                            thinkingContent.textContent = 'Thinking: ' + accumulatedThinkingContent;
                           }
                         }
 
@@ -969,11 +981,46 @@ export const StreamingResponseExtension = {
                           isPerplexityThinking = false;
                           if (payload.debugMode === 1) console.log(`💡 Switching from thinking to regular content mode`);
 
-                          // Remove thinking header when transitioning to regular content
+                          // Instead of hiding thinking header, make it collapsible but keep it
                           const thinkingHeader = container.querySelector('.thinking-header');
                           if (thinkingHeader) {
-                            thinkingHeader.classList.add('hidden');
+                            // Add a toggle button to the thinking header
+                            if (!thinkingHeader.querySelector('.thinking-toggle')) {
+                              const toggleButton = document.createElement('button');
+                              toggleButton.className = 'thinking-toggle';
+                              toggleButton.textContent = 'Toggle Thinking Process';
+                              toggleButton.style.padding = '4px 8px';
+                              toggleButton.style.margin = '4px 0';
+                              toggleButton.style.backgroundColor = '#f0f0f0';
+                              toggleButton.style.border = '1px solid #ccc';
+                              toggleButton.style.borderRadius = '4px';
+                              toggleButton.style.cursor = 'pointer';
+
+                              toggleButton.addEventListener('click', () => {
+                                const content = thinkingHeader.querySelector('.thinking-content');
+                                if (content) {
+                                  if (content.style.display === 'none') {
+                                    content.style.display = 'block';
+                                    toggleButton.textContent = 'Hide Thinking Process';
+                                  } else {
+                                    content.style.display = 'none';
+                                    toggleButton.textContent = 'Show Thinking Process';
+                                  }
+                                }
+                              });
+
+                              const thinkingContent = thinkingHeader.querySelector('.thinking-content');
+                              if (thinkingContent) {
+                                // Initially hide the content and style it better
+                                thinkingContent.style.maxHeight = '300px';
+                                thinkingContent.style.overflowY = 'auto';
+                                thinkingContent.style.display = 'none'; // Initially hidden
+                              }
+
+                              thinkingHeader.insertBefore(toggleButton, thinkingContent);
+                            }
                           }
+
                           // Make response section visible
                           responseSection.classList.add('visible');
 
