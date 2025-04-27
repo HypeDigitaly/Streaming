@@ -193,6 +193,7 @@ export default async function handler(req, res) {
     let buffer = '';
     let isInThinkBlock = false;
     let citations = [];
+    let seenDoneMessage = false;
 
     // Process incoming data from Perplexity
     perplexityStream.on('data', (chunk) => {
@@ -213,9 +214,14 @@ export default async function handler(req, res) {
 
         for (const line of lines) {
           if (!line.trim() || !line.startsWith('data: ')) continue;
+          
+          // Handle DONE marker
           if (line === 'data: [DONE]') {
-            // Send the [DONE] marker to client
-            res.write('data: [DONE]\n\n');
+            if (!seenDoneMessage) {
+              // Send the [DONE] marker to client only once
+              res.write('data: [DONE]\n\n');
+              seenDoneMessage = true;
+            }
             continue;
           }
 
@@ -228,6 +234,10 @@ export default async function handler(req, res) {
 
             // 1. Handle citations if present
             if (data.citations && Array.isArray(data.citations)) {
+              if (debugMode === 1) {
+                console.log('🔗 [got] Received citations:', data.citations.length);
+              }
+              
               citations = data.citations;
               // Send citations as part of the stream in a format StreamingResponseExtension can parse
               const citationsData = { 
@@ -236,72 +246,23 @@ export default async function handler(req, res) {
               res.write(`data: ${JSON.stringify(citationsData)}\n\n`);
             }
 
-            // 2. Process content
+            // 2. Process content - handle content directly in data (Perplexity can send this format)
+            if (data.content !== undefined) {
+              const content = data.content;
+              
+              if (content !== null && content !== undefined) {
+                // Process thinking/regular content with the same logic as below
+                processContentChunk(content, res);
+              }
+              continue; // Skip to next line after processing direct content
+            }
+
+            // 3. Process standard OpenAI-like format
             if (data.choices && data.choices[0] && data.choices[0].delta) {
               const { content } = data.choices[0].delta;
 
               if (content !== null && content !== undefined) {
-                // Check for think blocks - special handling
-                if (content.includes('<think>')) {
-                  isInThinkBlock = true;
-                  // Extract content after <think> tag
-                  const afterThink = content.split('<think>')[1] || '';
-
-                  // Create a modified chunk that the StreamingResponseExtension can understand
-                  if (afterThink) {
-                    const thinkingData = {
-                      choices: [{
-                        delta: { content: afterThink }
-                      }],
-                      isThinking: true
-                    };
-                    res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
-                  }
-                } 
-                else if (content.includes('</think>')) {
-                  isInThinkBlock = false;
-                  // Get content before </think>
-                  const beforeThinkEnd = content.split('</think>')[0];
-                  if (beforeThinkEnd) {
-                    const thinkingData = {
-                      choices: [{
-                        delta: { content: beforeThinkEnd }
-                      }],
-                      isThinking: true
-                    };
-                    res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
-                  }
-
-                  // Get content after </think>
-                  const afterThink = content.split('</think>')[1] || '';
-                  if (afterThink) {
-                    const regularData = {
-                      choices: [{
-                        delta: { content: afterThink }
-                      }]
-                    };
-                    res.write(`data: ${JSON.stringify(regularData)}\n\n`);
-                  }
-                } 
-                else if (isInThinkBlock) {
-                  // Send thinking content
-                  const thinkingData = {
-                    choices: [{
-                      delta: { content: content }
-                    }],
-                    isThinking: true
-                  };
-                  res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
-                } 
-                else {
-                  // Regular content - pass through in expected format
-                  const regularData = {
-                    choices: [{
-                      delta: { content: content }
-                    }]
-                  };
-                  res.write(`data: ${JSON.stringify(regularData)}\n\n`);
-                }
+                processContentChunk(content, res);
               }
             } else if (data.error) {
               // Handle error in the stream data
@@ -317,6 +278,119 @@ export default async function handler(req, res) {
         console.error('Error processing perplexity stream chunk:', e);
       }
     });
+
+    // Helper function to process content chunks and handle think blocks
+    function processContentChunk(content, res) {
+      // Check for think blocks that span across multiple chunks
+      if (content.includes('<think>') && content.includes('</think>')) {
+        // Case: Both tags in same chunk
+        const beforeThink = content.split('<think>')[0];
+        if (beforeThink.trim()) {
+          const regularData = {
+            choices: [{
+              delta: { content: beforeThink }
+            }]
+          };
+          res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+        }
+        
+        const thinkContent = content.split('<think>')[1].split('</think>')[0];
+        if (thinkContent.trim()) {
+          const thinkingData = {
+            choices: [{
+              delta: { content: thinkContent }
+            }],
+            isThinking: true
+          };
+          res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+        }
+        
+        const afterThink = content.split('</think>')[1];
+        if (afterThink.trim()) {
+          const regularData = {
+            choices: [{
+              delta: { content: afterThink }
+            }]
+          };
+          res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+        }
+        
+        // No need to update isInThinkBlock flag since we're handling the entire block
+      }
+      else if (content.includes('<think>')) {
+        // Start of think block
+        isInThinkBlock = true;
+        
+        // Process any content before the think tag
+        const beforeThink = content.split('<think>')[0];
+        if (beforeThink.trim()) {
+          const regularData = {
+            choices: [{
+              delta: { content: beforeThink }
+            }]
+          };
+          res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+        }
+        
+        // Process content after think tag
+        const afterThink = content.split('<think>')[1] || '';
+        if (afterThink) {
+          const thinkingData = {
+            choices: [{
+              delta: { content: afterThink }
+            }],
+            isThinking: true
+          };
+          res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+        }
+      } 
+      else if (content.includes('</think>')) {
+        // End of think block
+        isInThinkBlock = false;
+        
+        // Get content before </think>
+        const beforeThinkEnd = content.split('</think>')[0];
+        if (beforeThinkEnd) {
+          const thinkingData = {
+            choices: [{
+              delta: { content: beforeThinkEnd }
+            }],
+            isThinking: true
+          };
+          res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+        }
+
+        // Get content after </think>
+        const afterThink = content.split('</think>')[1] || '';
+        if (afterThink) {
+          const regularData = {
+            choices: [{
+              delta: { content: afterThink }
+            }]
+          };
+          res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+        }
+      } 
+      else if (isInThinkBlock) {
+        // Inside think block
+        const thinkingData = {
+          choices: [{
+            delta: { content: content }
+          }],
+          isThinking: true
+        };
+        res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+      } 
+      else {
+        // Regular content outside think block
+        const regularData = {
+          choices: [{
+            delta: { content: content }
+          }]
+        };
+        res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+      }
+    }
 
     // Handle potential errors during the stream transfer
     perplexityStream.on('error', (error) => {

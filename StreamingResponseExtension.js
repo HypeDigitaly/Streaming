@@ -931,25 +931,28 @@ export const StreamingResponseExtension = {
                       // Don't update UI directly for citations, but store them
                     }
 
-                    // Handle thinking and content
-                    if (parsed.content) {
+                    // Handle thinking content or regular content
+                    if (parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content) {
+                      const content = parsed.choices[0].delta.content;
                       receivedAnyContent = true; // Mark that we have received processable content
 
                       // Check if this is a thinking part
                       if (parsed.isThinking === true) {
                         isPerplexityThinking = true;
+                        if (payload.debugMode === 1) console.log(`🤔 Processing thinking content: ${content.substring(0, 50)}...`);
+                        
                         // Handle thinking mode differently - show loading animation with thinking content
                         const thinkingHeader = container.querySelector('.thinking-header');
                         if (thinkingHeader && !thinkingHeader.classList.contains('thinking-expanded')) {
                           thinkingHeader.classList.add('thinking-expanded');
                           const thinkingContent = document.createElement('div');
                           thinkingContent.className = 'thinking-content';
-                          thinkingContent.textContent = 'Thinking: ' + parsed.content;
+                          thinkingContent.textContent = 'Thinking: ' + content;
                           thinkingHeader.appendChild(thinkingContent);
                         } else if (thinkingHeader) {
                           const thinkingContent = thinkingHeader.querySelector('.thinking-content');
                           if (thinkingContent) {
-                            thinkingContent.textContent = 'Thinking: ' + parsed.content;
+                            thinkingContent.textContent = 'Thinking: ' + content;
                           }
                         }
 
@@ -964,6 +967,8 @@ export const StreamingResponseExtension = {
                         // If we were in thinking mode, clean it up
                         if (isPerplexityThinking) {
                           isPerplexityThinking = false;
+                          if (payload.debugMode === 1) console.log(`💡 Switching from thinking to regular content mode`);
+                          
                           // Remove thinking header when transitioning to regular content
                           const thinkingHeader = container.querySelector('.thinking-header');
                           if (thinkingHeader) {
