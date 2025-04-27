@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import got from 'got';
 import { whitelistedDomains, isDomainWhitelisted } from '../../config/domains';
 
 export default async function handler(req, res) {
@@ -124,196 +124,118 @@ export default async function handler(req, res) {
       });
     }
 
-    // Call Perplexity API
-    const perplexityResponse = await fetch('https://api.perplexity.ai/chat/completions', {
-      method: 'POST',
+    // ---> MODIFIED: Call Perplexity API using got <---
+    const perplexityStream = got.stream.post('https://api.perplexity.ai/chat/completions', {
       headers: {
         'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'text/event-stream' // Explicitly accept event stream
       },
-      body: JSON.stringify(requestBody)
-    }).catch(err => {
-      console.error('❌ Perplexity fetch error:', err.message);
-      throw err;
+      json: requestBody, // Send body as JSON
+      timeout: { request: 30000 }, // Set a request timeout (e.g., 30 seconds)
+      retry: { limit: 0 } // Disable retries for streaming
     });
 
-    if (debugMode === 1) {
-      console.log(`🚦 Perplexity API Raw Response Status: ${perplexityResponse.status}`);
-      console.log(`🚦 Perplexity API Raw Response OK: ${perplexityResponse.ok}`);
-      console.log(`🚦 Perplexity API Raw Response Headers:`, perplexityResponse.headers.raw());
-    }
-
-    if (!perplexityResponse.ok) {
-      const errorText = await perplexityResponse.text();
-      console.error('❌ perplexity-stream: API error:', perplexityResponse.status, errorText);
-      // Ensure we return here and don't try to read the body further
-      return res.status(perplexityResponse.status).json({
-        error: `Perplexity API error: ${perplexityResponse.status}`,
-        details: errorText
-      });
-    }
-
-    // ---> ADDED CHECK: Verify response body and getReader exist <---
-    if (!perplexityResponse.body || typeof perplexityResponse.body.getReader !== 'function') {
-      console.error('❌ perplexity-stream: Critical Error - Response body is not a readable stream or getReader is missing.');
-      let errorDetails = 'Response body is not a readable stream.';
-      if (perplexityResponse.body) {
-        try {
-          // Attempt to read the body as text to see what was returned
-          const bodyText = await perplexityResponse.text();
-          errorDetails = `getReader is not a function on the response body. Body content: ${bodyText}`;
-          console.error('❌ perplexity-stream: Body Text:', bodyText);
-        } catch (readError) {
-          console.error('❌ perplexity-stream: Failed to read response body as text:', readError);
-          errorDetails = 'getReader is not a function, and failed to read body as text.';
-        }
-      }
-      // Return a 500 error to the client ...
-      return res.status(500).json({
-        error: 'Internal server error',
-        details: errorDetails
-      });
-    } 
-    // ---> END ADDED CHECK <---
-
-    // Set up SSE response
-    res.setHeader('Content-Type', 'text/event-stream');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('Connection', 'keep-alive');
-
-    if (debugMode === 1) {
-      console.log('📥 Perplexity API Response initialized, attempting to get reader...');
-    }
-
-    // ---> ADDED TRY/CATCH around getReader <---
-    let reader;
-    try {
-      reader = perplexityResponse.body.getReader();
+    // Event listener for the 'response' event to check status code and headers
+    perplexityStream.on('response', (response) => {
       if (debugMode === 1) {
-         console.log('✅ Successfully got stream reader.');
+        console.log(`🚦 [got] Perplexity API Response Status: ${response.statusCode}`);
+        console.log(`🚦 [got] Perplexity API Response Headers:`, response.headers);
       }
-    } catch (getReaderError) {
-      console.error('❌ perplexity-stream: CRITICAL - Failed to get reader from response body:', getReaderError);
-      return res.status(500).json({
-        error: 'Internal server error',
-        details: `Failed to get reader from response body: ${getReaderError.message}`
+
+      // Check if the status code indicates success
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+         console.error(`❌ [got] Perplexity API error: Status ${response.statusCode}`);
+         // Attempt to close the client connection gracefully
+         try {
+            if (!res.headersSent) {
+               res.status(response.statusCode).json({ error: `Perplexity API error: ${response.statusCode}` });
+            } else {
+               res.end(); // End the stream if headers were already sent
+            }
+         } catch (e) {
+            console.error("Error sending error response to client:", e);
+         }
+         perplexityStream.destroy(new Error(`Perplexity API error: ${response.statusCode}`)); // Destroy the got stream
+         return; // Stop further processing on this stream instance
+      }
+
+      // Check Content-Type header
+      const contentType = response.headers['content-type'];
+      if (!contentType || !contentType.includes('text/event-stream')) {
+        console.error(`❌ [got] Unexpected Content-Type: ${contentType}. Expected text/event-stream.`);
+        try {
+          if (!res.headersSent) {
+            res.status(500).json({ error: 'Internal server error', details: `Unexpected Content-Type from Perplexity: ${contentType}` });
+          } else {
+            res.end();
+          }
+        } catch (e) {
+          console.error("Error sending error response to client:", e);
+        }
+        perplexityStream.destroy(new Error(`Unexpected Content-Type: ${contentType}`));
+        return;
+      }
+
+      // Set up SSE response headers for the client *after* receiving a valid response from Perplexity
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Connection', 'keep-alive');
+      res.writeHead(200); // Send 200 OK to client now
+      if (debugMode === 1) {
+        console.log('✅ [got] Perplexity stream response validated. Piping to client...');
+      }
+    });
+
+    // ---> ADDED: Pipe the stream directly, handle data and errors using got events <---
+
+    // Pipe the data directly from Perplexity to the client response
+    perplexityStream.pipe(res);
+
+    // Optional: Log chunks for debugging (can be verbose)
+    if (debugMode === 1) {
+      perplexityStream.on('data', (chunk) => {
+        try {
+          const decodedChunk = chunk.toString();
+          console.log('📥 [got] Received chunk:', decodedChunk);
+        } catch (e) {
+          console.error('Error decoding/logging chunk:', e);
+        }
       });
     }
-    // ---> END ADDED TRY/CATCH <---
 
-    const decoder = new TextDecoder();
-    let thinkingContent = '';
-    let citations = [];
-    let responseContent = '';
-    let isThinking = false;
-    let citationsSent = false;
-
-    try {
-      while (true) {
-        const { done, value } = await reader.read();
-        
-        if (done) {
-          // Send final [DONE] signal
-          if (debugMode === 1) {
-            console.log('📤 Perplexity: Stream completed, sending [DONE]');
-          }
-          res.write('data: [DONE]\n\n');
-          break;
-        }
-
-        const chunk = decoder.decode(value, { stream: true });
-        if (debugMode === 1 && chunk.length < 1000) {
-          console.log('📥 Perplexity: Received chunk:', chunk);
-        }
-
-        const lines = chunk.split('\n');
-        
-        for (const line of lines) {
-          if (line.startsWith('data:') && line.trim() !== 'data: [DONE]') {
-            try {
-              const data = line.substring(6);
-              if (!data.trim()) continue;
-              
-              const parsed = JSON.parse(data);
-              
-              if (parsed.choices && parsed.choices[0]) {
-                const choice = parsed.choices[0];
-                const content = choice.delta?.content || choice.message?.content || '';
-                
-                // Handle thinking part
-                if (content.includes('<think>') && content.includes('</think>')) {
-                  const thinkMatch = content.match(/<think>(.*?)<\/think>/s);
-                  if (thinkMatch && thinkMatch[1]) {
-                    thinkingContent = thinkMatch[1].trim();
-                    isThinking = true;
-                    
-                    // Send thinking content
-                    res.write(`data: ${JSON.stringify({ content: thinkingContent, isThinking: true })}\n\n`);
-                  }
-                  
-                  // Extract the actual response (after thinking)
-                  const afterThink = content.split('</think>')[1]?.trim();
-                  if (afterThink) {
-                    responseContent = afterThink;
-                  }
-                } 
-                // Regular delta update (no thinking tags)
-                else if (content) {
-                  if (isThinking) {
-                    // We've transitioned from thinking to response
-                    isThinking = false;
-                    
-                    // If we have citations and haven't sent them yet, send them
-                    if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
-                      citations = parsed.citations;
-                      res.write(`data: ${JSON.stringify({ citations })}\n\n`);
-                      citationsSent = true;
-                    }
-                  }
-                  
-                  responseContent += content;
-                  // Send actual response content
-                  res.write(`data: ${JSON.stringify({ content })}\n\n`);
-                }
-              }
-              
-              // Handle citations if they weren't sent earlier
-              if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
-                citations = parsed.citations;
-                res.write(`data: ${JSON.stringify({ citations })}\n\n`);
-                citationsSent = true;
-              }
-              
-            } catch (error) {
-              if (debugMode === 1) {
-                console.error('❌ perplexity-stream: Error parsing SSE data:', error, line);
-              }
-            }
-          }
-        }
-      }
-      
-      res.end();
-      
-    } catch (error) {
-      console.error('❌ perplexity-stream: Error:', error.message, error.stack);
-      
-      // If headers haven't been sent yet, return error as JSON
-      if (!res.headersSent) {
-        return res.status(500).json({ error: 'Internal server error', details: error.message });
-      }
-      
-      // Otherwise send error as SSE message
+    // Handle potential errors during the stream transfer
+    perplexityStream.on('error', (error) => {
+      console.error('❌ [got] Perplexity stream error:', error.message);
       try {
-        res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
-        res.write('data: [DONE]\n\n');
-        res.end();
-      } catch (sendError) {
-        console.error('❌ perplexity-stream: Error sending error message:', sendError);
+        // If headers haven't been sent, send a 500 status
+        if (!res.headersSent) {
+          res.status(500).json({ error: 'Internal server error', details: error.message });
+        } else {
+          // If headers were sent, try to end the response
+          // Avoid writing further data after piping has started
+          res.end();
+        }
+      } catch (e) {
+        console.error('Error sending error response to client:', e);
       }
-    }
+    });
+
+    // Handle the end of the stream from Perplexity
+    perplexityStream.on('end', () => {
+      if (debugMode === 1) {
+        console.log('📤 [got] Perplexity stream ended.');
+      }
+      // Ensure the client response stream is properly ended
+      if (!res.writableEnded) {
+        res.end();
+      }
+    });
+
   } catch (error) {
-    console.error('❌ perplexity-stream: Error:', error.message, error.stack);
+    // This catch block now primarily handles errors *before* the stream starts
+    // (e.g., API key not found, initial got request setup error)
+    console.error('❌ perplexity-stream: Setup Error:', error.message, error.stack);
     
     // If headers haven't been sent yet, return error as JSON
     if (!res.headersSent) {
