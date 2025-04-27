@@ -280,7 +280,15 @@ export default async function handler(req, res) {
     });
 
     // Helper function to process content chunks and handle think blocks
+    // Enhanced to ensure immediate display of thinking content
     function processContentChunk(content, res) {
+      // Flush function to ensure content is sent immediately
+      const flushResponse = () => {
+        if (typeof res.flush === 'function') {
+          res.flush();
+        }
+      };
+
       // Check for think blocks that span across multiple chunks
       if (content.includes('<think>') && content.includes('</think>')) {
         // Case: Both tags in same chunk
@@ -292,6 +300,7 @@ export default async function handler(req, res) {
             }]
           };
           res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+          flushResponse();
         }
         
         const thinkContent = content.split('<think>')[1].split('</think>')[0];
@@ -303,6 +312,7 @@ export default async function handler(req, res) {
             isThinking: true
           };
           res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+          flushResponse(); // Immediately flush to ensure thinking content appears
         }
         
         const afterThink = content.split('</think>')[1];
@@ -313,12 +323,13 @@ export default async function handler(req, res) {
             }]
           };
           res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+          flushResponse();
         }
         
         // No need to update isInThinkBlock flag since we're handling the entire block
       }
       else if (content.includes('<think>')) {
-        // Start of think block
+        // Start of think block - this is critical for immediately showing thinking UI
         isInThinkBlock = true;
         
         // Process any content before the think tag
@@ -330,9 +341,10 @@ export default async function handler(req, res) {
             }]
           };
           res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+          flushResponse();
         }
         
-        // Process content after think tag
+        // Process content after think tag - crucial to send immediately 
         const afterThink = content.split('<think>')[1] || '';
         if (afterThink) {
           const thinkingData = {
@@ -342,6 +354,18 @@ export default async function handler(req, res) {
             isThinking: true
           };
           res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+          flushResponse(); // Force immediate display
+        } else {
+          // Even if there's no content after <think>, send an empty thinking message
+          // to trigger the thinking UI immediately
+          const emptyThinkingData = {
+            choices: [{
+              delta: { content: '' }
+            }],
+            isThinking: true
+          };
+          res.write(`data: ${JSON.stringify(emptyThinkingData)}\n\n`);
+          flushResponse();
         }
       } 
       else if (content.includes('</think>')) {
@@ -358,6 +382,7 @@ export default async function handler(req, res) {
             isThinking: true
           };
           res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+          flushResponse();
         }
 
         // Get content after </think>
@@ -369,10 +394,11 @@ export default async function handler(req, res) {
             }]
           };
           res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+          flushResponse();
         }
       } 
       else if (isInThinkBlock) {
-        // Inside think block
+        // Inside think block - ensure each chunk shows immediately
         const thinkingData = {
           choices: [{
             delta: { content: content }
@@ -380,6 +406,7 @@ export default async function handler(req, res) {
           isThinking: true
         };
         res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+        flushResponse(); // Immediately display thinking content
       } 
       else {
         // Regular content outside think block
@@ -389,6 +416,7 @@ export default async function handler(req, res) {
           }]
         };
         res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+        flushResponse();
       }
     }
 

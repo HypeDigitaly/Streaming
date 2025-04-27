@@ -841,7 +841,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
               allowedDomains: payload.allowedDomains
             });
-            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${currentTimeout}ms); // <-- Use conditional timeout in log
+            console.log(` Calling proxy URL: ${proxyUrlwith TTFT ${currentTimeout}ms); // <-- Use conditional timeout in log
           }
 
           if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
@@ -940,7 +940,7 @@ export const StreamingResponseExtension = {
                       if (parsed.isThinking === true) {
                         isPerplexityThinking = true;
                         if (payload.debugMode === 1) console.log(`🤔 Processing thinking content: ${content.substring(0, 50)}...`);
-                        
+
                         // Handle thinking mode differently - show loading animation with thinking content
                         const thinkingHeader = container.querySelector('.thinking-header');
                         if (thinkingHeader && !thinkingHeader.classList.contains('thinking-expanded')) {
@@ -968,7 +968,7 @@ export const StreamingResponseExtension = {
                         if (isPerplexityThinking) {
                           isPerplexityThinking = false;
                           if (payload.debugMode === 1) console.log(`💡 Switching from thinking to regular content mode`);
-                          
+
                           // Remove thinking header when transitioning to regular content
                           const thinkingHeader = container.querySelector('.thinking-header');
                           if (thinkingHeader) {
