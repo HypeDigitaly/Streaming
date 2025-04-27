@@ -137,14 +137,44 @@ export default async function handler(req, res) {
       throw err;
     });
 
+    if (debugMode === 1) {
+      console.log(`🚦 Perplexity API Raw Response Status: ${perplexityResponse.status}`);
+      console.log(`🚦 Perplexity API Raw Response OK: ${perplexityResponse.ok}`);
+      console.log(`🚦 Perplexity API Raw Response Headers:`, perplexityResponse.headers.raw());
+    }
+
     if (!perplexityResponse.ok) {
       const errorText = await perplexityResponse.text();
       console.error('❌ perplexity-stream: API error:', perplexityResponse.status, errorText);
-      return res.status(perplexityResponse.status).json({ 
-        error: `Perplexity API error: ${perplexityResponse.status}`, 
-        details: errorText 
+      // Ensure we return here and don't try to read the body further
+      return res.status(perplexityResponse.status).json({
+        error: `Perplexity API error: ${perplexityResponse.status}`,
+        details: errorText
       });
     }
+
+    // ---> ADDED CHECK: Verify response body and getReader exist <---
+    if (!perplexityResponse.body || typeof perplexityResponse.body.getReader !== 'function') {
+      console.error('❌ perplexity-stream: Critical Error - Response body is not a readable stream or getReader is missing.');
+      let errorDetails = 'Response body is not a readable stream.';
+      if (perplexityResponse.body) {
+        try {
+          // Attempt to read the body as text to see what was returned
+          const bodyText = await perplexityResponse.text();
+          errorDetails = `getReader is not a function on the response body. Body content: ${bodyText}`;
+          console.error('❌ perplexity-stream: Body Text:', bodyText);
+        } catch (readError) {
+          console.error('❌ perplexity-stream: Failed to read response body as text:', readError);
+          errorDetails = 'getReader is not a function, and failed to read body as text.';
+        }
+      }
+      // Return a 500 error to the client ...
+      return res.status(500).json({
+        error: 'Internal server error',
+        details: errorDetails
+      });
+    } 
+    // ---> END ADDED CHECK <---
 
     // Set up SSE response
     res.setHeader('Content-Type', 'text/event-stream');
@@ -152,10 +182,25 @@ export default async function handler(req, res) {
     res.setHeader('Connection', 'keep-alive');
 
     if (debugMode === 1) {
-      console.log('📥 Perplexity API Response initialized');
+      console.log('📥 Perplexity API Response initialized, attempting to get reader...');
     }
 
-    const reader = perplexityResponse.body.getReader();
+    // ---> ADDED TRY/CATCH around getReader <---
+    let reader;
+    try {
+      reader = perplexityResponse.body.getReader();
+      if (debugMode === 1) {
+         console.log('✅ Successfully got stream reader.');
+      }
+    } catch (getReaderError) {
+      console.error('❌ perplexity-stream: CRITICAL - Failed to get reader from response body:', getReaderError);
+      return res.status(500).json({
+        error: 'Internal server error',
+        details: `Failed to get reader from response body: ${getReaderError.message}`
+      });
+    }
+    // ---> END ADDED TRY/CATCH <---
+
     const decoder = new TextDecoder();
     let thinkingContent = '';
     let citations = [];
