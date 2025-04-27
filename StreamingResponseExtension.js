@@ -39,6 +39,23 @@ export const StreamingResponseExtension = {
             height: 0;
             padding: 0;
           }
+          .thinking-header.thinking-expanded {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .thinking-content {
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            padding: 8px 12px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            margin-top: 8px;
+            max-height: 120px;
+            overflow-y: auto;
+            width: 100%;
+            color: #595959;
+          }
           .loading-animation {
             display: flex;
             align-items: center;
@@ -211,6 +228,45 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
+          
+          /* Perplexity specific styles */
+          .perplexity-citations {
+            margin-top: 15px;
+            font-size: 13px;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 8px;
+          }
+          .citations-container {
+            background-color: #f9f9f9;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+          }
+          .citations-container h3 {
+            font-size: 14px;
+            margin: 0 0 8px 0;
+            color: #444;
+          }
+          .citations-list {
+            margin: 0;
+            padding-left: 20px;
+          }
+          .citations-list li {
+            margin-bottom: 4px;
+          }
+          .citations-list a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 12px;
+            word-break: break-all;
+          }
+          .citations-list a::before {
+            content: ""; /* Override the arrow prefix for citation links */
+          }
+          .citations-list a:hover {
+            text-decoration: underline;
+          }
+          
           .ai-info-footer {
             display: flex;
             align-items: center;
@@ -272,7 +328,8 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.claude,
           .model-info-tooltip.openai,
           .model-info-tooltip.gemini,
-          .model-info-tooltip.groq {
+          .model-info-tooltip.groq,
+          .model-info-tooltip.perplexity {
             background-color: #E2F2D9;
             color: #333;
           }
@@ -536,6 +593,15 @@ export const StreamingResponseExtension = {
         type: 'groq',
         endpoint: '/api/groq-stream',
         displayName: 'Llama 4 Scout'
+      },
+      
+      // Perplexity models
+      {
+        id: 10,
+        name: 'sonar-reasoning-pro',
+        type: 'perplexity',
+        endpoint: '/api/perplexity-stream',
+        displayName: 'Perplexity Sonar Reasoning Pro'
       }
     ];
 
@@ -745,6 +811,8 @@ export const StreamingResponseExtension = {
         let response;
         let localCompleteResponse = '';
         let receivedAnyContent = false; // Track if *any* content was processed successfully
+        let isPerplexityThinking = false; // For tracking Perplexity thinking state
+        let perplexityCitations = []; // For storing Perplexity citations
 
         try {
           const proxyUrl = `https://utils.hypedigitaly.ai${endpoint}`;
@@ -756,9 +824,10 @@ export const StreamingResponseExtension = {
               debugMode: payload.debugMode,
               projectName: payload.projectName,
               systemPrompt: payload.systemPrompt,
-              user_id: payload.user_id
+              user_id: payload.user_id,
+              allowedDomains: payload.allowedDomains
             });
-            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
 
           response = await fetch(proxyUrl, {
@@ -822,29 +891,114 @@ export const StreamingResponseExtension = {
                     throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
                   }
 
-                  const content = parsed.content || '';
-                  if (content || typeof content === 'string') { // Handle empty string content too
-                    receivedAnyContent = true; // Mark that we have received processable content
-
-                    // --- TTFT Logic ---
-                    if (!firstChunkReceived) {
-                      firstChunkReceived = true;
-                      if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
-                      // Crucially, clear the TTFT timer now
-                      if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
-                      // Signal that the TTFT hurdle is passed
-                      resolveFirstChunkPromise();
+                  // Special handling for Perplexity
+                  if (endpoint === '/api/perplexity-stream') {
+                    // Handle perplexity citations
+                    if (parsed.citations && Array.isArray(parsed.citations)) {
+                      perplexityCitations = parsed.citations;
+                      if (payload.debugMode === 1) console.log(`📋 Perplexity citations received:`, perplexityCitations);
+                      // Don't update UI directly for citations, but store them
                     }
-                    // --- End TTFT Logic ---
 
-                    // Update UI only if the fetch wasn't aborted *before* this point
-                    if (!abortController.signal.aborted) {
-                        updateContent(content);
-                        localCompleteResponse += content;
-                    } else {
-                        // Should theoretically not happen if abort check is robust, but good failsafe
-                        if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
-                        // Do not update UI or localCompleteResponse if aborted
+                    // Handle thinking and content
+                    if (parsed.content) {
+                      receivedAnyContent = true; // Mark that we have received processable content
+
+                      // Check if this is a thinking part
+                      if (parsed.isThinking === true) {
+                        isPerplexityThinking = true;
+                        // Handle thinking mode differently - show loading animation with thinking content
+                        const thinkingHeader = container.querySelector('.thinking-header');
+                        if (thinkingHeader && !thinkingHeader.classList.contains('thinking-expanded')) {
+                          thinkingHeader.classList.add('thinking-expanded');
+                          const thinkingContent = document.createElement('div');
+                          thinkingContent.className = 'thinking-content';
+                          thinkingContent.textContent = 'Thinking: ' + parsed.content;
+                          thinkingHeader.appendChild(thinkingContent);
+                        } else if (thinkingHeader) {
+                          const thinkingContent = thinkingHeader.querySelector('.thinking-content');
+                          if (thinkingContent) {
+                            thinkingContent.textContent = 'Thinking: ' + parsed.content;
+                          }
+                        }
+
+                        // TTFT check for thinking
+                        if (!firstChunkReceived) {
+                          firstChunkReceived = true;
+                          if (payload.debugMode === 1) console.log(`✅ First chunk (thinking) received from ${endpoint} within timeout.`);
+                          if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
+                          resolveFirstChunkPromise();
+                        }
+                      } else {
+                        // If we were in thinking mode, clean it up
+                        if (isPerplexityThinking) {
+                          isPerplexityThinking = false;
+                          // Remove thinking header when transitioning to regular content
+                          const thinkingHeader = container.querySelector('.thinking-header');
+                          if (thinkingHeader) {
+                            thinkingHeader.classList.add('hidden');
+                          }
+                          // Make response section visible
+                          responseSection.classList.add('visible');
+                          
+                          // If we have citations, format them and add to response
+                          if (perplexityCitations.length > 0) {
+                            const citationsHTML = formatPerplexityCitations(perplexityCitations);
+                            const citationsDiv = document.createElement('div');
+                            citationsDiv.className = 'perplexity-citations';
+                            citationsDiv.innerHTML = citationsHTML;
+                            responseContent.appendChild(citationsDiv);
+                          }
+                        }
+
+                        // --- TTFT Logic ---
+                        if (!firstChunkReceived) {
+                          firstChunkReceived = true;
+                          if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
+                          // Crucially, clear the TTFT timer now
+                          if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
+                          // Signal that the TTFT hurdle is passed
+                          resolveFirstChunkPromise();
+                        }
+                        // --- End TTFT Logic ---
+
+                        // Update UI only if the fetch wasn't aborted *before* this point
+                        if (!abortController.signal.aborted) {
+                            updateContent(parsed.content);
+                            localCompleteResponse += parsed.content;
+                        } else {
+                            // Should theoretically not happen if abort check is robust, but good failsafe
+                            if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
+                            // Do not update UI or localCompleteResponse if aborted
+                        }
+                      }
+                    }
+                  } else {
+                    // Regular handler for non-Perplexity providers
+                    const content = parsed.content || '';
+                    if (content || typeof content === 'string') { // Handle empty string content too
+                      receivedAnyContent = true; // Mark that we have received processable content
+
+                      // --- TTFT Logic ---
+                      if (!firstChunkReceived) {
+                        firstChunkReceived = true;
+                        if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
+                        // Crucially, clear the TTFT timer now
+                        if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
+                        // Signal that the TTFT hurdle is passed
+                        resolveFirstChunkPromise();
+                      }
+                      // --- End TTFT Logic ---
+
+                      // Update UI only if the fetch wasn't aborted *before* this point
+                      if (!abortController.signal.aborted) {
+                          updateContent(content);
+                          localCompleteResponse += content;
+                      } else {
+                          // Should theoretically not happen if abort check is robust, but good failsafe
+                          if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
+                          // Do not update UI or localCompleteResponse if aborted
+                      }
                     }
                   }
                 } else if (payload.debugMode === 1 && data) {
@@ -889,6 +1043,24 @@ export const StreamingResponseExtension = {
           if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
         }
       };
+
+      // Function to format Perplexity citations
+      function formatPerplexityCitations(citations) {
+        if (!citations || citations.length === 0) return '';
+        
+        let html = '<div class="citations-container">';
+        html += '<h3>Sources:</h3>';
+        html += '<ol class="citations-list">';
+        
+        citations.forEach((url, index) => {
+          // Create a truncated version for display
+          const displayUrl = url.length > 60 ? url.substring(0, 57) + '...' : url;
+          html += `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${displayUrl}</a></li>`;
+        });
+        
+        html += '</ol></div>';
+        return html;
+      }
 
       // Helper function for Voiceflow update to keep main logic cleaner
       async function updateVoiceflowVariable(payload, completeResponse) {
@@ -1033,6 +1205,14 @@ export const StreamingResponseExtension = {
           projectName: trace.payload.projectName,
           user_id: trace.payload.user_id,
         };
+
+        // Add allowedDomains parameter for Perplexity API
+        if (model.type === 'perplexity' && trace.payload.allowedDomains) {
+          payload.allowedDomains = trace.payload.allowedDomains;
+          if (trace.payload.debugMode === 1) {
+            console.log(`📌 Adding allowed domains for Perplexity: ${trace.payload.allowedDomains}`);
+          }
+        }
 
         // Call the LLM API
         const success = await callLLMAPI(model.endpoint, payload);

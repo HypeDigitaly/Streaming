@@ -1,0 +1,226 @@
+import fetch from 'node-fetch';
+import { whitelistedDomains, isDomainWhitelisted } from '../../config/domains';
+
+export default async function handler(req, res) {
+  const origin = req.headers.origin;
+
+  // Check if origin is in whitelist
+  if (!isDomainWhitelisted(origin)) {
+    return res.status(403).json({ error: 'Access denied - domain not whitelisted' });
+  }
+
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'false');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+  
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const {
+    model,
+    userData,
+    systemPrompt,
+    max_tokens,
+    temperature,
+    debugMode,
+    allowedDomains,
+    projectName,
+  } = req.body;
+
+  // Parse allowed domains from comma-separated string to array of strings
+  let search_domain_filter = [];
+  if (allowedDomains) {
+    search_domain_filter = allowedDomains.split(',')
+      .map(domain => domain.trim())
+      .filter(Boolean);
+  }
+
+  if (debugMode === 1) {
+    console.log('📦 perplexity-stream: Request body:', {
+      model,
+      max_tokens,
+      temperature,
+      projectName,
+      userData: userData?.substring(0, 100) + (userData?.length > 100 ? '...' : ''),
+      systemPrompt: systemPrompt?.substring(0, 100) + (systemPrompt?.length > 100 ? '...' : ''),
+      allowedDomains,
+      search_domain_filter
+    });
+  }
+
+  // Build request body for Perplexity API
+  const requestBody = {
+    model: model || "sonar-reasoning-pro",
+    temperature: parseFloat(temperature) || 0.25,
+    top_p: parseFloat(temperature) || 0.25,
+    return_images: true,
+    return_related_questions: true,
+    top_k: 0,
+    stream: true,
+    presence_penalty: 0,
+    frequency_penalty: 1,
+    web_search_options: {
+      search_context_size: "high"
+    },
+    messages: [
+      {
+        role: "system",
+        content: systemPrompt || "You are a helpful assistant."
+      },
+      {
+        role: "user",
+        content: userData || "Hello"
+      }
+    ],
+    max_tokens: parseInt(max_tokens) || 1000
+  };
+
+  // Add search_domain_filter only if there are domains specified
+  if (search_domain_filter.length > 0) {
+    requestBody.search_domain_filter = search_domain_filter;
+  }
+
+  try {
+    // Select API key based on projectName
+    const apiKey = process.env[`PERPLEXITY_API_KEY_${projectName?.toUpperCase()}`] || process.env.PERPLEXITY_API_KEY;
+
+    if (!apiKey) {
+      throw new Error(`API key not found for project: ${projectName}`);
+    }
+
+    // Call Perplexity API
+    const perplexityResponse = await fetch('https://api.perplexity.ai/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody)
+    });
+
+    if (!perplexityResponse.ok) {
+      const errorText = await perplexityResponse.text();
+      if (debugMode === 1) {
+        console.error('❌ perplexity-stream: API error:', perplexityResponse.status, errorText);
+      }
+      return res.status(perplexityResponse.status).json({ 
+        error: `Perplexity API error: ${perplexityResponse.status}`, 
+        details: errorText 
+      });
+    }
+
+    // Set up SSE response
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    const reader = perplexityResponse.body.getReader();
+    const decoder = new TextDecoder();
+    let thinkingContent = '';
+    let citations = [];
+    let responseContent = '';
+    let isThinking = false;
+    let citationsSent = false;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      
+      if (done) {
+        // Send final [DONE] signal
+        res.write('data: [DONE]\n\n');
+        break;
+      }
+
+      const chunk = decoder.decode(value, { stream: true });
+      const lines = chunk.split('\n');
+      
+      for (const line of lines) {
+        if (line.startsWith('data:') && line.trim() !== 'data: [DONE]') {
+          try {
+            const data = line.substring(6);
+            if (!data.trim()) continue;
+            
+            const parsed = JSON.parse(data);
+            
+            if (parsed.choices && parsed.choices[0]) {
+              const choice = parsed.choices[0];
+              const content = choice.delta?.content || choice.message?.content || '';
+              
+              // Handle thinking part
+              if (content.includes('<think>') && content.includes('</think>')) {
+                const thinkMatch = content.match(/<think>(.*?)<\/think>/s);
+                if (thinkMatch && thinkMatch[1]) {
+                  thinkingContent = thinkMatch[1].trim();
+                  isThinking = true;
+                  
+                  // Send thinking content
+                  res.write(`data: ${JSON.stringify({ content: thinkingContent, isThinking: true })}\n\n`);
+                }
+                
+                // Extract the actual response (after thinking)
+                const afterThink = content.split('</think>')[1]?.trim();
+                if (afterThink) {
+                  responseContent = afterThink;
+                }
+              } 
+              // Regular delta update (no thinking tags)
+              else if (content) {
+                if (isThinking) {
+                  // We've transitioned from thinking to response
+                  isThinking = false;
+                  
+                  // If we have citations and haven't sent them yet, send them
+                  if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
+                    citations = parsed.citations;
+                    res.write(`data: ${JSON.stringify({ citations })}\n\n`);
+                    citationsSent = true;
+                  }
+                }
+                
+                responseContent += content;
+                // Send actual response content
+                res.write(`data: ${JSON.stringify({ content })}\n\n`);
+              }
+            }
+            
+            // Handle citations if they weren't sent earlier
+            if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
+              citations = parsed.citations;
+              res.write(`data: ${JSON.stringify({ citations })}\n\n`);
+              citationsSent = true;
+            }
+            
+          } catch (error) {
+            if (debugMode === 1) {
+              console.error('❌ perplexity-stream: Error parsing SSE data:', error, line);
+            }
+          }
+        }
+      }
+    }
+    
+    res.end();
+    
+  } catch (error) {
+    if (debugMode === 1) {
+      console.error('❌ perplexity-stream: Error:', error);
+    }
+    
+    // If headers haven't been sent yet, return error as JSON
+    if (!res.headersSent) {
+      return res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
+    
+    // Otherwise send error as SSE message
+    res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
+    res.write('data: [DONE]\n\n');
+    res.end();
+  }
+} 

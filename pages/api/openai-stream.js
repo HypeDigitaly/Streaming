@@ -1,23 +1,11 @@
 import { OpenAI } from 'openai';
+import { isDomainWhitelisted } from '../../config/domains';
 
 export default async function handler(req, res) {
-  const whitelistedDomains = [
-    'icuk.cz',
-    'kr-ustecky.cz',
-    'kr-vysocina.cz',
-    'setrivodou.cz',
-    'healthytwenty.cz',
-    'barber-mnb.cz',
-    'teplice.cz',
-    'hypedigitaly.ai',
-    'litomerice.cz'
-  ];
-
   const origin = req.headers.origin;
 
   // Check if origin is in whitelist
-  const hostname = new URL(origin).hostname.replace(/^www\./, '');
-  if (!origin || !whitelistedDomains.includes(hostname)) {
+  if (!isDomainWhitelisted(origin)) {
     return res.status(403).json({ error: 'Access denied - domain not whitelisted' });
   }
 
