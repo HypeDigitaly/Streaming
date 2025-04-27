@@ -786,6 +786,13 @@ export const StreamingResponseExtension = {
       let resolveFirstChunkPromise = null;
       let rejectFirstChunkPromise = null;
 
+      // ---> ADDED: Determine timeout based on endpoint <---
+      const PERPLEXITY_TIMEOUT_MS = 20000; // 20 seconds for Perplexity
+      const currentTimeout = endpoint === '/api/perplexity-stream'
+        ? PERPLEXITY_TIMEOUT_MS
+        : TTFT_TIMEOUT_MS;
+      // ---> END ADDED <---
+
       // Promise that resolves ONLY when the first chunk arrives or rejects on early error
       const firstChunkPromise = new Promise((resolve, reject) => {
         resolveFirstChunkPromise = resolve;
@@ -799,14 +806,14 @@ export const StreamingResponseExtension = {
           if (firstChunkReceived) return;
 
           if (payload.debugMode === 1) {
-            console.log(`⏰ TTFT Timeout (${TTFT_TIMEOUT_MS}ms) reached for ${endpoint}. Aborting fetch.`);
+            console.log(`⏰ TTFT Timeout (${currentTimeout}ms) reached for ${endpoint}. Aborting fetch.`);
           }
           // Abort the fetch *before* rejecting due to timeout
           if (!abortController.signal.aborted) {
             abortController.abort('TTFT Timeout'); // Use a reason for clarity
           }
-          reject(new Error(`TTFT timeout after ${TTFT_TIMEOUT_MS}ms for ${endpoint}`));
-        }, TTFT_TIMEOUT_MS);
+          reject(new Error(`TTFT timeout after ${currentTimeout}ms for ${endpoint}`));
+        }, currentTimeout); // <-- Use conditional timeout
       });
 
       // This function handles the actual fetch and stream processing
@@ -830,7 +837,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
               allowedDomains: payload.allowedDomains
             });
-            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${currentTimeout}ms`); // <-- Use conditional timeout in log
           }
           
           if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
