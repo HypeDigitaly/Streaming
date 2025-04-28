@@ -179,41 +179,97 @@ export default async function handler(req, res) {
     res.setHeader('Connection', 'keep-alive');
 
     if (debugMode === 1) {
-      console.log('📥 Perplexity API Response OK, attempting to get stream reader...');
+      console.log('📥 Perplexity API Response OK, processing the response stream...');
     }
 
-    // Try to get the stream reader
-    let reader;
-    try {
-      // Check if body exists and has getReader - handle potential non-stream success response
-      if (!perplexityResponse.body || typeof perplexityResponse.body.getReader !== 'function') {
-          console.error('❌ perplexity-stream: Response body is not a readable stream even though status was OK.');
-          let bodyContent = 'Could not read body.';
-          try { bodyContent = await perplexityResponse.text(); } catch (e) { /* ignore */ }
-          console.error('❌ perplexity-stream: Body content received:', bodyContent);
-          throw new Error('Received OK status but response body is not a readable stream.');
-      }
-      reader = perplexityResponse.body.getReader();
-      if (debugMode === 1) {
-         console.log('✅ Successfully got stream reader.');
-      }
-    } catch (getReaderError) {
-      // This catch handles errors from the check above or the getReader() call itself
-      console.error('❌ perplexity-stream: CRITICAL - Failed to get reader from response body:', getReaderError.message);
-      console.error('❌ perplexity-stream: getReaderError stack:', getReaderError.stack);
-      // Ensure we return the 500 error to the client
-      return res.status(500).json({
-        error: 'Internal server error',
-        details: `Failed to get reader from response body: ${getReaderError.message}`
-      });
-    }
-
-    const decoder = new TextDecoder();
+    // Process the response without using getReader()
+    const responseText = await perplexityResponse.text();
+    const lines = responseText.split('\n');
     let thinkingContent = '';
     let citations = [];
     let responseContent = '';
     let isThinking = false;
     let citationsSent = false;
+
+    try {
+      for (const line of lines) {
+        if (line.startsWith('data:') && line.trim() !== 'data: [DONE]') {
+          try {
+            const data = line.substring(6);
+            if (!data.trim()) continue;
+            
+            const parsed = JSON.parse(data);
+            
+            if (parsed.choices && parsed.choices[0]) {
+              const choice = parsed.choices[0];
+              const content = choice.delta?.content || choice.message?.content || '';
+              
+              // Handle thinking part
+              if (content.includes('<think>') && content.includes('</think>')) {
+                const thinkMatch = content.match(/<think>(.*?)<\/think>/s);
+                if (thinkMatch && thinkMatch[1]) {
+                  thinkingContent = thinkMatch[1].trim();
+                  isThinking = true;
+                  
+                  // Send thinking content
+                  res.write(`data: ${JSON.stringify({ content: thinkingContent, isThinking: true })}\n\n`);
+                }
+                
+                // Extract the actual response (after thinking)
+                const afterThink = content.split('</think>')[1]?.trim();
+                if (afterThink) {
+                  responseContent = afterThink;
+                }
+              } 
+              // Regular delta update (no thinking tags)
+              else if (content) {
+                if (isThinking) {
+                  // We've transitioned from thinking to response
+                  isThinking = false;
+                  
+                  // If we have citations and haven't sent them yet, send them
+                  if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
+                    citations = parsed.citations;
+                    res.write(`data: ${JSON.stringify({ citations })}\n\n`);
+                    citationsSent = true;
+                  }
+                }
+                
+                responseContent += content;
+                // Send actual response content
+                res.write(`data: ${JSON.stringify({ content })}\n\n`);
+              }
+            }
+            
+            // Handle citations if they weren't sent earlier
+            if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
+              citations = parsed.citations;
+              res.write(`data: ${JSON.stringify({ citations })}\n\n`);
+              citationsSent = true;
+            }
+            
+          } catch (error) {
+            if (debugMode === 1) {
+              console.error('❌ perplexity-stream: Error parsing SSE data:', error, line);
+            }
+          }
+        } else if (line.trim() === 'data: [DONE]') {
+          // Send [DONE] signal
+          res.write('data: [DONE]\n\n');
+        }
+      }
+      
+      // Ensure [DONE] is sent if not already
+      res.write('data: [DONE]\n\n');
+      res.end();
+    } catch (error) {
+      console.error('❌ perplexity-stream: Error processing response:', error.message, error.stack);
+      
+      // Send error as SSE message
+      res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
+      res.write('data: [DONE]\n\n');
+      res.end();
+    }
 
     try {
       while (true) {
