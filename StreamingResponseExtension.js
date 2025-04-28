@@ -1125,10 +1125,7 @@ export const StreamingResponseExtension = {
   },
 };
 
-// Keep track of completed steps globally
-      let completedSteps = []
-
-      // Variable to hold Perplexity UI references
+// Variable to hold Perplexity UI references
       let perplexityUI = null;
 
       // Get model type class for styling
@@ -1417,9 +1414,6 @@ export const StreamingResponseExtension = {
       return result;
     }
 
-
-    // Keep track of completed steps globally
-    let completedSteps = []
 
     // Variable to hold Perplexity UI references
     let perplexityUI = null;
