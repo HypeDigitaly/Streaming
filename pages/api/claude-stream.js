@@ -128,7 +128,6 @@ export default async function handler(req, res) {
         }
       }],
       stream: true,
-      timeout: 10000, // 10 second timeout
     });
 
     if (debugMode === 1) {

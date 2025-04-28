@@ -292,10 +292,6 @@ export const StreamingResponseExtension = {
     let buffer = '';
     let deltaCounter = 0;
     let completeResponse = '';
-    let citations = null;
-    let isReasoningModel = false;
-    let answer = '';
-    let activeReasoningGroup = null;
 
     // Show container immediately with loading animation
     container.style.display = 'block';
@@ -414,7 +410,7 @@ export const StreamingResponseExtension = {
       // Wrap OL items first, then UL items
       wrapListItems('ol');
       wrapListItems('ul');
-
+      
       // Clean up empty numbered list items (modified check)
       const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
       listItems.forEach(li => {
@@ -427,7 +423,7 @@ export const StreamingResponseExtension = {
           }
         }
       });
-
+      
       // Remove any potentially empty OL/UL tags left after cleaning LIs
       tempContainer.querySelectorAll('ol, ul').forEach(list => {
         if (!list.hasChildNodes()) {
@@ -540,14 +536,7 @@ export const StreamingResponseExtension = {
         type: 'groq',
         endpoint: '/api/groq-stream',
         displayName: 'Llama 4 Scout'
-      },
-      {
-        id: 10,
-        name: 'sonar-reasoning-pro',
-        type: 'perplexity',
-        endpoint: '/api/perplexity-stream',
-        displayName: 'Perplexity Sonar Reasoning Pro'
-      } // Added Perplexity model
+      }
     ];
 
     // Function to process model sequence
@@ -769,7 +758,7 @@ export const StreamingResponseExtension = {
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
             });
-            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
 
           response = await fetch(proxyUrl, {
