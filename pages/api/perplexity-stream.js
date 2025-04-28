@@ -63,8 +63,6 @@ export default async function handler(req, res) {
         systemPrompt,
         user_id
       });
-      console.log('🔍 System Prompt full text:', systemPrompt);
-      console.log('🔍 User Input full text:', userData);
     }
 
     res.writeHead(200, {
@@ -102,7 +100,6 @@ export default async function handler(req, res) {
 
     if (debugMode === 1) {
       console.log('🚀 Making Perplexity API call with payload:', JSON.stringify(payload, null, 2));
-      console.log('⏳ Starting API stream request to Perplexity...');
     }
 
     const controller = new AbortController();
@@ -129,14 +126,6 @@ export default async function handler(req, res) {
     const decoder = new TextDecoder();
     let buffer = '';
 
-    // Initialize variables to track the entire response
-    let fullResponse = '';
-    let thinkingContent = '';
-    let allCitations = [];
-    let tokenCount = 0;
-    let isInThinkingBlock = false;
-    let allStreamChunks = [];
-
     while (true) {
       const { done, value } = await reader.read();
       
@@ -157,9 +146,6 @@ export default async function handler(req, res) {
         if (!line.trim() || !line.startsWith('data: ')) continue;
         if (line === 'data: [DONE]') {
           // Send [DONE] signal to client
-          if (debugMode === 1) {
-            console.log('🏁 Received [DONE] signal from Perplexity API');
-          }
           res.write('data: [DONE]\n\n');
           continue;
         }
@@ -169,11 +155,8 @@ export default async function handler(req, res) {
           const jsonStr = line.slice(5);
           const data = JSON.parse(jsonStr);
           
-          // Save the raw stream chunk
-          allStreamChunks.push(data);
-          
           if (debugMode === 1) {
-            console.log(`📥 Perplexity Response Chunk #${tokenCount + 1}:`, JSON.stringify(data, null, 2));
+            console.log('📥 Perplexity Response Chunk:', JSON.stringify(data, null, 2));
           }
 
           // Process response content - handle both thinking (Perplexity-specific) and regular response
@@ -181,55 +164,6 @@ export default async function handler(req, res) {
             const { delta } = data.choices[0];
             
             if (delta.content !== undefined && delta.content !== null) {
-              // Increment token count
-              tokenCount++;
-              
-              // Check for thinking tags in the content
-              if (delta.content.includes('<think>')) {
-                isInThinkingBlock = true;
-                const afterThinkTag = delta.content.split('<think>')[1] || '';
-                thinkingContent += afterThinkTag;
-                
-                if (debugMode === 1) {
-                  console.log('🧠 Entering thinking block');
-                  if (afterThinkTag) {
-                    console.log('🧠 First thinking content:', afterThinkTag);
-                  }
-                }
-              } else if (delta.content.includes('</think>')) {
-                isInThinkingBlock = false;
-                const beforeThinkEndTag = delta.content.split('</think>')[0] || '';
-                thinkingContent += beforeThinkEndTag;
-                
-                if (debugMode === 1) {
-                  console.log('🧠 Exiting thinking block');
-                  if (beforeThinkEndTag) {
-                    console.log('🧠 Final thinking content:', beforeThinkEndTag);
-                  }
-                  console.log('🧠 COMPLETE THINKING PROCESS:', thinkingContent);
-                }
-                
-                // Get content after </think> tag
-                const afterThinkEndTag = delta.content.split('</think>')[1] || '';
-                if (afterThinkEndTag) {
-                  fullResponse += afterThinkEndTag;
-                  if (debugMode === 1) {
-                    console.log('💬 Content after thinking:', afterThinkEndTag);
-                  }
-                }
-              } else if (isInThinkingBlock) {
-                thinkingContent += delta.content;
-                if (debugMode === 1) {
-                  console.log(`🧠 Thinking token #${tokenCount}:`, delta.content);
-                }
-              } else {
-                // Regular content
-                fullResponse += delta.content;
-                if (debugMode === 1) {
-                  console.log(`💬 Response token #${tokenCount}:`, delta.content);
-                }
-              }
-              
               const responseData = {
                 type: 'content',
                 content: delta.content
@@ -242,14 +176,6 @@ export default async function handler(req, res) {
 
           // Handle citations if they exist in the response
           if (data.citations) {
-            // Track all citations
-            allCitations = data.citations;
-            
-            if (debugMode === 1) {
-              console.log('📚 Citations received:', JSON.stringify(data.citations, null, 2));
-              console.log(`📚 Total citations: ${data.citations.length}`);
-            }
-            
             const citationsData = {
               type: 'citations',
               citations: data.citations
@@ -260,23 +186,11 @@ export default async function handler(req, res) {
           }
         } catch (e) {
           if (debugMode === 1) {
-            console.error('❌ Failed to parse Perplexity chunk:', e, 'Line:', line);
+            console.error('Failed to parse Perplexity chunk:', e, 'Line:', line);
           }
           // Skip incomplete chunks silently
         }
       }
-    }
-    
-    // Log the complete response data at the end
-    if (debugMode === 1) {
-      console.log('\n==== PERPLEXITY STREAMING SUMMARY ====');
-      console.log(`🔢 Total tokens streamed: ${tokenCount}`);
-      console.log(`📚 Total citations: ${allCitations.length}`);
-      console.log('📚 All citations:', JSON.stringify(allCitations, null, 2));
-      console.log('🧠 Complete thinking process:', thinkingContent);
-      console.log('💬 Complete final response:', fullResponse);
-      console.log('📊 All stream chunks:', JSON.stringify(allStreamChunks, null, 2));
-      console.log('==== END SUMMARY ====\n');
     }
 
     // Explicitly send DONE signal to ensure it's always sent
@@ -288,19 +202,7 @@ export default async function handler(req, res) {
 
   } catch (error) {
     if (req.body.debugMode === 1) {
-      console.error('❌ Stream Error:', error);
-      console.error('❌ Error Stack:', error.stack);
-      console.error('❌ Error occurred during Perplexity API request processing');
-      
-      // Try to extract additional error information if available
-      if (error.response) {
-        try {
-          const errorBody = await error.response.text();
-          console.error('❌ Perplexity API Error Response:', errorBody);
-        } catch (e) {
-          console.error('❌ Could not extract error response body:', e);
-        }
-      }
+      console.error('Stream Error:', error);
     }
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.write('data: [DONE]\n\n');
