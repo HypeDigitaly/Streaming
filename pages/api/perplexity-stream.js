@@ -198,12 +198,12 @@ export default async function handler(req, res) {
     // Store the complete API response for debugging
     let fullApiResponse = '';
     let fullResponseChunks = [];
-    
+
     // Process incoming data from Perplexity
     perplexityStream.on('data', (chunk) => {
       try {
         const decodedChunk = chunk.toString();
-        
+
         // Add to the full response log
         fullApiResponse += decodedChunk;
         fullResponseChunks.push(decodedChunk);
@@ -223,7 +223,7 @@ export default async function handler(req, res) {
 
         for (const line of lines) {
           if (!line.trim() || !line.startsWith('data: ')) continue;
-          
+
           // Handle DONE marker
           if (line === 'data: [DONE]') {
             if (!seenDoneMessage) {
@@ -246,7 +246,7 @@ export default async function handler(req, res) {
               if (debugMode === 1) {
                 console.log('🔗 [got] Received citations:', data.citations.length);
               }
-              
+
               citations = data.citations;
               // Send citations as part of the stream in a format StreamingResponseExtension can parse
               const citationsData = { 
@@ -258,7 +258,7 @@ export default async function handler(req, res) {
             // 2. Process content - handle content directly in data (Perplexity can send this format)
             if (data.content !== undefined) {
               const content = data.content;
-              
+
               if (content !== null && content !== undefined) {
                 // Process thinking/regular content with the same logic as below
                 processContentChunk(content, res);
@@ -311,7 +311,7 @@ export default async function handler(req, res) {
           res.write(`data: ${JSON.stringify(regularData)}\n\n`);
           flushResponse();
         }
-        
+
         const thinkContent = content.split('<think>')[1].split('</think>')[0];
         if (thinkContent.trim()) {
           const thinkingData = {
@@ -323,7 +323,7 @@ export default async function handler(req, res) {
           res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
           flushResponse(); // Immediately flush to ensure thinking content appears
         }
-        
+
         const afterThink = content.split('</think>')[1];
         if (afterThink.trim()) {
           // Send final response content in a way that allows token-by-token streaming
@@ -336,13 +336,13 @@ export default async function handler(req, res) {
           res.write(`data: ${JSON.stringify(finalResponseData)}\n\n`);
           flushResponse();
         }
-        
+
         // No need to update isInThinkBlock flag since we're handling the entire block
       }
       else if (content.includes('<think>')) {
         // Start of think block - this is critical for immediately showing thinking UI
         isInThinkBlock = true;
-        
+
         // Process any content before the think tag
         const beforeThink = content.split('<think>')[0];
         if (beforeThink.trim()) {
@@ -354,7 +354,7 @@ export default async function handler(req, res) {
           res.write(`data: ${JSON.stringify(regularData)}\n\n`);
           flushResponse();
         }
-        
+
         // Process content after think tag - crucial to send immediately 
         const afterThink = content.split('<think>')[1] || '';
         if (afterThink) {
@@ -382,7 +382,7 @@ export default async function handler(req, res) {
       else if (content.includes('</think>')) {
         // End of think block
         isInThinkBlock = false;
-        
+
         // Get content before </think>
         const beforeThinkEnd = content.split('</think>')[0];
         if (beforeThinkEnd) {
@@ -457,7 +457,7 @@ export default async function handler(req, res) {
       console.log('==========================================================');
       console.log('📤 [got] COMPLETE PERPLEXITY API RESPONSE (START)');
       console.log('==========================================================');
-      
+
       // Try to parse each chunk as JSON and log in a more structured way
       console.log('RESPONSE CHUNKS:');
       fullResponseChunks.forEach((chunk, index) => {
@@ -483,11 +483,11 @@ export default async function handler(req, res) {
           console.log(chunk);
         }
       });
-      
+
       console.log('==========================================================');
       console.log('📤 [got] COMPLETE PERPLEXITY API RESPONSE (END)');
       console.log('==========================================================');
-      
+
       if (debugMode === 1) {
         console.log('📤 [got] Perplexity stream ended.');
       }
