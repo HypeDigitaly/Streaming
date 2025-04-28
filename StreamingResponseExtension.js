@@ -830,11 +830,49 @@ export const StreamingResponseExtension = {
                   const parsed = JSON.parse(data);
 
                   if (parsed.error) {
+                    // Log specific error received from stream
+                    if (payload.debugMode === 1) {
+                       console.error(`🔴 [Client] Received Stream Error from ${endpoint}:`, parsed.error);
+                    }
                     throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
                   }
 
-                  const content = parsed.content || '';
-                  if (content || typeof content === 'string') { // Handle empty string content too
+                  // Handle different data types from the stream
+                  let content = '';
+                  let logMessage = null;
+
+                  if (parsed.type === 'content') {
+                     content = parsed.content || '';
+                     if (payload.debugMode === 1) {
+                       logMessage = `📦 [Client] Received Content Chunk from ${endpoint}: "${content}"`;
+                     }
+                  } else if (parsed.type === 'citations') {
+                     // Citations don't contribute to the main response display or localCompleteResponse
+                     // Log them if in debug mode
+                     if (payload.debugMode === 1) {
+                       logMessage = `📚 [Client] Received Citations from ${endpoint}: ${JSON.stringify(parsed.citations)}`;
+                     }
+                     // Do not set receivedAnyContent = true for citations alone
+                  } else if (parsed.type === 'thinking') {
+                     // Thinking content is only logged in debug mode, not displayed
+                     const thinkingChunk = parsed.content || '';
+                     if (payload.debugMode === 1 && thinkingChunk) {
+                       logMessage = `🧠 [Client] Received Thinking Chunk from ${endpoint}: "${thinkingChunk}"`;
+                     }
+                     // Do NOT set content here or mark receivedAnyContent, as it's not displayable
+                  } else if (parsed.content) {
+                     // Fallback for older/other stream formats
+                     content = parsed.content || '';
+                     if (payload.debugMode === 1) {
+                       logMessage = `📦 [Client] Received Generic Content from ${endpoint}: "${content}"`;
+                     }
+                  } else if (payload.debugMode === 1) {
+                     // Log unexpected structure if in debug mode
+                     console.warn(`⚠️ [Client] Received unknown data structure from ${endpoint}:`, parsed);
+                  }
+
+                  // Only process if we actually got content to display
+                  if (content || (typeof content === 'string' && content !== '')) { // Ensure content is non-empty string
                     receivedAnyContent = true; // Mark that we have received processable content
 
                     // --- TTFT Logic ---
@@ -848,21 +886,28 @@ export const StreamingResponseExtension = {
                     }
                     // --- End TTFT Logic ---
 
+                    // Log the specific message determined above
+                    if (logMessage) {
+                       console.log(logMessage);
+                    }
+
                     // Update UI only if the fetch wasn't aborted *before* this point
                     if (!abortController.signal.aborted) {
-                        updateContent(content);
-                        localCompleteResponse += content;
-                    } else {
-                        // Should theoretically not happen if abort check is robust, but good failsafe
-                        if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
-                        // Do not update UI or localCompleteResponse if aborted
+                        // Only update UI for actual displayable content
+                        if (parsed.type === 'content' || (!parsed.type && content)) { // Check if it's content type or fallback
+                            updateContent(content);
+                            localCompleteResponse += content;
+                        }
+                    } else if (payload.debugMode === 1) {
+                        // Log discarded content if aborted
+                        console.warn(`⚠️ [Client] Content received from ${endpoint} *after* abort signal. Discarding: "${content}"`);
                     }
                   }
                 } else if (payload.debugMode === 1 && data) {
-                   console.log(`Received non-JSON data chunk from ${endpoint}:`, data);
+                   console.log(`🟡 [Client] Received non-JSON data chunk from ${endpoint}:`, data);
                 }
               } catch (parseError) {
-                 if (payload.debugMode === 1) console.warn(`Failed to parse SSE data line for ${endpoint}:`, parseError, 'Data:', data);
+                 if (payload.debugMode === 1) console.warn(`🟠 [Client] Failed to parse SSE data line for ${endpoint}:`, parseError, 'Data:', data);
               }
             } // End line processing loop
 

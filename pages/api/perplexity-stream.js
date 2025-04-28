@@ -1,4 +1,3 @@
-
 // Perplexity API stream handler
 
 export default async function handler(req, res) {
@@ -181,62 +180,69 @@ export default async function handler(req, res) {
             const { delta } = data.choices[0];
             
             if (delta.content !== undefined && delta.content !== null) {
-              // Increment token count
-              tokenCount++;
-              
-              // Check for thinking tags in the content
-              if (delta.content.includes('<think>')) {
-                isInThinkingBlock = true;
-                const afterThinkTag = delta.content.split('<think>')[1] || '';
-                thinkingContent += afterThinkTag;
-                
-                if (debugMode === 1) {
-                  console.log('🧠 Entering thinking block');
-                  if (afterThinkTag) {
-                    console.log('🧠 First thinking content:', afterThinkTag);
+              let currentContent = delta.content;
+              tokenCount++; // Increment token count once per non-null delta
+
+              // Process tags within the current chunk
+              while (currentContent.length > 0) {
+                if (!isInThinkingBlock) {
+                  const thinkStartIndex = currentContent.indexOf('<think>');
+                  if (thinkStartIndex !== -1) {
+                    // Part 1: Content before <think> tag
+                    const beforeThink = currentContent.substring(0, thinkStartIndex);
+                    if (beforeThink) {
+                      fullResponse += beforeThink;
+                      if (debugMode === 1) console.log(`💬 Response token fragment:`, beforeThink);
+                      const responseData = { type: 'content', content: beforeThink };
+                      if (debugMode === 1) console.log(`📤 [Client Send] Writing content chunk:`, JSON.stringify(responseData));
+                      res.write(`data: ${JSON.stringify(responseData)}\n\n`);
+                      res.flush?.();
+                    }
+
+                    // Mark as entering thinking block
+                    isInThinkingBlock = true;
+                    if (debugMode === 1) console.log('🧠 Entering thinking block');
+                    currentContent = currentContent.substring(thinkStartIndex + '<think>'.length); // Consume <think> tag
+                  } else {
+                    // No <think> tag found, entire remaining content is response content
+                    fullResponse += currentContent;
+                    if (debugMode === 1) console.log(`💬 Response token fragment:`, currentContent);
+                    const responseData = { type: 'content', content: currentContent };
+                    if (debugMode === 1) console.log(`📤 [Client Send] Writing content chunk:`, JSON.stringify(responseData));
+                    res.write(`data: ${JSON.stringify(responseData)}\n\n`);
+                    res.flush?.();
+                    currentContent = ''; // Consumed all content
+                  }
+                } else { // We are inside a thinking block
+                  const thinkEndIndex = currentContent.indexOf('</think>');
+                  if (thinkEndIndex !== -1) {
+                    // Part 1: Content before </think> tag (this is thinking content)
+                    const thinkingPart = currentContent.substring(0, thinkEndIndex);
+                    if (thinkingPart) {
+                      thinkingContent += thinkingPart;
+                      if (debugMode === 1) console.log(`🧠 Thinking token fragment:`, thinkingPart);
+                      const thinkingData = { type: 'thinking', content: thinkingPart };
+                       if (debugMode === 1) console.log(`📤 [Client Send] Writing thinking chunk:`, JSON.stringify(thinkingData));
+                      res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+                      res.flush?.();
+                    }
+
+                    // Mark as exiting thinking block
+                    isInThinkingBlock = false;
+                    if (debugMode === 1) console.log('🧠 Exiting thinking block');
+                    currentContent = currentContent.substring(thinkEndIndex + '</think>'.length); // Consume </think> tag
+                  } else {
+                    // No </think> tag found, entire remaining content is thinking content
+                    thinkingContent += currentContent;
+                    if (debugMode === 1) console.log(`🧠 Thinking token fragment:`, currentContent);
+                    const thinkingData = { type: 'thinking', content: currentContent };
+                    if (debugMode === 1) console.log(`📤 [Client Send] Writing thinking chunk:`, JSON.stringify(thinkingData));
+                    res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+                    res.flush?.();
+                    currentContent = ''; // Consumed all content
                   }
                 }
-              } else if (delta.content.includes('</think>')) {
-                isInThinkingBlock = false;
-                const beforeThinkEndTag = delta.content.split('</think>')[0] || '';
-                thinkingContent += beforeThinkEndTag;
-                
-                if (debugMode === 1) {
-                  console.log('🧠 Exiting thinking block');
-                  if (beforeThinkEndTag) {
-                    console.log('🧠 Final thinking content:', beforeThinkEndTag);
-                  }
-                  console.log('🧠 COMPLETE THINKING PROCESS:', thinkingContent);
-                }
-                
-                // Get content after </think> tag
-                const afterThinkEndTag = delta.content.split('</think>')[1] || '';
-                if (afterThinkEndTag) {
-                  fullResponse += afterThinkEndTag;
-                  if (debugMode === 1) {
-                    console.log('💬 Content after thinking:', afterThinkEndTag);
-                  }
-                }
-              } else if (isInThinkingBlock) {
-                thinkingContent += delta.content;
-                if (debugMode === 1) {
-                  console.log(`🧠 Thinking token #${tokenCount}:`, delta.content);
-                }
-              } else {
-                // Regular content
-                fullResponse += delta.content;
-                if (debugMode === 1) {
-                  console.log(`💬 Response token #${tokenCount}:`, delta.content);
-                }
-              }
-              
-              const responseData = {
-                type: 'content',
-                content: delta.content
-              };
-              
-              res.write(`data: ${JSON.stringify(responseData)}\n\n`);
-              res.flush?.();
+              } // End while loop for processing currentContent
             }
           }
 
@@ -255,6 +261,10 @@ export default async function handler(req, res) {
               citations: data.citations
             };
             
+            // Add debug log before writing
+            if (debugMode === 1) {
+              console.log(`📤 [Client Send] Writing citations data:`, JSON.stringify(citationsData));
+            }
             res.write(`data: ${JSON.stringify(citationsData)}\n\n`);
             res.flush?.();
           }
@@ -281,7 +291,7 @@ export default async function handler(req, res) {
 
     // Explicitly send DONE signal to ensure it's always sent
     if (debugMode === 1) {
-      console.log('📤 Sending final [DONE] signal to complete stream');
+      console.log('📤 [Client Send] Sending final [DONE] signal to complete stream');
     }
     res.write('data: [DONE]\n\n');
     res.end();
@@ -302,7 +312,15 @@ export default async function handler(req, res) {
         }
       }
     }
+    // Add debug log before writing error
+    if (req.body.debugMode === 1) {
+      console.error('📤 [Client Send] Writing error to stream:', JSON.stringify({ error: error.message }));
+    }
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
+    // Add debug log before writing final DONE after error
+    if (req.body.debugMode === 1) {
+      console.error('📤 [Client Send] Writing final [DONE] after error');
+    }
     res.write('data: [DONE]\n\n');
     res.end();
   }
