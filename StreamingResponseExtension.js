@@ -277,55 +277,6 @@ export const StreamingResponseExtension = {
             color: #333;
           }
 
-          /* Styles for thinking block */
-          .thinking-block {
-            background-color: #f0f8ff; /* Light blue background */
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            font-style: italic; /* Italic font */
-          }
-
-          /* Styles for citations section */
-          .citations-section {
-            margin-top: 20px;
-            padding: 12px 16px;
-            background-color: #F3F4F6;
-            border-radius: 8px;
-            border-left: 4px solid #2563EB;
-          }
-          .citations-title {
-            font-weight: 600;
-            font-size: 15px;
-            margin-bottom: 10px;
-            color: #1F2937;
-          }
-          .citation-item {
-            margin-bottom: 8px;
-            font-size: 13px;
-            line-height: 1.4;
-          }
-          .citation-number {
-            display: inline-block;
-            min-width: 24px;
-            height: 24px;
-            text-align: center;
-            line-height: 24px;
-            background-color: #2563EB;
-            color: white;
-            border-radius: 12px;
-            font-weight: 600;
-            margin-right: 8px;
-            font-size: 12px;
-          }
-          .citation-url {
-            color: #2563EB;
-            text-decoration: none;
-            word-break: break-all;
-          }
-          .citation-url:hover {
-            text-decoration: underline;
-          }
         </style>
         <div class="response-section">
           <div class="response-content"></div>
@@ -345,8 +296,6 @@ export const StreamingResponseExtension = {
     let isReasoningModel = false;
     let answer = '';
     let activeReasoningGroup = null;
-    let isInThinkBlock = false;
-    let hasStartedAnswer = false;
 
     // Show container immediately with loading animation
     container.style.display = 'block';
@@ -877,42 +826,40 @@ export const StreamingResponseExtension = {
               }
 
               try {
-                let parsed;
                 if (data.startsWith('{') && data.endsWith('}')) {
-                  parsed = JSON.parse(data);
-                } else {
-                  // Attempt to parse as a simple string for legacy support
-                  parsed = { type: 'content', content: data };
-                }
+                  const parsed = JSON.parse(data);
 
-                if (parsed.error) {
-                  throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
-                }
-
-                const content = parsed.content || '';
-                if (content || typeof content === 'string') { // Handle empty string content too
-                  receivedAnyContent = true; // Mark that we have received processable content
-
-                  // --- TTFT Logic ---
-                  if (!firstChunkReceived) {
-                    firstChunkReceived = true;
-                    if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
-                    // Crucially, clear the TTFT timer now
-                    if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
-                    // Signal that the TTFT hurdle is passed
-                    resolveFirstChunkPromise();
+                  if (parsed.error) {
+                    throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
                   }
-                  // --- End TTFT Logic ---
 
-                  // Update UI only if the fetch wasn't aborted *before* this point
-                  if (!abortController.signal.aborted) {
-                    processStreamChunk(parsed);
-                    localCompleteResponse += content;
-                  } else {
-                    // Should theoretically not happen if abort check is robust, but good failsafe
-                    if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
-                    // Do not update UI or localCompleteResponse if aborted
+                  const content = parsed.content || '';
+                  if (content || typeof content === 'string') { // Handle empty string content too
+                    receivedAnyContent = true; // Mark that we have received processable content
+
+                    // --- TTFT Logic ---
+                    if (!firstChunkReceived) {
+                      firstChunkReceived = true;
+                      if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
+                      // Crucially, clear the TTFT timer now
+                      if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
+                      // Signal that the TTFT hurdle is passed
+                      resolveFirstChunkPromise();
+                    }
+                    // --- End TTFT Logic ---
+
+                    // Update UI only if the fetch wasn't aborted *before* this point
+                    if (!abortController.signal.aborted) {
+                        updateContent(content);
+                        localCompleteResponse += content;
+                    } else {
+                        // Should theoretically not happen if abort check is robust, but good failsafe
+                        if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
+                        // Do not update UI or localCompleteResponse if aborted
+                    }
                   }
+                } else if (payload.debugMode === 1 && data) {
+                   console.log(`Received non-JSON data chunk from ${endpoint}:`, data);
                 }
               } catch (parseError) {
                  if (payload.debugMode === 1) console.warn(`Failed to parse SSE data line for ${endpoint}:`, parseError, 'Data:', data);
@@ -1181,301 +1128,3 @@ export const StreamingResponseExtension = {
     window.voiceflow.chat.interact({ type: "continue" });
   },
 };
-
-// Process stream chunks
-function processStreamChunk(data) {
-  // Handle different types of messages based on the response format
-  if (data.type === 'thinkingStart') {
-    // Start of thinking block
-    isInThinkBlock = true;
-    if (data.content) {
-      processThinkingContent(data.content);
-    }
-    return;
-  } 
-
-  if (data.type === 'thinkingContent') {
-    // Content within thinking block
-    if (data.content) {
-      processThinkingContent(data.content);
-    }
-    return;
-  }
-
-  if (data.type === 'thinkingEnd') {
-    // End of thinking block
-    isInThinkBlock = false;
-    // Complete any remaining step
-    if (currentStep) {
-      const contentDiv = currentStep.querySelector('.step-content');
-      if (contentDiv) {
-        const currentText = contentDiv.textContent;
-        updateStep(currentStep, currentText, true);
-      }
-      currentStep = null;
-    }
-
-    // After thinking ends, show the answer section with a slight delay
-    setTimeout(() => {
-      reasoningSection.classList.add('collapsed');
-      reasoningSection.classList.add('has-answer');
-      const answerSection = container.querySelector('.answer-section');
-      if (answerSection) {
-        answerSection.classList.add('visible');
-        answerSection.style.display = 'block';
-      }
-      scrollIntoViewSmooth(answerContent);
-    }, 1000);
-
-    return;
-  }
-
-  if (data.type === 'citationsSummary') {
-    // Final citations summary at the end of the response
-    if (data.citations && data.citations.length > 0) {
-      citations = data.citations;
-
-      // Create citations section
-      addCitationsSection(citations);
-
-      // Re-process the entire answer with citations
-      updateAnswerContent(processCitations(answer, citations));
-    }
-    return;
-  }
-
-  // Process regular content chunks
-  if (data.type === 'content') {
-    if (data.content) {
-      answer += data.content;
-      updateAnswerContent(processCitations(answer, citations));
-
-      // Show answer section if this is the first content
-      if (!hasStartedAnswer) {
-        hasStartedAnswer = true;
-      }
-    }
-    return;
-  }
-
-  // Handle citations if present in the chunk
-  if (data.type === 'citations') {
-    if (data.citations) {
-      citations = data.citations;
-      // Re-process the answer with new citations
-      updateAnswerContent(processCitations(answer, citations));
-    }
-    return;
-  }
-
-  // Legacy handling for old format responses
-  if (data.choices && data.choices[0] && data.choices[0].delta) {
-    const { content } = data.choices[0].delta;
-
-    // Show container and answer section for non-reasoning models when streaming starts
-    if (!isReasoningModel && container.style.display === 'none') {
-      container.style.display = 'block';
-      answerSection.classList.add('visible');
-      answerSection.style.display = 'block';
-    }
-
-    // Update citations if present in the chunk
-    if (data.citations) {
-      citations = data.citations;
-      // Re-process all existing steps with new citations
-      const steps = activeReasoningGroup.querySelectorAll('.reasoning-step');
-      steps.forEach((step) => {
-        const contentDiv = step.querySelector('.step-content');
-        if (contentDiv) {
-          // Get original content without any HTML
-          const currentText = contentDiv.textContent
-            .replace(/\s+/g, ' ')
-            .trim();
-          // Process citations directly with isReasoning flag
-          contentDiv.innerHTML = processCitations(
-            currentText,
-            citations,
-            true
-          );
-        }
-      });
-    }
-
-    if (content !== null && content !== undefined) {
-      // Handle think block content
-      if (content.includes('<think>')) {
-        isInThinkBlock = true;
-        const afterThink = content.split('<think>')[1] || '';
-        if (afterThink) {
-          processThinkingContent(afterThink);
-        }
-      } else if (content.includes('</think>')) {
-        isInThinkBlock = false;
-        const beforeThinkEnd = content.split('</think>')[0];
-        if (beforeThinkEnd) {
-          processThinkingContent(beforeThinkEnd);
-        }
-        // Complete any remaining step
-        if (currentStep) {
-          const contentDiv = currentStep.querySelector('.step-content');
-          if (contentDiv) {
-            const currentText = contentDiv.textContent;
-            updateStep(currentStep, currentText, true);
-          }
-          currentStep = null;
-        }
-        // Get content after </think>
-        const afterThink = content.split('</think>')[1] || '';
-        if (afterThink) {
-          answer += afterThink;
-          updateAnswerContent(processCitations(answer, citations));
-        }
-      } else if (isInThinkBlock) {
-        processThinkingContent(content);
-      } else {
-        // For non-think block content, just append directly to answer
-        answer += content;
-        updateAnswerContent(processCitations(answer, citations));
-
-        // Show answer section if this is the first content
-        if (!hasStartedAnswer) {
-          hasStartedAnswer = true;
-          setTimeout(() => {
-            reasoningSection.classList.add('collapsed');
-            reasoningSection.classList.add('has-answer');
-            const answerSection = container.querySelector('.answer-section');
-            if (answerSection) {
-              answerSection.classList.add('visible');
-              answerSection.style.display = 'block';
-            }
-            scrollIntoViewSmooth(answerContent);
-          }, 1000);
-        }
-      }
-    }
-  }
-}
-
-// Add citations section
-function addCitationsSection(citations) {
-  if (!citations || citations.length === 0) return;
-
-  // Create section if it doesn't exist already
-  let citationsSection = answerSection.querySelector('.citations-section');
-  if (!citationsSection) {
-    citationsSection = document.createElement('div');
-    citationsSection.className = 'citations-section';
-
-    // Add title
-    const title = document.createElement('div');
-    title.className = 'citations-title';
-    title.textContent = 'Sources';
-    citationsSection.appendChild(title);
-
-    // Create list
-    const list = document.createElement('div');
-    list.className = 'citations-list';
-
-    // Add each citation
-    citations.forEach((url, index) => {
-      const item = document.createElement('div');
-      item.className = 'citation-item';
-
-      const number = document.createElement('span');
-      number.className = 'citation-number';
-      number.textContent = index + 1;
-
-      const link = document.createElement('a');
-      link.className = 'citation-url';
-      link.href = url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.textContent = url;
-
-      item.appendChild(number);
-      item.appendChild(link);
-      list.appendChild(item);
-    });
-
-    citationsSection.appendChild(list);
-    answerSection.appendChild(citationsSection);
-
-    // Add CSS for citations section
-    const citationsStyle = document.createElement('style');
-    citationsStyle.textContent = `
-      .citations-section {
-        margin-top: 20px;
-        padding: 12px 16px;
-        background-color: #F3F4F6;
-        border-radius: 8px;
-        border-left: 4px solid #2563EB;
-      }
-      .citations-title {
-        font-weight: 600;
-        font-size: 15px;
-        margin-bottom: 10px;
-        color: #1F2937;
-      }
-      .citation-item {
-        margin-bottom: 8px;
-        font-size: 13px;
-        line-height: 1.4;
-      }
-      .citation-number {
-        display: inline-block;
-        min-width: 24px;
-        height: 24px;
-        text-align: center;
-        line-height: 24px;
-        background-color: #2563EB;
-        color: white;
-        border-radius: 12px;
-        font-weight: 600;
-        margin-right: 8px;
-        font-size: 12px;
-      }
-      .citation-url {
-        color: #2563EB;
-        text-decoration: none;
-        word-break: break-all;
-      }
-      .citation-url:hover {
-        text-decoration: underline;
-      }
-    `;
-    document.head.appendChild(citationsStyle);
-  }
-}
-
-function processThinkingContent(content) {
-  const thinkingBlock = document.createElement('div');
-  thinkingBlock.className = 'thinking-block';
-  thinkingBlock.innerHTML = content;
-  responseContent.appendChild(thinkingBlock);
-}
-
-function processCitations(text, citations) {
-  if (!citations) return text;
-  // Simple citation replacement for now, could be improved
-  return text.replace(/\[(\d+)\]/g, (match, number) => {
-    const citationIndex = parseInt(number) - 1;
-    const citation = citations[citationIndex];
-    if (citation) {
-      return `<a href="${citation}" target="_blank" rel="noopener noreferrer">[${number}]</a>`;
-    }
-    return match; // Return original match if citation not found
-  });
-}
-
-function updateAnswerContent(formattedAnswer) {
-  answerContent.innerHTML = formattedAnswer;
-}
-
-function updateStep(step, text, isLastStep) {
-  step.querySelector('.step-content').innerHTML = processCitations(text, citations);
-}
-
-
-function scrollIntoViewSmooth(el) {
-  el.scrollIntoView({ behavior: 'smooth' });
-}
