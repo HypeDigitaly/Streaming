@@ -182,85 +182,173 @@ export default async function handler(req, res) {
       console.log('📥 Perplexity API Response OK, processing the response stream...');
     }
 
-    // Process the response without using getReader()
-    const responseText = await perplexityResponse.text();
-    const lines = responseText.split('\n');
+    // Use streaming approach with getReader() for real-time token delivery
+    const reader = perplexityResponse.body.getReader();
+    const decoder = new TextDecoder();
     let thinkingContent = '';
     let citations = [];
     let responseContent = '';
     let isThinking = false;
     let citationsSent = false;
-
+    let buffer = '';
+    
     try {
-      for (const line of lines) {
-        if (line.startsWith('data:') && line.trim() !== 'data: [DONE]') {
-          try {
-            const data = line.substring(6);
-            if (!data.trim()) continue;
-            
-            const parsed = JSON.parse(data);
-            
-            if (parsed.choices && parsed.choices[0]) {
-              const choice = parsed.choices[0];
-              const content = choice.delta?.content || choice.message?.content || '';
+      if (debugMode === 1) {
+        console.log('📥 Perplexity: Processing stream with token-by-token approach');
+      }
+      
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) {
+          if (debugMode === 1) {
+            console.log('📤 Perplexity: Stream completed, sending [DONE]');
+          }
+          // Ensure [DONE] is sent
+          res.write('data: [DONE]\n\n');
+          break;
+        }
+
+        const chunk = decoder.decode(value, { stream: true });
+        buffer += chunk;
+        
+        // Process each complete line in the buffer
+        let lines = buffer.split('\n');
+        // Keep the last line in the buffer as it might be incomplete
+        buffer = lines.pop() || '';
+        
+        for (const line of lines) {
+          if (line.startsWith('data:') && line.trim() !== 'data: [DONE]') {
+            try {
+              const data = line.substring(6);
+              if (!data.trim()) continue;
               
-              // Handle thinking part
-              if (content.includes('<think>') && content.includes('</think>')) {
-                const thinkMatch = content.match(/<think>(.*?)<\/think>/s);
-                if (thinkMatch && thinkMatch[1]) {
-                  thinkingContent = thinkMatch[1].trim();
-                  isThinking = true;
-                  
-                  // Send thinking content
-                  res.write(`data: ${JSON.stringify({ content: thinkingContent, isThinking: true })}\n\n`);
-                }
+              const parsed = JSON.parse(data);
+              
+              if (parsed.choices && parsed.choices[0]) {
+                const choice = parsed.choices[0];
+                const content = choice.delta?.content || choice.message?.content || '';
                 
-                // Extract the actual response (after thinking)
-                const afterThink = content.split('</think>')[1]?.trim();
-                if (afterThink) {
-                  responseContent = afterThink;
-                }
-              } 
-              // Regular delta update (no thinking tags)
-              else if (content) {
-                if (isThinking) {
-                  // We've transitioned from thinking to response
-                  isThinking = false;
+                // Handle thinking part
+                if (content.includes('<think>') && content.includes('</think>')) {
+                  // Full thinking block in one chunk
+                  const thinkMatch = content.match(/<think>(.*?)<\/think>/s);
+                  if (thinkMatch && thinkMatch[1]) {
+                    thinkingContent = thinkMatch[1].trim();
+                    isThinking = true;
+                    
+                    // Send thinking content token by token with small delay to simulate typing
+                    const thinkingTokens = thinkingContent.split(/(\s+)/).filter(Boolean);
+                    for (let i = 0; i < thinkingTokens.length; i++) {
+                      // Send each token as a separate SSE message for real-time streaming feel
+                      res.write(`data: ${JSON.stringify({ 
+                        content: thinkingTokens[i], 
+                        isThinking: true,
+                        isPartial: i < thinkingTokens.length - 1
+                      })}\n\n`);
+                      
+                      // Optional tiny delay for more realistic typing (use only if needed)
+                      // await new Promise(resolve => setTimeout(resolve, 5));
+                    }
+                  }
                   
-                  // If we have citations and haven't sent them yet, send them
-                  if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
-                    citations = parsed.citations;
-                    res.write(`data: ${JSON.stringify({ citations })}\n\n`);
-                    citationsSent = true;
+                  // Extract the actual response (after thinking)
+                  const afterThink = content.split('</think>')[1]?.trim();
+                  if (afterThink) {
+                    responseContent = afterThink;
+                    // Stream the afterThink content token by token
+                    const afterThinkTokens = afterThink.split(/(\s+)/).filter(Boolean);
+                    for (let i = 0; i < afterThinkTokens.length; i++) {
+                      res.write(`data: ${JSON.stringify({ 
+                        content: afterThinkTokens[i], 
+                        isPartial: i < afterThinkTokens.length - 1 
+                      })}\n\n`);
+                    }
+                  }
+                } 
+                // Handle partial <think> tag at the beginning of content
+                else if (content.includes('<think>') && !content.includes('</think>')) {
+                  isThinking = true;
+                  const thinkingText = content.split('<think>')[1]?.trim() || '';
+                  if (thinkingText) {
+                    res.write(`data: ${JSON.stringify({ 
+                      content: thinkingText, 
+                      isThinking: true,
+                      isPartial: true
+                    })}\n\n`);
+                    thinkingContent += thinkingText;
                   }
                 }
-                
-                responseContent += content;
-                // Send actual response content
-                res.write(`data: ${JSON.stringify({ content })}\n\n`);
+                // Handle continuation of thinking content
+                else if (isThinking && !content.includes('</think>')) {
+                  thinkingContent += content;
+                  res.write(`data: ${JSON.stringify({ 
+                    content: content, 
+                    isThinking: true,
+                    isPartial: true
+                  })}\n\n`);
+                }
+                // Handle end of thinking content
+                else if (isThinking && content.includes('</think>')) {
+                  const beforeThinkEnd = content.split('</think>')[0]?.trim() || '';
+                  if (beforeThinkEnd) {
+                    thinkingContent += beforeThinkEnd;
+                    res.write(`data: ${JSON.stringify({ 
+                      content: beforeThinkEnd, 
+                      isThinking: true,
+                      isPartial: false
+                    })}\n\n`);
+                  }
+                  
+                  isThinking = false;
+                  
+                  // Extract content after </think>
+                  const afterThink = content.split('</think>')[1]?.trim();
+                  if (afterThink) {
+                    responseContent = afterThink;
+                    // Stream the afterThink token by token
+                    const afterThinkTokens = afterThink.split(/(\s+)/).filter(Boolean);
+                    for (let i = 0; i < afterThinkTokens.length; i++) {
+                      res.write(`data: ${JSON.stringify({ 
+                        content: afterThinkTokens[i],
+                        isPartial: i < afterThinkTokens.length - 1
+                      })}\n\n`);
+                    }
+                  }
+                }
+                // Regular delta update (no thinking tags)
+                else if (content) {
+                  responseContent += content;
+                  // Split content into tokens and send each separately for smoother streaming
+                  const tokens = content.split(/(\s+)/).filter(Boolean);
+                  for (let i = 0; i < tokens.length; i++) {
+                    res.write(`data: ${JSON.stringify({ 
+                      content: tokens[i],
+                      isPartial: i < tokens.length - 1
+                    })}\n\n`);
+                  }
+                }
+              }
+              
+              // Handle citations if present
+              if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
+                citations = parsed.citations;
+                res.write(`data: ${JSON.stringify({ citations })}\n\n`);
+                citationsSent = true;
+              }
+              
+            } catch (error) {
+              if (debugMode === 1) {
+                console.error('❌ perplexity-stream: Error parsing SSE data:', error, line);
               }
             }
-            
-            // Handle citations if they weren't sent earlier
-            if (parsed.citations && parsed.citations.length > 0 && !citationsSent) {
-              citations = parsed.citations;
-              res.write(`data: ${JSON.stringify({ citations })}\n\n`);
-              citationsSent = true;
-            }
-            
-          } catch (error) {
-            if (debugMode === 1) {
-              console.error('❌ perplexity-stream: Error parsing SSE data:', error, line);
-            }
+          } else if (line.trim() === 'data: [DONE]') {
+            // Send [DONE] signal
+            res.write('data: [DONE]\n\n');
           }
-        } else if (line.trim() === 'data: [DONE]') {
-          // Send [DONE] signal
-          res.write('data: [DONE]\n\n');
         }
       }
       
-      // Ensure [DONE] is sent if not already
-      res.write('data: [DONE]\n\n');
       res.end();
     } catch (error) {
       console.error('❌ perplexity-stream: Error processing response:', error.message, error.stack);
