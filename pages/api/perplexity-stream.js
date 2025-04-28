@@ -102,14 +102,20 @@ export default async function handler(req, res) {
       console.log('🚀 Making Perplexity API call with payload:', JSON.stringify(payload, null, 2));
     }
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    
     const response = await fetch('https://api.perplexity.ai/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: controller.signal
     });
+    
+    clearTimeout(timeoutId); // Clear the timeout if the request completes
 
     if (!response.ok) {
       const errorData = await response.text();

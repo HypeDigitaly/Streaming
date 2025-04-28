@@ -57,6 +57,7 @@ export default async function handler(req, res) {
     // Get the generative model
     const genModel = genAI.getGenerativeModel({
       model: model || 'gemini-2.5-pro-preview-03-25',
+      timeout: 10000, // 10 second timeout
     });
 
     if (debugMode === 1) {

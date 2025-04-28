@@ -90,6 +90,7 @@ export default async function handler(req, res) {
       max_tokens: max_tokens || 4096,
       temperature: temperature || 0,
       stream: true,
+      timeout: 10000, // 10 second timeout
     });
 
     if (debugMode === 1) {
