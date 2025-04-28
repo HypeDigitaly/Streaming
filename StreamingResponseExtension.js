@@ -953,18 +953,30 @@ export const StreamingResponseExtension = {
 
                         // Accumulate thinking content
                         accumulatedThinkingContent += content;
+                        
+                        // Get user language for translations
+                        const userLang = trace.payload?.lang || navigator.language || 'en';
+                        const shortLang = userLang.split('-')[0];
+                        
+                        // Get translation for "Thinking" label
+                        const thinkingText = {
+                          en: 'Thinking:',
+                          cs: 'Přemýšlení:',
+                          de: 'Denkprozess:',
+                          uk: 'Міркування:'
+                        }[shortLang] || 'Thinking:';
 
                         const thinkingHeader = container.querySelector('.thinking-header');
                         if (thinkingHeader && !thinkingHeader.classList.contains('thinking-expanded')) {
                           thinkingHeader.classList.add('thinking-expanded');
                           const thinkingContent = document.createElement('div');
                           thinkingContent.className = 'thinking-content';
-                          thinkingContent.textContent = 'Thinking: ' + accumulatedThinkingContent;
+                          thinkingContent.textContent = thinkingText + ' ' + accumulatedThinkingContent;
                           thinkingHeader.appendChild(thinkingContent);
                         } else if (thinkingHeader) {
                           const thinkingContent = thinkingHeader.querySelector('.thinking-content');
                           if (thinkingContent) {
-                            thinkingContent.textContent = 'Thinking: ' + accumulatedThinkingContent;
+                            thinkingContent.textContent = thinkingText + ' ' + accumulatedThinkingContent;
                           }
                         }
 
@@ -981,36 +993,62 @@ export const StreamingResponseExtension = {
                           isPerplexityThinking = false;
                           if (payload.debugMode === 1) console.log(`💡 Switching from thinking to regular content mode`);
 
-                          // Instead of hiding thinking header, make it collapsible but keep it
+                          // Hide the loading animation but keep the toggle
                           const thinkingHeader = container.querySelector('.thinking-header');
                           if (thinkingHeader) {
+                            // Hide loading animation dots
+                            const loadingAnimation = thinkingHeader.querySelector('.loading-animation');
+                            if (loadingAnimation) {
+                              loadingAnimation.style.display = 'none';
+                            }
+                            
                             // Add a toggle button to the thinking header
                             if (!thinkingHeader.querySelector('.thinking-toggle')) {
                               const toggleButton = document.createElement('button');
                               toggleButton.className = 'thinking-toggle';
-                              toggleButton.textContent = 'Toggle Thinking Process';
-                              toggleButton.style.padding = '4px 8px';
-                              toggleButton.style.margin = '4px 0';
-                              toggleButton.style.backgroundColor = '#f0f0f0';
-                              toggleButton.style.border = '1px solid #ccc';
-                              toggleButton.style.borderRadius = '4px';
-                              toggleButton.style.cursor = 'pointer';
-
+                              
+                              // Get user language for translations
+                              const userLang = trace.payload?.lang || navigator.language || 'en';
+                              const shortLang = userLang.split('-')[0];
+                              
+                              // Translations for thinking toggle
+                              const thinkingLabels = {
+                                en: {show: 'Show Thinking Process', hide: 'Hide Thinking Process'},
+                                cs: {show: 'Zobrazit myšlenkový proces', hide: 'Skrýt myšlenkový proces'},
+                                de: {show: 'Denkprozess anzeigen', hide: 'Denkprozess ausblenden'},
+                                uk: {show: 'Показати процес мислення', hide: 'Приховати процес мислення'}
+                              };
+                              
+                              // Default to English if language not supported
+                              const labels = thinkingLabels[shortLang] || thinkingLabels.en;
+                              toggleButton.textContent = labels.show;
+                              
                               toggleButton.addEventListener('click', () => {
                                 const content = thinkingHeader.querySelector('.thinking-content');
                                 if (content) {
                                   if (content.style.display === 'none') {
                                     content.style.display = 'block';
-                                    toggleButton.textContent = 'Hide Thinking Process';
+                                    toggleButton.textContent = labels.hide;
                                   } else {
                                     content.style.display = 'none';
-                                    toggleButton.textContent = 'Show Thinking Process';
+                                    toggleButton.textContent = labels.show;
                                   }
                                 }
                               });
 
                               const thinkingContent = thinkingHeader.querySelector('.thinking-content');
                               if (thinkingContent) {
+                                // Get translation for "Thinking" label
+                                const thinkingText = {
+                                  en: 'Thinking:',
+                                  cs: 'Přemýšlení:',
+                                  de: 'Denkprozess:',
+                                  uk: 'Міркування:'
+                                }[shortLang] || 'Thinking:';
+                                
+                                // Update thinking content with translated label
+                                thinkingContent.textContent = thinkingText + ' ' + accumulatedThinkingContent;
+                                
                                 // Initially hide the content and style it better
                                 thinkingContent.style.maxHeight = '300px';
                                 thinkingContent.style.overflowY = 'auto';
