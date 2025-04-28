@@ -965,13 +965,18 @@ export const StreamingResponseExtension = {
                       // Don't update UI directly for citations, but store them
                     }
 
+                    // ---> ADDED: Define content variable for Perplexity messages <---
+                    const content = parsed.choices?.[0]?.delta?.content || parsed.content || '';
+                    // ---> END ADDED <---
+
                     // Handle thinking content, final response, or regular content
                     if (parsed.isThinking === true) {
                       isPerplexityThinking = true;
-                      if (payload.debugMode === 1) console.log(`🤔 Processing thinking content: ${content.substring(0, 50)}...`);
+                      // ---> MODIFIED: Use defined content variable <---
+                      if (payload.debugMode === 1 && content) console.log(`🤔 Processing thinking content: ${content.substring(0, 50)}...`);
 
                       // Accumulate thinking content
-                      accumulatedThinkingContent += content;
+                      accumulatedThinkingContent += content; // Use defined content variable
 
                       // Get user language for translations
                       const userLang = trace.payload?.lang || navigator.language || 'en';
@@ -1008,7 +1013,8 @@ export const StreamingResponseExtension = {
                       }
                     } else if (parsed.isFinalResponse === true) {
                       // This is for the final response that streams after thinking
-                      if (payload.debugMode === 1) console.log(`📝 Processing final response content: ${content.substring(0, 50)}...`);
+                      // ---> MODIFIED: Use defined content variable <---
+                      if (payload.debugMode === 1 && content) console.log(`📝 Processing final response content: ${content.substring(0, 50)}...`);
 
                       // Get or create final response container
                       let finalResponseContent = container.querySelector('.final-response-content');
@@ -1035,6 +1041,7 @@ export const StreamingResponseExtension = {
                       }
 
                       // Append the content
+                      // ---> MODIFIED: Use defined content variable <---
                       finalResponseContent.textContent = (finalResponseContent.textContent || '') + content;
 
                       // TTFT check for final response
