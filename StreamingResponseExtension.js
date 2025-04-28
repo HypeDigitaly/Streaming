@@ -231,7 +231,7 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
-
+          
           /* Perplexity specific styles */
           .perplexity-citations {
             margin-top: 15px;
@@ -269,7 +269,7 @@ export const StreamingResponseExtension = {
           .citations-list a:hover {
             text-decoration: underline;
           }
-
+          
           .ai-info-footer {
             display: flex;
             align-items: center;
@@ -336,27 +336,6 @@ export const StreamingResponseExtension = {
             background-color: #E2F2D9;
             color: #333;
           }
-          .thinking-toggle {
-            padding: 4px 8px;
-            margin: 4px 0;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-          }
-          .final-response-heading {
-            font-weight: bold;
-            margin-top: 16px;
-            margin-bottom: 8px;
-          }
-          .final-response-content {
-            padding: 12px;
-            background-color: #f9f9f9;
-            border-radius: 6px;
-            margin-top: 8px;
-            margin-bottom: 16px;
-            white-space: pre-wrap;
-          }
 
         </style>
         <div class="response-section">
@@ -373,8 +352,6 @@ export const StreamingResponseExtension = {
     let buffer = '';
     let deltaCounter = 0;
     let completeResponse = '';
-    // Added for accumulating thinking content
-    let accumulatedThinkingContent = '';
 
     // Show container immediately with loading animation
     container.style.display = 'block';
@@ -409,21 +386,10 @@ export const StreamingResponseExtension = {
 
     // Update the answer content with markdown support
     function updateContent(text) {
-      // Only log when there's actually content and avoid excessive logging
-      if (text && typeof text === 'string' && text.trim().length > 0) {
-        console.log(`🔍 [UI] Content update: "${text.substring(0, 30)}${text.length > 30 ? '...' : ''}"`);
-      }
-
-      // Check both undefined and empty cases to avoid unnecessary logs
-      if (!text || typeof text !== 'string' || text.trim() === '') {
-        // Don't log empty content events to reduce noise
-        return;
-      }
+      if (!text) return;
 
       // Handle first chunk
       if (isFirstChunk) {
-        // Only log first meaningful content
-        console.log('🔍 [UI] First content chunk received, showing response section');
         // Hide loading animation when we receive the first content
         const thinkingHeader = container.querySelector('.thinking-header');
         if (thinkingHeader) {
@@ -504,7 +470,7 @@ export const StreamingResponseExtension = {
       // Wrap OL items first, then UL items
       wrapListItems('ol');
       wrapListItems('ul');
-
+      
       // Clean up empty numbered list items (modified check)
       const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
       listItems.forEach(li => {
@@ -517,7 +483,7 @@ export const StreamingResponseExtension = {
           }
         }
       });
-
+      
       // Remove any potentially empty OL/UL tags left after cleaning LIs
       tempContainer.querySelectorAll('ol, ul').forEach(list => {
         if (!list.hasChildNodes()) {
@@ -631,7 +597,7 @@ export const StreamingResponseExtension = {
         endpoint: '/api/groq-stream',
         displayName: 'Llama 4 Scout'
       },
-
+      
       // Perplexity models
       {
         id: 10,
@@ -820,10 +786,6 @@ export const StreamingResponseExtension = {
       let resolveFirstChunkPromise = null;
       let rejectFirstChunkPromise = null;
 
-      // Citation handling flags
-      let citationsHandled = false;
-      let citationsAddedToDOM = false;
-
       // ---> ADDED: Determine timeout based on endpoint <---
       const PERPLEXITY_TIMEOUT_MS = 20000; // 20 seconds for Perplexity
       const currentTimeout = endpoint === '/api/perplexity-stream'
@@ -875,9 +837,9 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
               allowedDomains: payload.allowedDomains
             });
-            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${currentTimeout}ms`); // Fixed missing closing bracket and template string
+            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${currentTimeout}ms`); // <-- Use conditional timeout in log
           }
-
+          
           if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
             console.log('🔵 PERPLEXITY: Attempting fetch to:', proxyUrl);
             console.log('🔵 PERPLEXITY: Payload being sent:', JSON.stringify(payload));
@@ -889,7 +851,7 @@ export const StreamingResponseExtension = {
             body: JSON.stringify(payload),
             signal: abortController.signal // Use the abort signal
           });
-
+          
           if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
             console.log('🔵 PERPLEXITY: Fetch call completed. Response status:', response.status);
           }
@@ -903,7 +865,7 @@ export const StreamingResponseExtension = {
             // Reject the firstChunkPromise if the initial fetch fails
             throw new Error(errorText);
           }
-
+          
           if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
             console.log('🟢 PERPLEXITY: Fetch successful (response.ok). Proceeding to read stream...');
           }
@@ -958,160 +920,62 @@ export const StreamingResponseExtension = {
                   // Special handling for Perplexity
                   if (endpoint === '/api/perplexity-stream') {
                     // Handle perplexity citations
-                    if (parsed.citations && Array.isArray(parsed.citations) && !citationsHandled) {
+                    if (parsed.citations && Array.isArray(parsed.citations)) {
                       perplexityCitations = parsed.citations;
                       if (payload.debugMode === 1) console.log(`📋 Perplexity citations received:`, perplexityCitations);
-                      citationsHandled = true; // Mark citations as handled
                       // Don't update UI directly for citations, but store them
                     }
 
-                    // ---> ADDED: Define content variable for Perplexity messages <---
-                    const content = parsed.choices?.[0]?.delta?.content || parsed.content || '';
-                    // ---> END ADDED <---
+                    // Handle thinking and content
+                    if (parsed.content) {
+                      receivedAnyContent = true; // Mark that we have received processable content
 
-                    // Handle thinking content, final response, or regular content
-                    if (parsed.isThinking === true) {
-                      isPerplexityThinking = true;
-                      // ---> MODIFIED: Use defined content variable <---
-                      if (payload.debugMode === 1 && content) console.log(`🤔 Processing thinking content: ${content.substring(0, 50)}...`);
-
-                      // Accumulate thinking content
-                      accumulatedThinkingContent += content; // Use defined content variable
-
-                      // Get user language for translations
-                      const userLang = trace.payload?.lang || navigator.language || 'en';
-                      const shortLang = userLang.split('-')[0];
-
-                      // Get translation for "Thinking" label
-                      const thinkingText = {
-                        en: 'Thinking:',
-                        cs: 'Přemýšlení:',
-                        de: 'Denkprozess:',
-                        uk: 'Міркування:'
-                      }[shortLang] || 'Thinking:';
-
-                      const thinkingHeader = container.querySelector('.thinking-header');
-                      if (thinkingHeader && !thinkingHeader.classList.contains('thinking-expanded')) {
-                        thinkingHeader.classList.add('thinking-expanded');
-                        const thinkingContent = document.createElement('div');
-                        thinkingContent.className = 'thinking-content';
-                        thinkingContent.textContent = thinkingText + ' ' + accumulatedThinkingContent;
-                        thinkingHeader.appendChild(thinkingContent);
-                      } else if (thinkingHeader) {
-                        const thinkingContent = thinkingHeader.querySelector('.thinking-content');
-                        if (thinkingContent) {
-                          thinkingContent.textContent = thinkingText + ' ' + accumulatedThinkingContent;
+                      // Check if this is a thinking part
+                      if (parsed.isThinking === true) {
+                        isPerplexityThinking = true;
+                        // Handle thinking mode differently - show loading animation with thinking content
+                        const thinkingHeader = container.querySelector('.thinking-header');
+                        if (thinkingHeader && !thinkingHeader.classList.contains('thinking-expanded')) {
+                          thinkingHeader.classList.add('thinking-expanded');
+                          const thinkingContent = document.createElement('div');
+                          thinkingContent.className = 'thinking-content';
+                          thinkingContent.textContent = 'Thinking: ' + parsed.content;
+                          thinkingHeader.appendChild(thinkingContent);
+                        } else if (thinkingHeader) {
+                          const thinkingContent = thinkingHeader.querySelector('.thinking-content');
+                          if (thinkingContent) {
+                            thinkingContent.textContent = 'Thinking: ' + parsed.content;
+                          }
                         }
-                      }
 
-                      // TTFT check for thinking
-                      if (!firstChunkReceived) {
-                        firstChunkReceived = true;
-                        if (payload.debugMode === 1) console.log(`✅ First chunk (thinking) received from ${endpoint} within timeout.`);
-                        if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
-                        resolveFirstChunkPromise();
-                      }
-                    } else if (parsed.isFinalResponse === true) {
-                      // This is for the final response that streams after thinking
-                      // ---> MODIFIED: Use defined content variable <---
-                      if (payload.debugMode === 1 && content) console.log(`📝 Processing final response content: ${content.substring(0, 50)}...`);
-
-                      // Get or create final response container
-                      let finalResponseContent = container.querySelector('.final-response-content');
-
-                      if (!finalResponseContent) {
-                        // Create a div for the final response content if it doesn't exist
-                        finalResponseContent = document.createElement('div');
-                        finalResponseContent.className = 'final-response-content';
-                        finalResponseContent.style.padding = '12px';
-                        finalResponseContent.style.backgroundColor = '#f9f9f9';
-                        finalResponseContent.style.borderRadius = '6px';
-                        finalResponseContent.style.marginTop = '8px';
-                        finalResponseContent.style.marginBottom = '16px';
-                        finalResponseContent.style.whiteSpace = 'pre-wrap';
-
-                        // Find the final response heading and insert after it
-                        const finalResponseHeading = container.querySelector('.final-response-heading');
-                        if (finalResponseHeading) {
-                          finalResponseHeading.parentNode.insertBefore(finalResponseContent, finalResponseHeading.nextSibling);
-                        } else {
-                          // If no heading exists yet (shouldn't happen), append to response section
-                          responseSection.appendChild(finalResponseContent);
+                        // TTFT check for thinking
+                        if (!firstChunkReceived) {
+                          firstChunkReceived = true;
+                          if (payload.debugMode === 1) console.log(`✅ First chunk (thinking) received from ${endpoint} within timeout.`);
+                          if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
+                          resolveFirstChunkPromise();
                         }
-                      }
-
-                      // Append the content
-                      // ---> MODIFIED: Use defined content variable <---
-                      finalResponseContent.textContent = (finalResponseContent.textContent || '') + content;
-
-                      // TTFT check for final response
-                      if (!firstChunkReceived) {
-                        firstChunkReceived = true;
-                        if (payload.debugMode === 1) console.log(`✅ First chunk (final response) received from ${endpoint} within timeout.`);
-                        if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
-                        resolveFirstChunkPromise();
-                      }
-                    } else if (parsed.isPostResponseCitations === true) {
-                      // Handle post-response citations
-                      if (payload.debugMode === 1) console.log(`📚 Processing post-response citations`);
-
-                      if (parsed.citations && Array.isArray(parsed.citations) && parsed.citations.length > 0) {
-                        // Create citations container
-                        const citationsContainer = document.createElement('div');
-                        citationsContainer.className = 'citations-container';
-                        citationsContainer.style.marginTop = '16px';
-
-                        // Add sources heading
-                        const sourcesHeading = document.createElement('h3');
-                        sourcesHeading.textContent = 'Sources:';
-                        sourcesHeading.style.fontSize = '14px';
-                        sourcesHeading.style.margin = '0 0 8px 0';
-                        citationsContainer.appendChild(sourcesHeading);
-
-                        // Create list for citations
-                        const citationsList = document.createElement('ol');
-                        citationsList.className = 'citations-list';
-                        citationsList.style.margin = '0';
-                        citationsList.style.paddingLeft = '20px';
-
-                        // Add each citation
-                        parsed.citations.forEach(url => {
-                          const listItem = document.createElement('li');
-                          listItem.style.marginBottom = '4px';
-
-                          const link = document.createElement('a');
-                          link.href = url;
-                          link.target = '_blank';
-                          link.rel = 'noopener noreferrer';
-                          link.style.color = '#0066cc';
-                          link.style.textDecoration = 'none';
-                          link.style.fontSize = '12px';
-                          link.style.wordBreak = 'break-all';
-
-                          // Truncate long URLs for display
-                          const displayUrl = url.length > 60 ? url.substring(0, 57) + '...' : url;
-                          link.textContent = displayUrl;
-
-                          listItem.appendChild(link);
-                          citationsList.appendChild(listItem);
-                        });
-
-                        citationsContainer.appendChild(citationsList);
-
-                        // Add to UI - place after final response
-                        const finalResponseContent = container.querySelector('.final-response-content');
-                        if (finalResponseContent) {
-                          finalResponseContent.parentNode.insertBefore(citationsContainer, finalResponseContent.nextSibling);
-                        } else {
-                          // Fallback if no final response content exists
-                          responseSection.appendChild(citationsContainer);
+                      } else {
+                        // If we were in thinking mode, clean it up
+                        if (isPerplexityThinking) {
+                          isPerplexityThinking = false;
+                          // Remove thinking header when transitioning to regular content
+                          const thinkingHeader = container.querySelector('.thinking-header');
+                          if (thinkingHeader) {
+                            thinkingHeader.classList.add('hidden');
+                          }
+                          // Make response section visible
+                          responseSection.classList.add('visible');
+                          
+                          // If we have citations, format them and add to response
+                          if (perplexityCitations.length > 0) {
+                            const citationsHTML = formatPerplexityCitations(perplexityCitations);
+                            const citationsDiv = document.createElement('div');
+                            citationsDiv.className = 'perplexity-citations';
+                            citationsDiv.innerHTML = citationsHTML;
+                            responseContent.appendChild(citationsDiv);
+                          }
                         }
-                      }
-                    } else {
-                      // Regular handler for non-Perplexity providers
-                      const content = parsed.content || '';
-                      if (content || typeof content === 'string') { // Handle empty string content too
-                        receivedAnyContent = true; // Mark that we have received processable content
 
                         // --- TTFT Logic ---
                         if (!firstChunkReceived) {
@@ -1126,12 +990,12 @@ export const StreamingResponseExtension = {
 
                         // Update UI only if the fetch wasn't aborted *before* this point
                         if (!abortController.signal.aborted) {
-                            updateContent(content);
-                            localCompleteResponse += content;
+                            updateContent(parsed.content);
+                            localCompleteResponse += parsed.content;
                         } else {
-                          // Should theoretically not happen if abort check is robust, but good failsafe
-                          if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
-                          // Do not update UI or localCompleteResponse if aborted
+                            // Should theoretically not happen if abort check is robust, but good failsafe
+                            if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
+                            // Do not update UI or localCompleteResponse if aborted
                         }
                       }
                     }
@@ -1156,11 +1020,11 @@ export const StreamingResponseExtension = {
                       if (!abortController.signal.aborted) {
                           updateContent(content);
                           localCompleteResponse += content;
-                        } else {
+                      } else {
                           // Should theoretically not happen if abort check is robust, but good failsafe
                           if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
                           // Do not update UI or localCompleteResponse if aborted
-                        }
+                      }
                     }
                   }
                 } else if (payload.debugMode === 1 && data) {
@@ -1209,17 +1073,17 @@ export const StreamingResponseExtension = {
       // Function to format Perplexity citations
       function formatPerplexityCitations(citations) {
         if (!citations || citations.length === 0) return '';
-
+        
         let html = '<div class="citations-container">';
         html += '<h3>Sources:</h3>';
         html += '<ol class="citations-list">';
-
+        
         citations.forEach((url, index) => {
           // Create a truncated version for display
           const displayUrl = url.length > 60 ? url.substring(0, 57) + '...' : url;
           html += `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${displayUrl}</a></li>`;
         });
-
+        
         html += '</ol></div>';
         return html;
       }
