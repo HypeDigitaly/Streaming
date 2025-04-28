@@ -396,16 +396,21 @@ export const StreamingResponseExtension = {
 
     // Update the answer content with markdown support
     function updateContent(text) {
-      console.log('🔍 [UI] updateContent called with text:', text);
+      // Only log when there's actually content and avoid excessive logging
+      if (text && typeof text === 'string' && text.trim().length > 0) {
+        console.log(`🔍 [UI] Content update: "${text.substring(0, 30)}${text.length > 30 ? '...' : ''}"`);
+      }
       
-      if (!text) {
-        console.log('🔍 [UI] Empty text provided to updateContent, returning');
+      // Check both undefined and empty cases to avoid unnecessary logs
+      if (!text || typeof text !== 'string' || text.trim() === '') {
+        // Don't log empty content events to reduce noise
         return;
       }
 
       // Handle first chunk
       if (isFirstChunk) {
-        console.log('🔍 [UI] First chunk detected, showing response section');
+        // Only log first meaningful content
+        console.log('🔍 [UI] First content chunk received, showing response section');
         // Hide loading animation when we receive the first content
         const thinkingHeader = container.querySelector('.thinking-header');
         if (thinkingHeader) {

@@ -197,6 +197,7 @@ export default async function handler(req, res) {
 
     // Store the complete API response for debugging
     let fullApiResponse = '';
+    let fullResponseChunks = [];
     
     // Process incoming data from Perplexity
     perplexityStream.on('data', (chunk) => {
@@ -205,9 +206,12 @@ export default async function handler(req, res) {
         
         // Add to the full response log
         fullApiResponse += decodedChunk;
+        fullResponseChunks.push(decodedChunk);
 
-        // Always log the chunk regardless of debug mode
-        console.log('📥 [got] Received chunk:', decodedChunk);
+        // Log chunks only in debug mode to avoid excessive logs
+        if (debugMode === 1) {
+          console.log('📥 [got] Received chunk:', decodedChunk);
+        }
 
         // Add to buffer and process line by line
         buffer += decodedChunk;
@@ -445,10 +449,40 @@ export default async function handler(req, res) {
 
     // Handle the end of the stream from Perplexity
     perplexityStream.on('end', () => {
-      // Always log the full response at the end of the stream
-      console.log('📤 [got] COMPLETE PERPLEXITY API RESPONSE:');
-      console.log(fullApiResponse);
-      console.log('📤 [got] END OF COMPLETE RESPONSE');
+      // Always log the full response at the end of the stream in a structured way
+      console.log('==========================================================');
+      console.log('📤 [got] COMPLETE PERPLEXITY API RESPONSE (START)');
+      console.log('==========================================================');
+      
+      // Try to parse each chunk as JSON and log in a more structured way
+      console.log('RESPONSE CHUNKS:');
+      fullResponseChunks.forEach((chunk, index) => {
+        console.log(`--- CHUNK ${index + 1} ---`);
+        try {
+          // Log each line separately for better readability
+          const lines = chunk.split('\n');
+          lines.forEach(line => {
+            if (line.trim()) {
+              if (line.startsWith('data: ')) {
+                try {
+                  const jsonData = JSON.parse(line.slice(6));
+                  console.log(`JSON: ${JSON.stringify(jsonData, null, 2)}`);
+                } catch {
+                  console.log(`RAW: ${line}`);
+                }
+              } else {
+                console.log(`RAW: ${line}`);
+              }
+            }
+          });
+        } catch (e) {
+          console.log(chunk);
+        }
+      });
+      
+      console.log('==========================================================');
+      console.log('📤 [got] COMPLETE PERPLEXITY API RESPONSE (END)');
+      console.log('==========================================================');
       
       if (debugMode === 1) {
         console.log('📤 [got] Perplexity stream ended.');

@@ -86,13 +86,29 @@
             if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
               const fullContent = data.choices[0].message.content;
 
-              // Always log the full content for debugging
+              // Always log the full content for debugging in a clear, structured format
+              console.log('==========================================================');
               console.log('🌟 [got] RECEIVED COMPLETE MESSAGE (STANDARD RESPONSE):');
+              console.log('==========================================================');
               console.log(fullContent);
-              console.log('🌟 [got] END OF COMPLETE MESSAGE');
+              console.log('==========================================================');
+              console.log('🌟 [got] END OF STANDARD RESPONSE');
+              console.log('==========================================================');
+              
+              // Create separate data object to ensure the standard response is passed to the client
+              const standardResponseData = {
+                choices: [{
+                  delta: { content: fullContent }
+                }],
+                isStandardResponse: true
+              };
+              
+              // Send the standard response to the client
+              res.write(`data: ${JSON.stringify(standardResponseData)}\n\n`);
               
               if (debugMode === 1) {
                 console.log('🌟 [got] Received complete message content:', fullContent.substring(0, 100) + '...');
+                console.log('🌟 [got] Sent standard response to client');
               }
 
               // Split the complete response into thinking and regular parts
