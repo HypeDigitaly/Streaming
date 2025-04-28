@@ -124,61 +124,89 @@ export default async function handler(req, res) {
       });
     }
 
-    // Call Perplexity API
-    const perplexityResponse = await fetch('https://api.perplexity.ai/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestBody)
-    }).catch(err => {
-      console.error('❌ Perplexity fetch error:', err.message);
-      console.error('❌ Perplexity fetch error object:', err);
-      console.error('❌ Perplexity fetch error stack:', err.stack);
-      throw err;
-    });
+    // ---> Wrap the fetch call in its own try/catch < ---
+    let perplexityResponse;
+    try {
+        // Call Perplexity API
+        perplexityResponse = await fetch('https://api.perplexity.ai/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestBody)
+        });
+        // If fetch succeeds, log status etc. right away
+        if (debugMode === 1) {
+            console.log(`🚦 Perplexity API Raw Response Status: ${perplexityResponse.status}`);
+            console.log(`🚦 Perplexity API Raw Response OK: ${perplexityResponse.ok}`);
+            console.log(`🚦 Perplexity API Raw Response Headers:`, perplexityResponse.headers.raw());
+        }
 
-    if (debugMode === 1) {
-      console.log(`🚦 Perplexity API Raw Response Status: ${perplexityResponse.status}`);
-      console.log(`🚦 Perplexity API Raw Response OK: ${perplexityResponse.ok}`);
-      console.log(`🚦 Perplexity API Raw Response Headers:`, perplexityResponse.headers.raw());
+    } catch (fetchError) {
+        // Catch errors specifically from the fetch operation itself
+        console.error('❌ Perplexity fetch operation failed:', fetchError.message);
+        console.error('❌ Perplexity fetch error object:', fetchError); 
+        console.error('❌ Perplexity fetch error stack:', fetchError.stack);
+        // Re-throw to be caught by the outer handler's catch block, which will send 500
+        throw fetchError;
     }
+    // ---> End fetch try/catch <---
 
+    // Now check if response is ok - This handles HTTP errors from Perplexity
     if (!perplexityResponse.ok) {
-      const errorText = await perplexityResponse.text();
-      console.error('❌ perplexity-stream: API error:', perplexityResponse.status, errorText);
+      let errorText = 'Unknown API error';
+      try {
+          errorText = await perplexityResponse.text();
+      } catch (textError) {
+          console.error('❌ Failed to read error response body as text:', textError);
+          errorText = `Failed to read error body. Status: ${perplexityResponse.status}`;
+      }
+      console.error('❌ perplexity-stream: API error received:', perplexityResponse.status, errorText);
       // Ensure we return here and don't try to read the body further
+      // Send the status code received from Perplexity back to the client
       return res.status(perplexityResponse.status).json({
         error: `Perplexity API error: ${perplexityResponse.status}`,
         details: errorText
       });
     }
 
-    // Set up SSE response
+    // --- If we reach here, the response is OK (e.g., 200) --- 
+
+    // Set up SSE response headers
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
 
     if (debugMode === 1) {
-      console.log('📥 Perplexity API Response initialized, attempting to get reader...');
+      console.log('📥 Perplexity API Response OK, attempting to get stream reader...');
     }
 
-    // ---> ADDED TRY/CATCH around getReader <---
+    // Try to get the stream reader
     let reader;
     try {
+      // Check if body exists and has getReader - handle potential non-stream success response
+      if (!perplexityResponse.body || typeof perplexityResponse.body.getReader !== 'function') {
+          console.error('❌ perplexity-stream: Response body is not a readable stream even though status was OK.');
+          let bodyContent = 'Could not read body.';
+          try { bodyContent = await perplexityResponse.text(); } catch (e) { /* ignore */ }
+          console.error('❌ perplexity-stream: Body content received:', bodyContent);
+          throw new Error('Received OK status but response body is not a readable stream.');
+      }
       reader = perplexityResponse.body.getReader();
       if (debugMode === 1) {
          console.log('✅ Successfully got stream reader.');
       }
     } catch (getReaderError) {
-      console.error('❌ perplexity-stream: CRITICAL - Failed to get reader from response body:', getReaderError);
+      // This catch handles errors from the check above or the getReader() call itself
+      console.error('❌ perplexity-stream: CRITICAL - Failed to get reader from response body:', getReaderError.message);
+      console.error('❌ perplexity-stream: getReaderError stack:', getReaderError.stack);
+      // Ensure we return the 500 error to the client
       return res.status(500).json({
         error: 'Internal server error',
         details: `Failed to get reader from response body: ${getReaderError.message}`
       });
     }
-    // ---> END ADDED TRY/CATCH <---
 
     const decoder = new TextDecoder();
     let thinkingContent = '';

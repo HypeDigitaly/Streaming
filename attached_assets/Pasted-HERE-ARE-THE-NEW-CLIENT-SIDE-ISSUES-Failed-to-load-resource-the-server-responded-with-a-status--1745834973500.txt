@@ -1,0 +1,87 @@
+HERE ARE THE NEW CLIENT SIDE ISSUES:
+
+Failed to load resource: the server responded with a status of 500 ()Understand this error
+StreamingResponseExtension.js:861 🔵 PERPLEXITY: Fetch call completed. Response status: 500
+StreamingResponseExtension.js:867 🔴 PERPLEXITY: Fetch failed! Status: 500
+processStream @ StreamingResponseExtension.js:867Understand this error
+StreamingResponseExtension.js:1105 Error during stream processing for /api/perplexity-stream: Error: HTTP error! status: 500, body: {"error":"Internal server error","details":"Failed to get reader from response body: perplexityResponse.body.getReader is not a function"}
+    at processStream (StreamingResponseExtension.js:871:19)
+processStream @ StreamingResponseExtension.js:1105Understand this error
+StreamingResponseExtension.js:1189 💥 CAUGHT ERROR in callLLMAPI main catch block for endpoint: /api/perplexity-stream
+callLLMAPI @ StreamingResponseExtension.js:1189Understand this error
+StreamingResponseExtension.js:1190 💥 Error message: HTTP error! status: 500, body: {"error":"Internal server error","details":"Failed to get reader from response body: perplexityResponse.body.getReader is not a function"}
+callLLMAPI @ StreamingResponseExtension.js:1190Understand this error
+StreamingResponseExtension.js:1191 💥 Error object: Error: HTTP error! status: 500, body: {"error":"Internal server error","details":"Failed to get reader from response body: perplexityResponse.body.getReader is not a function"}
+    at processStream (StreamingResponseExtension.js:871:19)
+callLLMAPI @ StreamingResponseExtension.js:1191Understand this error
+StreamingResponseExtension.js:1197 callLLMAPI failed for /api/perplexity-stream before first chunk. Reason: HTTP error! status: 500, body: {"error":"Internal server error","details":"Failed to get reader from response body: perplexityResponse.body.getReader is not a function"}
+
+AND SERVER SIDE ISSUES:
+
+✓ Compiled in 301ms (258 modules)
+2025-04-28 12:05:42.53
+GET / 200 in 5520ms
+2025-04-28 12:06:11.98
+✓ Compiled /api/claude-stream in 264ms (68 modules)
+2025-04-28 12:06:12.44
+OPTIONS /api/claude-stream 200 in 730ms
+2025-04-28 12:06:14.53
+POST /api/claude-stream 200 in 1924ms
+2025-04-28 12:06:14.73
+✓ Compiled /api/openai-stream in 164ms (71 modules)
+2025-04-28 12:06:14.91
+OPTIONS /api/openai-stream 200 in 355ms
+2025-04-28 12:06:25.05
+POST /api/openai-stream 200 in 9995ms
+2025-04-28 12:06:25.40
+✓ Compiled /api/voiceflow-variable-update in 180ms (74 modules)
+2025-04-28 12:06:25.43
+OPTIONS /api/voiceflow-variable-update 200 in 219ms
+2025-04-28 12:06:25.88
+POST /api/voiceflow-variable-update 200 in 317ms
+2025-04-28 12:06:39.21
+✓ Compiled /api/perplexity-stream in 294ms (77 modules)
+2025-04-28 12:06:39.25
+🚀 perplexity-stream: Handler invoked. Method: OPTIONS Origin: https://hypedigitaly.ai
+2025-04-28 12:06:39.26
+OPTIONS /api/perplexity-stream 200 in 356ms
+2025-04-28 12:06:39.43
+🚀 perplexity-stream: Handler invoked. Method: POST Origin: https://hypedigitaly.ai
+2025-04-28 12:06:39.43
+🚀 perplexity-stream: Passed initial checks (CORS, Method).
+2025-04-28 12:06:39.44
+📦 perplexity-stream: Request body: {
+2025-04-28 12:06:39.44
+model: 'sonar-reasoning-pro',
+2025-04-28 12:06:39.44
+max_tokens: 8000,
+2025-04-28 12:06:39.44
+temperature: 0,
+2025-04-28 12:06:39.44
+projectName: 'KHK',
+2025-04-28 12:06:39.44
+userData: 'Jaké dotační příležitosti, grantové programy a finanční podpory jsou aktuálně k dispozici od Králové...',
+2025-04-28 12:06:39.44
+systemPrompt: 'Jsi výzkumný asistent, který vyhledává komplexní, detailní a komprehensivní informace, které přímo z...',
+2025-04-28 12:06:39.44
+allowedDomains: 'khk.cz',
+2025-04-28 12:06:39.44
+search_domain_filter: [ 'khk.cz' ]
+2025-04-28 12:06:39.44
+}
+2025-04-28 12:06:39.44
+📤 Perplexity: Full Request Payload: {
+2025-04-28 12:06:39.44
+"model": "sonar-reasoning-pro",
+2025-04-28 12:06:39.44
+"temperature": 0.25,
+2025-04-28 12:06:39.44
+"top_p": 0.25,
+2025-04-28 12:06:39.44
+"return_images": true,
+2025-04-28 12:06:39.44
+"return_related_questions": true,
+2025-04-28 12:06:39.44
+"top_k": 0,
+2025-04-28 12:06:39.44
+"stream": true,
