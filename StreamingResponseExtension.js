@@ -115,7 +115,7 @@ export const StreamingResponseExtension = {
             font-size: 14px;
             line-height: 1.2;
           }
-          .strong {
+          strong {
             font-weight: 600;
           }
           .response-content h1, 
@@ -276,64 +276,7 @@ export const StreamingResponseExtension = {
             background-color: #E2F2D9;
             color: #333;
           }
-          
-          /* Perplexity Reasoning Styles */
-          .perplexity-reasoning {
-            background-color: #F9FAFB;
-            border-radius: 8px;
-            padding: 12px;
-            margin: 0 0 12px 0;
-            font-size: 12px;
-            line-height: 1.4;
-          }
-          .reasoning-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            font-weight: 600;
-          }
-          .reasoning-title {
-            font-size: 14px;
-            color: #111827;
-          }
-          .reasoning-toggle {
-            cursor: pointer;
-            color: #6B7280;
-            font-size: 12px;
-          }
-          .reasoning-content {
-            font-size: 12px;
-            color: #4B5563;
-          }
-          .reasoning-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            margin-bottom: 6px;
-          }
-          .step-checkbox {
-            color: #10B981;
-            font-weight: bold;
-            font-size: 10px;
-            line-height: 1;
-          }
-          .step-content {
-            flex: 1;
-          }
-          /* Citation link styles */
-          .citation-link {
-            color: #2563EB;
-            text-decoration: none;
-            font-weight: normal;
-            cursor: pointer;
-            margin: 0;
-            padding: 0;
-            display: inline;
-          }
-          .citation-link:hover {
-            text-decoration: underline;
-          }
+
         </style>
         <div class="response-section">
           <div class="response-content"></div>
@@ -381,25 +324,8 @@ export const StreamingResponseExtension = {
         .trim();
     }
 
-    // Process citations in text and format them as links
-    function processCitations(text, citations) {
-      if (!citations || !Array.isArray(citations) || citations.length === 0) {
-        return text;
-      }
-
-      // Replace citation markers [1], [2], etc. with links
-      return text.replace(/\[(\d+)\]/g, (match, number) => {
-        const index = parseInt(number) - 1;
-        if (index >= 0 && index < citations.length) {
-          const url = citations[index];
-          return `<a href="${url}" target="_blank" class="citation-link">[${number}]</a>`;
-        }
-        return match;
-      });
-    }
-
     // Update the answer content with markdown support
-    function updateContent(text, citations = null) {
+    function updateContent(text) {
       if (!text) return;
 
       // Handle first chunk
@@ -416,11 +342,8 @@ export const StreamingResponseExtension = {
       // Append to buffer
       buffer += text;
 
-      // Process citations if available
-      let processedBuffer = citations ? processCitations(buffer, citations) : buffer;
-
       // Format markdown content
-      const formattedContent = processedBuffer
+      const formattedContent = buffer
         .replace(/^### (.*$)/gm, '<h3>$1</h3>')
         .replace(/^## (.*$)/gm, '<h2>$1</h2>')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>')
@@ -613,21 +536,6 @@ export const StreamingResponseExtension = {
         type: 'groq',
         endpoint: '/api/groq-stream',
         displayName: 'Llama 4 Scout'
-      },
-      
-      // Perplexity models
-      {
-        id: 10,
-        name: 'sonar-reasoning-pro',
-        type: 'perplexity',
-        endpoint: '/api/perplexity-stream',
-        displayName: 'Perplexity Sonar Reasoning Pro',
-        supportsReasoning: true,
-        reasoningIcon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-          <ellipse cx="12" cy="8" stroke="#1B1B1B" stroke-width="2" rx="7" ry="3" transform="rotate(-45 12 8)"></ellipse>
-          <ellipse cx="12" cy="8" stroke="#1B1B1B" stroke-width="2" rx="7" ry="3" transform="rotate(45 12 8)"></ellipse>
-          <path fill="#1B1B1B" d="M19 7.5C19 7.2 18.8 7 18.5 7C18.2 7 18 7.2 18 7.5H19ZM11.8 3C12.1 3 12.3 2.8 12.3 2.5C12.3 2.2 12.1 2 11.8 2V3ZM5.2 12H5.8C5.8 11.7 5.7 11.4 5.3 11.3L5.2 12ZM15.5 15.7C15.6 16 16 16.1 16.2 16C16.5 15.9 16.6 15.6 16.5 15.3L15.5 15.7ZM9.9 15.2C10.1 15.1 10.2 14.8 10.1 14.6C10 14.3 9.7 14.2 9.5 14.3L9.9 15.2ZM14.8 18.5V19V18.5ZM4.2 11.7L4 12.1L4.2 11.7ZM9.6 18.5L9.6 19L9.6 18.5ZM5.5 8.8L5.1 8.5L5.5 8.8ZM5.9 8.1L5.1 8L5.9 8.1ZM6.7 15.5L6.6 15L6.7 15.5ZM15.4 15.5L15.9 15.4C15.9 15.4 15.9 15.4 15.9 15.3L15.4 15.5ZM18 7.5C18 10.2 17.7 11.2 17.1 11.7L18.2 12.3C19.2 11.6 19 10.3 19 7.5H18ZM4.3 9.3L5.9 8.3L5.1 7.3L3.5 8.3L4.3 9.3ZM5.3 11.3L4.4 10.8L4 12.1L4.9 12.6L5.3 11.3ZM5.8 14.2V12H4.8V14.2H5.8ZM8.2 14.8L6.6 15.1L6.8 16.1L8.4 15.8L8.2 14.8ZM8.8 17.2V15.3H7.8V17.2H8.8ZM14.8 18H9.6V19H14.8V18ZM15.2 15.7L15.6 16.9L16.6 16.7L16.2 15.4L15.2 15.7ZM8.4 15.8L9.9 15.2L9.5 14.3L8 14.9L8.4 15.8ZM6.9 5.5C8.2 3.4 10.1 3 11.8 3V2C10 2 7.6 2.4 6 5L6.9 5.5ZM5.5 6.9L5.1 8.1L6.1 8.2L6.4 7L5.5 6.9ZM14.8 19C15.8 19 16.7 17.9 16.6 16.9L15.6 16.9C15.6 17.3 15.3 18 14.8 18V19ZM3.5 8.3C2.9 8.9 3.1 9.9 4 12.1L4.4 10.8C4.3 10.8 4.3 10.7 4.3 9.3L3.5 8.3ZM7.8 17.2C7.8 18.2 8.6 19 9.6 19L9.6 18C9.2 18 8.8 17.6 8.8 17.2H7.8ZM5.9 8.3C6.1 8.1 6.3 7.9 6.4 7L5.1 8.1C5.1 8.2 5 8.2 5.1 8.3L5.9 8.3ZM4.8 14.2C4.8 15.4 5.7 16.2 6.8 16.1L6.6 15.1C6.1 15.1 5.8 14.7 5.8 14.2H4.8ZM6 5C5.7 5.5 5.5 6.2 5.5 6.9L6.4 7C6.5 6.4 6.6 5.9 6.9 5.5L6 5Z"></path>
-        </svg>`
       }
     ];
 
@@ -837,7 +745,6 @@ export const StreamingResponseExtension = {
         let response;
         let localCompleteResponse = '';
         let receivedAnyContent = false; // Track if *any* content was processed successfully
-        let perplexityState = null; // State for handling Perplexity reasoning format
 
         try {
           const proxyUrl = `https://utils.hypedigitaly.ai${endpoint}`;
@@ -851,7 +758,7 @@ export const StreamingResponseExtension = {
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
             });
-            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
 
           response = await fetch(proxyUrl, {
@@ -915,10 +822,7 @@ export const StreamingResponseExtension = {
                     throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
                   }
 
-                  // Extract content and potential citations
                   const content = parsed.content || '';
-                  const citations = parsed.citations || null;
-                  
                   if (content || typeof content === 'string') { // Handle empty string content too
                     receivedAnyContent = true; // Mark that we have received processable content
 
@@ -933,152 +837,14 @@ export const StreamingResponseExtension = {
                     }
                     // --- End TTFT Logic ---
 
-                    // Special handling for Perplexity reasoning content
-                    const isPerplexity = model && model.type === 'perplexity';
-
-                    if (isPerplexity) {
-                      // Process Perplexity reasoning format
-                      if (!perplexityState) {
-                        perplexityState = {
-                          isInThinkBlock: false,
-                          thinkingContent: '',
-                          answerContent: '',
-                          reasoningElements: null,
-                          reasoningVisible: true
-                        };
-                        
-                        // Create reasoning UI elements if they don't exist
-                        if (!responseContent.querySelector('.perplexity-reasoning')) {
-                          const reasoningSection = document.createElement('div');
-                          reasoningSection.className = 'perplexity-reasoning';
-                          reasoningSection.innerHTML = `
-                            <div class="reasoning-header">
-                              <div class="reasoning-title">Reasoning</div>
-                              <div class="reasoning-toggle">▼</div>
-                            </div>
-                            <div class="reasoning-content"></div>
-                          `;
-                          responseContent.appendChild(reasoningSection);
-                          
-                          // Add toggle behavior
-                          const toggleBtn = reasoningSection.querySelector('.reasoning-toggle');
-                          toggleBtn.addEventListener('click', () => {
-                            const content = reasoningSection.querySelector('.reasoning-content');
-                            if (content.style.display === 'none') {
-                              content.style.display = 'block';
-                              toggleBtn.textContent = '▼';
-                              perplexityState.reasoningVisible = true;
-                            } else {
-                              content.style.display = 'none';
-                              toggleBtn.textContent = '▶';
-                              perplexityState.reasoningVisible = false;
-                            }
-                          });
-                          
-                          perplexityState.reasoningElements = {
-                            section: reasoningSection,
-                            content: reasoningSection.querySelector('.reasoning-content')
-                          };
-                        }
-                      }
-                      
-                      // Process <think> tags for reasoning steps
-                      if (content.includes('<think>')) {
-                        perplexityState.isInThinkBlock = true;
-                        const thinkingPart = content.split('<think>')[1] || '';
-                        perplexityState.thinkingContent += thinkingPart;
-                        
-                        // Update reasoning UI
-                        if (perplexityState.reasoningElements) {
-                          // Split thinking content into steps by line breaks
-                          const steps = perplexityState.thinkingContent.split('\n')
-                            .filter(step => step.trim().length > 0);
-                          
-                          // Update reasoning content
-                          perplexityState.reasoningElements.content.innerHTML = '';
-                          steps.forEach(step => {
-                            const stepElem = document.createElement('div');
-                            stepElem.className = 'reasoning-step';
-                            stepElem.innerHTML = `
-                              <div class="step-checkbox">✓</div>
-                              <div class="step-content">${processCitations(step, citations)}</div>
-                            `;
-                            perplexityState.reasoningElements.content.appendChild(stepElem);
-                          });
-                        }
-                        
-                      } else if (content.includes('</think>')) {
-                        perplexityState.isInThinkBlock = false;
-                        const parts = content.split('</think>');
-                        if (parts[0]) {
-                          // Last part of thinking content
-                          perplexityState.thinkingContent += parts[0];
-                          
-                          // Update reasoning UI with final thinking content
-                          if (perplexityState.reasoningElements) {
-                            const steps = perplexityState.thinkingContent.split('\n')
-                              .filter(step => step.trim().length > 0);
-                            
-                            perplexityState.reasoningElements.content.innerHTML = '';
-                            steps.forEach(step => {
-                              const stepElem = document.createElement('div');
-                              stepElem.className = 'reasoning-step';
-                              stepElem.innerHTML = `
-                                <div class="step-checkbox">✓</div>
-                                <div class="step-content">${processCitations(step, citations)}</div>
-                              `;
-                              perplexityState.reasoningElements.content.appendChild(stepElem);
-                            });
-                          }
-                        }
-                        
-                        // Get content after </think> as answer content
-                        if (parts[1]) {
-                          perplexityState.answerContent += parts[1];
-                          updateContent(parts[1], citations);
-                        }
-                        
-                      } else if (perplexityState.isInThinkBlock) {
-                        // Inside thinking block, accumulate thinking content
-                        perplexityState.thinkingContent += content;
-                        
-                        // Update reasoning UI
-                        if (perplexityState.reasoningElements) {
-                          const steps = perplexityState.thinkingContent.split('\n')
-                            .filter(step => step.trim().length > 0);
-                          
-                          perplexityState.reasoningElements.content.innerHTML = '';
-                          steps.forEach(step => {
-                            const stepElem = document.createElement('div');
-                            stepElem.className = 'reasoning-step';
-                            stepElem.innerHTML = `
-                              <div class="step-checkbox">✓</div>
-                              <div class="step-content">${processCitations(step, citations)}</div>
-                            `;
-                            perplexityState.reasoningElements.content.appendChild(stepElem);
-                          });
-                        }
-                        
-                      } else {
-                        // Regular content outside of thinking block
-                        perplexityState.answerContent += content;
-                        updateContent(content, citations);
-                      }
-                      
-                      // Store complete response for both thinking and answer content
-                      localCompleteResponse = perplexityState.answerContent;
-                      
+                    // Update UI only if the fetch wasn't aborted *before* this point
+                    if (!abortController.signal.aborted) {
+                        updateContent(content);
+                        localCompleteResponse += content;
                     } else {
-                      // Standard content processing for non-Perplexity models
-                      // Update UI only if the fetch wasn't aborted *before* this point
-                      if (!abortController.signal.aborted) {
-                          updateContent(content, citations);
-                          localCompleteResponse += content;
-                      } else {
-                          // Should theoretically not happen if abort check is robust, but good failsafe
-                          if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
-                          // Do not update UI or localCompleteResponse if aborted
-                      }
+                        // Should theoretically not happen if abort check is robust, but good failsafe
+                        if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
+                        // Do not update UI or localCompleteResponse if aborted
                     }
                   }
                 } else if (payload.debugMode === 1 && data) {
