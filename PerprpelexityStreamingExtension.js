@@ -1,3 +1,4 @@
+
 export const PerplexityReasonerExtension = {
     name: 'PerplexityReasoner',
     type: 'response',
@@ -41,20 +42,21 @@ export const PerplexityReasonerExtension = {
             gap: 0;
           }
           .reasoning-section {
-            background-color: #F9FAFB;
+            background-color: #F0F4F8;
             border-radius: 12px;
             padding: 16px;
             margin: 0;
             width: 100%;
             box-sizing: border-box;
             transition: all 0.3s ease;
+            border-left: 4px solid #4A6FA5;
           }
           .reasoning-section.collapsed {
             padding: 10px 16px;
             cursor: pointer;
           }
           .reasoning-section.has-answer {
-            margin-bottom: 8px;
+            margin-bottom: 16px;
           }
           .reasoning-section.collapsed .reasoning-content,
           .reasoning-section.collapsed .reasoning-intro {
@@ -144,9 +146,10 @@ export const PerplexityReasonerExtension = {
             }
           }
           .reasoning-content {
-            font-size: 12px;
-            line-height: 1.4;
+            font-size: 13px;
+            line-height: 1.5;
             color: #4B5563;
+            font-family: monospace;
           }
           .reasoning-step {
             display: flex;
@@ -170,9 +173,10 @@ export const PerplexityReasonerExtension = {
           }
           .step-content {
             flex: 1;
-            font-size: 12px;
-            line-height: 1.4;
+            font-size: 13px;
+            line-height: 1.5;
             padding-top: 1px;
+            font-family: monospace;
           }
           .step-checkbox .unchecked {
             opacity: 1;
@@ -209,9 +213,62 @@ export const PerplexityReasonerExtension = {
           }
           .answer-content {
             font-size: 14px;
-            line-height: 1.4;
+            line-height: 1.5;
             margin: 0;
             padding: 0;
+          }
+          .citation-link {
+            display: inline-flex;
+            align-items: center;
+            color: #2563EB;
+            text-decoration: none;
+            font-weight: normal;
+            cursor: pointer;
+            margin: 0 2px;
+            transition: all 0.2s ease;
+          }
+          .citation-link:hover {
+            text-decoration: underline;
+            color: #1E40AF;
+          }
+          .citations-section {
+            margin-top: 20px;
+            padding: 12px 16px;
+            background-color: #F3F4F6;
+            border-radius: 8px;
+            border-left: 4px solid #2563EB;
+          }
+          .citations-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #1F2937;
+          }
+          .citation-item {
+            margin-bottom: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+          }
+          .citation-number {
+            display: inline-block;
+            min-width: 24px;
+            height: 24px;
+            text-align: center;
+            line-height: 24px;
+            background-color: #2563EB;
+            color: white;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            font-size: 12px;
+          }
+          .citation-url {
+            color: #2563EB;
+            text-decoration: none;
+            word-break: break-all;
+          }
+          .citation-url:hover {
+            text-decoration: underline;
           }
         </style>
         <div class="reasoning-section">
@@ -649,6 +706,11 @@ export const PerplexityReasonerExtension = {
               // Ignore parsing errors for final incomplete chunk
             }
           }
+
+          // Add citations section at the end
+          if (citations && citations.length > 0) {
+            addCitationsSection(citations);
+          }
         } catch (error) {
           reasoningContent.textContent =
             'Error: Failed to get response from Perplexity API'
@@ -658,6 +720,52 @@ export const PerplexityReasonerExtension = {
           }
         } finally {
           isStreaming = false
+        }
+      }
+
+      // Create citations section
+      function addCitationsSection(citations) {
+        if (!citations || citations.length === 0) return;
+
+        // Create section if it doesn't exist already
+        let citationsSection = answerSection.querySelector('.citations-section');
+        if (!citationsSection) {
+          citationsSection = document.createElement('div');
+          citationsSection.className = 'citations-section';
+          
+          // Add title
+          const title = document.createElement('div');
+          title.className = 'citations-title';
+          title.textContent = 'Sources';
+          citationsSection.appendChild(title);
+          
+          // Create list
+          const list = document.createElement('div');
+          list.className = 'citations-list';
+          
+          // Add each citation
+          citations.forEach((url, index) => {
+            const item = document.createElement('div');
+            item.className = 'citation-item';
+            
+            const number = document.createElement('span');
+            number.className = 'citation-number';
+            number.textContent = index + 1;
+            
+            const link = document.createElement('a');
+            link.className = 'citation-url';
+            link.href = url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = url;
+            
+            item.appendChild(number);
+            item.appendChild(link);
+            list.appendChild(item);
+          });
+          
+          citationsSection.appendChild(list);
+          answerSection.appendChild(citationsSection);
         }
       }
   
@@ -890,45 +998,45 @@ export const PerplexityReasonerExtension = {
           <style>
             .answer-content {
               font-size: 14px;
-              line-height: 1.4;
+              line-height: 1.5;
               color: #374151;
               margin: 0;
               padding: 0;
             }
             .answer-paragraph {
-              margin: 4px 0;
+              margin: 8px 0;
               padding: 0;
             }
             .answer-paragraph:first-child {
               margin-top: 0;
             }
             .answer-list {
-              margin: 2px 0;
+              margin: 8px 0;
               padding-left: 20px;
             }
             .answer-list-item {
-              margin: 2px 0;
+              margin: 4px 0;
               padding: 0;
             }
             .answer-h1 {
-              font-size: 16px;
-              margin: 12px 0 8px;
+              font-size: 18px;
+              margin: 16px 0 8px;
               font-weight: 600;
             }
             .answer-h1:first-child {
               margin-top: 0;
             }
             .answer-h2 {
-              font-size: 14px;
-              margin: 10px 0 6px;
+              font-size: 16px;
+              margin: 14px 0 6px;
               font-weight: 600;
             }
             .answer-h2:first-child {
               margin-top: 0;
             }
             .answer-h3 {
-              font-size: 13px;
-              margin: 8px 0 4px;
+              font-size: 14px;
+              margin: 12px 0 4px;
               font-weight: 600;
             }
             .answer-h3:first-child {
@@ -936,7 +1044,7 @@ export const PerplexityReasonerExtension = {
             }
             br {
               display: block;
-              margin: 2px 0;
+              margin: 4px 0;
             }
             strong {
               font-weight: 600;
@@ -1020,31 +1128,36 @@ export const PerplexityReasonerExtension = {
         .citation-link {
           color: #2563EB;
           text-decoration: none;
-          font-weight: normal;
+          font-weight: 500;
           cursor: pointer;
-          margin: 0;
-          padding: 0;
-          display: inline;
+          margin: 0 2px;
+          padding: 1px 3px;
+          border-radius: 3px;
+          background-color: rgba(37, 99, 235, 0.1);
+          transition: background-color 0.2s ease;
         }
         .citation-link:hover {
-          text-decoration: underline;
+          text-decoration: none;
+          background-color: rgba(37, 99, 235, 0.2);
         }
         .reasoning-content .citation-link {
           color: #4B5563;
-          font-weight: 500;
+          font-weight: 600;
           display: inline;
-          margin: 0;
-          padding: 0;
+          margin: 0 2px;
+          padding: 1px 3px;
+          background-color: rgba(75, 85, 99, 0.1);
         }
         .reasoning-content .citation-link:hover {
           color: #2563EB;
-          text-decoration: underline;
+          background-color: rgba(37, 99, 235, 0.1);
         }
         .step-content {
-          font-size: 12px;
-          line-height: 1.4;
+          font-size: 13px;
+          line-height: 1.5;
           padding-top: 1px;
           color: #4B5563;
+          font-family: monospace;
         }
         .step-content a {
           color: inherit;
@@ -1153,4 +1266,3 @@ export const PerplexityReasonerExtension = {
       })
     },
   }
-  
