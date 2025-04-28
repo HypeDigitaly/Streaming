@@ -396,10 +396,16 @@ export const StreamingResponseExtension = {
 
     // Update the answer content with markdown support
     function updateContent(text) {
-      if (!text) return;
+      console.log('🔍 [UI] updateContent called with text:', text);
+      
+      if (!text) {
+        console.log('🔍 [UI] Empty text provided to updateContent, returning');
+        return;
+      }
 
       // Handle first chunk
       if (isFirstChunk) {
+        console.log('🔍 [UI] First chunk detected, showing response section');
         // Hide loading animation when we receive the first content
         const thinkingHeader = container.querySelector('.thinking-header');
         if (thinkingHeader) {

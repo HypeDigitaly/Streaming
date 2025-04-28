@@ -195,14 +195,19 @@ export default async function handler(req, res) {
     let citations = [];
     let seenDoneMessage = false;
 
+    // Store the complete API response for debugging
+    let fullApiResponse = '';
+    
     // Process incoming data from Perplexity
     perplexityStream.on('data', (chunk) => {
       try {
         const decodedChunk = chunk.toString();
+        
+        // Add to the full response log
+        fullApiResponse += decodedChunk;
 
-        if (debugMode === 1) {
-          console.log('📥 [got] Received chunk:', decodedChunk);
-        }
+        // Always log the chunk regardless of debug mode
+        console.log('📥 [got] Received chunk:', decodedChunk);
 
         // Add to buffer and process line by line
         buffer += decodedChunk;
@@ -440,6 +445,11 @@ export default async function handler(req, res) {
 
     // Handle the end of the stream from Perplexity
     perplexityStream.on('end', () => {
+      // Always log the full response at the end of the stream
+      console.log('📤 [got] COMPLETE PERPLEXITY API RESPONSE:');
+      console.log(fullApiResponse);
+      console.log('📤 [got] END OF COMPLETE RESPONSE');
+      
       if (debugMode === 1) {
         console.log('📤 [got] Perplexity stream ended.');
       }

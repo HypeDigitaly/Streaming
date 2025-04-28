@@ -86,6 +86,11 @@
             if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
               const fullContent = data.choices[0].message.content;
 
+              // Always log the full content for debugging
+              console.log('🌟 [got] RECEIVED COMPLETE MESSAGE (STANDARD RESPONSE):');
+              console.log(fullContent);
+              console.log('🌟 [got] END OF COMPLETE MESSAGE');
+              
               if (debugMode === 1) {
                 console.log('🌟 [got] Received complete message content:', fullContent.substring(0, 100) + '...');
               }
