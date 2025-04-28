@@ -153,29 +153,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // ---> ADDED CHECK: Verify response body and getReader exist <---
-    if (!perplexityResponse.body || typeof perplexityResponse.body.getReader !== 'function') {
-      console.error('❌ perplexity-stream: Critical Error - Response body is not a readable stream or getReader is missing.');
-      let errorDetails = 'Response body is not a readable stream.';
-      if (perplexityResponse.body) {
-        try {
-          // Attempt to read the body as text to see what was returned
-          const bodyText = await perplexityResponse.text();
-          errorDetails = `getReader is not a function on the response body. Body content: ${bodyText}`;
-          console.error('❌ perplexity-stream: Body Text:', bodyText);
-        } catch (readError) {
-          console.error('❌ perplexity-stream: Failed to read response body as text:', readError);
-          errorDetails = 'getReader is not a function, and failed to read body as text.';
-        }
-      }
-      // Return a 500 error to the client ...
-      return res.status(500).json({
-        error: 'Internal server error',
-        details: errorDetails
-      });
-    } 
-    // ---> END ADDED CHECK <---
-
     // Set up SSE response
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
