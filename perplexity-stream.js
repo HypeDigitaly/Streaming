@@ -126,19 +126,54 @@
                   res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
                 }
 
-                // Then send the main content
+                // Then send the main content token by token to simulate streaming
                 if (mainContent) {
-                  const mainData = {
-                    choices: [{delta: {content: mainContent}}]
+                  // Get words (or small chunks) to simulate token-by-token streaming
+                  const tokens = mainContent.match(/[\w\W]{1,5}/g) || [];
+                  
+                  for (const token of tokens) {
+                    const mainData = {
+                      choices: [{delta: {content: token}}],
+                      isFinalResponse: true
+                    };
+                    res.write(`data: ${JSON.stringify(mainData)}\n\n`);
+                    
+                    // Small delay to make the streaming visible
+                    await new Promise(resolve => setTimeout(resolve, 10));
+                  }
+                }
+                
+                // After streaming the main content, send citations as a separate chunk if available
+                if (citations && citations.length > 0) {
+                  const citationsData = {
+                    citations: citations,
+                    isPostResponseCitations: true
                   };
-                  res.write(`data: ${JSON.stringify(mainData)}\n\n`);
+                  res.write(`data: ${JSON.stringify(citationsData)}\n\n`);
                 }
               } else {
                 // No think tags, just send as regular content
-                const regularData = {
-                  choices: [{delta: {content: fullContent}}]
-                };
-                res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+                const tokens = fullContent.match(/[\w\W]{1,5}/g) || [];
+                
+                for (const token of tokens) {
+                  const regularData = {
+                    choices: [{delta: {content: token}}],
+                    isFinalResponse: true
+                  };
+                  res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+                  
+                  // Small delay to make the streaming visible
+                  await new Promise(resolve => setTimeout(resolve, 10));
+                }
+                
+                // Send citations after content if available
+                if (citations && citations.length > 0) {
+                  const citationsData = {
+                    citations: citations,
+                    isPostResponseCitations: true
+                  };
+                  res.write(`data: ${JSON.stringify(citationsData)}\n\n`);
+                }
               }
 
               continue; // Skip other processing for this line

@@ -326,12 +326,14 @@ export default async function handler(req, res) {
         
         const afterThink = content.split('</think>')[1];
         if (afterThink.trim()) {
-          const regularData = {
+          // Send final response content in a way that allows token-by-token streaming
+          const finalResponseData = {
             choices: [{
               delta: { content: afterThink }
-            }]
+            }],
+            isFinalResponse: true
           };
-          res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+          res.write(`data: ${JSON.stringify(finalResponseData)}\n\n`);
           flushResponse();
         }
         
@@ -394,15 +396,16 @@ export default async function handler(req, res) {
           flushResponse();
         }
 
-        // Get content after </think>
+        // Get content after </think> - treat as final response
         const afterThink = content.split('</think>')[1] || '';
         if (afterThink) {
-          const regularData = {
+          const finalResponseData = {
             choices: [{
               delta: { content: afterThink }
-            }]
+            }],
+            isFinalResponse: true
           };
-          res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+          res.write(`data: ${JSON.stringify(finalResponseData)}\n\n`);
           flushResponse();
         }
       } 
@@ -418,13 +421,14 @@ export default async function handler(req, res) {
         flushResponse(); // Immediately display thinking content
       } 
       else {
-        // Regular content outside think block
-        const regularData = {
+        // Regular content outside think block - treat as part of final response
+        const finalResponseData = {
           choices: [{
             delta: { content: content }
-          }]
+          }],
+          isFinalResponse: true
         };
-        res.write(`data: ${JSON.stringify(regularData)}\n\n`);
+        res.write(`data: ${JSON.stringify(finalResponseData)}\n\n`);
         flushResponse();
       }
     }
