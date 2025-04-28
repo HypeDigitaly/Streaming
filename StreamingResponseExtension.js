@@ -107,6 +107,28 @@ export const StreamingResponseExtension = {
           .response-content h2, 
           .response-content h3,
           .response-content h4 {
+
+    // Add handler for debug messages
+    function handleDebugMessages(data) {
+      if (data && data.type === 'debug') {
+        const content = data.content || {};
+        
+        // Log debug information to client console
+        console.log(`📋 [Perplexity Debug] ${content.message || 'Debug event'}`);
+        
+        // Log additional details if present
+        if (content.payload) console.log(`📦 Payload:`, content.payload);
+        if (content.data) console.log(`📄 Data:`, content.data);
+        if (content.thinking) console.log(`🧠 Thinking:`, content.thinking);
+        if (content.thinkingFinal) console.log(`🧠 Final Thinking:`, content.thinkingFinal);
+        if (content.completeThinking) console.log(`🧠 Complete Thinking:`, content.completeThinking);
+        if (content.citations) console.log(`📚 Citations:`, content.citations);
+        if (content.completeResponse) console.log(`💬 Complete Response:`, content.completeResponse);
+        if (content.allStreamChunks) console.log(`📊 All Stream Chunks (${content.allStreamChunks.length}):`, content.allStreamChunks);
+        if (content.totalTokens) console.log(`🔢 Total Tokens:`, content.totalTokens);
+      }
+    }
+
             font-family: var(--_1bof89na), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #1a1e23;
             margin: 0;
@@ -831,6 +853,12 @@ export const StreamingResponseExtension = {
 
                   if (parsed.error) {
                     throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
+                  }
+                  
+                  // Handle debug messages - add to console but don't update UI
+                  if (parsed.type === 'debug') {
+                    handleDebugMessages(parsed);
+                    continue; // Skip UI updates for debug messages
                   }
 
                   const content = parsed.content || '';
