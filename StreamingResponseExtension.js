@@ -5,9 +5,6 @@ export const StreamingResponseExtension = {
     trace.type === "ext_streamingResponse" ||
     trace.payload?.name === "ext_streamingResponse",
   render: async ({ trace, element }) => {
-    // ---> ADDED LOGGING <---
-    console.log("🚦 [Render Scope] Entering render function.");
-    // ---> END ADDED LOGGING <---
     if (trace.payload?.debugMode === 1) {
       console.log("🚀 StreamingResponseExtension: Starting render", { trace });
       console.log("📦 Full trace payload:", JSON.stringify(trace.payload, null, 2));
@@ -41,23 +38,6 @@ export const StreamingResponseExtension = {
             opacity: 0;
             height: 0;
             padding: 0;
-          }
-          .thinking-header.thinking-expanded {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-          .thinking-content {
-            font-family: monospace;
-            font-size: 12px;
-            line-height: 1.4;
-            padding: 8px 12px;
-            background-color: #f5f5f5;
-            border-radius: 4px;
-            margin-top: 8px;
-            max-height: 120px;
-            overflow-y: auto;
-            width: 100%;
-            color: #595959;
           }
           .loading-animation {
             display: flex;
@@ -231,45 +211,6 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
-          
-          /* Perplexity specific styles */
-          .perplexity-citations {
-            margin-top: 15px;
-            font-size: 13px;
-            border-top: 1px solid #e0e0e0;
-            padding-top: 8px;
-          }
-          .citations-container {
-            background-color: #f9f9f9;
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-top: 12px;
-          }
-          .citations-container h3 {
-            font-size: 14px;
-            margin: 0 0 8px 0;
-            color: #444;
-          }
-          .citations-list {
-            margin: 0;
-            padding-left: 20px;
-          }
-          .citations-list li {
-            margin-bottom: 4px;
-          }
-          .citations-list a {
-            color: #0066cc;
-            text-decoration: none;
-            font-size: 12px;
-            word-break: break-all;
-          }
-          .citations-list a::before {
-            content: ""; /* Override the arrow prefix for citation links */
-          }
-          .citations-list a:hover {
-            text-decoration: underline;
-          }
-          
           .ai-info-footer {
             display: flex;
             align-items: center;
@@ -331,8 +272,7 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.claude,
           .model-info-tooltip.openai,
           .model-info-tooltip.gemini,
-          .model-info-tooltip.groq,
-          .model-info-tooltip.perplexity {
+          .model-info-tooltip.groq {
             background-color: #E2F2D9;
             color: #333;
           }
@@ -596,15 +536,6 @@ export const StreamingResponseExtension = {
         type: 'groq',
         endpoint: '/api/groq-stream',
         displayName: 'Llama 4 Scout'
-      },
-      
-      // Perplexity models
-      {
-        id: 10,
-        name: 'sonar-reasoning-pro',
-        type: 'perplexity',
-        endpoint: '/api/perplexity-stream',
-        displayName: 'Perplexity Sonar Reasoning Pro'
       }
     ];
 
@@ -786,13 +717,6 @@ export const StreamingResponseExtension = {
       let resolveFirstChunkPromise = null;
       let rejectFirstChunkPromise = null;
 
-      // ---> ADDED: Determine timeout based on endpoint <---
-      const PERPLEXITY_TIMEOUT_MS = 20000; // 20 seconds for Perplexity
-      const currentTimeout = endpoint === '/api/perplexity-stream'
-        ? PERPLEXITY_TIMEOUT_MS
-        : TTFT_TIMEOUT_MS;
-      // ---> END ADDED <---
-
       // Promise that resolves ONLY when the first chunk arrives or rejects on early error
       const firstChunkPromise = new Promise((resolve, reject) => {
         resolveFirstChunkPromise = resolve;
@@ -806,14 +730,14 @@ export const StreamingResponseExtension = {
           if (firstChunkReceived) return;
 
           if (payload.debugMode === 1) {
-            console.log(`⏰ TTFT Timeout (${currentTimeout}ms) reached for ${endpoint}. Aborting fetch.`);
+            console.log(`⏰ TTFT Timeout (${TTFT_TIMEOUT_MS}ms) reached for ${endpoint}. Aborting fetch.`);
           }
           // Abort the fetch *before* rejecting due to timeout
           if (!abortController.signal.aborted) {
             abortController.abort('TTFT Timeout'); // Use a reason for clarity
           }
-          reject(new Error(`TTFT timeout after ${currentTimeout}ms for ${endpoint}`));
-        }, currentTimeout); // <-- Use conditional timeout
+          reject(new Error(`TTFT timeout after ${TTFT_TIMEOUT_MS}ms for ${endpoint}`));
+        }, TTFT_TIMEOUT_MS);
       });
 
       // This function handles the actual fetch and stream processing
@@ -821,13 +745,6 @@ export const StreamingResponseExtension = {
         let response;
         let localCompleteResponse = '';
         let receivedAnyContent = false; // Track if *any* content was processed successfully
-        let isPerplexityThinking = false; // For tracking Perplexity thinking state
-        let perplexityCitations = []; // For storing Perplexity citations
-        // ---> NEW: Buffer for thinking content <---
-        let perplexityThinkBuffer = '';
-        // ---> NEW: Flag for direct client-side parsing <---
-        let isInThinkBlock = false;
-        let currentThinkElement = null; // Reference to the thinking UI element
 
         try {
           const proxyUrl = `https://utils.hypedigitaly.ai${endpoint}`;
@@ -839,15 +756,9 @@ export const StreamingResponseExtension = {
               debugMode: payload.debugMode,
               projectName: payload.projectName,
               systemPrompt: payload.systemPrompt,
-              user_id: payload.user_id,
-              allowedDomains: payload.allowedDomains
+              user_id: payload.user_id
             });
-            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${currentTimeout}ms`); // <-- Use conditional timeout in log
-          }
-          
-          if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
-            console.log('🔵 PERPLEXITY: Attempting fetch to:', proxyUrl);
-            console.log('🔵 PERPLEXITY: Payload being sent:', JSON.stringify(payload));
+            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
 
           response = await fetch(proxyUrl, {
@@ -856,23 +767,12 @@ export const StreamingResponseExtension = {
             body: JSON.stringify(payload),
             signal: abortController.signal // Use the abort signal
           });
-          
-          if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
-            console.log('🔵 PERPLEXITY: Fetch call completed. Response status:', response.status);
-          }
 
           if (!response.ok) {
             let errorText = `HTTP error! status: ${response.status}`;
-            if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
-                console.error('🔴 PERPLEXITY: Fetch failed! Status:', response.status);
-            }
             try { errorText += `, body: ${await response.text()}`; } catch (e) { /* ignore */ }
             // Reject the firstChunkPromise if the initial fetch fails
             throw new Error(errorText);
-          }
-          
-          if (payload.debugMode === 1 && endpoint === '/api/perplexity-stream') {
-            console.log('🟢 PERPLEXITY: Fetch successful (response.ok). Proceeding to read stream...');
           }
 
           const reader = response.body.getReader();
@@ -922,132 +822,29 @@ export const StreamingResponseExtension = {
                     throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
                   }
 
-                  // Special handling for Perplexity
-                  if (endpoint === '/api/perplexity-stream') {
-                    // Handle perplexity citations
-                    if (parsed.citations && Array.isArray(parsed.citations)) {
-                      perplexityCitations = parsed.citations;
-                      if (payload.debugMode === 1) console.log(`📋 Perplexity citations received:`, perplexityCitations);
-                      // We'll render citations later
+                  const content = parsed.content || '';
+                  if (content || typeof content === 'string') { // Handle empty string content too
+                    receivedAnyContent = true; // Mark that we have received processable content
+
+                    // --- TTFT Logic ---
+                    if (!firstChunkReceived) {
+                      firstChunkReceived = true;
+                      if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
+                      // Crucially, clear the TTFT timer now
+                      if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
+                      // Signal that the TTFT hurdle is passed
+                      resolveFirstChunkPromise();
                     }
+                    // --- End TTFT Logic ---
 
-                    // Handle content - **Direct Parsing Logic Added Here**
-                    const rawContent = parsed.content; // Get the raw content delta
-                    if (rawContent !== null && rawContent !== undefined) {
-                       receivedAnyContent = true; // Mark that we have received processable content
-
-                      // --- TTFT Logic (only needs to run once) ---
-                      if (!firstChunkReceived) {
-                        firstChunkReceived = true;
-                        if (payload.debugMode === 1) console.log(`✅ First chunk (thinking or content) received from ${endpoint} within timeout.`);
-                        if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
-                        resolveFirstChunkPromise(); // Signal TTFT met
-                      }
-                      // --- End TTFT Logic ---
-
-                      let contentToProcess = rawContent;
-                      let justExitedThinkBlock = false;
-
-                      // Check for <think> tag start
-                      if (contentToProcess.includes('<think>')) {
-                        isInThinkBlock = true;
-                        contentToProcess = contentToProcess.split('<think>')[1] || '';
-                        // Ensure thinking header is visible and potentially create content div
-                        const thinkingHeader = container.querySelector('.thinking-header');
-                        if (thinkingHeader) {
-                           thinkingHeader.classList.remove('hidden');
-                           thinkingHeader.classList.add('thinking-expanded'); // Use existing class for expansion
-                           if (!currentThinkElement) {
-                              currentThinkElement = thinkingHeader.querySelector('.thinking-content');
-                              if (!currentThinkElement) {
-                                 currentThinkElement = document.createElement('div');
-                                 currentThinkElement.className = 'thinking-content';
-                                 thinkingHeader.appendChild(currentThinkElement);
-                              }
-                           }
-                        }
-                      }
-
-                      // Check for </think> tag end
-                      if (isInThinkBlock && contentToProcess.includes('</think>')) {
-                        const beforeThinkEnd = contentToProcess.split('</think>')[0];
-                        const afterThinkEnd = contentToProcess.split('</think>')[1] || '';
-                        contentToProcess = beforeThinkEnd; // Process content before the tag first
-                        justExitedThinkBlock = true; // Flag to handle content after the tag
-                        perplexityThinkBuffer += contentToProcess; // Add final part to buffer
-
-                         // Update the thinking UI one last time before hiding
-                        if (currentThinkElement) {
-                           currentThinkElement.textContent = perplexityThinkBuffer; // Update with final buffer
-                        }
-
-                        // Transition out of thinking state
-                        isInThinkBlock = false;
-                        perplexityThinkBuffer = ''; // Clear buffer
-                        const thinkingHeader = container.querySelector('.thinking-header');
-                        if (thinkingHeader) {
-                           thinkingHeader.classList.add('hidden'); // Hide thinking header
-                           thinkingHeader.classList.remove('thinking-expanded');
-                        }
-                        responseSection.classList.add('visible'); // Ensure response section is visible
-                        contentToProcess = afterThinkEnd; // Set content to process to what came after the tag
-                      }
-
-                      // Process based on state
-                      if (isInThinkBlock) {
-                        // Append to think buffer and update thinking UI
-                        perplexityThinkBuffer += contentToProcess;
-                        if (currentThinkElement && !abortController.signal.aborted) {
-                           currentThinkElement.textContent = perplexityThinkBuffer;
-                           // Optional: scroll thinking content if it overflows
-                           currentThinkElement.scrollTop = currentThinkElement.scrollHeight;
-                        }
-                         // Ensure main response content is empty while thinking
-                        if (responseContent.innerHTML !== '') {
-                            responseContent.innerHTML = '';
-                            localCompleteResponse = '';
-                        }
-
-                      } else if (contentToProcess && !abortController.signal.aborted) {
-                        // Append to main answer buffer and update main UI
-                        // Ensure thinking header is hidden if we somehow start here
-                        const thinkingHeader = container.querySelector('.thinking-header');
-                        if (thinkingHeader && !thinkingHeader.classList.contains('hidden')) {
-                            thinkingHeader.classList.add('hidden');
-                            responseSection.classList.add('visible');
-                        }
-                        // Use the raw delta for updateContent
-                        updateContent(contentToProcess);
-                        localCompleteResponse += contentToProcess;
-                      }
-
-                    }
-                  } else {
-                    // Regular handler for non-Perplexity providers
-                    const content = parsed.content || '';
-                    if (content || typeof content === 'string') { // Handle empty string content too
-                      receivedAnyContent = true; // Mark that we have received processable content
-
-                      // --- TTFT Logic ---
-                      if (!firstChunkReceived) {
-                        firstChunkReceived = true;
-                        if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
-                        // Crucially, clear the TTFT timer now
-                        if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
-                        // Signal that the TTFT hurdle is passed
-                        resolveFirstChunkPromise();
-                      }
-                      // --- End TTFT Logic ---
-
-                      // Update UI only if the fetch wasn't aborted *before* this point
-                      if (!abortController.signal.aborted) {
-                          updateContent(content);
-                          localCompleteResponse += content;
-                      } else {
-                          // Should theoretically not happen if abort check is robust, but good failsafe
-                          if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
-                          // Do not update UI or localCompleteResponse if aborted
-                      }
+                    // Update UI only if the fetch wasn't aborted *before* this point
+                    if (!abortController.signal.aborted) {
+                        updateContent(content);
+                        localCompleteResponse += content;
+                    } else {
+                        // Should theoretically not happen if abort check is robust, but good failsafe
+                        if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
+                        // Do not update UI or localCompleteResponse if aborted
                     }
                   }
                 } else if (payload.debugMode === 1 && data) {
@@ -1060,29 +857,6 @@ export const StreamingResponseExtension = {
 
             if (done) {
               if (payload.debugMode === 1) console.log(`Stream ended naturally (done=true) for ${endpoint}.`);
-              // ---> ADDED: Render citations at the end for Perplexity <---
-              if (endpoint === '/api/perplexity-stream' && perplexityCitations.length > 0) {
-                const citationsHTML = formatPerplexityCitations(perplexityCitations);
-                const citationsDiv = document.createElement('div');
-                citationsDiv.className = 'perplexity-citations'; // Use existing class
-                citationsDiv.innerHTML = citationsHTML;
-                // Append after the main response content
-                if (responseContent) {
-                  responseContent.appendChild(citationsDiv);
-                   // Scroll handling after adding citations
-                  const scrollContainer = findScrollableParent(element);
-                  if (scrollContainer) {
-                      scrollContainer.scrollTo({
-                          top: scrollContainer.scrollHeight,
-                          behavior: 'smooth'
-                      });
-                  }
-                } else {
-                    console.warn("Could not find responseContent to append citations.");
-                }
-              }
-              // ---> END ADDED <---
-
               // If stream ends without [DONE], but we got content, consider it success
               if (receivedAnyContent) {
                 if (payload.debugMode === 1) console.log("Attempting Voiceflow update on natural stream end.");
@@ -1115,24 +889,6 @@ export const StreamingResponseExtension = {
           if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
         }
       };
-
-      // Function to format Perplexity citations
-      function formatPerplexityCitations(citations) {
-        if (!citations || citations.length === 0) return '';
-        
-        let html = '<div class="citations-container">';
-        html += '<h3>Sources:</h3>';
-        html += '<ol class="citations-list">';
-        
-        citations.forEach((url, index) => {
-          // Create a truncated version for display
-          const displayUrl = url.length > 60 ? url.substring(0, 57) + '...' : url;
-          html += `<li><a href="${url}" target="_blank" rel="noopener noreferrer">${displayUrl}</a></li>`;
-        });
-        
-        html += '</ol></div>';
-        return html;
-      }
 
       // Helper function for Voiceflow update to keep main logic cleaner
       async function updateVoiceflowVariable(payload, completeResponse) {
@@ -1186,9 +942,6 @@ export const StreamingResponseExtension = {
         // ---- This catch block handles: ----
         // 1. Rejection from ttftTimeoutPromise (TTFT timeout occurred before first chunk)
         // 2. Rejection from firstChunkPromise (e.g., fetch failed *before* first chunk)
-        console.error('💥 CAUGHT ERROR in callLLMAPI main catch block for endpoint:', endpoint);
-        console.error('💥 Error message:', error.message);
-        console.error('💥 Error object:', error);
         if (payload.debugMode === 1) {
           // Differentiate log based on error type
           if (error.message.startsWith('TTFT timeout')) {
@@ -1217,13 +970,6 @@ export const StreamingResponseExtension = {
     }
 
     async function orchestrateLLMCalls(trace) {
-      // ---> ADDED LOGGING <---
-      if (typeof console === 'undefined' || typeof console.log === 'undefined') {
-         alert('CRITICAL: console.log is undefined in orchestrateLLMCalls!');
-      } else {
-         console.log('🚦 [Orchestrate Scope] Entering orchestrateLLMCalls...');
-      }
-      // ---> END ADDED LOGGING <---
       if (!trace.payload) {
         responseContent.textContent = "Error: No payload received";
         return;
@@ -1250,124 +996,104 @@ export const StreamingResponseExtension = {
       const attemptedModels = [];
       let successfulModelFound = false; // Flag to track if we found a working model
 
-      // ---> ADDED WRAPPING TRY...CATCH <---
-      try {
-        // Try each model in sequence
-        for (const modelId of modelSequence) {
-          // If we already found a successful model, don't try others
-          if (successfulModelFound) break;
+      // Try each model in sequence
+      for (const modelId of modelSequence) {
+        // If we already found a successful model, don't try others
+        if (successfulModelFound) break;
 
-          const model = modelsRegistry.find(m => m.id === modelId);
+        const model = modelsRegistry.find(m => m.id === modelId);
 
-          if (!model) {
-            if (trace.payload.debugMode === 1) {
-              console.log(`⚠️ Unknown model ID ${modelId}, skipping`);
-            }
-            continue;
-          }
-
-          // Record the attempt before calling the API
-          const currentAttempt = { id: model.id, success: null };
-          attemptedModels.push(currentAttempt);
-
+        if (!model) {
           if (trace.payload.debugMode === 1) {
-            console.log(`\n🔄 ATTEMPT ${attemptedModels.length}/${modelSequence.length}: Using model ID:${model.id}`);
+            console.log(`⚠️ Unknown model ID ${modelId}, skipping`);
+          }
+          continue;
+        }
+
+        // Record the attempt before calling the API
+        const currentAttempt = { id: model.id, success: null };
+        attemptedModels.push(currentAttempt);
+
+        if (trace.payload.debugMode === 1) {
+          console.log(`\n🔄 ATTEMPT ${attemptedModels.length}/${modelSequence.length}: Using model ID:${model.id}`);
+          console.log(`📌 Model: ${model.displayName} (${model.type})`);
+          console.log(`📌 Model name: ${model.name}`);
+          console.log(`📌 Endpoint: ${model.endpoint}`);
+          console.log(`📌 Status: STARTING REQUEST`);
+        }
+
+        // Prepare payload for API call
+        const payload = {
+          model: model.name,
+          max_tokens: trace.payload.max_tokens,
+          temperature: trace.payload.temperature,
+          userData: trace.payload.userData,
+          systemPrompt: trace.payload.systemPrompt,
+          debugMode: trace.payload.debugMode || 0,
+          projectName: trace.payload.projectName,
+          user_id: trace.payload.user_id,
+        };
+
+        // Call the LLM API
+        const success = await callLLMAPI(model.endpoint, payload);
+
+        // Update the status of the current attempt
+        currentAttempt.success = success;
+
+        // If successful, stop trying other models and add footer
+        if (success) {
+          successfulModelFound = true; // Set the flag
+          if (trace.payload.debugMode === 1) {
+            console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
             console.log(`📌 Model: ${model.displayName} (${model.type})`);
             console.log(`📌 Model name: ${model.name}`);
-            console.log(`📌 Endpoint: ${model.endpoint}`);
-            console.log(`📌 Status: STARTING REQUEST`);
+            console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
+            console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
+            console.log(`=============================`);
           }
-
-          // Prepare payload for API call
-          const payload = {
-            model: model.name,
-            max_tokens: trace.payload.max_tokens,
-            temperature: trace.payload.temperature,
-            userData: trace.payload.userData,
-            systemPrompt: trace.payload.systemPrompt,
-            debugMode: trace.payload.debugMode || 0,
-            projectName: trace.payload.projectName,
-            user_id: trace.payload.user_id,
-          };
-
-          // Add allowedDomains parameter for Perplexity API
-          if (model.type === 'perplexity' && trace.payload.allowedDomains) {
-            payload.allowedDomains = trace.payload.allowedDomains;
+          addAIInfoFooter(attemptedModels); // Pass the list of attempted models
+          // No return here, let loop break naturally or finish
+        } else {
+            // --- Failure case within the loop ---
             if (trace.payload.debugMode === 1) {
-              console.log(`📌 Adding allowed domains for Perplexity: ${trace.payload.allowedDomains}`);
+                console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
+                console.log(`📌 Model: ${model.displayName} (${model.type})`);
+                console.log(`📌 Model name: ${model.name}`);
+                console.log(`📌 Status: REQUEST FAILED OR TIMED OUT`);
+                console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
             }
-          }
 
-          // Call the LLM API
-          const success = await callLLMAPI(model.endpoint, payload);
+            // *** IMPORTANT: Clear content before trying the next model ***
+            if (responseContent) {
+                 if (trace.payload.debugMode === 1) {
+                    console.log(`🧼 Clearing response content before next attempt.`);
+                 }
+                 responseContent.innerHTML = ''; // Clear the displayed content
+                 completeResponse = ''; // Reset the global complete response accumulator
+                 // We might potentially reset isFirstChunk = true here if we want the loader again
+                 // For now, just clearing content.
+            }
 
-          // Update the status of the current attempt
-          currentAttempt.success = success;
-
-          // If successful, stop trying other models and add footer
-          if (success) {
-            successfulModelFound = true; // Set the flag
+            // Check if there are more models to try
+            const nextModelIndex = modelSequence.indexOf(modelId) + 1;
+            if (nextModelIndex < modelSequence.length) {
+              const nextModelId = modelSequence[nextModelIndex];
+              const nextModel = modelsRegistry.find(m => m.id === nextModelId);
+              if (nextModel && trace.payload.debugMode === 1) {
+                console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
+              }
+            } else if (trace.payload.debugMode === 1) {
+              console.log(`📌 No more models to try in sequence`);
+            }
             if (trace.payload.debugMode === 1) {
-              console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
-              console.log(`📌 Model: ${model.displayName} (${model.type})`);
-              console.log(`📌 Model name: ${model.name}`);
-              console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
-              console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
-              console.log(`=============================`);
+                console.log(`-----------------------------`);
             }
-            addAIInfoFooter(attemptedModels); // Pass the list of attempted models
-            // No return here, let loop break naturally or finish
-          } else {
-              // --- Failure case within the loop ---
-              if (trace.payload.debugMode === 1) {
-                  console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
-                  console.log(`📌 Model: ${model.displayName} (${model.type})`);
-                  console.log(`📌 Model name: ${model.name}`);
-                  console.log(`📌 Status: REQUEST FAILED OR TIMED OUT`);
-                  console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
-              }
-
-              // *** IMPORTANT: Clear content before trying the next model ***
-              if (responseContent) {
-                   if (trace.payload.debugMode === 1) {
-                      console.log(`🧼 Clearing response content before next attempt.`);
-                   }
-                   responseContent.innerHTML = ''; // Clear the displayed content
-                   completeResponse = ''; // Reset the global complete response accumulator
-                   // We might potentially reset isFirstChunk = true here if we want the loader again
-                   // For now, just clearing content.
-              }
-
-              // Check if there are more models to try
-              const nextModelIndex = modelSequence.indexOf(modelId) + 1;
-              if (nextModelIndex < modelSequence.length) {
-                const nextModelId = modelSequence[nextModelIndex];
-                const nextModel = modelsRegistry.find(m => m.id === nextModelId);
-                if (nextModel && trace.payload.debugMode === 1) {
-                  console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
-                }
-              } else if (trace.payload.debugMode === 1) {
-                console.log(`📌 No more models to try in sequence`);
-              }
-              if (trace.payload.debugMode === 1) {
-                  console.log(`-----------------------------`);
-              }
-          }
-        } // End of model sequence loop
-      } catch (loopError) {
-        console.error('🆘 UNCAUGHT ERROR during orchestrateLLMCalls model loop:', loopError);
-        // ---> ADDED LOGGING <---
-        console.log('🚦 [Orchestrate Scope] In loopError catch block, preparing to call addAIInfoFooter.');
-        // ---> END ADDED LOGGING <---
-        // Attempt to add footer even if loop crashes
-        if (!successfulModelFound) {
-          addAIInfoFooter(attemptedModels.length > 0 ? attemptedModels : [{ id: 'LoopError', success: false }]);
         }
-      }
-      // ---> END ADDED WRAPPING TRY...CATCH <---
+      } // End of model sequence loop
 
       // --- After the loop ---
       // Add the footer only if no successful model was found OR if it hasn't been added yet
+      // The successful case inside the loop already adds the footer.
       if (!successfulModelFound) {
         if (trace.payload.debugMode === 1) {
           console.log(`\n❌ ALL ATTEMPTED MODELS FAILED`);
@@ -1386,13 +1112,7 @@ export const StreamingResponseExtension = {
     }
 
     // Start the LLM orchestration
-    // ---> ADDED LOGGING <---
-    console.log("🚦 [Render Scope] BEFORE await orchestrateLLMCalls");
-    // ---> END ADDED LOGGING <---
     await orchestrateLLMCalls(trace);
-    // ---> ADDED LOGGING <---
-    console.log("🚦 [Render Scope] AFTER await orchestrateLLMCalls");
-    // ---> END ADDED LOGGING <---
 
     window.voiceflow.chat.interact({ type: "continue" });
   },
