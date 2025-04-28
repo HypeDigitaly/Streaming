@@ -1,0 +1,3543 @@
+📋 Perplexity citations received: (10) ['https://www.khk.cz/dotace/dotacni-programy-fondy/k…rajske-dotacni-programy-na-rok-2025-line-seminare', 'https://www.khk.cz/oblasti/socialni-oblast/dotace-v-socialni-oblasti/rok-2025', 'https://dotace.khk.cz', 'https://old.khk.cz/scripts/detail.php?pgid=2188', 'https://www.khk.cz/system/files/2025-02/P1_Podm%C3%ADnky_dota%C4%8Dn%C3%ADho_programu_0.pdf', 'https://old.khk.cz/cz/rozvoj-kraje/granty-dotace/d…i-financnich-podpor-mimo-grantove-programy-82362/', 'https://www.khk.cz/aktuality/o-krajske-dotace-lze-zadat-pouze-elektronicky', 'https://www.nepomuk.cz/data/article-documents/dotace-verze-1-2025-f65.pdf', 'https://www.khk.cz/oblasti/socialni-oblast/dotace-…a-podporu-hospicove-pece-v-kralovehradeckem-kraji', 'https://old.khk.cz/scripts/detail.php?pgid=1475']
+StreamingResponseExtension.js:1112 ✅ First chunk received from /api/perplexity-stream within timeout.
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99) Data: {"choices":[{"delta":{"content":"\nOkay,"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99) Data: {"choices":[{"delta":{"content":" potřeb"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1260 TTFT met for /api/perplexity-stream. Waiting for stream completion...
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"uji"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" zod"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"p"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ově"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"d"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ět"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" dot"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"az"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" na"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" d"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ota"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ční"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" pří"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ležit"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"osti"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" Kr"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ál"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ové"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"h"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"rade"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ck"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ého"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" kra"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"je"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" pro"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" rok"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" "}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"202"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"5"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"."}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" Pod"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"í"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ve"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"j"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"me"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" se"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" na"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" pos"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"k"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"yt"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"nut"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"é"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" zd"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ro"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"je"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":".\n\n"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"Pr"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"v"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ně"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" vid"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ím"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":","}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" že"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" v"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" [2]"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" a"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" [9]"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" jsou"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" zm"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ín"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ě"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ny"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" kon"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"kr"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ét"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ní"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" d"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ota"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ční"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" program"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"y"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" pro"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" soci"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ální"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" oblast"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" a"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" hosp"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ic"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ovou"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" pé"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"či"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"."}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" Term"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"í"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ny"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" semin"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ář"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ů"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" jsou"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" v"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" [1],"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" což"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" je"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" dů"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"le"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ž"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ité"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" pro"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" ž"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ad"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ate"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"le"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"."}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" V"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" [4]"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" a"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" [5]"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" jsou"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" pod"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"rob"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"nosti"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" o"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" podm"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ín"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"k"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ách"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" a"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" č"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ís"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"lech"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" program"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ů"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":","}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" třeba"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" "}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"25"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"S"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"VD"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"02"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" s"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" al"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ok"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ací"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" "}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"3"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" milion"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"y"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" K"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"č"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"."}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" \n\n"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"D"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ále"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" je"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" kl"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"í"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"č"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"ový"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" od"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":"kaz"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" na"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExtension.js:1385:27)
+    at async Object.render (StreamingResponseExtension.js:1475:5) Data: {"choices":[{"delta":{"content":" d"}}],"isThinking":true}
+processStream @ StreamingResponseExtension.js:1163
+await in processStream
+callLLMAPI @ StreamingResponseExtension.js:1254
+orchestrateLLMCalls @ StreamingResponseExtension.js:1385
+render @ StreamingResponseExtension.js:1475
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:433
+Wf @ bundle.mjs:191
+m1e @ bundle.mjs:204
+h1e @ bundle.mjs:204
+p1e @ bundle.mjs:204
+f1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+Id @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+Ve @ bundle.mjs:81
+je @ bundle.mjs:81
+la @ bundle.mjs:81Understand this warning
+StreamingResponseExtension.js:1163 Failed to parse SSE data line for /api/perplexity-stream: ReferenceError: content is not defined
+    at processStream (StreamingResponseExtension.js:971:99)
+    at async callLLMAPI (StreamingResponseExtension.js:1263:24)
+    at async orchestrateLLMCalls (StreamingResponseExten
