@@ -44,7 +44,7 @@ export default async function handler(req, res) {
   res.setHeader('Connection', 'keep-alive');
 
   try {
-    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id } = req.body;
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, browser_lang } = req.body;
 
     // Select API key based on projectName
     const apiKey = process.env[`PERPLEXITY_API_KEY_${projectName?.toUpperCase()}`] || process.env.PERPLEXITY_API_KEY;
@@ -61,7 +61,8 @@ export default async function handler(req, res) {
         projectName,
         debugMode,
         systemPrompt,
-        user_id
+        user_id,
+        browser_lang
       });
     }
 
@@ -102,6 +103,34 @@ export default async function handler(req, res) {
       console.log('🚀 Making Perplexity API call with payload:', JSON.stringify(payload, null, 2));
     }
 
+    // Initialize thinking and response states
+    let isInThinkingMode = false;
+    let thinkingContent = '';
+    let answerContent = '';
+    let citations = [];
+
+    // Send initial UI setup to client
+    const setupData = {
+      type: 'setup',
+      thinkingLabel: getThinkingLabel(browser_lang || 'cs'),
+      model: model || "sonar-reasoning-pro"
+    };
+    res.write(`data: ${JSON.stringify(setupData)}\n\n`);
+
+    // Helper function to get "Thinking" in different languages
+    function getThinkingLabel(lang) {
+      const translations = {
+        'cs': 'Přemýšlím',
+        'en': 'Thinking',
+        'de': 'Ich denke nach',
+        'sk': 'Premýšľam',
+        'pl': 'Myślę',
+        'uk': 'Обдумую',
+        'ru': 'Размышляю'
+      };
+      return translations[lang] || translations['en'];
+    }
+
     const response = await fetch('https://api.perplexity.ai/chat/completions', {
       method: 'POST',
       headers: {
@@ -139,7 +168,11 @@ export default async function handler(req, res) {
       for (const line of lines) {
         if (!line.trim() || !line.startsWith('data: ')) continue;
         if (line === 'data: [DONE]') {
-          // Send [DONE] signal to client
+          // When all content is received, send final completed signal to client
+          const completedData = {
+            type: 'completed'
+          };
+          res.write(`data: ${JSON.stringify(completedData)}\n\n`);
           res.write('data: [DONE]\n\n');
           continue;
         }
@@ -153,30 +186,94 @@ export default async function handler(req, res) {
             console.log('📥 Perplexity Response Chunk:', JSON.stringify(data, null, 2));
           }
 
-          // Process response content - handle both thinking (Perplexity-specific) and regular response
-          if (data.choices && data.choices[0]) {
+          // Process citations if they exist
+          if (data.citations && data.citations.length > 0) {
+            citations = data.citations;
+            
+            // Send citation data to client
+            const citationsData = {
+              type: 'citations',
+              citations: citations
+            };
+            res.write(`data: ${JSON.stringify(citationsData)}\n\n`);
+          }
+
+          // Process content from response
+          if (data.choices && data.choices[0] && data.choices[0].delta) {
             const { delta } = data.choices[0];
             
             if (delta.content !== undefined && delta.content !== null) {
-              const responseData = {
-                type: 'content',
-                content: delta.content
-              };
+              const content = delta.content;
               
-              res.write(`data: ${JSON.stringify(responseData)}\n\n`);
-              res.flush?.();
+              // Check for <think> tag to enter thinking mode
+              if (content.includes('<think>')) {
+                isInThinkingMode = true;
+                
+                // Extract any content after the <think> tag
+                const thinkingPart = content.split('<think>')[1];
+                if (thinkingPart) {
+                  thinkingContent += thinkingPart;
+                  
+                  // Send thinking content
+                  const thinkingData = {
+                    type: 'thinking',
+                    content: thinkingPart
+                  };
+                  res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+                }
+              } 
+              // Check for </think> tag to exit thinking mode
+              else if (content.includes('</think>')) {
+                // Extract any content before the </think> tag
+                const beforeEndTag = content.split('</think>')[0];
+                if (beforeEndTag) {
+                  thinkingContent += beforeEndTag;
+                  
+                  // Send final part of thinking content
+                  const thinkingData = {
+                    type: 'thinking',
+                    content: beforeEndTag
+                  };
+                  res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+                }
+                
+                isInThinkingMode = false;
+                
+                // Extract any content after the </think> tag as answer content
+                const afterEndTag = content.split('</think>')[1];
+                if (afterEndTag) {
+                  answerContent += afterEndTag;
+                  
+                  // Send answer content
+                  const answerData = {
+                    type: 'answer',
+                    content: afterEndTag
+                  };
+                  res.write(`data: ${JSON.stringify(answerData)}\n\n`);
+                }
+              }
+              // Process content based on current mode
+              else if (isInThinkingMode) {
+                thinkingContent += content;
+                
+                // Send thinking content
+                const thinkingData = {
+                  type: 'thinking',
+                  content: content
+                };
+                res.write(`data: ${JSON.stringify(thinkingData)}\n\n`);
+              } 
+              else {
+                answerContent += content;
+                
+                // Send answer content
+                const answerData = {
+                  type: 'answer',
+                  content: content
+                };
+                res.write(`data: ${JSON.stringify(answerData)}\n\n`);
+              }
             }
-          }
-
-          // Handle citations if they exist in the response
-          if (data.citations) {
-            const citationsData = {
-              type: 'citations',
-              citations: data.citations
-            };
-            
-            res.write(`data: ${JSON.stringify(citationsData)}\n\n`);
-            res.flush?.();
           }
         } catch (e) {
           if (debugMode === 1) {
@@ -191,6 +288,10 @@ export default async function handler(req, res) {
     if (debugMode === 1) {
       console.log('📤 Sending final [DONE] signal to complete stream');
     }
+    const finalData = {
+      type: 'completed'
+    };
+    res.write(`data: ${JSON.stringify(finalData)}\n\n`);
     res.write('data: [DONE]\n\n');
     res.end();
 
@@ -198,7 +299,7 @@ export default async function handler(req, res) {
     if (req.body.debugMode === 1) {
       console.error('Stream Error:', error);
     }
-    res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
+    res.write(`data: ${JSON.stringify({ type: 'error', error: error.message })}\n\n`);
     res.write('data: [DONE]\n\n');
     res.end();
   }

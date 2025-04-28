@@ -364,10 +364,6 @@ export const StreamingResponseExtension = {
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        .replace(/^- (.*$)/gm, (match, content) => {
-          const indentation = match.match(/^\s*/)[0].length;
-          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
-        })
         .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
 
@@ -840,7 +836,7 @@ export const StreamingResponseExtension = {
                     // --- TTFT Logic ---
                     if (!firstChunkReceived) {
                       firstChunkReceived = true;
-                      if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
+                      if (payload.debugMode === 1) console.log(`✅ First chunk receivedfrom ${endpoint} within timeout.`);
                       // Crucially, clear the TTFT timer now
                       if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
                       // Signal that the TTFT hurdle is passed
@@ -850,7 +846,7 @@ export const StreamingResponseExtension = {
 
                     // Update UI only if the fetch wasn't aborted *before* this point
                     if (!abortController.signal.aborted) {
-                        updateContent(content);
+                        processStreamChunk(parsed);
                         localCompleteResponse += content;
                     } else {
                         // Should theoretically not happen if abort check is robust, but good failsafe
@@ -1128,3 +1124,534 @@ export const StreamingResponseExtension = {
     window.voiceflow.chat.interact({ type: "continue" });
   },
 };
+
+// Keep track of completed steps globally
+      let completedSteps = []
+
+      // Variable to hold Perplexity UI references
+      let perplexityUI = null;
+
+      // Get model type class for styling
+      const modelTypeClass = (() => {
+        const model = (trace.payload?.model || '').toLowerCase();
+        if (model.includes('claude')) return 'claude';
+        if (model.includes('gpt')) return 'openai';
+        if (model.includes('gemini')) return 'gemini';
+        if (model.includes('llama')) return 'groq';
+        if (model.includes('sonar') || model.includes('perplexity')) return 'perplexity';
+        return '';
+      })();
+
+    function processStreamChunk(data) {
+            // Special handling for Perplexity type (from our updated API response format)
+            if (data.type) {
+              // If this is a Perplexity response with our custom type field
+              if (modelTypeClass === 'perplexity') {
+                // Set up Perplexity UI if not already done
+                if (!perplexityUI) {
+                  perplexityUI = setupPerplexityUI(container, responseSection, responseContent);
+
+                  // Hide the standard thinking header since we have our own
+                  const thinkingHeader = container.querySelector('.thinking-header');
+                  if (thinkingHeader) {
+                    thinkingHeader.classList.add('hidden');
+                  }
+
+                  // Show container
+                  container.style.display = 'block';
+                }
+
+                // Handle different message types
+                switch(data.type) {
+                  case 'setup':
+                    // Set the thinking text and model name
+                    if (perplexityUI.thinkingText) {
+                      perplexityUI.thinkingText.textContent = data.thinkingLabel || 'Thinking';
+                    }
+                    if (perplexityUI.modelName) {
+                      perplexityUI.modelName.textContent = ` with ${formatModelName(data.model)}`;
+                    }
+                    break;
+
+                  case 'thinking':
+                    // Process thinking content
+                    if (perplexityUI.thinkingContent) {
+                      // Split thinking content by lines for step-by-step display
+                      const lines = data.content.split('\n').filter(line => line.trim());
+
+                      // Append content to thinking section
+                      perplexityUI.thinkingContent.innerHTML += processCitations(data.content, citations);
+
+                      // Ensure section is visible
+                      perplexityUI.thinkingSection.classList.remove('collapsed');
+                    }
+                    break;
+
+                  case 'answer':
+                    // Process answer content
+                    if (perplexityUI.answerContent) {
+                      // Hide thinking indicator when answer starts
+                      if (perplexityUI.thinkingIndicator) {
+                        perplexityUI.thinkingIndicator.style.display = 'none';
+                      }
+
+                      // Append to answer content
+                      perplexityUI.answerContent.innerHTML += processCitations(data.content, citations);
+
+                      // Show answer section
+                      perplexityUI.answerSection.classList.add('visible');
+
+                      // Collapse thinking section when answer begins
+                      if (!perplexityUI.hasStartedAnswer) {
+                        perplexityUI.hasStartedAnswer = true;
+                        setTimeout(() => {
+                          perplexityUI.thinkingSection.classList.add('collapsed');
+                        }, 500);
+                      }
+                    }
+                    break;
+
+                  case 'citations':
+                    // Update citations
+                    citations = data.citations;
+
+                    // Update any existing content with citations
+                    if (perplexityUI.thinkingContent) {
+                      const currentThinkingText = perplexityUI.thinkingContent.innerHTML;
+                      perplexityUI.thinkingContent.innerHTML = processCitations(currentThinkingText, citations);
+                    }
+
+                    if (perplexityUI.answerContent) {
+                      const currentAnswerText = perplexityUI.answerContent.innerHTML;
+                      perplexityUI.answerContent.innerHTML = processCitations(currentAnswerText, citations);
+                    }
+                    break;
+
+                  case 'completed':
+                    // Handle completion
+                    if (perplexityUI.thinkingIndicator) {
+                      perplexityUI.thinkingIndicator.style.display = 'none';
+                    }
+
+                    // Collapse thinking section on completion
+                    perplexityUI.thinkingSection.classList.add('collapsed');
+                    break;
+
+                  case 'error':
+                    // Display error in the answer content
+                    if (perplexityUI.answerContent) {
+                      perplexityUI.answerContent.innerHTML = `<div class="error-message">Error: ${data.error}</div>`;
+                      perplexityUI.answerSection.classList.add('visible');
+                    }
+                    break;
+                }
+
+                // For Perplexity, we've handled the data in our custom format, so return early
+                return;
+              }
+            }
+
+            // Standard processing for other models
+            if (data.choices && data.choices[0] && data.choices[0].delta) {
+              const { content } = data.choices[0].delta
+
+              // Show container and answer section for non-reasoning models when streaming starts
+              if (!isReasoningModel && container.style.display === 'none') {
+                container.style.display = 'block'
+                answerSection.classList.add('visible')
+                answerSection.style.display = 'block'
+              }
+
+              // Update citations if present in the chunk
+              if (data.citations) {
+                citations = data.citations
+                // Re-process all existing steps with new citations
+                if (activeReasoningGroup) {
+                  const steps = activeReasoningGroup.querySelectorAll('.reasoning-step')
+                  steps.forEach((step) => {
+                    const contentDiv = step.querySelector('.step-content')
+                    if (contentDiv) {
+                      // Get original content without any HTML
+                      const currentText = contentDiv.textContent
+                        .replace(/\s+/g, ' ')
+                        .trim()
+                      // Process citations directly with isReasoning flag
+                      contentDiv.innerHTML = processCitations(
+                        currentText,
+                        citations,
+                        true
+                      )
+                    }
+                  })
+                }
+              }
+
+              if (content !== null && content !== undefined) {
+                // Handle think block content
+                if (content.includes('<think>')) {
+                  isInThinkBlock = true
+                  const afterThink = content.split('<think>')[1] || ''
+                  if (afterThink) {
+                    processThinkingContent(afterThink)
+                  }
+                } else if (content.includes('</think>')) {
+                  isInThinkBlock = false
+                  const beforeThinkEnd = content.split('</think>')[0]
+                  if (beforeThinkEnd && processThinkingContent) {
+                    processThinkingContent(beforeThinkEnd)
+                  }
+                  // Complete any remaining step
+                  if (currentStep) {
+                    const contentDiv = currentStep.querySelector('.step-content')
+                    if (contentDiv) {
+                      const currentText = contentDiv.textContent
+                      if (updateStep) {
+                        updateStep(currentStep, currentText, true)
+                      }
+                    }
+                    currentStep = null
+                  }
+                  // Get content after </think>
+                  const afterThink = content.split('</think>')[1] || ''
+                  if (afterThink) {
+                    answer += afterThink
+                    if (updateAnswerContent) {
+                      updateAnswerContent(processCitations(answer, citations))
+                    } else {
+                      updateContent(afterThink)
+                    }
+                  }
+                } else if (isInThinkBlock) {
+                  if (processThinkingContent) {
+                    processThinkingContent(content)
+                  }
+                } else {
+                  // For non-think block content, just append directly to answer
+                  answer += content
+                  if (updateAnswerContent) {
+                    updateAnswerContent(processCitations(answer, citations))
+                  } else {
+                    updateContent(content)
+                  }
+
+                  // Show answer section if this is the first content
+                  if (!hasStartedAnswer && reasoningSection) {
+                    hasStartedAnswer = true
+                    setTimeout(() => {
+                      reasoningSection.classList.add('collapsed')
+                      reasoningSection.classList.add('has-answer')
+                      const answerSection =
+                        container.querySelector('.answer-section')
+                      if (answerSection) {
+                        answerSection.classList.add('visible')
+                        answerSection.style.display = 'block'
+                      }
+                      if (scrollIntoViewSmooth) {
+                        scrollIntoViewSmooth(answerContent)
+                      }
+                    }, 1000)
+                  }
+                }
+              }
+            }
+          }
+
+    // Helper function to format model names (can be expanded later)
+    function formatModelName(modelName) {
+      // Basic formatting for now - can add more sophisticated logic if needed
+      return modelName.replace(/_/g, ' ');
+    }
+
+    // Helper function to set up the Perplexity UI elements
+    function setupPerplexityUI(container, responseSection, responseContent) {
+      // Create thinking section
+      const thinkingSection = document.createElement('div');
+      thinkingSection.className = 'perplexity-thinking-section';
+      thinkingSection.innerHTML = `
+        <div class="perplexity-thinking-header">
+          <span class="perplexity-thinking-text">Thinking</span>
+          <span class="perplexity-model-name"></span>
+          <span class="perplexity-thinking-indicator">...</span>
+        </div>
+        <div class="perplexity-thinking-content"></div>
+      `;
+
+      // Create answer section
+      const answerSection = document.createElement('div');
+      answerSection.className = 'perplexity-answer-section response-section';
+      answerSection.innerHTML = `<div class="response-content"></div>`;
+
+      // Append sections to container
+      container.insertBefore(thinkingSection, responseSection);
+      container.appendChild(answerSection);
+
+      // Return references to UI elements
+      return {
+        thinkingSection: thinkingSection,
+        thinkingText: thinkingSection.querySelector('.perplexity-thinking-text'),
+        modelName: thinkingSection.querySelector('.perplexity-model-name'),
+        thinkingIndicator: thinkingSection.querySelector('.perplexity-thinking-indicator'),
+        thinkingContent: thinkingSection.querySelector('.perplexity-thinking-content'),
+        answerSection: answerSection,
+        answerContent: answerSection.querySelector('.response-content'),
+        hasStartedAnswer: false
+      };
+    }
+
+    // Function to process citations for Perplexity
+    function processCitations(text, citations) {
+      if (!citations) return text;
+
+      // Find all URLs in the text
+      const urls = text.match(/(https?:\/\/[^\s]+)/g) || [];
+
+      // Replace URLs with clickable links with citations
+      let result = text;
+      urls.forEach(url => {
+        const citation = citations.find(c => c.url === url);
+        const citationText = citation ? ` (${citation.source})` : '';
+        const link = `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${citationText}`;
+        result = result.replace(url, link);
+      });
+
+      return result;
+    }
+
+
+    // Keep track of completed steps globally
+    let completedSteps = []
+
+    // Variable to hold Perplexity UI references
+    let perplexityUI = null;
+
+    // Get model type class for styling
+    const modelTypeClass = (() => {
+      const model = (trace.payload?.model || '').toLowerCase();
+      if (model.includes('claude')) return 'claude';
+      if (model.includes('gpt')) return 'openai';
+      if (model.includes('gemini')) return 'gemini';
+      if (model.includes('llama')) return 'groq';
+      if (model.includes('sonar') || model.includes('perplexity')) return 'perplexity';
+      return '';
+    })();
+
+    let isInThinkBlock = false;
+    let hasStartedAnswer = false;
+    let currentStep = null;
+    let answerSection = container.querySelector('.answer-section');
+    let reasoningSection = container.querySelector('.reasoning-section');
+    let answerContent = container.querySelector('.answer-content');
+
+    function processStreamChunk(data) {
+            // Special handling for Perplexity type (from our updated API response format)
+            if (data.type) {
+              // If this is a Perplexity response with our custom type field
+              if (modelTypeClass === 'perplexity') {
+                // Set up Perplexity UI if not already done
+                if (!perplexityUI) {
+                  perplexityUI = setupPerplexityUI(container, responseSection, responseContent);
+
+                  // Hide the standard thinking header since we have our own
+                  const thinkingHeader = container.querySelector('.thinking-header');
+                  if (thinkingHeader) {
+                    thinkingHeader.classList.add('hidden');
+                  }
+
+                  // Show container
+                  container.style.display = 'block';
+                }
+
+                // Handle different message types
+                switch(data.type) {
+                  case 'setup':
+                    // Set the thinking text and model name
+                    if (perplexityUI.thinkingText) {
+                      perplexityUI.thinkingText.textContent = data.thinkingLabel || 'Thinking';
+                    }
+                    if (perplexityUI.modelName) {
+                      perplexityUI.modelName.textContent = ` with ${formatModelName(data.model)}`;
+                    }
+                    break;
+
+                  case 'thinking':
+                    // Process thinking content
+                    if (perplexityUI.thinkingContent) {
+                      // Split thinking content by lines for step-by-step display
+                      const lines = data.content.split('\n').filter(line => line.trim());
+
+                      // Append content to thinking section
+                      perplexityUI.thinkingContent.innerHTML += processCitations(data.content, citations);
+
+                      // Ensure section is visible
+                      perplexityUI.thinkingSection.classList.remove('collapsed');
+                    }
+                    break;
+
+                  case 'answer':
+                    // Process answer content
+                    if (perplexityUI.answerContent) {
+                      // Hide thinking indicator when answer starts
+                      if (perplexityUI.thinkingIndicator) {
+                        perplexityUI.thinkingIndicator.style.display = 'none';
+                      }
+
+                      // Append to answer content
+                      perplexityUI.answerContent.innerHTML += processCitations(data.content, citations);
+
+                      // Show answer section
+                      perplexityUI.answerSection.classList.add('visible');
+
+                      // Collapse thinking section when answer begins
+                      if (!perplexityUI.hasStartedAnswer) {
+                        perplexityUI.hasStartedAnswer = true;
+                        setTimeout(() => {
+                          perplexityUI.thinkingSection.classList.add('collapsed');
+                        }, 500);
+                      }
+                    }
+                    break;
+
+                  case 'citations':
+                    // Update citations
+                    citations = data.citations;
+
+                    // Update any existing content with citations
+                    if (perplexityUI.thinkingContent) {
+                      const currentThinkingText = perplexityUI.thinkingContent.innerHTML;
+                      perplexityUI.thinkingContent.innerHTML = processCitations(currentThinkingText, citations);
+                    }
+
+                    if (perplexityUI.answerContent) {
+                      const currentAnswerText = perplexityUI.answerContent.innerHTML;
+                      perplexityUI.answerContent.innerHTML = processCitations(currentAnswerText, citations);
+                    }
+                    break;
+
+                  case 'completed':
+                    // Handle completion
+                    if (perplexityUI.thinkingIndicator) {
+                      perplexityUI.thinkingIndicator.style.display = 'none';
+                    }
+
+                    // Collapse thinking section on completion
+                    perplexityUI.thinkingSection.classList.add('collapsed');
+                    break;
+
+                  case 'error':
+                    // Display error in the answer content
+                    if (perplexityUI.answerContent) {
+                      perplexityUI.answerContent.innerHTML = `<div class="error-message">Error: ${data.error}</div>`;
+                      perplexityUI.answerSection.classList.add('visible');
+                    }
+                    break;
+                }
+
+                // For Perplexity, we've handled the data in our custom format, so return early
+                return;
+              }
+            }
+
+            // Standard processing for other models
+            if (data.choices && data.choices[0] && data.choices[0].delta) {
+              const { content } = data.choices[0].delta
+
+              // Show container and answer section for non-reasoning models when streaming starts
+              if (!isReasoningModel && container.style.display === 'none') {
+                container.style.display = 'block'
+                answerSection.classList.add('visible')
+                answerSection.style.display = 'block'
+              }
+
+              // Update citations if present in the chunk
+              if (data.citations) {
+                citations = data.citations
+                // Re-process all existing steps with new citations
+                if (activeReasoningGroup) {
+                  const steps = activeReasoningGroup.querySelectorAll('.reasoning-step')
+                  steps.forEach((step) => {
+                    const contentDiv = step.querySelector('.step-content')
+                    if (contentDiv) {
+                      // Get original content without any HTML
+                      const currentText = contentDiv.textContent
+                        .replace(/\s+/g, ' ')
+                        .trim()
+                      // Process citations directly with isReasoning flag
+                      contentDiv.innerHTML = processCitations(
+                        currentText,
+                        citations,
+                        true
+                      )
+                    }
+                  })
+                }
+              }
+
+              if (content !== null && content !== undefined) {
+                // Handle think block content
+                if (content.includes('<think>')) {
+                  isInThinkBlock = true
+                  const afterThink = content.split('<think>')[1] || ''
+                  if (afterThink) {
+                    processThinkingContent(afterThink)
+                  }
+                } else if (content.includes('</think>')) {
+                  isInThinkBlock = false
+                  const beforeThinkEnd = content.split('</think>')[0]
+                  if (beforeThinkEnd && processThinkingContent) {
+                    processThinkingContent(beforeThinkEnd)
+                  }
+                  // Complete any remaining step
+                  if (currentStep) {
+                    const contentDiv = currentStep.querySelector('.step-content')
+                    if (contentDiv) {
+                      const currentText = contentDiv.textContent
+                      if (updateStep) {
+                        updateStep(currentStep, currentText, true)
+                      }
+                    }
+                    currentStep = null
+                  }
+                  // Get content after </think>
+                  const afterThink = content.split('</think>')[1] || ''
+                  if (afterThink) {
+                    answer += afterThink
+                    if (updateAnswerContent) {
+                      updateAnswerContent(processCitations(answer, citations))
+                    } else {
+                      updateContent(afterThink)
+                    }
+                  }
+                } else if (isInThinkBlock) {
+                  if (processThinkingContent) {
+                    processThinkingContent(content)
+                  }
+                } else {
+                  // For non-think block content, just append directly to answer
+                  answer += content
+                  if (updateAnswerContent) {
+                    updateAnswerContent(processCitations(answer, citations))
+                  } else {
+                    updateContent(content)
+                  }
+
+                  // Show answer section if this is the first content
+                  if (!hasStartedAnswer && reasoningSection) {
+                    hasStartedAnswer = true
+                    setTimeout(() => {
+                      reasoningSection.classList.add('collapsed')
+                      reasoningSection.classList.add('has-answer')
+                      const answerSection =
+                        container.querySelector('.answer-section')
+                      if (answerSection) {
+                        answerSection.classList.add('visible')
+                        answerSection.style.display = 'block'
+                      }
+                      if (scrollIntoViewSmooth) {
+                        scrollIntoViewSmooth(answerContent)
+                      }
+                    }, 1000)
+                  }
+                }
+              }
+            }
+          }
