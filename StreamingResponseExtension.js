@@ -95,18 +95,6 @@ export const StreamingResponseExtension = {
             font-size: 14px;
             line-height: 20px;
             color: #1a1e23;
-            white-space: pre-wrap;
-            word-break: break-word;
-            padding: 0;
-            margin: 0;
-          }
-          .response-content > *:first-child {
-            margin-top: 0;
-          }
-          .response-content h1, 
-          .response-content h2, 
-          .response-content h3,
-          .response-content h4 {
 
     // Add handler for debug messages
     function handleDebugMessages(data) {
@@ -129,6 +117,18 @@ export const StreamingResponseExtension = {
       }
     }
 
+            white-space: pre-wrap;
+            word-break: break-word;
+            padding: 0;
+            margin: 0;
+          }
+          .response-content > *:first-child {
+            margin-top: 0;
+          }
+          .response-content h1, 
+          .response-content h2, 
+          .response-content h3,
+          .response-content h4 {
             font-family: var(--_1bof89na), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #1a1e23;
             margin: 0;
