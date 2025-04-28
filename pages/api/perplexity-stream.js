@@ -103,16 +103,6 @@ export default async function handler(req, res) {
     if (debugMode === 1) {
       console.log('🚀 Making Perplexity API call with payload:', JSON.stringify(payload, null, 2));
       console.log('⏳ Starting API stream request to Perplexity...');
-      
-      // Send debug information to client console
-      res.write(`data: ${JSON.stringify({
-        type: 'debug',
-        content: {
-          message: '🚀 Making Perplexity API call',
-          payload: JSON.stringify(payload, null, 2),
-          timestamp: new Date().toISOString()
-        }
-      })}\n\n`);
     }
 
     const controller = new AbortController();
@@ -184,17 +174,6 @@ export default async function handler(req, res) {
           
           if (debugMode === 1) {
             console.log(`📥 Perplexity Response Chunk #${tokenCount + 1}:`, JSON.stringify(data, null, 2));
-            
-            // Send debug information to client console
-            res.write(`data: ${JSON.stringify({
-              type: 'debug',
-              content: {
-                message: `📥 Perplexity Response Chunk #${tokenCount + 1}`,
-                data: JSON.stringify(data, null, 2),
-                timestamp: new Date().toISOString()
-              }
-            })}\n\n`);
-            res.flush?.();
           }
 
           // Process response content - handle both thinking (Perplexity-specific) and regular response
@@ -216,17 +195,6 @@ export default async function handler(req, res) {
                   if (afterThinkTag) {
                     console.log('🧠 First thinking content:', afterThinkTag);
                   }
-                  
-                  // Send thinking block debug info to client console
-                  res.write(`data: ${JSON.stringify({
-                    type: 'debug',
-                    content: {
-                      message: '🧠 Entering thinking block',
-                      thinking: afterThinkTag ? `First thinking content: ${afterThinkTag}` : '',
-                      timestamp: new Date().toISOString()
-                    }
-                  })}\n\n`);
-                  res.flush?.();
                 }
               } else if (delta.content.includes('</think>')) {
                 isInThinkingBlock = false;
@@ -239,18 +207,6 @@ export default async function handler(req, res) {
                     console.log('🧠 Final thinking content:', beforeThinkEndTag);
                   }
                   console.log('🧠 COMPLETE THINKING PROCESS:', thinkingContent);
-                  
-                  // Send thinking block completion to client console
-                  res.write(`data: ${JSON.stringify({
-                    type: 'debug',
-                    content: {
-                      message: '🧠 Exiting thinking block',
-                      thinkingFinal: beforeThinkEndTag || '',
-                      completeThinking: thinkingContent,
-                      timestamp: new Date().toISOString()
-                    }
-                  })}\n\n`);
-                  res.flush?.();
                 }
                 
                 // Get content after </think> tag
@@ -292,17 +248,6 @@ export default async function handler(req, res) {
             if (debugMode === 1) {
               console.log('📚 Citations received:', JSON.stringify(data.citations, null, 2));
               console.log(`📚 Total citations: ${data.citations.length}`);
-              
-              // Send citations debug info to client console
-              res.write(`data: ${JSON.stringify({
-                type: 'debug',
-                content: {
-                  message: `📚 Citations received (${data.citations.length} total)`,
-                  citations: JSON.stringify(data.citations, null, 2),
-                  timestamp: new Date().toISOString()
-                }
-              })}\n\n`);
-              res.flush?.();
             }
             
             const citationsData = {
@@ -332,22 +277,6 @@ export default async function handler(req, res) {
       console.log('💬 Complete final response:', fullResponse);
       console.log('📊 All stream chunks:', JSON.stringify(allStreamChunks, null, 2));
       console.log('==== END SUMMARY ====\n');
-      
-      // Send comprehensive summary to client console
-      res.write(`data: ${JSON.stringify({
-        type: 'debug',
-        content: {
-          message: '==== PERPLEXITY STREAMING SUMMARY ====',
-          totalTokens: tokenCount,
-          totalCitations: allCitations.length,
-          allCitations: allCitations,
-          completeThinking: thinkingContent,
-          completeResponse: fullResponse,
-          allStreamChunks: allStreamChunks,
-          timestamp: new Date().toISOString()
-        }
-      })}\n\n`);
-      res.flush?.();
     }
 
     // Explicitly send DONE signal to ensure it's always sent
