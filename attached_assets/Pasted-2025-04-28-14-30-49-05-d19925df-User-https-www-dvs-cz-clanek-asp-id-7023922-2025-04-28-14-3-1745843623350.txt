@@ -1,0 +1,124 @@
+2025-04-28 14:30:49.05
+d19925df
+User
+"https://www.dvs.cz/clanek.asp?id=7023922",
+2025-04-28 14:30:49.05
+d19925df
+User
+"https://prokreativitu.cz/dotacni-programy-pro-rok-2025/"
+2025-04-28 14:30:49.05
+d19925df
+User
+]
+2025-04-28 14:30:49.05
+d19925df
+User
+📚 Total citations: 10
+2025-04-28 14:30:49.05
+d19925df
+User
+📥 Perplexity Response Chunk #1333: {
+2025-04-28 14:30:49.05
+d19925df
+User
+"id": "c6933a6b-085e-46dd-a572-eac36b24bddf",
+2025-04-28 14:30:49.05
+d19925df
+User
+"model": "sonar-reasoning-pro",
+2025-04-28 14:30:49.05
+d19925df
+User
+"created": 1745843449,
+2025-04-28 14:30:49.05
+d19925df
+User
+"usage": {
+2025-04-28 14:30:49.05
+d19925df
+User
+"prompt_tokens": 313,
+2025-04-28 14:30:49.05
+d19925df
+User
+"completion_tokens": 1377,
+2025-04-28 14:30:49.05
+d19925df
+User
+"total_tokens": 1690,
+2025-04-28 14:30:49.05
+d19925df
+User
+"search_context_size": "high"
+2025-04-28 14:30:49.05
+d19925df
+User
+},
+2025-04-28 14:30:49.05
+d19925df
+User
+"https://www.khk.cz/dotace/dotacni-programy-fondy/krajske/krajske-dotacni-programy-na-rok-2025-line-seminare",
+2025-04-28 14:30:49.05
+d19925df
+User
+"https://www.khk.cz/oblasti/socialni-oblast/dotace-v-socialni-oblasti/rok-2025",
+2025-04-28 14:30:49.05
+d19925df
+User
+"https://skolstvikhk.cz/sip-ms-zs/dotacni-programy-kralovehradeckeho-kraje-v-oblasti-skolstvi-pro-rok-2025/",
+2025-04-28 14:30:49.05
+d19925df
+User
+"https://skolstvikhk.cz/sip-sport-a-vc/krajske-sportovni-dotacni-programy-na-rok-2025-byly-vyhlaseny/",
+2025-04-28 14:30:49.05
+d19925df
+User
+"https://www.khk.cz/dotace/dotacni-programy-fondy/krajske/vyhlaseni-dotacniho-programu-pro-podporu-cinnosti-ktere-navazuji-kooperuji-nebo-rozsiruji-socialni-sluzby-pro-podporu-prorodinnych-aktivit",
+2025-04-28 14:30:49.05
+d19925df
+User
+"https://prokreativitu.cz/dotacni-programy-pro-rok-2025/"
+2025-04-28 14:30:49.05
+d19925df
+User
+"image_url": "https://www.mudk.cz/galerie/1444823.jpg",
+2025-04-28 14:30:49.05
+d19925df
+User
+},
+2025-04-28 14:30:49.05
+d19925df
+User
+{
+2025-04-28 14:30:49.05
+d19925df
+User
+"origin_url": "https://www.khk.cz/aktuality/kralovehradecky-kraj-podpori-kulturu-v-roce-2025-castkou-352-milionu-korun",
+2025-04-28 14:30:49.05
+d19925df
+User
+"height": 215,
+2025-04-28 14:30:49.05
+d19925df
+User
+},
+2025-04-28 14:30:49.05
+d19925df
+User
+{
+2025-04-28 14:30:49.05
+d19925df
+User
+"width": 1350
+2025-04-28 14:30:49.05
+d19925df
+User
+{
+2025-04-28 14:30:49.05
+d19925df
+User
+"image_url": "x-raw-image:///b16ed1984d63073616a6066fbd3761d2cf3d5b7fc1517b750aed3fa27317a6cd",
+2025-04-28 14:30:49.05
+d19925df
+User
+"height": 2263,
