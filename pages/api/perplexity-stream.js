@@ -134,6 +134,8 @@ export default async function handler(req, res) {
       body: JSON.stringify(requestBody)
     }).catch(err => {
       console.error('❌ Perplexity fetch error:', err.message);
+      console.error('❌ Perplexity fetch error object:', err);
+      console.error('❌ Perplexity fetch error stack:', err.stack);
       throw err;
     });
 
