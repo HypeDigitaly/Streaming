@@ -710,7 +710,7 @@ export const StreamingResponseExtension = {
 
     // Generic function to call any LLM API provider with TTFT timeout
     async function callLLMAPI(endpoint, payload) {
-      const TTFT_TIMEOUT_MS = 5000; // Time To First Token timeout (5 seconds)
+      const TTFT_TIMEOUT_MS = 10000; // Time To First Token timeout (10 seconds)
       const abortController = new AbortController();
       let ttftTimeoutId = null;
       let firstChunkReceived = false;
