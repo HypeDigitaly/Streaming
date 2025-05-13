@@ -366,8 +366,10 @@ export const StreamingResponseExtension = {
         .replace(/^### (.*$)/gm, '<h3>$1</h3>')
         .replace(/^## (.*$)/gm, '<h2>$1</h2>')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-        // Bold and italic
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Bold and italic formatting
+        .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')  // Triple asterisks for bold+italic
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Double asterisks for bold
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')  // Single asterisks for italic
         .replace(/\_(.*?)\_/g, '<em>$1</em>')  // Underscore for italic
         // Line separators (three or more hyphens)
         .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
