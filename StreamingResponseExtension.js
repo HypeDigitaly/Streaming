@@ -182,6 +182,14 @@ export const StreamingResponseExtension = {
             display: block;
             margin: 0.5em 0;
           }
+          /* Line separator styling */
+          .response-content hr.markdown-separator {
+            border: none;
+            height: 1px;
+            background-color: #E5E7EB;
+            width: 100%;
+            margin: 1.2em 0;
+          }
           /* Added styles for headings */
           .response-content .answer-h1 {
             font-size: 1.4em;
@@ -361,6 +369,8 @@ export const StreamingResponseExtension = {
         // Bold and italic
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\_(.*?)\_/g, '<em>$1</em>')  // Underscore for italic
+        // Line separators (three or more hyphens)
+        .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
         // List items
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
