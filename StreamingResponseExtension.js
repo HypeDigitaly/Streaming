@@ -106,7 +106,8 @@ export const StreamingResponseExtension = {
           .response-content h1, 
           .response-content h2, 
           .response-content h3,
-          .response-content h4 {
+          .response-content h4,
+          .response-content h5 {
             font-family: var(--_1bof89na), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #1a1e23;
             margin: 0;
@@ -118,15 +119,22 @@ export const StreamingResponseExtension = {
           strong {
             font-weight: 600;
           }
+          em {
+            font-style: italic;
+          }
           .response-content h1, 
           .response-content h2, 
-          .response-content h3 {
+          .response-content h3,
+          .response-content h4,
+          .response-content h5 {
             margin: 1.5em 0 0.5em;
             font-weight: 600;
           }
           .response-content h1 { font-size: 2em; }
           .response-content h2 { font-size: 1.5em; }
           .response-content h3 { font-size: 1.2em; }
+          .response-content h4 { font-size: 1.1em; }
+          .response-content h5 { font-size: 1em; }
           .response-content ul {
             margin: 0.5em 0;
             padding-left: 1.5em;
@@ -344,15 +352,23 @@ export const StreamingResponseExtension = {
 
       // Format markdown content
       const formattedContent = buffer
+        // Headers - H1 to H5
+        .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
+        .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
         .replace(/^### (.*$)/gm, '<h3>$1</h3>')
         .replace(/^## (.*$)/gm, '<h2>$1</h2>')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+        // Bold and italic
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\_(.*?)\_/g, '<em>$1</em>')  // Underscore for italic
+        // List items
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
         .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
+        // Code
         .replace(/`([^`]+)`/g, '<code>$1</code>')
+        // Images
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
