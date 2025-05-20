@@ -9,7 +9,8 @@ const whitelistedDomains = [
   'barber-mnb.cz',
   'teplice.cz',
   'hypedigitaly.ai',
-  'litomerice.cz'
+  'litomerice.cz',
+  'khk.cz'
 ];
 
 module.exports = {
