@@ -1,18 +1,7 @@
 import { Anthropic } from '@anthropic-ai/sdk';
+import { whitelistedDomains } from '../../config/domains';
 
 export default async function handler(req, res) {
-  const whitelistedDomains = [
-    'icuk.cz',
-    'kr-ustecky.cz',
-    'kr-vysocina.cz',
-    'setrivodou.cz',
-    'healthytwenty.cz',
-    'barber-mnb.cz',
-    'teplice.cz',
-    'hypedigitaly.ai',
-    'litomerice.cz'
-  ];
-
   const origin = req.headers.origin;
 
   // Check if origin is in whitelist
