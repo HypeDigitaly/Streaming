@@ -431,7 +431,7 @@ export const StreamingResponseExtension = {
       // Links
       workString = workString.replace(/\[(.*?)\]\((.*?)\)/g, (match, linkText, url) => {
           foundLinks++;
-          const placeholder = `{{{PLACEHOLDER_ID_${extractedElements.length}}}}`;
+          const placeholder = `@@PLACEHOLDER_LINK_${extractedElements.length}@@`; // New robust placeholder
           extractedElements.push({ placeholder, type: 'link', text: linkText, url: url });
           return placeholder;
       });
@@ -439,7 +439,7 @@ export const StreamingResponseExtension = {
       // Images
       workString = workString.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => {
           foundImages++;
-          const placeholder = `{{{PLACEHOLDER_ID_${extractedElements.length}}}}`;
+          const placeholder = `@@PLACEHOLDER_IMAGE_${extractedElements.length}@@`; // New robust placeholder
           extractedElements.push({ placeholder, type: 'image', alt: altText, url: url });
           return placeholder;
       });
@@ -479,12 +479,19 @@ export const StreamingResponseExtension = {
         const firstPlaceholder = extractedElements[0].placeholder;
         console.log(`🚧 POST-PASS-2 CHECK:`);
         console.log(`  🔍 Expected placeholder [0] (from extractedElements): "${firstPlaceholder}"`);
+        // Check against a generic placeholder start if specific one not found, to see if it was partially corrupted
+        const genericLinkPlaceholderStart = "@@PLACEHOLDER_LINK_";
+        const genericImagePlaceholderStart = "@@PLACEHOLDER_IMAGE_";
+
         const placeholderIndexInWorkString = workString.indexOf(firstPlaceholder);
         if (placeholderIndexInWorkString !== -1) {
-          console.log(`  ✅ Placeholder [0] FOUND in workString (after Pass 2) at index ${placeholderIndexInWorkString}.`);
+          console.log(`  ✅ Placeholder [0] ("${firstPlaceholder}") FOUND in workString (after Pass 2) at index ${placeholderIndexInWorkString}.`);
           console.log(`     Context: "${workString.substring(Math.max(0, placeholderIndexInWorkString - 30), placeholderIndexInWorkString + firstPlaceholder.length + 30)}"`);
         } else {
           console.warn(`  ❌ Placeholder [0] ("${firstPlaceholder}") NOT FOUND in workString (after Pass 2).`);
+          if (workString.includes(genericLinkPlaceholderStart) || workString.includes(genericImagePlaceholderStart)) {
+            console.warn(`     However, a generic placeholder start like "${genericLinkPlaceholderStart}" or "${genericImagePlaceholderStart}" WAS FOUND. Placeholder might be corrupted.`);
+          }
           console.warn(`     WorkString (first 500 chars after Pass 2): "${workString.substring(0,500)}"`);
         }
       }
@@ -526,7 +533,11 @@ export const StreamingResponseExtension = {
       
       // MODIFIED FINAL CHECK LOG
       if (trace.payload?.debugMode === 1) { 
-        console.log(`[DEBUG] StreamingResponseExtension UpdateContent - FINAL CHECK: formattedContent (first 500): ${formattedContent.substring(0,500)}`);
+        let finalCheckMsg = `[DEBUG] StreamingResponseExtension UpdateContent - FINAL CHECK: formattedContent (first 500): ${formattedContent.substring(0,500)}`;
+        if (formattedContent.includes("@@PLACEHOLDER_LINK_") || formattedContent.includes("@@PLACEHOLDER_IMAGE_")) {
+            finalCheckMsg += " -- WARNING: RAW PLACEHOLDERS STILL PRESENT!";
+        }
+        console.log(finalCheckMsg);
       }
       // END MODIFIED FINAL CHECK LOG
       
