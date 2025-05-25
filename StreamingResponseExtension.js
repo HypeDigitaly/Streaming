@@ -227,25 +227,6 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
-          .response-content .markdown-table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 1em 0;
-            font-size: 14px;
-          }
-          .response-content .markdown-table th,
-          .response-content .markdown-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-          }
-          .response-content .markdown-table th {
-            background-color: #f6f8fa;
-            font-weight: 600;
-          }
-          .response-content .markdown-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-          }
           .ai-info-footer {
             display: flex;
             align-items: center;
@@ -340,40 +321,6 @@ export const StreamingResponseExtension = {
         .replace(/<strong>(.*?)<\/strong>/g, '**$1**')
         // Italic
         .replace(/<em>(.*?)<\/em>/g, '*$1*')
-        // Tables
-        .replace(/<table[^>]*>([\s\S]*?)<\/table>/g, (match, tableContent) => {
-          const rows = tableContent.match(/<tr[^>]*>([\s\S]*?)<\/tr>/g) || [];
-          if (rows.length === 0) return match;
-
-          let markdownTable = '\n';
-          let headerCreated = false;
-
-          rows.forEach((row) => {
-            const cells = row.match(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g) || [];
-            if (cells.length === 0) return;
-
-            markdownTable += '|';
-
-            cells.forEach((cell) => {
-              const content = cell.replace(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g, '$1').trim();
-              markdownTable += ` ${content} |`;
-            });
-
-            markdownTable += '\n';
-
-            // Add separator row after the first row
-            if (!headerCreated) {
-              markdownTable += '|';
-              cells.forEach(() => {
-                markdownTable += ' --- |';
-              });
-              markdownTable += '\n';
-              headerCreated = true;
-            }
-          });
-
-          return markdownTable + '\n';
-        })
         // Lists
         .replace(/<ul[^>]*>(.*?)<\/ul>/gs, (_, content) => {
           return content.replace(/<li[^>]*>(.*?)<\/li>/g, '- $1\n');
@@ -412,14 +359,12 @@ export const StreamingResponseExtension = {
       buffer += text;
 
       // Format markdown content
-      // IMPORTANT: No URL modifications or placeholders - URLs should be preserved exactly as they are
-
       const formattedContent = buffer
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
         .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
         .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gm, '<h2>$2</h2>')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>')
         // Bold and italic formatting
         .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')  // Triple asterisks for bold+italic
@@ -435,44 +380,6 @@ export const StreamingResponseExtension = {
         .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
         // Code
         .replace(/`([^`]+)`/g, '<code>$1</code>')
-        // Tables
-        .replace(/(\n\|.*\|.*\n\|[\s-]*\|[\s-]*\|[\s-]*\n)((.*\n)*?)(?=\n|$)/g, function(match) {
-          // Process the table
-          const rows = match.trim().split('\n');
-
-          // Check if this is really a table
-          if (rows.length < 2) return match;
-
-          let tableHtml = '<table class="markdown-table">\n';
-
-          // Process each row
-          rows.forEach((row, rowIndex) => {
-            if (rowIndex === 1 && row.match(/^\|[\s-]*\|[\s-]*\|/)) {
-              // This is the separator row, skip it
-              return;
-            }
-
-            // Start the row
-            tableHtml += '  <tr>\n';
-
-            // Extract cells, remove first and last empty cells if they exist
-            const cells = row.split('|').slice(1, -1);
-
-            // Process each cell
-            cells.forEach((cell) => {
-              const cellContent = cell.trim();
-              const cellTag = rowIndex === 0 ? 'th' : 'td';
-              tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
-            });
-
-            //            // End the row
-            tableHtml += '  </tr>\n';
-          });
-
-          // End the table
-          tableHtml += '</table>';
-          return tableHtml;
-        })
         // Images
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
@@ -480,9 +387,7 @@ export const StreamingResponseExtension = {
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
-        .replace(/\[(.*?)\]\((.*?)\)/g, function(match, text, url) {
-          return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`;
-        })
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
@@ -490,9 +395,75 @@ export const StreamingResponseExtension = {
         .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
 
-      // Apply content directly without any URL placeholder restoration
-      // This ensures URLs remain untouched throughout the process
-      responseContent.innerHTML = formattedContent;
+      // --- BEGIN: Post-process lists and clean up empty items ---
+      const tempContainer = document.createElement('div');
+      // Use DOMParser for potentially cleaner initial parsing if needed, but innerHTML is often sufficient
+      tempContainer.innerHTML = formattedContent; 
+
+      // Function to wrap consecutive LIs
+      function wrapListItems(listType /* 'ol' or 'ul' */) {
+        const items = tempContainer.querySelectorAll('li'); // Get all LIs
+        let currentList = null;
+
+        items.forEach((li, index) => {
+          // Rough heuristic: Check if it looks like a numbered list item was intended
+          // This relies on the number potentially being left as text by the simple regex
+          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim()); 
+          const targetListType = looksNumbered ? 'ol' : 'ul';
+
+          // Only process items matching the current function call type (ol or ul)
+          if (targetListType !== listType) return;
+
+          // Skip items already inside a list (e.g., nested lists - handle later if needed)
+          if (li.parentElement.tagName === 'OL' || li.parentElement.tagName === 'UL') {
+            currentList = null; // Reset sequence if we encounter an already nested item
+            return; 
+          }
+
+          const prevSibling = li.previousElementSibling;
+
+          // Start a new list if needed
+          if (!currentList || !prevSibling || prevSibling.tagName !== 'LI' || (prevSibling.parentElement.tagName !== listType.toUpperCase())) {
+            currentList = document.createElement(listType);
+            li.parentNode.insertBefore(currentList, li);
+          }
+
+          // Move the li into the current list
+          if (currentList) {
+            currentList.appendChild(li);
+          }
+        });
+      }
+
+      // Wrap OL items first, then UL items
+      wrapListItems('ol');
+      wrapListItems('ul');
+      
+      // Clean up empty numbered list items (modified check)
+      const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
+      listItems.forEach(li => {
+        // Check if the list item is effectively empty or just a marker
+        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, '').trim(); // Remove number marker for check
+        if (contentCheck === '' || contentCheck === '<br>') {
+          // Check if it's truly empty, not containing other important tags
+          if (!li.querySelector('a, img, code, strong, em, ul, ol')) {
+             li.remove();
+          }
+        }
+      });
+      
+      // Remove any potentially empty OL/UL tags left after cleaning LIs
+      tempContainer.querySelectorAll('ol, ul').forEach(list => {
+        if (!list.hasChildNodes()) {
+          list.remove();
+        }
+      });
+
+      const cleanedHtml = tempContainer.innerHTML;
+      // --- END: Post-process lists and clean up empty items ---
+
+      // Update content with formatting using the cleaned HTML
+      responseContent.innerHTML = cleanedHtml;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -814,9 +785,9 @@ export const StreamingResponseExtension = {
               projectName: payload.projectName,
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
-                        });
-            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
-                    }
+            });
+            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+          }
 
           response = await fetch(proxyUrl, {
             method: "POST",
