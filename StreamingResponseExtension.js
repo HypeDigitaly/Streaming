@@ -426,13 +426,13 @@ export const StreamingResponseExtension = {
       // Pass 1: Extract Links and Images, replace with placeholders
       // Links
       workString = workString.replace(/\[(.*?)\]\((.*?)\)/g, (match, linkText, url) => { // Corrected regex for capturing group
-          const placeholder = `__ELEMENT_PLACEHOLDER_${extractedElements.length}__`;
+          const placeholder = `{{{PLACEHOLDER_ID_${extractedElements.length}}}}`; // New placeholder format
           extractedElements.push({ placeholder, type: 'link', text: linkText, url: url });
           return placeholder;
       });
       // Images
       workString = workString.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => { // Corrected regex for capturing group
-          const placeholder = `__ELEMENT_PLACEHOLDER_${extractedElements.length}__`;
+          const placeholder = `{{{PLACEHOLDER_ID_${extractedElements.length}}}}`; // New placeholder format
           extractedElements.push({ placeholder, type: 'image', alt: altText, url: url });
           return placeholder;
       });
