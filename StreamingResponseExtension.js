@@ -508,12 +508,13 @@ export const StreamingResponseExtension = {
         .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
 
-        // Restore URL placeholders in the final content
-        const finalContent = formattedContent.replace(/__URL_PLACEHOLDER_(\d+)__/g, (match) => {
-          return urlMap.get(match) || match;
-        });
+        // Restore URL placeholders in the final content without any encoding
+      const finalContent = formattedContent.replace(/__URL_PLACEHOLDER_(\d+)__/g, (match) => {
+        return urlMap.get(match) || match;
+      });
 
       // Update content with formatting using the cleaned HTML
+      // We use innerHTML to set the content but ensure URLs are preserved as-is
       responseContent.innerHTML = finalContent;
 
       // Scroll handling
@@ -836,7 +837,7 @@ export const StreamingResponseExtension = {
               projectName: payload.projectName,
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
-            });
+                        });
             console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
                     }
 
