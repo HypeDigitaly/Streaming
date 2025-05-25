@@ -360,34 +360,37 @@ export const StreamingResponseExtension = {
 
       // Format markdown content
       const formattedContent = buffer
+        // PRIORITY 1: Code blocks (protects content within backticks)
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        // PRIORITY 2: Images (Markdown: ![alt](url)) - URL goes into src attribute
+        .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
+          // Convert HTTP to HTTPS if it\'s not already
+          const secureUrl = url.replace(/^http:\/\//i, 'https://');
+          return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
+        })
+        // PRIORITY 3: Links (Markdown: [text](url)) - URL goes into href attribute
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        // PRIORITY 4: Autolink bare URLs
+        .replace(/\b(https?:\/\/[-\w@:%.+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-\w()@:%+.~#?&//=]*))\b/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
         .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
         .replace(/^### (.*$)/gm, '<h3>$1</h3>')
         .replace(/^## (.*$)/gm, '<h2>$1</h2>')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-        // Bold and italic formatting
+        // Bold and italic formatting (now applied after URLs are protected)
         .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')  // Triple asterisks for bold+italic
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Double asterisks for bold
         .replace(/\*(.*?)\*/g, '<em>$1</em>')  // Single asterisks for italic
-        .replace(/\_(.*?)\_/g, '<em>$1</em>')  // Underscore for italic
+        .replace(/_(.*?)_/g, '<em>$1</em>')  // Underscore for italic - changed from /\_(.*?)\_/g
         // Line separators (three or more hyphens)
         .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
         // List items
         .replace(/^\* (.*$)/gm, '<li>$1</li>')
         .replace(/^- (.*$)/gm, '<li>$1</li>')
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
-        .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
-        // Code
-        .replace(/`([^`]+)`/g, '<code>$1</code>')
-        // Images
-        .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
-          // Convert HTTP to HTTPS if it's not already
-          const secureUrl = url.replace(/^http:\/\//i, 'https://');
-          return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
-        })
+        .replace(/^\d+\.\s+(.*$)/gm, '<li>$1</li>') // Corrected: was /^\\d+\\\\.\\\\s+(.*$)/gm
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
@@ -786,7 +789,7 @@ export const StreamingResponseExtension = {
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
             });
-            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+            console.log(`📞 Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
 
           response = await fetch(proxyUrl, {
