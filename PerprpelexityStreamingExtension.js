@@ -791,9 +791,9 @@ export const PerplexityReasonerExtension = {
             continue
           }
   
-          // Handle lists with proper indentation support
-          const orderedListMatch = line.match(/^(\s*)\d+\.\s+(.+)/)
-          const unorderedListMatch = line.match(/^(\s*)[-*]\s+(.+)/)
+          // Handle lists
+          const orderedListMatch = line.match(/^\d+\.\s+(.+)/)
+          const unorderedListMatch = line.match(/^-\s+(.+)/)
   
           if (orderedListMatch || unorderedListMatch) {
             if (isInParagraph) {
@@ -801,10 +801,8 @@ export const PerplexityReasonerExtension = {
               isInParagraph = false
             }
   
-            const indent = (orderedListMatch || unorderedListMatch)[1].length
-            const listContent = (orderedListMatch || unorderedListMatch)[2]
+            const listContent = (orderedListMatch || unorderedListMatch)[1]
             const listType = orderedListMatch ? 'ol' : 'ul'
-            const indentClass = indent > 0 ? ` indent-${Math.floor(indent/2)}` : ''
   
             if (!currentList) {
               currentList = { type: listType }
@@ -820,7 +818,7 @@ export const PerplexityReasonerExtension = {
             }
   
             processedLines.push(
-              `<li class="answer-list-item${indentClass}">${listContent}</li>`
+              `<li class="answer-list-item">${listContent}</li>`
             )
             lastLineWasHeader = false
             continue
@@ -911,21 +909,6 @@ export const PerplexityReasonerExtension = {
             .answer-list-item {
               margin: 2px 0;
               padding: 0;
-            }
-            .answer-list-item.indent-1 {
-              margin-left: 20px;
-            }
-            .answer-list-item.indent-2 {
-              margin-left: 40px;
-            }
-            .answer-list-item.indent-3 {
-              margin-left: 60px;
-            }
-            .answer-list-item.indent-4 {
-              margin-left: 80px;
-            }
-            .answer-list .answer-list {
-              margin-left: 20px;
             }
             .answer-h1 {
               font-size: 16px;
