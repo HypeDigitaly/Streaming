@@ -344,23 +344,23 @@ export const StreamingResponseExtension = {
         .replace(/<table[^>]*>([\s\S]*?)<\/table>/g, (match, tableContent) => {
           const rows = tableContent.match(/<tr[^>]*>([\s\S]*?)<\/tr>/g) || [];
           if (rows.length === 0) return match;
-          
+
           let markdownTable = '\n';
           let headerCreated = false;
-          
+
           rows.forEach((row) => {
             const cells = row.match(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g) || [];
             if (cells.length === 0) return;
-            
+
             markdownTable += '|';
-            
+
             cells.forEach((cell) => {
               const content = cell.replace(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g, '$1').trim();
               markdownTable += ` ${content} |`;
             });
-            
+
             markdownTable += '\n';
-            
+
             // Add separator row after the first row
             if (!headerCreated) {
               markdownTable += '|';
@@ -371,7 +371,7 @@ export const StreamingResponseExtension = {
               headerCreated = true;
             }
           });
-          
+
           return markdownTable + '\n';
         })
         // Lists
@@ -412,7 +412,19 @@ export const StreamingResponseExtension = {
       buffer += text;
 
       // Format markdown content
-      const formattedContent = buffer
+        // First, we'll protect URL patterns from later formatting
+        let urlMap = new Map();
+        let urlCounter = 0;
+
+        // Pre-process to protect URLs
+        let processedBuffer = buffer.replace(/(https?:\/\/[^\s\)]+)/g, (match) => {
+          const placeholder = `__URL_PLACEHOLDER_${urlCounter}__`;
+          urlMap.set(placeholder, match);
+          urlCounter++;
+          return placeholder;
+        });
+
+        const formattedContent = processedBuffer
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
         .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
@@ -437,48 +449,58 @@ export const StreamingResponseExtension = {
         .replace(/(\n\|.*\|.*\n\|[\s-]*\|[\s-]*\|[\s-]*\n)((.*\n)*?)(?=\n|$)/g, function(match) {
           // Process the table
           const rows = match.trim().split('\n');
-          
+
           // Check if this is really a table
           if (rows.length < 2) return match;
-          
+
           let tableHtml = '<table class="markdown-table">\n';
-          
+
           // Process each row
           rows.forEach((row, rowIndex) => {
             if (rowIndex === 1 && row.match(/^\|[\s-]*\|[\s-]*\|/)) {
               // This is the separator row, skip it
               return;
             }
-            
+
             // Start the row
             tableHtml += '  <tr>\n';
-            
+
             // Extract cells, remove first and last empty cells if they exist
             const cells = row.split('|').slice(1, -1);
-            
+
             // Process each cell
             cells.forEach((cell) => {
               const cellContent = cell.trim();
               const cellTag = rowIndex === 0 ? 'th' : 'td';
               tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
             });
-            
+
             // End the row
             tableHtml += '  </tr>\n';
           });
-          
+
           // End the table
           tableHtml += '</table>';
           return tableHtml;
         })
         // Images
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
+          // Restore any URL placeholders in the URL
+          const restoredUrl = url.replace(/__URL_PLACEHOLDER_(\d+)__/g, (match, num) => {
+            return urlMap.get(match) || match;
+          });
           // Convert HTTP to HTTPS if it's not already
-          const secureUrl = url.replace(/^http:\/\//i, 'https://');
+          const secureUrl = restoredUrl.replace(/^http:\/\//i, 'https://');
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(/\[(.*?)\]\((.*?)\)/g, function(match, text, url) {
+          // Restore any URL placeholders in the URL
+          const restoredUrl = url.replace(/__URL_PLACEHOLDER_(\d+)__/g, (match, num) => {
+            return urlMap.get(match) || match;
+          });
+          return `<a href="${restoredUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+        })
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
@@ -486,75 +508,13 @@ export const StreamingResponseExtension = {
         .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
 
-      // --- BEGIN: Post-process lists and clean up empty items ---
-      const tempContainer = document.createElement('div');
-      // Use DOMParser for potentially cleaner initial parsing if needed, but innerHTML is often sufficient
-      tempContainer.innerHTML = formattedContent; 
-
-      // Function to wrap consecutive LIs
-      function wrapListItems(listType /* 'ol' or 'ul' */) {
-        const items = tempContainer.querySelectorAll('li'); // Get all LIs
-        let currentList = null;
-
-        items.forEach((li, index) => {
-          // Rough heuristic: Check if it looks like a numbered list item was intended
-          // This relies on the number potentially being left as text by the simple regex
-          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim()); 
-          const targetListType = looksNumbered ? 'ol' : 'ul';
-
-          // Only process items matching the current function call type (ol or ul)
-          if (targetListType !== listType) return;
-
-          // Skip items already inside a list (e.g., nested lists - handle later if needed)
-          if (li.parentElement.tagName === 'OL' || li.parentElement.tagName === 'UL') {
-            currentList = null; // Reset sequence if we encounter an already nested item
-            return; 
-          }
-
-          const prevSibling = li.previousElementSibling;
-
-          // Start a new list if needed
-          if (!currentList || !prevSibling || prevSibling.tagName !== 'LI' || (prevSibling.parentElement.tagName !== listType.toUpperCase())) {
-            currentList = document.createElement(listType);
-            li.parentNode.insertBefore(currentList, li);
-          }
-
-          // Move the li into the current list
-          if (currentList) {
-            currentList.appendChild(li);
-          }
+        // Restore URL placeholders in the final content
+        const finalContent = formattedContent.replace(/__URL_PLACEHOLDER_(\d+)__/g, (match) => {
+          return urlMap.get(match) || match;
         });
-      }
-
-      // Wrap OL items first, then UL items
-      wrapListItems('ol');
-      wrapListItems('ul');
-      
-      // Clean up empty numbered list items (modified check)
-      const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
-      listItems.forEach(li => {
-        // Check if the list item is effectively empty or just a marker
-        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, '').trim(); // Remove number marker for check
-        if (contentCheck === '' || contentCheck === '<br>') {
-          // Check if it's truly empty, not containing other important tags
-          if (!li.querySelector('a, img, code, strong, em, ul, ol')) {
-             li.remove();
-          }
-        }
-      });
-      
-      // Remove any potentially empty OL/UL tags left after cleaning LIs
-      tempContainer.querySelectorAll('ol, ul').forEach(list => {
-        if (!list.hasChildNodes()) {
-          list.remove();
-        }
-      });
-
-      const cleanedHtml = tempContainer.innerHTML;
-      // --- END: Post-process lists and clean up empty items ---
 
       // Update content with formatting using the cleaned HTML
-      responseContent.innerHTML = cleanedHtml;
+      responseContent.innerHTML = finalContent;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -877,8 +837,8 @@ export const StreamingResponseExtension = {
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
             });
-            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
-          }
+            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+                    }
 
           response = await fetch(proxyUrl, {
             method: "POST",
