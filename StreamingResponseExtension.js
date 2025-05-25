@@ -424,18 +424,54 @@ export const StreamingResponseExtension = {
       }
 
       // Pass 1: Extract Links and Images, replace with placeholders
+      const initialWorkStringLength = workString.length;
+      let foundLinks = 0;
+      let foundImages = 0;
+
       // Links
-      workString = workString.replace(/\[(.*?)\]\((.*?)\)/g, (match, linkText, url) => { // Corrected regex for capturing group
-          const placeholder = `{{{PLACEHOLDER_ID_${extractedElements.length}}}}`; // New placeholder format
+      workString = workString.replace(/\[(.*?)\]\((.*?)\)/g, (match, linkText, url) => {
+          foundLinks++;
+          const placeholder = `{{{PLACEHOLDER_ID_${extractedElements.length}}}}`;
           extractedElements.push({ placeholder, type: 'link', text: linkText, url: url });
           return placeholder;
       });
+
       // Images
-      workString = workString.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => { // Corrected regex for capturing group
-          const placeholder = `{{{PLACEHOLDER_ID_${extractedElements.length}}}}`; // New placeholder format
+      workString = workString.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => {
+          foundImages++;
+          const placeholder = `{{{PLACEHOLDER_ID_${extractedElements.length}}}}`;
           extractedElements.push({ placeholder, type: 'image', alt: altText, url: url });
           return placeholder;
       });
+
+      // AGGRESSIVE PASS 1 LOG
+      if (trace.payload?.debugMode === 1) {
+          console.log(`[DEBUG] StreamingResponseExtension UpdateContent - PASS 1: initialLen=${initialWorkStringLength}, linksFound=${foundLinks}, imagesFound=${foundImages}, extractedTotal=${extractedElements.length}`);
+          if (initialWorkStringLength > 0 && extractedElements.length === 0 && (workString.includes('[') || workString.includes('!['))) {
+              console.warn(`[DEBUG] StreamingResponseExtension UpdateContent - PASS 1 WARN: No elements extracted despite potential markdown. WorkString (first 300): ${workString.substring(0,300)}`);
+          }
+      }
+      // END AGGRESSIVE PASS 1 LOG
+
+      // ---- PRE-REPLACEMENT CHECK LOG ----
+      if (trace.payload?.debugMode === 1 && extractedElements.length > 0) {
+        const firstPlaceholder = extractedElements[0].placeholder;
+        console.log(`🚧 PRE-REPLACEMENT CHECK:`);
+        console.log(`  🔍 Expected placeholder [0]: "${firstPlaceholder}"`);
+        const placeholderIndexInWorkString = workString.indexOf(firstPlaceholder);
+        if (placeholderIndexInWorkString !== -1) {
+          console.log(`  ✅ Placeholder [0] FOUND in workString at index ${placeholderIndexInWorkString}.`);
+          console.log(`     Context: "${workString.substring(Math.max(0, placeholderIndexInWorkString - 20), placeholderIndexInWorkString + firstPlaceholder.length + 20)}"`);
+        } else {
+          console.log(`  ❌ Placeholder [0] NOT FOUND in workString.`);
+          console.log(`     WorkString (first 500 chars): "${workString.substring(0,500)}"`);
+          const corruptedPlaceholder = firstPlaceholder.replace(/\{|\}|_/g, ''); // Simplified corruption check
+          if (workString.includes(corruptedPlaceholder)) {
+             console.log(`  ❓ Possible raw form (no braces/underscores) "${corruptedPlaceholder}" FOUND in workString.`);
+          }
+        }
+      }
+      // ---- END PRE-REPLACEMENT CHECK LOG ----
 
       // Pass 2: Process main content (workString) for markdown
       workString = workString
@@ -479,11 +515,11 @@ export const StreamingResponseExtension = {
 
       const formattedContent = workString;
       
-      // Debug: Log the processed HTML to help identify link formatting issues
-      // This log is now after the multi-pass approach
-      if (trace.payload?.debugMode === 1 && (formattedContent.includes('<a href') || formattedContent.includes('{{{PLACEHOLDER_ID_'))) {
-        console.log('🔗 Processed HTML (multi-pass) check:', formattedContent.substring(0, 800) + (formattedContent.length > 800 ? '...' : ''));
+      // MODIFIED FINAL CHECK LOG
+      if (trace.payload?.debugMode === 1) { 
+        console.log(`[DEBUG] StreamingResponseExtension UpdateContent - FINAL CHECK: formattedContent (first 500): ${formattedContent.substring(0,500)}`);
       }
+      // END MODIFIED FINAL CHECK LOG
       
       const tempContainer = document.createElement('div');
       tempContainer.innerHTML = formattedContent; 
