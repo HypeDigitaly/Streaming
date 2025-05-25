@@ -344,23 +344,23 @@ export const StreamingResponseExtension = {
         .replace(/<table[^>]*>([\s\S]*?)<\/table>/g, (match, tableContent) => {
           const rows = tableContent.match(/<tr[^>]*>([\s\S]*?)<\/tr>/g) || [];
           if (rows.length === 0) return match;
-          
+
           let markdownTable = '\n';
           let headerCreated = false;
-          
+
           rows.forEach((row) => {
             const cells = row.match(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g) || [];
             if (cells.length === 0) return;
-            
+
             markdownTable += '|';
-            
+
             cells.forEach((cell) => {
               const content = cell.replace(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g, '$1').trim();
               markdownTable += ` ${content} |`;
             });
-            
+
             markdownTable += '\n';
-            
+
             // Add separator row after the first row
             if (!headerCreated) {
               markdownTable += '|';
@@ -371,16 +371,55 @@ export const StreamingResponseExtension = {
               headerCreated = true;
             }
           });
-          
+
           return markdownTable + '\n';
         })
         // Lists
-        .replace(/<ul[^>]*>(.*?)<\/ul>/gs, (_, content) => {
-          return content.replace(/<li[^>]*>(.*?)<\/li>/g, '- $1\n');
+        .replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gs, (_, content) => {
+          // Process nested lists properly by preserving the nesting structure
+          return content.replace(/<li[^>]*>([\s\S]*?)<\/li>/g, (match, liContent) => {
+            // Check if this list item contains a nested list
+            if (/<ul[^>]*>/.test(liContent)) {
+              // Extract the main content before the nested list
+              const mainContent = liContent.split(/<ul[^>]*>/)[0].trim();
+              // Return with proper indentation marker
+              return `- ${mainContent}\n${liContent.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/g, (_, nestedContent) => {
+                // Process the nested content with indentation
+                return nestedContent.replace(/<li[^>]*>([\s\S]*?)<\/li>/g, '  - $1\n');
+              })}`;
+            }
+            return `- ${liContent.trim()}\n`;
+          });
         })
-        .replace(/<ol[^>]*>(.*?)<\/ol>/gs, (_, content) => {
+        .replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gs, (_, content) => {
           let counter = 1;
-          return content.replace(/<li[^>]*>(.*?)<\/li>/g, () => `${counter++}. $1\n`);
+          // Process ordered lists with proper nesting
+          return content.replace(/<li[^>]*>([\s\S]*?)<\/li>/g, (match, liContent) => {
+            // Check if this list item contains a nested list
+            if (/<ol[^>]*>|<ul[^>]*>/.test(liContent)) {
+              // Extract the main content before the nested list
+              let mainContent = liContent.split(/<(?:ol|ul)[^>]*>/)[0].trim();
+              let nestedList = '';
+
+              // Process nested OL
+              if (/<ol[^>]*>/.test(liContent)) {
+                let nestedCounter = 1;
+                nestedList = liContent.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/g, (_, nestedContent) => {
+                  return nestedContent.replace(/<li[^>]*>([\s\S]*?)<\/li>/g, () => `  ${nestedCounter++}. $1\n`);
+                });
+              }
+
+              // Process nested UL
+              if (/<ul[^>]*>/.test(liContent)) {
+                nestedList = liContent.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/g, (_, nestedContent) => {
+                  return nestedContent.replace(/<li[^>]*>([\s\S]*?)<\/li>/g, '  - $1\n');
+                });
+              }
+
+              return `${counter++}. ${mainContent}\n${nestedList}`;
+            }
+            return `${counter++}. ${liContent.trim()}\n`;
+          });
         })
         // Paragraphs
         .replace(/<p[^>]*>(.*?)<\/p>/g, '$1\n\n')
@@ -426,47 +465,42 @@ export const StreamingResponseExtension = {
         .replace(/\_(.*?)\_/g, '<em>$1</em>')  // Underscore for italic
         // Line separators (three or more hyphens)
         .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
-        // List items
-        .replace(/^\* (.*$)/gm, '<li>$1</li>')
-        .replace(/^- (.*$)/gm, '<li>$1</li>')
-        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
-        .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
         // Code
         .replace(/`([^`]+)`/g, '<code>$1</code>')
         // Tables
         .replace(/(\n\|.*\|.*\n\|[\s-]*\|[\s-]*\|[\s-]*\n)((.*\n)*?)(?=\n|$)/g, function(match) {
           // Process the table
           const rows = match.trim().split('\n');
-          
+
           // Check if this is really a table
           if (rows.length < 2) return match;
-          
+
           let tableHtml = '<table class="markdown-table">\n';
-          
+
           // Process each row
           rows.forEach((row, rowIndex) => {
             if (rowIndex === 1 && row.match(/^\|[\s-]*\|[\s-]*\|/)) {
               // This is the separator row, skip it
               return;
             }
-            
+
             // Start the row
             tableHtml += '  <tr>\n';
-            
+
             // Extract cells, remove first and last empty cells if they exist
             const cells = row.split('|').slice(1, -1);
-            
+
             // Process each cell
             cells.forEach((cell) => {
               const cellContent = cell.trim();
               const cellTag = rowIndex === 0 ? 'th' : 'td';
               tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
             });
-            
+
             // End the row
             tableHtml += '  </tr>\n';
           });
-          
+
           // End the table
           tableHtml += '</table>';
           return tableHtml;
@@ -478,83 +512,87 @@ export const StreamingResponseExtension = {
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        .replace(/^- (.*$)/gm, (match, content) => {
-          const indentation = match.match(/^\s*/)[0].length;
-          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+      // --- Process hierarchical lists ---
+      // This is a more complex operation that needs to handle nesting properly
+
+      // Process ordered list items - capturing indentation levels with regex groups
+      let processedContent = formattedContent
+        // Handle numbered lists with different indentation levels
+        .replace(/^(\s*)(\d+)\.\s+(.*$)/gm, (match, indent, num, content) => {
+          const indentLevel = Math.floor(indent.length / 2);
+          const indentClass = indentLevel > 0 ? ` class="indent-${indentLevel}"` : '';
+          return `<li data-indent="${indentLevel}" data-type="ol"${indentClass}>${content.trim()}</li>`;
         })
-        .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
-
-      // --- BEGIN: Post-process lists and clean up empty items ---
-      const tempContainer = document.createElement('div');
-      // Use DOMParser for potentially cleaner initial parsing if needed, but innerHTML is often sufficient
-      tempContainer.innerHTML = formattedContent; 
-
-      // Function to wrap consecutive LIs
-      function wrapListItems(listType /* 'ol' or 'ul' */) {
-        const items = tempContainer.querySelectorAll('li'); // Get all LIs
-        let currentList = null;
-
-        items.forEach((li, index) => {
-          // Rough heuristic: Check if it looks like a numbered list item was intended
-          // This relies on the number potentially being left as text by the simple regex
-          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim()); 
-          const targetListType = looksNumbered ? 'ol' : 'ul';
-
-          // Only process items matching the current function call type (ol or ul)
-          if (targetListType !== listType) return;
-
-          // Skip items already inside a list (e.g., nested lists - handle later if needed)
-          if (li.parentElement.tagName === 'OL' || li.parentElement.tagName === 'UL') {
-            currentList = null; // Reset sequence if we encounter an already nested item
-            return; 
-          }
-
-          const prevSibling = li.previousElementSibling;
-
-          // Start a new list if needed
-          if (!currentList || !prevSibling || prevSibling.tagName !== 'LI' || (prevSibling.parentElement.tagName !== listType.toUpperCase())) {
-            currentList = document.createElement(listType);
-            li.parentNode.insertBefore(currentList, li);
-          }
-
-          // Move the li into the current list
-          if (currentList) {
-            currentList.appendChild(li);
-          }
+        // Handle bullet lists with different indentation levels
+        .replace(/^(\s*)-\s+(.*$)/gm, (match, indent, content) => {
+          const indentLevel = Math.floor(indent.length / 2);
+          const indentClass = indentLevel > 0 ? ` class="indent-${indentLevel}"` : '';
+          return `<li data-indent="${indentLevel}" data-type="ul"${indentClass}>${content.trim()}</li>`;
+        })
+        // Handle asterisk lists with different indentation levels
+        .replace(/^(\s*)\*\s+(.*$)/gm, (match, indent, content) => {
+          const indentLevel = Math.floor(indent.length / 2);
+          const indentClass = indentLevel > 0 ? ` class="indent-${indentLevel}"` : '';
+          return `<li data-indent="${indentLevel}" data-type="ul"${indentClass}>${content.trim()}</li>`;
         });
+
+      // --- End process hierarchical lists ---
+
+      // --- Prepare and update the DOM ---
+      const listRegex = /(<li data-indent="\d+" data-type="[ou]l">.*?<\/li>)/g;
+
+      // If we find any list items, wrap them into lists
+      if (listRegex.test(processedContent)) {
+        // Use a temporary container to build the nested lists
+        const tempContainer = document.createElement('div');
+        tempContainer.innerHTML = processedContent;
+
+        // Get all li elements with the data-indent attribute
+        const listItems = tempContainer.querySelectorAll('li[data-indent]');
+
+        // Create the nested list structure based on the indentation level
+        let currentList = null;
+        let currentIndent = -1;
+        let lastType = null;
+
+        listItems.forEach((li) => {
+          const indent = parseInt(li.dataset.indent);
+          const type = li.dataset.type;
+
+          // Close nested lists if the indentation decreases
+          while (indent < currentIndent) {
+            currentList = currentList.parentNode.parentNode;
+            currentIndent--;
+          }
+
+          // Create a new list if necessary
+          if (indent > currentIndent || type !== lastType) {
+            const list = document.createElement(type === 'ol' ? 'ol' : 'ul');
+            if (currentList) {
+              currentList.appendChild(list);
+            } else {
+              tempContainer.appendChild(list);
+            }
+            currentList = list;
+            currentIndent = indent;
+            lastType = type;
+          }
+
+          // Append the list item to the current list
+          currentList.appendChild(li);
+
+          // Remove the data-indent and data-type attributes
+          li.removeAttribute('data-indent');
+          li.removeAttribute('data-type');
+          li.removeAttribute('class');
+        });
+
+        processedContent = tempContainer.innerHTML;
       }
 
-      // Wrap OL items first, then UL items
-      wrapListItems('ol');
-      wrapListItems('ul');
-      
-      // Clean up empty numbered list items (modified check)
-      const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
-      listItems.forEach(li => {
-        // Check if the list item is effectively empty or just a marker
-        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, '').trim(); // Remove number marker for check
-        if (contentCheck === '' || contentCheck === '<br>') {
-          // Check if it's truly empty, not containing other important tags
-          if (!li.querySelector('a, img, code, strong, em, ul, ol')) {
-             li.remove();
-          }
-        }
-      });
-      
-      // Remove any potentially empty OL/UL tags left after cleaning LIs
-      tempContainer.querySelectorAll('ol, ul').forEach(list => {
-        if (!list.hasChildNodes()) {
-          list.remove();
-        }
-      });
-
-      const cleanedHtml = tempContainer.innerHTML;
-      // --- END: Post-process lists and clean up empty items ---
-
-      // Update content with formatting using the cleaned HTML
-      responseContent.innerHTML = cleanedHtml;
+      responseContent.innerHTML = processedContent;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -799,7 +837,7 @@ export const StreamingResponseExtension = {
         const isVisible = modelInfoTooltip.classList.toggle('visible');
         // Toggle class on footer for icon rotation
         if (isVisible) {
-          aiInfoFooter.classList.add('tooltip-visible');
+aiInfoFooter.classList.add('tooltip-visible');
         } else {
           aiInfoFooter.classList.remove('tooltip-visible');
         }
@@ -877,7 +915,7 @@ export const StreamingResponseExtension = {
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
             });
-            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
 
           response = await fetch(proxyUrl, {
