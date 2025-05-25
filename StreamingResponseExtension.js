@@ -340,66 +340,13 @@ export const StreamingResponseExtension = {
         .trim();
     }
 
-    // Helper function for DOM-based list processing, moved from updateContent
-    function postProcessListsDOM(tempContainer, debugMode) {
-      function wrapListItems(listType /* 'ol' or 'ul' */) {
-        const items = tempContainer.querySelectorAll('li'); 
-        let currentList = null;
-        items.forEach((li) => { // Removed unused 'index'
-            const looksNumbered = /^\d+\.\s*/.test(li.textContent.trim()); // Corrected regex: removed extra backslashes
-            const targetListType = looksNumbered ? 'ol' : 'ul';
-            if (targetListType !== listType) return;
-            if (li.parentElement && (li.parentElement.tagName === 'OL' || li.parentElement.tagName === 'UL')) { // Added parentElement check
-                currentList = null; 
-                return; 
-            }
-            const prevSibling = li.previousElementSibling;
-            if (!currentList || !prevSibling || prevSibling.tagName !== 'LI' || (currentList.tagName !== listType.toUpperCase())) { // check currentList type
-                currentList = document.createElement(listType);
-                if (li.parentNode) {
-                    li.parentNode.insertBefore(currentList, li);
-                } else {
-                    if(debugMode) console.warn("StreamingResponseExtension: LI item without parentNode during wrapListItems:", li);
-                    tempContainer.appendChild(currentList); 
-                }
-            }
-            if (currentList) { // Check currentList exists
-                currentList.appendChild(li);
-            }
-        });
-      }
-
-      wrapListItems('ol');
-      wrapListItems('ul');
-      
-      const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
-      listItems.forEach(li => {
-        const contentCheck = li.innerHTML.replace(/^\d+\.\s*/, '').trim(); // Corrected regex: removed extra backslashes
-        if (contentCheck === '' || contentCheck === '<br>') {
-            if (!li.querySelector('a, img, code, strong, em, ul, ol')) {
-               li.remove();
-            }
-        }
-      });
-      
-      tempContainer.querySelectorAll('ol, ul').forEach(list => {
-        if (!list.hasChildNodes()) {
-          list.remove();
-        }
-      });
-      return tempContainer.innerHTML;
-    }
-
     // Update the answer content with markdown support
     function updateContent(text) {
-      if (!text && !isFirstChunk) { // Allow empty subsequent chunks
-        // If it's not the first chunk and text is empty, we might still need to process buffer if it has pending content.
-        // However, typical streaming sends data or signals done, an empty subsequent chunk is unusual unless it's a keep-alive.
-      } else if (!text && isFirstChunk) { // No actual first text
-        return; 
-      }
+      if (!text) return;
 
+      // Handle first chunk
       if (isFirstChunk) {
+        // Hide loading animation when we receive the first content
         const thinkingHeader = container.querySelector('.thinking-header');
         if (thinkingHeader) {
           thinkingHeader.classList.add('hidden');
@@ -408,143 +355,114 @@ export const StreamingResponseExtension = {
         isFirstChunk = false;
       }
 
+      // Append to buffer
       buffer += text;
-      let workString = buffer;
-      const extractedElements = [];
 
-      // Helper to process inline markdown for link text and image alt
-      function processInlineMarkdown(inlineText) {
-        if (typeof inlineText !== 'string') return '';
-        return inlineText
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/_(.*?)_/g, '<em>$1</em>');
-      }
+      // Format markdown content
+      const formattedContent = buffer
+        // Headers - H1 to H5
+        .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
+        .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
+        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+        // Bold and italic formatting
+        .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')  // Triple asterisks for bold+italic
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Double asterisks for bold
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')  // Single asterisks for italic
+        .replace(/\_(.*?)\_/g, '<em>$1</em>')  // Underscore for italic
+        // Line separators (three or more hyphens)
+        .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
+        // List items
+        .replace(/^\* (.*$)/gm, '<li>$1</li>')
+        .replace(/^- (.*$)/gm, '<li>$1</li>')
+        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
+        .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
+        // Code
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        // Images
+        .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
+          // Convert HTTP to HTTPS if it's not already
+          const secureUrl = url.replace(/^http:\/\//i, 'https://');
+          return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
+        })
+        // Convert markdown links to HTML links (arrow removed, handled by CSS now)
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(/^- (.*$)/gm, (match, content) => {
+          const indentation = match.match(/^\s*/)[0].length;
+          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
+        })
+        .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
 
-      // Pass 1: Extract Links and Images, replace with placeholders
-      const initialWorkStringLength = workString.length;
-      let foundLinks = 0;
-      let foundImages = 0;
-
-      // Links
-      workString = workString.replace(/\[(.*?)\]\((.*?)\)/g, (match, linkText, url) => {
-          foundLinks++;
-          const placeholder = `@@PLACEHOLDER_LINK_${extractedElements.length}@@`; // New robust placeholder
-          extractedElements.push({ placeholder, type: 'link', text: linkText, url: url });
-          return placeholder;
-      });
-
-      // Images
-      workString = workString.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => {
-          foundImages++;
-          const placeholder = `@@PLACEHOLDER_IMAGE_${extractedElements.length}@@`; // New robust placeholder
-          extractedElements.push({ placeholder, type: 'image', alt: altText, url: url });
-          return placeholder;
-      });
-
-      // END AGGRESSIVE PASS 1 LOG
-
-      // Pass 2: Process main content (workString) for markdown
-      workString = workString
-          .replace(/`([^`]+)`/g, '<code>$1</code>') // Code (inline/blocks not handled by link/alt)
-          .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
-          .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
-          .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-          .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-          .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-          .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
-          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-          .replace(/\*(.*?)\*/g, '<em>$1</em>')
-          .replace(/_(.*?)_/g, '<em>$1</em>') // General italicization
-          .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />') // Line separators
-          // Basic list items (nesting and wrapping handled by DOM pass)
-          .replace(/^\* (.*$)/gm, '<li>$1</li>')
-          .replace(/^- (.*$)/gm, '<li>$1</li>')
-          .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>') // Indented
-          .replace(/^\d+\.\s+(.*$)/gm, '<li>$1</li>'); // Ordered
-
-      // Process text/alt attributes of extracted elements for inline markdown
-      for (const el of extractedElements) {
-          if (el.type === 'link') {
-              el.processedText = processInlineMarkdown(el.text);
-          } else if (el.type === 'image') {
-              el.processedAlt = processInlineMarkdown(el.alt);
-          }
-      }
-
-      // ---- POST-PASS-2 / PRE-PASS-3 CHECK LOG ----
-      if (trace.payload?.debugMode === 1 && extractedElements.length > 0) {
-        const firstPlaceholder = extractedElements[0].placeholder;
-        console.log(`🚧 POST-PASS-2 CHECK:`);
-        console.log(`  🔍 Expected placeholder [0] (from extractedElements): "${firstPlaceholder}"`);
-        // Check against a generic placeholder start if specific one not found, to see if it was partially corrupted
-        const genericLinkPlaceholderStart = "@@PLACEHOLDER_LINK_";
-        const genericImagePlaceholderStart = "@@PLACEHOLDER_IMAGE_";
-
-        const placeholderIndexInWorkString = workString.indexOf(firstPlaceholder);
-        if (placeholderIndexInWorkString !== -1) {
-          console.log(`  ✅ Placeholder [0] ("${firstPlaceholder}") FOUND in workString (after Pass 2) at index ${placeholderIndexInWorkString}.`);
-          console.log(`     Context: "${workString.substring(Math.max(0, placeholderIndexInWorkString - 30), placeholderIndexInWorkString + firstPlaceholder.length + 30)}"`);
-        } else {
-          console.warn(`  ❌ Placeholder [0] ("${firstPlaceholder}") NOT FOUND in workString (after Pass 2).`);
-          if (workString.includes(genericLinkPlaceholderStart) || workString.includes(genericImagePlaceholderStart)) {
-            console.warn(`     However, a generic placeholder start like "${genericLinkPlaceholderStart}" or "${genericImagePlaceholderStart}" WAS FOUND. Placeholder might be corrupted.`);
-          }
-          console.warn(`     WorkString (first 500 chars after Pass 2): "${workString.substring(0,500)}"`);
-        }
-      }
-      // ---- END POST-PASS-2 / PRE-PASS-3 CHECK LOG ----
-
-      // Pass 3: Restore Links and Images from placeholders
-      extractedElements.forEach((el, index) => {
-          let htmlElement = '';
-          const currentPlaceholder = el.placeholder;
-
-          if (trace.payload?.debugMode === 1) {
-              console.log(`[DEBUG] Pass 3 [${index}] - Placeholder: "${currentPlaceholder}", Type: ${el.type}`);
-              console.log(`[DEBUG] Pass 3 [${index}] - Original Text/Alt: "${el.text || el.alt}", URL: "${el.url}"`);
-              if (!workString.includes(currentPlaceholder)) {
-                  console.warn(`[DEBUG] Pass 3 [${index}] - CRITICAL WARN: Placeholder "${currentPlaceholder}" NOT IN workString BEFORE replace attempt!`);
-              }
-          }
-
-          if (el.type === 'link') {
-              htmlElement = `<a href="${el.url}" target="_blank" rel="noopener noreferrer">${el.processedText || ''}</a>`;
-          } else if (el.type === 'image') {
-              const secureUrl = el.url.replace(/^http:\/\//i, 'https://');
-              htmlElement = `<img src="${secureUrl}" alt="${el.processedAlt || ''}" style="max-width:100%; height:auto;">`;
-          }
-          
-          if (workString.includes(currentPlaceholder)) {
-            workString = workString.replace(currentPlaceholder, htmlElement);
-            if (trace.payload?.debugMode === 1 && workString.includes(currentPlaceholder)){
-                console.error(`[DEBUG] Pass 3 [${index}] - FAILED TO REPLACE "${currentPlaceholder}". It still exists!`);
-            } else if (trace.payload?.debugMode === 1){
-                console.log(`[DEBUG] Pass 3 [${index}] - Successfully replaced "${currentPlaceholder}".`);
-            }
-          } else if (trace.payload?.debugMode === 1) {
-             console.warn(`[DEBUG] Pass 3 [${index}] - SKIPPED replace for "${currentPlaceholder}" as it was not found in workString.`);
-          }
-      });
-
-      const formattedContent = workString;
-      
-      // MODIFIED FINAL CHECK LOG
-      if (trace.payload?.debugMode === 1) { 
-        let finalCheckMsg = `[DEBUG] StreamingResponseExtension UpdateContent - FINAL CHECK: formattedContent (first 500): ${formattedContent.substring(0,500)}`;
-        if (formattedContent.includes("@@PLACEHOLDER_LINK_") || formattedContent.includes("@@PLACEHOLDER_IMAGE_")) {
-            finalCheckMsg += " -- WARNING: RAW PLACEHOLDERS STILL PRESENT!";
-        }
-        console.log(finalCheckMsg);
-      }
-      // END MODIFIED FINAL CHECK LOG
-      
+      // --- BEGIN: Post-process lists and clean up empty items ---
       const tempContainer = document.createElement('div');
+      // Use DOMParser for potentially cleaner initial parsing if needed, but innerHTML is often sufficient
       tempContainer.innerHTML = formattedContent; 
 
-      const cleanedHtml = postProcessListsDOM(tempContainer, trace.payload?.debugMode === 1);
+      // Function to wrap consecutive LIs
+      function wrapListItems(listType /* 'ol' or 'ul' */) {
+        const items = tempContainer.querySelectorAll('li'); // Get all LIs
+        let currentList = null;
+
+        items.forEach((li, index) => {
+          // Rough heuristic: Check if it looks like a numbered list item was intended
+          // This relies on the number potentially being left as text by the simple regex
+          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim()); 
+          const targetListType = looksNumbered ? 'ol' : 'ul';
+
+          // Only process items matching the current function call type (ol or ul)
+          if (targetListType !== listType) return;
+
+          // Skip items already inside a list (e.g., nested lists - handle later if needed)
+          if (li.parentElement.tagName === 'OL' || li.parentElement.tagName === 'UL') {
+            currentList = null; // Reset sequence if we encounter an already nested item
+            return; 
+          }
+
+          const prevSibling = li.previousElementSibling;
+
+          // Start a new list if needed
+          if (!currentList || !prevSibling || prevSibling.tagName !== 'LI' || (prevSibling.parentElement.tagName !== listType.toUpperCase())) {
+            currentList = document.createElement(listType);
+            li.parentNode.insertBefore(currentList, li);
+          }
+
+          // Move the li into the current list
+          if (currentList) {
+            currentList.appendChild(li);
+          }
+        });
+      }
+
+      // Wrap OL items first, then UL items
+      wrapListItems('ol');
+      wrapListItems('ul');
+      
+      // Clean up empty numbered list items (modified check)
+      const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
+      listItems.forEach(li => {
+        // Check if the list item is effectively empty or just a marker
+        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, '').trim(); // Remove number marker for check
+        if (contentCheck === '' || contentCheck === '<br>') {
+          // Check if it's truly empty, not containing other important tags
+          if (!li.querySelector('a, img, code, strong, em, ul, ol')) {
+             li.remove();
+          }
+        }
+      });
+      
+      // Remove any potentially empty OL/UL tags left after cleaning LIs
+      tempContainer.querySelectorAll('ol, ul').forEach(list => {
+        if (!list.hasChildNodes()) {
+          list.remove();
+        }
+      });
+
+      const cleanedHtml = tempContainer.innerHTML;
+      // --- END: Post-process lists and clean up empty items ---
+
+      // Update content with formatting using the cleaned HTML
       responseContent.innerHTML = cleanedHtml;
 
       // Scroll handling
@@ -868,7 +786,7 @@ export const StreamingResponseExtension = {
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
             });
-            console.log(`📞 Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
 
           response = await fetch(proxyUrl, {
