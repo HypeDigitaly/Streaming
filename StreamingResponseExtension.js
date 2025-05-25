@@ -370,8 +370,7 @@ export const StreamingResponseExtension = {
         })
         // PRIORITY 3: Links (Markdown: [text](url)) - URL goes into href attribute
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        // PRIORITY 4: Autolink bare URLs
-        .replace(/\b(https?:\/\/[-\w@:%.+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-\w()@:%+.~#?&//=]*))\b/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
         .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
@@ -464,6 +463,11 @@ export const StreamingResponseExtension = {
 
       const cleanedHtml = tempContainer.innerHTML;
       // --- END: Post-process lists and clean up empty items ---
+
+      // Debug: Log the processed HTML to help identify link formatting issues
+      if (trace.payload?.debugMode === 1 && cleanedHtml.includes('<a ')) {
+        console.log('🔗 Processed HTML with links:', cleanedHtml.substring(0, 500) + (cleanedHtml.length > 500 ? '...' : ''));
+      }
 
       // Update content with formatting using the cleaned HTML
       responseContent.innerHTML = cleanedHtml;
