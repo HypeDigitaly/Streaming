@@ -481,8 +481,8 @@ export const StreamingResponseExtension = {
       
       // Debug: Log the processed HTML to help identify link formatting issues
       // This log is now after the multi-pass approach
-      if (trace.payload?.debugMode === 1 && formattedContent.includes('<a href')) {
-        console.log('🔗 Processed HTML (multi-pass) with links:', formattedContent.substring(0, 800) + (formattedContent.length > 800 ? '...' : ''));
+      if (trace.payload?.debugMode === 1 && (formattedContent.includes('<a href') || formattedContent.includes('{{{PLACEHOLDER_ID_'))) {
+        console.log('🔗 Processed HTML (multi-pass) check:', formattedContent.substring(0, 800) + (formattedContent.length > 800 ? '...' : ''));
       }
       
       const tempContainer = document.createElement('div');
