@@ -412,24 +412,14 @@ export const StreamingResponseExtension = {
       buffer += text;
 
       // Format markdown content
-        // First, we'll protect URL patterns from later formatting
-        let urlMap = new Map();
-        let urlCounter = 0;
+      // IMPORTANT: No URL modifications or placeholders - URLs should be preserved exactly as they are
 
-        // Pre-process to protect URLs
-        let processedBuffer = buffer.replace(/(https?:\/\/[^\s\)]+)/g, (match) => {
-          const placeholder = `__URL_PLACEHOLDER_${urlCounter}__`;
-          urlMap.set(placeholder, match);
-          urlCounter++;
-          return placeholder;
-        });
-
-        const formattedContent = processedBuffer
+      const formattedContent = buffer
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
         .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
         .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+        .replace(/^## (.*$)/gm, '<h2>$2</h2>')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>')
         // Bold and italic formatting
         .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')  // Triple asterisks for bold+italic
@@ -475,7 +465,7 @@ export const StreamingResponseExtension = {
               tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
             });
 
-            // End the row
+            //            // End the row
             tableHtml += '  </tr>\n';
           });
 
@@ -485,21 +475,13 @@ export const StreamingResponseExtension = {
         })
         // Images
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
-          // Restore any URL placeholders in the URL
-          const restoredUrl = url.replace(/__URL_PLACEHOLDER_(\d+)__/g, (match, num) => {
-            return urlMap.get(match) || match;
-          });
           // Convert HTTP to HTTPS if it's not already
-          const secureUrl = restoredUrl.replace(/^http:\/\//i, 'https://');
+          const secureUrl = url.replace(/^http:\/\//i, 'https://');
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
         .replace(/\[(.*?)\]\((.*?)\)/g, function(match, text, url) {
-          // Restore any URL placeholders in the URL
-          const restoredUrl = url.replace(/__URL_PLACEHOLDER_(\d+)__/g, (match, num) => {
-            return urlMap.get(match) || match;
-          });
-          return `<a href="${restoredUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`;
         })
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
@@ -508,14 +490,9 @@ export const StreamingResponseExtension = {
         .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
 
-        // Restore URL placeholders in the final content without any encoding
-      const finalContent = formattedContent.replace(/__URL_PLACEHOLDER_(\d+)__/g, (match) => {
-        return urlMap.get(match) || match;
-      });
-
-      // Update content with formatting using the cleaned HTML
-      // We use innerHTML to set the content but ensure URLs are preserved as-is
-      responseContent.innerHTML = finalContent;
+      // Apply content directly without any URL placeholder restoration
+      // This ensures URLs remain untouched throughout the process
+      responseContent.innerHTML = formattedContent;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
