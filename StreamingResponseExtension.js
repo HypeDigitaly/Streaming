@@ -444,34 +444,7 @@ export const StreamingResponseExtension = {
           return placeholder;
       });
 
-      // AGGRESSIVE PASS 1 LOG
-      if (trace.payload?.debugMode === 1) {
-          console.log(`[DEBUG] StreamingResponseExtension UpdateContent - PASS 1: initialLen=${initialWorkStringLength}, linksFound=${foundLinks}, imagesFound=${foundImages}, extractedTotal=${extractedElements.length}`);
-          if (initialWorkStringLength > 0 && extractedElements.length === 0 && (workString.includes('[') || workString.includes('!['))) {
-              console.warn(`[DEBUG] StreamingResponseExtension UpdateContent - PASS 1 WARN: No elements extracted despite potential markdown. WorkString (first 300): ${workString.substring(0,300)}`);
-          }
-      }
       // END AGGRESSIVE PASS 1 LOG
-
-      // ---- PRE-REPLACEMENT CHECK LOG ----
-      if (trace.payload?.debugMode === 1 && extractedElements.length > 0) {
-        const firstPlaceholder = extractedElements[0].placeholder;
-        console.log(`🚧 PRE-REPLACEMENT CHECK:`);
-        console.log(`  🔍 Expected placeholder [0]: "${firstPlaceholder}"`);
-        const placeholderIndexInWorkString = workString.indexOf(firstPlaceholder);
-        if (placeholderIndexInWorkString !== -1) {
-          console.log(`  ✅ Placeholder [0] FOUND in workString at index ${placeholderIndexInWorkString}.`);
-          console.log(`     Context: "${workString.substring(Math.max(0, placeholderIndexInWorkString - 20), placeholderIndexInWorkString + firstPlaceholder.length + 20)}"`);
-        } else {
-          console.log(`  ❌ Placeholder [0] NOT FOUND in workString.`);
-          console.log(`     WorkString (first 500 chars): "${workString.substring(0,500)}"`);
-          const corruptedPlaceholder = firstPlaceholder.replace(/\{|\}|_/g, ''); // Simplified corruption check
-          if (workString.includes(corruptedPlaceholder)) {
-             console.log(`  ❓ Possible raw form (no braces/underscores) "${corruptedPlaceholder}" FOUND in workString.`);
-          }
-        }
-      }
-      // ---- END PRE-REPLACEMENT CHECK LOG ----
 
       // Pass 2: Process main content (workString) for markdown
       workString = workString
@@ -501,16 +474,52 @@ export const StreamingResponseExtension = {
           }
       }
 
+      // ---- POST-PASS-2 / PRE-PASS-3 CHECK LOG ----
+      if (trace.payload?.debugMode === 1 && extractedElements.length > 0) {
+        const firstPlaceholder = extractedElements[0].placeholder;
+        console.log(`🚧 POST-PASS-2 CHECK:`);
+        console.log(`  🔍 Expected placeholder [0] (from extractedElements): "${firstPlaceholder}"`);
+        const placeholderIndexInWorkString = workString.indexOf(firstPlaceholder);
+        if (placeholderIndexInWorkString !== -1) {
+          console.log(`  ✅ Placeholder [0] FOUND in workString (after Pass 2) at index ${placeholderIndexInWorkString}.`);
+          console.log(`     Context: "${workString.substring(Math.max(0, placeholderIndexInWorkString - 30), placeholderIndexInWorkString + firstPlaceholder.length + 30)}"`);
+        } else {
+          console.warn(`  ❌ Placeholder [0] ("${firstPlaceholder}") NOT FOUND in workString (after Pass 2).`);
+          console.warn(`     WorkString (first 500 chars after Pass 2): "${workString.substring(0,500)}"`);
+        }
+      }
+      // ---- END POST-PASS-2 / PRE-PASS-3 CHECK LOG ----
+
       // Pass 3: Restore Links and Images from placeholders
-      extractedElements.forEach(el => {
+      extractedElements.forEach((el, index) => {
           let htmlElement = '';
+          const currentPlaceholder = el.placeholder;
+
+          if (trace.payload?.debugMode === 1) {
+              console.log(`[DEBUG] Pass 3 [${index}] - Placeholder: "${currentPlaceholder}", Type: ${el.type}`);
+              console.log(`[DEBUG] Pass 3 [${index}] - Original Text/Alt: "${el.text || el.alt}", URL: "${el.url}"`);
+              if (!workString.includes(currentPlaceholder)) {
+                  console.warn(`[DEBUG] Pass 3 [${index}] - CRITICAL WARN: Placeholder "${currentPlaceholder}" NOT IN workString BEFORE replace attempt!`);
+              }
+          }
+
           if (el.type === 'link') {
               htmlElement = `<a href="${el.url}" target="_blank" rel="noopener noreferrer">${el.processedText || ''}</a>`;
           } else if (el.type === 'image') {
               const secureUrl = el.url.replace(/^http:\/\//i, 'https://');
               htmlElement = `<img src="${secureUrl}" alt="${el.processedAlt || ''}" style="max-width:100%; height:auto;">`;
           }
-          workString = workString.replace(el.placeholder, htmlElement);
+          
+          if (workString.includes(currentPlaceholder)) {
+            workString = workString.replace(currentPlaceholder, htmlElement);
+            if (trace.payload?.debugMode === 1 && workString.includes(currentPlaceholder)){
+                console.error(`[DEBUG] Pass 3 [${index}] - FAILED TO REPLACE "${currentPlaceholder}". It still exists!`);
+            } else if (trace.payload?.debugMode === 1){
+                console.log(`[DEBUG] Pass 3 [${index}] - Successfully replaced "${currentPlaceholder}".`);
+            }
+          } else if (trace.payload?.debugMode === 1) {
+             console.warn(`[DEBUG] Pass 3 [${index}] - SKIPPED replace for "${currentPlaceholder}" as it was not found in workString.`);
+          }
       });
 
       const formattedContent = workString;
