@@ -135,18 +135,16 @@ export const StreamingResponseExtension = {
           .response-content h3 { font-size: 1.2em; }
           .response-content h4 { font-size: 1.1em; }
           .response-content h5 { font-size: 1em; }
-          .response-content ul, 
-          .response-content ol {
+          .response-content ul {
             margin: 0.5em 0;
             padding-left: 1.5em;
             list-style-position: outside;
           }
-          /* Nested list styling */
-          .response-content ul ul,
-          .response-content ul ol,
-          .response-content ol ul,
-          .response-content ol ol {
-            margin: 0.3em 0 0.3em 0; /* Reduced margin for nested lists */
+          /* Add rules for ordered lists to match unordered */
+          .response-content ol {
+            margin: 0.5em 0; /* Match ul margins */
+            padding-left: 1.5em; /* Match ul padding */
+            list-style-position: outside; /* Ensure numbers are outside */
           }
           /* Apply consistent styling to all list items */
           .response-content ul li,
@@ -156,21 +154,8 @@ export const StreamingResponseExtension = {
             line-height: 20px; /* Ensure consistent line height */
             margin-bottom: 0.6em; /* Increase bottom margin specifically for ordered lists */
           }
-          /* Style for nested list items */
-          .response-content li > ul,
-          .response-content li > ol {
-            margin-top: 0.4em; /* Space between parent item and its nested list */
-          }
-          /* Properly style indentation levels */
-          .response-content ul ul,
-          .response-content ol ul {
-            list-style-type: circle; /* Second level bullets */
-          }
-          .response-content ul ul ul,
-          .response-content ol ul ul,
-          .response-content ol ol ul,
-          .response-content ul ol ul {
-            list-style-type: square; /* Third level bullets */
+          .response-content li.sublist {
+            margin: 0.5em 0;
           }
           .response-content br {
             margin: 0;
@@ -389,58 +374,13 @@ export const StreamingResponseExtension = {
           
           return markdownTable + '\n';
         })
-        // Process lists (with proper nesting)
-        .replace(/<ul[^>]*>([\s\S]*?)<\/ul>/g, function processUl(match, content) {
-          // Process nested lists first
-          let processedContent = content.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/g, function(nestedMatch, nestedContent) {
-            // Process the content of this nested list with proper indentation
-            return nestedContent.replace(/<li[^>]*>([\s\S]*?)<\/li>/g, (_, itemContent) => {
-              // Check if there's another nested list inside this item
-              const hasNestedList = /<ul[^>]*>/.test(itemContent);
-              // Extract the text content (excluding any nested lists)
-              const textContent = hasNestedList 
-                ? itemContent.replace(/<ul[^>]*>[\s\S]*?<\/ul>/g, '') 
-                : itemContent;
-              
-              // Format with indentation for nested level
-              return `  - ${textContent.trim()}\n${hasNestedList ? itemContent.match(/<ul[^>]*>[\s\S]*?<\/ul>/g)[0] : ''}`;
-            });
-          });
-          
-          // Process the top-level items
-          return processedContent.replace(/<li[^>]*>([\s\S]*?)<\/li>/g, (_, itemContent) => {
-            // Check if this item contains a nested list that's already been processed
-            const hasProcessedNestedList = /  - /.test(itemContent);
-            if (hasProcessedNestedList) return itemContent;
-            
-            // Regular item without nesting
-            return `- ${itemContent.trim()}\n`;
-          });
+        // Lists
+        .replace(/<ul[^>]*>(.*?)<\/ul>/gs, (_, content) => {
+          return content.replace(/<li[^>]*>(.*?)<\/li>/g, '- $1\n');
         })
-        // Ordered lists with similar nested processing
-        .replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gs, function processOl(match, content) {
+        .replace(/<ol[^>]*>(.*?)<\/ol>/gs, (_, content) => {
           let counter = 1;
-          
-          // Process nested lists first
-          let processedContent = content.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/g, function(nestedMatch, nestedContent) {
-            let nestedCounter = 1;
-            return nestedContent.replace(/<li[^>]*>([\s\S]*?)<\/li>/g, (_, itemContent) => {
-              const hasNestedList = /<ol[^>]*>/.test(itemContent);
-              const textContent = hasNestedList 
-                ? itemContent.replace(/<ol[^>]*>[\s\S]*?<\/ol>/g, '') 
-                : itemContent;
-              
-              return `  ${nestedCounter++}. ${textContent.trim()}\n${hasNestedList ? itemContent.match(/<ol[^>]*>[\s\S]*?<\/ol>/g)[0] : ''}`;
-            });
-          });
-          
-          // Process the top-level items
-          return processedContent.replace(/<li[^>]*>([\s\S]*?)<\/li>/g, (_, itemContent) => {
-            const hasProcessedNestedList = /  \d+\./.test(itemContent);
-            if (hasProcessedNestedList) return itemContent;
-            
-            return `${counter++}. ${itemContent.trim()}\n`;
-          });
+          return content.replace(/<li[^>]*>(.*?)<\/li>/g, () => `${counter++}. $1\n`);
         })
         // Paragraphs
         .replace(/<p[^>]*>(.*?)<\/p>/g, '$1\n\n')
@@ -539,63 +479,12 @@ export const StreamingResponseExtension = {
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        // Process multi-level lists
-        .replace(/^(\s*)- (.*$)/gm, (match, indent, content) => {
-          const indentLevel = Math.floor(indent.length / 2); // Each level is 2 spaces
-          return `<li data-level="${indentLevel}">${content.trim()}</li>`;
+        .replace(/^- (.*$)/gm, (match, content) => {
+          const indentation = match.match(/^\s*/)[0].length;
+          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
         })
-        // Process nested lists structure in a post-processing step
-        .replace(/(?:^|\n)(<li)/g, '\n<ul>$1');
-
-      // Post-process for proper list nesting
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = formattedContent;
-      
-      // Process list items with data-level attributes
-      function processNestedLists(container) {
-        const listItems = container.querySelectorAll('li[data-level]');
-        let currentLevel = 0;
-        let currentList = null;
-        let listStack = [];
-        
-        for (const item of listItems) {
-          const level = parseInt(item.getAttribute('data-level') || '0');
-          
-          // Remove the attribute once processed
-          item.removeAttribute('data-level');
-          
-          if (level > currentLevel) {
-            // Create a new nested list
-            const newList = document.createElement('ul');
-            if (currentList) {
-              // Append to the last li of the current list
-              const lastItem = currentList.querySelector('li:last-child');
-              if (lastItem) {
-                lastItem.appendChild(newList);
-                listStack.push(currentList);
-                currentList = newList;
-                currentLevel = level;
-              }
-            }
-          } else if (level < currentLevel) {
-            // Go back up the stack
-            for (let i = 0; i < (currentLevel - level); i++) {
-              if (listStack.length) {
-                currentList = listStack.pop();
-              }
-            }
-            currentLevel = level;
-          }
-          
-          // Move the item to its correct list
-          if (currentList && level > 0) {
-            currentList.appendChild(item);
-          }
-        }
-      }
-      
-      processNestedLists(tempDiv);
-      formattedContent = tempDiv.innerHTML;
+        .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
 
       // --- BEGIN: Post-process lists and clean up empty items ---
       const tempContainer = document.createElement('div');
