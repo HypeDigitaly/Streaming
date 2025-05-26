@@ -951,10 +951,6 @@ export const StreamingResponseExtension = {
                   if (content || typeof content === 'string') { // Handle empty string content too
                     receivedAnyContent = true; // Mark that we have received processable content
 
-                    if (payload.debugMode === 1) {
-                      console.log(`📝 Content chunk from ${endpoint}: "${content}"`);
-                    }
-
                     // --- TTFT Logic ---
                     if (!firstChunkReceived) {
                       firstChunkReceived = true;
