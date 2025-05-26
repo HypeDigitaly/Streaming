@@ -1,0 +1,562 @@
+ Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+fingerprint.js:221 Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+bundle.mjs:513 voiceflow webchat v2.85.4
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "1,4,5",
+  "model": "claude-3-7-sonnet-20250219",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\nThis block defines the dynamic variables provided to you with each user query.\n\n---\n\n# Knowledge & Query Context\n\n## \"Reference Information\": \n  \"\"\"\n  [{\"score\":0.50678253,\"chunkID\":\"9206cbb0-de24-4db4-949f-c7c2bf4b8cae\",\"documentID\":\"682d0983911de76a76d85fb5\",\"content\":\"Title: Nové výzvy programu Interreg Česko - Polsko 2021-2027 - životní prostředí a doprava; URL: https://www.khk.cz/dotace-prehled/aktuality/nove-vyzvy-programu-interreg-cesko-polsko-2021-2027-zivotni-prostredi-doprava; Description: Dne 12. května 2025 byly v rámci programu Interreg Česko - Polsko 2021-2027 vyhlášeny nové výzvy pro priority:\\\\n3 DOPRAVA - specifický cíl3.1_Opatření pro rozvoj přeshraniční veřejné a individuální dopravy\\\\nVíce informací:Nové výzvy v rámci P1 a P3; ImageURL: undefined; Date: 20250520\",\"metadata\":{\"Category\":[\"Media_Komunikace\",\"Doprava\",\"Dotace\",\"Rozvoj_Projekty\"],\"Date\":20250520},\"source\":{\"type\":\"table\",\"name\":\"table_tiskove_informace_2025_20250519_20250520\",\"rowsCount\":2,\"tags\":[]}},{\"score\":0.49699402,\"chunkID\":\"126bbcf4-bc4f-4688-b6f7-a9e0ac936713\",\"documentID\":\"682d0983911de76a76d85fb5\",\"content\":\"Title: Školení k novým výzvám programu Interreg Česko - Polsko 2021-2027 - životní prostředí a doprava; URL: https://www.khk.cz/dotace-prehled/aktuality/skoleni-k-novym-vyzvam-programu-interreg-cesko-polsko-2021-2027-zivotni-prostredi-doprava; Description: Dne 26. května 2025 od 9 do 12 hodin se bude konat formou videokonference školení, týkající se nových výzev programu Interreg Česko - Polsko 2021-2027 (životní prostředí a doprava).\\\\nVíce informací, včetně pozvánky:Školení pro žadatele k výzvám v 1.2 a 3.1\\\\n; ImageURL: undefined; Date: 20250520\",\"metadata\":{\"Category\":[\"Media_Komunikace\",\"Dotace\",\"Zivotni_Prostredi_Zemedelstvi\",\"Doprava\"],\"Date\":20250520},\"source\":{\"type\":\"table\",\"name\":\"table_tiskove_informace_2025_20250519_20250520\",\"rowsCount\":2,\"tags\":[]}},{\"score\":0.44892502,\"chunkID\":\"77b84264-3ea2-45ab-80e4-a67b4aaefb64\",\"documentID\":\"682bb7ff9cd291327d5ba441\",\"content\":\"Title: V Hradci Králové vznikne Centrum asistivních technologií, pomůže seniorům i hendikepovaným; URL: https://www.khk.cz/aktuality/v-hradci-kralove-vznikne-centrum-asistivnich-technologii-pomuze-seniorum-i-hendikepovanym; Description: Asistivní technologie prodlužují bezpečný a nezávislý život seniorů a hendikepovaných osob ve vlastní domácnosti. Laická i odborná veřejnost o nich má ale velmi malé povědomí. Královéhradecký kraj podporuje šíření informací o tomto oboru, a proto zaštítil vznik Centra asistivních technologií v Hradci Králové. To se otevře 25. července ve Věkoších.\\\\n„Královéhradecký kraj vnímá moderní technologie jako příležitost, jak zlepšit kvalitu života osob se zdravotním postižením. Proto jsme rádi, že můžeme tento projekt podpořit. Toto místo bude sloužit neformálně pečujícím osobám, klientům, tak i zástupcům odborné veřejnosti. Již na tento rok máme naplánováno mnoho aktivit,“sdělila náměstkyně hejtmana pro oblast sociálních věcí Jana Hůlková.\\\\nNa vzniku Centra asistivních technologií se budou podílet tři strany, které spolu v pondělí 19. května uzavřely memorandum o spolupráci. Královéhradecký kraj zde bude figurovat především jako propagátor asistivních technologií mezi svými příspěvkovými organizacemi i vstříc široké veřejnosti.\\\\nAsistivní a dohledové technologie jsou velkou příležitostí ke snížení nároků na poskytování pobytových i terénních sociálních služeb. Jejich vhodné využití je základem k prodloužení nezávislého života seniorů a osob se zdravotním postižením ve vlastní domácnosti. Jedná se například o kamery se vzdáleným přístupem, SOS tlačítka nebo kompenzační pomůcky (naslouchátka, vozíky, zvedáky apod.).\\\\nCentrum vznikne v budověCentra pro integraci osob se zdravotním postižením Královehradeckého kraje o.p.s. v ulici Jana Černého 8/28 v Hradci Králové – Věkoších. Bude sloužit jako ukázkový a poradenský prostor pro seniory, osoby se zdravotním postižením a jejich pečující. Cílem je nabídnout jim praktické možnosti využití moderních pomůcek a technologií v běžném životě.\\\\n„Chceme, aby Centrum asistivních technologií bylo místem, kde si lidé mohou v bezpečném prostředí vyzkoušet moderní pomůcky, získat praktické rady a inspiraci pro každodenní život,“uvedl ředitel Centra pro integraci osob se zdravotním postižením Královehradeckého kraje Rostislav Hekera.\\\\nVybavení centra, zaškolení pracovníků a pořádání odborných kurzů pro sociální pracovníky zajistí zapsaný spolekDohled na dosah. Jeho pracovníci se tématu asistivních technologií dlouhodobě věnují a mají již další centra v Plzni, Ostravě a Jihlavě a jsou také poskytovateli sociální služby tísňové péče a telefonické krizové pomoci.\\\\n„Věříme, že toto Centrum naváže na úspěchy a přínosy n
+StreamingResponseExtension.js:11 🌍 Language setting: cs
+StreamingResponseExtension.js:1163 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:1164 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:1165 📋 Raw sequence: 1,4,5
+StreamingResponseExtension.js:1166 📋 Parsed IDs: [1,4,5]
+StreamingResponseExtension.js:1169 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:1171 📌 Position 0: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:1171 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:1171 📌 Position 2: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+StreamingResponseExtension.js:1173 =============================
+StreamingResponseExtension.js:1199 
+🔄 ATTEMPT 1/3: Using model ID:1
+StreamingResponseExtension.js:1200 📌 Model: Claude 4 Sonnet (claude)
+StreamingResponseExtension.js:1201 📌 Model name: claude-sonnet-4-20250514
+StreamingResponseExtension.js:1202 📌 Endpoint: /api/claude-stream
+StreamingResponseExtension.js:1203 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:929 📦 Payload for /api/claude-stream: Object
+StreamingResponseExtension.js:938 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/claude-stream with TTFT 10000ms
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:1013 ✅ First chunk received from /api/claude-stream within timeout.
+StreamingResponseExtension.js:1114 TTFT met for /api/claude-stream. Waiting for stream completion...
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:534 Converting markdown image to HTML: Object
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'dově Centra pro integraci osob se'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+The deferred DOM Node could not be resolved to a valid node.
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' zdravotním postižením v ul'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ici Jana Černého **8'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '/28**.\n\nNáměst'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'kyně hejtmana Jana'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' Hůlková uvedla: *"Králov'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'éhradecký kraj vnímá moder'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ní technologie jako příležitost,'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' jak zlepšit kvalitu života os'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ob se zdravotním postižením."'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '*\n\n# Zdroje'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '\n* [Sociální pedagog ve šk'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ole je mostem mezi školou, rodinou'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' a službou](https://www.khk'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '.cz/aktuality/socialni-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'pedagog-ve-skole-je-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'mostem-mezi-skolou-rodinou'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '-sluzbou)\n* ['}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'Začala stavba obchvatu Čast'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'olovic za 474 milionů ko'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'run](https://www.khk.c'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'z/aktuality/zacala-stav'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ba-obchvatu-castolovic'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '-za-474-milionu-ko'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'run)\n* [Školení k nov'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ým výzvám programu Interreg'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' Česko - Polsko 2021'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '-2027](https://www.kh'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'k.cz/dotace-preh'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'led/aktuality/skoleni-k-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'novym-vyzvam-programu-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'interreg-cesko-polsko-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '2021-2027-zivotni'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '-prostredi-doprava)\n*'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' [Nové výzvy programu'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' Interreg Česko - Polsko'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' 2021-2027](https://www'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '.khk.cz/dotace-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'prehled/aktuality/nove-v'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'yzvy-programu-interreg-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'cesko-polsko-2021-2'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '027-zivotni-prostredi'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '-doprava)\n* [V Hra'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'dci Králové vznikne Centrum asist'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ivních technologií](https://www.kh'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'k.cz/aktuality/v-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'hradci-kralove-vznikne-centrum'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '-asistivnich-technologii-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'pomuze-seniorum-i-'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'hendikepovanym)\n\n---'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '\n***Upozornění:*** *Při'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' poskytování kompletních seznamů se'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' snažím vždy poskytnout ú'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'plné informace, nicméně se'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: ' může stát, že nějakou polož'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ku někdy omylem vynechám. Do'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'poručuji si mou odp'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ověď raději ověřit'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: '. Přeci jen jsem st'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ále umělá inteligence a m'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:999 📥 Frontend chunk from /api/claude-stream: {type: 'content', content: 'ám své limity.*'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Odborné setkání na téma sociálního pedagoga](htt…il/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…ail/public/2025-05/DSC</em>6532.jpg?itok=q0Pt6lAG', altText: 'Odborné setkání na téma sociálního pedagoga'}
+StreamingResponseExtension.js:534 Converting markdown image to HTML: {original: '![Stavba obchvatu Častolovic](https://www.khk.cz/s…m>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-)', cleanUrl: 'https://www.khk.cz/sites/default/files/styles/phot…em>20250520115433<em>0102</em>D.jpg?itok=dPCewbW-', altText: 'Stavba obchvatu Častolovic'}
+StreamingResponseExtension.js:984 [DONE] received for /api/claude-stream.
+StreamingResponseExtension.js:1081 📤 Updating Voiceflow variable with response length: 4560
+StreamingResponseExtension.js:1096 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:1097 Voiceflow update response: {success: true, status: 200, message: '{"_id":"6816970a1bc95d6a828f83b9","id":"general-pl…"content":"tiskové zprávy za poslední týden"}]}}}'}
+StreamingResponseExtension.js:1228 
+✅ SUCCESS: MODEL ID:1
+StreamingResponseExtension.js:1229 📌 Model: Claude 4 Sonnet (claude)
+StreamingResponseExtension.js:1230 📌 Model name: claude-sonnet-4-20250514
+StreamingResponseExtension.js:1231 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:1232 📌 Attempt: 1/3
+StreamingResponseExtension.js:1233 =============================
