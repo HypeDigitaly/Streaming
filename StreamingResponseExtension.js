@@ -413,39 +413,47 @@ export const StreamingResponseExtension = {
 
       // Post-process buffer to handle various image URL patterns
       
-      // Pattern 1: Complete image URLs with query parameters (e.g., DSC_6532.jpg?tok=xyz)
-      buffer = buffer.replace(/\b([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_-]+)\b/gi, function(match, imageUrl) {
+      // Pattern 1: Complete URLs with image extensions (including query parameters)
+      buffer = buffer.replace(/\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?)\b/gi, function(match, imageUrl) {
         // Skip if already in markdown or HTML format
-        if (buffer.substring(0, buffer.indexOf(match)).includes('![') || 
-            buffer.substring(0, buffer.indexOf(match)).includes('<img')) {
+        const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+        if (beforeMatch.includes('![') && beforeMatch.lastIndexOf('![') > beforeMatch.lastIndexOf(')')) {
+          return match;
+        }
+        if (beforeMatch.includes('<img')) {
           return match;
         }
         return `![Image](${imageUrl})`;
       });
       
-      // Pattern 2: Fragmented URLs that might be split (filename.ext?param followed by token)
-      buffer = buffer.replace(/([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_]*)\s*[-=]([a-zA-Z0-9_-]+)/gi, function(match, urlPart, token) {
-        // Skip if already processed
-        if (buffer.substring(0, buffer.indexOf(match)).includes('![') || 
-            buffer.substring(0, buffer.indexOf(match)).includes('<img')) {
+      // Pattern 2: Image filenames with query parameters (e.g., DSC_6532.jpg?tok=xyz)
+      buffer = buffer.replace(/\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_.-]+)\b/gi, function(match, imageUrl) {
+        // Skip if already in markdown or HTML format
+        const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+        if (beforeMatch.includes('![') && beforeMatch.lastIndexOf('![') > beforeMatch.lastIndexOf(')')) {
           return match;
         }
-        const completeUrl = urlPart + token;
-        return `![Image](${completeUrl})`;
+        if (beforeMatch.includes('<img')) {
+          return match;
+        }
+        return `![Image](${imageUrl})`;
       });
       
       // Pattern 3: Standalone image filenames (without query params)
-      buffer = buffer.replace(/\b([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi, function(match, filename) {
+      buffer = buffer.replace(/\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi, function(match, filename) {
         // Skip if already in markdown or HTML format
-        if (buffer.substring(0, buffer.indexOf(match)).includes('![') || 
-            buffer.substring(0, buffer.indexOf(match)).includes('<img')) {
+        const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+        if (beforeMatch.includes('![') && beforeMatch.lastIndexOf('![') > beforeMatch.lastIndexOf(')')) {
           return match;
         }
-        // Skip if this looks like it might be part of a larger URL that will be processed later
-        const contextBefore = buffer.substring(Math.max(0, buffer.indexOf(match) - 20), buffer.indexOf(match));
-        const contextAfter = buffer.substring(buffer.indexOf(match) + match.length, buffer.indexOf(match) + match.length + 20);
-        if (contextBefore.includes('?') || contextAfter.match(/^[\?=&\-]/)) {
-          return match; // Let other patterns handle this
+        if (beforeMatch.includes('<img')) {
+          return match;
+        }
+        // Skip if this looks like it might be part of a larger URL
+        const contextBefore = buffer.substring(Math.max(0, buffer.indexOf(match) - 10), buffer.indexOf(match));
+        const contextAfter = buffer.substring(buffer.indexOf(match) + match.length, buffer.indexOf(match) + match.length + 10);
+        if (contextBefore.includes('?') || contextAfter.match(/^[\?=&]/)) {
+          return match; // Skip fragments that will be processed by other patterns
         }
         return `![Image](${filename})`;
       });
@@ -515,13 +523,15 @@ export const StreamingResponseExtension = {
           // Clean and validate the URL
           let cleanUrl = url.trim();
           
-          // Convert HTTP to HTTPS if it's not already HTTPS
+          // Convert HTTP to HTTPS if it's a full URL starting with http://
           if (cleanUrl.match(/^http:\/\//i)) {
             cleanUrl = cleanUrl.replace(/^http:\/\//i, 'https://');
           }
           
           // Use alt text if provided, otherwise use empty string
-          const altText = alt ? alt.trim() : 'Image';
+          const altText = alt ? alt.trim() : '';
+          
+          console.log('Converting markdown image to HTML:', { original: match, cleanUrl, altText });
           
           return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
