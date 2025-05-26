@@ -412,16 +412,21 @@ export const StreamingResponseExtension = {
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         // --- BEGIN: Markdown Table Conversion ---
-        .replace(/^\|(.+)\|\\r?\\n\|( *[-:]+[-| :]* *)\|\\r?\\n((?:\|.*\|\\r?\\n?)*)/gm, (match, headerRow, separatorRow, bodyRows) => {
+        .replace(/^\|(.+)\|\\r?\\n\|( *[-:]+[-| :]* *)\|\\r?\\n((?:\|.*\|\\r?\\n?)*)/gm, (match, headerRowContent, separatorRowContent, bodyRows) => {
           let html = '<table>\\n';
 
-          // Process header
-          const headerCells = headerRow.split('|').map(cell => cell.trim()).filter(cell => cell);
-          if (headerCells.length > 0) {
+          // Determine column count from separator row
+          const separatorCells = separatorRowContent.split('|').map(cell => cell.trim());
+          const numCols = separatorCells.length;
+
+          // Process header content
+          const parsedHeaderCells = headerRowContent.split('|').map(cell => cell.trim());
+
+          if (numCols > 0) {
             html += '  <thead>\\n    <tr>\\n';
-            headerCells.forEach(cell => {
-              html += `      <th>${cell}</th>\\n`;
-            });
+            for (let i = 0; i < numCols; i++) {
+              html += `      <th>${parsedHeaderCells[i] || ''}</th>\\n`;
+            }
             html += '    </tr>\\n  </thead>\\n';
           }
 
