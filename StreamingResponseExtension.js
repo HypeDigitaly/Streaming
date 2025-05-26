@@ -475,7 +475,9 @@ export const StreamingResponseExtension = {
         .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
-          return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
+          // Use alt text if provided, otherwise use empty string
+          const altText = alt ? alt.trim() : '';
+          return `<img src="${secureUrl}" alt="${altText}" style="max-width:100%; height:auto;">`;
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
