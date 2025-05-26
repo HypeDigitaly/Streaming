@@ -939,6 +939,10 @@ export const StreamingResponseExtension = {
                 if (data.startsWith('{') && data.endsWith('}')) {
                   const parsed = JSON.parse(data);
 
+                  if (payload.debugMode === 1) {
+                    console.log(`📥 Frontend chunk from ${endpoint}:`, parsed);
+                  }
+
                   if (parsed.error) {
                     throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
                   }
@@ -946,6 +950,10 @@ export const StreamingResponseExtension = {
                   const content = parsed.content || '';
                   if (content || typeof content === 'string') { // Handle empty string content too
                     receivedAnyContent = true; // Mark that we have received processable content
+
+                    if (payload.debugMode === 1) {
+                      console.log(`📝 Content chunk from ${endpoint}: "${content}"`);
+                    }
 
                     // --- TTFT Logic ---
                     if (!firstChunkReceived) {
