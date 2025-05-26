@@ -411,6 +411,25 @@ export const StreamingResponseExtension = {
       // Append to buffer
       buffer += text;
 
+      // Post-process buffer to handle fragmented image URLs
+      // Pattern: filename.ext?param followed by -token
+      buffer = buffer.replace(/([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_]*)\s*(-[a-zA-Z0-9]+)/gi, function(match, urlPart, token) {
+        const completeUrl = urlPart + token;
+        return `![Image](https://www.kh.cz/${completeUrl})`;
+      });
+      
+      // Also handle standalone image files
+      buffer = buffer.replace(/\b([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi, function(match, filename) {
+        // Skip if already in markdown image format or HTML
+        if (buffer.includes(`![`) && buffer.includes(`](`) && buffer.includes(filename)) {
+          return match;
+        }
+        if (buffer.includes(`<img`) && buffer.includes(filename)) {
+          return match;
+        }
+        return `![Image](https://www.kh.cz/${filename})`;
+      });
+
       // Format markdown content
       const formattedContent = buffer
         // Headers - H1 to H5
@@ -479,12 +498,21 @@ export const StreamingResponseExtension = {
           const altText = alt ? alt.trim() : '';
           return `<img src="${secureUrl}" alt="${altText}" style="max-width:100%; height:auto;">`;
         })
-        // Fallback: detect standalone image URLs or file extensions and convert to images
-        .replace(/(?:^|\s)((?:https?:\/\/)?[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?)\s*$/gim, function(match, url) {
-          // Ensure URL has protocol
-          const fullUrl = url.startsWith('http') ? url : `https://${url}`;
-          const secureUrl = fullUrl.replace(/^http:\/\//i, 'https://');
-          return `<img src="${secureUrl}" alt="Image" style="max-width:100%; height:auto;">`;
+        // Fallback: detect image file patterns and convert to images
+        .replace(/([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[a-zA-Z0-9=&_-]*)?)/gi, function(match, filename) {
+          // Check if this looks like a complete image filename or URL fragment
+          if (filename.includes('.')) {
+            // If it has a domain-like structure, treat as URL
+            if (filename.match(/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/)) {
+              const secureUrl = filename.startsWith('http') ? filename : `https://${filename}`;
+              return `<img src="${secureUrl}" alt="Image" style="max-width:100%; height:auto;">`;
+            }
+            // Otherwise, assume it's a relative path that needs a base URL
+            else {
+              return `<img src="https://www.kh.cz/${filename}" alt="Image" style="max-width:100%; height:auto;">`;
+            }
+          }
+          return match;
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
