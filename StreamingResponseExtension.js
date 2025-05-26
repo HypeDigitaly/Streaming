@@ -471,14 +471,14 @@ export const StreamingResponseExtension = {
           tableHtml += '</table>';
           return tableHtml;
         })
-        // Images
-        .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
+        // Images (convert markdown images to HTML before processing links)
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
           const secureUrl = url.replace(/^http:\/\//i, 'https://');
           return `<img src="${secureUrl}" alt="${alt}" style="max-width:100%; height:auto;">`;
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
