@@ -479,6 +479,13 @@ export const StreamingResponseExtension = {
           const altText = alt ? alt.trim() : '';
           return `<img src="${secureUrl}" alt="${altText}" style="max-width:100%; height:auto;">`;
         })
+        // Fallback: detect standalone image URLs or file extensions and convert to images
+        .replace(/(?:^|\s)((?:https?:\/\/)?[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?)\s*$/gim, function(match, url) {
+          // Ensure URL has protocol
+          const fullUrl = url.startsWith('http') ? url : `https://${url}`;
+          const secureUrl = fullUrl.replace(/^http:\/\//i, 'https://');
+          return `<img src="${secureUrl}" alt="Image" style="max-width:100%; height:auto;">`;
+        })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         .replace(/^- (.*$)/gm, (match, content) => {
