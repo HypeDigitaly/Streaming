@@ -411,21 +411,41 @@ export const StreamingResponseExtension = {
       // Append to buffer
       buffer += text;
 
-      // Post-process buffer to handle fragmented image URLs
-      // Pattern: filename.ext?param followed by -token
-      buffer = buffer.replace(/([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_]*)\s*(-[a-zA-Z0-9]+)/gi, function(match, urlPart, token) {
+      // Post-process buffer to handle various image URL patterns
+      
+      // Pattern 1: Complete image URLs with query parameters (e.g., DSC_6532.jpg?tok=xyz)
+      buffer = buffer.replace(/\b([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_-]+)\b/gi, function(match, imageUrl) {
+        // Skip if already in markdown or HTML format
+        if (buffer.substring(0, buffer.indexOf(match)).includes('![') || 
+            buffer.substring(0, buffer.indexOf(match)).includes('<img')) {
+          return match;
+        }
+        return `![Image](https://www.kh.cz/${imageUrl})`;
+      });
+      
+      // Pattern 2: Fragmented URLs that might be split (filename.ext?param followed by token)
+      buffer = buffer.replace(/([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_]*)\s*[-=]([a-zA-Z0-9_-]+)/gi, function(match, urlPart, token) {
+        // Skip if already processed
+        if (buffer.substring(0, buffer.indexOf(match)).includes('![') || 
+            buffer.substring(0, buffer.indexOf(match)).includes('<img')) {
+          return match;
+        }
         const completeUrl = urlPart + token;
         return `![Image](https://www.kh.cz/${completeUrl})`;
       });
       
-      // Also handle standalone image files
+      // Pattern 3: Standalone image filenames (without query params)
       buffer = buffer.replace(/\b([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi, function(match, filename) {
-        // Skip if already in markdown image format or HTML
-        if (buffer.includes(`![`) && buffer.includes(`](`) && buffer.includes(filename)) {
+        // Skip if already in markdown or HTML format
+        if (buffer.substring(0, buffer.indexOf(match)).includes('![') || 
+            buffer.substring(0, buffer.indexOf(match)).includes('<img')) {
           return match;
         }
-        if (buffer.includes(`<img`) && buffer.includes(filename)) {
-          return match;
+        // Skip if this looks like it might be part of a larger URL that will be processed later
+        const contextBefore = buffer.substring(Math.max(0, buffer.indexOf(match) - 20), buffer.indexOf(match));
+        const contextAfter = buffer.substring(buffer.indexOf(match) + match.length, buffer.indexOf(match) + match.length + 20);
+        if (contextBefore.includes('?') || contextAfter.match(/^[\?=&\-]/)) {
+          return match; // Let other patterns handle this
         }
         return `![Image](https://www.kh.cz/${filename})`;
       });
@@ -490,31 +510,27 @@ export const StreamingResponseExtension = {
           tableHtml += '</table>';
           return tableHtml;
         })
-        // Images (convert markdown images to HTML before processing links)
+        // Images: Convert markdown images to HTML (MUST be done before link conversion)
         .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, alt, url) {
-          // Convert HTTP to HTTPS if it's not already
-          const secureUrl = url.replace(/^http:\/\//i, 'https://');
-          // Use alt text if provided, otherwise use empty string
-          const altText = alt ? alt.trim() : '';
-          return `<img src="${secureUrl}" alt="${altText}" style="max-width:100%; height:auto;">`;
-        })
-        // Fallback: detect image file patterns and convert to images
-        .replace(/([a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[a-zA-Z0-9=&_-]*)?)/gi, function(match, filename) {
-          // Check if this looks like a complete image filename or URL fragment
-          if (filename.includes('.')) {
-            // If it has a domain-like structure, treat as URL
-            if (filename.match(/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/)) {
-              const secureUrl = filename.startsWith('http') ? filename : `https://${filename}`;
-              return `<img src="${secureUrl}" alt="Image" style="max-width:100%; height:auto;">`;
-            }
-            // Otherwise, assume it's a relative path that needs a base URL
-            else {
-              return `<img src="https://www.kh.cz/${filename}" alt="Image" style="max-width:100%; height:auto;">`;
-            }
+          // Clean and validate the URL
+          let cleanUrl = url.trim();
+          
+          // Convert HTTP to HTTPS if it's not already HTTPS
+          if (cleanUrl.match(/^http:\/\//i)) {
+            cleanUrl = cleanUrl.replace(/^http:\/\//i, 'https://');
           }
-          return match;
+          
+          // If URL doesn't start with http/https, assume it's relative and add base
+          if (!cleanUrl.match(/^https?:\/\//i)) {
+            cleanUrl = `https://www.kh.cz/${cleanUrl.replace(/^\/+/, '')}`;
+          }
+          
+          // Use alt text if provided, otherwise use empty string
+          const altText = alt ? alt.trim() : 'Image';
+          
+          return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
-        // Convert markdown links to HTML links (arrow removed, handled by CSS now)
+        // Convert regular markdown links to HTML links (AFTER image processing)
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
