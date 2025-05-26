@@ -190,29 +190,6 @@ export const StreamingResponseExtension = {
             width: 100%;
             margin: 1.2em 0;
           }
-          /* Table styles */
-          .response-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1em 0;
-            font-size: 14px;
-            line-height: 1.6;
-          }
-          .response-content th, 
-          .response-content td {
-            border: 1px solid #E5E7EB;
-            padding: 8px 12px;
-            text-align: left;
-          }
-          .response-content th {
-            background-color: #f9fafb;
-            font-weight: 600;
-            color: #374151;
-          }
-          .response-content tr:nth-child(even) {
-            background-color: #f9fafb;
-          }
-          /* End Table styles */
           /* Added styles for headings */
           .response-content .answer-h1 {
             font-size: 1.4em;
@@ -249,6 +226,25 @@ export const StreamingResponseExtension = {
             font-family: monospace; /* Monospace font */
             margin: 0;
             line-height: 1;
+          }
+          .response-content .markdown-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+            font-size: 14px;
+          }
+          .response-content .markdown-table th,
+          .response-content .markdown-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+          }
+          .response-content .markdown-table th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+          }
+          .response-content .markdown-table tr:nth-child(even) {
+            background-color: #f9f9f9;
           }
           .ai-info-footer {
             display: flex;
@@ -344,6 +340,40 @@ export const StreamingResponseExtension = {
         .replace(/<strong>(.*?)<\/strong>/g, '**$1**')
         // Italic
         .replace(/<em>(.*?)<\/em>/g, '*$1*')
+        // Tables
+        .replace(/<table[^>]*>([\s\S]*?)<\/table>/g, (match, tableContent) => {
+          const rows = tableContent.match(/<tr[^>]*>([\s\S]*?)<\/tr>/g) || [];
+          if (rows.length === 0) return match;
+          
+          let markdownTable = '\n';
+          let headerCreated = false;
+          
+          rows.forEach((row) => {
+            const cells = row.match(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g) || [];
+            if (cells.length === 0) return;
+            
+            markdownTable += '|';
+            
+            cells.forEach((cell) => {
+              const content = cell.replace(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g, '$1').trim();
+              markdownTable += ` ${content} |`;
+            });
+            
+            markdownTable += '\n';
+            
+            // Add separator row after the first row
+            if (!headerCreated) {
+              markdownTable += '|';
+              cells.forEach(() => {
+                markdownTable += ' --- |';
+              });
+              markdownTable += '\n';
+              headerCreated = true;
+            }
+          });
+          
+          return markdownTable + '\n';
+        })
         // Lists
         .replace(/<ul[^>]*>(.*?)<\/ul>/gs, (_, content) => {
           return content.replace(/<li[^>]*>(.*?)<\/li>/g, '- $1\n');
@@ -403,6 +433,44 @@ export const StreamingResponseExtension = {
         .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
         // Code
         .replace(/`([^`]+)`/g, '<code>$1</code>')
+        // Tables
+        .replace(/(\n\|.*\|.*\n\|[\s-]*\|[\s-]*\|[\s-]*\n)((.*\n)*?)(?=\n|$)/g, function(match) {
+          // Process the table
+          const rows = match.trim().split('\n');
+          
+          // Check if this is really a table
+          if (rows.length < 2) return match;
+          
+          let tableHtml = '<table class="markdown-table">\n';
+          
+          // Process each row
+          rows.forEach((row, rowIndex) => {
+            if (rowIndex === 1 && row.match(/^\|[\s-]*\|[\s-]*\|/)) {
+              // This is the separator row, skip it
+              return;
+            }
+            
+            // Start the row
+            tableHtml += '  <tr>\n';
+            
+            // Extract cells, remove first and last empty cells if they exist
+            const cells = row.split('|').slice(1, -1);
+            
+            // Process each cell
+            cells.forEach((cell) => {
+              const cellContent = cell.trim();
+              const cellTag = rowIndex === 0 ? 'th' : 'td';
+              tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
+            });
+            
+            // End the row
+            tableHtml += '  </tr>\n';
+          });
+          
+          // End the table
+          tableHtml += '</table>';
+          return tableHtml;
+        })
         // Images
         .replace(/!\[(.*?)\]\((.*?)\)/g, function(match, alt, url) {
           // Convert HTTP to HTTPS if it's not already
@@ -411,45 +479,6 @@ export const StreamingResponseExtension = {
         })
         // Convert markdown links to HTML links (arrow removed, handled by CSS now)
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        // --- BEGIN: Markdown Table Conversion ---
-        .replace(/^\|(.+)\|\\r?\\n\|( *[-:]+[-| :]* *)\|\\r?\\n((?:\|.*\|\\r?\\n?)*)/gm, (match, headerRowContent, separatorRowContent, bodyRows) => {
-          let html = '<table>\\n';
-
-          // Determine column count from separator row
-          const separatorCells = separatorRowContent.split('|').map(cell => cell.trim());
-          const numCols = separatorCells.length;
-
-          // Process header content
-          const parsedHeaderCells = headerRowContent.split('|').map(cell => cell.trim());
-
-          if (numCols > 0) {
-            html += '  <thead>\\n    <tr>\\n';
-            for (let i = 0; i < numCols; i++) {
-              html += `      <th>${parsedHeaderCells[i] || ''}</th>\\n`;
-            }
-            html += '    </tr>\\n  </thead>\\n';
-          }
-
-          // Process body
-          const rows = bodyRows.trim().split(/\\r?\\n/);
-          if (rows.length > 0 && rows[0].trim() !== '') {
-            html += '  <tbody>\\n';
-            rows.forEach(rowStr => {
-              const cells = rowStr.split('|').map(cell => cell.trim()).filter((cell, index, arr) => index !== 0 && index !== arr.length -1 ); // remove empty start/end cells from split
-              if (cells.some(cell => cell)) { // Check if row is not entirely empty
-                html += '    <tr>\\n';
-                cells.forEach(cell => {
-                  html += `      <td>${cell}</td>\\n`;
-                });
-                html += '    </tr>\\n';
-              }
-            });
-            html += '  </tbody>\\n';
-          }
-          html += '</table>';
-          return html;
-        })
-        // --- END: Markdown Table Conversion ---
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
           return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
@@ -848,7 +877,7 @@ export const StreamingResponseExtension = {
               systemPrompt: payload.systemPrompt,
               user_id: payload.user_id
             });
-            console.log(` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
           }
 
           response = await fetch(proxyUrl, {
