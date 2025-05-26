@@ -119,9 +119,6 @@ export const StreamingResponseExtension = {
           strong {
             font-weight: 600;
           }
-          em {
-            font-style: italic;
-          }
           .response-content h1, 
           .response-content h2, 
           .response-content h3,
@@ -483,11 +480,8 @@ export const StreamingResponseExtension = {
           
           return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
-        // Bold and italic formatting (AFTER image processing to prevent URL corruption)
-        .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')  // Triple asterisks for bold+italic
+        // Bold formatting only (AFTER image processing to prevent URL corruption)
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Double asterisks for bold
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')  // Single asterisks for italic
-        .replace(/\_(.*?)\_/g, '<em>$1</em>')  // Underscore for italic
         // Line separators (three or more hyphens)
         .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
         // List items
