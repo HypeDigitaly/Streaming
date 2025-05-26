@@ -458,7 +458,7 @@ export const StreamingResponseExtension = {
         return `![Image](${filename})`;
       });
 
-      // Format markdown content
+      // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
       const formattedContent = buffer
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
@@ -466,7 +466,24 @@ export const StreamingResponseExtension = {
         .replace(/^### (.*$)/gm, '<h3>$1</h3>')
         .replace(/^## (.*$)/gm, '<h2>$1</h2>')
         .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-        // Bold and italic formatting
+        // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, alt, url) {
+          // Clean and validate the URL
+          let cleanUrl = url.trim();
+          
+          // Convert HTTP to HTTPS if it's a full URL starting with http://
+          if (cleanUrl.match(/^http:\/\//i)) {
+            cleanUrl = cleanUrl.replace(/^http:\/\//i, 'https://');
+          }
+          
+          // Use alt text if provided, otherwise use empty string
+          const altText = alt ? alt.trim() : '';
+          
+          console.log('Converting markdown image to HTML:', { original: match, cleanUrl, altText });
+          
+          return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
+        })
+        // Bold and italic formatting (AFTER image processing to prevent URL corruption)
         .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')  // Triple asterisks for bold+italic
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Double asterisks for bold
         .replace(/\*(.*?)\*/g, '<em>$1</em>')  // Single asterisks for italic
@@ -517,23 +534,6 @@ export const StreamingResponseExtension = {
           // End the table
           tableHtml += '</table>';
           return tableHtml;
-        })
-        // Images: Convert markdown images to HTML (MUST be done before link conversion)
-        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, alt, url) {
-          // Clean and validate the URL
-          let cleanUrl = url.trim();
-          
-          // Convert HTTP to HTTPS if it's a full URL starting with http://
-          if (cleanUrl.match(/^http:\/\//i)) {
-            cleanUrl = cleanUrl.replace(/^http:\/\//i, 'https://');
-          }
-          
-          // Use alt text if provided, otherwise use empty string
-          const altText = alt ? alt.trim() : '';
-          
-          console.log('Converting markdown image to HTML:', { original: match, cleanUrl, altText });
-          
-          return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
         // Convert regular markdown links to HTML links (AFTER image processing)
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
