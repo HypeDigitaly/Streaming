@@ -420,7 +420,7 @@ export const StreamingResponseExtension = {
             buffer.substring(0, buffer.indexOf(match)).includes('<img')) {
           return match;
         }
-        return `![Image](https://www.kh.cz/${imageUrl})`;
+        return `![Image](${imageUrl})`;
       });
       
       // Pattern 2: Fragmented URLs that might be split (filename.ext?param followed by token)
@@ -431,7 +431,7 @@ export const StreamingResponseExtension = {
           return match;
         }
         const completeUrl = urlPart + token;
-        return `![Image](https://www.kh.cz/${completeUrl})`;
+        return `![Image](${completeUrl})`;
       });
       
       // Pattern 3: Standalone image filenames (without query params)
@@ -447,7 +447,7 @@ export const StreamingResponseExtension = {
         if (contextBefore.includes('?') || contextAfter.match(/^[\?=&\-]/)) {
           return match; // Let other patterns handle this
         }
-        return `![Image](https://www.kh.cz/${filename})`;
+        return `![Image](${filename})`;
       });
 
       // Format markdown content
@@ -518,11 +518,6 @@ export const StreamingResponseExtension = {
           // Convert HTTP to HTTPS if it's not already HTTPS
           if (cleanUrl.match(/^http:\/\//i)) {
             cleanUrl = cleanUrl.replace(/^http:\/\//i, 'https://');
-          }
-          
-          // If URL doesn't start with http/https, assume it's relative and add base
-          if (!cleanUrl.match(/^https?:\/\//i)) {
-            cleanUrl = `https://www.kh.cz/${cleanUrl.replace(/^\/+/, '')}`;
           }
           
           // Use alt text if provided, otherwise use empty string
