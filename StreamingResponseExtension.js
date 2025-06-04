@@ -703,10 +703,10 @@ export const StreamingResponseExtension = {
       },
       {
         id: 9,
-        name: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        name: 'deepseek-r1-distill-llama-70b',
         type: 'groq',
         endpoint: '/api/groq-stream',
-        displayName: 'Llama 4 Scout'
+        displayName: 'Llama 70B'
       }
     ];
 
