@@ -641,10 +641,10 @@ export const StreamingResponseExtension = {
       // Claude models
       {
         id: 1,
-        name: 'claude-sonnet-4-20250514',
+        name: 'claude-3-7-sonnet-latest',
         type: 'claude',
         endpoint: '/api/claude-stream',
-        displayName: 'Claude 4 Sonnet'
+        displayName: 'Claude 3.7 Sonnet'
       },
       {
         id: 2,
