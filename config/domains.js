@@ -10,7 +10,8 @@ const whitelistedDomains = [
   'teplice.cz',
   'hypedigitaly.ai',
   'litomerice.cz',
-  'khk.cz'
+  'khk.cz',
+  'stredoceskykraj.cz'
 ];
 
 module.exports = {
