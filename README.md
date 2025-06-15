@@ -1,7 +1,7 @@
 
 # Multi-LLM Streaming Extension
 
-A Next.js API extension that provides streaming capabilities for multiple LLM providers including OpenAI, Anthropic Claude, Google Gemini, and Groq.
+A Next.js API extension that provides streaming capabilities for multiple LLM providers including OpenAI, Anthropic Claude, Google Gemini, Groq, and SambaNova.
 
 ## Features
 
@@ -21,6 +21,7 @@ A Next.js API extension that provides streaming capabilities for multiple LLM pr
    - `ANTHROPIC_API_KEY`
    - `GEMINI_API_KEY`
    - `GROQ_API_KEY`
+   - `SAMBANOVA_API_KEY`
    - For project-specific keys, use format: `OPENAI_API_KEY_PROJECTNAME`
 
 3. Update the whitelist in `config/domains.js` with the domains allowed to access your API
@@ -33,6 +34,7 @@ Each LLM provider has its own endpoint:
 - `/api/claude-stream` - Anthropic Claude models
 - `/api/gemini-stream` - Google Gemini models
 - `/api/groq-stream` - Groq models
+- `/api/sambanova-stream` - SambaNova models
 
 ### Example Request
 

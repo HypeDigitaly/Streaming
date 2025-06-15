@@ -304,7 +304,8 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.claude,
           .model-info-tooltip.openai,
           .model-info-tooltip.gemini,
-          .model-info-tooltip.groq {
+          .model-info-tooltip.groq,
+          .model-info-tooltip.sambanova {
             background-color: #E2F2D9;
             color: #333;
           }
@@ -707,6 +708,29 @@ export const StreamingResponseExtension = {
         type: 'groq',
         endpoint: '/api/groq-stream',
         displayName: 'Llama 70B'
+      },
+
+      // SambaNova models
+      {
+        id: 10,
+        name: 'Meta-Llama-3.1-8B-Instruct',
+        type: 'sambanova',
+        endpoint: '/api/sambanova-stream',
+        displayName: 'Llama 3.1 8B Instruct'
+      },
+      {
+        id: 11,
+        name: 'Meta-Llama-3.1-70B-Instruct',
+        type: 'sambanova',
+        endpoint: '/api/sambanova-stream',
+        displayName: 'Llama 3.1 70B Instruct'
+      },
+      {
+        id: 12,
+        name: 'Meta-Llama-3.1-405B-Instruct',
+        type: 'sambanova',
+        endpoint: '/api/sambanova-stream',
+        displayName: 'Llama 3.1 405B Instruct'
       }
     ];
 
