@@ -713,24 +713,10 @@ export const StreamingResponseExtension = {
       // SambaNova models
       {
         id: 10,
-        name: 'Meta-Llama-3.1-8B-Instruct',
+        name: 'Llama-4-Maverick-17B-128E-Instruct',
         type: 'sambanova',
         endpoint: '/api/sambanova-stream',
-        displayName: 'Llama 3.1 8B Instruct'
-      },
-      {
-        id: 11,
-        name: 'Meta-Llama-3.1-70B-Instruct',
-        type: 'sambanova',
-        endpoint: '/api/sambanova-stream',
-        displayName: 'Llama 3.1 70B Instruct'
-      },
-      {
-        id: 12,
-        name: 'Meta-Llama-3.1-405B-Instruct',
-        type: 'sambanova',
-        endpoint: '/api/sambanova-stream',
-        displayName: 'Llama 3.1 405B Instruct'
+        displayName: 'Llama 4 Maverick 17B 128E Instruct'
       }
     ];
 
