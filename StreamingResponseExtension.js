@@ -306,7 +306,7 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.gemini,
           .model-info-tooltip.groq,
           .model-info-tooltip.sambanova {
-            background-color: #E2F2D9;
+            background-color: #F3F4F6;
             color: #333;
           }
 
