@@ -305,7 +305,8 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.openai,
           .model-info-tooltip.gemini,
           .model-info-tooltip.groq,
-          .model-info-tooltip.sambanova {
+          .model-info-tooltip.sambanova,
+          .model-info-tooltip.baseten {
             background-color: #F3F4F6;
             color: #333;
           }
