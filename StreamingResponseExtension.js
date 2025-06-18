@@ -494,7 +494,7 @@ export const StreamingResponseExtension = {
         // Code
         .replace(/`([^`]+)`/g, '<code>$1</code>')
         // Tables - Improved processing for markdown tables
-        .replace(/(?:^|\n)(\|[^\n]+\|\n\|[\s\-:|]+\|\n(?:\|[^\n]+\|\n?)*)/gm, function(match) {
+        .replace(/(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm, function(match) {
           // Clean up the match and split into lines
           const tableContent = match.trim();
           const rows = tableContent.split('\n').filter(row => row.trim());
@@ -510,7 +510,7 @@ export const StreamingResponseExtension = {
             const trimmedRow = row.trim();
             
             // Skip the separator row (contains only dashes, spaces, pipes, and colons)
-            if (rowIndex === 1 && /^\|[\s\-:|]+\|$/.test(trimmedRow)) {
+            if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) {
               return;
             }
             
