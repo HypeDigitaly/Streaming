@@ -224,92 +224,24 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
-          .response-content .markdown-table-container {
-            overflow-x: auto;
-            margin: 1em 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-width: 100%;
-            -webkit-overflow-scrolling: touch;
-          }
           .response-content .markdown-table {
             border-collapse: collapse;
             width: 100%;
-            margin: 0;
-            font-size: 13px;
-            min-width: 100%;
-            table-layout: auto;
+            margin: 1em 0;
+            font-size: 14px;
           }
           .response-content .markdown-table th,
           .response-content .markdown-table td {
-            border: 1px solid #e2e8f0;
-            padding: 8px 12px;
+            border: 1px solid #ddd;
+            padding: 8px;
             text-align: left;
-            vertical-align: top;
-            word-wrap: break-word;
-            hyphens: auto;
-            line-height: 1.4;
           }
           .response-content .markdown-table th {
-            background-color: #f8fafc;
+            background-color: #f6f8fa;
             font-weight: 600;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #475569;
-            position: sticky;
-            top: 0;
-            z-index: 1;
-            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
-          }
-          .response-content .markdown-table td {
-            max-width: 150px;
-            overflow-wrap: break-word;
-            word-break: break-word;
           }
           .response-content .markdown-table tr:nth-child(even) {
-            background-color: #f8fafc;
-          }
-          .response-content .markdown-table tr:hover {
-            background-color: #e2e8f0;
-          }
-          .response-content .markdown-table td:first-child {
-            font-weight: 500;
-            min-width: 120px;
-          }
-          .response-content .markdown-table td:nth-child(2) {
-            min-width: 140px;
-          }
-          .response-content .markdown-table td:nth-child(3) {
-            min-width: 80px;
-            text-align: center;
-          }
-          .response-content .markdown-table td:nth-child(4) {
-            min-width: 100px;
-            word-break: break-all;
-          }
-          .response-content .markdown-table td:last-child {
-            min-width: 100px;
-          }
-          @media (max-width: 480px) {
-            .response-content .markdown-table {
-              font-size: 11px;
-            }
-            .response-content .markdown-table th,
-            .response-content .markdown-table td {
-              padding: 6px 8px;
-            }
-            .response-content .markdown-table td {
-              max-width: 120px;
-            }
-            .response-content .markdown-table td:first-child {
-              min-width: 100px;
-            }
-            .response-content .markdown-table td:nth-child(2) {
-              min-width: 120px;
-            }
+            background-color: #f9f9f9;
           }
           .ai-info-footer {
             display: flex;
@@ -570,7 +502,7 @@ export const StreamingResponseExtension = {
           // Check if this is really a table (at least 2 rows: header + separator)
           if (rows.length < 2) return match;
           
-          let tableHtml = '<div class="markdown-table-container">\n<table class="markdown-table">\n';
+          let tableHtml = '<table class="markdown-table">\n';
           let headerProcessed = false;
           
           // Process each row
@@ -611,7 +543,7 @@ export const StreamingResponseExtension = {
           });
           
           // End the table
-          tableHtml += '</table>\n</div>';
+          tableHtml += '</table>';
           return tableHtml;
         })
         // Convert regular markdown links to HTML links (AFTER image processing)
