@@ -224,24 +224,45 @@ export const StreamingResponseExtension = {
             margin: 0;
             line-height: 1;
           }
+          .response-content .markdown-table-container {
+            overflow-x: auto;
+            margin: 1em 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #ffffff;
+          }
           .response-content .markdown-table {
             border-collapse: collapse;
             width: 100%;
-            margin: 1em 0;
+            min-width: 600px;
+            margin: 0;
             font-size: 14px;
+            white-space: nowrap;
           }
           .response-content .markdown-table th,
           .response-content .markdown-table td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px 16px;
             text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
           }
           .response-content .markdown-table th {
             background-color: #f6f8fa;
             font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1;
           }
           .response-content .markdown-table tr:nth-child(even) {
             background-color: #f9f9f9;
+          }
+          .response-content .markdown-table td:hover {
+            background-color: #e8f4f8;
+            white-space: normal;
+            word-wrap: break-word;
           }
           .ai-info-footer {
             display: flex;
@@ -502,7 +523,7 @@ export const StreamingResponseExtension = {
           // Check if this is really a table (at least 2 rows: header + separator)
           if (rows.length < 2) return match;
           
-          let tableHtml = '<table class="markdown-table">\n';
+          let tableHtml = '<div class="markdown-table-container">\n<table class="markdown-table">\n';
           let headerProcessed = false;
           
           // Process each row
@@ -543,7 +564,7 @@ export const StreamingResponseExtension = {
           });
           
           // End the table
-          tableHtml += '</table>';
+          tableHtml += '</table>\n</div>';
           return tableHtml;
         })
         // Convert regular markdown links to HTML links (AFTER image processing)
