@@ -1,0 +1,127 @@
+
+import { OpenAI } from 'openai';
+import { whitelistedDomains } from '../../config/domains';
+
+export default async function handler(req, res) {
+  const origin = req.headers.origin;
+
+  // Check if origin is in whitelist
+  const hostname = new URL(origin).hostname.replace(/^www\./, '');
+  if (!origin || !whitelistedDomains.includes(hostname)) {
+    return res.status(403).json({ error: 'Access denied - domain not whitelisted' });
+  }
+
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'false');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
+  if (req.method !== 'POST') {
+    if (req.headers.debug === '1' || req.body.debugMode === 1) {
+      console.error('❌ Proxy: Invalid method', req.method);
+    }
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+
+  try {
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, baseUrl } = req.body;
+
+    // Select API key based on projectName
+    const apiKey = process.env[`BASETEN_API_KEY_${projectName?.toUpperCase()}`] || process.env.BASETEN_API_KEY;
+    
+    // Select base URL based on projectName or use provided baseUrl
+    const selectedBaseUrl = process.env[`BASETEN_BASE_URL_${projectName?.toUpperCase()}`] || process.env.BASETEN_BASE_URL || baseUrl;
+
+    if (!apiKey) {
+      throw new Error(`API key not found for project: ${projectName}`);
+    }
+
+    if (!selectedBaseUrl) {
+      throw new Error(`Base URL not found for project: ${projectName}`);
+    }
+
+    const client = new OpenAI({
+      apiKey: apiKey,
+      baseURL: selectedBaseUrl,
+    });
+
+    if (debugMode === 1) {
+      console.log('📡 Baseten Payload values:', {
+        model,
+        max_tokens,
+        temperature,
+        projectName,
+        debugMode,
+        systemPrompt,
+        user_id,
+        baseUrl: selectedBaseUrl
+      });
+    }
+
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
+    });
+
+    const response = await client.chat.completions.create({
+      model: model || '',
+      max_tokens: max_tokens || 512,
+      temperature: temperature || 0.3,
+      messages: [
+        {
+          role: 'system',
+          content: systemPrompt
+        },
+        {
+          role: 'user',
+          content: userData
+        }
+      ],
+      stream: true,
+    });
+
+    if (debugMode === 1) {
+      console.log('📥 Baseten API Response initialized');
+    }
+
+    for await (const chunk of response) {
+      if (debugMode === 1) {
+        console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
+      }
+
+      if (chunk.choices[0]?.delta?.content) {
+        const data = {
+          type: 'content',
+          content: chunk.choices[0].delta.content
+        };
+
+        res.write(`data: ${JSON.stringify(data)}\n\n`);
+        res.flush?.();
+      }
+    }
+
+    // Explicitly send DONE signal to trigger Voiceflow variable update
+    if (debugMode === 1) {
+      console.log('📤 Sending [DONE] signal to complete stream');
+    }
+    res.write('data: [DONE]\n\n');
+    res.end();
+
+  } catch (error) {
+    if (req.body.debugMode === 1) {
+      console.error('Baseten Stream Error:', error);
+    }
+    res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
+    res.end();
+  }
+}

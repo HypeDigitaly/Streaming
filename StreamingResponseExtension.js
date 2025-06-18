@@ -717,6 +717,22 @@ export const StreamingResponseExtension = {
         type: 'sambanova',
         endpoint: '/api/sambanova-stream',
         displayName: 'Llama 4 Maverick 17B 128E Instruct'
+      },
+
+      // Baseten models
+      {
+        id: 11,
+        name: 'llama-4-17b',
+        type: 'baseten',
+        endpoint: '/api/baseten-stream',
+        displayName: 'Llama 4 17B (Baseten)'
+      },
+      {
+        id: 12,
+        name: 'llama-4-multimodal',
+        type: 'baseten',
+        endpoint: '/api/baseten-stream',
+        displayName: 'Llama 4 Multimodal (Baseten)'
       }
     ];
 
