@@ -722,17 +722,10 @@ export const StreamingResponseExtension = {
       // Baseten models
       {
         id: 11,
-        name: 'llama-4-17b',
+        name: 'meta-llama/Llama-4-Maverick-17B-128E-Instruct',
         type: 'baseten',
         endpoint: '/api/baseten-stream',
-        displayName: 'Llama 4 17B (Baseten)'
-      },
-      {
-        id: 12,
-        name: 'llama-4-multimodal',
-        type: 'baseten',
-        endpoint: '/api/baseten-stream',
-        displayName: 'Llama 4 Multimodal (Baseten)'
+        displayName: 'Llama 4 Maverick 17B (Baseten)'
       }
     ];
 

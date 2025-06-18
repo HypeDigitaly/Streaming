@@ -1,5 +1,4 @@
 
-import { OpenAI } from 'openai';
 import { whitelistedDomains } from '../../config/domains';
 
 export default async function handler(req, res) {
@@ -33,26 +32,14 @@ export default async function handler(req, res) {
   res.setHeader('Connection', 'keep-alive');
 
   try {
-    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, baseUrl } = req.body;
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id } = req.body;
 
     // Select API key based on projectName
     const apiKey = process.env[`BASETEN_API_KEY_${projectName?.toUpperCase()}`] || process.env.BASETEN_API_KEY;
-    
-    // Select base URL based on projectName or use provided baseUrl
-    const selectedBaseUrl = process.env[`BASETEN_BASE_URL_${projectName?.toUpperCase()}`] || process.env.BASETEN_BASE_URL || baseUrl;
 
     if (!apiKey) {
       throw new Error(`API key not found for project: ${projectName}`);
     }
-
-    if (!selectedBaseUrl) {
-      throw new Error(`Base URL not found for project: ${projectName}`);
-    }
-
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: selectedBaseUrl,
-    });
 
     if (debugMode === 1) {
       console.log('📡 Baseten Payload values:', {
@@ -62,8 +49,7 @@ export default async function handler(req, res) {
         projectName,
         debugMode,
         systemPrompt,
-        user_id,
-        baseUrl: selectedBaseUrl
+        user_id
       });
     }
 
@@ -73,40 +59,93 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
-    const response = await client.chat.completions.create({
-      model: model || '',
-      max_tokens: max_tokens || 512,
-      temperature: temperature || 0.3,
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt
-        },
-        {
-          role: 'user',
-          content: userData
+    // Use Baseten's native API endpoint
+    const response = await fetch('https://inference.baseten.co/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Api-Key ${apiKey}`, // Baseten uses Api-Key format
+      },
+      body: JSON.stringify({
+        model: model || 'meta-llama/Llama-4-Maverick-17B-128E-Instruct',
+        messages: [
+          {
+            role: 'system',
+            content: systemPrompt
+          },
+          {
+            role: 'user',
+            content: userData
+          }
+        ],
+        max_tokens: max_tokens || 1000,
+        temperature: temperature || 1,
+        top_p: 1,
+        presence_penalty: 0,
+        frequency_penalty: 0,
+        stop: [],
+        stream: true,
+        stream_options: {
+          include_usage: true,
+          continuous_usage_stats: true
         }
-      ],
-      stream: true,
+      }),
     });
+
+    if (!response.ok) {
+      throw new Error(`Baseten API error: ${response.status} ${response.statusText}`);
+    }
 
     if (debugMode === 1) {
       console.log('📥 Baseten API Response initialized');
     }
 
-    for await (const chunk of response) {
-      if (debugMode === 1) {
-        console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
-      }
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
 
-      if (chunk.choices[0]?.delta?.content) {
-        const data = {
-          type: 'content',
-          content: chunk.choices[0].delta.content
-        };
+    while (true) {
+      const { done, value } = await reader.read();
+      
+      if (done) break;
 
-        res.write(`data: ${JSON.stringify(data)}\n\n`);
-        res.flush?.();
+      const chunk = decoder.decode(value);
+      const lines = chunk.split('\n').filter(line => line.trim() !== '');
+
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          const data = line.slice(6);
+
+          if (data === '[DONE]') {
+            if (debugMode === 1) {
+              console.log('📤 Sending [DONE] signal to complete stream');
+            }
+            res.write('data: [DONE]\n\n');
+            res.end();
+            return;
+          }
+
+          try {
+            const parsed = JSON.parse(data);
+
+            if (debugMode === 1) {
+              console.log('📥 Response Chunk:', JSON.stringify(parsed, null, 2));
+            }
+
+            if (parsed.choices && parsed.choices[0]?.delta?.content) {
+              const responseData = {
+                type: 'content',
+                content: parsed.choices[0].delta.content
+              };
+
+              res.write(`data: ${JSON.stringify(responseData)}\n\n`);
+              res.flush?.();
+            }
+          } catch (parseError) {
+            if (debugMode === 1) {
+              console.warn('Failed to parse SSE data:', parseError);
+            }
+          }
+        }
       }
     }
 
