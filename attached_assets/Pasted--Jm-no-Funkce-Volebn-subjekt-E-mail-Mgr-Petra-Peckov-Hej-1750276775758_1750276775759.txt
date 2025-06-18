@@ -1,0 +1,66 @@
+| Jméno | Funkce | Volební subjekt | E-mail |
+    |---|---|---|---|
+    | Mgr. Petra Pecková | Hejtmanka Středočeského kraje | STAROSTOVÉ | peckova@kr-s.cz |
+    | Mgr. Michael Kašpar | Náměstek hejtmanky pro oblast financí, ICT a digitalizace | STAROSTOVÉ  | kaspar@kr-s.cz |
+    | Ing. et Ing. Jan Skopeček, Ph.D. | Náměstek hejtmanky pro oblast regionálního rozvoje, územního plánování, dotací a sportu | SPOLU | skopecek@kr-s.cz |
+    | PhDr. Ing. Mgr. Karel Bendl, MBA, LL.M. | Předseda Výboru pro životní prostředí a zemědělství, člen zastupitelstva | SPOLU | bendl@kr-s.cz |
+    | Ing. Martin Čacký | Předseda Výboru pro výchovu, vzdělávání a zaměstnanost, člen zastupitelstva | STAROSTOVÉ | cacky@kr-s.cz |
+    | Ing. Kateřina Daczická, MBA | Předsedkyně Výboru pro kulturu, památkovou péči a cestovní ruch, členka zastupitelstva | SPOLU | daczicka@kr-s.cz |
+    | Petr Halada | Předseda Komise pro spolupráci s městy a obcemi, člen zastupitelstva | STAROSTOVÉ | halada@kr-s.cz |
+    | PhDr. Tomáš Helebrant, MBA | Předseda Výboru kontrolního, člen zastupitelstva | ANO 2011 | helebrant@kr-s.cz |
+    | Mgr. Anna Chvojková | Předsedkyně Komise pro ICT a digitalizaci, členka zastupitelstva | STAROSTOVÉ | chvojkova@kr-s.cz |
+    | Mgr. Luděk Jeništa | Předseda Výboru pro tělovýchovu a sport, člen zastupitelstva | STAROSTOVÉ | jenistal@kr-s.cz |
+    | Mgr. Tomáš Klinecký | Předseda Výboru pro dopravu, člen zastupitelstva | SPOLU | klinecky@kr-s.cz |
+    | Mgr. Karel Marek | Předseda Výboru sociálních věcí, člen zastupitelstva | SPOLU | marekk@kr-s.cz |
+    | Mgr. Daniel Marek | Předseda Komise pro bezpečnost a IZS, člen Výboru pro tělovýchovu a sport, člen zastupitelstva | STAROSTOVÉ | marek@kr-s.cz |
+    | Ing. Michael Pánek | Předseda Výboru finančního, člen zastupitelstva | SPOLU | panek@kr-s.cz |
+    | Mgr. Markéta Škodová | Předsedkyně Výboru pro regionální rozvoj, členka zastupitelstva | STAROSTOVÉ | skodovam@kr-s.cz |
+    | Mgr. Tomáš Vokurka, Dis. | Předseda Výboru pro zdravotnictví, člen zastupitelstva | SPOLU | vokurka@kr-s.cz |
+    | Markéta Balková | 1. místopředsedkyně Výboru pro kulturu, 2. místopředsedkyně Komise pro spolupráci s městy a obcemi, členka zastupitelstva | STAROSTOVÉ | balkova@kr-s.cz |
+    | JUDr. Robert Bezděk, CSc. | 1. místopředseda Výboru finančního, 2. místopředseda Výboru kontrolního, člen zastupitelstva | ANO 2011 | bezdek@kr-s.cz |
+    | Ing. Věra Eschnerová | 1. místopředsedkyně Výboru pro životní prostředí a zemědělství, členka Komise pro majetek, členka zastupitelstva | STAROSTOVÉ | eschnerova@kr-s.cz |
+    | Ing. Roman Foršt | 1. místopředseda Výboru kontrolního, člen Výboru pro životní prostředí a zemědělství, člen zastupitelstva | STAROSTOVÉ | forst@kr-s.cz |
+    | JUDr. Vlastislav Málek | 1. místopředseda Výboru pro zdravotnictví, člen zastupitelstva | STAROSTOVÉ | malekv@kr-s.cz |
+    | Mgr. Pavla Štrobachová, MPA | 1. místopředsedkyně Výboru sociálních věcí, členka zastupitelstva | STAROSTOVÉ | strobachova@kr-s.cz |
+    | Ing. arch. Anna Gamanová | 2. místopředsedkyně Výboru pro regionální rozvoj, členka zastupitelstva | STAROSTOVÉ  | gamanova@kr-s.cz |
+    | Pavel Babiš | člen Výboru kontrolního, člen zastupitelstva | ANO 2011 | babis@kr-s.cz |
+    | Ing. Drahomír Blažej, MBA | Člen zastupitelstva | ANO 2011 ||
+    | Ing. Jiří Bouška | Člen Výboru pro regionální rozvoj, člen zastupitelstva | ANO 2011 ||
+    | Andrea Brzobohatá, MBA | Členka Výboru pro zdravotnictví, členka zastupitelstva | ANO 2011 ||
+    | Mgr. František Bureš | Člen Výboru pro tělovýchovu a sport, člen zastupitelstva | ANO 2011 ||
+    | Oldřich Černý | Člen Výboru pro dopravu, člen zastupitelstva | SPD, Trikolora a PRO ||
+    | Ing. Mgr. Tomáš Doležal | Člen Výboru finančního, člen zastupitelstva | SPD, Trikolora a PRO ||
+    | Mgr. Adriena Gabrielová | Členka Výboru pro regionální rozvoj, členka zastupitelstva | ANO 2011 ||
+    | Mgr. Bc. Jindřich Havelka, DiS., MBA | Člen Výboru pro zdravotnictví, člen zastupitelstva | STAČILO! ||
+    | doc. Ing. Karel Havlíček, Ph.D., MBA | Člen zastupitelstva | ANO 2011 ||
+    | Bc. Pavel Havránek | Člen Výboru pro regionální rozvoj, člen zastupitelstva | STAČILO! ||
+    | Martin Herman | Člen Výboru kontrolního, člen zastupitelstva | ANO 2011 || 
+    | Mgr. Martin Hujer | Člen Výboru pro tělovýchovu a sport, člen zastupitelstva | STAROSTOVÉ || 
+    | MUDr. Igor Karen | Člen Výboru pro zdravotnictví, člen zastupitelstva | ANO 2011 || 
+    | Mgr. Karel Kárník, MPA | Člen zastupitelstva | ANO 2011 || 
+    | Mgr. Jiří Kobza | Člen Výboru pro životní prostředí a zemědělství, člen zastupitelstva | SPD, Trikolora a PRO || 
+    | Mgr. Jan Konvalinka | Člen výboru sociálních věcí, člen zastupitelstva | ANO 2011 || 
+    | Mgr. Filip Kořínek | Člen zastupitelstva | STAROSTOVÉ || 
+    | Bc. Petr Kowanda | Člen Výboru pro výchovu, vzdělávání a zaměstnanost, člen zastupitelstva | ANO 2011 || 
+    | Ing. Petr Lošek | Člen Výboru pro výchovu, vzdělávání a zaměstnanost, člen zastupitelstva | ANO 2011 ||
+    | Ing. Irena Mastná | Členka Výboru pro regionální rozvoj, členka zastupitelstva | ANO 2011 || 
+    | Marek Michl | Člen Výboru pro zdravotnictví, člen zastupitelstva | STAROSTOVÉ || 
+    | Jindřich Neumann | Člen Výboru pro sport a tělovýchovu, člen zastupitelstva | ANO 2011 || 
+    | Mgr. Jiří Novotný | Člen Výboru kontrolního, člen zastupitelstva | SPD, Trikolora a PRO || 
+    | Tomáš Pekárek, MBA | Člen Výboru pro životní prostředí, člen zastupitelstva | ANO 2011 || 
+    | Ing. František Petrtýl | Člen Výboru pro dopravu, člen zastupitelstva | ANO 2011 || 
+    | Ing. Jaroslava Pokorná Jermanová | Členka zastupitelstva | ANO 2011 || 
+    | Ing. Milan Pour | Člen zastupitelstva | ANO 2011 || 
+    | Miroslav Samaš | Člen zastupitelstva | ANO 2011 || 
+    | Ing. Zdeněk Štefek | Člen Výboru pro kulturu, památkovou péči a cestovní ruch, člen zastupitelstva | STAČILO! ||
+    | doc. Dr. Ing. Roman Štěrba, MBA | Člen Výboru pro dopravu, člen zastupitelstva | ANO 2011 || 
+    | Mgr. Jaroslav Trachta | Člen Výboru kontrolního člen zastupitelstva | ANO 2011 ||
+    | Radek Vondráček  | Člen Výboru pro kulturu, člen zastupitelstva | ANO 2011 ||
+    | Mgr. Petr Borecký | Radní pro oblast dopravy a mobility | STAROSTOVÉ || 
+    | Mgr. Martin Hrabánek | Radní pro oblast sociálních věcí | SPOLU || 
+    | Ing. Josef Pátek | Radní pro oblast silniční dopravy | SPOLU || 
+    | Ing. Pavel Pavlík | Statutární náměstek/r>hejtmanky pro oblast zdravotnictví | SPOLU ||
+    | Ing. Robert Pecha | Radní pro oblast investic a majetku | SPOLU ||
+    | Mgr. Jindřiška Romba, MPA | Radní pro oblast ŽP a zemědělství | STAROSTOVÉ ||
+    | Mgr. Václav Švenda | Radní pro oblast kultury | SPOLU ||
+    | Mgr. Milan Vácha | Radní pro oblast školství | STAROSTOVÉ ||
