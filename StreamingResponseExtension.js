@@ -493,35 +493,50 @@ export const StreamingResponseExtension = {
         .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
         // Code
         .replace(/`([^`]+)`/g, '<code>$1</code>')
-        // Tables
-        .replace(/(\n\|.*\|.*\n\|[\s-]*\|[\s-]*\|[\s-]*\n)((.*\n)*?)(?=\n|$)/g, function(match) {
-          // Process the table
-          const rows = match.trim().split('\n');
+        // Tables - Improved processing for markdown tables
+        .replace(/(?:^|\n)(\|[^\n]+\|\n\|[\s\-:|]+\|\n(?:\|[^\n]+\|\n?)*)/gm, function(match) {
+          // Clean up the match and split into lines
+          const tableContent = match.trim();
+          const rows = tableContent.split('\n').filter(row => row.trim());
           
-          // Check if this is really a table
+          // Check if this is really a table (at least 2 rows: header + separator)
           if (rows.length < 2) return match;
           
           let tableHtml = '<table class="markdown-table">\n';
+          let headerProcessed = false;
           
           // Process each row
           rows.forEach((row, rowIndex) => {
-            if (rowIndex === 1 && row.match(/^\|[\s-]*\|[\s-]*\|/)) {
-              // This is the separator row, skip it
+            const trimmedRow = row.trim();
+            
+            // Skip the separator row (contains only dashes, spaces, pipes, and colons)
+            if (rowIndex === 1 && /^\|[\s\-:|]+\|$/.test(trimmedRow)) {
               return;
             }
             
             // Start the row
             tableHtml += '  <tr>\n';
             
-            // Extract cells, remove first and last empty cells if they exist
-            const cells = row.split('|').slice(1, -1);
+            // Extract cells - handle pipes that might be at start/end
+            let cells;
+            if (trimmedRow.startsWith('|') && trimmedRow.endsWith('|')) {
+              cells = trimmedRow.slice(1, -1).split('|');
+            } else {
+              cells = trimmedRow.split('|');
+            }
             
             // Process each cell
             cells.forEach((cell) => {
               const cellContent = cell.trim();
-              const cellTag = rowIndex === 0 ? 'th' : 'td';
+              // First row (after potential separator) is header
+              const cellTag = (!headerProcessed && rowIndex === 0) ? 'th' : 'td';
               tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
             });
+            
+            // Mark header as processed after first actual content row
+            if (!headerProcessed && rowIndex === 0) {
+              headerProcessed = true;
+            }
             
             // End the row
             tableHtml += '  </tr>\n';
