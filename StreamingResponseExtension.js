@@ -124,7 +124,7 @@ export const StreamingResponseExtension = {
           .response-content h3,
           .response-content h4,
           .response-content h5 {
-            margin: 1.5em 0 0.5em;
+            margin: 0;
             font-weight: 600;
           }
           .response-content h1 { font-size: 2em; }
@@ -133,34 +133,32 @@ export const StreamingResponseExtension = {
           .response-content h4 { font-size: 1.1em; }
           .response-content h5 { font-size: 1em; }
           .response-content ul {
-            margin: 0.5em 0;
+            margin: 0;
             padding-left: 1.5em;
             list-style-position: outside;
           }
           /* Add rules for ordered lists to match unordered */
           .response-content ol {
-            margin: 0.5em 0; /* Match ul margins */
+            margin: 0;
             padding-left: 1.5em; /* Match ul padding */
             list-style-position: outside; /* Ensure numbers are outside */
           }
           /* Apply consistent styling to all list items */
           .response-content ul li,
           .response-content ol li {
-            margin: 0 0 0.3em 0;
+            margin: 0;
             padding-left: 0.5em;
             line-height: 20px; /* Ensure consistent line height */
-            margin-bottom: 0.6em; /* Increase bottom margin specifically for ordered lists */
           }
           .response-content li.sublist {
-            margin: 0.5em 0;
+            margin: 0;
           }
           .response-content br {
             margin: 0;
             line-height: 1;
           }
           .response-content p {
-            margin: 0.25em 0;
-            margin-bottom: 0.5em; /* Reduced bottom margin for tighter spacing */
+            margin: 0;
           }
           .response-content a {
             word-break: break-all;
@@ -170,14 +168,14 @@ export const StreamingResponseExtension = {
           }
           /* Add spacing for adjacent links */
           .response-content a + a {
-            margin-top: 0.5em; /* Reduced space above links that follow other links */
+            margin-top: 0;
           }
           /* Responsive image styles to prevent overflow */
           .response-content img {
             max-width: 100%;
             height: auto;
             display: block;
-            margin: 0.25em 0;
+            margin: 0;
           }
           /* Line separator styling */
           .response-content hr.markdown-separator {
@@ -190,7 +188,7 @@ export const StreamingResponseExtension = {
           /* Added styles for headings */
           .response-content .answer-h1 {
             font-size: 1.4em;
-            margin: 0.25em 0 0.25em 0;
+            margin: 0;
             font-weight: 600;
             line-height: 1.2;
           }
@@ -199,7 +197,7 @@ export const StreamingResponseExtension = {
           }
           .response-content .answer-h2 {
             font-size: 1.2em;
-            margin: 0.25em 0 0.25em 0;
+            margin: 0;
             font-weight: 600;
             line-height: 1.2;
           }
@@ -208,7 +206,7 @@ export const StreamingResponseExtension = {
           }
           .response-content .answer-h3 {
             font-size: 1.1em;
-            margin: 0 0 0;
+            margin: 0;
             font-weight: 600;
             line-height: 1.2;
           }
