@@ -476,7 +476,9 @@ export const StreamingResponseExtension = {
           // Use alt text if provided, otherwise use empty string
           const altText = alt ? alt.trim() : '';
           
-          console.log('Converting markdown image to HTML:', { original: match, cleanUrl, altText });
+          if (trace.payload?.debugMode === 1) {
+            console.log('Converting markdown image to HTML:', { original: match, cleanUrl, altText });
+          }
           
           return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
