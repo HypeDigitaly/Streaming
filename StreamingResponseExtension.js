@@ -7,12 +7,18 @@ export const StreamingResponseExtension = {
   render: async ({ trace, element }) => {
     if (trace.payload?.debugMode === 1) {
       console.log("🚀 StreamingResponseExtension: Starting render", { trace });
-      console.log("📦 Full trace payload:", JSON.stringify(trace.payload, null, 2));
-      console.log("🌍 Language setting:", trace.payload?.lang || "cs (default)");
+      console.log(
+        "📦 Full trace payload:",
+        JSON.stringify(trace.payload, null, 2),
+      );
+      console.log(
+        "🌍 Language setting:",
+        trace.payload?.lang || "cs (default)",
+      );
     }
 
-    const container = document.createElement('div');
-    container.className = 'streaming-response-container';
+    const container = document.createElement("div");
+    container.className = "streaming-response-container";
 
     // Create the base structure
     container.innerHTML = `
@@ -318,76 +324,91 @@ export const StreamingResponseExtension = {
     element.appendChild(container);
 
     // Get references to elements
-    const responseSection = container.querySelector('.response-section');
-    const responseContent = container.querySelector('.response-content');
+    const responseSection = container.querySelector(".response-section");
+    const responseContent = container.querySelector(".response-content");
     let isFirstChunk = true;
-    let buffer = '';
+    let buffer = "";
     let deltaCounter = 0;
-    let completeResponse = '';
+    let completeResponse = "";
 
     // Show container immediately with loading animation
-    container.style.display = 'block';
+    container.style.display = "block";
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
-      return html
-        // Headers
-        .replace(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/g, (_, content) => `# ${content}\n\n`)
-        // Bold
-        .replace(/<strong>(.*?)<\/strong>/g, '**$1**')
-        // Italic
-        .replace(/<em>(.*?)<\/em>/g, '*$1*')
-        // Tables
-        .replace(/<table[^>]*>([\s\S]*?)<\/table>/g, (match, tableContent) => {
-          const rows = tableContent.match(/<tr[^>]*>([\s\S]*?)<\/tr>/g) || [];
-          if (rows.length === 0) return match;
-          
-          let markdownTable = '\n';
-          let headerCreated = false;
-          
-          rows.forEach((row) => {
-            const cells = row.match(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g) || [];
-            if (cells.length === 0) return;
-            
-            markdownTable += '|';
-            
-            cells.forEach((cell) => {
-              const content = cell.replace(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g, '$1').trim();
-              markdownTable += ` ${content} |`;
-            });
-            
-            markdownTable += '\n';
-            
-            // Add separator row after the first row
-            if (!headerCreated) {
-              markdownTable += '|';
-              cells.forEach(() => {
-                markdownTable += ' --- |';
+      return (
+        html
+          // Headers
+          .replace(
+            /<h[1-3][^>]*>(.*?)<\/h[1-3]>/g,
+            (_, content) => `# ${content}\n\n`,
+          )
+          // Bold
+          .replace(/<strong>(.*?)<\/strong>/g, "**$1**")
+          // Italic
+          .replace(/<em>(.*?)<\/em>/g, "*$1*")
+          // Tables
+          .replace(
+            /<table[^>]*>([\s\S]*?)<\/table>/g,
+            (match, tableContent) => {
+              const rows =
+                tableContent.match(/<tr[^>]*>([\s\S]*?)<\/tr>/g) || [];
+              if (rows.length === 0) return match;
+
+              let markdownTable = "\n";
+              let headerCreated = false;
+
+              rows.forEach((row) => {
+                const cells =
+                  row.match(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g) || [];
+                if (cells.length === 0) return;
+
+                markdownTable += "|";
+
+                cells.forEach((cell) => {
+                  const content = cell
+                    .replace(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g, "$1")
+                    .trim();
+                  markdownTable += ` ${content} |`;
+                });
+
+                markdownTable += "\n";
+
+                // Add separator row after the first row
+                if (!headerCreated) {
+                  markdownTable += "|";
+                  cells.forEach(() => {
+                    markdownTable += " --- |";
+                  });
+                  markdownTable += "\n";
+                  headerCreated = true;
+                }
               });
-              markdownTable += '\n';
-              headerCreated = true;
-            }
-          });
-          
-          return markdownTable + '\n';
-        })
-        // Lists
-        .replace(/<ul[^>]*>(.*?)<\/ul>/gs, (_, content) => {
-          return content.replace(/<li[^>]*>(.*?)<\/li>/g, '- $1\n');
-        })
-        .replace(/<ol[^>]*>(.*?)<\/ol>/gs, (_, content) => {
-          let counter = 1;
-          return content.replace(/<li[^>]*>(.*?)<\/li>/g, () => `${counter++}. $1\n`);
-        })
-        // Paragraphs
-        .replace(/<p[^>]*>(.*?)<\/p>/g, '$1\n\n')
-        // Links
-        .replace(/<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/g, '[$2]($1)')
-        // Code
-        .replace(/<code>(.*?)<\/code>/g, '`$1`')
-        // Clean up
-        .replace(/\n{3,}/g, '\n\n')
-        .trim();
+
+              return markdownTable + "\n";
+            },
+          )
+          // Lists
+          .replace(/<ul[^>]*>(.*?)<\/ul>/gs, (_, content) => {
+            return content.replace(/<li[^>]*>(.*?)<\/li>/g, "- $1\n");
+          })
+          .replace(/<ol[^>]*>(.*?)<\/ol>/gs, (_, content) => {
+            let counter = 1;
+            return content.replace(
+              /<li[^>]*>(.*?)<\/li>/g,
+              () => `${counter++}. $1\n`,
+            );
+          })
+          // Paragraphs
+          .replace(/<p[^>]*>(.*?)<\/p>/g, "$1\n\n")
+          // Links
+          .replace(/<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/g, "[$2]($1)")
+          // Code
+          .replace(/<code>(.*?)<\/code>/g, "`$1`")
+          // Clean up
+          .replace(/\n{3,}/g, "\n\n")
+          .trim()
+      );
     }
 
     // Update the answer content with markdown support
@@ -397,11 +418,11 @@ export const StreamingResponseExtension = {
       // Handle first chunk
       if (isFirstChunk) {
         // Hide loading animation when we receive the first content
-        const thinkingHeader = container.querySelector('.thinking-header');
+        const thinkingHeader = container.querySelector(".thinking-header");
         if (thinkingHeader) {
-          thinkingHeader.classList.add('hidden');
+          thinkingHeader.classList.add("hidden");
         }
-        responseSection.classList.add('visible');
+        responseSection.classList.add("visible");
         isFirstChunk = false;
       }
 
@@ -409,181 +430,224 @@ export const StreamingResponseExtension = {
       buffer += text;
 
       // Post-process buffer to handle various image URL patterns
-      
+
       // Pattern 1: Complete URLs with image extensions (including query parameters)
-      buffer = buffer.replace(/\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?)\b/gi, function(match, imageUrl) {
-        // Skip if already in markdown or HTML format
-        const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-        if (beforeMatch.includes('![') && beforeMatch.lastIndexOf('![') > beforeMatch.lastIndexOf(')')) {
-          return match;
-        }
-        if (beforeMatch.includes('<img')) {
-          return match;
-        }
-        return `![Image](${imageUrl})`;
-      });
-      
+      buffer = buffer.replace(
+        /\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?)\b/gi,
+        function (match, imageUrl) {
+          // Skip if already in markdown or HTML format
+          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+          if (
+            beforeMatch.includes("![") &&
+            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
+          ) {
+            return match;
+          }
+          if (beforeMatch.includes("<img")) {
+            return match;
+          }
+          return `![Image](${imageUrl})`;
+        },
+      );
+
       // Pattern 2: Image filenames with query parameters (e.g., DSC_6532.jpg?tok=xyz)
-      buffer = buffer.replace(/\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_.-]+)\b/gi, function(match, imageUrl) {
-        // Skip if already in markdown or HTML format
-        const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-        if (beforeMatch.includes('![') && beforeMatch.lastIndexOf('![') > beforeMatch.lastIndexOf(')')) {
-          return match;
-        }
-        if (beforeMatch.includes('<img')) {
-          return match;
-        }
-        return `![Image](${imageUrl})`;
-      });
-      
+      buffer = buffer.replace(
+        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_.-]+)\b/gi,
+        function (match, imageUrl) {
+          // Skip if already in markdown or HTML format
+          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+          if (
+            beforeMatch.includes("![") &&
+            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
+          ) {
+            return match;
+          }
+          if (beforeMatch.includes("<img")) {
+            return match;
+          }
+          return `![Image](${imageUrl})`;
+        },
+      );
+
       // Pattern 3: Standalone image filenames (without query params)
-      buffer = buffer.replace(/\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi, function(match, filename) {
-        // Skip if already in markdown or HTML format
-        const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-        if (beforeMatch.includes('![') && beforeMatch.lastIndexOf('![') > beforeMatch.lastIndexOf(')')) {
-          return match;
-        }
-        if (beforeMatch.includes('<img')) {
-          return match;
-        }
-        // Skip if this looks like it might be part of a larger URL
-        const contextBefore = buffer.substring(Math.max(0, buffer.indexOf(match) - 10), buffer.indexOf(match));
-        const contextAfter = buffer.substring(buffer.indexOf(match) + match.length, buffer.indexOf(match) + match.length + 10);
-        if (contextBefore.includes('?') || contextAfter.match(/^[\?=&]/)) {
-          return match; // Skip fragments that will be processed by other patterns
-        }
-        return `![Image](${filename})`;
-      });
+      buffer = buffer.replace(
+        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi,
+        function (match, filename) {
+          // Skip if already in markdown or HTML format
+          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+          if (
+            beforeMatch.includes("![") &&
+            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
+          ) {
+            return match;
+          }
+          if (beforeMatch.includes("<img")) {
+            return match;
+          }
+          // Skip if this looks like it might be part of a larger URL
+          const contextBefore = buffer.substring(
+            Math.max(0, buffer.indexOf(match) - 10),
+            buffer.indexOf(match),
+          );
+          const contextAfter = buffer.substring(
+            buffer.indexOf(match) + match.length,
+            buffer.indexOf(match) + match.length + 10,
+          );
+          if (contextBefore.includes("?") || contextAfter.match(/^[\?=&]/)) {
+            return match; // Skip fragments that will be processed by other patterns
+          }
+          return `![Image](${filename})`;
+        },
+      );
 
       // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
       const formattedContent = buffer
         // Headers - H1 to H5
-        .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
-        .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
-        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+        .replace(/^##### (.*$)/gm, "<h5>$1</h5>")
+        .replace(/^#### (.*$)/gm, "<h4>$1</h4>")
+        .replace(/^### (.*$)/gm, "<h3>$1</h3>")
+        .replace(/^## (.*$)/gm, "<h2>$1</h2>")
+        .replace(/^# (.*$)/gm, "<h1>$1</h1>")
         // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
-        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, alt, url) {
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
           // Clean and validate the URL
           let cleanUrl = url.trim();
-          
+
           // Convert HTTP to HTTPS if it's a full URL starting with http://
           if (cleanUrl.match(/^http:\/\//i)) {
-            cleanUrl = cleanUrl.replace(/^http:\/\//i, 'https://');
+            cleanUrl = cleanUrl.replace(/^http:\/\//i, "https://");
           }
-          
+
           // Use alt text if provided, otherwise use empty string
-          const altText = alt ? alt.trim() : '';
-          
+          const altText = alt ? alt.trim() : "";
+
           if (trace.payload?.debugMode === 1) {
-            console.log('Converting markdown image to HTML:', { original: match, cleanUrl, altText });
+            console.log("Converting markdown image to HTML:", {
+              original: match,
+              cleanUrl,
+              altText,
+            });
           }
-          
+
           return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
         // Bold formatting only (AFTER image processing to prevent URL corruption)
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Double asterisks for bold
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Double asterisks for bold
         // Line separators (three or more hyphens)
         .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
         // List items
-        .replace(/^\* (.*$)/gm, '<li>$1</li>')
-        .replace(/^- (.*$)/gm, '<li>$1</li>')
+        .replace(/^\* (.*$)/gm, "<li>$1</li>")
+        .replace(/^- (.*$)/gm, "<li>$1</li>")
         .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
-        .replace(/^\\d+\\.\\s+(.*$)/gm, '<li>$1</li>')
+        .replace(/^\\d+\\.\\s+(.*$)/gm, "<li>$1</li>")
         // Code
-        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/`([^`]+)`/g, "<code>$1</code>")
         // Tables - Improved processing for markdown tables
-        .replace(/(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm, function(match) {
-          // Clean up the match and split into lines
-          const tableContent = match.trim();
-          const rows = tableContent.split('\n').filter(row => row.trim());
-          
-          // Check if this is really a table (at least 2 rows: header + separator)
-          if (rows.length < 2) return match;
-          
-          let tableHtml = '<table class="markdown-table">\n';
-          let headerProcessed = false;
-          
-          // Process each row
-          rows.forEach((row, rowIndex) => {
-            const trimmedRow = row.trim();
-            
-            // Skip the separator row (contains only dashes, spaces, pipes, and colons)
-            if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) {
-              return;
-            }
-            
-            // Start the row
-            tableHtml += '  <tr>\n';
-            
-            // Extract cells - handle pipes that might be at start/end
-            let cells;
-            if (trimmedRow.startsWith('|') && trimmedRow.endsWith('|')) {
-              cells = trimmedRow.slice(1, -1).split('|');
-            } else {
-              cells = trimmedRow.split('|');
-            }
-            
-            // Process each cell
-            cells.forEach((cell) => {
-              const cellContent = cell.trim();
-              // First row (after potential separator) is header
-              const cellTag = (!headerProcessed && rowIndex === 0) ? 'th' : 'td';
-              tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
+        .replace(
+          /(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm,
+          function (match) {
+            // Clean up the match and split into lines
+            const tableContent = match.trim();
+            const rows = tableContent.split("\n").filter((row) => row.trim());
+
+            // Check if this is really a table (at least 2 rows: header + separator)
+            if (rows.length < 2) return match;
+
+            let tableHtml = '<table class="markdown-table">\n';
+            let headerProcessed = false;
+
+            // Process each row
+            rows.forEach((row, rowIndex) => {
+              const trimmedRow = row.trim();
+
+              // Skip the separator row (contains only dashes, spaces, pipes, and colons)
+              if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) {
+                return;
+              }
+
+              // Start the row
+              tableHtml += "  <tr>\n";
+
+              // Extract cells - handle pipes that might be at start/end
+              let cells;
+              if (trimmedRow.startsWith("|") && trimmedRow.endsWith("|")) {
+                cells = trimmedRow.slice(1, -1).split("|");
+              } else {
+                cells = trimmedRow.split("|");
+              }
+
+              // Process each cell
+              cells.forEach((cell) => {
+                const cellContent = cell.trim();
+                // First row (after potential separator) is header
+                const cellTag =
+                  !headerProcessed && rowIndex === 0 ? "th" : "td";
+                tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
+              });
+
+              // Mark header as processed after first actual content row
+              if (!headerProcessed && rowIndex === 0) {
+                headerProcessed = true;
+              }
+
+              // End the row
+              tableHtml += "  </tr>\n";
             });
-            
-            // Mark header as processed after first actual content row
-            if (!headerProcessed && rowIndex === 0) {
-              headerProcessed = true;
-            }
-            
-            // End the row
-            tableHtml += '  </tr>\n';
-          });
-          
-          // End the table
-          tableHtml += '</table>';
-          return tableHtml;
-        })
+
+            // End the table
+            tableHtml += "</table>";
+            return tableHtml;
+          },
+        )
         // Convert regular markdown links to HTML links (AFTER image processing)
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(
+          /\[([^\]]+)\]\(([^)]+)\)/g,
+          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
+        )
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
-          return `<li class="${indentation > 0 ? 'sublist' : ''}">${content.trim()}</li>`;
+          return `<li class="${indentation > 0 ? "sublist" : ""}">${content.trim()}</li>`;
         })
-        .replace(/(?:^|\n)(<li)/g, '\n<ul>$1')
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, '$1</ul>');
+        .replace(/(?:^|\n)(<li)/g, "\n<ul>$1")
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, "$1</ul>");
 
       // --- BEGIN: Post-process lists and clean up empty items ---
-      const tempContainer = document.createElement('div');
+      const tempContainer = document.createElement("div");
       // Use DOMParser for potentially cleaner initial parsing if needed, but innerHTML is often sufficient
-      tempContainer.innerHTML = formattedContent; 
+      tempContainer.innerHTML = formattedContent;
 
       // Function to wrap consecutive LIs
       function wrapListItems(listType /* 'ol' or 'ul' */) {
-        const items = tempContainer.querySelectorAll('li'); // Get all LIs
+        const items = tempContainer.querySelectorAll("li"); // Get all LIs
         let currentList = null;
 
         items.forEach((li, index) => {
           // Rough heuristic: Check if it looks like a numbered list item was intended
           // This relies on the number potentially being left as text by the simple regex
-          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim()); 
-          const targetListType = looksNumbered ? 'ol' : 'ul';
+          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim());
+          const targetListType = looksNumbered ? "ol" : "ul";
 
           // Only process items matching the current function call type (ol or ul)
           if (targetListType !== listType) return;
 
           // Skip items already inside a list (e.g., nested lists - handle later if needed)
-          if (li.parentElement.tagName === 'OL' || li.parentElement.tagName === 'UL') {
+          if (
+            li.parentElement.tagName === "OL" ||
+            li.parentElement.tagName === "UL"
+          ) {
             currentList = null; // Reset sequence if we encounter an already nested item
-            return; 
+            return;
           }
 
           const prevSibling = li.previousElementSibling;
 
           // Start a new list if needed
-          if (!currentList || !prevSibling || prevSibling.tagName !== 'LI' || (prevSibling.parentElement.tagName !== listType.toUpperCase())) {
+          if (
+            !currentList ||
+            !prevSibling ||
+            prevSibling.tagName !== "LI" ||
+            prevSibling.parentElement.tagName !== listType.toUpperCase()
+          ) {
             currentList = document.createElement(listType);
             li.parentNode.insertBefore(currentList, li);
           }
@@ -596,24 +660,24 @@ export const StreamingResponseExtension = {
       }
 
       // Wrap OL items first, then UL items
-      wrapListItems('ol');
-      wrapListItems('ul');
-      
+      wrapListItems("ol");
+      wrapListItems("ul");
+
       // Clean up empty numbered list items (modified check)
-      const listItems = tempContainer.querySelectorAll('ol > li, ul > li');
-      listItems.forEach(li => {
+      const listItems = tempContainer.querySelectorAll("ol > li, ul > li");
+      listItems.forEach((li) => {
         // Check if the list item is effectively empty or just a marker
-        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, '').trim(); // Remove number marker for check
-        if (contentCheck === '' || contentCheck === '<br>') {
+        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, "").trim(); // Remove number marker for check
+        if (contentCheck === "" || contentCheck === "<br>") {
           // Check if it's truly empty, not containing other important tags
-          if (!li.querySelector('a, img, code, strong, em, ul, ol')) {
-             li.remove();
+          if (!li.querySelector("a, img, code, strong, em, ul, ol")) {
+            li.remove();
           }
         }
       });
-      
+
       // Remove any potentially empty OL/UL tags left after cleaning LIs
-      tempContainer.querySelectorAll('ol, ul').forEach(list => {
+      tempContainer.querySelectorAll("ol, ul").forEach((list) => {
         if (!list.hasChildNodes()) {
           list.remove();
         }
@@ -628,13 +692,16 @@ export const StreamingResponseExtension = {
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
       if (scrollContainer) {
-        const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-        const isNearBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= maxScroll - 100;
+        const maxScroll =
+          scrollContainer.scrollHeight - scrollContainer.clientHeight;
+        const isNearBottom =
+          scrollContainer.scrollTop + scrollContainer.clientHeight >=
+          maxScroll - 100;
 
         if (isNearBottom) {
           scrollContainer.scrollTo({
             top: scrollContainer.scrollHeight,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }
       }
@@ -645,7 +712,7 @@ export const StreamingResponseExtension = {
         const style = window.getComputedStyle(el);
         const overflowY = style.overflowY;
 
-        if (overflowY === 'auto' || overflowY === 'scroll') {
+        if (overflowY === "auto" || overflowY === "scroll") {
           return el;
         }
         el = el.parentElement;
@@ -658,91 +725,98 @@ export const StreamingResponseExtension = {
       // Claude models
       {
         id: 1,
-        name: 'claude-sonnet-4-20250514',
-        type: 'claude',
-        endpoint: '/api/claude-stream',
-        displayName: 'Claude 4 Sonnet'
+        name: "claude-sonnet-4-20250514",
+        type: "claude",
+        endpoint: "/api/claude-stream",
+        displayName: "Claude 4 Sonnet",
       },
       {
         id: 2,
-        name: 'claude-3-5-haiku-20241022',
-        type: 'claude',
-        endpoint: '/api/claude-stream',
-        displayName: 'Claude 3.5 Haiku'
+        name: "claude-3-5-haiku-20241022",
+        type: "claude",
+        endpoint: "/api/claude-stream",
+        displayName: "Claude 3.5 Haiku",
       },
       {
         id: 3,
-        name: 'claude-3-sonnet-20240229',
-        type: 'claude',
-        endpoint: '/api/claude-stream',
-        displayName: 'Claude 3 Sonnet'
+        name: "claude-3-sonnet-20240229",
+        type: "claude",
+        endpoint: "/api/claude-stream",
+        displayName: "Claude 3 Sonnet",
       },
 
       // OpenAI models
       {
         id: 4,
-        name: 'gpt-4.1-2025-04-14',
-        type: 'openai',
-        endpoint: '/api/openai-stream',
-        displayName: 'GPT-4.1'
+        name: "gpt-4.1-2025-04-14",
+        type: "openai",
+        endpoint: "/api/openai-stream",
+        displayName: "GPT-4.1",
       },
       {
         id: 5,
-        name: 'gpt-4.1-mini-2025-04-14',
-        type: 'openai',
-        endpoint: '/api/openai-stream',
-        displayName: 'GPT-4.1 Mini'
+        name: "gpt-4.1-mini-2025-04-14",
+        type: "openai",
+        endpoint: "/api/openai-stream",
+        displayName: "GPT-4.1 Mini",
       },
 
       // Gemini models
       {
         id: 6,
-        name: 'gemini-2.5-pro-preview-05-06',
-        type: 'gemini',
-        endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 2.5 Pro'
+        name: "gemini-2.5-pro-preview-05-06",
+        type: "gemini",
+        endpoint: "/api/gemini-stream",
+        displayName: "Gemini 2.5 Pro",
       },
       {
         id: 7,
-        name: 'gemini-2.5-flash-preview-04-17',
-        type: 'gemini',
-        endpoint: '/api/gemini-stream',
-        displayName: 'Gemini 2.5 Flash'
+        name: "gemini-2.5-flash-preview-04-17",
+        type: "gemini",
+        endpoint: "/api/gemini-stream",
+        displayName: "Gemini 2.5 Flash",
       },
 
       // Groq models
       {
         id: 8,
-        name: 'meta-llama/llama-4-maverick-17b-128e-instruct',
-        type: 'groq',
-        endpoint: '/api/groq-stream',
-        displayName: 'Llama 4 Maverick'
+        name: "meta-llama/llama-4-maverick-17b-128e-instruct",
+        type: "groq",
+        endpoint: "/api/groq-stream",
+        displayName: "Llama 4 Maverick",
       },
       {
         id: 9,
-        name: 'deepseek-r1-distill-llama-70b',
-        type: 'groq',
-        endpoint: '/api/groq-stream',
-        displayName: 'Llama 70B'
+        name: "deepseek-r1-distill-llama-70b",
+        type: "groq",
+        endpoint: "/api/groq-stream",
+        displayName: "Llama 70B",
       },
 
       // SambaNova models
       {
         id: 10,
-        name: 'Llama-4-Maverick-17B-128E-Instruct',
-        type: 'sambanova',
-        endpoint: '/api/sambanova-stream',
-        displayName: 'Llama 4 Maverick 17B 128E Instruct'
+        name: "Llama-4-Maverick-17B-128E-Instruct",
+        type: "sambanova",
+        endpoint: "/api/sambanova-stream",
+        displayName: "Llama 4 Maverick 17B 128E Instruct",
       },
 
       // Baseten models
       {
         id: 11,
-        name: 'deepseek-ai/DeepSeek-V3-0324',
-        type: 'baseten',
-        endpoint: '/api/baseten-stream',
-        displayName: 'Baseten'
-      }
+        name: "deepseek-ai/DeepSeek-V3-0324",
+        type: "baseten",
+        endpoint: "/api/baseten-stream",
+        displayName: "Baseten",
+      },
+      {
+        id: 12,
+        name: "deepseek-ai/DeepSeek-R1-0528",
+        type: "baseten",
+        endpoint: "/api/baseten-stream",
+        displayName: "Baseten thinking",
+      },
     ];
 
     // Function to process model sequence
@@ -750,65 +824,69 @@ export const StreamingResponseExtension = {
       if (!sequenceStr) return [1]; // Default to first model if none specified
 
       // Parse sequence string to array of numbers
-      return sequenceStr.split(',')
-        .map(id => parseInt(id.trim()))
-        .filter(id => !isNaN(id) && modelsRegistry.some(m => m.id === id));
+      return sequenceStr
+        .split(",")
+        .map((id) => parseInt(id.trim()))
+        .filter((id) => !isNaN(id) && modelsRegistry.some((m) => m.id === id));
     }
 
     // Function to get detailed model info by ID
     function getModelDetailById(modelId) {
-      const model = modelsRegistry.find(m => m.id === modelId);
-      return model ? 
-        `ID:${model.id} | ${model.displayName} (${model.type}) | Model: ${model.name}` : 
-        `Unknown model ID: ${modelId}`;
+      const model = modelsRegistry.find((m) => m.id === modelId);
+      return model
+        ? `ID:${model.id} | ${model.displayName} (${model.type}) | Model: ${model.name}`
+        : `Unknown model ID: ${modelId}`;
     }
 
     // Adds AI info footer to the UI
     function addAIInfoFooter(attemptedModels) {
       // Determine overall success and find the successful model details
-      const successfulAttempt = attemptedModels.find(m => m.success === true);
-      const successfulModel = successfulAttempt 
-        ? modelsRegistry.find(m => m.id === successfulAttempt.id)
+      const successfulAttempt = attemptedModels.find((m) => m.success === true);
+      const successfulModel = successfulAttempt
+        ? modelsRegistry.find((m) => m.id === successfulAttempt.id)
         : null;
       const wasSuccess = !!successfulModel;
 
       // Create footer container
-      const aiInfoFooter = document.createElement('div');
-      aiInfoFooter.className = 'ai-info-footer';
-      aiInfoFooter.style.position = 'relative'; // Add relative positioning for tooltip
-      aiInfoFooter.setAttribute('title', 'Click to show/hide AI model execution details');
+      const aiInfoFooter = document.createElement("div");
+      aiInfoFooter.className = "ai-info-footer";
+      aiInfoFooter.style.position = "relative"; // Add relative positioning for tooltip
+      aiInfoFooter.setAttribute(
+        "title",
+        "Click to show/hide AI model execution details",
+      );
 
       // Create AI icon
-      const aiIcon = document.createElement('div');
-      aiIcon.className = 'ai-icon';
-      aiIcon.textContent = 'AI';
+      const aiIcon = document.createElement("div");
+      aiIcon.className = "ai-icon";
+      aiIcon.textContent = "AI";
 
       // Create info text
-      const aiInfoText = document.createElement('div');
-      aiInfoText.className = 'ai-info-text';
+      const aiInfoText = document.createElement("div");
+      aiInfoText.className = "ai-info-text";
 
       // Language support for messages
       const languageMessages = {
         cs: {
-          success: 'Odpověď generována pomocí AI.',
-          failure: 'AI generování selhalo.'
+          success: "Odpověď generována pomocí AI.",
+          failure: "AI generování selhalo.",
         },
         en: {
-          success: 'Response generated by AI.',
-          failure: 'AI generation failed.'
+          success: "Response generated by AI.",
+          failure: "AI generation failed.",
         },
         de: {
-          success: 'Antwort durch KI generiert.',
-          failure: 'KI-Generierung fehlgeschlagen.'
+          success: "Antwort durch KI generiert.",
+          failure: "KI-Generierung fehlgeschlagen.",
         },
         uk: {
-          success: 'Відповідь згенерована ШІ.',
-          failure: 'Генерація ШІ не вдалася.'
-        }
+          success: "Відповідь згенерована ШІ.",
+          failure: "Генерація ШІ не вдалася.",
+        },
       };
 
       // Get language from payload, default to Czech
-      const userLang = trace.payload?.lang || 'cs';
+      const userLang = trace.payload?.lang || "cs";
       // Get language messages or fall back to Czech if not supported
       const messages = languageMessages[userLang] || languageMessages.cs;
 
@@ -816,40 +894,40 @@ export const StreamingResponseExtension = {
         aiInfoText.textContent = messages.success;
       } else {
         aiInfoText.textContent = messages.failure;
-        aiInfoFooter.style.color = '#DC2626'; // Indicate failure visually
+        aiInfoFooter.style.color = "#DC2626"; // Indicate failure visually
       }
 
       // Create tooltip with simplified model sequence info
-      const modelInfoTooltip = document.createElement('div');
-      const modelTypeClass = successfulModel ? successfulModel.type : 'failed'; // Use type for styling or 'failed'
+      const modelInfoTooltip = document.createElement("div");
+      const modelTypeClass = successfulModel ? successfulModel.type : "failed"; // Use type for styling or 'failed'
       modelInfoTooltip.className = `model-info-tooltip ${modelTypeClass}`;
 
       // Language support for tooltip messages
       const tooltipMessages = {
         cs: {
-          title: 'Spuštěné AI modely:',
-          noModels: 'Žádné modely nebyly spuštěny.',
-          allFailed: '(Všechny selhaly)',
-          unknown: 'Neznámý ID:'
+          title: "Spuštěné AI modely:",
+          noModels: "Žádné modely nebyly spuštěny.",
+          allFailed: "(Všechny selhaly)",
+          unknown: "Neznámý ID:",
         },
         en: {
-          title: 'AI models executed:',
-          noModels: 'No models were executed.',
-          allFailed: '(All failed)',
-          unknown: 'Unknown ID:'
+          title: "AI models executed:",
+          noModels: "No models were executed.",
+          allFailed: "(All failed)",
+          unknown: "Unknown ID:",
         },
         de: {
-          title: 'Ausgeführte KI-Modelle:',
-          noModels: 'Es wurden keine Modelle ausgeführt.',
-          allFailed: '(Alle fehlgeschlagen)',
-          unknown: 'Unbekannte ID:'
+          title: "Ausgeführte KI-Modelle:",
+          noModels: "Es wurden keine Modelle ausgeführt.",
+          allFailed: "(Alle fehlgeschlagen)",
+          unknown: "Unbekannte ID:",
         },
         uk: {
-          title: 'Виконані моделі ШІ:',
-          noModels: 'Жодна модель не була виконана.',
-          allFailed: '(Усі не вдалися)',
-          unknown: 'Невідомий ID:'
-        }
+          title: "Виконані моделі ШІ:",
+          noModels: "Жодна модель не була виконана.",
+          allFailed: "(Усі не вдалися)",
+          unknown: "Невідомий ID:",
+        },
       };
 
       // Get tooltip messages or fall back to Czech if not supported
@@ -857,12 +935,16 @@ export const StreamingResponseExtension = {
 
       let tooltipHTML = `<strong>${tooltipText.title}</strong> `;
       if (attemptedModels.length > 0) {
-        tooltipHTML += attemptedModels.map(attempt => {
-          const modelInfo = modelsRegistry.find(m => m.id === attempt.id);
-          const displayName = modelInfo ? modelInfo.displayName : `${tooltipText.unknown}${attempt.id}`;
-          const statusIcon = attempt.success === true ? '✅' : '❌';
-          return `${statusIcon} ${displayName}`;
-        }).join(' → '); // Use arrow separator
+        tooltipHTML += attemptedModels
+          .map((attempt) => {
+            const modelInfo = modelsRegistry.find((m) => m.id === attempt.id);
+            const displayName = modelInfo
+              ? modelInfo.displayName
+              : `${tooltipText.unknown}${attempt.id}`;
+            const statusIcon = attempt.success === true ? "✅" : "❌";
+            return `${statusIcon} ${displayName}`;
+          })
+          .join(" → "); // Use arrow separator
       } else {
         tooltipHTML += tooltipText.noModels; // Fallback message
       }
@@ -880,34 +962,37 @@ export const StreamingResponseExtension = {
       aiInfoFooter.appendChild(modelInfoTooltip);
 
       // Toggle dropdown visibility on click
-      aiInfoFooter.addEventListener('click', function(e) {
+      aiInfoFooter.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        const isVisible = modelInfoTooltip.classList.toggle('visible');
+        const isVisible = modelInfoTooltip.classList.toggle("visible");
         // Toggle class on footer for icon rotation
         if (isVisible) {
-          aiInfoFooter.classList.add('tooltip-visible');
+          aiInfoFooter.classList.add("tooltip-visible");
         } else {
-          aiInfoFooter.classList.remove('tooltip-visible');
+          aiInfoFooter.classList.remove("tooltip-visible");
         }
       });
 
       // Prevent tooltip from closing when clicking inside it
-      modelInfoTooltip.addEventListener('click', function(e) {
+      modelInfoTooltip.addEventListener("click", function (e) {
         e.stopPropagation();
       });
 
       // Close tooltip only when clicking outside both the footer and tooltip
-      document.addEventListener('click', function(e) {
-        if (!aiInfoFooter.contains(e.target) && !modelInfoTooltip.contains(e.target)) {
-          modelInfoTooltip.classList.remove('visible');
-          aiInfoFooter.classList.remove('tooltip-visible'); // Also remove class here
+      document.addEventListener("click", function (e) {
+        if (
+          !aiInfoFooter.contains(e.target) &&
+          !modelInfoTooltip.contains(e.target)
+        ) {
+          modelInfoTooltip.classList.remove("visible");
+          aiInfoFooter.classList.remove("tooltip-visible"); // Also remove class here
         }
       });
 
       // Add the footer after the response content
       // Ensure it's added only once (important if called on failure after potential partial success render)
-      const existingFooter = responseSection.querySelector('.ai-info-footer');
+      const existingFooter = responseSection.querySelector(".ai-info-footer");
       if (existingFooter) {
         existingFooter.remove();
       }
@@ -936,20 +1021,26 @@ export const StreamingResponseExtension = {
           if (firstChunkReceived) return;
 
           if (payload.debugMode === 1) {
-            console.log(`⏰ TTFT Timeout (${TTFT_TIMEOUT_MS}ms) reached for ${endpoint}. Aborting fetch.`);
+            console.log(
+              `⏰ TTFT Timeout (${TTFT_TIMEOUT_MS}ms) reached for ${endpoint}. Aborting fetch.`,
+            );
           }
           // Abort the fetch *before* rejecting due to timeout
           if (!abortController.signal.aborted) {
-            abortController.abort('TTFT Timeout'); // Use a reason for clarity
+            abortController.abort("TTFT Timeout"); // Use a reason for clarity
           }
-          reject(new Error(`TTFT timeout after ${TTFT_TIMEOUT_MS}ms for ${endpoint}`));
+          reject(
+            new Error(
+              `TTFT timeout after ${TTFT_TIMEOUT_MS}ms for ${endpoint}`,
+            ),
+          );
         }, TTFT_TIMEOUT_MS);
       });
 
       // This function handles the actual fetch and stream processing
       const processStream = async () => {
         let response;
-        let localCompleteResponse = '';
+        let localCompleteResponse = "";
         let receivedAnyContent = false; // Track if *any* content was processed successfully
 
         try {
@@ -962,33 +1053,41 @@ export const StreamingResponseExtension = {
               debugMode: payload.debugMode,
               projectName: payload.projectName,
               systemPrompt: payload.systemPrompt,
-              user_id: payload.user_id
+              user_id: payload.user_id,
             });
-            console.log(`�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`);
+            console.log(
+              `�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
+            );
           }
 
           response = await fetch(proxyUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
-            signal: abortController.signal // Use the abort signal
+            signal: abortController.signal, // Use the abort signal
           });
 
           if (!response.ok) {
             let errorText = `HTTP error! status: ${response.status}`;
-            try { errorText += `, body: ${await response.text()}`; } catch (e) { /* ignore */ }
+            try {
+              errorText += `, body: ${await response.text()}`;
+            } catch (e) {
+              /* ignore */
+            }
             // Reject the firstChunkPromise if the initial fetch fails
             throw new Error(errorText);
           }
 
           const reader = response.body.getReader();
           const decoder = new TextDecoder();
-          let streamBuffer = '';
+          let streamBuffer = "";
 
           while (true) {
             // Check for abort *before* reading - handles external aborts or quick timeouts
             if (abortController.signal.aborted) {
-               throw new Error(`Fetch aborted during read for ${endpoint}. Reason: ${abortController.signal.reason || 'Unknown'}`);
+              throw new Error(
+                `Fetch aborted during read for ${endpoint}. Reason: ${abortController.signal.reason || "Unknown"}`,
+              );
             }
 
             const { done, value } = await reader.read();
@@ -997,31 +1096,36 @@ export const StreamingResponseExtension = {
               streamBuffer += decoder.decode(value, { stream: true });
             }
 
-            let lines = streamBuffer.split('\n');
-            streamBuffer = done ? '' : lines.pop() || '';
+            let lines = streamBuffer.split("\n");
+            streamBuffer = done ? "" : lines.pop() || "";
 
             for (const line of lines) {
               if (abortController.signal.aborted) {
-                  // Stop processing immediately if aborted (e.g., by timeout while processing buffer)
-                  throw new Error(`Fetch aborted during line processing for ${endpoint}. Reason: ${abortController.signal.reason || 'Unknown'}`);
+                // Stop processing immediately if aborted (e.g., by timeout while processing buffer)
+                throw new Error(
+                  `Fetch aborted during line processing for ${endpoint}. Reason: ${abortController.signal.reason || "Unknown"}`,
+                );
               }
 
-              if (!line.trim() || !line.startsWith('data: ')) continue;
+              if (!line.trim() || !line.startsWith("data: ")) continue;
               const data = line.slice(6).trim();
 
-              if (data === '[DONE]') {
-                if (payload.debugMode === 1) console.log(`[DONE] received for ${endpoint}.`);
+              if (data === "[DONE]") {
+                if (payload.debugMode === 1)
+                  console.log(`[DONE] received for ${endpoint}.`);
                 // Attempt Voiceflow update only if content was actually received and processed
                 if (receivedAnyContent) {
-                   await updateVoiceflowVariable(payload, localCompleteResponse);
+                  await updateVoiceflowVariable(payload, localCompleteResponse);
                 } else if (payload.debugMode === 1) {
-                   console.log("⚠️ No content received before [DONE], skipping Voiceflow update.");
+                  console.log(
+                    "⚠️ No content received before [DONE], skipping Voiceflow update.",
+                  );
                 }
                 return { success: true }; // Signal successful completion
               }
 
               try {
-                if (data.startsWith('{') && data.endsWith('}')) {
+                if (data.startsWith("{") && data.endsWith("}")) {
                   const parsed = JSON.parse(data);
 
                   if (payload.debugMode === 1) {
@@ -1029,17 +1133,23 @@ export const StreamingResponseExtension = {
                   }
 
                   if (parsed.error) {
-                    throw new Error(`Stream error from ${endpoint}: ${parsed.error}`);
+                    throw new Error(
+                      `Stream error from ${endpoint}: ${parsed.error}`,
+                    );
                   }
 
-                  const content = parsed.content || '';
-                  if (content || typeof content === 'string') { // Handle empty string content too
+                  const content = parsed.content || "";
+                  if (content || typeof content === "string") {
+                    // Handle empty string content too
                     receivedAnyContent = true; // Mark that we have received processable content
 
                     // --- TTFT Logic ---
                     if (!firstChunkReceived) {
                       firstChunkReceived = true;
-                      if (payload.debugMode === 1) console.log(`✅ First chunk received from ${endpoint} within timeout.`);
+                      if (payload.debugMode === 1)
+                        console.log(
+                          `✅ First chunk received from ${endpoint} within timeout.`,
+                        );
                       // Crucially, clear the TTFT timer now
                       if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
                       // Signal that the TTFT hurdle is passed
@@ -1049,51 +1159,81 @@ export const StreamingResponseExtension = {
 
                     // Update UI only if the fetch wasn't aborted *before* this point
                     if (!abortController.signal.aborted) {
-                        updateContent(content);
-                        localCompleteResponse += content;
+                      updateContent(content);
+                      localCompleteResponse += content;
                     } else {
-                        // Should theoretically not happen if abort check is robust, but good failsafe
-                        if (payload.debugMode === 1) console.warn(`⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`);
-                        // Do not update UI or localCompleteResponse if aborted
+                      // Should theoretically not happen if abort check is robust, but good failsafe
+                      if (payload.debugMode === 1)
+                        console.warn(
+                          `⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`,
+                        );
+                      // Do not update UI or localCompleteResponse if aborted
                     }
                   }
                 } else if (payload.debugMode === 1 && data) {
-                   console.log(`Received non-JSON data chunk from ${endpoint}:`, data);
+                  console.log(
+                    `Received non-JSON data chunk from ${endpoint}:`,
+                    data,
+                  );
                 }
               } catch (parseError) {
-                 if (payload.debugMode === 1) console.warn(`Failed to parse SSE data line for ${endpoint}:`, parseError, 'Data:', data);
+                if (payload.debugMode === 1)
+                  console.warn(
+                    `Failed to parse SSE data line for ${endpoint}:`,
+                    parseError,
+                    "Data:",
+                    data,
+                  );
               }
             } // End line processing loop
 
             if (done) {
-              if (payload.debugMode === 1) console.log(`Stream ended naturally (done=true) for ${endpoint}.`);
+              if (payload.debugMode === 1)
+                console.log(
+                  `Stream ended naturally (done=true) for ${endpoint}.`,
+                );
               // If stream ends without [DONE], but we got content, consider it success
               if (receivedAnyContent) {
-                if (payload.debugMode === 1) console.log("Attempting Voiceflow update on natural stream end.");
+                if (payload.debugMode === 1)
+                  console.log(
+                    "Attempting Voiceflow update on natural stream end.",
+                  );
                 await updateVoiceflowVariable(payload, localCompleteResponse);
                 return { success: true };
               } else {
                 // No content AND no [DONE] -> Treat as failure for this provider
-                throw new Error(`Stream ended for ${endpoint} without [DONE] signal or any valid content.`);
+                throw new Error(
+                  `Stream ended for ${endpoint} without [DONE] signal or any valid content.`,
+                );
               }
             }
           } // End while true loop
-
         } catch (error) {
-            // Catch all errors from fetch, reading, processing
-            if (error.name === 'AbortError') {
-                // Log abort reason, but the failure is handled by the Promise.race outcome
-                if (payload.debugMode === 1) console.log(`Fetch aborted for ${endpoint}. Reason: ${abortController.signal.reason || 'Unknown'}`);
-            } else {
-                // Log other errors
-                if (payload.debugMode === 1) console.error(`Error during stream processing for ${endpoint}:`, error);
+          // Catch all errors from fetch, reading, processing
+          if (error.name === "AbortError") {
+            // Log abort reason, but the failure is handled by the Promise.race outcome
+            if (payload.debugMode === 1)
+              console.log(
+                `Fetch aborted for ${endpoint}. Reason: ${abortController.signal.reason || "Unknown"}`,
+              );
+          } else {
+            // Log other errors
+            if (payload.debugMode === 1)
+              console.error(
+                `Error during stream processing for ${endpoint}:`,
+                error,
+              );
+          }
+          // If an error occurs *before* the first chunk, reject the firstChunkPromise
+          if (!firstChunkReceived) {
+            try {
+              rejectFirstChunkPromise(error);
+            } catch (e) {
+              /* ignore if already settled */
             }
-            // If an error occurs *before* the first chunk, reject the firstChunkPromise
-            if (!firstChunkReceived) {
-                try { rejectFirstChunkPromise(error); } catch (e) { /* ignore if already settled */ }
-            }
-            // Ensure the process signals failure
-            return { success: false };
+          }
+          // Ensure the process signals failure
+          return { success: false };
         } finally {
           // Always clear the timeout if it's still pending when processing finishes/errors
           if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
@@ -1102,33 +1242,47 @@ export const StreamingResponseExtension = {
 
       // Helper function for Voiceflow update to keep main logic cleaner
       async function updateVoiceflowVariable(payload, completeResponse) {
-         if (!completeResponse) {
-             if (payload.debugMode === 1) console.log("Skipping Voiceflow update: No content generated.");
-             return;
-         }
-         try {
-            if (payload.debugMode === 1) console.log('📤 Updating Voiceflow variable with response length:', completeResponse.length);
-            const updateResponse = await fetch("https://utils.hypedigitaly.ai/api/voiceflow-variable-update", {
-               method: 'POST',
-               headers: { 'Content-Type': 'application/json' },
-               body: JSON.stringify({
-                  user_id: payload.user_id,
-                  projectName: payload.projectName,
-                  variables: { "LLM_Main_Response": completeResponse },
-                  debugMode: payload.debugMode || 0
-               }),
-            });
-            if (!updateResponse.ok) {
-               const errorText = await updateResponse.text();
-               if (payload.debugMode === 1) console.error('Failed to update Voiceflow variables:', errorText);
-            } else if (payload.debugMode === 1) {
-               console.log('✅ Voiceflow update attempted successfully.');
-               try { const responseData = await updateResponse.json(); console.log('Voiceflow update response:', responseData); }
-               catch (e) { console.log('Voiceflow update status:', updateResponse.status); }
+        if (!completeResponse) {
+          if (payload.debugMode === 1)
+            console.log("Skipping Voiceflow update: No content generated.");
+          return;
+        }
+        try {
+          if (payload.debugMode === 1)
+            console.log(
+              "📤 Updating Voiceflow variable with response length:",
+              completeResponse.length,
+            );
+          const updateResponse = await fetch(
+            "https://utils.hypedigitaly.ai/api/voiceflow-variable-update",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                user_id: payload.user_id,
+                projectName: payload.projectName,
+                variables: { LLM_Main_Response: completeResponse },
+                debugMode: payload.debugMode || 0,
+              }),
+            },
+          );
+          if (!updateResponse.ok) {
+            const errorText = await updateResponse.text();
+            if (payload.debugMode === 1)
+              console.error("Failed to update Voiceflow variables:", errorText);
+          } else if (payload.debugMode === 1) {
+            console.log("✅ Voiceflow update attempted successfully.");
+            try {
+              const responseData = await updateResponse.json();
+              console.log("Voiceflow update response:", responseData);
+            } catch (e) {
+              console.log("Voiceflow update status:", updateResponse.status);
             }
-         } catch (error) {
-            if (payload.debugMode === 1) console.error('Error during Voiceflow variable update:', error);
-         }
+          }
+        } catch (error) {
+          if (payload.debugMode === 1)
+            console.error("Error during Voiceflow variable update:", error);
+        }
       }
 
       // --- Main Execution Logic ---
@@ -1140,40 +1294,47 @@ export const StreamingResponseExtension = {
         await Promise.race([firstChunkPromise, ttftTimeoutPromise]);
 
         // ---- If we reach this point, firstChunkPromise resolved successfully (TTFT met) ----
-        if (payload.debugMode === 1) console.log(`TTFT met for ${endpoint}. Waiting for stream completion...`);
+        if (payload.debugMode === 1)
+          console.log(
+            `TTFT met for ${endpoint}. Waiting for stream completion...`,
+          );
 
         // Now, wait for the *rest* of the stream processing to finish.
         const result = await streamProcessingResultPromise;
 
         // Return true only if the full stream processing completed successfully *after* TTFT was met.
         return result.success;
-
       } catch (error) {
         // ---- This catch block handles: ----
         // 1. Rejection from ttftTimeoutPromise (TTFT timeout occurred before first chunk)
         // 2. Rejection from firstChunkPromise (e.g., fetch failed *before* first chunk)
         if (payload.debugMode === 1) {
           // Differentiate log based on error type
-          if (error.message.startsWith('TTFT timeout')) {
-             console.warn(`callLLMAPI failed for ${endpoint} due to TTFT timeout.`);
+          if (error.message.startsWith("TTFT timeout")) {
+            console.warn(
+              `callLLMAPI failed for ${endpoint} due to TTFT timeout.`,
+            );
           } else {
-             console.error(`callLLMAPI failed for ${endpoint} before first chunk. Reason:`, error.message);
+            console.error(
+              `callLLMAPI failed for ${endpoint} before first chunk. Reason:`,
+              error.message,
+            );
           }
         }
 
         // Ensure fetch is aborted if it hasn't been already (especially for non-timeout errors)
         if (!abortController.signal.aborted) {
-          abortController.abort('callLLMAPI error before first chunk');
+          abortController.abort("callLLMAPI error before first chunk");
         }
 
         // Make sure thinking animation is hidden if we fail early
         if (isFirstChunk) {
-            const thinkingHeader = container.querySelector('.thinking-header');
-            if (thinkingHeader && !thinkingHeader.classList.contains('hidden')) {
-                thinkingHeader.classList.add('hidden');
-                responseSection.classList.add('visible'); // Show section even on failure
-            }
-            isFirstChunk = false; // Mark as not first chunk anymore
+          const thinkingHeader = container.querySelector(".thinking-header");
+          if (thinkingHeader && !thinkingHeader.classList.contains("hidden")) {
+            thinkingHeader.classList.add("hidden");
+            responseSection.classList.add("visible"); // Show section even on failure
+          }
+          isFirstChunk = false; // Mark as not first chunk anymore
         }
         return false; // Indicate failure for this attempt
       }
@@ -1191,7 +1352,9 @@ export const StreamingResponseExtension = {
       if (trace.payload.debugMode === 1) {
         console.log("📊 MODEL SEQUENCE DEBUG INFO:");
         console.log("=== CONFIGURED MODEL SEQUENCE ===");
-        console.log(`📋 Raw sequence: ${trace.payload.modelSequence || "Default"}`);
+        console.log(
+          `📋 Raw sequence: ${trace.payload.modelSequence || "Default"}`,
+        );
         console.log(`📋 Parsed IDs: ${JSON.stringify(modelSequence)}`);
 
         // Print detailed model info
@@ -1211,7 +1374,7 @@ export const StreamingResponseExtension = {
         // If we already found a successful model, don't try others
         if (successfulModelFound) break;
 
-        const model = modelsRegistry.find(m => m.id === modelId);
+        const model = modelsRegistry.find((m) => m.id === modelId);
 
         if (!model) {
           if (trace.payload.debugMode === 1) {
@@ -1225,7 +1388,9 @@ export const StreamingResponseExtension = {
         attemptedModels.push(currentAttempt);
 
         if (trace.payload.debugMode === 1) {
-          console.log(`\n🔄 ATTEMPT ${attemptedModels.length}/${modelSequence.length}: Using model ID:${model.id}`);
+          console.log(
+            `\n🔄 ATTEMPT ${attemptedModels.length}/${modelSequence.length}: Using model ID:${model.id}`,
+          );
           console.log(`📌 Model: ${model.displayName} (${model.type})`);
           console.log(`📌 Model name: ${model.name}`);
           console.log(`📌 Endpoint: ${model.endpoint}`);
@@ -1258,46 +1423,52 @@ export const StreamingResponseExtension = {
             console.log(`📌 Model: ${model.displayName} (${model.type})`);
             console.log(`📌 Model name: ${model.name}`);
             console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
-            console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
+            console.log(
+              `📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`,
+            );
             console.log(`=============================`);
           }
           addAIInfoFooter(attemptedModels); // Pass the list of attempted models
           // No return here, let loop break naturally or finish
         } else {
-            // --- Failure case within the loop ---
-            if (trace.payload.debugMode === 1) {
-                console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
-                console.log(`📌 Model: ${model.displayName} (${model.type})`);
-                console.log(`📌 Model name: ${model.name}`);
-                console.log(`📌 Status: REQUEST FAILED OR TIMED OUT`);
-                console.log(`📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`);
-            }
+          // --- Failure case within the loop ---
+          if (trace.payload.debugMode === 1) {
+            console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
+            console.log(`📌 Model: ${model.displayName} (${model.type})`);
+            console.log(`📌 Model name: ${model.name}`);
+            console.log(`📌 Status: REQUEST FAILED OR TIMED OUT`);
+            console.log(
+              `📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`,
+            );
+          }
 
-            // *** IMPORTANT: Clear content before trying the next model ***
-            if (responseContent) {
-                 if (trace.payload.debugMode === 1) {
-                    console.log(`🧼 Clearing response content before next attempt.`);
-                 }
-                 responseContent.innerHTML = ''; // Clear the displayed content
-                 completeResponse = ''; // Reset the global complete response accumulator
-                 // We might potentially reset isFirstChunk = true here if we want the loader again
-                 // For now, just clearing content.
-            }
-
-            // Check if there are more models to try
-            const nextModelIndex = modelSequence.indexOf(modelId) + 1;
-            if (nextModelIndex < modelSequence.length) {
-              const nextModelId = modelSequence[nextModelIndex];
-              const nextModel = modelsRegistry.find(m => m.id === nextModelId);
-              if (nextModel && trace.payload.debugMode === 1) {
-                console.log(`📌 Next attempt: ${getModelDetailById(nextModelId)}`);
-              }
-            } else if (trace.payload.debugMode === 1) {
-              console.log(`📌 No more models to try in sequence`);
-            }
+          // *** IMPORTANT: Clear content before trying the next model ***
+          if (responseContent) {
             if (trace.payload.debugMode === 1) {
-                console.log(`-----------------------------`);
+              console.log(`🧼 Clearing response content before next attempt.`);
             }
+            responseContent.innerHTML = ""; // Clear the displayed content
+            completeResponse = ""; // Reset the global complete response accumulator
+            // We might potentially reset isFirstChunk = true here if we want the loader again
+            // For now, just clearing content.
+          }
+
+          // Check if there are more models to try
+          const nextModelIndex = modelSequence.indexOf(modelId) + 1;
+          if (nextModelIndex < modelSequence.length) {
+            const nextModelId = modelSequence[nextModelIndex];
+            const nextModel = modelsRegistry.find((m) => m.id === nextModelId);
+            if (nextModel && trace.payload.debugMode === 1) {
+              console.log(
+                `📌 Next attempt: ${getModelDetailById(nextModelId)}`,
+              );
+            }
+          } else if (trace.payload.debugMode === 1) {
+            console.log(`📌 No more models to try in sequence`);
+          }
+          if (trace.payload.debugMode === 1) {
+            console.log(`-----------------------------`);
+          }
         }
       } // End of model sequence loop
 
@@ -1310,7 +1481,12 @@ export const StreamingResponseExtension = {
           console.log(`📌 Attempted models:`);
           attemptedModels.forEach((attempt, index) => {
             const detail = getModelDetailById(attempt.id);
-            const status = attempt.success === null ? '(Not Run)' : (attempt.success ? '(Success - Error in Logic?)' : '(Failed/Timed Out)');
+            const status =
+              attempt.success === null
+                ? "(Not Run)"
+                : attempt.success
+                  ? "(Success - Error in Logic?)"
+                  : "(Failed/Timed Out)";
             console.log(`   ${index + 1}. ${detail} ${status}`);
           });
           console.log(`📌 Result: No successful responses`);
