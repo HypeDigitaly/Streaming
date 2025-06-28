@@ -409,17 +409,22 @@ export const StreamingResponseExtension = {
     if (!window.toggleThinkingSection) {
       window.toggleThinkingSection = function(sectionId) {
         const content = document.getElementById(sectionId);
-        const header = content.previousElementSibling;
         
-        if (content && header) {
-          const isExpanded = content.classList.contains('expanded');
+        if (content) {
+          // Find the header within the same parent container
+          const section = content.parentElement;
+          const header = section ? section.querySelector('.ai-thinking-header') : null;
           
-          if (isExpanded) {
-            content.classList.remove('expanded');
-            header.classList.remove('expanded');
-          } else {
-            content.classList.add('expanded');
-            header.classList.add('expanded');
+          if (header) {
+            const isExpanded = content.classList.contains('expanded');
+            
+            if (isExpanded) {
+              content.classList.remove('expanded');
+              header.classList.remove('expanded');
+            } else {
+              content.classList.add('expanded');
+              header.classList.add('expanded');
+            }
           }
         }
       };
