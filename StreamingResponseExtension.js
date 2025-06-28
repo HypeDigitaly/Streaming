@@ -251,7 +251,7 @@ export const StreamingResponseExtension = {
             background-color: #F8FAFC;
             border: 1px solid #E2E8F0;
             border-radius: 6px;
-            margin: 4px 0;
+            margin: 0;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             overflow: hidden;
           }
@@ -332,6 +332,28 @@ export const StreamingResponseExtension = {
           }
           .ai-thinking-content li {
             margin: 2px 0;
+          }
+          /* Force remove all spacing around thinking sections */
+          .response-content .ai-thinking-section {
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+          .response-content .ai-thinking-section + * {
+            margin-top: 0 !important;
+          }
+          .response-content * + .ai-thinking-section {
+            margin-top: 0 !important;
+          }
+          /* Aggressive margin/padding removal */
+          .response-content p:empty {
+            display: none;
+          }
+          .response-content br + .ai-thinking-section,
+          .response-content .ai-thinking-section + br {
+            display: none;
+          }
+          .response-content .ai-thinking-section {
+            line-height: 1 !important;
           }
           .ai-info-footer {
             display: flex;
@@ -616,15 +638,12 @@ export const StreamingResponseExtension = {
       const formattedContent = buffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section">
-            <div class="ai-thinking-header">
-              <div class="ai-thinking-icon">🧠</div>
-              <div class="ai-thinking-title">Jak AI došla k odpovědi</div>
-              <div class="ai-thinking-arrow">▼</div>
-            </div>
-            <div class="ai-thinking-content">${content.trim()}</div>
-          </div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header"><div class="ai-thinking-icon">🧠</div><div class="ai-thinking-title">Jak AI došla k odpovědi</div><div class="ai-thinking-arrow">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
+        // Remove empty paragraphs and extra whitespace around thinking sections
+        .replace(/<p>\s*<\/p>/g, '')
+        .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
+        .replace(/<\/div>\s*\n/g, '</div>')
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, "<h5>$1</h5>")
         .replace(/^#### (.*$)/gm, "<h4>$1</h4>")
