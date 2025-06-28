@@ -116,16 +116,25 @@ export const StreamingResponseExtension = {
           .response-content h5 {
             font-family: var(--_1bof89na), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #1a1e23;
-            margin: 8px 0 4px 0;
+            margin: 0;
             padding: 0;
-            font-weight: 600;
+            font-weight: normal;
+            font-size: 14px;
             line-height: 1.2;
           }
           strong {
             font-weight: 600;
           }
-          .response-content h1 { font-size: 1.8em; }
-          .response-content h2 { font-size: 1.4em; }
+          .response-content h1, 
+          .response-content h2, 
+          .response-content h3,
+          .response-content h4,
+          .response-content h5 {
+            margin: 0;
+            font-weight: 600;
+          }
+          .response-content h1 { font-size: 2em; }
+          .response-content h2 { font-size: 1.5em; }
           .response-content h3 { font-size: 1.2em; }
           .response-content h4 { font-size: 1.1em; }
           .response-content h5 { font-size: 1em; }
@@ -247,7 +256,7 @@ export const StreamingResponseExtension = {
             overflow: hidden;
           }
           .ai-thinking-header {
-            background-color: #f3f4f6;
+            background-color: #EBF5FF;
             border-bottom: 1px solid #E2E8F0;
             padding: 8px 12px;
             cursor: pointer;
@@ -256,16 +265,15 @@ export const StreamingResponseExtension = {
             gap: 6px;
             transition: background-color 0.2s ease;
             user-select: none;
-            min-height: 34px;
           }
           .ai-thinking-header:hover {
-            background-color: #e5e7eb;
+            background-color: #DBEAFE;
           }
           .ai-thinking-header.expanded {
-            background-color: #e5e7eb;
+            background-color: #DBEAFE;
           }
           .ai-thinking-icon {
-            background-color: #6B7280;
+            background-color: #3B82F6;
             color: white;
             width: 18px;
             height: 18px;
@@ -274,20 +282,13 @@ export const StreamingResponseExtension = {
             align-items: center;
             justify-content: center;
             font-size: 10px;
-            font-weight: bold;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             flex-shrink: 0;
-            line-height: 18px;
-            text-align: center;
           }
           .ai-thinking-title {
             font-weight: 600;
-            color: #374151;
+            color: #1E40AF;
             font-size: 13px;
             flex-grow: 1;
-            line-height: 18px;
-            display: flex;
-            align-items: center;
           }
           .ai-thinking-arrow {
             color: #6B7280;
@@ -338,7 +339,7 @@ export const StreamingResponseExtension = {
             padding: 0 !important;
           }
           .response-content .ai-thinking-section + * {
-            margin-top: 16px !important;
+            margin-top: 0 !important;
           }
           .response-content * + .ai-thinking-section {
             margin-top: 0 !important;
@@ -637,7 +638,7 @@ export const StreamingResponseExtension = {
       const formattedContent = buffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header"><div class="ai-thinking-icon">i</div><div class="ai-thinking-title">Jak AI došla k odpovědi</div><div class="ai-thinking-arrow">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header"><div class="ai-thinking-icon">🧠</div><div class="ai-thinking-title">Jak AI došla k odpovědi</div><div class="ai-thinking-arrow">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
@@ -1227,7 +1228,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
             });
             console.log(
-              ` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
+              `�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
             );
           }
 
