@@ -431,6 +431,47 @@ export const StreamingResponseExtension = {
       // Append to buffer
       buffer += text;
 
+      // Process POSTUP thinking sections BEFORE markdown formatting
+      let processedContent = buffer;
+
+      // Debug: Check if POSTUP markers are present
+      if (trace.payload?.debugMode === 1) {
+        const hasPostupStart = processedContent.includes('[[POSTUP_START]]');
+        const hasPostupEnd = processedContent.includes('[[POSTUP_END]]');
+        console.log('POSTUP Debug:', { hasPostupStart, hasPostupEnd, contentLength: processedContent.length });
+        if (hasPostupStart || hasPostupEnd) {
+          console.log('POSTUP content snippet:', processedContent.substring(0, 500));
+        }
+      }
+
+      // Replace POSTUP sections with expandable thinking blocks
+      processedContent = processedContent.replace(
+        /\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g,
+        function(match, thinkingContent) {
+          if (trace.payload?.debugMode === 1) {
+            console.log('POSTUP match found:', { matchLength: match.length, thinkingLength: thinkingContent.length });
+          }
+
+          const cleanThinking = thinkingContent.trim()
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+
+          return `<div class="thinking-process-section">
+            <div class="thinking-header-toggle" onclick="this.parentElement.classList.toggle('expanded')">
+              <span class="thinking-icon">🤔</span>
+              <span class="thinking-label">Myšlenkový proces</span>
+              <span class="dropdown-arrow">▼</span>
+            </div>
+            <div class="thinking-content">
+              <div class="thinking-text">${cleanThinking}</div>
+            </div>
+          </div>`;
+        }
+      );
+
       // Post-process buffer to handle various image URL patterns
 
       // Pattern 1: Complete URLs with image extensions (including query parameters)
@@ -503,7 +544,7 @@ export const StreamingResponseExtension = {
       );
 
       // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
-      const formattedContent = buffer
+      const formattedContent = processedContent
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, "<h5>$1</h5>")
         .replace(/^#### (.*$)/gm, "<h4>$1</h4>")
@@ -1088,7 +1129,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
             });
             console.log(
-              `�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
+              ` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
             );
           }
 
