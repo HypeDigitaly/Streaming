@@ -810,14 +810,14 @@ export const StreamingResponseExtension = {
         name: "deepseek-ai/DeepSeek-V3-0324",
         type: "baseten",
         endpoint: "/api/baseten-stream",
-        displayName: "HypeDigitaly model",
+        displayName: "Baseten",
       },
       {
         id: 12,
         name: "deepseek-ai/DeepSeek-R1-0528",
         type: "baseten",
         endpoint: "/api/baseten-stream",
-        displayName: "HypeDigitaly model 2",
+        displayName: "Baseten thinking",
       },
     ];
 
