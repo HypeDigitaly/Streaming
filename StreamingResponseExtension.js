@@ -880,8 +880,7 @@ export const StreamingResponseExtension = {
         : `Unknown model ID: ${modelId}`;
     }
 
-    // Adds AI info footer to the UI
-    function addAIInfoFooter(attemptedModels) {
+    // Adds AI info footer to the UI    function addAIInfoFooter(attemptedModels) {
       // Determine overall success and find the successful model details
       const successfulAttempt = attemptedModels.find((m) => m.success === true);
       const successfulModel = successfulAttempt
@@ -906,6 +905,21 @@ export const StreamingResponseExtension = {
       // Create info text
       const aiInfoText = document.createElement("div");
       aiInfoText.className = "ai-info-text";
+
+      // Create thought process icon
+      const thoughtProcessIcon = document.createElement("div");
+      thoughtProcessIcon.className = "thought-process-icon";
+      thoughtProcessIcon.innerHTML = `
+            <svg class="brain-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.33 12.91c.09-.33.15-.68.15-1.04 0-2.24-1.62-4.09-3.75-4.51-.28-1.47-1.62-2.59-3.24-2.59-.63 0-1.22.18-1.72.49-.65-.31-1.38-.49-2.16-.49-2.76 0-5.01 2.25-5.01 5.01 0 .28.02.56.07.83-.94.5-1.58 1.48-1.58 2.61 0 1.63 1.32 2.95 2.95 2.95.17 0 .34-.01.5-.04.49 1.14 1.61 1.93 2.92 1.93.64 0 1.23-.19 1.73-.51.27.84 1.05 1.45 1.97 1.45.99 0 1.82-.69 2.03-1.61.1.01.2.01.3.01 1.45 0 2.62-1.18 2.62-2.62-.01-.43-.11-.84-.28-1.21z"/>
+            </svg>
+            <div class="thought-tooltip">Myšlenkový proces</div>
+          `;
+
+      // Insert thought process icon before info text
+      aiInfoFooter.appendChild(aiIcon);
+      aiInfoFooter.appendChild(thoughtProcessIcon);
+      aiInfoFooter.appendChild(aiInfoText);
 
       // Language support for messages
       const languageMessages = {
@@ -1028,9 +1042,7 @@ export const StreamingResponseExtension = {
 
       modelInfoTooltip.innerHTML = tooltipHTML;
 
-      // Assemble the elements
-      aiInfoFooter.appendChild(aiIcon);
-      aiInfoFooter.appendChild(aiInfoText);
+      // Assemble the remaining elements
       aiInfoFooter.appendChild(modelInfoTooltip);
 
       // Toggle dropdown visibility on click
