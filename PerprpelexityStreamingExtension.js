@@ -7,11 +7,11 @@ export const PerplexityReasonerExtension = {
     render: async ({ trace, element }) => {
       const container = document.createElement('div')
       container.className = 'perplexity-reasoner-container'
-  
+
       // Add variables to track streaming state
       let isStreaming = false
       let activeReasoningGroup = null
-  
+
       // Function to format model name
       function formatModelName(model) {
         const modelMap = {
@@ -26,7 +26,7 @@ export const PerplexityReasonerExtension = {
             .join(' ')
         )
       }
-  
+
       // Create the base structure first
       container.innerHTML = `
         <style>
@@ -213,6 +213,25 @@ export const PerplexityReasonerExtension = {
             margin: 0;
             padding: 0;
           }
+          .postup-container {
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f0f8ff;
+          }
+          .postup-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+          }
+          .postup-icon {
+            font-size: 1.2em;
+            margin-right: 5px;
+          }
+          .postup-content {
+            font-style: italic;
+          }
         </style>
         <div class="reasoning-section">
           <div class="reasoning-header">
@@ -246,30 +265,30 @@ export const PerplexityReasonerExtension = {
           <div class="answer-content" id="answer-content"></div>
         </div>
       `
-  
+
       // Add the container to the element first
       element.appendChild(container)
-  
+
       // Get references to elements
       const reasoningSection = container.querySelector('.reasoning-section')
       const reasoningContent = container.querySelector('#reasoning-content')
       const answerContent = container.querySelector('#answer-content')
       const answerSection = container.querySelector('.answer-section')
-  
+
       // Check if model name contains "reasoning"
       const modelName = (trace.payload?.model || '').toLowerCase()
       const isReasoningModel = modelName.includes('reasoning')
-  
+
       // Hide reasoning section for non-reasoning models
       if (!isReasoningModel) {
         reasoningSection.style.display = 'none'
         // Initially hide the container for non-reasoning models
         container.style.display = 'none'
       }
-  
+
       // Keep track of completed steps globally
       let completedSteps = []
-  
+
       // Move scrollToBottom outside and improve implementation
       function scrollToBottom() {
         // Use scrollIntoView on our element with padding
@@ -277,13 +296,13 @@ export const PerplexityReasonerExtension = {
           // Add temporary padding to the bottom
           const originalPadding = element.style.paddingBottom
           element.style.paddingBottom = '80px'
-  
+
           element.scrollIntoView({
             behavior: 'smooth',
             block: 'end',
             inline: 'nearest',
           })
-  
+
           // Backup scroll attempt with auto behavior
           setTimeout(() => {
             element.scrollIntoView({
@@ -291,7 +310,7 @@ export const PerplexityReasonerExtension = {
               block: 'end',
               inline: 'nearest',
             })
-  
+
             // Restore original padding after scrolling
             setTimeout(() => {
               element.style.paddingBottom = originalPadding
@@ -299,7 +318,7 @@ export const PerplexityReasonerExtension = {
           }, 100)
         }
       }
-  
+
       // Add click handler for reasoning section expansion
       reasoningSection.addEventListener('click', (e) => {
         if (e.target.closest('.reasoning-header')) {
@@ -335,7 +354,7 @@ export const PerplexityReasonerExtension = {
           }
         }
       })
-  
+
       // Update the streaming function to use activeReasoningGroup
       async function callPerplexityAPI(messages) {
         try {
@@ -357,7 +376,7 @@ export const PerplexityReasonerExtension = {
               }),
             }
           )
-  
+
           const reader = response.body.getReader()
           const decoder = new TextDecoder()
           let buffer = ''
@@ -367,19 +386,19 @@ export const PerplexityReasonerExtension = {
           let isInThinkBlock = false
           let thinkBuffer = ''
           let citations = []
-  
+
           // Create and setup initial group
           const reasoningGroup = createReasoningGroup()
           reasoningContent.appendChild(reasoningGroup)
           activeReasoningGroup = reasoningGroup
           isStreaming = true
-  
+
           // Add overflow handling styles
           reasoningContent.style.overflow = 'hidden'
-  
+
           // Keep track of the current streaming step
           let currentStep = null
-  
+
           // Update the createNewStep function
           function createNewStep(content, isComplete = false) {
             const step = createReasoningStep(
@@ -388,11 +407,11 @@ export const PerplexityReasonerExtension = {
               activeReasoningGroup.children.length,
               citations
             )
-  
+
             if (step) {
               // Add to DOM
               activeReasoningGroup.appendChild(step)
-  
+
               // Show checkbox based on completion
               const checkbox = step.querySelector('.step-checkbox')
               if (checkbox) {
@@ -402,34 +421,34 @@ export const PerplexityReasonerExtension = {
                   completedSteps.push(step)
                 }
               }
-  
+
               // Update height and ensure content is visible
               const totalHeight =
                 activeReasoningGroup.getBoundingClientRect().height
               reasoningContent.style.height = `${totalHeight}px`
-  
+
               // Force a reflow before scrolling
               void reasoningContent.offsetHeight
-  
+
               // Attempt to scroll multiple times
               setTimeout(scrollToBottom, 10)
               setTimeout(scrollToBottom, 50)
               setTimeout(scrollToBottom, 100)
-  
+
               return step
             }
             return null
           }
-  
+
           // Update the updateStep function
           function updateStep(step, content, complete = false) {
             if (!step) return
-  
+
             const contentDiv = step.querySelector('.step-content')
             if (contentDiv) {
               contentDiv.innerHTML = processCitations(content, citations, true)
             }
-  
+
             if (complete && !completedSteps.includes(step)) {
               const checkbox = step.querySelector('.step-checkbox')
               if (checkbox) {
@@ -437,30 +456,30 @@ export const PerplexityReasonerExtension = {
               }
               completedSteps.push(step)
             }
-  
+
             // Update height and ensure content is visible
             const totalHeight =
               activeReasoningGroup.getBoundingClientRect().height
             reasoningContent.style.height = `${totalHeight}px`
-  
+
             // Force a reflow before scrolling
             void reasoningContent.offsetHeight
-  
+
             // Attempt to scroll multiple times
             setTimeout(scrollToBottom, 10)
             setTimeout(scrollToBottom, 50)
             setTimeout(scrollToBottom, 100)
           }
-  
+
           // Process thinking content
           function processThinkingContent(content) {
             thinkBuffer += content
-  
+
             // Split buffer into complete and incomplete parts
             const parts = thinkBuffer.split('\n')
             const incompletePart = parts.pop() || ''
             const completeParts = parts.filter((part) => part.trim())
-  
+
             // Process any complete lines
             for (const line of completeParts) {
               const trimmedLine = line.trim()
@@ -484,7 +503,7 @@ export const PerplexityReasonerExtension = {
                 }
               }
             }
-  
+
             // Handle the remaining incomplete content
             if (incompletePart.trim()) {
               if (!currentStep) {
@@ -505,23 +524,23 @@ export const PerplexityReasonerExtension = {
               }
               currentStep = null
             }
-  
+
             // Update buffer to only contain incomplete content
             thinkBuffer = incompletePart
           }
-  
+
           // Process stream chunks
           function processStreamChunk(data) {
             if (data.choices[0].delta) {
               const { content } = data.choices[0].delta
-  
+
               // Show container and answer section for non-reasoning models when streaming starts
               if (!isReasoningModel && container.style.display === 'none') {
                 container.style.display = 'block'
                 answerSection.classList.add('visible')
                 answerSection.style.display = 'block'
               }
-  
+
               // Update citations if present in the chunk
               if (data.citations) {
                 citations = data.citations
@@ -544,7 +563,7 @@ export const PerplexityReasonerExtension = {
                   }
                 })
               }
-  
+
               if (content !== null && content !== undefined) {
                 // Handle think block content
                 if (content.includes('<think>')) {
@@ -580,7 +599,7 @@ export const PerplexityReasonerExtension = {
                   // For non-think block content, just append directly to answer
                   answer += content
                   updateAnswerContent(processCitations(answer, citations))
-  
+
                   // Show answer section if this is the first content
                   if (!hasStartedAnswer) {
                     hasStartedAnswer = true
@@ -600,14 +619,14 @@ export const PerplexityReasonerExtension = {
               }
             }
           }
-  
+
           while (true) {
             const { done, value } = await reader.read()
             if (done) {
               isStreaming = false
               break
             }
-  
+
             if (isFirstChunk) {
               const reasoningIntro = container.querySelector('.reasoning-intro')
               if (reasoningIntro) {
@@ -615,20 +634,20 @@ export const PerplexityReasonerExtension = {
               }
               isFirstChunk = false
             }
-  
+
             const chunk = decoder.decode(value)
             let jsonBuffer = buffer + chunk
             buffer = ''
-  
+
             // Split into lines and process each complete line
             const lines = jsonBuffer.split('\n')
             // Keep the last (potentially incomplete) line in buffer
             buffer = lines.pop() || ''
-  
+
             for (const line of lines) {
               if (!line.trim() || !line.startsWith('data: ')) continue
               if (line === 'data: [DONE]') continue
-  
+
               try {
                 // Remove 'data: ' prefix and parse
                 const jsonStr = line.slice(5)
@@ -639,7 +658,7 @@ export const PerplexityReasonerExtension = {
               }
             }
           }
-  
+
           // Process any remaining complete data in buffer
           if (buffer.trim() && buffer.startsWith('data: ')) {
             try {
@@ -660,7 +679,7 @@ export const PerplexityReasonerExtension = {
           isStreaming = false
         }
       }
-  
+
       // Function to find the closest scrollable parent
       function findScrollableParent(element) {
         let currentParent = element.parentElement
@@ -669,7 +688,7 @@ export const PerplexityReasonerExtension = {
             currentParent.scrollHeight > currentParent.clientHeight
           const isScrollable =
             getComputedStyle(currentParent).overflow !== 'visible'
-  
+
           if (hasScrollableContent && isScrollable) {
             return currentParent
           }
@@ -677,22 +696,22 @@ export const PerplexityReasonerExtension = {
         }
         return null
       }
-  
+
       // Function to smoothly scroll to an element
       function scrollIntoViewSmooth(element) {
         // Find the scrollable container by traversing up the DOM
         const scrollContainer = findScrollableParent(element)
-  
+
         if (scrollContainer) {
           const elementRect = element.getBoundingClientRect()
           const containerRect = scrollContainer.getBoundingClientRect()
           const isElementInView =
             elementRect.top >= containerRect.top &&
             elementRect.bottom <= containerRect.bottom
-  
+
           if (!isElementInView) {
             const scrollOffset = elementRect.bottom - containerRect.bottom + 50
-  
+
             // Use scrollIntoView as a fallback if scrollTo is not working
             if (Math.abs(scrollContainer.scrollTop) < 1) {
               element.scrollIntoView({ behavior: 'smooth', block: 'end' })
@@ -708,7 +727,7 @@ export const PerplexityReasonerExtension = {
           element.scrollIntoView({ behavior: 'smooth', block: 'end' })
         }
       }
-  
+
       // Function to convert markdown to HTML
       function markdownToHtml(markdown) {
         // First trim and clean the input
@@ -716,7 +735,7 @@ export const PerplexityReasonerExtension = {
           .trim()
           .replace(/^\s+/gm, '') // Remove leading spaces from each line
           .replace(/\n{3,}/g, '\n\n') // Clean up excessive newlines
-  
+
         // Process common introductory phrases
         cleanedMarkdown = cleanedMarkdown
           .replace(
@@ -730,20 +749,20 @@ export const PerplexityReasonerExtension = {
           )
           .replace(/^(talking|speaking) about /i, '')
           .trim()
-  
+
         // Split content into lines for better processing
         const lines = cleanedMarkdown.split('\n')
         const processedLines = []
         let currentList = null
         let isInParagraph = false
         let lastLineWasHeader = false
-  
+
         for (let i = 0; i < lines.length; i++) {
           const line = lines[i].trim()
           const nextLine = i < lines.length - 1 ? lines[i + 1].trim() : ''
           const isCurrentLineHeader = line.startsWith('#')
           const isNextLineHeader = nextLine.startsWith('#')
-  
+
           // Handle headers
           if (line.startsWith('###')) {
             if (currentList) {
@@ -790,20 +809,20 @@ export const PerplexityReasonerExtension = {
             lastLineWasHeader = true
             continue
           }
-  
+
           // Handle lists
           const orderedListMatch = line.match(/^\d+\.\s+(.+)/)
           const unorderedListMatch = line.match(/^-\s+(.+)/)
-  
+
           if (orderedListMatch || unorderedListMatch) {
             if (isInParagraph) {
               processedLines.push('</p>')
               isInParagraph = false
             }
-  
+
             const listContent = (orderedListMatch || unorderedListMatch)[1]
             const listType = orderedListMatch ? 'ol' : 'ul'
-  
+
             if (!currentList) {
               currentList = { type: listType }
               // Add a newline before list only if previous line wasn't a header
@@ -816,20 +835,20 @@ export const PerplexityReasonerExtension = {
               currentList = { type: listType }
               processedLines.push(`<${listType} class="answer-list">`)
             }
-  
+
             processedLines.push(
               `<li class="answer-list-item">${listContent}</li>`
             )
             lastLineWasHeader = false
             continue
           }
-  
+
           // Close list if we're not in a list item anymore
           if (currentList && line && !line.match(/^(-|\d+\.)\s/)) {
             processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>')
             currentList = null
           }
-  
+
           // Handle paragraphs
           if (line) {
             if (!isInParagraph) {
@@ -851,7 +870,7 @@ export const PerplexityReasonerExtension = {
             isInParagraph = false
           }
         }
-  
+
         // Close any open tags
         if (currentList) {
           processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>')
@@ -859,7 +878,7 @@ export const PerplexityReasonerExtension = {
         if (isInParagraph) {
           processedLines.push('</p>')
         }
-  
+
         // Join lines and apply remaining markdown formatting
         return (
           processedLines
@@ -879,13 +898,28 @@ export const PerplexityReasonerExtension = {
             .trim()
         )
       }
-  
-      // Update the answer content with markdown support
+
+      // Function to process POSTUP tags
+      function processPostupTags(text) {
+        return text.replace(/\[\[POSTUP_START\]\](.*?)\[\[POSTUP_END\]\]/gs, function(match, content) {
+          const trimmedContent = content.trim();
+          return `<div class="postup-container">
+            <div class="postup-header">
+              <div class="postup-icon">★</div>
+              <span>Postup Content</span>
+            </div>
+            <div class="postup-content">${trimmedContent}</div>
+          </div>`;
+        });
+      }
+
+      // Function to update answer content with markdown support
       function updateAnswerContent(text) {
-        const trimmedText = text.trim()
-        const formattedHtml = markdownToHtml(trimmedText)
-  
-        // Add styles for answer content
+        if (!text) return
+
+        // Process POSTUP tags first
+        text = processPostupTags(text);
+
         const styles = `
           <style>
             .answer-content {
@@ -943,10 +977,10 @@ export const PerplexityReasonerExtension = {
             }
           </style>
         `
-  
-        answerContent.innerHTML = styles + formattedHtml
+
+        answerContent.innerHTML = styles + markdownToHtml(text)
       }
-  
+
       // Function to create checkbox SVGs
       function createCheckbox() {
         const checkbox = document.createElement('div')
@@ -962,21 +996,21 @@ export const PerplexityReasonerExtension = {
         `
         return checkbox
       }
-  
+
       // Function to create a reasoning group
       function createReasoningGroup() {
         const group = document.createElement('div')
         group.className = 'reasoning-group'
         return group
       }
-  
+
       // Function to process citations and convert [X] to links
       function processCitations(text, citations, isReasoning = false) {
         if (!citations || !citations.length) return text
-  
+
         // First normalize spaces in the text
         let processedText = text.replace(/\s+/g, ' ').trim()
-  
+
         // Add space before citations and convert to links in a single pass
         return processedText.replace(/\s*\[(\d+)\]/g, (match, num) => {
           const index = parseInt(num) - 1
@@ -991,29 +1025,29 @@ export const PerplexityReasonerExtension = {
           return match
         })
       }
-  
+
       // Function to create and append a new reasoning step
       function createReasoningStep(content, group, stepIndex, citations) {
         if (!content || content.length < 5 || content.trim().endsWith('?'))
           return null
-  
+
         const step = document.createElement('div')
         step.className = 'reasoning-step'
-  
+
         const checkbox = createCheckbox()
         checkbox.style.display = 'none' // Hide checkbox by default
         const contentDiv = document.createElement('div')
         contentDiv.className = 'step-content'
-  
+
         // Process citations directly with isReasoning flag set to true
         contentDiv.innerHTML = processCitations(content, citations, true)
-  
+
         step.appendChild(checkbox)
         step.appendChild(contentDiv)
-  
+
         return step
       }
-  
+
       // Add citation link styles
       const citationStyles = document.createElement('style')
       citationStyles.textContent = `
@@ -1054,27 +1088,27 @@ export const PerplexityReasonerExtension = {
         }
       `
       document.head.appendChild(citationStyles)
-  
+
       // Create URL preview container
       const previewContainer = document.createElement('div')
       previewContainer.className = 'url-preview-container'
       document.body.appendChild(previewContainer)
-  
+
       // Function to handle URL preview
       async function handleUrlPreview(event) {
         const link = event.target.closest('a')
         if (!link) return
-  
+
         const url = link.href
         const rect = link.getBoundingClientRect()
-  
+
         // Position the preview container
         const previewX = rect.left
         const previewY = rect.bottom + window.scrollY + 10 // 10px below the link
-  
+
         previewContainer.style.left = `${previewX}px`
         previewContainer.style.top = `${previewY}px`
-  
+
         try {
           // Show loading state with logo animation
           previewContainer.innerHTML = `
@@ -1083,7 +1117,7 @@ export const PerplexityReasonerExtension = {
             </div>
           `
           previewContainer.classList.add('visible')
-  
+
           // Use mql to fetch URL preview
           const { data } = await window.mql(url, {
             data: {
@@ -1092,27 +1126,27 @@ export const PerplexityReasonerExtension = {
               image: true,
             },
           })
-  
+
           const { title, description, image } = data
-  
+
           let previewHtml = '<div class="url-preview-content">'
-  
+
           if (image?.url) {
             previewHtml += `<img class="url-preview-image" src="${
               image.url
             }" alt="${title || 'Preview'}" />`
           }
-  
+
           if (title) {
             previewHtml += `<div class="url-preview-title">${title}</div>`
           }
-  
+
           if (description) {
             previewHtml += `<div class="url-preview-description">${description}</div>`
           }
-  
+
           previewHtml += '</div>'
-  
+
           previewContainer.innerHTML = previewHtml
         } catch (error) {
           // If preview fails, show a simple preview with improved styling
@@ -1124,12 +1158,12 @@ export const PerplexityReasonerExtension = {
           `
         }
       }
-  
+
       // Function to hide URL preview
       function hideUrlPreview() {
         previewContainer.classList.remove('visible')
       }
-  
+
       // Add event listeners for URL preview
       element.addEventListener('mouseover', (e) => {
         const link = e.target.closest('a')
@@ -1137,14 +1171,14 @@ export const PerplexityReasonerExtension = {
           handleUrlPreview(e)
         }
       })
-  
+
       element.addEventListener('mouseout', (e) => {
         const link = e.target.closest('a')
         if (link) {
           hideUrlPreview()
         }
       })
-  
+
       if (trace.payload?.messages) {
         await callPerplexityAPI(trace.payload?.messages)
       }
@@ -1153,4 +1187,3 @@ export const PerplexityReasonerExtension = {
       })
     },
   }
-  

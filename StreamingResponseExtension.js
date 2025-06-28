@@ -317,6 +317,16 @@ export const StreamingResponseExtension = {
             color: #333;
           }
 
+          .postup-content {
+            border: 1px solid #FFC107; /* Amber border */
+            background-color: #FFF8E1; /* Light amber background */
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #795548; /* Brown text for contrast */
+          }
+
         </style>
         <div class="response-section">
           <div class="response-content"></div>
@@ -411,6 +421,30 @@ export const StreamingResponseExtension = {
           .replace(/\n{3,}/g, "\n\n")
           .trim()
       );
+    }
+
+    // Function to process POSTUP tags and format the content
+    function processPostupTags(text) {
+      const startTag = "[[POSTUP_START]]";
+      const endTag = "[[POSTUP_END]]";
+      let processedText = text;
+
+      // Find and replace the content within the tags
+      while (processedText.includes(startTag) && processedText.includes(endTag)) {
+        const startIndex = processedText.indexOf(startTag);
+        const endIndex = processedText.indexOf(endTag);
+
+        if (startIndex < endIndex) {
+          const content = processedText.substring(startIndex + startTag.length, endIndex);
+          const formattedContent = `<div class="postup-content">${content}</div>`;
+          processedText = processedText.substring(0, startIndex) + formattedContent + processedText.substring(endIndex + endTag.length);
+        } else {
+          // If the tags are not properly nested, stop processing to avoid infinite loops
+          break;
+        }
+      }
+
+      return processedText;
     }
 
     // Update the answer content with markdown support
@@ -688,8 +722,14 @@ export const StreamingResponseExtension = {
       const cleanedHtml = tempContainer.innerHTML;
       // --- END: Post-process lists and clean up empty items ---
 
+      // Process POSTUP tags first
+      let processedBuffer = processPostupTags(buffer);
+
+      // Convert markdown to HTML with improved formatting
+      let formattedHtml = htmlToMarkdown(processedBuffer);
+
       // Update content with formatting using the cleaned HTML
-      responseContent.innerHTML = cleanedHtml;
+      responseContent.innerHTML = formattedHtml;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -1088,7 +1128,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
             });
             console.log(
-              `�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
+              ` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
             );
           }
 
