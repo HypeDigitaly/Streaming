@@ -245,7 +245,7 @@ export const StreamingResponseExtension = {
             height: 1px;
             background-color: #E5E7EB;
             width: 100%;
-            margin: 0.2em 0 0.8em 0;
+            margin: 0.15em 0;
           }
           /* Added styles for headings */
           .response-content .answer-h1 {
@@ -789,11 +789,6 @@ export const StreamingResponseExtension = {
             tableHtml += "</table>";
             return tableHtml;
           },
-        )
-        // Convert double-bracket markdown links to HTML links (BEFORE single brackets)
-        .replace(
-          /\[\[([^\]]+)\]\]\(([^)]+)\)/g,
-          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
         )
         // Convert regular markdown links to HTML links (AFTER image processing)
         .replace(
