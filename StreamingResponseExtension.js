@@ -887,6 +887,10 @@ export const StreamingResponseExtension = {
           success: "Odgovor ustvarila umetna inteligenca.",
           failure: "Ustvarjanje z umetno inteligenco ni uspelo.",
         },
+        sk: {
+          success: "Odpoveď generovaná umelou inteligenciou.",
+          failure: "Generovanie AI zlyhalo.",
+        },
         pl: {
           success: "Odpowiedź wygenerowana przez AI.",
           failure: "Generowanie AI nie powiodło się.",
@@ -941,6 +945,12 @@ export const StreamingResponseExtension = {
           noModels: "Noben model ni bil izveden.",
           allFailed: "(Vsi neuspešni)",
           unknown: "Neznan ID:",
+        },
+        sk: {
+          title: "Spustené AI modely:",
+          noModels: "Žiadne modely neboli spustené.",
+          allFailed: "(Všetky zlyhali)",
+          unknown: "Neznáme ID:",
         },
         pl: {
           title: "Wykonane modele AI:",
