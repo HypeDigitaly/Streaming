@@ -270,6 +270,8 @@ export const StreamingResponseExtension = {
           .ai-icon {
             font-weight: bold;
             margin-right: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
           }
           .ai-info-text {
             flex-grow: 1;
