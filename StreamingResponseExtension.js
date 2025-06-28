@@ -302,13 +302,20 @@ export const StreamingResponseExtension = {
             padding: 16px;
             background-color: #FFFFFF;
             border-top: 1px solid #F1F5F9;
-            display: none;
+            display: block;
             font-size: 14px;
             line-height: 1.6;
             color: #374151;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding-top: 0;
+            padding-bottom: 0;
           }
           .ai-thinking-content.expanded {
-            display: block;
+            max-height: 1000px;
+            padding-top: 16px;
+            padding-bottom: 16px;
           }
           .ai-thinking-content > *:first-child {
             margin-top: 0;
@@ -405,30 +412,29 @@ export const StreamingResponseExtension = {
     // Show container immediately with loading animation
     container.style.display = "block";
 
-    // Add global toggle function for thinking sections
-    if (!window.toggleThinkingSection) {
-      window.toggleThinkingSection = function(sectionId) {
-        const content = document.getElementById(sectionId);
+    // Add event delegation for thinking section toggles
+    responseContent.addEventListener('click', function(event) {
+      const header = event.target.closest('.ai-thinking-header');
+      if (header) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const section = header.parentElement;
+        const content = section ? section.querySelector('.ai-thinking-content') : null;
         
         if (content) {
-          // Find the header within the same parent container
-          const section = content.parentElement;
-          const header = section ? section.querySelector('.ai-thinking-header') : null;
+          const isExpanded = content.classList.contains('expanded');
           
-          if (header) {
-            const isExpanded = content.classList.contains('expanded');
-            
-            if (isExpanded) {
-              content.classList.remove('expanded');
-              header.classList.remove('expanded');
-            } else {
-              content.classList.add('expanded');
-              header.classList.add('expanded');
-            }
+          if (isExpanded) {
+            content.classList.remove('expanded');
+            header.classList.remove('expanded');
+          } else {
+            content.classList.add('expanded');
+            header.classList.add('expanded');
           }
         }
-      };
-    }
+      }
+    });
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -600,14 +606,13 @@ export const StreamingResponseExtension = {
       const formattedContent = buffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          const uniqueId = `thinking-section-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
           return `<div class="ai-thinking-section">
-            <div class="ai-thinking-header" onclick="toggleThinkingSection('${uniqueId}')">
+            <div class="ai-thinking-header">
               <div class="ai-thinking-icon">🧠</div>
               <div class="ai-thinking-title">Jak AI došla k odpovědi</div>
               <div class="ai-thinking-arrow">▼</div>
             </div>
-            <div class="ai-thinking-content" id="${uniqueId}">${content.trim()}</div>
+            <div class="ai-thinking-content">${content.trim()}</div>
           </div>`;
         })
         // Headers - H1 to H5
