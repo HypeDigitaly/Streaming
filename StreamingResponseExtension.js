@@ -131,20 +131,30 @@ export const StreamingResponseExtension = {
           .response-content h3,
           .response-content h4,
           .response-content h5 {
-            margin: 0;
+            margin: 1em 0 0.5em 0;
             font-weight: 600;
           }
-          .response-content h1 { font-size: 1.3em; margin: 0; font-weight: 600; }
-          .response-content h2 { font-size: 1.2em; margin: 0; font-weight: 600; }
-          .response-content h3 { font-size: 1.1em; margin: 0; font-weight: 600; }
-          .response-content h4 { font-size: 1.05em; margin: 0; font-weight: 600; }
-          .response-content h5 { font-size: 1em; margin: 0; font-weight: 600; }
+          .response-content h1 { font-size: 1.3em; margin: 1.2em 0 0.6em 0; font-weight: 600; }
+          .response-content h2 { font-size: 1.2em; margin: 1.1em 0 0.5em 0; font-weight: 600; }
+          .response-content h3 { font-size: 1.1em; margin: 1em 0 0.4em 0; font-weight: 600; }
+          .response-content h4 { font-size: 1.05em; margin: 0.9em 0 0.3em 0; font-weight: 600; }
+          .response-content h5 { font-size: 1em; margin: 0.8em 0 0.3em 0; font-weight: 600; }
+          
+          /* First headings in container should not have top margin */
+          .response-content > h1:first-child,
+          .response-content > h2:first-child,
+          .response-content > h3:first-child,
+          .response-content > h4:first-child,
+          .response-content > h5:first-child {
+            margin-top: 0;
+          }
           
           /* Eliminate spacing between consecutive headers */
           .response-content h1 + h2,
           .response-content h2 + h3,
-          .response-content h3 + h4 {
-            margin-top: 0;
+          .response-content h3 + h4,
+          .response-content h4 + h5 {
+            margin-top: 0.2em;
           }
           
           /* Remove any paragraphs between headers */
