@@ -273,26 +273,17 @@ export const StreamingResponseExtension = {
             background-color: #DBEAFE;
           }
           .ai-thinking-icon {
-            background-color: #3B82F6;
-            color: white;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: bold;
-            line-height: 1;
+            color: #3B82F6;
+            font-size: 14px;
+            margin-right: 6px;
             flex-shrink: 0;
+            line-height: 1;
           }
           .ai-thinking-title {
             font-weight: 600;
             color: #1E40AF;
             font-size: 13px;
             line-height: 1.2;
-            display: flex;
-            align-items: center;
             flex-grow: 1;
           }
           .ai-thinking-arrow {
@@ -304,7 +295,7 @@ export const StreamingResponseExtension = {
             transform: rotate(180deg);
           }
           .ai-thinking-content {
-            padding: 12px;
+            padding: 0 12px;
             background-color: #FFFFFF;
             border-top: 1px solid #F1F5F9;
             display: block;
@@ -314,13 +305,10 @@ export const StreamingResponseExtension = {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease, padding 0.3s ease;
-            padding-top: 0;
-            padding-bottom: 0;
           }
           .ai-thinking-content.expanded {
             max-height: 1000px;
-            padding-top: 12px;
-            padding-bottom: 12px;
+            padding: 12px;
           }
           .ai-thinking-content > *:first-child {
             margin-top: 0;
@@ -340,14 +328,14 @@ export const StreamingResponseExtension = {
           }
           /* Add proper spacing around thinking sections */
           .response-content .ai-thinking-section {
-            margin: 8px 0 !important;
+            margin: 16px 0 !important;
             padding: 0 !important;
           }
           .response-content .ai-thinking-section + * {
-            margin-top: 8px !important;
+            margin-top: 16px !important;
           }
           .response-content * + .ai-thinking-section {
-            margin-top: 8px !important;
+            margin-top: 16px !important;
           }
           /* Aggressive margin/padding removal */
           .response-content p:empty {
