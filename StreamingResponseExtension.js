@@ -116,25 +116,16 @@ export const StreamingResponseExtension = {
           .response-content h5 {
             font-family: var(--_1bof89na), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #1a1e23;
-            margin: 0;
+            margin: 8px 0 4px 0;
             padding: 0;
-            font-weight: normal;
-            font-size: 14px;
+            font-weight: 600;
             line-height: 1.2;
           }
           strong {
             font-weight: 600;
           }
-          .response-content h1, 
-          .response-content h2, 
-          .response-content h3,
-          .response-content h4,
-          .response-content h5 {
-            margin: 0;
-            font-weight: 600;
-          }
-          .response-content h1 { font-size: 2em; }
-          .response-content h2 { font-size: 1.5em; }
+          .response-content h1 { font-size: 1.8em; }
+          .response-content h2 { font-size: 1.4em; }
           .response-content h3 { font-size: 1.2em; }
           .response-content h4 { font-size: 1.1em; }
           .response-content h5 { font-size: 1em; }
@@ -282,17 +273,21 @@ export const StreamingResponseExtension = {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
-            font-family: serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             flex-shrink: 0;
-            line-height: 1;
+            line-height: 18px;
+            text-align: center;
           }
           .ai-thinking-title {
             font-weight: 600;
             color: #374151;
             font-size: 13px;
             flex-grow: 1;
+            line-height: 18px;
+            display: flex;
+            align-items: center;
           }
           .ai-thinking-arrow {
             color: #6B7280;
@@ -343,7 +338,7 @@ export const StreamingResponseExtension = {
             padding: 0 !important;
           }
           .response-content .ai-thinking-section + * {
-            margin-top: 4px !important;
+            margin-top: 16px !important;
           }
           .response-content * + .ai-thinking-section {
             margin-top: 0 !important;
