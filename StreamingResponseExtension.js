@@ -121,6 +121,7 @@ export const StreamingResponseExtension = {
             font-weight: normal;
             font-size: 14px;
             line-height: 1.2;
+            display: block;
           }
           strong {
             font-weight: 600;
@@ -133,11 +134,38 @@ export const StreamingResponseExtension = {
             margin: 0;
             font-weight: 600;
           }
-          .response-content h1 { font-size: 1.4em; margin-bottom: 0.1em; }
-          .response-content h2 { font-size: 1.3em; margin-bottom: 0.1em; }
-          .response-content h3 { font-size: 1.2em; margin-bottom: 0.1em; }
-          .response-content h4 { font-size: 1.1em; margin-bottom: 0.1em; }
-          .response-content h5 { font-size: 1em; margin-bottom: 0.1em; }
+          .response-content h1 { font-size: 1.4em; margin: 0; }
+          .response-content h2 { font-size: 1.3em; margin: 0; }
+          .response-content h3 { font-size: 1.2em; margin: 0; }
+          .response-content h4 { font-size: 1.1em; margin: 0; }
+          .response-content h5 { font-size: 1em; margin: 0; }
+          
+          /* Eliminate spacing between consecutive headers */
+          .response-content h1 + h2,
+          .response-content h2 + h3,
+          .response-content h3 + h4 {
+            margin-top: 0;
+          }
+          
+          /* Remove any paragraphs between headers */
+          .response-content h1 + p:empty,
+          .response-content h2 + p:empty,
+          .response-content h3 + p:empty {
+            display: none;
+          }
+          
+          /* Remove breaks around headers */
+          .response-content br + h1,
+          .response-content br + h2,
+          .response-content br + h3 {
+            margin-top: 0;
+          }
+          
+          .response-content h1 + br,
+          .response-content h2 + br,
+          .response-content h3 + br {
+            display: none;
+          }
           .response-content ul {
             margin: 0;
             padding-left: 1.5em;
@@ -194,7 +222,7 @@ export const StreamingResponseExtension = {
           /* Added styles for headings */
           .response-content .answer-h1 {
             font-size: 1.4em;
-            margin: 0 0 0.1em 0;
+            margin: 0;
             font-weight: 600;
             line-height: 1.2;
           }
@@ -203,7 +231,7 @@ export const StreamingResponseExtension = {
           }
           .response-content .answer-h2 {
             font-size: 1.3em;
-            margin: 0 0 0.1em 0;
+            margin: 0;
             font-weight: 600;
             line-height: 1.2;
           }
