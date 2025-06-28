@@ -134,7 +134,7 @@ export const StreamingResponseExtension = {
             margin: 0.2em 0 0.1em 0;
             font-weight: 600;
           }
-          .response-content h1 { font-size: 1.3em; margin: 0.7em 0 0.em 0; font-weight: 600; }
+          .response-content h1 { font-size: 1.3em; margin: 1em 0 0.em 0; font-weight: 600; }
           .response-content h2 { font-size: 1.2em; margin: 0.6em 0 0em 0; font-weight: 600; }
           .response-content h3 { font-size: 1.1em; margin: 0.5em 0 0em 0; font-weight: 600; }
           .response-content h4 { font-size: 1.05em; margin: 0.4em 0 0em 0; font-weight: 600; }
