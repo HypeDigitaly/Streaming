@@ -247,6 +247,75 @@ export const StreamingResponseExtension = {
           .response-content .markdown-table tr:nth-child(even) {
             background-color: #f9f9f9;
           }
+          .ai-thinking-section {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            margin: 16px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+          }
+          .ai-thinking-header {
+            background-color: #EBF5FF;
+            border-bottom: 1px solid #E2E8F0;
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+            user-select: none;
+          }
+          .ai-thinking-header:hover {
+            background-color: #DBEAFE;
+          }
+          .ai-thinking-header.expanded {
+            background-color: #DBEAFE;
+          }
+          .ai-thinking-icon {
+            background-color: #3B82F6;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+          }
+          .ai-thinking-title {
+            font-weight: 600;
+            color: #1E40AF;
+            font-size: 14px;
+            flex-grow: 1;
+          }
+          .ai-thinking-arrow {
+            color: #6B7280;
+            font-size: 12px;
+            transition: transform 0.2s ease;
+          }
+          .ai-thinking-header.expanded .ai-thinking-arrow {
+            transform: rotate(180deg);
+          }
+          .ai-thinking-content {
+            padding: 16px;
+            background-color: #FFFFFF;
+            border-top: 1px solid #F1F5F9;
+            display: none;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #374151;
+          }
+          .ai-thinking-content.expanded {
+            display: block;
+          }
+          .ai-thinking-content > *:first-child {
+            margin-top: 0;
+          }
+          .ai-thinking-content > *:last-child {
+            margin-bottom: 0;
+          }
           .ai-info-footer {
             display: flex;
             align-items: center;
@@ -317,16 +386,6 @@ export const StreamingResponseExtension = {
             color: #333;
           }
 
-          .postup-content {
-            border: 1px solid #FFC107; /* Amber border */
-            background-color: #FFF8E1; /* Light amber background */
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            font-style: italic;
-            color: #795548; /* Brown text for contrast */
-          }
-
         </style>
         <div class="response-section">
           <div class="response-content"></div>
@@ -345,6 +404,26 @@ export const StreamingResponseExtension = {
 
     // Show container immediately with loading animation
     container.style.display = "block";
+
+    // Add global toggle function for thinking sections
+    if (!window.toggleThinkingSection) {
+      window.toggleThinkingSection = function(sectionId) {
+        const content = document.getElementById(sectionId);
+        const header = content.previousElementSibling;
+        
+        if (content && header) {
+          const isExpanded = content.classList.contains('expanded');
+          
+          if (isExpanded) {
+            content.classList.remove('expanded');
+            header.classList.remove('expanded');
+          } else {
+            content.classList.add('expanded');
+            header.classList.add('expanded');
+          }
+        }
+      };
+    }
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -421,30 +500,6 @@ export const StreamingResponseExtension = {
           .replace(/\n{3,}/g, "\n\n")
           .trim()
       );
-    }
-
-    // Function to process POSTUP tags and format the content
-    function processPostupTags(text) {
-      const startTag = "[[POSTUP_START]]";
-      const endTag = "[[POSTUP_END]]";
-      let processedText = text;
-
-      // Find and replace the content within the tags
-      while (processedText.includes(startTag) && processedText.includes(endTag)) {
-        const startIndex = processedText.indexOf(startTag);
-        const endIndex = processedText.indexOf(endTag);
-
-        if (startIndex < endIndex) {
-          const content = processedText.substring(startIndex + startTag.length, endIndex);
-          const formattedContent = `<div class="postup-content">${content}</div>`;
-          processedText = processedText.substring(0, startIndex) + formattedContent + processedText.substring(endIndex + endTag.length);
-        } else {
-          // If the tags are not properly nested, stop processing to avoid infinite loops
-          break;
-        }
-      }
-
-      return processedText;
     }
 
     // Update the answer content with markdown support
@@ -538,6 +593,18 @@ export const StreamingResponseExtension = {
 
       // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
       const formattedContent = buffer
+        // Process POSTUP tags FIRST to avoid conflicts with other formatting
+        .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
+          const uniqueId = `thinking-section-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+          return `<div class="ai-thinking-section">
+            <div class="ai-thinking-header" onclick="toggleThinkingSection('${uniqueId}')">
+              <div class="ai-thinking-icon">🧠</div>
+              <div class="ai-thinking-title">Jak AI došla k odpovědi</div>
+              <div class="ai-thinking-arrow">▼</div>
+            </div>
+            <div class="ai-thinking-content" id="${uniqueId}">${content.trim()}</div>
+          </div>`;
+        })
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, "<h5>$1</h5>")
         .replace(/^#### (.*$)/gm, "<h4>$1</h4>")
@@ -722,14 +789,8 @@ export const StreamingResponseExtension = {
       const cleanedHtml = tempContainer.innerHTML;
       // --- END: Post-process lists and clean up empty items ---
 
-      // Process POSTUP tags first
-      let processedBuffer = processPostupTags(buffer);
-
-      // Convert markdown to HTML with improved formatting
-      let formattedHtml = htmlToMarkdown(processedBuffer);
-
       // Update content with formatting using the cleaned HTML
-      responseContent.innerHTML = formattedHtml;
+      responseContent.innerHTML = cleanedHtml;
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -880,7 +941,8 @@ export const StreamingResponseExtension = {
         : `Unknown model ID: ${modelId}`;
     }
 
-    // Adds AI info footer to the UI    function addAIInfoFooter(attemptedModels) {
+    // Adds AI info footer to the UI
+    function addAIInfoFooter(attemptedModels) {
       // Determine overall success and find the successful model details
       const successfulAttempt = attemptedModels.find((m) => m.success === true);
       const successfulModel = successfulAttempt
@@ -905,21 +967,6 @@ export const StreamingResponseExtension = {
       // Create info text
       const aiInfoText = document.createElement("div");
       aiInfoText.className = "ai-info-text";
-
-      // Create thought process icon
-      const thoughtProcessIcon = document.createElement("div");
-      thoughtProcessIcon.className = "thought-process-icon";
-      thoughtProcessIcon.innerHTML = `
-            <svg class="brain-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21.33 12.91c.09-.33.15-.68.15-1.04 0-2.24-1.62-4.09-3.75-4.51-.28-1.47-1.62-2.59-3.24-2.59-.63 0-1.22.18-1.72.49-.65-.31-1.38-.49-2.16-.49-2.76 0-5.01 2.25-5.01 5.01 0 .28.02.56.07.83-.94.5-1.58 1.48-1.58 2.61 0 1.63 1.32 2.95 2.95 2.95.17 0 .34-.01.5-.04.49 1.14 1.61 1.93 2.92 1.93.64 0 1.23-.19 1.73-.51.27.84 1.05 1.45 1.97 1.45.99 0 1.82-.69 2.03-1.61.1.01.2.01.3.01 1.45 0 2.62-1.18 2.62-2.62-.01-.43-.11-.84-.28-1.21z"/>
-            </svg>
-            <div class="thought-tooltip">Myšlenkový proces</div>
-          `;
-
-      // Insert thought process icon before info text
-      aiInfoFooter.appendChild(aiIcon);
-      aiInfoFooter.appendChild(thoughtProcessIcon);
-      aiInfoFooter.appendChild(aiInfoText);
 
       // Language support for messages
       const languageMessages = {
@@ -1042,7 +1089,9 @@ export const StreamingResponseExtension = {
 
       modelInfoTooltip.innerHTML = tooltipHTML;
 
-      // Assemble the remaining elements
+      // Assemble the elements
+      aiInfoFooter.appendChild(aiIcon);
+      aiInfoFooter.appendChild(aiInfoText);
       aiInfoFooter.appendChild(modelInfoTooltip);
 
       // Toggle dropdown visibility on click
@@ -1140,7 +1189,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
             });
             console.log(
-              ` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
+              `�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
             );
           }
 
