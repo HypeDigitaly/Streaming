@@ -282,12 +282,17 @@ export const StreamingResponseExtension = {
             align-items: center;
             justify-content: center;
             font-size: 10px;
+            font-weight: bold;
+            line-height: 1;
             flex-shrink: 0;
           }
           .ai-thinking-title {
             font-weight: 600;
             color: #1E40AF;
             font-size: 13px;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
             flex-grow: 1;
           }
           .ai-thinking-arrow {
@@ -333,16 +338,16 @@ export const StreamingResponseExtension = {
           .ai-thinking-content li {
             margin: 2px 0;
           }
-          /* Force remove all spacing around thinking sections */
+          /* Add proper spacing around thinking sections */
           .response-content .ai-thinking-section {
-            margin: 0 !important;
+            margin: 8px 0 !important;
             padding: 0 !important;
           }
           .response-content .ai-thinking-section + * {
-            margin-top: 0 !important;
+            margin-top: 8px !important;
           }
           .response-content * + .ai-thinking-section {
-            margin-top: 0 !important;
+            margin-top: 8px !important;
           }
           /* Aggressive margin/padding removal */
           .response-content p:empty {
