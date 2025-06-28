@@ -873,9 +873,7 @@ export const StreamingResponseExtension = {
         type: "gemini",
         endpoint: "/api/gemini-stream",
         displayName: "Gemini 2.5 Flash",
-      },
-
-      // Groq models
+      },      // Groq models
       {
         id: 8,
         name: "meta-llama/llama-4-maverick-17b-128e-instruct",
@@ -1544,20 +1542,28 @@ export const StreamingResponseExtension = {
 
         // If successful, stop trying other models and add footer
         if (success) {
-          successfulModelFound = true; // Set the flag
-          if (trace.payload.debugMode === 1) {
-            console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
-            console.log(`📌 Model: ${model.displayName} (${model.type})`);
-            console.log(`📌 Model name: ${model.name}`);
-            console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
-            console.log(
-              `📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`,
-            );
-            console.log(`=============================`);
-          }
-          addAIInfoFooter(attemptedModels); // Pass the list of attempted models
-          // No return here, let loop break naturally or finish
-        } else {
+                successfulModelFound = true; // Set the flag
+
+                // Hide thinking section after successful completion
+                if (thinkingSection) {
+                  setTimeout(() => {
+                    thinkingSection.style.display = "none";
+                  }, 1000); // Give time for users to see it briefly
+                }
+
+                if (trace.payload.debugMode === 1) {
+                  console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
+                  console.log(`📌 Model: ${model.displayName} (${model.type})`);
+                  console.log(`📌 Model name: ${model.name}`);
+                  console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
+                  console.log(
+                    `📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`,
+                  );
+                  console.log(`=============================`);
+                }
+                addAIInfoFooter(attemptedModels); // Pass the list of attempted models
+                // No return here, let loop break naturally or finish
+              } else {
           // --- Failure case within the loop ---
           if (trace.payload.debugMode === 1) {
             console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
