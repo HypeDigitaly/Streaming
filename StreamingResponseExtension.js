@@ -22,28 +22,76 @@ export const StreamingResponseExtension = {
 
     // Create the base structure
     container.innerHTML = `
-        <div class="thinking-header">
-          <div class="loading-animation">
-            <div class="loading-dot"></div>
-            <div class="loading-dot"></div>
-            <div class="loading-dot"></div>
+        <div class="thinking-section">
+          <div class="thinking-header">
+            <div class="thinking-title">
+              <div class="loading-animation">
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+              </div>
+              <span class="thinking-text">AI is thinking...</span>
+            </div>
+            <div class="thinking-dropdown-icon">▼</div>
+          </div>
+          <div class="thinking-content">
+            <div class="thinking-steps"></div>
           </div>
         </div>
         <style>
+          .thinking-section {
+            background-color: #F8F9FA;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #E9ECEF;
+            transition: all 0.3s ease;
+          }
+          .thinking-section.collapsed .thinking-content {
+            display: none;
+          }
+          .thinking-section.collapsed .thinking-dropdown-icon {
+            transform: rotate(-90deg);
+          }
           .thinking-header {
-            padding: 12px 0;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            opacity: 1;
-            height: auto;
-            transition: opacity 0.3s ease, height 0.3s ease;
-            margin: 0;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s ease;
+          }
+          .thinking-header:hover {
+            background-color: #F1F3F4;
+          }
+          .thinking-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+          .thinking-text {
+            font-size: 14px;
+            color: #5F6368;
+            font-weight: 500;
+          }
+          .thinking-dropdown-icon {
+            font-size: 12px;
+            color: #5F6368;
+            transition: transform 0.2s ease;
+            font-family: monospace;
+          }
+          .thinking-content {
+            padding: 0 16px 12px 16px;
+            border-top: 1px solid #E9ECEF;
+            background-color: #FFFFFF;
+          }
+          .thinking-steps {
+            font-size: 13px;
+            color: #3C4043;
+            line-height: 1.4;
           }
           .thinking-header.hidden {
-            opacity: 0;
-            height: 0;
-            padding: 0;
+            display: none;
           }
           .loading-animation {
             display: flex;
@@ -326,8 +374,16 @@ export const StreamingResponseExtension = {
     element.appendChild(container);
 
     // Get references to elements
+    const thinkingSection = container.querySelector(".thinking-section");
+    const thinkingHeader = container.querySelector(".thinking-header");
+    const thinkingSteps = container.querySelector(".thinking-steps");
     const responseSection = container.querySelector(".response-section");
     const responseContent = container.querySelector(".response-content");
+
+    // Add click handler for thinking section toggle
+    thinkingHeader.addEventListener('click', () => {
+      thinkingSection.classList.toggle('collapsed');
+    });
     let isFirstChunk = true;
     let buffer = "";
     let deltaCounter = 0;
@@ -419,10 +475,9 @@ export const StreamingResponseExtension = {
 
       // Handle first chunk
       if (isFirstChunk) {
-        // Hide loading animation when we receive the first content
-        const thinkingHeader = container.querySelector(".thinking-header");
-        if (thinkingHeader) {
-          thinkingHeader.classList.add("hidden");
+        // Hide thinking section when we receive the first content
+        if (thinkingSection) {
+          thinkingSection.style.display = "none";
         }
         responseSection.classList.add("visible");
         isFirstChunk = false;
@@ -1400,11 +1455,10 @@ export const StreamingResponseExtension = {
           abortController.abort("callLLMAPI error before first chunk");
         }
 
-        // Make sure thinking animation is hidden if we fail early
+        // Make sure thinking section is hidden if we fail early
         if (isFirstChunk) {
-          const thinkingHeader = container.querySelector(".thinking-header");
-          if (thinkingHeader && !thinkingHeader.classList.contains("hidden")) {
-            thinkingHeader.classList.add("hidden");
+          if (thinkingSection) {
+            thinkingSection.style.display = "none";
             responseSection.classList.add("visible"); // Show section even on failure
           }
           isFirstChunk = false; // Mark as not first chunk anymore
