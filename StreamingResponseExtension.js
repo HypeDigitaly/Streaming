@@ -134,11 +134,11 @@ export const StreamingResponseExtension = {
             margin: 0;
             font-weight: 600;
           }
-          .response-content h1 { font-size: 1.4em; margin: 0; }
-          .response-content h2 { font-size: 1.3em; margin: 0; }
-          .response-content h3 { font-size: 1.2em; margin: 0; }
-          .response-content h4 { font-size: 1.1em; margin: 0; }
-          .response-content h5 { font-size: 1em; margin: 0; }
+          .response-content h1 { font-size: 1.3em; margin: 0; font-weight: 600; }
+          .response-content h2 { font-size: 1.2em; margin: 0; font-weight: 600; }
+          .response-content h3 { font-size: 1.1em; margin: 0; font-weight: 600; }
+          .response-content h4 { font-size: 1.05em; margin: 0; font-weight: 600; }
+          .response-content h5 { font-size: 1em; margin: 0; font-weight: 600; }
           
           /* Eliminate spacing between consecutive headers */
           .response-content h1 + h2,
@@ -221,7 +221,7 @@ export const StreamingResponseExtension = {
           }
           /* Added styles for headings */
           .response-content .answer-h1 {
-            font-size: 1.4em;
+            font-size: 1.3em;
             margin: 0;
             font-weight: 600;
             line-height: 1.2;
@@ -230,7 +230,7 @@ export const StreamingResponseExtension = {
             margin-top: 0;
           }
           .response-content .answer-h2 {
-            font-size: 1.3em;
+            font-size: 1.2em;
             margin: 0;
             font-weight: 600;
             line-height: 1.2;
@@ -239,8 +239,8 @@ export const StreamingResponseExtension = {
             margin-top: 0;
           }
           .response-content .answer-h3 {
-            font-size: 1.2em;
-            margin: 0 0 0.1em 0;
+            font-size: 1.1em;
+            margin: 0;
             font-weight: 600;
             line-height: 1.2;
           }
@@ -665,12 +665,12 @@ export const StreamingResponseExtension = {
         .replace(/<p>\s*<\/p>/g, '')
         .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
         .replace(/<\/div>\s*\n/g, '</div>')
-        // Headers - H1 to H5
-        .replace(/^##### (.*$)/gm, "<h5>$1</h5>")
-        .replace(/^#### (.*$)/gm, "<h4>$1</h4>")
-        .replace(/^### (.*$)/gm, "<h3>$1</h3>")
-        .replace(/^## (.*$)/gm, "<h2>$1</h2>")
-        .replace(/^# (.*$)/gm, "<h1>$1</h1>")
+        // Headers - H1 to H5 (improved regex to handle whitespace)
+        .replace(/^\s*##### (.*$)/gm, "<h5>$1</h5>")
+        .replace(/^\s*#### (.*$)/gm, "<h4>$1</h4>")
+        .replace(/^\s*### (.*$)/gm, "<h3>$1</h3>")
+        .replace(/^\s*## (.*$)/gm, "<h2>$1</h2>")
+        .replace(/^\s*# (.*$)/gm, "<h1>$1</h1>")
         // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
         .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
           // Clean and validate the URL
