@@ -887,6 +887,10 @@ export const StreamingResponseExtension = {
           success: "Odgovor ustvarjen z umetno inteligenco.",
           failure: "Ustvarjanje z umetno inteligenco je spodletelo.",
         },
+        pl: {
+          success: "Odpowiedź wygenerowana przez AI.",
+          failure: "Generowanie AI nie powiodło się.",
+        },
       };
 
       // Get language from payload, default to Czech
@@ -937,6 +941,12 @@ export const StreamingResponseExtension = {
           noModels: "Noben model ni bil izveden.",
           allFailed: "(Vsi neuspešni)",
           unknown: "Neznani ID:",
+        },
+        pl: {
+          title: "Wykonane modele AI:",
+          noModels: "Żaden model nie został wykonany.",
+          allFailed: "(Wszystkie nie powiodły się)",
+          unknown: "Nieznane ID:",
         },
       };
 
