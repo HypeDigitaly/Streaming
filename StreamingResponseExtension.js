@@ -265,6 +265,7 @@ export const StreamingResponseExtension = {
             gap: 6px;
             transition: background-color 0.2s ease;
             user-select: none;
+            min-height: 34px;
           }
           .ai-thinking-header:hover {
             background-color: #e5e7eb;
@@ -281,9 +282,11 @@ export const StreamingResponseExtension = {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
+            font-family: serif;
             flex-shrink: 0;
+            line-height: 1;
           }
           .ai-thinking-title {
             font-weight: 600;
