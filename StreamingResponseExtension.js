@@ -22,76 +22,28 @@ export const StreamingResponseExtension = {
 
     // Create the base structure
     container.innerHTML = `
-        <div class="thinking-section">
-          <div class="thinking-header">
-            <div class="thinking-title">
-              <div class="loading-animation">
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-                <div class="loading-dot"></div>
-              </div>
-              <span class="thinking-text">AI is thinking...</span>
-            </div>
-            <div class="thinking-dropdown-icon">▼</div>
-          </div>
-          <div class="thinking-content">
-            <div class="thinking-steps"></div>
+        <div class="thinking-header">
+          <div class="loading-animation">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
           </div>
         </div>
         <style>
-          .thinking-section {
-            background-color: #F8F9FA;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            border: 1px solid #E9ECEF;
-            transition: all 0.3s ease;
-          }
-          .thinking-section.collapsed .thinking-content {
-            display: none;
-          }
-          .thinking-section.collapsed .thinking-dropdown-icon {
-            transform: rotate(-90deg);
-          }
           .thinking-header {
-            padding: 12px 16px;
+            padding: 12px 0;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color 0.2s ease;
-          }
-          .thinking-header:hover {
-            background-color: #F1F3F4;
-          }
-          .thinking-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-          }
-          .thinking-text {
-            font-size: 14px;
-            color: #5F6368;
-            font-weight: 500;
-          }
-          .thinking-dropdown-icon {
-            font-size: 12px;
-            color: #5F6368;
-            transition: transform 0.2s ease;
-            font-family: monospace;
-          }
-          .thinking-content {
-            padding: 0 16px 12px 16px;
-            border-top: 1px solid #E9ECEF;
-            background-color: #FFFFFF;
-          }
-          .thinking-steps {
-            font-size: 13px;
-            color: #3C4043;
-            line-height: 1.4;
+            gap: 6px;
+            opacity: 1;
+            height: auto;
+            transition: opacity 0.3s ease, height 0.3s ease;
+            margin: 0;
           }
           .thinking-header.hidden {
-            display: none;
+            opacity: 0;
+            height: 0;
+            padding: 0;
           }
           .loading-animation {
             display: flex;
@@ -374,16 +326,8 @@ export const StreamingResponseExtension = {
     element.appendChild(container);
 
     // Get references to elements
-    const thinkingSection = container.querySelector(".thinking-section");
-    const thinkingHeader = container.querySelector(".thinking-header");
-    const thinkingSteps = container.querySelector(".thinking-steps");
     const responseSection = container.querySelector(".response-section");
     const responseContent = container.querySelector(".response-content");
-
-    // Add click handler for thinking section toggle
-    thinkingHeader.addEventListener('click', () => {
-      thinkingSection.classList.toggle('collapsed');
-    });
     let isFirstChunk = true;
     let buffer = "";
     let deltaCounter = 0;
@@ -475,9 +419,10 @@ export const StreamingResponseExtension = {
 
       // Handle first chunk
       if (isFirstChunk) {
-        // Hide thinking section when we receive the first content
-        if (thinkingSection) {
-          thinkingSection.style.display = "none";
+        // Hide loading animation when we receive the first content
+        const thinkingHeader = container.querySelector(".thinking-header");
+        if (thinkingHeader) {
+          thinkingHeader.classList.add("hidden");
         }
         responseSection.classList.add("visible");
         isFirstChunk = false;
@@ -485,47 +430,6 @@ export const StreamingResponseExtension = {
 
       // Append to buffer
       buffer += text;
-
-      // Process POSTUP thinking sections BEFORE markdown formatting
-      let processedContent = buffer;
-
-      // Debug: Check if POSTUP markers are present
-      if (trace.payload?.debugMode === 1) {
-        const hasPostupStart = processedContent.includes('[[POSTUP_START]]');
-        const hasPostupEnd = processedContent.includes('[[POSTUP_END]]');
-        console.log('POSTUP Debug:', { hasPostupStart, hasPostupEnd, contentLength: processedContent.length });
-        if (hasPostupStart || hasPostupEnd) {
-          console.log('POSTUP content snippet:', processedContent.substring(0, 500));
-        }
-      }
-
-      // Replace POSTUP sections with expandable thinking blocks
-      processedContent = processedContent.replace(
-        /\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g,
-        function(match, thinkingContent) {
-          if (trace.payload?.debugMode === 1) {
-            console.log('POSTUP match found:', { matchLength: match.length, thinkingLength: thinkingContent.length });
-          }
-
-          const cleanThinking = thinkingContent.trim()
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-
-          return `<div class="thinking-process-section">
-            <div class="thinking-header-toggle" onclick="this.parentElement.classList.toggle('expanded')">
-              <span class="thinking-icon">🤔</span>
-              <span class="thinking-label">Myšlenkový proces</span>
-              <span class="dropdown-arrow">▼</span>
-            </div>
-            <div class="thinking-content">
-              <div class="thinking-text">${cleanThinking}</div>
-            </div>
-          </div>`;
-        }
-      );
 
       // Post-process buffer to handle various image URL patterns
 
@@ -599,7 +503,7 @@ export const StreamingResponseExtension = {
       );
 
       // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
-      const formattedContent = processedContent
+      const formattedContent = buffer
         // Headers - H1 to H5
         .replace(/^##### (.*$)/gm, "<h5>$1</h5>")
         .replace(/^#### (.*$)/gm, "<h4>$1</h4>")
@@ -873,7 +777,9 @@ export const StreamingResponseExtension = {
         type: "gemini",
         endpoint: "/api/gemini-stream",
         displayName: "Gemini 2.5 Flash",
-      },      // Groq models
+      },
+
+      // Groq models
       {
         id: 8,
         name: "meta-llama/llama-4-maverick-17b-128e-instruct",
@@ -1182,7 +1088,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
             });
             console.log(
-              ` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
+              `�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
             );
           }
 
@@ -1453,10 +1359,11 @@ export const StreamingResponseExtension = {
           abortController.abort("callLLMAPI error before first chunk");
         }
 
-        // Make sure thinking section is hidden if we fail early
+        // Make sure thinking animation is hidden if we fail early
         if (isFirstChunk) {
-          if (thinkingSection) {
-            thinkingSection.style.display = "none";
+          const thinkingHeader = container.querySelector(".thinking-header");
+          if (thinkingHeader && !thinkingHeader.classList.contains("hidden")) {
+            thinkingHeader.classList.add("hidden");
             responseSection.classList.add("visible"); // Show section even on failure
           }
           isFirstChunk = false; // Mark as not first chunk anymore
@@ -1542,28 +1449,20 @@ export const StreamingResponseExtension = {
 
         // If successful, stop trying other models and add footer
         if (success) {
-                successfulModelFound = true; // Set the flag
-
-                // Hide thinking section after successful completion
-                if (thinkingSection) {
-                  setTimeout(() => {
-                    thinkingSection.style.display = "none";
-                  }, 1000); // Give time for users to see it briefly
-                }
-
-                if (trace.payload.debugMode === 1) {
-                  console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
-                  console.log(`📌 Model: ${model.displayName} (${model.type})`);
-                  console.log(`📌 Model name: ${model.name}`);
-                  console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
-                  console.log(
-                    `📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`,
-                  );
-                  console.log(`=============================`);
-                }
-                addAIInfoFooter(attemptedModels); // Pass the list of attempted models
-                // No return here, let loop break naturally or finish
-              } else {
+          successfulModelFound = true; // Set the flag
+          if (trace.payload.debugMode === 1) {
+            console.log(`\n✅ SUCCESS: MODEL ID:${model.id}`);
+            console.log(`📌 Model: ${model.displayName} (${model.type})`);
+            console.log(`📌 Model name: ${model.name}`);
+            console.log(`📌 Status: COMPLETED SUCCESSFULLY`);
+            console.log(
+              `📌 Attempt: ${attemptedModels.length}/${modelSequence.length}`,
+            );
+            console.log(`=============================`);
+          }
+          addAIInfoFooter(attemptedModels); // Pass the list of attempted models
+          // No return here, let loop break naturally or finish
+        } else {
           // --- Failure case within the loop ---
           if (trace.payload.debugMode === 1) {
             console.log(`\n❌ FAILED: MODEL ID:${model.id}`);
