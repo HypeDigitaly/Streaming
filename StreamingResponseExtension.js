@@ -133,11 +133,11 @@ export const StreamingResponseExtension = {
             margin: 0;
             font-weight: 600;
           }
-          .response-content h1 { font-size: 2em; }
-          .response-content h2 { font-size: 1.5em; }
-          .response-content h3 { font-size: 1.2em; }
-          .response-content h4 { font-size: 1.1em; }
-          .response-content h5 { font-size: 1em; }
+          .response-content h1 { font-size: 1.4em; margin-bottom: 0.1em; }
+          .response-content h2 { font-size: 1.3em; margin-bottom: 0.1em; }
+          .response-content h3 { font-size: 1.2em; margin-bottom: 0.1em; }
+          .response-content h4 { font-size: 1.1em; margin-bottom: 0.1em; }
+          .response-content h5 { font-size: 1em; margin-bottom: 0.1em; }
           .response-content ul {
             margin: 0;
             padding-left: 1.5em;
@@ -194,7 +194,7 @@ export const StreamingResponseExtension = {
           /* Added styles for headings */
           .response-content .answer-h1 {
             font-size: 1.4em;
-            margin: 0;
+            margin: 0 0 0.1em 0;
             font-weight: 600;
             line-height: 1.2;
           }
@@ -202,8 +202,8 @@ export const StreamingResponseExtension = {
             margin-top: 0;
           }
           .response-content .answer-h2 {
-            font-size: 1.2em;
-            margin: 0;
+            font-size: 1.3em;
+            margin: 0 0 0.1em 0;
             font-weight: 600;
             line-height: 1.2;
           }
@@ -211,8 +211,8 @@ export const StreamingResponseExtension = {
             margin-top: 0;
           }
           .response-content .answer-h3 {
-            font-size: 1.1em;
-            margin: 0;
+            font-size: 1.2em;
+            margin: 0 0 0.1em 0;
             font-weight: 600;
             line-height: 1.2;
           }
