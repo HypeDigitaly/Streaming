@@ -250,19 +250,19 @@ export const StreamingResponseExtension = {
           .ai-thinking-section {
             background-color: #F8FAFC;
             border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            margin: 16px 0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            margin: 4px 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             overflow: hidden;
           }
           .ai-thinking-header {
             background-color: #EBF5FF;
             border-bottom: 1px solid #E2E8F0;
-            padding: 12px 16px;
+            padding: 8px 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: background-color 0.2s ease;
             user-select: none;
           }
@@ -275,19 +275,19 @@ export const StreamingResponseExtension = {
           .ai-thinking-icon {
             background-color: #3B82F6;
             color: white;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 10px;
             flex-shrink: 0;
           }
           .ai-thinking-title {
             font-weight: 600;
             color: #1E40AF;
-            font-size: 14px;
+            font-size: 13px;
             flex-grow: 1;
           }
           .ai-thinking-arrow {
@@ -299,12 +299,12 @@ export const StreamingResponseExtension = {
             transform: rotate(180deg);
           }
           .ai-thinking-content {
-            padding: 16px;
+            padding: 12px;
             background-color: #FFFFFF;
             border-top: 1px solid #F1F5F9;
             display: block;
-            font-size: 14px;
-            line-height: 1.6;
+            font-size: 13px;
+            line-height: 1.5;
             color: #374151;
             max-height: 0;
             overflow: hidden;
@@ -314,14 +314,24 @@ export const StreamingResponseExtension = {
           }
           .ai-thinking-content.expanded {
             max-height: 1000px;
-            padding-top: 16px;
-            padding-bottom: 16px;
+            padding-top: 12px;
+            padding-bottom: 12px;
           }
           .ai-thinking-content > *:first-child {
             margin-top: 0;
           }
           .ai-thinking-content > *:last-child {
             margin-bottom: 0;
+          }
+          .ai-thinking-content p {
+            margin: 4px 0;
+          }
+          .ai-thinking-content ul, .ai-thinking-content ol {
+            margin: 4px 0;
+            padding-left: 1.2em;
+          }
+          .ai-thinking-content li {
+            margin: 2px 0;
           }
           .ai-info-footer {
             display: flex;
