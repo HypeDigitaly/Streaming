@@ -326,9 +326,9 @@ export const StreamingResponseExtension = {
           .ai-thinking-content li {
             margin: 2px 0;
           }
-          /* Remove all spacing around thinking sections */
+          /* Remove top spacing, keep bottom spacing around thinking sections */
           .response-content .ai-thinking-section {
-            margin: 0 !important;
+            margin: 0 0 16px 0 !important;
             padding: 0 !important;
           }
           .response-content .ai-thinking-section + * {
