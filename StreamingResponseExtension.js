@@ -199,7 +199,10 @@ export const StreamingResponseExtension = {
           .response-content > h2:first-child,
           .response-content > h3:first-child,
           .response-content > h4:first-child,
-          .response-content > h5:first-child {
+          .response-content > h5:first-child,
+          .response-content > .answer-h1:first-child,
+          .response-content > .answer-h2:first-child,
+          .response-content > .answer-h3:first-child {
             margin-top: 0;
           }
           /* Elementy po nadpisech nemají horní margin */
@@ -207,7 +210,10 @@ export const StreamingResponseExtension = {
           .response-content h2 + *,
           .response-content h3 + *,
           .response-content h4 + *,
-          .response-content h5 + * {
+          .response-content h5 + *,
+          .response-content .answer-h1 + *,
+          .response-content .answer-h2 + *,
+          .response-content .answer-h3 + * {
             margin-top: 0 !important;
           }
 
@@ -434,9 +440,9 @@ export const StreamingResponseExtension = {
             margin: 0;
             padding: 0;
           }
-          /* Remove all spacing around thinking sections */
+          /* Thinking section s malou dolní mezerou */
           .response-content .ai-thinking-section {
-            margin: 0 !important;
+            margin: 0 0 10px 0 !important;
             padding: 0 !important;
           }
           /* Aggressive margin/padding removal */
