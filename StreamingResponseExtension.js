@@ -45,9 +45,10 @@ export const StreamingResponseExtension = {
 
     if (trace.payload?.debugMode === 1) {
       console.log("🎨 Generated color scheme for thinking sections:", {
-        base: reasoningBgColour,
-        lighter: lighterBgColour,
-        darker: darkerBgColour
+        background: reasoningBgColour,
+        backgroundLighter: lighterBgColour,
+        backgroundDarker: darkerBgColour,
+        textColor: "#000000 (black for contrast)"
       });
     }
 
@@ -360,7 +361,7 @@ export const StreamingResponseExtension = {
             background-color: ${darkerBgColour};
           }
           .ai-thinking-icon {
-            color: #3B82F6;
+            color: #000000;
             font-size: 14px;
             margin-right: 6px;
             flex-shrink: 0;
@@ -368,13 +369,13 @@ export const StreamingResponseExtension = {
           }
           .ai-thinking-title {
             font-weight: 600;
-            color: #1E40AF;
+            color: #000000;
             font-size: 13px;
             line-height: 1.2;
             flex-grow: 1;
           }
           .ai-thinking-arrow {
-            color: #6B7280;
+            color: #000000;
             font-size: 12px;
             transition: transform 0.2s ease;
           }
@@ -735,7 +736,7 @@ export const StreamingResponseExtension = {
       const formattedContent = buffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon">💭</div><div class="ai-thinking-title">Myšlenkový proces</div><div class="ai-thinking-arrow">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #000000;">💭</div><div class="ai-thinking-title" style="color: #000000;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #000000;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
