@@ -158,41 +158,49 @@ export const StreamingResponseExtension = {
             font-weight: 600;
           }
           
-          /* Nadpisy bez mezer */
+          /* Nadpisy s malým horním marginem */
           .response-content h1 { 
             font-size: 1.4em; 
-            margin: 0; 
+            margin: 0.6em 0 0 0; 
             padding: 0;
             font-weight: 700; 
             line-height: 1.3;
           }
           .response-content h2 { 
             font-size: 1.25em; 
-            margin: 0; 
+            margin: 0.6em 0 0 0; 
             padding: 0;
             font-weight: 600; 
             line-height: 1.35;
           }
           .response-content h3 { 
             font-size: 1.15em; 
-            margin: 0; 
+            margin: 0.6em 0 0 0; 
             padding: 0;
             font-weight: 600; 
             line-height: 1.4;
           }
           .response-content h4 { 
             font-size: 1.1em; 
-            margin: 0; 
+            margin: 0.6em 0 0 0; 
             padding: 0;
             font-weight: 600; 
             line-height: 1.4;
           }
           .response-content h5 { 
             font-size: 1.05em; 
-            margin: 0; 
+            margin: 0.6em 0 0 0; 
             padding: 0;
             font-weight: 600; 
             line-height: 1.4;
+          }
+          /* První nadpis nemá horní margin */
+          .response-content > h1:first-child,
+          .response-content > h2:first-child,
+          .response-content > h3:first-child,
+          .response-content > h4:first-child,
+          .response-content > h5:first-child {
+            margin-top: 0;
           }
 
           
@@ -217,14 +225,14 @@ export const StreamingResponseExtension = {
           }
           .response-content ul {
             margin: 0;
-            padding: 0;
+            padding-left: 1.2em;
             list-style-position: outside;
             list-style-type: disc;
           }
           /* Add rules for ordered lists to match unordered */
           .response-content ol {
             margin: 0;
-            padding: 0;
+            padding-left: 1.2em;
             list-style-position: outside;
           }
           /* Apply consistent styling to all list items */
@@ -240,7 +248,7 @@ export const StreamingResponseExtension = {
           .response-content ul ol,
           .response-content ol ul {
             margin: 0;
-            padding: 0;
+            padding-left: 1.2em;
           }
           .response-content li.sublist {
             margin: 0;
@@ -282,21 +290,21 @@ export const StreamingResponseExtension = {
           /* Added styles for headings */
           .response-content .answer-h1 {
             font-size: 1.3em;
-            margin: 0;
+            margin: 0.6em 0 0 0;
             padding: 0;
             font-weight: 600;
             line-height: 1.2;
           }
           .response-content .answer-h2 {
             font-size: 1.2em;
-            margin: 0;
+            margin: 0.6em 0 0 0;
             padding: 0;
             font-weight: 600;
             line-height: 1.2;
           }
           .response-content .answer-h3 {
             font-size: 1.1em;
-            margin: 0;
+            margin: 0.6em 0 0 0;
             padding: 0;
             font-weight: 600;
             line-height: 1.2;
@@ -412,7 +420,7 @@ export const StreamingResponseExtension = {
           }
           .ai-thinking-content ul, .ai-thinking-content ol {
             margin: 0;
-            padding: 0;
+            padding-left: 1.2em;
           }
           .ai-thinking-content li {
             margin: 0;
