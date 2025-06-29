@@ -15,10 +15,41 @@ export const StreamingResponseExtension = {
         "🌍 Language setting:",
         trace.payload?.lang || "cs (default)",
       );
+      console.log(
+        "🎨 Reasoning background colour:",
+        trace.payload?.reasoningBgColour || "#EBF5FF (default)",
+      );
     }
 
     const container = document.createElement("div");
     container.className = "streaming-response-container";
+
+    // Get custom reasoning background color or use default
+    const reasoningBgColour = trace.payload?.reasoningBgColour || "#EBF5FF";
+    
+    // Function to adjust color brightness
+    function adjustColorBrightness(color, percent) {
+      const num = parseInt(color.replace("#", ""), 16);
+      const amt = Math.round(2.55 * percent * 100);
+      const R = (num >> 16) + amt;
+      const G = (num >> 8 & 0x00FF) + amt;
+      const B = (num & 0x0000FF) + amt;
+      return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+        (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+        (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+    }
+    
+    // Generate dynamic colors based on the base color
+    const lighterBgColour = adjustColorBrightness(reasoningBgColour, 0.1);
+    const darkerBgColour = adjustColorBrightness(reasoningBgColour, -0.1);
+
+    if (trace.payload?.debugMode === 1) {
+      console.log("🎨 Generated color scheme for thinking sections:", {
+        base: reasoningBgColour,
+        lighter: lighterBgColour,
+        darker: darkerBgColour
+      });
+    }
 
     // Create the base structure
     container.innerHTML = `
@@ -30,6 +61,11 @@ export const StreamingResponseExtension = {
           </div>
         </div>
         <style>
+          :root {
+            --reasoning-bg-color: ${reasoningBgColour};
+            --reasoning-bg-color-hover: ${darkerBgColour};
+            --reasoning-bg-color-lighter: ${lighterBgColour};
+          }
           .thinking-header {
             padding: 12px 0;
             display: flex;
@@ -312,7 +348,7 @@ export const StreamingResponseExtension = {
             overflow: hidden;
           }
           .ai-thinking-header {
-            background-color: #EBF5FF;
+            background-color: var(--reasoning-bg-color);
             border-bottom: 1px solid #E2E8F0;
             padding: 8px 12px;
             cursor: pointer;
@@ -323,10 +359,10 @@ export const StreamingResponseExtension = {
             user-select: none;
           }
           .ai-thinking-header:hover {
-            background-color: #DBEAFE;
+            background-color: var(--reasoning-bg-color-hover);
           }
           .ai-thinking-header.expanded {
-            background-color: #DBEAFE;
+            background-color: var(--reasoning-bg-color-hover);
           }
           .ai-thinking-icon {
             color: #3B82F6;
