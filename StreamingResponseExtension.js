@@ -202,6 +202,14 @@ export const StreamingResponseExtension = {
           .response-content > h5:first-child {
             margin-top: 0;
           }
+          /* Elementy po nadpisech nemají horní margin */
+          .response-content h1 + *,
+          .response-content h2 + *,
+          .response-content h3 + *,
+          .response-content h4 + *,
+          .response-content h5 + * {
+            margin-top: 0 !important;
+          }
 
           
           /* Remove any paragraphs between headers */
