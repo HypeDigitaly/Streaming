@@ -61,11 +61,6 @@ export const StreamingResponseExtension = {
           </div>
         </div>
         <style>
-          :root {
-            --reasoning-bg-color: ${reasoningBgColour};
-            --reasoning-bg-color-hover: ${darkerBgColour};
-            --reasoning-bg-color-lighter: ${lighterBgColour};
-          }
           .thinking-header {
             padding: 12px 0;
             display: flex;
@@ -348,7 +343,7 @@ export const StreamingResponseExtension = {
             overflow: hidden;
           }
           .ai-thinking-header {
-            background-color: var(--reasoning-bg-color);
+            background-color: ${reasoningBgColour};
             border-bottom: 1px solid #E2E8F0;
             padding: 8px 12px;
             cursor: pointer;
@@ -359,10 +354,10 @@ export const StreamingResponseExtension = {
             user-select: none;
           }
           .ai-thinking-header:hover {
-            background-color: var(--reasoning-bg-color-hover);
+            background-color: ${darkerBgColour};
           }
           .ai-thinking-header.expanded {
-            background-color: var(--reasoning-bg-color-hover);
+            background-color: ${darkerBgColour};
           }
           .ai-thinking-icon {
             color: #3B82F6;
@@ -545,11 +540,28 @@ export const StreamingResponseExtension = {
           if (isExpanded) {
             content.classList.remove('expanded');
             header.classList.remove('expanded');
+            header.style.backgroundColor = reasoningBgColour;
           } else {
             content.classList.add('expanded');
             header.classList.add('expanded');
+            header.style.backgroundColor = darkerBgColour;
           }
         }
+      }
+    });
+
+    // Add hover effects for thinking section headers
+    responseContent.addEventListener('mouseover', function(event) {
+      const header = event.target.closest('.ai-thinking-header');
+      if (header && !header.classList.contains('expanded')) {
+        header.style.backgroundColor = darkerBgColour;
+      }
+    });
+
+    responseContent.addEventListener('mouseout', function(event) {
+      const header = event.target.closest('.ai-thinking-header');
+      if (header && !header.classList.contains('expanded')) {
+        header.style.backgroundColor = reasoningBgColour;
       }
     });
 
@@ -723,7 +735,7 @@ export const StreamingResponseExtension = {
       const formattedContent = buffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header"><div class="ai-thinking-icon">🧠</div><div class="ai-thinking-title">Jak AI došla k odpovědi</div><div class="ai-thinking-arrow">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon">💭</div><div class="ai-thinking-title">Myšlenkový proces</div><div class="ai-thinking-arrow">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
@@ -1760,3 +1772,4 @@ export const StreamingResponseExtension = {
     window.voiceflow.chat.interact({ type: "continue" });
   },
 };
+
