@@ -702,6 +702,9 @@ export const StreamingResponseExtension = {
 
       // Append to buffer
       buffer += text;
+      
+      // Keep track of complete response for final processing
+      completeResponse += text;
 
       // Post-process buffer to handle various image URL patterns
 
@@ -778,14 +781,46 @@ export const StreamingResponseExtension = {
       if (trace.payload?.debugMode === 1 && buffer.includes('##')) {
         console.log("🔍 MARKDOWN DEBUG: Content contains headers:", buffer.substring(0, 500));
         console.log("🔍 MARKDOWN DEBUG: Buffer length:", buffer.length);
+        console.log("🔍 MARKDOWN DEBUG: Last 50 chars:", buffer.slice(-50));
         const headerMatches = buffer.match(/^.*##.*$/gm);
         if (headerMatches) {
           console.log("🔍 MARKDOWN DEBUG: Found header lines:", headerMatches);
         }
+        
+        // Test each regex pattern individually
+        console.log("🔍 REGEX TEST: Testing individual patterns:");
+        const testPatterns = [
+          { name: "Pattern 1", regex: /^(\s*)#{2}\s+(.+?)$/gm },
+          { name: "Pattern 2", regex: /^## (.+)$/gm },
+          { name: "Pattern 3", regex: /##\s+([^\n\r]+)/g }
+        ];
+        
+        testPatterns.forEach(({name, regex}) => {
+          const matches = buffer.match(regex);
+          console.log(`🔍 REGEX TEST: ${name}:`, matches);
+        });
+      }
+      
+      // Special handling for streaming headers - process only complete lines
+      let processBuffer = buffer;
+      
+      // If buffer doesn't end with newline and contains incomplete header, delay processing
+      if (buffer.includes('##') && !buffer.endsWith('\n') && !buffer.endsWith('\r\n')) {
+        const lines = buffer.split(/\r?\n/);
+        const lastLine = lines[lines.length - 1];
+        
+        // If last line looks like incomplete header, process only complete lines
+        if (lastLine.includes('##') && lastLine.length < 100) {
+          if (trace.payload?.debugMode === 1) {
+            console.log("🔍 STREAMING: Detected incomplete header line, delaying processing:", lastLine);
+          }
+          // Process all but the last line
+          processBuffer = lines.slice(0, -1).join('\n') + (lines.length > 1 ? '\n' : '');
+        }
       }
 
       // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
-      const formattedContent = buffer
+      const formattedContent = processBuffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">💭</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
@@ -794,18 +829,24 @@ export const StreamingResponseExtension = {
         .replace(/<p>\s*<\/p>/g, '')
         .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
         .replace(/<\/div>\s*\n/g, '</div>')
-        // Headers - H1 to H5 (improved regex to handle whitespace and various line endings)
-        .replace(/^\s*#{5}\s+(.+?)$/gm, "<h5>$1</h5>")
-        .replace(/^\s*#{4}\s+(.+?)$/gm, "<h4>$1</h4>")
-        .replace(/^\s*#{3}\s+(.+?)$/gm, "<h3>$1</h3>")
-        .replace(/^\s*#{2}\s+(.+?)$/gm, "<h2>$1</h2>")
-        .replace(/^\s*#{1}\s+(.+?)$/gm, "<h1>$1</h1>")
-        // Fallback headers - alternative format with space after hash
-        .replace(/^##### (.+?)$/gm, "<h5>$1</h5>")
-        .replace(/^#### (.+?)$/gm, "<h4>$1</h4>")
-        .replace(/^### (.+?)$/gm, "<h3>$1</h3>")
-        .replace(/^## (.+?)$/gm, "<h2>$1</h2>")
-        .replace(/^# (.+?)$/gm, "<h1>$1</h1>")
+        // Headers - H1 to H5 (multiple approaches for robustness)
+        .replace(/^(\s*)#{5}\s+(.+?)$/gm, "<h5>$2</h5>")
+        .replace(/^(\s*)#{4}\s+(.+?)$/gm, "<h4>$2</h4>")
+        .replace(/^(\s*)#{3}\s+(.+?)$/gm, "<h3>$2</h3>")
+        .replace(/^(\s*)#{2}\s+(.+?)$/gm, "<h2>$2</h2>")
+        .replace(/^(\s*)#{1}\s+(.+?)$/gm, "<h1>$2</h1>")
+        // Fallback headers - no leading whitespace
+        .replace(/^##### (.+)$/gm, "<h5>$1</h5>")
+        .replace(/^#### (.+)$/gm, "<h4>$1</h4>")
+        .replace(/^### (.+)$/gm, "<h3>$1</h3>")
+        .replace(/^## (.+)$/gm, "<h2>$1</h2>")
+        .replace(/^# (.+)$/gm, "<h1>$1</h1>")
+        // Ultra-simple fallback for stubborn cases
+        .replace(/##\s+([^\n\r]+)/g, "<h2>$1</h2>")
+        .replace(/#\s+([^\n\r]+)/g, "<h1>$1</h1>")
+        // Brutal fallback - replace any remaining ## patterns
+        .replace(/##\s*([^#\n\r]+)/g, "<h2>$1</h2>")
+        .replace(/^([^<\n\r]*?)##\s*([^#\n\r]+)/gm, "$1<h2>$2</h2>")
         // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
         .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
           // Clean and validate the URL
@@ -908,6 +949,17 @@ export const StreamingResponseExtension = {
         })
         .replace(/(?:^|\n)(<li)/g, "\n<ul>$1")
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, "$1</ul>");
+
+      // Debug logging after markdown processing
+      if (trace.payload?.debugMode === 1) {
+        console.log("🔍 PROCESSING: processBuffer vs buffer lengths:", processBuffer.length, "vs", buffer.length);
+        if (formattedContent.includes('##')) {
+          console.log("🔍 AFTER MARKDOWN: Still contains ##:", formattedContent.substring(0, 500));
+        }
+        if (formattedContent.includes('<h2>')) {
+          console.log("🔍 AFTER MARKDOWN: Found H2 tags:", formattedContent.match(/<h2>.*?<\/h2>/g));
+        }
+      }
 
       // --- BEGIN: Post-process lists and clean up empty items ---
       const tempContainer = document.createElement("div");
@@ -1833,8 +1885,21 @@ export const StreamingResponseExtension = {
       }
     }
 
+    // Add final processing function for when streaming ends
+    async function finalizeContent() {
+      if (buffer !== completeResponse && buffer.includes('##')) {
+        if (trace.payload?.debugMode === 1) {
+          console.log("🔍 FINALIZE: Processing remaining buffer content");
+        }
+        updateContent(''); // Trigger final processing with complete buffer
+      }
+    }
+
     // Start the LLM orchestration
     await orchestrateLLMCalls(trace);
+    
+    // Final processing after streaming completes
+    setTimeout(() => finalizeContent(), 100);
 
     window.voiceflow.chat.interact({ type: "continue" });
   },
