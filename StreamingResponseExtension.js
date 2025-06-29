@@ -450,11 +450,22 @@ export const StreamingResponseExtension = {
           }
           /* Remove top spacing, keep bottom spacing around thinking sections */
           .response-content .ai-thinking-section {
-            margin: 0 0 16px 0 !important;
+            margin: 0 0 1em 0 !important;
             padding: 0 !important;
           }
-          .response-content .ai-thinking-section + * {
-            margin-top: 0 !important;
+          .response-content .ai-thinking-section + h1,
+          .response-content .ai-thinking-section + h2,
+          .response-content .ai-thinking-section + h3,
+          .response-content .ai-thinking-section + h4,
+          .response-content .ai-thinking-section + h5 {
+            margin-top: 1em !important;
+          }
+          .response-content .ai-thinking-section + p {
+            margin-top: 0.8em !important;
+          }
+          .response-content .ai-thinking-section + ul,
+          .response-content .ai-thinking-section + ol {
+            margin-top: 0.8em !important;
           }
           .response-content * + .ai-thinking-section {
             margin-top: 0 !important;
@@ -466,9 +477,6 @@ export const StreamingResponseExtension = {
           .response-content br + .ai-thinking-section,
           .response-content .ai-thinking-section + br {
             display: none;
-          }
-          .response-content .ai-thinking-section {
-            line-height: 1 !important;
           }
           .ai-info-footer {
             display: flex;
