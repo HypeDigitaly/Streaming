@@ -48,7 +48,7 @@ export const StreamingResponseExtension = {
         background: reasoningBgColour,
         backgroundLighter: lighterBgColour,
         backgroundDarker: darkerBgColour,
-        textColor: "#000000 (black for contrast)"
+        textColor: "#333333 (dark gray for contrast)"
       });
     }
 
@@ -345,13 +345,14 @@ export const StreamingResponseExtension = {
           }
           .ai-thinking-header {
             background-color: ${reasoningBgColour};
-            border-bottom: 1px solid #E2E8F0;
+            border-bottom: none;
+            border-radius: 6px;
             padding: 8px 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease, border-radius 0.3s ease;
             user-select: none;
           }
           .ai-thinking-header:hover {
@@ -359,9 +360,11 @@ export const StreamingResponseExtension = {
           }
           .ai-thinking-header.expanded {
             background-color: ${darkerBgColour};
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #E2E8F0;
           }
           .ai-thinking-icon {
-            color: #000000;
+            color: #333333;
             font-size: 14px;
             margin-right: 6px;
             flex-shrink: 0;
@@ -369,13 +372,13 @@ export const StreamingResponseExtension = {
           }
           .ai-thinking-title {
             font-weight: 600;
-            color: #000000;
+            color: #333333;
             font-size: 13px;
             line-height: 1.2;
             flex-grow: 1;
           }
           .ai-thinking-arrow {
-            color: #000000;
+            color: #333333;
             font-size: 12px;
             transition: transform 0.2s ease;
           }
@@ -383,20 +386,22 @@ export const StreamingResponseExtension = {
             transform: rotate(180deg);
           }
           .ai-thinking-content {
-            padding: 0 12px;
+            padding: 0;
             background-color: #FFFFFF;
-            border-top: 1px solid #F1F5F9;
+            border-top: none;
             display: block;
             font-size: 13px;
             line-height: 1.5;
             color: #374151;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
+            transition: max-height 0.3s ease, padding 0.3s ease, border-top 0.3s ease;
           }
           .ai-thinking-content.expanded {
             max-height: 1000px;
             padding: 12px;
+            border-top: 1px solid #F1F5F9;
+            border-radius: 0 0 6px 6px;
           }
           .ai-thinking-content > *:first-child {
             margin-top: 0;
@@ -736,7 +741,7 @@ export const StreamingResponseExtension = {
       const formattedContent = buffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #000000;">💭</div><div class="ai-thinking-title" style="color: #000000;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #000000;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">💭</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
