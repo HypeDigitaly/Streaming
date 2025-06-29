@@ -158,36 +158,36 @@ export const StreamingResponseExtension = {
             font-weight: 600;
           }
           
-          /* Základní velikosti a mezery pro nadpisy */
+          /* Optimalizované velikosti a mezery pro nadpisy - přístupnost a čitelnost */
           .response-content h1 { 
-            font-size: 1.5em; 
-            margin: 1.5em 0 0.1em 0; 
+            font-size: 1.4em; 
+            margin: 1.2em 0 0.4em 0; 
             font-weight: 700; 
-            line-height: 1.2;
+            line-height: 1.3;
           }
           .response-content h2 { 
-            font-size: 1.3em; 
-            margin: 1.3em 0 0.1em 0; 
+            font-size: 1.25em; 
+            margin: 1.1em 0 0.35em 0; 
             font-weight: 600; 
-            line-height: 1.3;
+            line-height: 1.35;
           }
           .response-content h3 { 
             font-size: 1.15em; 
-            margin: 1.2em 0 0.1em 0; 
+            margin: 1em 0 0.3em 0; 
             font-weight: 600; 
-            line-height: 1.3;
+            line-height: 1.4;
           }
           .response-content h4 { 
             font-size: 1.1em; 
-            margin: 1em 0 0.1em 0; 
+            margin: 0.9em 0 0.25em 0; 
             font-weight: 600; 
-            line-height: 1.3;
+            line-height: 1.4;
           }
           .response-content h5 { 
             font-size: 1.05em; 
-            margin: 0.9em 0 0.1em 0; 
+            margin: 0.8em 0 0.2em 0; 
             font-weight: 600; 
-            line-height: 1.3;
+            line-height: 1.4;
           }
           
           /* První nadpisy v kontejneru nemají horní mezeru */
@@ -199,29 +199,53 @@ export const StreamingResponseExtension = {
             margin-top: 0;
           }
           
-          /* Zmenšení mezer mezi konsekutivními nadpisy - speciálně H1+H2 pro hlavní nadpis a podnadpis */
+          /* Dodatečná pravidla pro konzistentní spacing a přístupnost */
+          .response-content > * + * {
+            margin-top: 0.6em;
+          }
+          
+          /* Přepsat margin pro specifické kombinace */
+          .response-content h1 + *,
+          .response-content h2 + *,
+          .response-content h3 + *,
+          .response-content h4 + *,
+          .response-content h5 + * {
+            margin-top: 0.3em !important;
+          }
+          
+          /* Mezery mezi seznamy a paragrafy */
+          .response-content ul + p,
+          .response-content ol + p,
+          .response-content p + ul,
+          .response-content p + ol {
+            margin-top: 0.5em;
+          }
+          
+          /* Optimalizované mezery mezi konsekutivními nadpisy pro lepší vizuální hierarchii */
           .response-content h1 + h2 {
-            margin-top: 0.1em; /* Malá mezera mezi hlavním nadpisem a podnadpisem */
+            margin-top: 0.3em; /* Mírná mezera mezi hlavním nadpisem a podnadpisem */
           }
           .response-content h2 + h3,
           .response-content h3 + h4,
           .response-content h4 + h5 {
-            margin-top: 0.2em; /* Mírně zmenšené mezery mezi ostatními nadpisy */
+            margin-top: 0.4em; /* Konzistentní mezery mezi nadpisy různých úrovní */
           }
-          /* Mezery mezi nadpisy a obsahem */
+          /* Optimalizované mezery mezi nadpisy a obsahem pro lepší čitelnost */
           .response-content h1 + p,
           .response-content h2 + p,
           .response-content h3 + p,
           .response-content h4 + p,
           .response-content h5 + p {
-            margin-top: 0.1em;
+            margin-top: 0;
+            margin-bottom: 0.8em;
           }
           .response-content h1 + ul,
           .response-content h2 + ul,
           .response-content h3 + ul,
           .response-content h4 + ul,
           .response-content h5 + ul {
-            margin-top: 0.2em;
+            margin-top: 0.1em;
+            margin-bottom: 0.8em;
           }
           
           /* Remove any paragraphs between headers */
@@ -244,23 +268,23 @@ export const StreamingResponseExtension = {
             display: none;
           }
           .response-content ul {
-            margin: 1em 0;
-            padding-left: 1.5em;
+            margin: 0.6em 0;
+            padding-left: 1.3em;
             list-style-position: outside;
             list-style-type: disc;
           }
           /* Add rules for ordered lists to match unordered */
           .response-content ol {
-            margin: 1em 0;
-            padding-left: 1.5em;
+            margin: 0.6em 0;
+            padding-left: 1.3em;
             list-style-position: outside;
           }
           /* Apply consistent styling to all list items */
           .response-content ul li,
           .response-content ol li {
-            margin: 0.3em 0;
-            padding-left: 0.3em;
-            line-height: 1.5;
+            margin: 0.4em 0;
+            padding-left: 0.2em;
+            line-height: 1.6;
           }
           /* Nested lists */
           .response-content ul ul,
@@ -277,11 +301,15 @@ export const StreamingResponseExtension = {
             line-height: 1;
           }
           .response-content p {
-            margin: 0 0 1em 0;
+            margin: 0 0 0.8em 0;
             line-height: 1.6;
           }
           .response-content p:last-child {
             margin-bottom: 0;
+          }
+          /* Zajistit konzistentní spacing pro všechny elementy */
+          .response-content > *:first-child {
+            margin-top: 0 !important;
           }
           .response-content a {
             word-break: break-all;
