@@ -161,31 +161,31 @@ export const StreamingResponseExtension = {
           /* Základní velikosti a mezery pro nadpisy */
           .response-content h1 { 
             font-size: 1.5em; 
-            margin: 1.5em 0 0.8em 0; 
+            margin: 1.5em 0 0.1em 0; 
             font-weight: 700; 
             line-height: 1.2;
           }
           .response-content h2 { 
             font-size: 1.3em; 
-            margin: 1.3em 0 0.6em 0; 
+            margin: 1.3em 0 0.1em 0; 
             font-weight: 600; 
             line-height: 1.3;
           }
           .response-content h3 { 
             font-size: 1.15em; 
-            margin: 1.2em 0 0.5em 0; 
+            margin: 1.2em 0 0.1em 0; 
             font-weight: 600; 
             line-height: 1.3;
           }
           .response-content h4 { 
             font-size: 1.1em; 
-            margin: 1em 0 0.4em 0; 
+            margin: 1em 0 0.1em 0; 
             font-weight: 600; 
             line-height: 1.3;
           }
           .response-content h5 { 
             font-size: 1.05em; 
-            margin: 0.9em 0 0.4em 0; 
+            margin: 0.9em 0 0.1em 0; 
             font-weight: 600; 
             line-height: 1.3;
           }
@@ -201,12 +201,12 @@ export const StreamingResponseExtension = {
           
           /* Zmenšení mezer mezi konsekutivními nadpisy - speciálně H1+H2 pro hlavní nadpis a podnadpis */
           .response-content h1 + h2 {
-            margin-top: 0.3em; /* Malá mezera mezi hlavním nadpisem a podnadpisem */
+            margin-top: 0.1em; /* Malá mezera mezi hlavním nadpisem a podnadpisem */
           }
           .response-content h2 + h3,
           .response-content h3 + h4,
           .response-content h4 + h5 {
-            margin-top: 0.5em; /* Mírně zmenšené mezery mezi ostatními nadpisy */
+            margin-top: 0.2em; /* Mírně zmenšené mezery mezi ostatními nadpisy */
           }
           /* Mezery mezi nadpisy a obsahem */
           .response-content h1 + p,
@@ -214,14 +214,14 @@ export const StreamingResponseExtension = {
           .response-content h3 + p,
           .response-content h4 + p,
           .response-content h5 + p {
-            margin-top: 0.3em;
+            margin-top: 0.1em;
           }
           .response-content h1 + ul,
           .response-content h2 + ul,
           .response-content h3 + ul,
           .response-content h4 + ul,
           .response-content h5 + ul {
-            margin-top: 0.5em;
+            margin-top: 0.2em;
           }
           
           /* Remove any paragraphs between headers */
