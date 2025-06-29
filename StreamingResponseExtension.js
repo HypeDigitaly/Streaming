@@ -774,6 +774,16 @@ export const StreamingResponseExtension = {
         },
       );
 
+      // Debug logging for header conversion issues
+      if (trace.payload?.debugMode === 1 && buffer.includes('##')) {
+        console.log("🔍 MARKDOWN DEBUG: Content contains headers:", buffer.substring(0, 500));
+        console.log("🔍 MARKDOWN DEBUG: Buffer length:", buffer.length);
+        const headerMatches = buffer.match(/^.*##.*$/gm);
+        if (headerMatches) {
+          console.log("🔍 MARKDOWN DEBUG: Found header lines:", headerMatches);
+        }
+      }
+
       // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
       const formattedContent = buffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
@@ -784,12 +794,18 @@ export const StreamingResponseExtension = {
         .replace(/<p>\s*<\/p>/g, '')
         .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
         .replace(/<\/div>\s*\n/g, '</div>')
-        // Headers - H1 to H5 (improved regex to handle whitespace)
-        .replace(/^\s*##### (.*$)/gm, "<h5>$1</h5>")
-        .replace(/^\s*#### (.*$)/gm, "<h4>$1</h4>")
-        .replace(/^\s*### (.*$)/gm, "<h3>$1</h3>")
-        .replace(/^\s*## (.*$)/gm, "<h2>$1</h2>")
-        .replace(/^\s*# (.*$)/gm, "<h1>$1</h1>")
+        // Headers - H1 to H5 (improved regex to handle whitespace and various line endings)
+        .replace(/^\s*#{5}\s+(.+?)$/gm, "<h5>$1</h5>")
+        .replace(/^\s*#{4}\s+(.+?)$/gm, "<h4>$1</h4>")
+        .replace(/^\s*#{3}\s+(.+?)$/gm, "<h3>$1</h3>")
+        .replace(/^\s*#{2}\s+(.+?)$/gm, "<h2>$1</h2>")
+        .replace(/^\s*#{1}\s+(.+?)$/gm, "<h1>$1</h1>")
+        // Fallback headers - alternative format with space after hash
+        .replace(/^##### (.+?)$/gm, "<h5>$1</h5>")
+        .replace(/^#### (.+?)$/gm, "<h4>$1</h4>")
+        .replace(/^### (.+?)$/gm, "<h3>$1</h3>")
+        .replace(/^## (.+?)$/gm, "<h2>$1</h2>")
+        .replace(/^# (.+?)$/gm, "<h1>$1</h1>")
         // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
         .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
           // Clean and validate the URL
@@ -967,6 +983,14 @@ export const StreamingResponseExtension = {
 
       const cleanedHtml = tempContainer.innerHTML;
       // --- END: Post-process lists and clean up empty items ---
+
+      // Debug logging after HTML processing
+      if (trace.payload?.debugMode === 1 && cleanedHtml.includes('##')) {
+        console.log("🔍 HTML DEBUG: Cleaned HTML still contains ##:", cleanedHtml.substring(0, 500));
+      }
+      if (trace.payload?.debugMode === 1 && cleanedHtml.includes('<h2>')) {
+        console.log("🔍 HTML DEBUG: Found H2 tags:", cleanedHtml.substring(0, 500));
+      }
 
       // Update content with formatting using the cleaned HTML
       responseContent.innerHTML = cleanedHtml;
