@@ -1,4 +1,3 @@
-
 // Shared whitelist domains configuration
 const whitelistedDomains = [
   'icuk.cz',
@@ -11,7 +10,8 @@ const whitelistedDomains = [
   'hypedigitaly.ai',
   'litomerice.cz',
   'khk.cz',
-  'stredoceskykraj.cz'
+  'stredoceskykraj.cz',
+  'reasontest.yourdomain.com' // nebo vaše specifická doména pro REASONTEST
 ];
 
 module.exports = {
