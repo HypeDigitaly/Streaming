@@ -32,7 +32,7 @@ export default async function handler(req, res) {
   res.setHeader('Connection', 'keep-alive');
 
   try {
-    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id } = req.body;
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools } = req.body;
 
     // Select API key based on projectName
     const apiKey = process.env[`OPENAI_API_KEY_${projectName?.toUpperCase()}`] || process.env.OPENAI_API_KEY;
@@ -53,7 +53,9 @@ export default async function handler(req, res) {
         projectName,
         debugMode,
         systemPrompt,
-        user_id
+        user_id,
+        reasoning,
+        tools,
       });
     }
 
@@ -63,40 +65,92 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
-    const response = await openai.chat.completions.create({
-      model: model || 'gpt-4.1-2025-04-14',
-      max_tokens: max_tokens || 4096,
-      temperature: temperature || 0,
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt
-        },
-        {
-          role: 'user',
-          content: userData
-        }
-      ],
-      stream: true,
-    });
+    // Use the new Responses API if reasoning or tools are requested
+    if (reasoning || tools) {
+      const response = await openai.responses.create({
+        model: model || 'o4-mini',
+        max_output_tokens: max_tokens || 4096,
+        temperature: temperature || 0,
+        instructions: systemPrompt,
+        input: [{ role: 'user', content: userData }],
+        reasoning: reasoning,
+        tools: tools,
+        stream: true,
+      });
 
-    if (debugMode === 1) {
-      console.log('📥 OpenAI API Response initialized');
-    }
-
-    for await (const chunk of response) {
       if (debugMode === 1) {
-        console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
+        console.log('📥 OpenAI Responses API Response initialized');
       }
 
-      if (chunk.choices[0]?.delta?.content) {
-        const data = {
-          type: 'content',
-          content: chunk.choices[0].delta.content
-        };
+      for await (const chunk of response) {
+        if (debugMode === 1) {
+            console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
+        }
 
-        res.write(`data: ${JSON.stringify(data)}\n\n`);
-        res.flush?.();
+        let streamType = null;
+        let content = null;
+
+        if (chunk.type === 'response.output_text.delta') {
+            streamType = 'content';
+            content = chunk.delta;
+        } else if (chunk.type === 'response.reasoning_summary_text.delta') {
+            streamType = 'reasoning';
+            content = chunk.delta;
+        } else if (chunk.type === 'response.completed') {
+            res.write('data: [DONE]\n\n');
+            res.end();
+            return;
+        } else if (chunk.type === 'error') {
+            res.write(`data: ${JSON.stringify({ error: chunk.error.message })}\n\n`);
+            res.end();
+            return;
+        }
+
+        if (streamType && content) {
+            const data = {
+                type: streamType,
+                content: content,
+            };
+            res.write(`data: ${JSON.stringify(data)}\n\n`);
+            res.flush?.();
+        }
+      }
+    } else {
+      const response = await openai.chat.completions.create({
+        model: model || 'gpt-4.1-2025-04-14',
+        max_tokens: max_tokens || 4096,
+        temperature: temperature || 0,
+        messages: [
+          {
+            role: 'system',
+            content: systemPrompt
+          },
+          {
+            role: 'user',
+            content: userData
+          }
+        ],
+        stream: true,
+      });
+
+      if (debugMode === 1) {
+        console.log('📥 OpenAI Chat Completions API Response initialized');
+      }
+
+      for await (const chunk of response) {
+        if (debugMode === 1) {
+          console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
+        }
+
+        if (chunk.choices[0]?.delta?.content) {
+          const data = {
+            type: 'content',
+            content: chunk.choices[0].delta.content
+          };
+
+          res.write(`data: ${JSON.stringify(data)}\n\n`);
+          res.flush?.();
+        }
       }
     }
 
