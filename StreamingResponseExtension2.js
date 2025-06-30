@@ -793,15 +793,18 @@ export const StreamingResponseExtension = {
         if (thinkingHeader) {
           thinkingHeader.classList.add("hidden");
         }
-        // Show appropriate section
+        // Show reasoning section if it's reasoning type
         if (type === 'reasoning') {
             const reasoningSection = container.querySelector('.streaming-reasoning-section');
             reasoningSection.style.display = 'block';
-            reasoningSection.innerHTML = `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div></div><div class="ai-thinking-content"></div></div>`;
-        } else {
-            responseSection.classList.add("visible");
+            reasoningSection.innerHTML = `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content"></div></div>`;
         }
         isFirstChunk = false;
+      }
+      
+      // Show response section when content arrives (regardless of whether it's first chunk)
+      if (type === 'content' && !responseSection.classList.contains('visible')) {
+        responseSection.classList.add("visible");
       }
 
       if (type === 'reasoning') {
@@ -820,7 +823,7 @@ export const StreamingResponseExtension = {
           // Ensure reasoning section is visible if it wasn't from the first chunk
           if (reasoningSection.style.display === 'none') {
                reasoningSection.style.display = 'block';
-               reasoningSection.innerHTML = `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div></div><div class="ai-thinking-content"></div></div>`;
+               reasoningSection.innerHTML = `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content"></div></div>`;
                if (trace.payload?.debugMode === 1) {
                    console.log('🔎 REASONING SECTION CREATED');
                }
@@ -864,16 +867,24 @@ export const StreamingResponseExtension = {
                   <div class="tool-arguments">${toolData.arguments}</div>
               </div>`;
               
-              // Add to reasoning section or create new tools section
+              // Add to tools section or create new tools section
               let toolsSection = container.querySelector('.streaming-tools-section');
               if (!toolsSection) {
                   toolsSection = document.createElement('div');
                   toolsSection.className = 'streaming-tools-section';
                   toolsSection.style.display = 'block';
+                  toolsSection.style.margin = '1em 0';
                   const reasoningSection = container.querySelector('.streaming-reasoning-section');
-                  container.insertBefore(toolsSection, reasoningSection.nextSibling);
+                  if (reasoningSection && reasoningSection.style.display !== 'none') {
+                      // Insert after reasoning section if it exists and is visible
+                      container.insertBefore(toolsSection, reasoningSection.nextSibling);
+                  } else {
+                      // Insert before response section if no reasoning section
+                      const responseSection = container.querySelector('.response-section');
+                      container.insertBefore(toolsSection, responseSection);
+                  }
                   if (trace.payload?.debugMode === 1) {
-                      console.log('🔧 TOOLS SECTION CREATED');
+                      console.log('🔧 TOOLS SECTION CREATED AND POSITIONED');
                   }
               }
               toolsSection.innerHTML += toolCallHtml;
