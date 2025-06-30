@@ -1678,7 +1678,9 @@ export const StreamingResponseExtension = {
 
     // Generic function to call any LLM API provider with TTFT timeout
     async function callLLMAPI(endpoint, payload) {
-      const TTFT_TIMEOUT_MS = 10000; // Time To First Token timeout (10 seconds)
+      // Reasoning models need more time for first token
+      const isReasoningEnabled = payload.reasoning && isReasoningModel(payload.model);
+      const TTFT_TIMEOUT_MS = isReasoningEnabled ? 30000 : 10000; // 30s for reasoning, 10s for others
       const abortController = new AbortController();
       let ttftTimeoutId = null;
       let firstChunkReceived = false;
@@ -2096,7 +2098,8 @@ export const StreamingResponseExtension = {
           console.log(`🚫 REASONING MODEL DETECTED: Skipping temperature parameter for ${model.name}`);
         }
 
-        if (trace.payload.useReasoning) {
+        // Only add reasoning for reasoning models
+        if (trace.payload.useReasoning && isReasoningModel(model.name)) {
             payload.reasoning = {
                 effort: trace.payload.reasoningEffort || 'medium',
                 summary: 'auto'
@@ -2104,6 +2107,8 @@ export const StreamingResponseExtension = {
             if (trace.payload.debugMode === 1) {
                 console.log('🔎 REASONING PAYLOAD ADDED:', payload.reasoning);
             }
+        } else if (trace.payload.useReasoning && trace.payload.debugMode === 1) {
+            console.log('🚫 REASONING SKIPPED: Model does not support reasoning:', model.name);
         }
 
         const tools = [];

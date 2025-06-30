@@ -99,6 +99,14 @@ export default async function handler(req, res) {
       for await (const chunk of response) {
         if (debugMode === 1) {
             console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
+            console.log('🔍 Chunk Type Analysis:', {
+                chunk_type: chunk.type,
+                has_delta: !!chunk.delta,
+                delta_length: chunk.delta?.length || 0,
+                has_tool_call: !!chunk.tool_call,
+                has_error: !!chunk.error,
+                full_keys: Object.keys(chunk)
+            });
         }
 
         let streamType = null;
@@ -114,11 +122,21 @@ export default async function handler(req, res) {
                     chunk_type: chunk.type
                 });
             }
-        } else if (chunk.type === 'response.reasoning_summary_text.delta') {
+        } else if (chunk.type === 'response.reasoning.delta' && chunk.delta?.text) {
             streamType = 'reasoning';
-            content = chunk.delta;
+            content = chunk.delta.text;
             if (debugMode === 1) {
-                console.log('🔎 REASONING TOKEN:', {
+                console.log('🔎 RAW REASONING TOKEN:', {
+                    length: content?.length || 0,
+                    content: content?.substring(0, 50) + (content?.length > 50 ? '...' : ''),
+                    chunk_type: chunk.type
+                });
+            }
+        } else if (chunk.type === 'response.reasoning_summary.delta' && chunk.delta?.text) {
+            streamType = 'reasoning';
+            content = chunk.delta.text;
+            if (debugMode === 1) {
+                console.log('🔎 REASONING SUMMARY TOKEN (from object):', {
                     length: content?.length || 0,
                     content: content?.substring(0, 50) + (content?.length > 50 ? '...' : ''),
                     chunk_type: chunk.type
