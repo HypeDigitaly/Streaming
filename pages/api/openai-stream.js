@@ -34,6 +34,12 @@ export default async function handler(req, res) {
   try {
     const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools } = req.body;
 
+    // Function to check if a model is a reasoning model
+    function isReasoningModel(modelName) {
+      const reasoningModels = ["o4-mini", "o3-mini", "o3"];
+      return reasoningModels.includes(modelName);
+    }
+
     // Select API key based on projectName
     const apiKey = process.env[`OPENAI_API_KEY_${projectName?.toUpperCase()}`] || process.env.OPENAI_API_KEY;
 
@@ -67,16 +73,24 @@ export default async function handler(req, res) {
 
     // Use the new Responses API if reasoning or tools are requested
     if (reasoning || tools) {
-      const response = await openai.responses.create({
+      const responsesPayload = {
         model: model || 'o4-mini',
         max_output_tokens: max_tokens || 4096,
-        temperature: temperature || 0,
         instructions: systemPrompt,
         input: [{ role: 'user', content: userData }],
         reasoning: reasoning,
         tools: tools,
         stream: true,
-      });
+      };
+
+      // Only add temperature for non-reasoning models
+      if (!isReasoningModel(model || 'o4-mini')) {
+        responsesPayload.temperature = temperature || 0;
+      } else if (debugMode === 1) {
+        console.log(`🚫 REASONING MODEL DETECTED: Skipping temperature parameter for ${model || 'o4-mini'}`);
+      }
+
+      const response = await openai.responses.create(responsesPayload);
 
       if (debugMode === 1) {
         console.log('📥 OpenAI Responses API Response initialized');
@@ -185,10 +199,9 @@ export default async function handler(req, res) {
         }
       }
     } else {
-      const response = await openai.chat.completions.create({
+      const chatPayload = {
         model: model || 'gpt-4.1-2025-04-14',
         max_tokens: max_tokens || 4096,
-        temperature: temperature || 0,
         messages: [
           {
             role: 'system',
@@ -200,7 +213,16 @@ export default async function handler(req, res) {
           }
         ],
         stream: true,
-      });
+      };
+
+      // Only add temperature for non-reasoning models
+      if (!isReasoningModel(model || 'gpt-4.1-2025-04-14')) {
+        chatPayload.temperature = temperature || 0;
+      } else if (debugMode === 1) {
+        console.log(`🚫 REASONING MODEL DETECTED: Skipping temperature parameter for ${model || 'gpt-4.1-2025-04-14'}`);
+      }
+
+      const response = await openai.chat.completions.create(chatPayload);
 
       if (debugMode === 1) {
         console.log('📥 OpenAI Chat Completions API Response initialized');
