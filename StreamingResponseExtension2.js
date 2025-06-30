@@ -1468,6 +1468,12 @@ export const StreamingResponseExtension = {
         : `Unknown model ID: ${modelId}`;
     }
 
+    // Function to check if a model is a reasoning model
+    function isReasoningModel(modelName) {
+      const reasoningModels = ["o4-mini", "o3-mini", "o3"];
+      return reasoningModels.includes(modelName);
+    }
+
     // Adds AI info footer to the UI
     function addAIInfoFooter(attemptedModels) {
       // Determine overall success and find the successful model details
@@ -2065,13 +2071,19 @@ export const StreamingResponseExtension = {
         const payload = {
           model: model.name,
           max_tokens: trace.payload.max_tokens,
-          temperature: trace.payload.temperature,
           userData: trace.payload.userData,
           systemPrompt: trace.payload.systemPrompt,
           debugMode: trace.payload.debugMode || 0,
           projectName: trace.payload.projectName,
           user_id: trace.payload.user_id,
         };
+
+        // Only add temperature for non-reasoning models
+        if (!isReasoningModel(model.name)) {
+          payload.temperature = trace.payload.temperature;
+        } else if (trace.payload.debugMode === 1) {
+          console.log(`🚫 REASONING MODEL DETECTED: Skipping temperature parameter for ${model.name}`);
+        }
 
         if (trace.payload.useReasoning) {
             payload.reasoning = {
