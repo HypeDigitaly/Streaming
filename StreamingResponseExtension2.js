@@ -580,6 +580,69 @@ export const StreamingResponseExtension = {
             color: #333;
           }
 
+          .streaming-tools-section {
+            margin: 0 0 1em 0;
+          }
+          
+          .tool-call-section {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            margin: 0 0 0.5em 0;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+          }
+          
+          .tool-call-header {
+            background-color: #EDF2F7;
+            padding: 8px 12px;
+            border-bottom: 1px solid #E2E8F0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+          }
+          
+          .tool-icon {
+            font-size: 14px;
+            flex-shrink: 0;
+          }
+          
+          .tool-name {
+            flex-grow: 1;
+            color: #374151;
+          }
+          
+          .tool-status {
+            color: #6B7280;
+            font-size: 12px;
+            font-weight: 500;
+          }
+          
+          .tool-arguments {
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #6B7280;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #F1F5F9;
+            font-family: monospace;
+            white-space: pre-wrap;
+          }
+          
+          .tool-response {
+            padding: 8px 12px;
+            font-size: 13px;
+            color: #374151;
+            background-color: #FFFFFF;
+            line-height: 1.5;
+          }
+          
+          .tool-response strong {
+            color: #1F2937;
+            font-weight: 600;
+          }
+
         </style>
         <div class="streaming-reasoning-section" style="display: none;"></div>
         <div class="response-section">
@@ -742,6 +805,15 @@ export const StreamingResponseExtension = {
       }
 
       if (type === 'reasoning') {
+          if (trace.payload?.debugMode === 1) {
+              console.log('🔎 FRONTEND REASONING PROCESSING:', {
+                  text_length: text?.length || 0,
+                  text_preview: text?.substring(0, 50) + (text?.length > 50 ? '...' : ''),
+                  reasoning_buffer_length: reasoningBuffer.length,
+                  type: type
+              });
+          }
+          
           const reasoningSection = container.querySelector('.streaming-reasoning-section');
           const reasoningContentEl = reasoningSection.querySelector('.ai-thinking-content');
 
@@ -749,6 +821,9 @@ export const StreamingResponseExtension = {
           if (reasoningSection.style.display === 'none') {
                reasoningSection.style.display = 'block';
                reasoningSection.innerHTML = `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div></div><div class="ai-thinking-content"></div></div>`;
+               if (trace.payload?.debugMode === 1) {
+                   console.log('🔎 REASONING SECTION CREATED');
+               }
           }
 
           reasoningBuffer += text;
@@ -760,6 +835,118 @@ export const StreamingResponseExtension = {
               reasoningContentEl.innerHTML = formattedReasoning;
           }
           return;
+      }
+
+      if (type === 'tool_call') {
+          if (trace.payload?.debugMode === 1) {
+              console.log('🔧 FRONTEND TOOL CALL PROCESSING:', {
+                  text: text,
+                  type: type
+              });
+          }
+          
+          try {
+              const toolData = JSON.parse(text);
+              if (trace.payload?.debugMode === 1) {
+                  console.log('🔧 PARSED TOOL DATA:', toolData);
+              }
+              
+              const toolName = toolData.tool_name === 'web_search_preview' ? '🌐 Vyhledávání na webu' : 
+                             toolData.tool_name === 'file_search' ? '📄 Vyhledávání v souborech' : 
+                             `🔧 ${toolData.tool_name}`;
+              
+              const toolCallHtml = `<div class="tool-call-section">
+                  <div class="tool-call-header">
+                      <span class="tool-icon">${toolName.split(' ')[0]}</span>
+                      <span class="tool-name">${toolName.substring(2)}</span>
+                      <span class="tool-status">Spouštím...</span>
+                  </div>
+                  <div class="tool-arguments">${toolData.arguments}</div>
+              </div>`;
+              
+              // Add to reasoning section or create new tools section
+              let toolsSection = container.querySelector('.streaming-tools-section');
+              if (!toolsSection) {
+                  toolsSection = document.createElement('div');
+                  toolsSection.className = 'streaming-tools-section';
+                  toolsSection.style.display = 'block';
+                  const reasoningSection = container.querySelector('.streaming-reasoning-section');
+                  container.insertBefore(toolsSection, reasoningSection.nextSibling);
+                  if (trace.payload?.debugMode === 1) {
+                      console.log('🔧 TOOLS SECTION CREATED');
+                  }
+              }
+              toolsSection.innerHTML += toolCallHtml;
+              
+              if (trace.payload?.debugMode === 1) {
+                  console.log('🔧 TOOL CALL UI ADDED:', {
+                      tool_name: toolData.tool_name,
+                      display_name: toolName
+                  });
+              }
+          } catch (e) {
+              console.warn('Failed to parse tool call data:', text);
+              if (trace.payload?.debugMode === 1) {
+                  console.error('🔧 TOOL CALL PARSE ERROR:', e);
+              }
+          }
+          return;
+      }
+
+      if (type === 'tool_response') {
+          if (trace.payload?.debugMode === 1) {
+              console.log('🌐 FRONTEND TOOL RESPONSE PROCESSING:', {
+                  text: text,
+                  type: type
+              });
+          }
+          
+          try {
+              const toolData = JSON.parse(text);
+              if (trace.payload?.debugMode === 1) {
+                  console.log('🌐 PARSED TOOL RESPONSE DATA:', toolData);
+              }
+              
+              const toolCallSections = container.querySelectorAll('.tool-call-section');
+              const lastToolCall = toolCallSections[toolCallSections.length - 1];
+              
+              if (lastToolCall) {
+                  const statusEl = lastToolCall.querySelector('.tool-status');
+                  if (statusEl) {
+                      statusEl.textContent = 'Dokončeno ✅';
+                      statusEl.style.color = '#10B981';
+                  }
+                  
+                  // Add tool response content
+                  const responseDiv = document.createElement('div');
+                  responseDiv.className = 'tool-response';
+                  responseDiv.innerHTML = `<strong>Výsledek:</strong><br>${toolData.response.replace(/\n/g, '<br>')}`;
+                  lastToolCall.appendChild(responseDiv);
+                  
+                  if (trace.payload?.debugMode === 1) {
+                      console.log('🌐 TOOL RESPONSE UI UPDATED:', {
+                          tool_name: toolData.tool_name,
+                          response_length: toolData.response?.length || 0
+                      });
+                  }
+              }
+          } catch (e) {
+              console.warn('Failed to parse tool response data:', text);
+              if (trace.payload?.debugMode === 1) {
+                  console.error('🌐 TOOL RESPONSE PARSE ERROR:', e);
+              }
+          }
+          return;
+      }
+
+      if (trace.payload?.debugMode === 1) {
+          console.log('📝 FRONTEND CONTENT PROCESSING:', {
+              text_length: text?.length || 0,
+              text_preview: text?.substring(0, 50) + (text?.length > 50 ? '...' : ''),
+              buffer_length: buffer.length,
+              complete_response_length: completeResponse.length,
+              type: type || 'content'
+          });
       }
 
       // Append to buffer
@@ -1891,17 +2078,40 @@ export const StreamingResponseExtension = {
                 effort: trace.payload.reasoningEffort || 'medium',
                 summary: 'auto'
             };
+            if (trace.payload.debugMode === 1) {
+                console.log('🔎 REASONING PAYLOAD ADDED:', payload.reasoning);
+            }
         }
 
         const tools = [];
         if (trace.payload.enableWebSearch) {
             tools.push({ type: 'web_search_preview' });
+            if (trace.payload.debugMode === 1) {
+                console.log('🌐 WEB SEARCH TOOL ADDED');
+            }
         }
         if (trace.payload.enableFileSearch) {
             tools.push({ type: 'file_search' });
+            if (trace.payload.debugMode === 1) {
+                console.log('📄 FILE SEARCH TOOL ADDED');
+            }
         }
         if (tools.length > 0) {
             payload.tools = tools;
+            if (trace.payload.debugMode === 1) {
+                console.log('🔧 TOOLS PAYLOAD ADDED:', payload.tools);
+            }
+        }
+
+        if (trace.payload.debugMode === 1) {
+            console.log('📦 FINAL PAYLOAD FOR API CALL:', {
+                model: payload.model,
+                has_reasoning: !!payload.reasoning,
+                reasoning_effort: payload.reasoning?.effort,
+                has_tools: !!payload.tools,
+                tools_count: payload.tools?.length || 0,
+                tools_types: payload.tools?.map(t => t.type) || []
+            });
         }
 
         // Call the LLM API

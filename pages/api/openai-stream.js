@@ -93,17 +93,79 @@ export default async function handler(req, res) {
         if (chunk.type === 'response.output_text.delta') {
             streamType = 'content';
             content = chunk.delta;
+            if (debugMode === 1) {
+                console.log('📝 CONTENT TOKEN:', {
+                    length: content?.length || 0,
+                    content: content?.substring(0, 50) + (content?.length > 50 ? '...' : ''),
+                    chunk_type: chunk.type
+                });
+            }
         } else if (chunk.type === 'response.reasoning_summary_text.delta') {
             streamType = 'reasoning';
             content = chunk.delta;
+            if (debugMode === 1) {
+                console.log('🔎 REASONING TOKEN:', {
+                    length: content?.length || 0,
+                    content: content?.substring(0, 50) + (content?.length > 50 ? '...' : ''),
+                    chunk_type: chunk.type
+                });
+            }
+        } else if (chunk.type === 'response.tool_call.delta') {
+            streamType = 'tool_call';
+            content = JSON.stringify({
+                tool_name: chunk.tool_call?.name || 'unknown',
+                arguments: chunk.tool_call?.arguments || chunk.delta || ''
+            });
+            if (debugMode === 1) {
+                console.log('🔧 TOOL CALL:', {
+                    tool_name: chunk.tool_call?.name || 'unknown',
+                    arguments: chunk.tool_call?.arguments || chunk.delta || '',
+                    chunk_type: chunk.type,
+                    full_chunk: JSON.stringify(chunk, null, 2)
+                });
+            }
+        } else if (chunk.type === 'response.tool_response.delta') {
+            streamType = 'tool_response';
+            content = JSON.stringify({
+                tool_name: chunk.tool_call?.name || 'unknown',
+                response: chunk.delta || ''
+            });
+            if (debugMode === 1) {
+                console.log('🌐 TOOL RESPONSE:', {
+                    tool_name: chunk.tool_call?.name || 'unknown',
+                    response_length: (chunk.delta || '').length,
+                    response_preview: (chunk.delta || '').substring(0, 100) + ((chunk.delta || '').length > 100 ? '...' : ''),
+                    chunk_type: chunk.type
+                });
+            }
         } else if (chunk.type === 'response.completed') {
+            if (debugMode === 1) {
+                console.log('✅ STREAM COMPLETED:', {
+                    chunk_type: chunk.type,
+                    timestamp: new Date().toISOString()
+                });
+            }
             res.write('data: [DONE]\n\n');
             res.end();
             return;
         } else if (chunk.type === 'error') {
+            if (debugMode === 1) {
+                console.error('❌ STREAM ERROR:', {
+                    error: chunk.error?.message || 'Unknown error',
+                    chunk_type: chunk.type,
+                    full_error: JSON.stringify(chunk.error, null, 2)
+                });
+            }
             res.write(`data: ${JSON.stringify({ error: chunk.error.message })}\n\n`);
             res.end();
             return;
+        } else {
+            if (debugMode === 1) {
+                console.log('❓ UNKNOWN CHUNK TYPE:', {
+                    chunk_type: chunk.type,
+                    full_chunk: JSON.stringify(chunk, null, 2)
+                });
+            }
         }
 
         if (streamType && content) {
@@ -111,6 +173,13 @@ export default async function handler(req, res) {
                 type: streamType,
                 content: content,
             };
+            if (debugMode === 1) {
+                console.log('📤 SENDING TO FRONTEND:', {
+                    type: streamType,
+                    content_length: content.length,
+                    content_preview: content.substring(0, 50) + (content.length > 50 ? '...' : '')
+                });
+            }
             res.write(`data: ${JSON.stringify(data)}\n\n`);
             res.flush?.();
         }
