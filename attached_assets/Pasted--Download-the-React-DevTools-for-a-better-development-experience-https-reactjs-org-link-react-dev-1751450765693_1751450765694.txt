@@ -1,0 +1,509 @@
+ Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+ Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+ voiceflow webchat v2.91.3
+ Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `HP`. See https://reactjs.org/link/warning-keys for more information.
+    at QH (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2392)
+    at HP (https://cdn.voiceflow.com/widget-next/bundle.mjs:455:2507)
+    at div
+    at div
+    at ZH (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2107)
+    at Zpe (https://cdn.voiceflow.com/widget-next/bundle.mjs:512:7389)
+    at LV (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7510)
+G @ bundle.mjs:55
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "13,8,4",
+  "max_tokens": 32768,
+  "temperature": 0.25,
+  "userData": "\n**Aktuální dotaz:** \"kdo je ředitelem společnosti HypeDigitaly s.r.o. a jaké všechny smlouvy tato společnost zatím uzavřela tento rok ?\"\n\n**Historie konverzace mezi tebou a uživatelem**: \"\"\"assistant: Zdravím, zeptejte se mě na cokoliv.\nuser: kdo je ředitelem společnosti HypeDigitaly s.r.o. a jaké všechny smlouvy tato společnost zatím uzavřela tento rok ?\"\"\"\n",
+  "systemPrompt": "\nJsi pomocný asistent.\n",
+  "projectName": "REASONTEST",
+  "debugMode": 1,
+  "user_id": "3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346",
+  "lang": "cs-CZ",
+  "reasoningBgColour": "#FCE8E9",
+  "useReasoning": true,
+  "reasoningEffort": "medium",
+  "enableWebSearch": true,
+  "enableFileSearch": false
+}
+ 🌍 Language setting: cs-CZ
+ 🎨 Reasoning background colour: #FCE8E9
+ 💡 Reasoning enabled: true
+StreamingResponseExtension2.js:23 ⚙️ Reasoning effort: medium
+StreamingResponseExtension2.js:24 🌐 Web Search enabled: true
+StreamingResponseExtension2.js:25 📄 File Search enabled: false
+StreamingResponseExtension2.js:51 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension2.js:2209 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension2.js:2210 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension2.js:2211 📋 Raw sequence: 13,8,4
+StreamingResponseExtension2.js:2214 📋 Parsed IDs: [13,8,4]
+StreamingResponseExtension2.js:2217 === MODELS IN SEQUENCE ===
+StreamingResponseExtension2.js:2219 📌 Position 0: ID:13 | o4-mini (Reasoning) (openai) | Model: o4-mini
+StreamingResponseExtension2.js:2219 📌 Position 1: ID:8 | Llama 4 Maverick (groq) | Model: meta-llama/llama-4-maverick-17b-128e-instruct
+StreamingResponseExtension2.js:2219 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension2.js:2221 =============================
+StreamingResponseExtension2.js:2247 
+🔄 ATTEMPT 1/3: Using model ID:13
+StreamingResponseExtension2.js:2250 📌 Model: o4-mini (Reasoning) (openai)
+StreamingResponseExtension2.js:2251 📌 Model name: o4-mini
+StreamingResponseExtension2.js:2252 📌 Endpoint: /api/openai-stream
+StreamingResponseExtension2.js:2253 📌 Status: STARTING REQUEST
+StreamingResponseExtension2.js:2271 🚫 REASONING MODEL DETECTED: Skipping temperature parameter for o4-mini
+StreamingResponseExtension2.js:2281 🔎 REASONING PAYLOAD ADDED: Object
+StreamingResponseExtension2.js:2291 🌐 WEB SEARCH TOOL ADDED
+StreamingResponseExtension2.js:2303 🔧 TOOLS PAYLOAD ADDED: Array(1)
+StreamingResponseExtension2.js:2308 📦 FINAL PAYLOAD FOR API CALL: Object
+StreamingResponseExtension2.js:1901 📦 Payload for /api/openai-stream: Object
+StreamingResponseExtension2.js:1910 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openai-stream with TTFT 60000ms
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension2.js:2004 ✅ First chunk received from /api/openai-stream within timeout.
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: Object
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: Object
+StreamingResponseExtension2.js:960 🔧 TOOLS SECTION CREATED AND POSITIONED
+StreamingResponseExtension2.js:1004 🔧 NEW TOOL CALL UI CREATED: Object
+StreamingResponseExtension2.js:2154 TTFT met for /api/openai-stream. Waiting for stream completion...
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: Object
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: Object
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: Object
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: Object
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: Object
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: Object
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: Object
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: Object
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: Object
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: Object
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: Object
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: Object
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_response', content: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}'}
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: {text: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}', type: 'tool_response'}
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: {tool_name: 'web_search_preview', response: 'Nalezeno 0 výsledků', results_count: 0, top_results: Array(0), status: 'completed', …}
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: {tool_name: 'web_search_preview', response_length: 19, results_count: 0}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: '**Assess'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: '**Assess', reasoning_buffer_length: 0, type: 'reasoning'}
+StreamingResponseExtension2.js:901 🔎 REASONING SECTION CREATED AND CLICK HANDLER ADDED
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: 'ing'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 3, text_preview: 'ing', reasoning_buffer_length: 8, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' contract'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 9, text_preview: ' contract', reasoning_buffer_length: 11, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' search'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 7, text_preview: ' search', reasoning_buffer_length: 20, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' methods'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' methods', reasoning_buffer_length: 27, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: "**\n\nI'm"}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 7, text_preview: "**\n\nI'm", reasoning_buffer_length: 35, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' realizing'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 10, text_preview: ' realizing', reasoning_buffer_length: 42, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' that'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' that', reasoning_buffer_length: 52, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' my'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 3, text_preview: ' my', reasoning_buffer_length: 57, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' current'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' current', reasoning_buffer_length: 60, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' searching'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 10, text_preview: ' searching', reasoning_buffer_length: 68, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' approach'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 9, text_preview: ' approach', reasoning_buffer_length: 78, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' isn'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' isn', reasoning_buffer_length: 87, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: '’t'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 2, text_preview: '’t', reasoning_buffer_length: 91, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' effective'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 10, text_preview: ' effective', reasoning_buffer_length: 93, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: '.'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 1, text_preview: '.', reasoning_buffer_length: 103, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' The'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' The', reasoning_buffer_length: 104, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' user'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' user', reasoning_buffer_length: 108, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' probably'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 9, text_preview: ' probably', reasoning_buffer_length: 113, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' wants'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 6, text_preview: ' wants', reasoning_buffer_length: 122, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' information'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 12, text_preview: ' information', reasoning_buffer_length: 128, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' about'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 6, text_preview: ' about', reasoning_buffer_length: 140, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' private'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' private', reasoning_buffer_length: 146, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' contracts'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 10, text_preview: ' contracts', reasoning_buffer_length: 154, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' from'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' from', reasoning_buffer_length: 164, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' this'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' this', reasoning_buffer_length: 169, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' year'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' year', reasoning_buffer_length: 174, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ','}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 1, text_preview: ',', reasoning_buffer_length: 179, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' but'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' but', reasoning_buffer_length: 180, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' private'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' private', reasoning_buffer_length: 184, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' companies'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 10, text_preview: ' companies', reasoning_buffer_length: 192, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' don'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' don', reasoning_buffer_length: 202, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: '’t'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 2, text_preview: '’t', reasoning_buffer_length: 206, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' disclose'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 9, text_preview: ' disclose', reasoning_buffer_length: 208, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' those'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 6, text_preview: ' those', reasoning_buffer_length: 217, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' publicly'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 9, text_preview: ' publicly', reasoning_buffer_length: 223, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: '.'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 1, text_preview: '.', reasoning_buffer_length: 232, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' I'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 2, text_preview: ' I', reasoning_buffer_length: 233, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' could'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 6, text_preview: ' could', reasoning_buffer_length: 235, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' explain'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' explain', reasoning_buffer_length: 241, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' that'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' that', reasoning_buffer_length: 249, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' we'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 3, text_preview: ' we', reasoning_buffer_length: 254, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: " can't"}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 6, text_preview: " can't", reasoning_buffer_length: 257, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' obtain'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 7, text_preview: ' obtain', reasoning_buffer_length: 263, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' a'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 2, text_preview: ' a', reasoning_buffer_length: 270, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' complete'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 9, text_preview: ' complete', reasoning_buffer_length: 272, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' list'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' list', reasoning_buffer_length: 281, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' of'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 3, text_preview: ' of', reasoning_buffer_length: 286, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' all'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' all', reasoning_buffer_length: 289, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' private'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' private', reasoning_buffer_length: 293, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' contracts'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 10, text_preview: ' contracts', reasoning_buffer_length: 301, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' since'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 6, text_preview: ' since', reasoning_buffer_length: 311, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' they'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' they', reasoning_buffer_length: 317, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' aren'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' aren', reasoning_buffer_length: 322, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: '’t'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 2, text_preview: '’t', reasoning_buffer_length: 327, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' legally'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' legally', reasoning_buffer_length: 329, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' required'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 9, text_preview: ' required', reasoning_buffer_length: 337, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' to'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 3, text_preview: ' to', reasoning_buffer_length: 346, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' publish'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' publish', reasoning_buffer_length: 349, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' them'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' them', reasoning_buffer_length: 357, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: '.'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 1, text_preview: '.', reasoning_buffer_length: 362, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' However'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' However', reasoning_buffer_length: 363, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ','}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 1, text_preview: ',', reasoning_buffer_length: 371, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' if'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 3, text_preview: ' if', reasoning_buffer_length: 372, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' the'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' the', reasoning_buffer_length: 375, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' company'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' company', reasoning_buffer_length: 379, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' engaged'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' engaged', reasoning_buffer_length: 387, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' in'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 3, text_preview: ' in', reasoning_buffer_length: 395, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' public'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 7, text_preview: ' public', reasoning_buffer_length: 398, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' procurement'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 12, text_preview: ' procurement', reasoning_buffer_length: 405, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ','}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 1, text_preview: ',', reasoning_buffer_length: 417, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' I'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 2, text_preview: ' I', reasoning_buffer_length: 418, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' can'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' can', reasoning_buffer_length: 420, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' search'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 7, text_preview: ' search', reasoning_buffer_length: 424, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' the'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' the', reasoning_buffer_length: 431, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' registry'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 9, text_preview: ' registry', reasoning_buffer_length: 435, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' for'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' for', reasoning_buffer_length: 444, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' contracts'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 10, text_preview: ' contracts', reasoning_buffer_length: 448, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' involving'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 10, text_preview: ' involving', reasoning_buffer_length: 458, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' them'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' them', reasoning_buffer_length: 468, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: '.'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 1, text_preview: '.', reasoning_buffer_length: 473, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: " I'll"}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: " I'll", reasoning_buffer_length: 474, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' check'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 6, text_preview: ' check', reasoning_buffer_length: 479, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' in'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 3, text_preview: ' in', reasoning_buffer_length: 485, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' the'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' the', reasoning_buffer_length: 488, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' appropriate'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 12, text_preview: ' appropriate', reasoning_buffer_length: 492, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' database'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 9, text_preview: ' database', reasoning_buffer_length: 504, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' for'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 4, text_preview: ' for', reasoning_buffer_length: 513, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' more'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 5, text_preview: ' more', reasoning_buffer_length: 517, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: ' details'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 8, text_preview: ' details', reasoning_buffer_length: 522, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'reasoning', content: '.'}
+StreamingResponseExtension2.js:837 🔎 FRONTEND REASONING PROCESSING: {text_length: 1, text_preview: '.', reasoning_buffer_length: 530, type: 'reasoning'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Vyhledávání na webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Vyhledávání na webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Prohledávání webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Prohledávání webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_response', content: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}'}
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: {text: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}', type: 'tool_response'}
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: {tool_name: 'web_search_preview', response: 'Nalezeno 0 výsledků', results_count: 0, top_results: Array(0), status: 'completed', …}
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: {tool_name: 'web_search_preview', response_length: 19, results_count: 0}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Vyhledávání na webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Vyhledávání na webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Prohledávání webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Prohledávání webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_response', content: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}'}
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: {text: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}', type: 'tool_response'}
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: {tool_name: 'web_search_preview', response: 'Nalezeno 0 výsledků', results_count: 0, top_results: Array(0), status: 'completed', …}
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: {tool_name: 'web_search_preview', response_length: 19, results_count: 0}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Vyhledávání na webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Vyhledávání na webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Prohledávání webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Prohledávání webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_response', content: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}'}
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: {text: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}', type: 'tool_response'}
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: {tool_name: 'web_search_preview', response: 'Nalezeno 0 výsledků', results_count: 0, top_results: Array(0), status: 'completed', …}
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: {tool_name: 'web_search_preview', response_length: 19, results_count: 0}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Vyhledávání na webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Vyhledávání na webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Prohledávání webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Prohledávání webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_response', content: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}'}
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: {text: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}', type: 'tool_response'}
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: {tool_name: 'web_search_preview', response: 'Nalezeno 0 výsledků', results_count: 0, top_results: Array(0), status: 'completed', …}
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: {tool_name: 'web_search_preview', response_length: 19, results_count: 0}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Vyhledávání na webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Vyhledávání na webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Prohledávání webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Prohledávání webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_response', content: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}'}
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: {text: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}', type: 'tool_response'}
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: {tool_name: 'web_search_preview', response: 'Nalezeno 0 výsledků', results_count: 0, top_results: Array(0), status: 'completed', …}
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: {tool_name: 'web_search_preview', response_length: 19, results_count: 0}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Vyhledávání na webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Vyhledávání na webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Prohledávání webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Prohledávání webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_response', content: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}'}
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: {text: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}', type: 'tool_response'}
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: {tool_name: 'web_search_preview', response: 'Nalezeno 0 výsledků', results_count: 0, top_results: Array(0), status: 'completed', …}
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: {tool_name: 'web_search_preview', response_length: 19, results_count: 0}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Vyhledávání na webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Vyhledávání na webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Prohledávání webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Prohledávání webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_response', content: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}'}
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: {text: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}', type: 'tool_response'}
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: {tool_name: 'web_search_preview', response: 'Nalezeno 0 výsledků', results_count: 0, top_results: Array(0), status: 'completed', …}
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: {tool_name: 'web_search_preview', response_length: 19, results_count: 0}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…step":"Vyhledávání na webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Vyhledávání na webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Vyhledávání na webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_call', content: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}'}
+StreamingResponseExtension2.js:927 🔧 FRONTEND TOOL CALL PROCESSING: {text: '{"tool_name":"web_search_preview","arguments":"Sea…,"step":"Prohledávání webu...","action":"search"}', type: 'tool_call'}
+StreamingResponseExtension2.js:936 🔧 PARSED TOOL DATA: {tool_name: 'web_search_preview', arguments: 'Searching...', status: 'searching', step: 'Prohledávání webu...', action: 'search'}
+StreamingResponseExtension2.js:1026 🔧 ACTIVE TOOL CALL UI UPDATED: {tool_name: 'web_search_preview', display_name: '🌐 Vyhledávání na webu', status: 'searching', step: 'Prohledávání webu...'}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'tool_response', content: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}'}
+StreamingResponseExtension2.js:1045 🌐 FRONTEND TOOL RESPONSE PROCESSING: {text: '{"tool_name":"web_search_preview","response":"Nale…atus":"completed","action":"search","domains":[]}', type: 'tool_response'}
+StreamingResponseExtension2.js:1054 🌐 PARSED TOOL RESPONSE DATA: {tool_name: 'web_search_preview', response: 'Nalezeno 0 výsledků', results_count: 0, top_results: Array(0), status: 'completed', …}
+StreamingResponseExtension2.js:1107 🌐 TOOL RESPONSE UI UPDATED: {tool_name: 'web_search_preview', response_length: 19, results_count: 0}
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Statutárním ředitelem'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 21, text_preview: 'Statutárním ředitelem', buffer_length: 0, complete_response_length: 0, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 21 vs 21
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' (jednatelem) společnosti Hype'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 30, text_preview: ' (jednatelem) společnosti Hype', buffer_length: 21, complete_response_length: 21, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 51 vs 51
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Digitaly s.r.o. jsou současně:  \n\n• M'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 37, text_preview: 'Digitaly s.r.o. jsou současně:  \n\n• M', buffer_length: 51, complete_response_length: 51, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 88 vs 88
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'iroslava Čermáková, by'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 22, text_preview: 'iroslava Čermáková, by', buffer_length: 88, complete_response_length: 88, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 110 vs 110
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'tem Teplice – funkce jednatelky'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 31, text_preview: 'tem Teplice – funkce jednatelky', buffer_length: 110, complete_response_length: 110, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 141 vs 141
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' vznikla 21. října '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 19, text_preview: ' vznikla 21. října ', buffer_length: 141, complete_response_length: 141, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 160 vs 160
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '2022. '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 6, text_preview: '2022. ', buffer_length: 160, complete_response_length: 160, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 166 vs 166
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '([rejstrik-firem.kurzy.cz](https://rejstrik-firem.…5655/hypedigitaly-sro/?utm_source=chatgpt.com))  '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 112, text_preview: '([rejstrik-firem.kurzy.cz](https://rejstrik-firem....', buffer_length: 166, complete_response_length: 166, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 278 vs 278
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '\n• Pavel Čermák,'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 16, text_preview: '\n• Pavel Čermák,', buffer_length: 278, complete_response_length: 278, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 294 vs 294
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' okres Teplice – funkce jedn'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 28, text_preview: ' okres Teplice – funkce jedn', buffer_length: 294, complete_response_length: 294, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 322 vs 322
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'atele vznikla 1.'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 16, text_preview: 'atele vznikla 1.', buffer_length: 322, complete_response_length: 322, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 338 vs 338
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' června 2024. '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 14, text_preview: ' června 2024. ', buffer_length: 338, complete_response_length: 338, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 352 vs 352
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '([rejstrik-firem.kurzy.cz](https://rejstrik-firem.…665655/hypedigitaly-sro/?utm_source=chatgpt.com))'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 110, text_preview: '([rejstrik-firem.kurzy.cz](https://rejstrik-firem....', buffer_length: 352, complete_response_length: 352, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 462 vs 462
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '  \n\nVeřejné sml'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 15, text_preview: '  \n\nVeřejné sml', buffer_length: 462, complete_response_length: 462, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 477 vs 477
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ouvy, které HypeDigitaly s.r.o. jako dodavatel uza…edna 2025 do dneška (2. července 2025):  \n\n• 10. '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 112, text_preview: 'ouvy, které HypeDigitaly s.r.o. jako dodavatel uza...', buffer_length: 477, complete_response_length: 477, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 589 vs 589
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ledna 2025 – smlouva s Kraj'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 27, text_preview: 'ledna 2025 – smlouva s Kraj', buffer_length: 589, complete_response_length: 589, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 616 vs 616
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'skou správou a Státním'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 22, text_preview: 'skou správou a Státním', buffer_length: 616, complete_response_length: 616, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 638 vs 638
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' archivem Kraje Vysočina  \n '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 28, text_preview: ' archivem Kraje Vysočina  \n ', buffer_length: 638, complete_response_length: 638, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 666 vs 666
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' – Předmět:'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 11, text_preview: ' – Předmět:', buffer_length: 666, complete_response_length: 666, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 677 vs 677
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' „Tvorba AI komunikačního asistenta pro'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 39, text_preview: ' „Tvorba AI komunikačního asistenta pro', buffer_length: 677, complete_response_length: 677, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 716 vs 716
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' web ‘kr-vysocina.cz'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 20, text_preview: ' web ‘kr-vysocina.cz', buffer_length: 716, complete_response_length: 716, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 736 vs 736
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '’, SLA a provozní balíček“  \n '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 30, text_preview: '’, SLA a provozní balíček“  \n ', buffer_length: 736, complete_response_length: 736, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 766 vs 766
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' – Cena: 210 000 K'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 18, text_preview: ' – Cena: 210 000 K', buffer_length: 766, complete_response_length: 766, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 784 vs 784
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'č včetně DPH '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 13, text_preview: 'č včetně DPH ', buffer_length: 784, complete_response_length: 784, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 797 vs 797
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '([smlouvy.gov.cz](https://smlouvy.gov.cz/vyhledava…ResultList-orderDir=d&utm_source=chatgpt.com))  \n'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 235, text_preview: '([smlouvy.gov.cz](https://smlouvy.gov.cz/vyhledava...', buffer_length: 797, complete_response_length: 797, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1032 vs 1032
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '\n• 22. dubna'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 12, text_preview: '\n• 22. dubna', buffer_length: 1032, complete_response_length: 1032, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1044 vs 1044
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' 2025 – smlou'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 13, text_preview: ' 2025 – smlou', buffer_length: 1044, complete_response_length: 1044, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1057 vs 1057
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'va s Kr'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 7, text_preview: 'va s Kr', buffer_length: 1057, complete_response_length: 1057, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1064 vs 1064
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'álovéhradeckým krajem  '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 23, text_preview: 'álovéhradeckým krajem  ', buffer_length: 1064, complete_response_length: 1064, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1087 vs 1087
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '\n  – Předmět'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 12, text_preview: '\n  – Předmět', buffer_length: 1087, complete_response_length: 1087, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1099 vs 1099
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ': „Tvorba AI komunikační'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 24, text_preview: ': „Tvorba AI komunikační', buffer_length: 1099, complete_response_length: 1099, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1123 vs 1123
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ho asistenta pro web ‘khk.cz'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 28, text_preview: 'ho asistenta pro web ‘khk.cz', buffer_length: 1123, complete_response_length: 1123, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1151 vs 1151
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '’ Královéhradeckého kra'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 23, text_preview: '’ Královéhradeckého kra', buffer_length: 1151, complete_response_length: 1151, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1174 vs 1174
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'je“  \n  – Cena'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 14, text_preview: 'je“  \n  – Cena', buffer_length: 1174, complete_response_length: 1174, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1188 vs 1188
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ': 210 000 '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 10, text_preview: ': 210 000 ', buffer_length: 1188, complete_response_length: 1188, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1198 vs 1198
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Kč včetně DPH '}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 14, text_preview: 'Kč včetně DPH ', buffer_length: 1198, complete_response_length: 1198, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1212 vs 1212
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '([smlouvy.gov.cz](https://smlouvy.gov.cz/vyhledava…rchResultList-orderDir=d&utm_source=chatgpt.com))'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 232, text_preview: '([smlouvy.gov.cz](https://smlouvy.gov.cz/vyhledava...', buffer_length: 1212, complete_response_length: 1212, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1444 vs 1444
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '  \n\nPoznám'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 10, text_preview: '  \n\nPoznám', buffer_length: 1444, complete_response_length: 1444, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1454 vs 1454
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ka: Pokud byste měl(a) na'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 25, text_preview: 'ka: Pokud byste měl(a) na', buffer_length: 1454, complete_response_length: 1454, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1479 vs 1479
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' mysli soukromé smlouvy'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 23, text_preview: ' mysli soukromé smlouvy', buffer_length: 1479, complete_response_length: 1479, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1502 vs 1502
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' mezi HypeDigitaly s.r.o'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 24, text_preview: ' mezi HypeDigitaly s.r.o', buffer_length: 1502, complete_response_length: 1502, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1526 vs 1526
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '. a jejími klienty mimo veřejný'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 31, text_preview: '. a jejími klienty mimo veřejný', buffer_length: 1526, complete_response_length: 1526, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1557 vs 1557
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' registr smluv, ty nejsou veřejně'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 33, text_preview: ' registr smluv, ty nejsou veřejně', buffer_length: 1557, complete_response_length: 1557, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1590 vs 1590
+StreamingResponseExtension2.js:1984 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' dostupné.'}
+StreamingResponseExtension2.js:1124 📝 FRONTEND CONTENT PROCESSING: {text_length: 10, text_preview: ' dostupné.', buffer_length: 1590, complete_response_length: 1590, type: 'content'}
+StreamingResponseExtension2.js:1385 🔍 PROCESSING: processBuffer vs buffer lengths: 1600 vs 1600
+StreamingResponseExtension2.js:1967 [DONE] received for /api/openai-stream.
+StreamingResponseExtension2.js:2108 📤 Updating Voiceflow variable with response length: 1600
+StreamingResponseExtension2.js:2130 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension2.js:2133 Voiceflow update response: {success: true, status: 200, message: '{"_id":"6863121cbd95386ce6d5c0eb","id":"general-pl…ný registr smluv, ty nejsou veřejně dostupné."}}}'}
+StreamingResponseExtension2.js:2328 
+✅ SUCCESS: MODEL ID:13
+StreamingResponseExtension2.js:2329 📌 Model: o4-mini (Reasoning) (openai)
+StreamingResponseExtension2.js:2330 📌 Model name: o4-mini
+StreamingResponseExtension2.js:2331 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension2.js:2332 📌 Attempt: 1/3
+StreamingResponseExtension2.js:2335 =============================
