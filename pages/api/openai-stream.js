@@ -201,14 +201,17 @@ export default async function handler(req, res) {
             query: webSearchCall.query,
             status: 'completed',
             action: webSearchCall.action || 'search',
-            domains: webSearchCall.domains || []
+            domains: webSearchCall.domains || [],
+            raw_results: results // Add raw results for debugging
           });
           if (debugMode === 1) {
             console.log('🌐 WEB SEARCH COMPLETED:', {
               chunk_type: chunk.type,
               web_search_call: webSearchCall,
               results_count: resultsCount,
-              top_results: topResults
+              top_results: topResults,
+              raw_results: results,
+              query: webSearchCall.query
             });
           }
         } else if (chunk.type === 'response.file_search_call.in_progress') {

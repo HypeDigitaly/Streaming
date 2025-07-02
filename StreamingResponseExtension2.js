@@ -30,7 +30,7 @@ export const StreamingResponseExtension = {
 
     // Get custom reasoning background color or use default
     const reasoningBgColour = trace.payload?.reasoningBgColour || "#EBF5FF";
-    
+
     // Function to adjust color brightness
     function adjustColorBrightness(color, percent) {
       const num = parseInt(color.replace("#", ""), 16);
@@ -42,7 +42,7 @@ export const StreamingResponseExtension = {
         (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
         (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
     }
-    
+
     // Generate dynamic colors based on the base color
     const lighterBgColour = adjustColorBrightness(reasoningBgColour, 0.1);
     const darkerBgColour = adjustColorBrightness(reasoningBgColour, -0.1);
@@ -161,7 +161,7 @@ export const StreamingResponseExtension = {
           strong {
             font-weight: 600;
           }
-          
+
           /* Optimalizované velikosti a mezery pro nadpisy - přístupnost a čitelnost */
           .response-content h1 { 
             font-size: 1.4em; 
@@ -193,7 +193,7 @@ export const StreamingResponseExtension = {
             font-weight: 600; 
             line-height: 1.4;
           }
-          
+
           /* První nadpisy v kontejneru nemají horní mezeru */
           .response-content > h1:first-child,
           .response-content > h2:first-child,
@@ -202,12 +202,12 @@ export const StreamingResponseExtension = {
           .response-content > h5:first-child {
             margin-top: 0;
           }
-          
+
           /* Dodatečná pravidla pro konzistentní spacing a přístupnost */
           .response-content > * + * {
             margin-top: 0.6em;
           }
-          
+
           /* Přepsat margin pro specifické kombinace */
           .response-content h1 + *,
           .response-content h2 + *,
@@ -216,7 +216,7 @@ export const StreamingResponseExtension = {
           .response-content h5 + * {
             margin-top: 0.3em !important;
           }
-          
+
           /* Mezery mezi seznamy a paragrafy */
           .response-content ul + p,
           .response-content ol + p,
@@ -224,7 +224,7 @@ export const StreamingResponseExtension = {
           .response-content p + ol {
             margin-top: 0.5em;
           }
-          
+
           /* Optimalizované mezery mezi konsekutivními nadpisy pro lepší vizuální hierarchii */
           .response-content h1 + h2 {
             margin-top: 0.3em; /* Mírná mezera mezi hlavním nadpisem a podnadpisem */
@@ -251,21 +251,21 @@ export const StreamingResponseExtension = {
             margin-top: 0.1em;
             margin-bottom: 0.8em;
           }
-          
+
           /* Remove any paragraphs between headers */
           .response-content h1 + p:empty,
           .response-content h2 + p:empty,
           .response-content h3 + p:empty {
             display: none;
           }
-          
+
           /* Remove breaks around headers */
           .response-content br + h1,
           .response-content br + h2,
           .response-content br + h3 {
             margin-top: 0;
           }
-          
+
           .response-content h1 + br,
           .response-content h2 + br,
           .response-content h3 + br {
@@ -583,7 +583,7 @@ export const StreamingResponseExtension = {
           .streaming-tools-section {
             margin: 0 0 1em 0;
           }
-          
+
           .tool-call-section {
             background-color: #F8FAFC;
             border: 1px solid #E2E8F0;
@@ -592,7 +592,7 @@ export const StreamingResponseExtension = {
             overflow: hidden;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
           }
-          
+
           .tool-call-header {
             background-color: #EDF2F7;
             padding: 8px 12px;
@@ -603,23 +603,23 @@ export const StreamingResponseExtension = {
             font-size: 13px;
             font-weight: 600;
           }
-          
+
           .tool-icon {
             font-size: 14px;
             flex-shrink: 0;
           }
-          
+
           .tool-name {
             flex-grow: 1;
             color: #374151;
           }
-          
+
           .tool-status {
             color: #6B7280;
             font-size: 12px;
             font-weight: 500;
           }
-          
+
           .tool-arguments {
             padding: 8px 12px;
             font-size: 12px;
@@ -629,7 +629,7 @@ export const StreamingResponseExtension = {
             font-family: monospace;
             white-space: pre-wrap;
           }
-          
+
           .tool-response {
             padding: 8px 12px;
             font-size: 13px;
@@ -637,12 +637,12 @@ export const StreamingResponseExtension = {
             background-color: #FFFFFF;
             line-height: 1.5;
           }
-          
+
           .tool-response strong {
             color: #1F2937;
             font-weight: 600;
           }
-          
+
           .tool-query {
             padding: 6px 12px;
             font-size: 13px;
@@ -651,7 +651,7 @@ export const StreamingResponseExtension = {
             border-bottom: 1px solid #F1F5F9;
             font-weight: 500;
           }
-          
+
           .tool-step {
             padding: 6px 12px;
             font-size: 12px;
@@ -662,11 +662,11 @@ export const StreamingResponseExtension = {
             align-items: center;
             gap: 6px;
           }
-          
+
           .tool-step-indicator {
             font-size: 14px;
           }
-          
+
           .search-summary {
             margin-bottom: 12px;
             padding: 8px;
@@ -674,11 +674,11 @@ export const StreamingResponseExtension = {
             border-radius: 4px;
             border-left: 3px solid #3B82F6;
           }
-          
+
           .search-results {
             margin-top: 8px;
           }
-          
+
           .search-result-item {
             margin: 8px 0;
             padding: 8px;
@@ -686,27 +686,27 @@ export const StreamingResponseExtension = {
             border-radius: 4px;
             border-left: 2px solid #E5E7EB;
           }
-          
+
           .result-title {
             display: flex;
             align-items: flex-start;
             gap: 6px;
             margin-bottom: 4px;
           }
-          
+
           .result-number {
             color: #6B7280;
             font-weight: 600;
             min-width: 20px;
           }
-          
+
           .result-url {
             font-size: 11px;
             color: #059669;
             margin-bottom: 4px;
             word-break: break-all;
           }
-          
+
           .result-snippet {
             font-size: 12px;
             color: #6B7280;
@@ -826,7 +826,7 @@ export const StreamingResponseExtension = {
         }
         isFirstChunk = false;
       }
-      
+
       // Show response section when content arrives (regardless of whether it's first chunk)
       if (type === 'content' && !responseSection.classList.contains('visible')) {
         responseSection.classList.add("visible");
@@ -841,9 +841,9 @@ export const StreamingResponseExtension = {
                   type: type
               });
           }
-          
+
           let reasoningSection = container.querySelector('.streaming-reasoning-section');
-          
+
           // Create reasoning section immediately if it doesn't exist or is hidden
           if (!reasoningSection || reasoningSection.style.display === 'none') {
                // Show reasoning section immediately when first reasoning token arrives
@@ -852,24 +852,24 @@ export const StreamingResponseExtension = {
                    <div class="ai-thinking-header expanded" style="background-color: ${darkerBgColour} !important; cursor: pointer; border-radius: 6px 6px 0 0; border-bottom: 1px solid #E2E8F0;" data-reasoning-toggle="true">
                        <div class="ai-thinking-icon" style="color: #333333;">🔎</div>
                        <div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div>
-                       <div class="ai-thinking-arrow" style="color: #333333; transform: rotate(180deg);">▼</div>
+                       <div class="ai-thinking-arrow" style="color: #333333; transform: rotate(180deg);"></div>
                    </div>
                    <div class="ai-thinking-content expanded" style="display: block; max-height: none; padding: 12px; border-top: 1px solid #F1F5F9; background-color: #FFFFFF; border-radius: 0 0 6px 6px;"></div>
                </div>`;
-               
+
                // Add click handler for this specific reasoning section
                const reasoningHeader = reasoningSection.querySelector('.ai-thinking-header');
                if (reasoningHeader) {
                    reasoningHeader.addEventListener('click', function(e) {
                        e.preventDefault();
                        e.stopPropagation();
-                       
+
                        const content = reasoningSection.querySelector('.ai-thinking-content');
                        const arrow = reasoningSection.querySelector('.ai-thinking-arrow');
-                       
+
                        if (content && arrow) {
                            const isExpanded = content.classList.contains('expanded');
-                           
+
                            if (isExpanded) {
                                // Collapse
                                content.classList.remove('expanded');
@@ -896,7 +896,7 @@ export const StreamingResponseExtension = {
                        }
                    });
                }
-               
+
                if (trace.payload?.debugMode === 1) {
                    console.log('🔎 REASONING SECTION CREATED AND CLICK HANDLER ADDED');
                }
@@ -904,7 +904,7 @@ export const StreamingResponseExtension = {
 
           const reasoningContentEl = reasoningSection.querySelector('.ai-thinking-content');
           reasoningBuffer += text;
-          
+
           // Enhanced markdown processing for reasoning
           const formattedReasoning = reasoningBuffer
               .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -912,10 +912,10 @@ export const StreamingResponseExtension = {
               .replace(/`(.*?)`/g, "<code>$1</code>")
               .replace(/\n\n/g, "</p><p>")
               .replace(/\n/g, "<br>");
-              
+
           if(reasoningContentEl) {
               reasoningContentEl.innerHTML = `<p>${formattedReasoning}</p>`;
-              
+
               // Scroll reasoning content to show latest thinking
               reasoningContentEl.scrollTop = reasoningContentEl.scrollHeight;
           }
@@ -929,17 +929,17 @@ export const StreamingResponseExtension = {
                   type: type
               });
           }
-          
+
           try {
               const toolData = JSON.parse(text);
               if (trace.payload?.debugMode === 1) {
                   console.log('🔧 PARSED TOOL DATA:', toolData);
               }
-              
+
               const toolName = toolData.tool_name === 'web_search_preview' ? '🌐 Vyhledávání na webu' : 
                              toolData.tool_name === 'file_search' ? '📄 Vyhledávání v souborech' : 
                              `🔧 ${toolData.tool_name}`;
-              
+
               // Get or create tools section
               let toolsSection = container.querySelector('.streaming-tools-section');
               if (!toolsSection) {
@@ -950,56 +950,64 @@ export const StreamingResponseExtension = {
                   const reasoningSection = container.querySelector('.streaming-reasoning-section');
                   if (reasoningSection && reasoningSection.style.display !== 'none') {
                       // Insert after reasoning section if it exists and is visible
-                      container.insertBefore(toolsSection, reasoningSection.nextSibling);
+                      reasoningSection.parentNode.insertBefore(toolsSection, reasoningSection.nextSibling);
                   } else {
-                      // Insert before response section if no reasoning section
-                      const responseSection = container.querySelector('.response-section');
-                      container.insertBefore(toolsSection, responseSection);
+                      // Insert at the beginning if no reasoning section
+                      container.insertBefore(toolsSection, container.firstChild);
                   }
+
                   if (trace.payload?.debugMode === 1) {
                       console.log('🔧 TOOLS SECTION CREATED AND POSITIONED');
                   }
               }
-              
-              // Always update or create the latest tool call section
-              let currentToolSection = toolsSection.querySelector(`[data-tool="${toolData.tool_name}"][data-status="active"]`);
-              
+
+              // Check if there's already any tool section for this tool (active or completed)
+              let currentToolSection = toolsSection.querySelector(`[data-tool-name="${toolData.tool_name}"][data-status="active"]`);
+
               if (!currentToolSection) {
-                  // Mark any existing tool sections as inactive
-                  const existingTools = toolsSection.querySelectorAll(`[data-tool="${toolData.tool_name}"]`);
-                  existingTools.forEach(tool => tool.setAttribute('data-status', 'inactive'));
-                  
-                  // Enhanced tool call display for web search
-                  let toolDetailsHtml = '';
-                  if (toolData.tool_name === 'web_search_preview') {
-                      const queryText = toolData.query || toolData.arguments || 'Searching...';
-                      const actionText = toolData.action === 'search' ? 'Vyhledávání' : 
-                                        toolData.action === 'open_page' ? 'Otevírání stránky' :
-                                        toolData.action === 'find_in_page' ? 'Hledání na stránce' : 'Zpracování';
-                      
-                      toolDetailsHtml = `
-                          <div class="tool-query">
-                              <strong>Dotaz:</strong> ${queryText}
-                          </div>
-                          <div class="tool-step">
-                              <span class="tool-step-indicator">⏳</span> ${actionText}...
-                          </div>`;
-                  } else {
-                      toolDetailsHtml = `<div class="tool-arguments">${toolData.arguments}</div>`;
+                  // Check if we have a completed tool section that we can reuse
+                  const completedToolSection = toolsSection.querySelector(`[data-tool-name="${toolData.tool_name}"][data-status="completed"]`);
+                  if (completedToolSection) {
+                      // Reactivate the completed section
+                      completedToolSection.setAttribute('data-status', 'active');
+                      currentToolSection = completedToolSection;
                   }
-                  
-                  const toolCallHtml = `<div class="tool-call-section" data-tool="${toolData.tool_name}" data-status="active">
-                      <div class="tool-call-header">
-                          <span class="tool-icon">${toolName.split(' ')[0]}</span>
-                          <span class="tool-name">${toolName.substring(2)}</span>
-                          <span class="tool-status">Spouštím...</span>
+              }
+
+              if (!currentToolSection) {
+                  // Create new tool section
+                  const toolSection = document.createElement('div');
+                  toolSection.className = 'tool-section';
+                  toolSection.setAttribute('data-tool-name', toolData.tool_name);
+                  toolSection.setAttribute('data-status', 'active');
+                  toolSection.style.cssText = `
+                      background: #F8F9FA;
+                      border: 1px solid #E9ECEF;
+                      border-radius: 8px;
+                      padding: 12px;
+                      margin: 8px 0;
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                  `;
+
+                  const query = toolData.query || toolData.arguments || 'Spouštím...';
+                  const step = toolData.step || 'Zpracovávám...';
+
+                  toolSection.innerHTML = `
+                      <div class="tool-header" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                          <span class="tool-icon" style="font-size: 16px;">${toolName.split(' ')[0]}</span>
+                          <span class="tool-name" style="font-weight: 500; color: #374151;">${toolName}</span>
+                          <span class="tool-status" style="color: #6B7280; font-size: 14px;">Spouštím...</span>
                       </div>
-                      ${toolDetailsHtml}
-                  </div>`;
-                  
-                  toolsSection.insertAdjacentHTML('beforeend', toolCallHtml);
-                  currentToolSection = toolsSection.querySelector(`[data-tool="${toolData.tool_name}"][data-status="active"]`);
-                  
+                      <div class="tool-step" style="color: #6B7280; font-size: 14px; margin-bottom: 4px;">
+                          <span class="tool-step-indicator">⏳</span> ${step}
+                      </div>
+                      <div class="tool-query" style="color: #374151; font-size: 14px; background: #FFFFFF; padding: 8px; border-radius: 4px; border: 1px solid #E5E7EB;">
+                          <strong>Dotaz:</strong> ${query}
+                      </div>
+                  `;
+
+                  toolsSection.appendChild(toolSection);
+
                   if (trace.payload?.debugMode === 1) {
                       console.log('🔧 NEW TOOL CALL UI CREATED:', {
                           tool_name: toolData.tool_name,
@@ -1015,13 +1023,19 @@ export const StreamingResponseExtension = {
                       statusEl.textContent = toolData.status === 'searching' ? 'Prohledávám...' : 'Spouštím...';
                       statusEl.style.color = '#6B7280';
                   }
-                  
+
                   // Update step text if exists
                   const stepEl = currentToolSection.querySelector('.tool-step');
                   if (stepEl && toolData.step) {
                       stepEl.innerHTML = `<span class="tool-step-indicator">⏳</span> ${toolData.step}`;
                   }
-                  
+
+                  // Update query if different
+                  const queryEl = currentToolSection.querySelector('.tool-query');
+                  if (queryEl && toolData.query && toolData.query !== 'Searching...') {
+                      queryEl.innerHTML = `<strong>Dotaz:</strong> ${toolData.query}`;
+                  }
+
                   if (trace.payload?.debugMode === 1) {
                       console.log('🔧 ACTIVE TOOL CALL UI UPDATED:', {
                           tool_name: toolData.tool_name,
@@ -1031,10 +1045,10 @@ export const StreamingResponseExtension = {
                       });
                   }
               }
+
           } catch (e) {
-              console.warn('Failed to parse tool call data:', text);
               if (trace.payload?.debugMode === 1) {
-                  console.error('🔧 TOOL CALL PARSE ERROR:', e);
+                  console.error('🔧 ERROR PARSING TOOL DATA:', e);
               }
           }
           return;
@@ -1047,74 +1061,107 @@ export const StreamingResponseExtension = {
                   type: type
               });
           }
-          
+
           try {
-              const toolData = JSON.parse(text);
+              const toolResponse = JSON.parse(text);
               if (trace.payload?.debugMode === 1) {
-                  console.log('🌐 PARSED TOOL RESPONSE DATA:', toolData);
+                  console.log('🌐 PARSED TOOL RESPONSE DATA:', toolResponse);
               }
-              
-              // Find the active tool call section for this tool
-              const lastToolCall = container.querySelector(`[data-tool="${toolData.tool_name}"][data-status="active"]`);
-              
-              if (lastToolCall) {
-                  const statusEl = lastToolCall.querySelector('.tool-status');
-                  if (statusEl) {
-                      statusEl.textContent = 'Dokončeno ✅';
-                      statusEl.style.color = '#10B981';
-                  }
-                  
-                  // Update step indicator if exists
-                  const stepIndicator = lastToolCall.querySelector('.tool-step-indicator');
-                  if (stepIndicator) {
-                      stepIndicator.textContent = '✅';
-                  }
-                  
-                  // Enhanced response display for web search
-                  const responseDiv = document.createElement('div');
-                  responseDiv.className = 'tool-response';
-                  
-                  if (toolData.tool_name === 'web_search_preview' && toolData.top_results) {
-                      let resultsHtml = `
-                          <div class="search-summary">
-                              <strong>📊 Výsledky vyhledávání:</strong> ${toolData.response}
-                          </div>`;
-                      
-                      if (toolData.top_results && toolData.top_results.length > 0) {
-                          resultsHtml += '<div class="search-results"><strong>🔝 Nejlepší výsledky:</strong>';
-                          toolData.top_results.forEach((result, index) => {
-                              resultsHtml += `
-                                  <div class="search-result-item">
-                                      <div class="result-title">
-                                          <span class="result-number">${index + 1}.</span>
-                                          <strong>${result.title}</strong>
-                                      </div>
-                                      <div class="result-url">🔗 ${result.url}</div>
-                                      <div class="result-snippet">${result.snippet}</div>
-                                  </div>`;
-                          });
-                          resultsHtml += '</div>';
+
+              const toolsSection = container.querySelector('.streaming-tools-section');
+              if (toolsSection) {
+                  // Find the active tool section for this tool
+                  const currentToolSection = toolsSection.querySelector(`[data-tool-name="${toolResponse.tool_name}"][data-status="active"]`);
+
+                  if (currentToolSection) {
+                      // Update status to completed
+                      currentToolSection.setAttribute('data-status', 'completed');
+
+                      // Update status text
+                      const statusEl = currentToolSection.querySelector('.tool-status');
+                      if (statusEl) {
+                          statusEl.textContent = 'Dokončeno ✅';
+                          statusEl.style.color = '#10B981';
                       }
-                      
-                      responseDiv.innerHTML = resultsHtml;
-                  } else {
-                      responseDiv.innerHTML = `<strong>Výsledek:</strong><br>${toolData.response.replace(/\n/g, '<br>')}`;
-                  }
-                  
-                  lastToolCall.appendChild(responseDiv);
-                  
-                  if (trace.payload?.debugMode === 1) {
-                      console.log('🌐 TOOL RESPONSE UI UPDATED:', {
-                          tool_name: toolData.tool_name,
-                          response_length: toolData.response?.length || 0,
-                          results_count: toolData.results_count || 0
-                      });
+
+                      // Update step indicator
+                      const stepIndicator = currentToolSection.querySelector('.tool-step-indicator');
+                      if (stepIndicator) {
+                          stepIndicator.textContent = '✅';
+                      }
+
+                      // Add or update results section
+                      let resultsSection = currentToolSection.querySelector('.tool-results');
+                      if (!resultsSection) {
+                          resultsSection = document.createElement('div');
+                          resultsSection.className = 'tool-results';
+                          resultsSection.style.cssText = `
+                              margin-top: 12px;
+                              padding: 8px;
+                              background: #FFFFFF;
+                              border-radius: 4px;
+                              border: 1px solid #E5E7EB;
+                          `;
+                          currentToolSection.appendChild(resultsSection);
+                      }
+
+                      if (toolResponse.tool_name === 'web_search_preview') {
+                          const resultsCount = toolResponse.results_count || 0;
+                          const topResults = toolResponse.top_results || [];
+
+                          let resultsHtml = `<div style="color: #374151; font-weight: 500; margin-bottom: 8px;">
+                              📊 Výsledky vyhledávání: ${toolResponse.response || `Nalezeno ${resultsCount} výsledků`}
+                          </div>`;
+
+                          if (resultsCount > 0 && topResults.length > 0) {
+                              resultsHtml += '<div style="margin-top: 8px;">';
+                              topResults.forEach((result, index) => {
+                                  resultsHtml += `
+                                      <div style="margin-bottom: 8px; padding: 8px; background: #F9FAFB; border-radius: 4px; border-left: 3px solid #3B82F6;">
+                                          <div style="font-weight: 500; color: #1F2937; margin-bottom: 4px;">
+                                              ${index + 1}. ${result.title || 'Bez názvu'}
+                                          </div>
+                                          ${result.url ? `<div style="font-size: 12px; color: #6B7280; margin-bottom: 4px; word-break: break-all;">${result.url}</div>` : ''}
+                                          <div style="color: #4B5563; font-size: 14px;">
+                                              ${result.snippet || 'Bez popisu'}
+                                          </div>
+                                      </div>
+                                  `;
+                              });
+                              resultsHtml += '</div>';
+                          } else if (resultsCount === 0) {
+                              resultsHtml += `
+                                  <div style="margin-top: 8px; padding: 8px; background: #FEF3C7; border-radius: 4px; border-left: 3px solid #F59E0B;">
+                                      <div style="color: #92400E; font-size: 14px;">
+                                          ⚠️ Nenalezeny žádné výsledky pro tento vyhledávací dotaz.
+                                      </div>
+                                  </div>
+                              `;
+                          }
+
+                          resultsSection.innerHTML = resultsHtml;
+
+                          if (trace.payload?.debugMode === 1) {
+                              console.log('🌐 TOOL RESPONSE UI UPDATED:', {
+                                  tool_name: toolResponse.tool_name,
+                                  response_length: toolResponse.response?.length || 0,
+                                  results_count: resultsCount
+                              });
+                          }
+                      } else {
+                          // Generic tool response
+                          resultsSection.innerHTML = `
+                              <div style="color: #374151; font-weight: 500;">
+                                  📊 Výsledek: ${toolResponse.response || 'Dokončeno'}
+                              </div>
+                          `;
+                      }
                   }
               }
+
           } catch (e) {
-              console.warn('Failed to parse tool response data:', text);
               if (trace.payload?.debugMode === 1) {
-                  console.error('🌐 TOOL RESPONSE PARSE ERROR:', e);
+                  console.error('🌐 ERROR PARSING TOOL RESPONSE:', e);
               }
           }
           return;
@@ -1132,7 +1179,7 @@ export const StreamingResponseExtension = {
 
       // Append to buffer
       buffer += text;
-      
+
       // Keep track of complete response for final processing
       completeResponse += text;
 
@@ -1216,7 +1263,7 @@ export const StreamingResponseExtension = {
         if (headerMatches) {
           console.log("🔍 MARKDOWN DEBUG: Found header lines:", headerMatches);
         }
-        
+
         // Test each regex pattern individually
         console.log("🔍 REGEX TEST: Testing individual patterns:");
         const testPatterns = [
@@ -1224,21 +1271,21 @@ export const StreamingResponseExtension = {
           { name: "Pattern 2", regex: /^## (.+)$/gm },
           { name: "Pattern 3", regex: /##\s+([^\n\r]+)/g }
         ];
-        
+
         testPatterns.forEach(({name, regex}) => {
           const matches = buffer.match(regex);
           console.log(`🔍 REGEX TEST: ${name}:`, matches);
         });
       }
-      
+
       // Special handling for streaming headers - process only complete lines
       let processBuffer = buffer;
-      
+
       // If buffer doesn't end with newline and contains incomplete header, delay processing
       if (buffer.includes('##') && !buffer.endsWith('\n') && !buffer.endsWith('\r\n')) {
         const lines = buffer.split(/\r?\n/);
         const lastLine = lines[lines.length - 1];
-        
+
         // If last line looks like incomplete header, process only complete lines
         if (lastLine.includes('##') && lastLine.length < 100) {
           if (trace.payload?.debugMode === 1) {
@@ -1561,8 +1608,7 @@ export const StreamingResponseExtension = {
         id: 7,
         name: "gemini-2.5-flash-preview-04-17",
         type: "gemini",
-        endpoint: "/api/gemini-stream",
-        displayName: "Gemini 2.5 Flash",
+        endpoint: "/api/gemini-stream",        displayName: "Gemini 2.5 Flash",
       },
 
       // Groq models
@@ -1908,7 +1954,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
             });
             console.log(
-              `�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
+              ` Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
             );
           }
 
@@ -2426,11 +2472,10 @@ export const StreamingResponseExtension = {
 
     // Start the LLM orchestration
     await orchestrateLLMCalls(trace);
-    
+
     // Final processing after streaming completes
     setTimeout(() => finalizeContent(), 100);
 
     window.voiceflow.chat.interact({ type: "continue" });
   },
 };
-
