@@ -178,7 +178,7 @@ export const StreamingResponseExtension = {
             gap: 6px;
             transition: background-color 0.2s ease, border-radius 0.3s ease;
             user-select: none;
-            margin: -6px -8px 16px -8px;
+            margin: -8px -8px 16px -8px;
           }
           .reasoning-header:hover {
             background-color: ${darkerBgColour};
