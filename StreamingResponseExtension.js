@@ -144,6 +144,7 @@ export const StreamingResponseExtension = {
             display: flex;
             flex-direction: column;
             gap: 0;
+            line-height: 1;
           }
           .reasoning-section {
             background-color: #F9FAFB;
@@ -159,7 +160,7 @@ export const StreamingResponseExtension = {
             cursor: pointer;
           }
           .reasoning-section.has-answer {
-            margin-bottom: 8px;
+            margin-bottom: 0;
           }
           .reasoning-section.collapsed .reasoning-content,
           .reasoning-section.collapsed .reasoning-intro {
@@ -218,6 +219,7 @@ export const StreamingResponseExtension = {
             line-height: 1.4;
             color: #6B7280;
             margin-bottom: 12px;
+            margin-top: 0;
           }
           .loading-dots {
             display: inline-flex;
@@ -252,6 +254,8 @@ export const StreamingResponseExtension = {
             font-size: 12px;
             line-height: 1.4;
             color: #4B5563;
+            margin: 0;
+            padding: 0;
           }
           .reasoning-step {
             display: flex;
@@ -307,6 +311,8 @@ export const StreamingResponseExtension = {
             opacity: 1;
             height: auto;
             overflow: visible;
+            padding-top: 0;
+            margin-top: 0;
           }
           .vfrc-message--extension-PerplexityReasoner {
             width: 100% !important;
@@ -317,6 +323,14 @@ export const StreamingResponseExtension = {
             line-height: 1.4;
             margin: 0;
             padding: 0;
+          }
+          
+          /* Ensure no extra spacing in Perplexity sections */
+          .perplexity-reasoner-container * {
+            margin-top: 0;
+          }
+          .perplexity-reasoner-container *:first-child {
+            margin-top: 0 !important;
           }
           
           /* Citation link styles */
@@ -354,6 +368,20 @@ export const StreamingResponseExtension = {
             margin: 0;
             padding: 0;
             display: inline;
+          }
+          
+          /* Additional answer content citation styles */
+          .answer-content .citation-link {
+            color: #2563EB;
+            text-decoration: none;
+            font-weight: normal;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            display: inline;
+          }
+          .answer-content .citation-link:hover {
+            text-decoration: underline;
           }
           
           .response-section {
@@ -2148,6 +2176,9 @@ export const StreamingResponseExtension = {
           const contentDiv = step.querySelector('.step-content');
           if (contentDiv) {
             contentDiv.innerHTML = processCitations(content, citations, true);
+            if (payload.debugMode === 1) {
+              console.log('🔄 Updated step with citations:', citations?.length || 0);
+            }
           }
           
           if (complete && !completedSteps.includes(step)) {
@@ -2209,12 +2240,15 @@ export const StreamingResponseExtension = {
           thinkBuffer = incompletePart;
         }
 
-        // Update answer content with markdown support (from PerplexityExtension)
+        // Update answer content with markdown support and citations
         function updateAnswerContent(text) {
           const trimmedText = text.trim();
           
+          // Process citations first
+          const textWithCitations = processCitations(trimmedText, citations, false);
+          
           // Convert markdown to HTML (simplified version)
-          const formattedHtml = trimmedText
+          const formattedHtml = textWithCitations
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
             .replace(/`(.*?)`/g, '<code>$1</code>')
@@ -2222,6 +2256,9 @@ export const StreamingResponseExtension = {
           
           if (answerContent) {
             answerContent.innerHTML = formattedHtml;
+            if (payload.debugMode === 1) {
+              console.log('📝 Updated answer content with citations:', citations?.length || 0);
+            }
           }
         }
 
@@ -2233,13 +2270,7 @@ export const StreamingResponseExtension = {
             break;
           }
 
-          if (isFirstChunk && isReasoningModel) {
-            const reasoningIntro = reasoningSection?.querySelector('.reasoning-intro');
-            if (reasoningIntro) {
-              reasoningIntro.style.display = 'none';
-            }
-            isFirstChunk = false;
-          }
+
 
           const chunk = decoder.decode(value);
           let jsonBuffer = streamBuffer + chunk;
@@ -2258,11 +2289,40 @@ export const StreamingResponseExtension = {
               
               if (data.citations) {
                 citations = data.citations;
+                if (payload.debugMode === 1) {
+                  console.log('📎 Citations updated:', citations);
+                }
+                
+                // Re-process all existing reasoning steps with new citations
+                if (activeReasoningGroup) {
+                  const steps = activeReasoningGroup.querySelectorAll('.reasoning-step');
+                  steps.forEach((step) => {
+                    const contentDiv = step.querySelector('.step-content');
+                    if (contentDiv) {
+                      // Get original content without any HTML
+                      const currentText = contentDiv.textContent.replace(/\s+/g, ' ').trim();
+                      // Process citations directly with isReasoning flag
+                      contentDiv.innerHTML = processCitations(currentText, citations, true);
+                    }
+                  });
+                }
               }
 
               if (data.choices?.[0]?.delta?.content !== null && data.choices?.[0]?.delta?.content !== undefined) {
                 const content = data.choices[0].delta.content;
                 
+                // Hide thinking animation on first content
+                if (isFirstChunk) {
+                  const reasoningIntro = reasoningSection?.querySelector('.reasoning-intro');
+                  if (reasoningIntro) {
+                    reasoningIntro.style.display = 'none';
+                    if (payload.debugMode === 1) {
+                      console.log('🔄 Hiding reasoning intro on first content');
+                    }
+                  }
+                  isFirstChunk = false;
+                }
+
                 // Handle think block content for reasoning models
                 if (isReasoningModel) {
                   if (content.includes('<think>')) {
@@ -2310,7 +2370,7 @@ export const StreamingResponseExtension = {
                         if (answerContent) {
                           scrollIntoViewSmooth(answerContent);
                         }
-                      }, 1000);
+                      }, 500);
                     }
                   }
                 } else {
