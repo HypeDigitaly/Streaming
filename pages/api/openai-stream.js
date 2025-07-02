@@ -75,19 +75,7 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
-    // Use the new Responses API if reasoning or tools are requested
-    if (reasoning || tools) {
-      const responsesPayload = {
-        model: model || 'o4-mini',
-        max_output_tokens: max_tokens || 4096,
-        instructions: systemPrompt,
-        input: [{ role: 'user', content: userData }],
-        reasoning: reasoning,
-        tools: tools,
-        stream: true, // Always use streaming for real-time updates
-      };
-
-      const tools = [];
+    const toolsArray = [];
         if (enableWebSearch) {
             const webSearchTool = { type: 'web_search_preview' };
 
@@ -107,25 +95,30 @@ export default async function handler(req, res) {
                 webSearchTool.search_context_size = searchContextSize; // 'low', 'medium', 'high'
             }
 
-            tools.push(webSearchTool);
+            toolsArray.push(webSearchTool);
             if (debugMode === 1) {
                 console.log('🌐 WEB SEARCH TOOL ADDED:', webSearchTool);
             }
         }
 
         if (enableFileSearch) {
-            tools.push({ type: 'file_search' });
+            toolsArray.push({ type: 'file_search' });
             if (debugMode === 1) {
                 console.log('📄 FILE SEARCH TOOL ADDED');
             }
         }
 
-      // Only add temperature for non-reasoning models
-      if (!isReasoningModel(model || 'o4-mini')) {
-        responsesPayload.temperature = temperature || 0;
-      } else if (debugMode === 1) {
-        console.log(`🚫 REASONING MODEL DETECTED: Skipping temperature parameter for ${model || 'o4-mini'}`);
-      }
+    // Use the new Responses API if reasoning or tools are requested
+      if (reasoning || tools || toolsArray.length > 0) {
+        const responsesPayload = {
+          model: model || 'o4-mini',
+          max_output_tokens: max_tokens || 4096,
+          instructions: systemPrompt,
+          input: [{ role: 'user', content: userData }],
+          reasoning: reasoning,
+          tools: toolsArray.length > 0 ? toolsArray : tools,
+          stream: true, // Always use streaming for real-time updates
+        };
 
       const response = await openai.responses.create(responsesPayload);
 
