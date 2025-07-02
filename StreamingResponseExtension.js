@@ -132,7 +132,6 @@ export const StreamingResponseExtension = {
             display: flex;
             flex-direction: column;
             gap: 0;
-            line-height: 1;
           }
           
           /* Perplexity reasoning section styles */
@@ -150,14 +149,14 @@ export const StreamingResponseExtension = {
           .reasoning-section {
             background-color: #F9FAFB;
             border-radius: 12px;
-            padding: 12px;
+            padding: 16px;
             margin: 0;
             width: 100%;
             box-sizing: border-box;
             transition: all 0.3s ease;
           }
           .reasoning-section.collapsed {
-            padding: 8px 12px;
+            padding: 10px 16px;
             cursor: pointer;
           }
           .reasoning-section.has-answer {
@@ -171,7 +170,7 @@ export const StreamingResponseExtension = {
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
           }
           .reasoning-section.collapsed .reasoning-header {
             margin-bottom: 0;
@@ -219,7 +218,7 @@ export const StreamingResponseExtension = {
             font-size: 12px;
             line-height: 1.4;
             color: #6B7280;
-            margin-bottom: 6px;
+            margin-bottom: 12px;
             margin-top: 0;
           }
           .loading-dots {
@@ -261,8 +260,8 @@ export const StreamingResponseExtension = {
           .reasoning-step {
             display: flex;
             align-items: flex-start;
-            gap: 6px;
-            margin-bottom: 4px;
+            gap: 8px;
+            margin-bottom: 8px;
           }
           .step-checkbox {
             width: 14px;
@@ -328,48 +327,9 @@ export const StreamingResponseExtension = {
           
           /* Ensure no extra spacing in Perplexity sections */
           .perplexity-reasoner-container * {
-            margin-top: 0 !important;
+            margin-top: 0;
           }
           .perplexity-reasoner-container *:first-child {
-            margin-top: 0 !important;
-          }
-          .perplexity-reasoner-container *:last-child {
-            margin-bottom: 0 !important;
-          }
-          
-          /* Minimize spacing for reasoning sections */
-          .reasoning-section * {
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-          }
-          .reasoning-section .reasoning-header {
-            margin-bottom: 8px !important;
-          }
-          .reasoning-section .reasoning-step {
-            margin-bottom: 4px !important;
-          }
-          .reasoning-section .reasoning-step:last-child {
-            margin-bottom: 0 !important;
-          }
-          
-          /* Ultra-compact spacing for Perplexity */
-          .reasoning-section, .answer-section {
-            line-height: 1.2 !important;
-          }
-          .reasoning-section .reasoning-content {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-          }
-          .reasoning-section.has-answer {
-            padding-bottom: 8px !important;
-          }
-          .answer-section.visible {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-          }
-          
-          /* Remove any potential whitespace between sections */
-          .reasoning-section + .answer-section {
             margin-top: 0 !important;
           }
           
@@ -1178,31 +1138,27 @@ export const StreamingResponseExtension = {
       })
     }
 
-            // Function to create and append a new reasoning step
-        function createReasoningStep(content, group, stepIndex, citations) {
-          if (!content || content.length < 5 || content.trim().endsWith('?'))
-            return null
+    // Function to create and append a new reasoning step
+    function createReasoningStep(content, group, stepIndex, citations) {
+      if (!content || content.length < 5 || content.trim().endsWith('?'))
+        return null
 
-          const step = document.createElement('div')
-          step.className = 'reasoning-step'
+      const step = document.createElement('div')
+      step.className = 'reasoning-step'
 
-          const checkbox = createCheckbox()
-          checkbox.style.display = 'none' // Hide checkbox by default
-          const contentDiv = document.createElement('div')
-          contentDiv.className = 'step-content'
+      const checkbox = createCheckbox()
+      checkbox.style.display = 'none' // Hide checkbox by default
+      const contentDiv = document.createElement('div')
+      contentDiv.className = 'step-content'
 
-          // Process citations directly with isReasoning flag set to true
-          contentDiv.innerHTML = processCitations(content, citations || [], true)
-          
-          if (payload.debugMode === 1) {
-            console.log('🔗 Creating reasoning step with citations:', citations?.length || 0, content.substring(0, 50));
-          }
+      // Process citations directly with isReasoning flag set to true
+      contentDiv.innerHTML = processCitations(content, citations, true)
 
-          step.appendChild(checkbox)
-          step.appendChild(contentDiv)
+      step.appendChild(checkbox)
+      step.appendChild(contentDiv)
 
-          return step
-        }
+      return step
+    }
 
     // Add event delegation for thinking section toggles
     responseContent.addEventListener('click', function(event) {
@@ -2111,13 +2067,14 @@ export const StreamingResponseExtension = {
                   </svg>
                 </div>
               </div>
-                                  <div class="reasoning-intro">
-            <div class="loading-dots">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-          </div>
+              <div class="reasoning-intro">
+                <span>Thinking</span>
+                <div class="loading-dots">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
               <div class="reasoning-content" id="reasoning-content"></div>
             </div>
             <div class="answer-section">
@@ -2197,15 +2154,6 @@ export const StreamingResponseExtension = {
               if (isComplete) {
                 checkbox.classList.add('is-checked');
                 completedSteps.push(step);
-              }
-            }
-            
-            // Make sure citations are properly processed for new steps
-            const contentDiv = step.querySelector('.step-content');
-            if (contentDiv && citations && citations.length > 0) {
-              contentDiv.innerHTML = processCitations(content, citations, true);
-              if (payload.debugMode === 1) {
-                console.log('🔗 Applied citations to new step:', citations.length);
               }
             }
             
@@ -2355,9 +2303,6 @@ export const StreamingResponseExtension = {
                       const currentText = contentDiv.textContent.replace(/\s+/g, ' ').trim();
                       // Process citations directly with isReasoning flag
                       contentDiv.innerHTML = processCitations(currentText, citations, true);
-                      if (payload.debugMode === 1) {
-                        console.log('🔗 Re-processed reasoning step with citations:', currentText.substring(0, 30));
-                      }
                     }
                   });
                 }
@@ -2366,7 +2311,7 @@ export const StreamingResponseExtension = {
               if (data.choices?.[0]?.delta?.content !== null && data.choices?.[0]?.delta?.content !== undefined) {
                 const content = data.choices[0].delta.content;
                 
-                // Hide thinking animation on first content for all models
+                // Hide thinking animation on first content
                 if (isFirstChunk) {
                   const reasoningIntro = reasoningSection?.querySelector('.reasoning-intro');
                   if (reasoningIntro) {
@@ -2375,13 +2320,6 @@ export const StreamingResponseExtension = {
                       console.log('🔄 Hiding reasoning intro on first content');
                     }
                   }
-                  
-                  // Also hide main thinking header if present
-                  const thinkingHeader = container.querySelector(".thinking-header");
-                  if (thinkingHeader && !thinkingHeader.classList.contains("hidden")) {
-                    thinkingHeader.classList.add("hidden");
-                  }
-                  
                   isFirstChunk = false;
                 }
 
