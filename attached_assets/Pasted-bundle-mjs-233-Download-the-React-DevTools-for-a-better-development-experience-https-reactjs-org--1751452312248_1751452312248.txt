@@ -1,0 +1,312 @@
+bundle.mjs:233 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+fingerprint.js:221 Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+bundle.mjs:513 voiceflow webchat v2.91.3
+bundle.mjs:55 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `HP`. See https://reactjs.org/link/warning-keys for more information.
+    at QH (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2392)
+    at HP (https://cdn.voiceflow.com/widget-next/bundle.mjs:455:2507)
+    at div
+    at div
+    at ZH (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2107)
+    at Zpe (https://cdn.voiceflow.com/widget-next/bundle.mjs:512:7389)
+    at LV (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7510)
+G @ bundle.mjs:55
+StreamingResponseExtension2.js:9 🚀 StreamingResponseExtension: Starting render {trace: {…}}
+StreamingResponseExtension2.js:10 📦 Full trace payload: {
+  "modelSequence": "13,8,4",
+  "max_tokens": "32768",
+  "temperature": "0.25",
+  "userData": "\n**Aktuální dotaz:** \"kdo všechno pracuje ve firmě hypedigitaly s.r.o. a jaké zakázky tato firma tento rok uazvřel a?\"\n\n**Historie konverzace mezi tebou a uživatelem**: \"\"\"assistant: Zdravím, zeptejte se mě na cokoliv.\nuser: kdo všechno pracuje ve firmě hypedigitaly s.r.o. a jaké zakázky tato firma tento rok uazvřel a?\"\"\"\n\nMusí odpodívdat pouze v českém jazyce jako rodilý mluvčí narozený v české republice. I tvůj reasoning/thinking proces musí být celý v češtině.\n",
+  "systemPrompt": "\nJsi pomocný asistent.\n",
+  "projectName": "REASONTEST",
+  "debugMode": 1,
+  "user_id": "3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346",
+  "lang": "cs-CZ",
+  "reasoningBgColour": "#FCE8E9",
+  "useReasoning": true,
+  "reasoningEffort": "medium",
+  "enableWebSearch": true,
+  "enableFileSearch": false,
+  "userLocation": {
+    "country": "CZ",
+    "city": "Prague",
+    "region": "Central Bohemian Region, Czechia",
+    "timezone": "Europe/Prague"
+  },
+  "searchContextSize": "medium"
+}
+StreamingResponseExtension2.js:14 🌍 Language setting: cs-CZ
+StreamingResponseExtension2.js:18 🎨 Reasoning background colour: #FCE8E9
+StreamingResponseExtension2.js:22 💡 Reasoning enabled: true
+StreamingResponseExtension2.js:23 ⚙️ Reasoning effort: medium
+StreamingResponseExtension2.js:24 🌐 Web Search enabled: true
+StreamingResponseExtension2.js:25 📄 File Search enabled: false
+StreamingResponseExtension2.js:51 🎨 Generated color scheme for thinking sections: {background: '#FCE8E9', backgroundLighter: '#ffffff', backgroundDarker: '#e3cfd0', textColor: '#333333 (dark gray for contrast)'}
+StreamingResponseExtension2.js:2329 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension2.js:2330 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension2.js:2331 📋 Raw sequence: 13,8,4
+StreamingResponseExtension2.js:2334 📋 Parsed IDs: [13,8,4]
+StreamingResponseExtension2.js:2337 === MODELS IN SEQUENCE ===
+StreamingResponseExtension2.js:2339 📌 Position 0: ID:13 | o4-mini (Reasoning) (openai) | Model: o4-mini
+StreamingResponseExtension2.js:2339 📌 Position 1: ID:8 | Llama 4 Maverick (groq) | Model: meta-llama/llama-4-maverick-17b-128e-instruct
+StreamingResponseExtension2.js:2339 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension2.js:2341 =============================
+StreamingResponseExtension2.js:2367 
+🔄 ATTEMPT 1/3: Using model ID:13
+StreamingResponseExtension2.js:2370 📌 Model: o4-mini (Reasoning) (openai)
+StreamingResponseExtension2.js:2371 📌 Model name: o4-mini
+StreamingResponseExtension2.js:2372 📌 Endpoint: /api/openai-stream
+StreamingResponseExtension2.js:2373 📌 Status: STARTING REQUEST
+StreamingResponseExtension2.js:2391 🚫 REASONING MODEL DETECTED: Skipping temperature parameter for o4-mini
+StreamingResponseExtension2.js:2401 🔎 REASONING PAYLOAD ADDED: {effort: 'medium', summary: 'auto'}
+StreamingResponseExtension2.js:2411 🌐 WEB SEARCH TOOL ADDED
+StreamingResponseExtension2.js:2423 🔧 TOOLS PAYLOAD ADDED: [{…}]
+StreamingResponseExtension2.js:2428 📦 FINAL PAYLOAD FOR API CALL: {model: 'o4-mini', has_reasoning: true, reasoning_effort: 'medium', has_tools: true, tools_count: 1, …}
+StreamingResponseExtension2.js:2021 📦 Payload for /api/openai-stream: {model: 'o4-mini', max_tokens: '32768', temperature: undefined, debugMode: 1, projectName: 'REASONTEST', …}
+StreamingResponseExtension2.js:2030  Calling proxy URL: https://utils.hypedigitaly.ai/api/openai-stream with TTFT 60000ms
+StreamingResponseExtension2.js:2104 📥 Frontend chunk from /api/openai-stream: {error: "Cannot access 'r' before initialization"}error: "Cannot access 'r' before initialization"[[Prototype]]: Object
+StreamingResponseExtension2.js:2157 Failed to parse SSE data line for /api/openai-stream: Error: Stream error from /api/openai-stream: Cannot access 'r' before initialization
+    at processStream (StreamingResponseExtension2.js:2108:27) Data: {"error":"Cannot access 'r' before initialization"}
+processStream @ StreamingResponseExtension2.js:2157
+await in processStream
+callLLMAPI @ StreamingResponseExtension2.js:2267
+orchestrateLLMCalls @ StreamingResponseExtension2.js:2439
+render @ StreamingResponseExtension2.js:2574
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:454
+Zf @ bundle.mjs:191
+J1e @ bundle.mjs:204
+Q1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+X1e @ bundle.mjs:204
+Mve @ bundle.mjs:204
+Ld @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+at @ bundle.mjs:81
+Ue @ bundle.mjs:81
+Br @ bundle.mjs:81
+StreamingResponseExtension2.js:2168 Stream ended naturally (done=true) for /api/openai-stream.
+StreamingResponseExtension2.js:2198 Error during stream processing for /api/openai-stream: Error: Stream ended for /api/openai-stream without [DONE] signal or any valid content.
+    at processStream (StreamingResponseExtension2.js:2181:23)
+processStream @ StreamingResponseExtension2.js:2198
+await in processStream
+callLLMAPI @ StreamingResponseExtension2.js:2267
+orchestrateLLMCalls @ StreamingResponseExtension2.js:2439
+render @ StreamingResponseExtension2.js:2574
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:454
+Zf @ bundle.mjs:191
+J1e @ bundle.mjs:204
+Q1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+X1e @ bundle.mjs:204
+Mve @ bundle.mjs:204
+Ld @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+at @ bundle.mjs:81
+Ue @ bundle.mjs:81
+Br @ bundle.mjs:81
+StreamingResponseExtension2.js:2294 callLLMAPI failed for /api/openai-stream before first chunk. Reason: Stream ended for /api/openai-stream without [DONE] signal or any valid content.
+callLLMAPI @ StreamingResponseExtension2.js:2294
+await in callLLMAPI
+orchestrateLLMCalls @ StreamingResponseExtension2.js:2439
+render @ StreamingResponseExtension2.js:2574
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:454
+Zf @ bundle.mjs:191
+J1e @ bundle.mjs:204
+Q1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+X1e @ bundle.mjs:204
+Mve @ bundle.mjs:204
+Ld @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+at @ bundle.mjs:81
+Ue @ bundle.mjs:81
+Br @ bundle.mjs:81
+StreamingResponseExtension2.js:2462 
+❌ FAILED: MODEL ID:13
+StreamingResponseExtension2.js:2463 📌 Model: o4-mini (Reasoning) (openai)
+StreamingResponseExtension2.js:2464 📌 Model name: o4-mini
+StreamingResponseExtension2.js:2465 📌 Status: REQUEST FAILED OR TIMED OUT
+StreamingResponseExtension2.js:2466 📌 Attempt: 1/3
+StreamingResponseExtension2.js:2474 🧼 Clearing response content before next attempt.
+StreamingResponseExtension2.js:2499 📌 Next attempt: ID:8 | Llama 4 Maverick (groq) | Model: meta-llama/llama-4-maverick-17b-128e-instruct
+StreamingResponseExtension2.js:2507 -----------------------------
+StreamingResponseExtension2.js:2367 
+🔄 ATTEMPT 2/3: Using model ID:8
+StreamingResponseExtension2.js:2370 📌 Model: Llama 4 Maverick (groq)
+StreamingResponseExtension2.js:2371 📌 Model name: meta-llama/llama-4-maverick-17b-128e-instruct
+StreamingResponseExtension2.js:2372 📌 Endpoint: /api/groq-stream
+StreamingResponseExtension2.js:2373 📌 Status: STARTING REQUEST
+StreamingResponseExtension2.js:2404 🚫 REASONING SKIPPED: Model does not support reasoning: meta-llama/llama-4-maverick-17b-128e-instruct
+StreamingResponseExtension2.js:2411 🌐 WEB SEARCH TOOL ADDED
+StreamingResponseExtension2.js:2423 🔧 TOOLS PAYLOAD ADDED: [{…}]
+StreamingResponseExtension2.js:2428 📦 FINAL PAYLOAD FOR API CALL: {model: 'meta-llama/llama-4-maverick-17b-128e-instruct', has_reasoning: false, reasoning_effort: undefined, has_tools: true, tools_count: 1, …}
+StreamingResponseExtension2.js:2021 📦 Payload for /api/groq-stream: {model: 'meta-llama/llama-4-maverick-17b-128e-instruct', max_tokens: '32768', temperature: '0.25', debugMode: 1, projectName: 'REASONTEST', …}
+StreamingResponseExtension2.js:2030  Calling proxy URL: https://utils.hypedigitaly.ai/api/groq-stream with TTFT 10000ms
+StreamingResponseExtension2.js:2104 📥 Frontend chunk from /api/groq-stream: {error: 'API key not found for project: REASONTEST'}
+StreamingResponseExtension2.js:2157 Failed to parse SSE data line for /api/groq-stream: Error: Stream error from /api/groq-stream: API key not found for project: REASONTEST
+    at processStream (StreamingResponseExtension2.js:2108:27) Data: {"error":"API key not found for project: REASONTEST"}
+processStream @ StreamingResponseExtension2.js:2157
+await in processStream
+callLLMAPI @ StreamingResponseExtension2.js:2267
+orchestrateLLMCalls @ StreamingResponseExtension2.js:2439
+await in orchestrateLLMCalls
+render @ StreamingResponseExtension2.js:2574
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:454
+Zf @ bundle.mjs:191
+J1e @ bundle.mjs:204
+Q1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+X1e @ bundle.mjs:204
+Mve @ bundle.mjs:204
+Ld @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+at @ bundle.mjs:81
+Ue @ bundle.mjs:81
+Br @ bundle.mjs:81
+StreamingResponseExtension2.js:2168 Stream ended naturally (done=true) for /api/groq-stream.
+StreamingResponseExtension2.js:2198 Error during stream processing for /api/groq-stream: Error: Stream ended for /api/groq-stream without [DONE] signal or any valid content.
+    at processStream (StreamingResponseExtension2.js:2181:23)
+processStream @ StreamingResponseExtension2.js:2198
+await in processStream
+callLLMAPI @ StreamingResponseExtension2.js:2267
+orchestrateLLMCalls @ StreamingResponseExtension2.js:2439
+await in orchestrateLLMCalls
+render @ StreamingResponseExtension2.js:2574
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:454
+Zf @ bundle.mjs:191
+J1e @ bundle.mjs:204
+Q1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+X1e @ bundle.mjs:204
+Mve @ bundle.mjs:204
+Ld @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+at @ bundle.mjs:81
+Ue @ bundle.mjs:81
+Br @ bundle.mjs:81
+StreamingResponseExtension2.js:2294 callLLMAPI failed for /api/groq-stream before first chunk. Reason: Stream ended for /api/groq-stream without [DONE] signal or any valid content.
+callLLMAPI @ StreamingResponseExtension2.js:2294
+await in callLLMAPI
+orchestrateLLMCalls @ StreamingResponseExtension2.js:2439
+await in orchestrateLLMCalls
+render @ StreamingResponseExtension2.js:2574
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:454
+Zf @ bundle.mjs:191
+J1e @ bundle.mjs:204
+Q1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+X1e @ bundle.mjs:204
+Mve @ bundle.mjs:204
+Ld @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+at @ bundle.mjs:81
+Ue @ bundle.mjs:81
+Br @ bundle.mjs:81
+StreamingResponseExtension2.js:2462 
+❌ FAILED: MODEL ID:8
+StreamingResponseExtension2.js:2463 📌 Model: Llama 4 Maverick (groq)
+StreamingResponseExtension2.js:2464 📌 Model name: meta-llama/llama-4-maverick-17b-128e-instruct
+StreamingResponseExtension2.js:2465 📌 Status: REQUEST FAILED OR TIMED OUT
+StreamingResponseExtension2.js:2466 📌 Attempt: 2/3
+StreamingResponseExtension2.js:2474 🧼 Clearing response content before next attempt.
+StreamingResponseExtension2.js:2499 📌 Next attempt: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension2.js:2507 -----------------------------
+StreamingResponseExtension2.js:2367 
+🔄 ATTEMPT 3/3: Using model ID:4
+StreamingResponseExtension2.js:2370 📌 Model: GPT-4.1 (openai)
+StreamingResponseExtension2.js:2371 📌 Model name: gpt-4.1-2025-04-14
+StreamingResponseExtension2.js:2372 📌 Endpoint: /api/openai-stream
+StreamingResponseExtension2.js:2373 📌 Status: STARTING REQUEST
+StreamingResponseExtension2.js:2404 🚫 REASONING SKIPPED: Model does not support reasoning: gpt-4.1-2025-04-14
+StreamingResponseExtension2.js:2411 🌐 WEB SEARCH TOOL ADDED
+StreamingResponseExtension2.js:2423 🔧 TOOLS PAYLOAD ADDED: [{…}]
+StreamingResponseExtension2.js:2428 📦 FINAL PAYLOAD FOR API CALL: {model: 'gpt-4.1-2025-04-14', has_reasoning: false, reasoning_effort: undefined, has_tools: true, tools_count: 1, …}
+StreamingResponseExtension2.js:2021 📦 Payload for /api/openai-stream: {model: 'gpt-4.1-2025-04-14', max_tokens: '32768', temperature: '0.25', debugMode: 1, projectName: 'REASONTEST', …}
+StreamingResponseExtension2.js:2030  Calling proxy URL: https://utils.hypedigitaly.ai/api/openai-stream with TTFT 10000ms
+StreamingResponseExtension2.js:2104 📥 Frontend chunk from /api/openai-stream: {error: "Cannot access 'r' before initialization"}
+StreamingResponseExtension2.js:2157 Failed to parse SSE data line for /api/openai-stream: Error: Stream error from /api/openai-stream: Cannot access 'r' before initialization
+    at processStream (StreamingResponseExtension2.js:2108:27) Data: {"error":"Cannot access 'r' before initialization"}
+processStream @ StreamingResponseExtension2.js:2157
+await in processStream
+callLLMAPI @ StreamingResponseExtension2.js:2267
+orchestrateLLMCalls @ StreamingResponseExtension2.js:2439
+await in orchestrateLLMCalls
+render @ StreamingResponseExtension2.js:2574
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:454
+Zf @ bundle.mjs:191
+J1e @ bundle.mjs:204
+Q1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+X1e @ bundle.mjs:204
+Mve @ bundle.mjs:204
+Ld @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+at @ bundle.mjs:81
+Ue @ bundle.mjs:81
+Br @ bundle.mjs:81
+StreamingResponseExtension2.js:2168 Stream ended naturally (done=true) for /api/openai-stream.
+StreamingResponseExtension2.js:2198 Error during stream processing for /api/openai-stream: Error: Stream ended for /api/openai-stream without [DONE] signal or any valid content.
+    at processStream (StreamingResponseExtension2.js:2181:23)
+processStream @ StreamingResponseExtension2.js:2198
+await in processStream
+callLLMAPI @ StreamingResponseExtension2.js:2267
+orchestrateLLMCalls @ StreamingResponseExtension2.js:2439
+await in orchestrateLLMCalls
+render @ StreamingResponseExtension2.js:2574
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:454
+Zf @ bundle.mjs:191
+J1e @ bundle.mjs:204
+Q1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+X1e @ bundle.mjs:204
+Mve @ bundle.mjs:204
+Ld @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+at @ bundle.mjs:81
+Ue @ bundle.mjs:81
+Br @ bundle.mjs:81
+StreamingResponseExtension2.js:2294 callLLMAPI failed for /api/openai-stream before first chunk. Reason: Stream ended for /api/openai-stream without [DONE] signal or any valid content.
+callLLMAPI @ StreamingResponseExtension2.js:2294
+await in callLLMAPI
+orchestrateLLMCalls @ StreamingResponseExtension2.js:2439
+await in orchestrateLLMCalls
+render @ StreamingResponseExtension2.js:2574
+(anonymous) @ bundle.mjs:234
+(anonymous) @ bundle.mjs:454
+Zf @ bundle.mjs:191
+J1e @ bundle.mjs:204
+Q1e @ bundle.mjs:204
+Z1e @ bundle.mjs:204
+X1e @ bundle.mjs:204
+Mve @ bundle.mjs:204
+Ld @ bundle.mjs:204
+(anonymous) @ bundle.mjs:204
+at @ bundle.mjs:81
+Ue @ bundle.mjs:81
+Br @ bundle.mjs:81
+StreamingResponseExtension2.js:2462 
+❌ FAILED: MODEL ID:4
+StreamingResponseExtension2.js:2463 📌 Model: GPT-4.1 (openai)
+StreamingResponseExtension2.js:2464 📌 Model name: gpt-4.1-2025-04-14
+StreamingResponseExtension2.js:2465 📌 Status: REQUEST FAILED OR TIMED OUT
+StreamingResponseExtension2.js:2466 📌 Attempt: 3/3
+StreamingResponseExtension2.js:2474 🧼 Clearing response content before next attempt.
+StreamingResponseExtension2.js:2504 📌 No more models to try in sequence
+StreamingResponseExtension2.js:2507 -----------------------------
+StreamingResponseExtension2.js:2517 
+❌ ALL ATTEMPTED MODELS FAILED
+StreamingResponseExtension2.js:2518 📌 Attempted models:
+StreamingResponseExtension2.js:2527    1. ID:13 | o4-mini (Reasoning) (openai) | Model: o4-mini (Failed/Timed Out)
+StreamingResponseExtension2.js:2527    2. ID:8 | Llama 4 Maverick (groq) | Model: meta-llama/llama-4-maverick-17b-128e-instruct (Failed/Timed Out)
+StreamingResponseExtension2.js:2527    3. ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14 (Failed/Timed Out)
+StreamingResponseExtension2.js:2529 📌 Result: No successful responses
+StreamingResponseExtension2.js:2530 =============================
