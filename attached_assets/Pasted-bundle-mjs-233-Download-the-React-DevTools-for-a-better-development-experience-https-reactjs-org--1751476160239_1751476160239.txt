@@ -1,0 +1,75 @@
+bundle.mjs:233 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+fingerprint.js:221 Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+bundle.mjs:513 voiceflow webchat v2.91.3
+bundle.mjs:55 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `HP`. See https://reactjs.org/link/warning-keys for more information.
+    at QH (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2392)
+    at HP (https://cdn.voiceflow.com/widget-next/bundle.mjs:455:2507)
+    at div
+    at div
+    at ZH (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2107)
+    at Zpe (https://cdn.voiceflow.com/widget-next/bundle.mjs:512:7389)
+    at LV (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7510)
+G @ bundle.mjs:55
+StreamingResponseExtension2.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension2.js:10 📦 Full trace payload: {
+  "modelSequence": "19",
+  "max_tokens": "32768",
+  "temperature": "0.25",
+  "userData": "\n**Aktuální dotaz:** \"Vyhledej v kontextu Středočeského kraje detailní informace ohledně následujícího tématu: 'kdo je hejtmanem '\"\n\n**Historie konverzace mezi tebou a uživatelem**: \"\"\"assistant: Zdravím, zeptejte se mě na cokoliv.\nuser: kdo je hejtmanem \"\"\"\n\nMusí odpodívdat pouze v českém jazyce jako rodilý mluvčí narozený v české republice. I tvůj reasoning/thinking proces musí být celý v češtině.\n",
+  "systemPrompt": "\nJsi pomocný asistent. Vyhledáváš komplexní, faktické, detailní a aktuální informace v kontextu primárně Středočeského kraje.\n\nTvým primárním zdrojem pro webové vyhledávání je web: www.stredoceskykraj.cz\n",
+  "projectName": "SCK",
+  "debugMode": 1,
+  "user_id": "3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346",
+  "lang": "cs-CZ",
+  "reasoningBgColour": "#FCE8E9",
+  "web_search_context_size": "high",
+  "search_domain_filter": [
+    "stredoceskykraj.cz"
+  ],
+  "reasoning_effort": "high"
+}
+StreamingResponseExtension2.js:14 🌍 Language setting: cs-CZ
+StreamingResponseExtension2.js:18 🎨 Reasoning background colour: #FCE8E9
+StreamingResponseExtension2.js:22 💡 Reasoning enabled: false
+StreamingResponseExtension2.js:23 ⚙️ Reasoning effort: medium (default)
+StreamingResponseExtension2.js:24 🌐 Web Search enabled: false
+StreamingResponseExtension2.js:25 📄 File Search enabled: false
+StreamingResponseExtension2.js:51 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension2.js:2590 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension2.js:2591 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension2.js:2592 📋 Raw sequence: 19
+StreamingResponseExtension2.js:2595 📋 Parsed IDs: [19]
+StreamingResponseExtension2.js:2598 === MODELS IN SEQUENCE ===
+StreamingResponseExtension2.js:2600 📌 Position 0: ID:19 | Sonar Reasoning Pro (perplexity) | Model: sonar-reasoning-pro
+StreamingResponseExtension2.js:2602 =============================
+StreamingResponseExtension2.js:2628 
+🔄 ATTEMPT 1/1: Using model ID:19
+StreamingResponseExtension2.js:2631 📌 Model: Sonar Reasoning Pro (perplexity)
+StreamingResponseExtension2.js:2632 📌 Model name: sonar-reasoning-pro
+StreamingResponseExtension2.js:2633 📌 Endpoint: /api/perplexity-stream
+StreamingResponseExtension2.js:2634 📌 Status: STARTING REQUEST
+StreamingResponseExtension2.js:2668 🔮 PERPLEXITY PARAMETERS ADDED: Object
+StreamingResponseExtension2.js:2719 📦 FINAL PAYLOAD FOR API CALL: Object
+StreamingResponseExtension2.js:2282 📦 Payload for /api/perplexity-stream: Object
+StreamingResponseExtension2.js:2291  Calling proxy URL: https://utils.hypedigitaly.ai/api/perplexity-stream with TTFT 10000ms
+StreamingResponseExtension2.js:2257 ⏰ TTFT Timeout (10000ms) reached for /api/perplexity-stream. Aborting fetch.
+StreamingResponseExtension2.js:2453 Fetch aborted for /api/perplexity-stream. Reason: TTFT Timeout
+StreamingResponseExtension2.js:2551 callLLMAPI failed for /api/perplexity-stream due to TTFT timeout.
+callLLMAPI @ StreamingResponseExtension2.js:2551
+StreamingResponseExtension2.js:2753 
+❌ FAILED: MODEL ID:19
+StreamingResponseExtension2.js:2754 📌 Model: Sonar Reasoning Pro (perplexity)
+StreamingResponseExtension2.js:2755 📌 Model name: sonar-reasoning-pro
+StreamingResponseExtension2.js:2756 📌 Status: REQUEST FAILED OR TIMED OUT
+StreamingResponseExtension2.js:2757 📌 Attempt: 1/1
+StreamingResponseExtension2.js:2765 🧼 Clearing response content before next attempt.
+StreamingResponseExtension2.js:2795 📌 No more models to try in sequence
+StreamingResponseExtension2.js:2798 -----------------------------
+StreamingResponseExtension2.js:2808 
+❌ ALL ATTEMPTED MODELS FAILED
+StreamingResponseExtension2.js:2809 📌 Attempted models:
+StreamingResponseExtension2.js:2818    1. ID:19 | Sonar Reasoning Pro (perplexity) | Model: sonar-reasoning-pro (Failed/Timed Out)
+StreamingResponseExtension2.js:2820 📌 Result: No successful responses
+StreamingResponseExtension2.js:2821 =============================
