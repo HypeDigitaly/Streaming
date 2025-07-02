@@ -476,6 +476,55 @@ export const StreamingResponseExtension = {
           .ai-thinking-content li {
             margin: 2px 0;
           }
+          
+          /* Reasoning step styles */
+          .reasoning-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+          }
+          .step-checkbox {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            position: relative;
+          }
+          .step-checkbox svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 14px;
+            height: 14px;
+          }
+          .step-content {
+            flex: 1;
+            font-size: 12px;
+            line-height: 1.4;
+            padding-top: 1px;
+            color: #4B5563;
+          }
+          .step-checkbox .unchecked {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+          }
+          .step-checkbox .checked {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+          .step-checkbox.is-checked .unchecked {
+            opacity: 0;
+          }
+          .step-checkbox.is-checked .checked {
+            opacity: 1;
+          }
+          .step-content a {
+            color: inherit;
+            margin: 0;
+            padding: 0;
+            display: inline;
+          }
           /* Remove top spacing, keep bottom spacing around thinking sections */
           .response-content .ai-thinking-section {
             margin: 0 0 1em 0 !important;
@@ -588,6 +637,17 @@ export const StreamingResponseExtension = {
             display: inline;
           }
           .citation-link:hover {
+            text-decoration: underline;
+          }
+          .ai-thinking-content .citation-link {
+            color: #4B5563;
+            font-weight: 500;
+            display: inline;
+            margin: 0;
+            padding: 0;
+          }
+          .ai-thinking-content .citation-link:hover {
+            color: #2563EB;
             text-decoration: underline;
           }
 
@@ -874,7 +934,9 @@ export const StreamingResponseExtension = {
       const formattedContent = processBuffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+          // Process citations within thinking content
+          const processedContent = container.citations ? processCitations(content.trim(), container.citations, true) : content.trim();
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${processedContent}</div></div>`;
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
@@ -1013,7 +1075,7 @@ export const StreamingResponseExtension = {
       }
       
       // Function to process citations and convert [X] to links
-      function processCitations(text, citations) {
+      function processCitations(text, citations, isReasoning = false) {
         if (!citations || !citations.length) return text;
 
         // First normalize spaces in the text
@@ -1023,7 +1085,9 @@ export const StreamingResponseExtension = {
         return processedText.replace(/\s*\[(\d+)\]/g, (match, num) => {
           const index = parseInt(num) - 1;
           if (index >= 0 && index < citations.length) {
-            return ` <a href="${citations[index]}" target="_blank" class="citation-link">[${num}]</a>`;
+            // Add space only for answer section
+            const prefix = !isReasoning ? ' ' : '';
+            return prefix + `<a href="${citations[index]}" target="_blank" class="citation-link">[${num}]</a>`;
           }
           return match;
         });
@@ -1106,7 +1170,14 @@ export const StreamingResponseExtension = {
 
       // Process citations if available
       if (container.citations && container.citations.length > 0) {
-        cleanedHtml = processCitations(cleanedHtml, container.citations);
+        cleanedHtml = processCitations(cleanedHtml, container.citations, false);
+        
+        // Also update any existing thinking sections with citations
+        const thinkingSections = tempContainer.querySelectorAll('.ai-thinking-content');
+        thinkingSections.forEach(section => {
+          const currentContent = section.textContent.replace(/\s+/g, ' ').trim();
+          section.innerHTML = processCitations(currentContent, container.citations, true);
+        });
       }
 
       // Debug logging after HTML processing
@@ -2021,6 +2092,50 @@ export const StreamingResponseExtension = {
         // Add the footer indicating failure, showing all attempts
         addAIInfoFooter(attemptedModels);
       }
+    }
+
+    // Function to create checkbox SVGs for thinking steps
+    function createCheckbox() {
+      const checkbox = document.createElement('div');
+      checkbox.className = 'step-checkbox';
+      checkbox.innerHTML = `
+        <svg class="unchecked" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="9" stroke="#9CA3AF" stroke-width="2"/>
+        </svg>
+        <svg class="checked" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="10" fill="#111827"/>
+          <path d="M14 7L8.5 12.5L6 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
+      return checkbox;
+    }
+
+    // Function to create a reasoning group
+    function createReasoningGroup() {
+      const group = document.createElement('div');
+      group.className = 'reasoning-group';
+      return group;
+    }
+
+    // Function to create and append a new reasoning step
+    function createReasoningStep(content, group, stepIndex, citations) {
+      if (!content || content.length < 5 || content.trim().endsWith('?')) return null;
+
+      const step = document.createElement('div');
+      step.className = 'reasoning-step';
+
+      const checkbox = createCheckbox();
+      checkbox.style.display = 'none'; // Hide checkbox by default
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'step-content';
+
+      // Process citations directly with isReasoning flag set to true
+      contentDiv.innerHTML = processCitations(content, citations, true);
+
+      step.appendChild(checkbox);
+      step.appendChild(contentDiv);
+
+      return step;
     }
 
     // Add final processing function for when streaming ends
