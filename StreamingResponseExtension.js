@@ -2217,14 +2217,39 @@ export const StreamingResponseExtension = {
           // Process citations first
           const textWithCitations = processCitations(trimmedText, citations, false);
           
+          if (payload.debugMode === 1) {
+            console.log('🔍 PERPLEXITY DEBUG: Raw text for formatting:', textWithCitations.substring(0, 200) + '...');
+            console.log('🔍 PERPLEXITY DEBUG: Contains ###?', textWithCitations.includes('###'));
+            console.log('🔍 PERPLEXITY DEBUG: Contains line breaks?', textWithCitations.includes('\n'));
+          }
+          
+          // First, normalize line breaks and ensure proper formatting for streaming content
+          let normalizedText = textWithCitations
+            // Ensure line breaks before and after markdown headers
+            .replace(/([.!?])\s*###\s*/g, '$1\n\n### ')
+            .replace(/###\s*([^\n]+)/g, '\n\n### $1\n\n')
+            // Ensure line breaks before list items
+            .replace(/([.!?])\s*-\s+/g, '$1\n- ')
+            .replace(/([.!?])\s*\*\s+/g, '$1\n* ')
+            // Ensure line breaks after sentences for better processing
+            .replace(/([.!?])\s+([A-ZČŠŽŘŮĚÝÁÍÉÓÚĎ])/g, '$1\n$2');
+          
+          if (payload.debugMode === 1) {
+            console.log('🔍 PERPLEXITY DEBUG: After normalization:', normalizedText.substring(0, 300) + '...');
+          }
+          
           // Simplified markdown processing for Perplexity complete text
-          let formattedContent = textWithCitations
-            // Headers - only convert actual markdown headers (lines starting with #)
+          let formattedContent = normalizedText
+            // Headers - handle both line-start and mid-text headers
             .replace(/^##### (.+)$/gm, "<h5>$1</h5>")
             .replace(/^#### (.+)$/gm, "<h4>$1</h4>")
             .replace(/^### (.+)$/gm, "<h3>$1</h3>")
             .replace(/^## (.+)$/gm, "<h2>$1</h2>")
             .replace(/^# (.+)$/gm, "<h1>$1</h1>")
+            // Also handle headers not at line start (for streaming content)
+            .replace(/\n### ([^\n]+)\n/g, '\n<h3>$1</h3>\n')
+            .replace(/\n## ([^\n]+)\n/g, '\n<h2>$1</h2>\n')
+            .replace(/\n# ([^\n]+)\n/g, '\n<h1>$1</h1>\n')
             // Bold and italic
             .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
             .replace(/\*(.*?)\*/g, "<em>$1</em>")
@@ -2239,21 +2264,24 @@ export const StreamingResponseExtension = {
               const altText = alt ? alt.trim() : "";
               return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
             })
-            // Links
+            // Links (but not citations which are already processed)
             .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
             // Line separators
             .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
-            // Lists - bullet points
+            // Lists - bullet points (both at line start and after line breaks)
             .replace(/^- (.+)$/gm, "<li>$1</li>")
             .replace(/^\* (.+)$/gm, "<li>$1</li>")
-            // Numbered lists
-            .replace(/^(\d+)\. (.+)$/gm, "<li>$2</li>");
+            .replace(/\n- (.+)/g, '\n<li>$1</li>')
+            .replace(/\n\* (.+)/g, '\n<li>$1</li>')
+            // Numbered lists  
+            .replace(/^(\d+)\. (.+)$/gm, "<li>$2</li>")
+            .replace(/\n(\d+)\. (.+)/g, '\n<li>$2</li>');
 
-          // Wrap consecutive list items in ul/ol tags
+          // Wrap consecutive list items in ul tags
           formattedContent = formattedContent
-            .replace(/(<li>.*<\/li>)/g, function(match) {
-              // Check if this li is already wrapped
-              if (match.includes('<ul>') || match.includes('<ol>')) {
+            .replace(/(<li>.*?<\/li>)(\s*<li>.*?<\/li>)*/g, function(match) {
+              // Check if already wrapped
+              if (match.includes('<ul>')) {
                 return match;
               }
               return `<ul>${match}</ul>`;
@@ -2308,6 +2336,19 @@ export const StreamingResponseExtension = {
               return tableHtml;
             }
           );
+          
+          // Convert remaining line breaks to HTML breaks for better formatting
+          formattedContent = formattedContent.replace(/\n\n+/g, '<br><br>').replace(/\n/g, '<br>');
+          
+          if (payload.debugMode === 1) {
+            console.log('🔍 PERPLEXITY DEBUG: Final formatted content:', formattedContent.substring(0, 300) + '...');
+            if (formattedContent.includes('<h3>')) {
+              console.log('🔍 PERPLEXITY DEBUG: Successfully found H3 tags!');
+            }
+            if (formattedContent.includes('<li>')) {
+              console.log('🔍 PERPLEXITY DEBUG: Successfully found LI tags!');
+            }
+          }
           
           if (answerContent) {
             answerContent.innerHTML = formattedContent;
