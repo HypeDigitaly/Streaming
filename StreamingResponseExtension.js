@@ -476,55 +476,6 @@ export const StreamingResponseExtension = {
           .ai-thinking-content li {
             margin: 2px 0;
           }
-          
-          /* Reasoning step styles */
-          .reasoning-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            margin-bottom: 8px;
-          }
-          .step-checkbox {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-            margin-top: 1px;
-            position: relative;
-          }
-          .step-checkbox svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 14px;
-            height: 14px;
-          }
-          .step-content {
-            flex: 1;
-            font-size: 12px;
-            line-height: 1.4;
-            padding-top: 1px;
-            color: #4B5563;
-          }
-          .step-checkbox .unchecked {
-            opacity: 1;
-            transition: opacity 0.3s ease;
-          }
-          .step-checkbox .checked {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-          }
-          .step-checkbox.is-checked .unchecked {
-            opacity: 0;
-          }
-          .step-checkbox.is-checked .checked {
-            opacity: 1;
-          }
-          .step-content a {
-            color: inherit;
-            margin: 0;
-            padding: 0;
-            display: inline;
-          }
           /* Remove top spacing, keep bottom spacing around thinking sections */
           .response-content .ai-thinking-section {
             margin: 0 0 1em 0 !important;
@@ -620,35 +571,9 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.gemini,
           .model-info-tooltip.groq,
           .model-info-tooltip.sambanova,
-          .model-info-tooltip.baseten,
-          .model-info-tooltip.perplexity {
+          .model-info-tooltip.baseten {
             background-color: #F3F4F6;
             color: #333;
-          }
-          
-          /* Citation link styles */
-          .citation-link {
-            color: #2563EB;
-            text-decoration: none;
-            font-weight: normal;
-            cursor: pointer;
-            margin: 0;
-            padding: 0;
-            display: inline;
-          }
-          .citation-link:hover {
-            text-decoration: underline;
-          }
-          .ai-thinking-content .citation-link {
-            color: #4B5563;
-            font-weight: 500;
-            display: inline;
-            margin: 0;
-            padding: 0;
-          }
-          .ai-thinking-content .citation-link:hover {
-            color: #2563EB;
-            text-decoration: underline;
           }
 
         </style>
@@ -666,18 +591,6 @@ export const StreamingResponseExtension = {
     let buffer = "";
     let deltaCounter = 0;
     let completeResponse = "";
-
-    // Check if this is a reasoning model (similar to PerplexityStreamingExtension)
-    const currentModelId = trace.payload?.modelSequence ? parseInt(trace.payload.modelSequence.split(',')[0]) : null;
-    const isReasoningModel = currentModelId && [12, 15, 16].includes(currentModelId); // Baseten thinking (12), Sonar Reasoning (15), Sonar Reasoning Pro (16)
-    
-    if (trace.payload?.debugMode === 1) {
-      console.log("🧠 REASONING MODEL CHECK:", {
-        modelId: currentModelId,
-        isReasoningModel: isReasoningModel,
-        reasoningModels: [12, 15, 16]
-      });
-    }
 
     // Show container immediately with loading animation
     container.style.display = "block";
@@ -801,7 +714,7 @@ export const StreamingResponseExtension = {
     }
 
     // Update the answer content with markdown support
-    function updateContent(text, citations = null, searchResults = null) {
+    function updateContent(text) {
       if (!text) return;
 
       // Handle first chunk
@@ -820,14 +733,6 @@ export const StreamingResponseExtension = {
       
       // Keep track of complete response for final processing
       completeResponse += text;
-      
-      // Store citations and search results for processing
-      if (citations) {
-        container.citations = citations;
-      }
-      if (searchResults) {
-        container.searchResults = searchResults;
-      }
 
       // Post-process buffer to handle various image URL patterns
 
@@ -944,15 +849,9 @@ export const StreamingResponseExtension = {
 
       // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
       const formattedContent = processBuffer
-        // Process POSTUP tags FIRST to avoid conflicts with other formatting - BUT ONLY FOR REASONING MODELS
+        // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          if (!isReasoningModel) {
-            // For non-reasoning models, just return the content without thinking wrapper
-            return content.trim();
-          }
-          // Process citations within thinking content for reasoning models only
-          const processedContent = container.citations ? processCitations(content.trim(), container.citations, true) : content.trim();
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${processedContent}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
@@ -1089,25 +988,6 @@ export const StreamingResponseExtension = {
           console.log("🔍 AFTER MARKDOWN: Found H2 tags:", formattedContent.match(/<h2>.*?<\/h2>/g));
         }
       }
-      
-      // Function to process citations and convert [X] to links
-      function processCitations(text, citations, isReasoning = false) {
-        if (!citations || !citations.length) return text;
-
-        // First normalize spaces in the text
-        let processedText = text.replace(/\s+/g, ' ').trim();
-
-        // Add space before citations and convert to links in a single pass
-        return processedText.replace(/\s*\[(\d+)\]/g, (match, num) => {
-          const index = parseInt(num) - 1;
-          if (index >= 0 && index < citations.length) {
-            // Add space only for answer section
-            const prefix = !isReasoning ? ' ' : '';
-            return prefix + `<a href="${citations[index]}" target="_blank" class="citation-link">[${num}]</a>`;
-          }
-          return match;
-        });
-      }
 
       // --- BEGIN: Post-process lists and clean up empty items ---
       const tempContainer = document.createElement("div");
@@ -1181,20 +1061,8 @@ export const StreamingResponseExtension = {
         }
       });
 
-      let cleanedHtml = tempContainer.innerHTML;
+      const cleanedHtml = tempContainer.innerHTML;
       // --- END: Post-process lists and clean up empty items ---
-
-      // Process citations if available
-      if (container.citations && container.citations.length > 0) {
-        cleanedHtml = processCitations(cleanedHtml, container.citations, false);
-        
-        // Also update any existing thinking sections with citations
-        const thinkingSections = tempContainer.querySelectorAll('.ai-thinking-content');
-        thinkingSections.forEach(section => {
-          const currentContent = section.textContent.replace(/\s+/g, ' ').trim();
-          section.innerHTML = processCitations(currentContent, container.citations, true);
-        });
-      }
 
       // Debug logging after HTML processing
       if (trace.payload?.debugMode === 1 && cleanedHtml.includes('##')) {
@@ -1334,43 +1202,6 @@ export const StreamingResponseExtension = {
         type: "baseten",
         endpoint: "/api/baseten-stream",
         displayName: "Baseten thinking",
-      },
-
-      // Perplexity models
-      {
-        id: 13,
-        name: "sonar",
-        type: "perplexity",
-        endpoint: "/api/perplexity-stream",
-        displayName: "Sonar",
-      },
-      {
-        id: 14,
-        name: "sonar-pro",
-        type: "perplexity",
-        endpoint: "/api/perplexity-stream",
-        displayName: "Sonar Pro",
-      },
-      {
-        id: 15,
-        name: "sonar-reasoning",
-        type: "perplexity",
-        endpoint: "/api/perplexity-stream",
-        displayName: "Sonar Reasoning",
-      },
-      {
-        id: 16,
-        name: "sonar-reasoning-pro",
-        type: "perplexity",
-        endpoint: "/api/perplexity-stream",
-        displayName: "Sonar Reasoning Pro",
-      },
-      {
-        id: 17,
-        name: "sonar-deep-research",
-        type: "perplexity",
-        endpoint: "/api/perplexity-stream",
-        displayName: "Sonar Deep Research",
       },
     ];
 
@@ -1724,9 +1555,6 @@ export const StreamingResponseExtension = {
                   }
 
                   const content = parsed.content || "";
-                  const citations = parsed.citations || null;
-                  const searchResults = parsed.search_results || null;
-                  
                   if (content || typeof content === "string") {
                     // Handle empty string content too
                     receivedAnyContent = true; // Mark that we have received processable content
@@ -1747,7 +1575,7 @@ export const StreamingResponseExtension = {
 
                     // Update UI only if the fetch wasn't aborted *before* this point
                     if (!abortController.signal.aborted) {
-                      updateContent(content, citations, searchResults);
+                      updateContent(content);
                       localCompleteResponse += content;
                     } else {
                       // Should theoretically not happen if abort check is robust, but good failsafe
@@ -1997,31 +1825,6 @@ export const StreamingResponseExtension = {
           user_id: trace.payload.user_id,
         };
 
-        // Add Perplexity-specific parameters if this is a Perplexity model
-        if (model.type === 'perplexity') {
-          if (trace.payload.search_mode) payload.search_mode = trace.payload.search_mode;
-          if (trace.payload.reasoning_effort) payload.reasoning_effort = trace.payload.reasoning_effort;
-          if (trace.payload.top_p !== undefined) payload.top_p = trace.payload.top_p;
-          if (trace.payload.search_domain_filter) payload.search_domain_filter = trace.payload.search_domain_filter;
-          if (trace.payload.return_images !== undefined) payload.return_images = trace.payload.return_images;
-          if (trace.payload.return_related_questions !== undefined) payload.return_related_questions = trace.payload.return_related_questions;
-          if (trace.payload.search_recency_filter) payload.search_recency_filter = trace.payload.search_recency_filter;
-          if (trace.payload.search_after_date_filter) payload.search_after_date_filter = trace.payload.search_after_date_filter;
-          if (trace.payload.search_before_date_filter) payload.search_before_date_filter = trace.payload.search_before_date_filter;
-          if (trace.payload.last_updated_after_filter) payload.last_updated_after_filter = trace.payload.last_updated_after_filter;
-          if (trace.payload.last_updated_before_filter) payload.last_updated_before_filter = trace.payload.last_updated_before_filter;
-          if (trace.payload.top_k !== undefined) payload.top_k = trace.payload.top_k;
-          if (trace.payload.presence_penalty !== undefined) payload.presence_penalty = trace.payload.presence_penalty;
-          if (trace.payload.frequency_penalty !== undefined) payload.frequency_penalty = trace.payload.frequency_penalty;
-          if (trace.payload.response_format) payload.response_format = trace.payload.response_format;
-          
-          // Handle web_search_options properly
-          if (trace.payload.web_search_context_size) payload.web_search_context_size = trace.payload.web_search_context_size;
-          if (trace.payload.user_location_latitude !== undefined) payload.user_location_latitude = trace.payload.user_location_latitude;
-          if (trace.payload.user_location_longitude !== undefined) payload.user_location_longitude = trace.payload.user_location_longitude;
-          if (trace.payload.user_location_country) payload.user_location_country = trace.payload.user_location_country;
-        }
-
         // Call the LLM API
         const success = await callLLMAPI(model.endpoint, payload);
 
@@ -2108,50 +1911,6 @@ export const StreamingResponseExtension = {
         // Add the footer indicating failure, showing all attempts
         addAIInfoFooter(attemptedModels);
       }
-    }
-
-    // Function to create checkbox SVGs for thinking steps
-    function createCheckbox() {
-      const checkbox = document.createElement('div');
-      checkbox.className = 'step-checkbox';
-      checkbox.innerHTML = `
-        <svg class="unchecked" viewBox="0 0 20 20" fill="none">
-          <circle cx="10" cy="10" r="9" stroke="#9CA3AF" stroke-width="2"/>
-        </svg>
-        <svg class="checked" viewBox="0 0 20 20" fill="none">
-          <circle cx="10" cy="10" r="10" fill="#111827"/>
-          <path d="M14 7L8.5 12.5L6 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      `;
-      return checkbox;
-    }
-
-    // Function to create a reasoning group
-    function createReasoningGroup() {
-      const group = document.createElement('div');
-      group.className = 'reasoning-group';
-      return group;
-    }
-
-    // Function to create and append a new reasoning step
-    function createReasoningStep(content, group, stepIndex, citations) {
-      if (!content || content.length < 5 || content.trim().endsWith('?')) return null;
-
-      const step = document.createElement('div');
-      step.className = 'reasoning-step';
-
-      const checkbox = createCheckbox();
-      checkbox.style.display = 'none'; // Hide checkbox by default
-      const contentDiv = document.createElement('div');
-      contentDiv.className = 'step-content';
-
-      // Process citations directly with isReasoning flag set to true
-      contentDiv.innerHTML = processCitations(content, citations, true);
-
-      step.appendChild(checkbox);
-      step.appendChild(contentDiv);
-
-      return step;
     }
 
     // Add final processing function for when streaming ends
