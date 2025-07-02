@@ -642,6 +642,76 @@ export const StreamingResponseExtension = {
             color: #1F2937;
             font-weight: 600;
           }
+          
+          .tool-query {
+            padding: 6px 12px;
+            font-size: 13px;
+            color: #374151;
+            background-color: #F9FAFB;
+            border-bottom: 1px solid #F1F5F9;
+            font-weight: 500;
+          }
+          
+          .tool-step {
+            padding: 6px 12px;
+            font-size: 12px;
+            color: #6B7280;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #F1F5F9;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+          
+          .tool-step-indicator {
+            font-size: 14px;
+          }
+          
+          .search-summary {
+            margin-bottom: 12px;
+            padding: 8px;
+            background-color: #F0F9FF;
+            border-radius: 4px;
+            border-left: 3px solid #3B82F6;
+          }
+          
+          .search-results {
+            margin-top: 8px;
+          }
+          
+          .search-result-item {
+            margin: 8px 0;
+            padding: 8px;
+            background-color: #FAFAFA;
+            border-radius: 4px;
+            border-left: 2px solid #E5E7EB;
+          }
+          
+          .result-title {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 4px;
+          }
+          
+          .result-number {
+            color: #6B7280;
+            font-weight: 600;
+            min-width: 20px;
+          }
+          
+          .result-url {
+            font-size: 11px;
+            color: #059669;
+            margin-bottom: 4px;
+            word-break: break-all;
+          }
+          
+          .result-snippet {
+            font-size: 12px;
+            color: #6B7280;
+            line-height: 1.4;
+          }
 
         </style>
         <div class="streaming-reasoning-section" style="display: none;"></div>
@@ -858,13 +928,27 @@ export const StreamingResponseExtension = {
                              toolData.tool_name === 'file_search' ? '📄 Vyhledávání v souborech' : 
                              `🔧 ${toolData.tool_name}`;
               
-              const toolCallHtml = `<div class="tool-call-section">
+              // Enhanced tool call display for web search
+              let toolDetailsHtml = '';
+              if (toolData.tool_name === 'web_search_preview') {
+                  toolDetailsHtml = `
+                      <div class="tool-query">
+                          <strong>Dotaz:</strong> ${toolData.query || toolData.arguments}
+                      </div>
+                      <div class="tool-step">
+                          <span class="tool-step-indicator">⏳</span> ${toolData.step || 'Vyhledávání...'}
+                      </div>`;
+              } else {
+                  toolDetailsHtml = `<div class="tool-arguments">${toolData.arguments}</div>`;
+              }
+              
+              const toolCallHtml = `<div class="tool-call-section" data-tool="${toolData.tool_name}">
                   <div class="tool-call-header">
                       <span class="tool-icon">${toolName.split(' ')[0]}</span>
                       <span class="tool-name">${toolName.substring(2)}</span>
                       <span class="tool-status">Spouštím...</span>
                   </div>
-                  <div class="tool-arguments">${toolData.arguments}</div>
+                  ${toolDetailsHtml}
               </div>`;
               
               // Add to tools section or create new tools section
@@ -928,16 +1012,50 @@ export const StreamingResponseExtension = {
                       statusEl.style.color = '#10B981';
                   }
                   
-                  // Add tool response content
+                  // Update step indicator if exists
+                  const stepIndicator = lastToolCall.querySelector('.tool-step-indicator');
+                  if (stepIndicator) {
+                      stepIndicator.textContent = '✅';
+                  }
+                  
+                  // Enhanced response display for web search
                   const responseDiv = document.createElement('div');
                   responseDiv.className = 'tool-response';
-                  responseDiv.innerHTML = `<strong>Výsledek:</strong><br>${toolData.response.replace(/\n/g, '<br>')}`;
+                  
+                  if (toolData.tool_name === 'web_search_preview' && toolData.top_results) {
+                      let resultsHtml = `
+                          <div class="search-summary">
+                              <strong>📊 Výsledky vyhledávání:</strong> ${toolData.response}
+                          </div>`;
+                      
+                      if (toolData.top_results && toolData.top_results.length > 0) {
+                          resultsHtml += '<div class="search-results"><strong>🔝 Nejlepší výsledky:</strong>';
+                          toolData.top_results.forEach((result, index) => {
+                              resultsHtml += `
+                                  <div class="search-result-item">
+                                      <div class="result-title">
+                                          <span class="result-number">${index + 1}.</span>
+                                          <strong>${result.title}</strong>
+                                      </div>
+                                      <div class="result-url">🔗 ${result.url}</div>
+                                      <div class="result-snippet">${result.snippet}</div>
+                                  </div>`;
+                          });
+                          resultsHtml += '</div>';
+                      }
+                      
+                      responseDiv.innerHTML = resultsHtml;
+                  } else {
+                      responseDiv.innerHTML = `<strong>Výsledek:</strong><br>${toolData.response.replace(/\n/g, '<br>')}`;
+                  }
+                  
                   lastToolCall.appendChild(responseDiv);
                   
                   if (trace.payload?.debugMode === 1) {
                       console.log('🌐 TOOL RESPONSE UI UPDATED:', {
                           tool_name: toolData.tool_name,
-                          response_length: toolData.response?.length || 0
+                          response_length: toolData.response?.length || 0,
+                          results_count: toolData.results_count || 0
                       });
                   }
               }

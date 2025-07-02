@@ -150,16 +150,31 @@ export default async function handler(req, res) {
           streamType = 'tool_call';
           content = JSON.stringify({
             tool_name: 'web_search_preview',
-            arguments: 'Searching...'
+            arguments: chunk.web_search_call?.query || 'Searching...',
+            status: 'searching',
+            query: chunk.web_search_call?.query,
+            step: 'Vyhledávání na webu...'
           });
           if (debugMode === 1) {
             console.log('🌐 WEB SEARCH IN PROGRESS:', chunk);
           }
         } else if (chunk.type === 'response.web_search_call.completed') {
           streamType = 'tool_response';
+          const results = chunk.web_search_call?.results || [];
+          const resultsCount = results.length;
+          const topResults = results.slice(0, 3).map(r => ({
+            title: r.title,
+            url: r.url,
+            snippet: r.snippet?.substring(0, 100) + '...'
+          }));
+          
           content = JSON.stringify({
             tool_name: 'web_search_preview',
-            response: 'Search completed'
+            response: `Nalezeno ${resultsCount} výsledků`,
+            results_count: resultsCount,
+            top_results: topResults,
+            query: chunk.web_search_call?.query,
+            status: 'completed'
           });
           if (debugMode === 1) {
             console.log('🌐 WEB SEARCH COMPLETED:', chunk);
