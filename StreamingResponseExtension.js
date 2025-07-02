@@ -2210,220 +2210,107 @@ export const StreamingResponseExtension = {
           thinkBuffer = incompletePart;
         }
 
-        // Update answer content with full markdown support and citations
+        // Update answer content with simplified markdown support and citations
         function updateAnswerContent(text) {
           const trimmedText = text.trim();
           
           // Process citations first
           const textWithCitations = processCitations(trimmedText, citations, false);
           
-          // Format markdown content with comprehensive processing (same as updateContent)
-          const formattedContent = textWithCitations
-            // Process POSTUP tags FIRST to avoid conflicts with other formatting
-            .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
-            })
-            // Remove empty paragraphs and extra whitespace around thinking sections
-            .replace(/<p>\s*<\/p>/g, '')
-            .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
-            .replace(/<\/div>\s*\n/g, '</div>')
-            // Headers - H1 to H5 (multiple approaches for robustness)
-            .replace(/^(\s*)#{5}\s+(.+?)$/gm, "<h5>$2</h5>")
-            .replace(/^(\s*)#{4}\s+(.+?)$/gm, "<h4>$2</h4>")
-            .replace(/^(\s*)#{3}\s+(.+?)$/gm, "<h3>$2</h3>")
-            .replace(/^(\s*)#{2}\s+(.+?)$/gm, "<h2>$2</h2>")
-            .replace(/^(\s*)#{1}\s+(.+?)$/gm, "<h1>$2</h1>")
-            // Fallback headers - no leading whitespace
+          // Simplified markdown processing for Perplexity complete text
+          let formattedContent = textWithCitations
+            // Headers - only convert actual markdown headers (lines starting with #)
             .replace(/^##### (.+)$/gm, "<h5>$1</h5>")
             .replace(/^#### (.+)$/gm, "<h4>$1</h4>")
             .replace(/^### (.+)$/gm, "<h3>$1</h3>")
             .replace(/^## (.+)$/gm, "<h2>$1</h2>")
             .replace(/^# (.+)$/gm, "<h1>$1</h1>")
-            // Ultra-simple fallback for stubborn cases
-            .replace(/##\s+([^\n\r]+)/g, "<h2>$1</h2>")
-            .replace(/#\s+([^\n\r]+)/g, "<h1>$1</h1>")
-            // Brutal fallback - replace any remaining ## patterns
-            .replace(/##\s*([^#\n\r]+)/g, "<h2>$1</h2>")
-            .replace(/^([^<\n\r]*?)##\s*([^#\n\r]+)/gm, "$1<h2>$2</h2>")
-            // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
+            // Bold and italic
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\*(.*?)\*/g, "<em>$1</em>")
+            // Code
+            .replace(/`([^`]+)`/g, "<code>$1</code>")
+            // Images
             .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
-              // Clean and validate the URL
               let cleanUrl = url.trim();
-
-              // Convert HTTP to HTTPS if it's a full URL starting with http://
               if (cleanUrl.match(/^http:\/\//i)) {
                 cleanUrl = cleanUrl.replace(/^http:\/\//i, "https://");
               }
-
-              // Use alt text if provided, otherwise use empty string
               const altText = alt ? alt.trim() : "";
-
-              if (payload.debugMode === 1) {
-                console.log("Converting markdown image to HTML:", {
-                  original: match,
-                  cleanUrl,
-                  altText,
-                });
-              }
-
               return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
             })
-            // Bold formatting only (AFTER image processing to prevent URL corruption)
-            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Double asterisks for bold
-            // Line separators (three or more hyphens)
+            // Links
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+            // Line separators
             .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
-            // List items
-            .replace(/^\* (.*$)/gm, "<li>$1</li>")
-            .replace(/^- (.*$)/gm, "<li>$1</li>")
-            .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
-            .replace(/^\\d+\\.\\s+(.*$)/gm, "<li>$1</li>")
-            // Code
-            .replace(/`([^`]+)`/g, "<code>$1</code>")
-            // Tables - Improved processing for markdown tables
-            .replace(
-              /(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm,
-              function (match) {
-                // Clean up the match and split into lines
-                const tableContent = match.trim();
-                const rows = tableContent.split("\n").filter((row) => row.trim());
+            // Lists - bullet points
+            .replace(/^- (.+)$/gm, "<li>$1</li>")
+            .replace(/^\* (.+)$/gm, "<li>$1</li>")
+            // Numbered lists
+            .replace(/^(\d+)\. (.+)$/gm, "<li>$2</li>");
 
-                // Check if this is really a table (at least 2 rows: header + separator)
-                if (rows.length < 2) return match;
+          // Wrap consecutive list items in ul/ol tags
+          formattedContent = formattedContent
+            .replace(/(<li>.*<\/li>)/g, function(match) {
+              // Check if this li is already wrapped
+              if (match.includes('<ul>') || match.includes('<ol>')) {
+                return match;
+              }
+              return `<ul>${match}</ul>`;
+            })
+            // Clean up multiple ul/ol tags
+            .replace(/<\/ul>\s*<ul>/g, '')
+            .replace(/<\/ol>\s*<ol>/g, '');
 
-                let tableHtml = '<table class="markdown-table">\n';
-                let headerProcessed = false;
+          // Process tables
+          formattedContent = formattedContent.replace(
+            /(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm,
+            function (match) {
+              const tableContent = match.trim();
+              const rows = tableContent.split("\n").filter((row) => row.trim());
 
-                // Process each row
-                rows.forEach((row, rowIndex) => {
-                  const trimmedRow = row.trim();
+              if (rows.length < 2) return match;
 
-                  // Skip the separator row (contains only dashes, spaces, pipes, and colons)
-                  if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) {
-                    return;
-                  }
+              let tableHtml = '<table class="markdown-table">\n';
+              let headerProcessed = false;
 
-                  // Start the row
-                  tableHtml += "  <tr>\n";
+              rows.forEach((row, rowIndex) => {
+                const trimmedRow = row.trim();
 
-                  // Extract cells - handle pipes that might be at start/end
-                  let cells;
-                  if (trimmedRow.startsWith("|") && trimmedRow.endsWith("|")) {
-                    cells = trimmedRow.slice(1, -1).split("|");
-                  } else {
-                    cells = trimmedRow.split("|");
-                  }
+                // Skip separator row
+                if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) {
+                  return;
+                }
 
-                  // Process each cell
-                  cells.forEach((cell) => {
-                    const cellContent = cell.trim();
-                    // First row (after potential separator) is header
-                    const cellTag =
-                      !headerProcessed && rowIndex === 0 ? "th" : "td";
-                    tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
-                  });
+                tableHtml += "  <tr>\n";
 
-                  // Mark header as processed after first actual content row
-                  if (!headerProcessed && rowIndex === 0) {
-                    headerProcessed = true;
-                  }
+                let cells;
+                if (trimmedRow.startsWith("|") && trimmedRow.endsWith("|")) {
+                  cells = trimmedRow.slice(1, -1).split("|");
+                } else {
+                  cells = trimmedRow.split("|");
+                }
 
-                  // End the row
-                  tableHtml += "  </tr>\n";
+                cells.forEach((cell) => {
+                  const cellContent = cell.trim();
+                  const cellTag = !headerProcessed && rowIndex === 0 ? "th" : "td";
+                  tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
                 });
 
-                // End the table
-                tableHtml += "</table>";
-                return tableHtml;
-              },
-            )
-            // Convert regular markdown links to HTML links (AFTER image processing)
-            .replace(
-              /\[([^\]]+)\]\(([^)]+)\)/g,
-              '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
-            )
-            .replace(/^- (.*$)/gm, (match, content) => {
-              const indentation = match.match(/^\s*/)[0].length;
-              return `<li class="${indentation > 0 ? "sublist" : ""}">${content.trim()}</li>`;
-            })
-            .replace(/(?:^|\n)(<li)/g, "\n<ul>$1")
-            .replace(/(<\/li>)(?:\n(?!<li)|$)/g, "$1</ul>");
+                if (!headerProcessed && rowIndex === 0) {
+                  headerProcessed = true;
+                }
 
-          // --- BEGIN: Post-process lists and clean up empty items ---
-          const tempContainer = document.createElement("div");
-          tempContainer.innerHTML = formattedContent;
+                tableHtml += "  </tr>\n";
+              });
 
-          // Function to wrap consecutive LIs
-          function wrapListItems(listType /* 'ol' or 'ul' */) {
-            const items = tempContainer.querySelectorAll("li"); // Get all LIs
-            let currentList = null;
-
-            items.forEach((li, index) => {
-              // Rough heuristic: Check if it looks like a numbered list item was intended
-              // This relies on the number potentially being left as text by the simple regex
-              const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim());
-              const targetListType = looksNumbered ? "ol" : "ul";
-
-              // Only process items matching the current function call type (ol or ul)
-              if (targetListType !== listType) return;
-
-              // Skip items already inside a list (e.g., nested lists - handle later if needed)
-              if (
-                li.parentElement.tagName === "OL" ||
-                li.parentElement.tagName === "UL"
-              ) {
-                currentList = null; // Reset sequence if we encounter an already nested item
-                return;
-              }
-
-              const prevSibling = li.previousElementSibling;
-
-              // Start a new list if needed
-              if (
-                !currentList ||
-                !prevSibling ||
-                prevSibling.tagName !== "LI" ||
-                prevSibling.parentElement.tagName !== listType.toUpperCase()
-              ) {
-                currentList = document.createElement(listType);
-                li.parentNode.insertBefore(currentList, li);
-              }
-
-              // Move the li into the current list
-              if (currentList) {
-                currentList.appendChild(li);
-              }
-            });
-          }
-
-          // Wrap OL items first, then UL items
-          wrapListItems("ol");
-          wrapListItems("ul");
-
-          // Clean up empty numbered list items (modified check)
-          const listItems = tempContainer.querySelectorAll("ol > li, ul > li");
-          listItems.forEach((li) => {
-            // Check if the list item is effectively empty or just a marker
-            const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, "").trim(); // Remove number marker for check
-            if (contentCheck === "" || contentCheck === "<br>") {
-              // Check if it's truly empty, not containing other important tags
-              if (!li.querySelector("a, img, code, strong, em, ul, ol")) {
-                li.remove();
-              }
+              tableHtml += "</table>";
+              return tableHtml;
             }
-          });
-
-          // Remove any potentially empty OL/UL tags left after cleaning LIs
-          tempContainer.querySelectorAll("ol, ul").forEach((list) => {
-            if (!list.hasChildNodes()) {
-              list.remove();
-            }
-          });
-
-          const cleanedHtml = tempContainer.innerHTML;
-          // --- END: Post-process lists and clean up empty items ---
+          );
           
           if (answerContent) {
-            answerContent.innerHTML = cleanedHtml;
+            answerContent.innerHTML = formattedContent;
             if (payload.debugMode === 1) {
               console.log('📝 Updated answer content with citations:', citations?.length || 0);
             }
