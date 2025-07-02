@@ -164,6 +164,10 @@ export const StreamingResponseExtension = {
           .reasoning-section.has-answer {
             margin-bottom: 0;
           }
+          .reasoning-section.has-answer.collapsed {
+            padding: 0;
+            margin: 0;
+          }
           .reasoning-section.collapsed .reasoning-content {
             display: none;
           }
