@@ -1,4 +1,3 @@
-
 import { whitelistedDomains } from '../../config/domains';
 
 export default async function handler(req, res) {
@@ -21,6 +20,10 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== 'POST') {
+    const debugMode = req.body?.debugMode || 0;
+    if (req.headers.debug === '1' || debugMode === 1) {
+      console.error('❌ Proxy: Invalid method', req.method);
+    }
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
@@ -38,167 +41,203 @@ export default async function handler(req, res) {
       projectName, 
       debugMode, 
       user_id,
-      // Perplexity-specific parameters
-      search_mode,
-      reasoning_effort,
-      top_p,
-      search_domain_filter,
-      return_images,
-      return_related_questions,
-      search_recency_filter,
-      search_after_date_filter,
-      search_before_date_filter,
-      last_updated_after_filter,
-      last_updated_before_filter,
-      top_k,
-      presence_penalty,
-      frequency_penalty,
-      response_format,
-      web_search_options
+      apiKey,
+      messages 
     } = req.body;
 
-    // Select API key based on projectName
-    const apiKey = process.env[`PERPLEXITY_API_KEY_${projectName?.toUpperCase()}`] || process.env.PERPLEXITY_API_KEY;
+    // Use provided apiKey or get from environment based on projectName
+    const perplexityApiKey = apiKey || 
+      process.env[`PERPLEXITY_API_KEY_${projectName?.toUpperCase()}`] || 
+      process.env.PERPLEXITY_API_KEY;
 
-    if (!apiKey) {
-      throw new Error(`API key not found for project: ${projectName}`);
+    if (!perplexityApiKey) {
+      throw new Error(`Perplexity API key not found for project: ${projectName}`);
     }
 
-    if (debugMode === 1) {
-      console.log('📡 Perplexity API Request:', {
-        model: model || 'sonar',
-        max_tokens,
-        temperature,
-        search_mode,
-        reasoning_effort,
-        projectName,
-        debugMode,
-        systemPrompt: systemPrompt ? `${systemPrompt.substring(0, 100)}...` : 'None',
-        user_id,
-        return_images,
-        return_related_questions,
-        web_search_options
-      });
+    // Prepare messages for Perplexity API
+    let perplexityMessages;
+    if (messages && Array.isArray(messages)) {
+      perplexityMessages = messages;
+    } else if (userData) {
+      perplexityMessages = [
+        {
+          role: 'user',
+          content: userData
+        }
+      ];
+      
+      // Add system prompt if provided
+      if (systemPrompt) {
+        perplexityMessages.unshift({
+          role: 'system',
+          content: systemPrompt
+        });
+      }
+    } else {
+      throw new Error('No messages or userData provided');
     }
 
-    // Build messages array
-    const messages = [];
-    if (systemPrompt) {
-      messages.push({
-        role: 'system',
-        content: systemPrompt
-      });
-    }
-    messages.push({
-      role: 'user',
-      content: userData
-    });
-
-    // Build request payload with all Perplexity parameters
-    const payload = {
-      model: model || 'sonar',
-      messages: messages,
-      stream: true
+    const requestPayload = {
+      model: model || 'sonar-reasoning',
+      messages: perplexityMessages,
+      return_images: false,
+      return_related_questions: false,
+      stream: true,
+      max_tokens: max_tokens || 4096,
+      temperature: temperature || 0
     };
 
-    // Add optional parameters only if they're provided
-    if (max_tokens) payload.max_tokens = max_tokens;
-    if (temperature !== undefined) payload.temperature = temperature;
-    if (search_mode) payload.search_mode = search_mode;
-    if (reasoning_effort) payload.reasoning_effort = reasoning_effort;
-    if (top_p !== undefined) payload.top_p = top_p;
-    if (search_domain_filter) payload.search_domain_filter = search_domain_filter;
-    if (return_images !== undefined) payload.return_images = return_images;
-    if (return_related_questions !== undefined) payload.return_related_questions = return_related_questions;
-    if (search_recency_filter) payload.search_recency_filter = search_recency_filter;
-    if (search_after_date_filter) payload.search_after_date_filter = search_after_date_filter;
-    if (search_before_date_filter) payload.search_before_date_filter = search_before_date_filter;
-    if (last_updated_after_filter) payload.last_updated_after_filter = last_updated_after_filter;
-    if (last_updated_before_filter) payload.last_updated_before_filter = last_updated_before_filter;
-    if (top_k !== undefined) payload.top_k = top_k;
-    if (presence_penalty !== undefined) payload.presence_penalty = presence_penalty;
-    if (frequency_penalty !== undefined) payload.frequency_penalty = frequency_penalty;
-    if (response_format) payload.response_format = response_format;
-    if (web_search_options) payload.web_search_options = web_search_options;
-
     if (debugMode === 1) {
-      console.log('📤 Perplexity Full Payload:', JSON.stringify(payload, null, 2));
+      console.log('🔮 Perplexity Payload values:', {
+        model,
+        max_tokens,
+        temperature,
+        projectName,
+        debugMode,
+        systemPrompt,
+        user_id,
+        messagesLength: perplexityMessages?.length
+      });
+
+      console.log('📤 Full Perplexity Request Payload:', JSON.stringify(requestPayload, null, 2));
     }
 
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
+    });
+
+    if (debugMode === 1) {
+      console.log('🚀 Making Perplexity API call to: https://api.perplexity.ai/chat/completions');
+    }
+
+    // Call Perplexity API
     const response = await fetch('https://api.perplexity.ai/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': `Bearer ${perplexityApiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(requestPayload),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Perplexity API error: ${response.status} ${errorText}`);
+      throw new Error(`Perplexity API error: ${response.status} - ${errorText}`);
+    }
+
+    if (debugMode === 1) {
+      console.log('📥 Perplexity API Response Status:', response.status);
     }
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
     let buffer = '';
 
-    if (debugMode === 1) {
-      console.log('📥 Perplexity API Response initialized');
-    }
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) {
+          if (debugMode === 1) {
+            console.log('📤 Perplexity stream completed');
+          }
+          break;
+        }
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+        const chunk = decoder.decode(value);
+        let jsonBuffer = buffer + chunk;
+        buffer = '';
 
-      const chunk = decoder.decode(value, { stream: true });
-      buffer += chunk;
+        // Split into lines and process each complete line
+        const lines = jsonBuffer.split('\n');
+        // Keep the last (potentially incomplete) line in buffer
+        buffer = lines.pop() || '';
 
-      const lines = buffer.split('\n');
-      buffer = lines.pop() || '';
-
-      for (const line of lines) {
-        if (!line.trim() || !line.startsWith('data: ')) continue;
-        if (line === 'data: [DONE]') continue;
-
-        try {
-          const data = JSON.parse(line.slice(6));
+        for (const line of lines) {
+          if (!line.trim() || !line.startsWith('data: ')) continue;
           
-          if (debugMode === 1) {
-            console.log('📥 Perplexity chunk:', data);
+          if (line === 'data: [DONE]') {
+            if (debugMode === 1) {
+              console.log('📤 Received [DONE] from Perplexity, forwarding to client');
+            }
+            res.write('data: [DONE]\n\n');
+            continue;
           }
 
-          if (data.choices?.[0]?.delta?.content) {
-            const content = data.choices[0].delta.content;
-            
-            // Send content with perplexity type for special processing
-            res.write(`data: ${JSON.stringify({ 
-              content: content,
-              type: 'perplexity_content',
-              citations: data.citations,
-              search_results: data.search_results
-            })}\n\n`);
-          }
-        } catch (error) {
-          if (debugMode === 1) {
-            console.error('Error parsing Perplexity chunk:', error);
+          try {
+            // Remove 'data: ' prefix and parse
+            const jsonStr = line.slice(5);
+            const data = JSON.parse(jsonStr);
+
+            // Transform Perplexity response format to our standard format
+            if (data.choices && data.choices[0] && data.choices[0].delta) {
+              const transformedData = {
+                type: 'content',
+                content: data.choices[0].delta.content || '',
+                choices: data.choices,
+                citations: data.citations || null
+              };
+
+              if (debugMode === 1 && data.choices[0].delta.content) {
+                console.log('📥 Perplexity Response Chunk:', {
+                  content: data.choices[0].delta.content.substring(0, 100) + '...',
+                  hasCitations: !!data.citations,
+                  citationsCount: data.citations?.length || 0
+                });
+              }
+
+              res.write(`data: ${JSON.stringify(transformedData)}\n\n`);
+              res.flush?.();
+            } else if (debugMode === 1) {
+              console.log('📥 Perplexity Non-content chunk:', JSON.stringify(data, null, 2));
+            }
+          } catch (parseError) {
+            if (debugMode === 1) {
+              console.warn('Failed to parse Perplexity SSE data line:', parseError, 'Data:', line);
+            }
           }
         }
       }
-    }
 
-    // Explicitly send DONE signal to trigger Voiceflow variable update
-    if (debugMode === 1) {
-      console.log('📤 Sending [DONE] signal to complete stream');
+      // Process any remaining complete data in buffer
+      if (buffer.trim() && buffer.startsWith('data: ')) {
+        try {
+          const jsonStr = buffer.slice(5);
+          const data = JSON.parse(jsonStr);
+          
+          if (data.choices && data.choices[0] && data.choices[0].delta) {
+            const transformedData = {
+              type: 'content',
+              content: data.choices[0].delta.content || '',
+              choices: data.choices,
+              citations: data.citations || null
+            };
+            res.write(`data: ${JSON.stringify(transformedData)}\n\n`);
+          }
+        } catch (e) {
+          if (debugMode === 1) {
+            console.warn('Failed to parse final buffer:', e);
+          }
+        }
+      }
+
+    } finally {
+      // Ensure stream is properly closed
+      if (debugMode === 1) {
+        console.log('📤 Sending final [DONE] signal to complete Perplexity stream');
+      }
+      res.write('data: [DONE]\n\n');
+      res.end();
     }
-    res.write('data: [DONE]\n\n');
-    res.end();
 
   } catch (error) {
-    if (req.body.debugMode === 1) {
-      console.error('Stream Error:', error);
+    const debugMode = req.body?.debugMode || 0;
+    if (debugMode === 1) {
+      console.error('🔮 Perplexity Stream Error:', error);
     }
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
   }
-}
+} 

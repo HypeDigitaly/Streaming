@@ -52,6 +52,26 @@ export const StreamingResponseExtension = {
       });
     }
 
+    // Add variables to track streaming state for Perplexity reasoning
+    let isStreaming = false;
+    let activeReasoningGroup = null;
+    let completedSteps = [];
+
+    // Function to format model name for Perplexity models
+    function formatModelName(model) {
+      const modelMap = {
+        'sonar-reasoning': 'Sonar Reasoning model',
+        'sonar-reasoning-pro': 'Sonar Reasoning Pro model',
+      }
+      return (
+        modelMap[model] ||
+        model
+          .split('-')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ')
+      )
+    }
+
     // Create the base structure
     container.innerHTML = `
         <div class="thinking-header">
@@ -113,6 +133,229 @@ export const StreamingResponseExtension = {
             flex-direction: column;
             gap: 0;
           }
+          
+          /* Perplexity reasoning section styles */
+          .perplexity-reasoner-container {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+          }
+          .reasoning-section {
+            background-color: #F9FAFB;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+          }
+          .reasoning-section.collapsed {
+            padding: 10px 16px;
+            cursor: pointer;
+          }
+          .reasoning-section.has-answer {
+            margin-bottom: 8px;
+          }
+          .reasoning-section.collapsed .reasoning-content,
+          .reasoning-section.collapsed .reasoning-intro {
+            display: none;
+          }
+          .reasoning-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+          }
+          .reasoning-section.collapsed .reasoning-header {
+            margin-bottom: 0;
+          }
+          .reasoning-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .reasoning-icon svg {
+            width: 28px;
+            height: 28px;
+          }
+          .reasoning-title-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          .reasoning-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111827;
+          }
+          .reasoning-model {
+            font-weight: normal;
+            color: #6B7280;
+            margin-left: 4px;
+          }
+          .toggle-icon {
+            width: 16px;
+            height: 16px;
+            color: #6B7280;
+            transition: transform 0.3s ease;
+          }
+          .reasoning-section.collapsed .toggle-icon {
+            transform: rotate(-180deg);
+          }
+          .reasoning-intro {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #6B7280;
+            margin-bottom: 12px;
+          }
+          .loading-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            height: 20px;
+          }
+          .loading-dots .dot {
+            width: 4px;
+            height: 4px;
+            background-color: #6B7280;
+            border-radius: 50%;
+            animation: dotPulse 1.5s infinite;
+          }
+          .loading-dots .dot:nth-child(2) {
+            animation-delay: 0.2s;
+          }
+          .loading-dots .dot:nth-child(3) {
+            animation-delay: 0.4s;
+          }
+          @keyframes dotPulse {
+            0%, 100% {
+              opacity: 0.4;
+              transform: scale(1);
+            }
+            50% {
+              opacity: 1;
+              transform: scale(1.3);
+            }
+          }
+          .reasoning-content {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #4B5563;
+          }
+          .reasoning-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+          }
+          .step-checkbox {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            position: relative;
+          }
+          .step-checkbox svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 14px;
+            height: 14px;
+          }
+          .step-content {
+            flex: 1;
+            font-size: 12px;
+            line-height: 1.4;
+            padding-top: 1px;
+          }
+          .step-checkbox .unchecked {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+          }
+          .step-checkbox .checked {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+          .step-checkbox.is-checked .unchecked {
+            opacity: 0;
+          }
+          .step-checkbox.is-checked .checked {
+            opacity: 1;
+          }
+          .answer-section {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+          }
+          .answer-section.visible {
+            opacity: 1;
+            height: auto;
+            overflow: visible;
+          }
+          .vfrc-message--extension-PerplexityReasoner {
+            width: 100% !important;
+            max-width: none !important;
+          }
+          .answer-content {
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+          }
+          
+          /* Citation link styles */
+          .citation-link {
+            color: #2563EB;
+            text-decoration: none;
+            font-weight: normal;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            display: inline;
+          }
+          .citation-link:hover {
+            text-decoration: underline;
+          }
+          .reasoning-content .citation-link {
+            color: #4B5563;
+            font-weight: 500;
+            display: inline;
+            margin: 0;
+            padding: 0;
+          }
+          .reasoning-content .citation-link:hover {
+            color: #2563EB;
+            text-decoration: underline;
+          }
+          .step-content {
+            font-size: 12px;
+            line-height: 1.4;
+            padding-top: 1px;
+            color: #4B5563;
+          }
+          .step-content a {
+            color: inherit;
+            margin: 0;
+            padding: 0;
+            display: inline;
+          }
+          
           .response-section {
             padding: 8px 0 0 0;
             margin: 0;
@@ -571,7 +814,8 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.gemini,
           .model-info-tooltip.groq,
           .model-info-tooltip.sambanova,
-          .model-info-tooltip.baseten {
+          .model-info-tooltip.baseten,
+          .model-info-tooltip.perplexity {
             background-color: #F3F4F6;
             color: #333;
           }
@@ -595,6 +839,299 @@ export const StreamingResponseExtension = {
     // Show container immediately with loading animation
     container.style.display = "block";
 
+    // Create URL preview container (from PerplexityExtension)
+    const previewContainer = document.createElement('div');
+    previewContainer.className = 'url-preview-container';
+    document.body.appendChild(previewContainer);
+
+    // Add URL preview styles
+    const urlPreviewStyles = document.createElement('style');
+    urlPreviewStyles.textContent = `
+      .url-preview-container {
+        position: absolute;
+        z-index: 1000;
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        max-width: 300px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+      .url-preview-container.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .url-preview-content {
+        padding: 12px;
+      }
+      .url-preview-loading {
+        padding: 12px;
+        text-align: center;
+      }
+      .url-preview-image {
+        width: 100%;
+        max-height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+      .url-preview-title {
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 4px;
+        color: #1a1e23;
+      }
+      .url-preview-description {
+        font-size: 12px;
+        color: #6b7280;
+        line-height: 1.4;
+      }
+    `;
+    document.head.appendChild(urlPreviewStyles);
+
+    // Function to add URL preview handlers
+    function addUrlPreviewHandlers() {
+      // Function to handle URL preview
+      async function handleUrlPreview(event) {
+        const link = event.target.closest('a')
+        if (!link) return
+
+        const url = link.href
+        const rect = link.getBoundingClientRect()
+
+        // Position the preview container
+        const previewX = rect.left
+        const previewY = rect.bottom + window.scrollY + 10 // 10px below the link
+
+        previewContainer.style.left = `${previewX}px`
+        previewContainer.style.top = `${previewY}px`
+
+        try {
+          // Show loading state
+          previewContainer.innerHTML = `
+            <div class="url-preview-loading">
+              Loading preview...
+            </div>
+          `
+          previewContainer.classList.add('visible')
+
+          // Check if mql is available for URL preview
+          if (typeof window.mql === 'function') {
+            const { data } = await window.mql(url, {
+              data: {
+                title: true,
+                description: true,
+                image: true,
+              },
+            })
+
+            const { title, description, image } = data
+
+            let previewHtml = '<div class="url-preview-content">'
+
+            if (image?.url) {
+              previewHtml += `<img class="url-preview-image" src="${image.url}" alt="${title || 'Preview'}" />`
+            }
+
+            if (title) {
+              previewHtml += `<div class="url-preview-title">${title}</div>`
+            }
+
+            if (description) {
+              previewHtml += `<div class="url-preview-description">${description}</div>`
+            }
+
+            previewHtml += '</div>'
+
+            previewContainer.innerHTML = previewHtml
+          } else {
+            // Fallback preview without mql
+            previewContainer.innerHTML = `
+              <div class="url-preview-content">
+                <div class="url-preview-title">${new URL(url).hostname}</div>
+                <div class="url-preview-description">${url}</div>
+              </div>
+            `
+          }
+        } catch (error) {
+          // If preview fails, show a simple preview
+          previewContainer.innerHTML = `
+            <div class="url-preview-content">
+              <div class="url-preview-title">${new URL(url).hostname}</div>
+              <div class="url-preview-description">${url}</div>
+            </div>
+          `
+        }
+      }
+
+      // Function to hide URL preview
+      function hideUrlPreview() {
+        previewContainer.classList.remove('visible')
+      }
+
+      // Add event listeners for URL preview
+      element.addEventListener('mouseover', (e) => {
+        const link = e.target.closest('a')
+        if (link) {
+          handleUrlPreview(e)
+        }
+      })
+
+      element.addEventListener('mouseout', (e) => {
+        const link = e.target.closest('a')
+        if (link) {
+          hideUrlPreview()
+        }
+      })
+    }
+
+    // Perplexity-specific functions
+    function scrollToBottom() {
+      // Use scrollIntoView on our element with padding
+      if (element) {
+        // Add temporary padding to the bottom
+        const originalPadding = element.style.paddingBottom
+        element.style.paddingBottom = '80px'
+
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+          inline: 'nearest',
+        })
+
+        // Backup scroll attempt with auto behavior
+        setTimeout(() => {
+          element.scrollIntoView({
+            behavior: 'auto',
+            block: 'end',
+            inline: 'nearest',
+          })
+
+          // Restore original padding after scrolling
+          setTimeout(() => {
+            element.style.paddingBottom = originalPadding
+          }, 300)
+        }, 100)
+      }
+    }
+
+    // Function to find the closest scrollable parent
+    function findScrollableParent(element) {
+      let currentParent = element.parentElement
+      while (currentParent) {
+        const hasScrollableContent =
+          currentParent.scrollHeight > currentParent.clientHeight
+        const isScrollable =
+          getComputedStyle(currentParent).overflow !== 'visible'
+
+        if (hasScrollableContent && isScrollable) {
+          return currentParent
+        }
+        currentParent = currentParent.parentElement
+      }
+      return null
+    }
+
+    // Function to smoothly scroll to an element
+    function scrollIntoViewSmooth(element) {
+      // Find the scrollable container by traversing up the DOM
+      const scrollContainer = findScrollableParent(element)
+
+      if (scrollContainer) {
+        const elementRect = element.getBoundingClientRect()
+        const containerRect = scrollContainer.getBoundingClientRect()
+        const isElementInView =
+          elementRect.top >= containerRect.top &&
+          elementRect.bottom <= containerRect.bottom
+
+        if (!isElementInView) {
+          const scrollOffset = elementRect.bottom - containerRect.bottom + 50
+
+          // Use scrollIntoView as a fallback if scrollTo is not working
+          if (Math.abs(scrollContainer.scrollTop) < 1) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'end' })
+          } else {
+            scrollContainer.scrollTo({
+              top: scrollContainer.scrollTop + scrollOffset,
+              behavior: 'smooth',
+            })
+          }
+        }
+      } else {
+        // If no scrollable container is found, try scrollIntoView as fallback
+        element.scrollIntoView({ behavior: 'smooth', block: 'end' })
+      }
+    }
+
+    // Function to create checkbox SVGs for reasoning steps
+    function createCheckbox() {
+      const checkbox = document.createElement('div')
+      checkbox.className = 'step-checkbox'
+      checkbox.innerHTML = `
+        <svg class="unchecked" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="9" stroke="#9CA3AF" stroke-width="2"/>
+        </svg>
+        <svg class="checked" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="10" fill="#111827"/>
+          <path d="M14 7L8.5 12.5L6 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `
+      return checkbox
+    }
+
+    // Function to create a reasoning group
+    function createReasoningGroup() {
+      const group = document.createElement('div')
+      group.className = 'reasoning-group'
+      return group
+    }
+
+    // Function to process citations and convert [X] to links
+    function processCitations(text, citations, isReasoning = false) {
+      if (!citations || !citations.length) return text
+
+      // First normalize spaces in the text
+      let processedText = text.replace(/\s+/g, ' ').trim()
+
+      // Add space before citations and convert to links in a single pass
+      return processedText.replace(/\s*\[(\d+)\]/g, (match, num) => {
+        const index = parseInt(num) - 1
+        if (index >= 0 && index < citations.length) {
+          // Add space only for answer section
+          const prefix = !isReasoning ? ' ' : ''
+          return (
+            prefix +
+            `<a href="${citations[index]}" target="_blank" class="citation-link">[${num}]</a>`
+          )
+        }
+        return match
+      })
+    }
+
+    // Function to create and append a new reasoning step
+    function createReasoningStep(content, group, stepIndex, citations) {
+      if (!content || content.length < 5 || content.trim().endsWith('?'))
+        return null
+
+      const step = document.createElement('div')
+      step.className = 'reasoning-step'
+
+      const checkbox = createCheckbox()
+      checkbox.style.display = 'none' // Hide checkbox by default
+      const contentDiv = document.createElement('div')
+      contentDiv.className = 'step-content'
+
+      // Process citations directly with isReasoning flag set to true
+      contentDiv.innerHTML = processCitations(content, citations, true)
+
+      step.appendChild(checkbox)
+      step.appendChild(contentDiv)
+
+      return step
+    }
+
     // Add event delegation for thinking section toggles
     responseContent.addEventListener('click', function(event) {
       const header = event.target.closest('.ai-thinking-header');
@@ -616,6 +1153,51 @@ export const StreamingResponseExtension = {
             content.classList.add('expanded');
             header.classList.add('expanded');
             header.style.backgroundColor = darkerBgColour;
+          }
+        }
+      }
+
+      // Handle reasoning section expansion from Perplexity
+      const reasoningHeader = event.target.closest('.reasoning-header');
+      if (reasoningHeader) {
+        const reasoningSection = reasoningHeader.closest('.reasoning-section');
+        if (reasoningSection) {
+          const isCollapsed = reasoningSection.classList.contains('collapsed')
+          if (isCollapsed) {
+            // Expanding
+            reasoningSection.classList.remove('collapsed')
+            const reasoningContent = reasoningSection.querySelector('.reasoning-content');
+            if (reasoningContent) {
+              // Restore height and visibility
+              reasoningContent.style.height = 'auto'
+              reasoningContent.style.overflow = 'visible'
+              // Show all completed steps and their checkboxes
+              completedSteps.forEach((step) => {
+                if (step) {
+                  step.style.display = 'flex'
+                  const checkbox = step.querySelector('.step-checkbox')
+                  if (checkbox) {
+                    checkbox.style.display = 'flex'
+                    checkbox.classList.add('is-checked')
+                  }
+                }
+              })
+              // Update height after content is visible
+              requestAnimationFrame(() => {
+                if (activeReasoningGroup) {
+                  const totalHeight = activeReasoningGroup.getBoundingClientRect().height
+                  reasoningContent.style.height = `${totalHeight}px`
+                }
+              })
+            }
+          } else {
+            // Collapsing
+            reasoningSection.classList.add('collapsed')
+            const reasoningContent = reasoningSection.querySelector('.reasoning-content');
+            if (reasoningContent) {
+              reasoningContent.style.overflow = 'hidden'
+              reasoningContent.style.height = '0'
+            }
           }
         }
       }
@@ -1075,6 +1657,9 @@ export const StreamingResponseExtension = {
       // Update content with formatting using the cleaned HTML
       responseContent.innerHTML = cleanedHtml;
 
+      // Add URL preview functionality for citation links (from PerplexityExtension)
+      addUrlPreviewHandlers();
+
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
       if (scrollContainer) {
@@ -1091,19 +1676,6 @@ export const StreamingResponseExtension = {
           });
         }
       }
-    }
-
-    function findScrollableParent(el) {
-      while (el) {
-        const style = window.getComputedStyle(el);
-        const overflowY = style.overflowY;
-
-        if (overflowY === "auto" || overflowY === "scroll") {
-          return el;
-        }
-        el = el.parentElement;
-      }
-      return window;
     }
 
     // Main models registry
@@ -1202,6 +1774,22 @@ export const StreamingResponseExtension = {
         type: "baseten",
         endpoint: "/api/baseten-stream",
         displayName: "Baseten thinking",
+      },
+
+      // Perplexity models
+      {
+        id: 13,
+        name: "sonar-reasoning",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Reasoning",
+      },
+      {
+        id: 14,
+        name: "sonar-reasoning-pro",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Reasoning Pro",
       },
     ];
 
@@ -1413,6 +2001,354 @@ export const StreamingResponseExtension = {
         existingFooter.remove();
       }
       responseSection.appendChild(aiInfoFooter);
+    }
+
+    // Function to handle Perplexity-specific streaming with reasoning
+    async function callPerplexityAPI(endpoint, payload) {
+      try {
+        if (payload.debugMode === 1) {
+          console.log('🔮 Perplexity Model:', payload.model);
+        }
+
+        // Check if model name contains "reasoning"
+        const modelName = (payload.model || '').toLowerCase()
+        const isReasoningModel = modelName.includes('reasoning')
+
+        // Create reasoning section for reasoning models
+        let reasoningSection = null;
+        let reasoningContent = null;
+        let answerSection = null;
+        let answerContent = null;
+
+        if (isReasoningModel) {
+          // Create Perplexity reasoning UI
+          const reasoningHTML = `
+            <div class="reasoning-section">
+              <div class="reasoning-header">
+                <div class="reasoning-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="none" viewBox="0 0 128 128" id="science">
+                    <ellipse cx="72" cy="48" stroke="#1B1B1B" stroke-width="6" rx="21.076" ry="10.036" transform="rotate(-45 72 48)"></ellipse>
+                    <ellipse cx="72" cy="48" stroke="#1B1B1B" stroke-width="6" rx="21.076" ry="10.036" transform="rotate(45 72 48)"></ellipse>
+                    <path fill="#1B1B1B" d="M107 46.7758C107 45.1189 105.657 43.7758 104 43.7758C102.343 43.7758 101 45.1189 101 46.7758H107ZM70.0342 19C71.6911 19 73.0342 17.6569 73.0342 16C73.0342 14.3431 71.6911 13 70.0342 13V19ZM29.8205 72.6634H32.8205C32.8205 71.446 32.0848 70.3493 30.9583 69.8876L29.8205 72.6634ZM89.611 94.2028C90.1916 95.7546 91.9203 96.5419 93.4721 95.9613C95.0238 95.3807 95.8111 93.652 95.2305 92.1002L89.611 94.2028ZM57.1417 91.2742C58.6739 90.6437 59.4048 88.8904 58.7742 87.3583C58.1437 85.8261 56.3904 85.0952 54.8583 85.7258L57.1417 91.2742ZM86.8025 111V114V111ZM23.3165 69.9974L22.1787 72.7733L23.3165 69.9974ZM55.8648 111L55.8648 114L55.8648 111ZM31.6171 53.0102L29.4088 50.9795L31.6171 53.0102ZM33.6399 48.7818L30.6731 48.3368L33.6399 48.7818ZM39.0923 93.2606L38.6153 90.2988L39.0923 93.2606ZM92.4208 93.1515L95.3162 92.3663C95.2918 92.2764 95.2632 92.1876 95.2305 92.1002L92.4208 93.1515ZM101 46.7758C101 61.4182 98.9356 67.2732 96.6185 70.2041L101.325 73.9252C104.992 69.2875 107 61.607 107 46.7758H101ZM24.0975 65.6194L33.8254 55.0409L29.4088 50.9795L19.681 61.5581L24.0975 65.6194ZM30.9583 69.8876L24.4543 67.2216L22.1787 72.7733L28.6826 75.4393L30.9583 69.8876ZM32.8205 85.3624V72.6634H26.8205V85.3624H32.8205ZM47.3879 88.8862L38.6153 90.2988L39.5692 96.2225L48.3417 94.8099L47.3879 88.8862ZM50.8648 103V91.8481H44.8648V103H50.8648ZM86.8025 108L55.8648 108L55.8648 114L86.8025 114V108ZM89.5253 93.9367L91.6282 101.691L97.4191 100.121L95.3162 92.3663L89.5253 93.9367ZM49.0065 94.6223L57.1417 91.2742L54.8583 85.7258L46.723 89.0738L49.0065 94.6223ZM40.6287 32.7137C48.0449 20.3612 59.6888 19 70.0342 19V13C59.2988 13 44.6452 14.3673 35.4846 29.6252L40.6287 32.7137ZM31.7491 41.1633L30.6731 48.3368L36.6067 49.2268L37.6827 42.0534L31.7491 41.1633ZM86.8025 114C94.049 114 99.3157 107.115 97.4191 100.121L91.6282 101.691C92.4903 104.87 90.0964 108 86.8025 108V114ZM19.681 61.5581C16.3813 65.1463 17.6681 70.9244 22.1787 72.7733L24.4543 67.2216C23.81 66.9575 23.6262 66.132 24.0975 65.6194L19.681 61.5581ZM44.8648 103C44.8648 109.075 49.7897 114 55.8648 114L55.8648 108C53.1034 108 50.8648 105.761 50.8648 103H44.8648ZM33.8254 55.0409C35.3122 53.424 36.2809 51.399 36.6067 49.2268L30.6731 48.3368C30.525 49.3242 30.0847 50.2446 29.4088 50.9795L33.8254 55.0409ZM26.8205 85.3624C26.8205 92.1352 32.8825 97.2992 39.5692 96.2225L38.6153 90.2988C35.5759 90.7882 32.8205 88.441 32.8205 85.3624H26.8205ZM35.4846 29.6252C33.2896 33.2812 32.3184 37.368 31.7491 41.1633L37.6827 42.0534C38.207 38.5581 39.0289 35.3782 40.6287 32.7137L35.4846 29.6252ZM96.6185 70.2041C91.4986 76.6802 86.0249 84.6185 89.611 94.2028L95.2305 92.1002C92.9397 85.9776 96.0444 80.6049 101.325 73.9252L96.6185 70.2041Z"></path>
+                  </svg>
+                </div>
+                <div class="reasoning-title-wrapper">
+                  <div class="reasoning-title">Reasoning<span class="reasoning-model">with ${formatModelName(payload.model || 'Unknown Model')}</span></div>
+                  <svg class="toggle-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+              <div class="reasoning-intro">
+                <span>Thinking</span>
+                <div class="loading-dots">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
+              <div class="reasoning-content" id="reasoning-content"></div>
+            </div>
+            <div class="answer-section">
+              <div class="answer-content" id="answer-content"></div>
+            </div>
+          `;
+          
+          // Replace responseContent with Perplexity UI
+          responseContent.innerHTML = reasoningHTML;
+          
+          // Get references to new elements
+          reasoningSection = responseContent.querySelector('.reasoning-section');
+          reasoningContent = responseContent.querySelector('#reasoning-content');
+          answerContent = responseContent.querySelector('#answer-content');
+          answerSection = responseContent.querySelector('.answer-section');
+          
+          // Create initial reasoning group
+          const reasoningGroup = createReasoningGroup();
+          reasoningContent.appendChild(reasoningGroup);
+          activeReasoningGroup = reasoningGroup;
+          isStreaming = true;
+          
+          // Add overflow handling styles
+          reasoningContent.style.overflow = 'hidden';
+        }
+
+        const proxyUrl = `https://utils.hypedigitaly.ai${endpoint}`;
+        if (payload.debugMode === 1) {
+          console.log(`🌐 Calling Perplexity proxy URL: ${proxyUrl}`);
+        }
+
+        const response = await fetch(proxyUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          let errorText = `HTTP error! status: ${response.status}`;
+          try {
+            errorText += `, body: ${await response.text()}`;
+          } catch (e) { /* ignore */ }
+          throw new Error(errorText);
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let streamBuffer = '';
+        let answer = '';
+        let hasStartedAnswer = false;
+        let isFirstChunk = true;
+        let isInThinkBlock = false;
+        let thinkBuffer = '';
+        let citations = [];
+        let currentStep = null;
+
+        // Show main container and hide loading animation
+        if (isFirstChunk) {
+          const thinkingHeader = container.querySelector(".thinking-header");
+          if (thinkingHeader) {
+            thinkingHeader.classList.add("hidden");
+          }
+          responseSection.classList.add("visible");
+          isFirstChunk = false;
+        }
+
+        // Helper functions for reasoning steps
+        function createNewStep(content, isComplete = false) {
+          const step = createReasoningStep(content, activeReasoningGroup, activeReasoningGroup.children.length, citations);
+          
+          if (step) {
+            activeReasoningGroup.appendChild(step);
+            
+            const checkbox = step.querySelector('.step-checkbox');
+            if (checkbox) {
+              checkbox.style.display = 'flex';
+              if (isComplete) {
+                checkbox.classList.add('is-checked');
+                completedSteps.push(step);
+              }
+            }
+            
+            const totalHeight = activeReasoningGroup.getBoundingClientRect().height;
+            reasoningContent.style.height = `${totalHeight}px`;
+            
+            void reasoningContent.offsetHeight;
+            setTimeout(scrollToBottom, 10);
+            setTimeout(scrollToBottom, 50);
+            setTimeout(scrollToBottom, 100);
+            
+            return step;
+          }
+          return null;
+        }
+
+        function updateStep(step, content, complete = false) {
+          if (!step) return;
+          
+          const contentDiv = step.querySelector('.step-content');
+          if (contentDiv) {
+            contentDiv.innerHTML = processCitations(content, citations, true);
+          }
+          
+          if (complete && !completedSteps.includes(step)) {
+            const checkbox = step.querySelector('.step-checkbox');
+            if (checkbox) {
+              checkbox.classList.add('is-checked');
+            }
+            completedSteps.push(step);
+          }
+          
+          const totalHeight = activeReasoningGroup.getBoundingClientRect().height;
+          reasoningContent.style.height = `${totalHeight}px`;
+          
+          void reasoningContent.offsetHeight;
+          setTimeout(scrollToBottom, 10);
+          setTimeout(scrollToBottom, 50);
+          setTimeout(scrollToBottom, 100);
+        }
+
+        // Process thinking content
+        function processThinkingContent(content) {
+          thinkBuffer += content;
+          
+          const parts = thinkBuffer.split('\n');
+          const incompletePart = parts.pop() || '';
+          const completeParts = parts.filter((part) => part.trim());
+          
+          for (const line of completeParts) {
+            const trimmedLine = line.trim();
+            if (trimmedLine) {
+              if (currentStep) {
+                updateStep(currentStep, trimmedLine, true);
+                currentStep = null;
+              } else {
+                const existingSteps = Array.from(activeReasoningGroup.querySelectorAll('.step-content'));
+                const hasStep = existingSteps.some((step) => step.textContent.replace(/\s+/g, ' ').trim() === trimmedLine);
+                if (!hasStep) {
+                  createNewStep(trimmedLine, true);
+                }
+              }
+            }
+          }
+          
+          if (incompletePart.trim()) {
+            if (!currentStep) {
+              currentStep = createNewStep(incompletePart.trim(), false);
+            } else {
+              updateStep(currentStep, incompletePart.trim(), false);
+            }
+          } else if (currentStep) {
+            const contentDiv = currentStep.querySelector('.step-content');
+            if (contentDiv) {
+              const currentText = contentDiv.textContent.replace(/\s+/g, ' ').trim();
+              updateStep(currentStep, currentText, true);
+            }
+            currentStep = null;
+          }
+          
+          thinkBuffer = incompletePart;
+        }
+
+        // Update answer content with markdown support (from PerplexityExtension)
+        function updateAnswerContent(text) {
+          const trimmedText = text.trim();
+          
+          // Convert markdown to HTML (simplified version)
+          const formattedHtml = trimmedText
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`(.*?)`/g, '<code>$1</code>')
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+          
+          if (answerContent) {
+            answerContent.innerHTML = formattedHtml;
+          }
+        }
+
+        // Process stream data
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) {
+            isStreaming = false;
+            break;
+          }
+
+          if (isFirstChunk && isReasoningModel) {
+            const reasoningIntro = reasoningSection?.querySelector('.reasoning-intro');
+            if (reasoningIntro) {
+              reasoningIntro.style.display = 'none';
+            }
+            isFirstChunk = false;
+          }
+
+          const chunk = decoder.decode(value);
+          let jsonBuffer = streamBuffer + chunk;
+          streamBuffer = '';
+
+          const lines = jsonBuffer.split('\n');
+          streamBuffer = lines.pop() || '';
+
+          for (const line of lines) {
+            if (!line.trim() || !line.startsWith('data: ')) continue;
+            if (line === 'data: [DONE]') continue;
+
+            try {
+              const jsonStr = line.slice(5);
+              const data = JSON.parse(jsonStr);
+              
+              if (data.citations) {
+                citations = data.citations;
+              }
+
+              if (data.choices?.[0]?.delta?.content !== null && data.choices?.[0]?.delta?.content !== undefined) {
+                const content = data.choices[0].delta.content;
+                
+                // Handle think block content for reasoning models
+                if (isReasoningModel) {
+                  if (content.includes('<think>')) {
+                    isInThinkBlock = true;
+                    const afterThink = content.split('<think>')[1] || '';
+                    if (afterThink) {
+                      processThinkingContent(afterThink);
+                    }
+                  } else if (content.includes('</think>')) {
+                    isInThinkBlock = false;
+                    const beforeThinkEnd = content.split('</think>')[0];
+                    if (beforeThinkEnd) {
+                      processThinkingContent(beforeThinkEnd);
+                    }
+                    if (currentStep) {
+                      const contentDiv = currentStep.querySelector('.step-content');
+                      if (contentDiv) {
+                        const currentText = contentDiv.textContent;
+                        updateStep(currentStep, currentText, true);
+                      }
+                      currentStep = null;
+                    }
+                    const afterThink = content.split('</think>')[1] || '';
+                    if (afterThink) {
+                      answer += afterThink;
+                      updateAnswerContent(answer);
+                    }
+                  } else if (isInThinkBlock) {
+                    processThinkingContent(content);
+                  } else {
+                    answer += content;
+                    updateAnswerContent(answer);
+                    
+                    if (!hasStartedAnswer) {
+                      hasStartedAnswer = true;
+                      setTimeout(() => {
+                        if (reasoningSection) {
+                          reasoningSection.classList.add('collapsed');
+                          reasoningSection.classList.add('has-answer');
+                        }
+                        if (answerSection) {
+                          answerSection.classList.add('visible');
+                          answerSection.style.display = 'block';
+                        }
+                        if (answerContent) {
+                          scrollIntoViewSmooth(answerContent);
+                        }
+                      }, 1000);
+                    }
+                  }
+                } else {
+                  // For non-reasoning models, just update regular content
+                  updateContent(content);
+                }
+              }
+            } catch (e) {
+              // Skip incomplete chunks silently
+            }
+          }
+        }
+
+        // Process any remaining complete data in buffer
+        if (streamBuffer.trim() && streamBuffer.startsWith('data: ')) {
+          try {
+            const data = JSON.parse(streamBuffer.slice(5));
+            // Process final chunk if needed
+          } catch (e) {
+            // Ignore parsing errors for final incomplete chunk
+          }
+        }
+
+        return true; // Success
+      } catch (error) {
+        if (payload.debugMode === 1) {
+          console.error('❌ Perplexity API Error:', error);
+        }
+        
+        // Show error in UI
+        if (responseContent) {
+          responseContent.innerHTML = `<p style="color: #DC2626;">Error: Failed to get response from Perplexity API - ${error.message}</p>`;
+        }
+        
+        return false; // Failure
+      } finally {
+        isStreaming = false;
+      }
     }
 
     // Generic function to call any LLM API provider with TTFT timeout
@@ -1825,8 +2761,19 @@ export const StreamingResponseExtension = {
           user_id: trace.payload.user_id,
         };
 
-        // Call the LLM API
-        const success = await callLLMAPI(model.endpoint, payload);
+        // Add Perplexity-specific parameters
+        if (model.type === 'perplexity') {
+          payload.apiKey = trace.payload.apiKey;
+          payload.messages = trace.payload.messages || trace.payload.userData;
+        }
+
+        // Call the appropriate LLM API based on model type
+        let success;
+        if (model.type === 'perplexity') {
+          success = await callPerplexityAPI(model.endpoint, payload);
+        } else {
+          success = await callLLMAPI(model.endpoint, payload);
+        }
 
         // Update the status of the current attempt
         currentAttempt.success = success;
@@ -1928,6 +2875,19 @@ export const StreamingResponseExtension = {
     
     // Final processing after streaming completes
     setTimeout(() => finalizeContent(), 100);
+
+    // Cleanup function for URL preview container
+    const cleanup = () => {
+      if (previewContainer && previewContainer.parentNode) {
+        previewContainer.parentNode.removeChild(previewContainer);
+      }
+      if (urlPreviewStyles && urlPreviewStyles.parentNode) {
+        urlPreviewStyles.parentNode.removeChild(urlPreviewStyles);
+      }
+    };
+
+    // Schedule cleanup after interaction completes
+    setTimeout(cleanup, 5000);
 
     window.voiceflow.chat.interact({ type: "continue" });
   },
