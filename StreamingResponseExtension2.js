@@ -1442,21 +1442,24 @@ export const StreamingResponseExtension = {
         name: "o4-mini",
         type: "openai",
         endpoint: "/api/openai-stream",
-        displayName: "o4-mini",
+        displayName: "o4-mini (Reasoning)",
+        supportsReasoning: true,
       },
       {
         id: 14,
         name: "o3-mini",
         type: "openai",
         endpoint: "/api/openai-stream",
-        displayName: "o3-mini",
+        displayName: "o3-mini (Reasoning)",
+        supportsReasoning: true,
       },
       {
         id: 15,
         name: "o3",
         type: "openai",
         endpoint: "/api/openai-stream",
-        displayName: "o3",
+        displayName: "o3 (Reasoning)",
+        supportsReasoning: true,
       },
     ];
 
@@ -1680,7 +1683,7 @@ export const StreamingResponseExtension = {
     async function callLLMAPI(endpoint, payload) {
       // Reasoning models need more time for first token
       const isReasoningEnabled = payload.reasoning && isReasoningModel(payload.model);
-      const TTFT_TIMEOUT_MS = isReasoningEnabled ? 30000 : 10000; // 30s for reasoning, 10s for others
+      const TTFT_TIMEOUT_MS = isReasoningEnabled ? 60000 : 10000; // 60s for reasoning, 10s for others
       const abortController = new AbortController();
       let ttftTimeoutId = null;
       let firstChunkReceived = false;
