@@ -73,6 +73,14 @@ export default async function handler(req, res) {
 
     // Use the new Responses API if reasoning or tools are requested
     if (reasoning || tools) {
+      // For reasoning models, we might need to use non-streaming and simulate streaming
+      // if OpenAI doesn't support reasoning streaming yet
+      const shouldTryHybridApproach = reasoning && isReasoningModel(model || 'o4-mini');
+      
+      if (shouldTryHybridApproach && debugMode === 1) {
+        console.log('🔄 ATTEMPTING HYBRID APPROACH: Non-streaming with simulated streaming for reasoning model');
+      }
+
       const responsesPayload = {
         model: model || 'o4-mini',
         max_output_tokens: max_tokens || 4096,
@@ -80,7 +88,7 @@ export default async function handler(req, res) {
         input: [{ role: 'user', content: userData }],
         reasoning: reasoning,
         tools: tools,
-        stream: true,
+        stream: !shouldTryHybridApproach, // Don't stream for reasoning models in hybrid mode
       };
 
       // Only add temperature for non-reasoning models
@@ -96,6 +104,81 @@ export default async function handler(req, res) {
         console.log('📥 OpenAI Responses API Response initialized');
       }
 
+      // Handle hybrid (non-streaming) approach for reasoning models
+      if (shouldTryHybridApproach && !responsesPayload.stream) {
+        if (debugMode === 1) {
+          console.log('🔄 HYBRID MODE: Processing non-streaming response');
+          console.log('📥 Full Response:', JSON.stringify(response, null, 2));
+        }
+        
+        // Extract reasoning if available
+        if (response.reasoning) {
+          const reasoningData = {
+            type: 'reasoning',
+            content: response.reasoning
+          };
+          if (debugMode === 1) {
+            console.log('🔎 EXTRACTED REASONING:', {
+              reasoning_length: response.reasoning?.length || 0,
+              reasoning_preview: response.reasoning?.substring(0, 100) + (response.reasoning?.length > 100 ? '...' : '')
+            });
+          }
+          res.write(`data: ${JSON.stringify(reasoningData)}\n\n`);
+          res.flush?.();
+        }
+        
+        // Extract and stream the main response content
+        const mainContent = response.output?.[0]?.content || response.content || '';
+        if (mainContent) {
+          // Simulate streaming by chunking the response
+          const chunks = mainContent.match(/.{1,50}/g) || [mainContent];
+          for (const chunk of chunks) {
+            const data = {
+              type: 'content',
+              content: chunk
+            };
+            res.write(`data: ${JSON.stringify(data)}\n\n`);
+            res.flush?.();
+            // Add small delay to simulate streaming
+            await new Promise(resolve => setTimeout(resolve, 50));
+          }
+        }
+        
+        res.write('data: [DONE]\n\n');
+        res.end();
+        return;
+      }
+    } else {
+      const chatPayload = {
+        model: model || 'gpt-4.1-2025-04-14',
+        max_tokens: max_tokens || 4096,
+        messages: [
+          {
+            role: 'system',
+            content: systemPrompt
+          },
+          {
+            role: 'user',
+            content: userData
+          }
+        ],
+        stream: true,
+      };
+
+      // Only add temperature for non-reasoning models
+      if (!isReasoningModel(model || 'gpt-4.1-2025-04-14')) {
+        chatPayload.temperature = temperature || 0;
+      } else if (debugMode === 1) {
+        console.log(`🚫 REASONING MODEL DETECTED: Skipping temperature parameter for ${model || 'gpt-4.1-2025-04-14'}`);
+      }
+
+      const response = await openai.chat.completions.create(chatPayload);
+
+      if (debugMode === 1) {
+        console.log('📥 OpenAI Chat Completions API Response initialized');
+      }
+
+      // Normal streaming approach for non-reasoning models or if reasoning streaming works
       for await (const chunk of response) {
         if (debugMode === 1) {
             console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
@@ -106,6 +189,25 @@ export default async function handler(req, res) {
                 has_tool_call: !!chunk.tool_call,
                 has_error: !!chunk.error,
                 full_keys: Object.keys(chunk)
+            });
+            
+            // Additional debugging - check for any reasoning or tool data in unexpected places
+            console.log('🔍 DEBUGGING ALL CHUNK FIELDS:', {
+                item_id: chunk.item_id,
+                output_index: chunk.output_index,
+                content_index: chunk.content_index,
+                delta_full: chunk.delta,
+                reasoning: chunk.reasoning,
+                tool_call: chunk.tool_call,
+                tool_response: chunk.tool_response,
+                status: chunk.status,
+                response: chunk.response,
+                all_possible_fields: Object.keys(chunk).filter(key => 
+                  key.includes('reason') || 
+                  key.includes('tool') || 
+                  key.includes('think') ||
+                  key.includes('search')
+                )
             });
         }
 
@@ -214,51 +316,6 @@ export default async function handler(req, res) {
             }
             res.write(`data: ${JSON.stringify(data)}\n\n`);
             res.flush?.();
-        }
-      }
-    } else {
-      const chatPayload = {
-        model: model || 'gpt-4.1-2025-04-14',
-        max_tokens: max_tokens || 4096,
-        messages: [
-          {
-            role: 'system',
-            content: systemPrompt
-          },
-          {
-            role: 'user',
-            content: userData
-          }
-        ],
-        stream: true,
-      };
-
-      // Only add temperature for non-reasoning models
-      if (!isReasoningModel(model || 'gpt-4.1-2025-04-14')) {
-        chatPayload.temperature = temperature || 0;
-      } else if (debugMode === 1) {
-        console.log(`🚫 REASONING MODEL DETECTED: Skipping temperature parameter for ${model || 'gpt-4.1-2025-04-14'}`);
-      }
-
-      const response = await openai.chat.completions.create(chatPayload);
-
-      if (debugMode === 1) {
-        console.log('📥 OpenAI Chat Completions API Response initialized');
-      }
-
-      for await (const chunk of response) {
-        if (debugMode === 1) {
-          console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
-        }
-
-        if (chunk.choices[0]?.delta?.content) {
-          const data = {
-            type: 'content',
-            content: chunk.choices[0].delta.content
-          };
-
-          res.write(`data: ${JSON.stringify(data)}\n\n`);
-          res.flush?.();
         }
       }
     }
