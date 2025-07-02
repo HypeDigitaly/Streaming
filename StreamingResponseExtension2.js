@@ -664,46 +664,7 @@ export const StreamingResponseExtension = {
     // Show container immediately with loading animation
     container.style.display = "block";
 
-    // Add event delegation for thinking section toggles
-    responseContent.addEventListener('click', function(event) {
-      const header = event.target.closest('.ai-thinking-header');
-      if (header) {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        const section = header.parentElement;
-        const content = section ? section.querySelector('.ai-thinking-content') : null;
-        
-        if (content) {
-          const isExpanded = content.classList.contains('expanded');
-          
-          if (isExpanded) {
-            content.classList.remove('expanded');
-            header.classList.remove('expanded');
-            header.style.backgroundColor = reasoningBgColour;
-          } else {
-            content.classList.add('expanded');
-            header.classList.add('expanded');
-            header.style.backgroundColor = darkerBgColour;
-          }
-        }
-      }
-    });
-
-    // Add hover effects for thinking section headers
-    responseContent.addEventListener('mouseover', function(event) {
-      const header = event.target.closest('.ai-thinking-header');
-      if (header && !header.classList.contains('expanded')) {
-        header.style.backgroundColor = darkerBgColour;
-      }
-    });
-
-    responseContent.addEventListener('mouseout', function(event) {
-      const header = event.target.closest('.ai-thinking-header');
-      if (header && !header.classList.contains('expanded')) {
-        header.style.backgroundColor = reasoningBgColour;
-      }
-    });
+    // Event delegation is now handled individually for each reasoning section when created
 
     // Convert HTML to Markdown
     function htmlToMarkdown(html) {
@@ -793,12 +754,6 @@ export const StreamingResponseExtension = {
         if (thinkingHeader) {
           thinkingHeader.classList.add("hidden");
         }
-        // Show reasoning section if it's reasoning type
-        if (type === 'reasoning') {
-            const reasoningSection = container.querySelector('.streaming-reasoning-section');
-            reasoningSection.style.display = 'block';
-            reasoningSection.innerHTML = `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content"></div></div>`;
-        }
         isFirstChunk = false;
       }
       
@@ -817,23 +772,68 @@ export const StreamingResponseExtension = {
               });
           }
           
-          const reasoningSection = container.querySelector('.streaming-reasoning-section');
-          const reasoningContentEl = reasoningSection.querySelector('.ai-thinking-content');
-
-          // Ensure reasoning section is visible if it wasn't from the first chunk
-          if (reasoningSection.style.display === 'none') {
+          let reasoningSection = container.querySelector('.streaming-reasoning-section');
+          
+          // Create reasoning section immediately if it doesn't exist
+          if (!reasoningSection || reasoningSection.style.display === 'none') {
+               if (!reasoningSection) {
+                   reasoningSection = container.querySelector('.streaming-reasoning-section');
+               }
                reasoningSection.style.display = 'block';
-               reasoningSection.innerHTML = `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content"></div></div>`;
+               reasoningSection.innerHTML = `<div class="ai-thinking-section">
+                   <div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important; cursor: pointer;" data-reasoning-toggle="true">
+                       <div class="ai-thinking-icon" style="color: #333333;">🔎</div>
+                       <div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div>
+                       <div class="ai-thinking-arrow" style="color: #333333;">▼</div>
+                   </div>
+                   <div class="ai-thinking-content" style="display: block; max-height: none; padding: 12px; border-top: 1px solid #F1F5F9; background-color: #FFFFFF;"></div>
+               </div>`;
+               
+               // Add click handler for this specific reasoning section
+               const reasoningHeader = reasoningSection.querySelector('.ai-thinking-header');
+               if (reasoningHeader) {
+                   reasoningHeader.addEventListener('click', function(e) {
+                       e.preventDefault();
+                       e.stopPropagation();
+                       
+                       const content = reasoningSection.querySelector('.ai-thinking-content');
+                       const arrow = reasoningSection.querySelector('.ai-thinking-arrow');
+                       
+                       if (content && arrow) {
+                           const isExpanded = content.style.display !== 'none' && content.style.maxHeight !== '0px';
+                           
+                           if (isExpanded) {
+                               // Collapse
+                               content.style.display = 'none';
+                               content.style.maxHeight = '0px';
+                               content.style.padding = '0 12px';
+                               arrow.style.transform = 'rotate(0deg)';
+                               reasoningHeader.style.backgroundColor = reasoningBgColour;
+                           } else {
+                               // Expand
+                               content.style.display = 'block';
+                               content.style.maxHeight = 'none';
+                               content.style.padding = '12px';
+                               arrow.style.transform = 'rotate(180deg)';
+                               reasoningHeader.style.backgroundColor = darkerBgColour;
+                           }
+                       }
+                   });
+               }
+               
                if (trace.payload?.debugMode === 1) {
-                   console.log('🔎 REASONING SECTION CREATED');
+                   console.log('🔎 REASONING SECTION CREATED AND CLICK HANDLER ADDED');
                }
           }
 
+          const reasoningContentEl = reasoningSection.querySelector('.ai-thinking-content');
           reasoningBuffer += text;
+          
           // Basic markdown for reasoning, can be expanded
           const formattedReasoning = reasoningBuffer
               .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
               .replace(/\n/g, "<br>");
+              
           if(reasoningContentEl) {
               reasoningContentEl.innerHTML = formattedReasoning;
           }
