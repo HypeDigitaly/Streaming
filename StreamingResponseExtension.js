@@ -571,9 +571,24 @@ export const StreamingResponseExtension = {
           .model-info-tooltip.gemini,
           .model-info-tooltip.groq,
           .model-info-tooltip.sambanova,
-          .model-info-tooltip.baseten {
+          .model-info-tooltip.baseten,
+          .model-info-tooltip.perplexity {
             background-color: #F3F4F6;
             color: #333;
+          }
+          
+          /* Citation link styles */
+          .citation-link {
+            color: #2563EB;
+            text-decoration: none;
+            font-weight: normal;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            display: inline;
+          }
+          .citation-link:hover {
+            text-decoration: underline;
           }
 
         </style>
@@ -714,7 +729,7 @@ export const StreamingResponseExtension = {
     }
 
     // Update the answer content with markdown support
-    function updateContent(text) {
+    function updateContent(text, citations = null, searchResults = null) {
       if (!text) return;
 
       // Handle first chunk
@@ -733,6 +748,14 @@ export const StreamingResponseExtension = {
       
       // Keep track of complete response for final processing
       completeResponse += text;
+      
+      // Store citations and search results for processing
+      if (citations) {
+        container.citations = citations;
+      }
+      if (searchResults) {
+        container.searchResults = searchResults;
+      }
 
       // Post-process buffer to handle various image URL patterns
 
@@ -988,6 +1011,23 @@ export const StreamingResponseExtension = {
           console.log("🔍 AFTER MARKDOWN: Found H2 tags:", formattedContent.match(/<h2>.*?<\/h2>/g));
         }
       }
+      
+      // Function to process citations and convert [X] to links
+      function processCitations(text, citations) {
+        if (!citations || !citations.length) return text;
+
+        // First normalize spaces in the text
+        let processedText = text.replace(/\s+/g, ' ').trim();
+
+        // Add space before citations and convert to links in a single pass
+        return processedText.replace(/\s*\[(\d+)\]/g, (match, num) => {
+          const index = parseInt(num) - 1;
+          if (index >= 0 && index < citations.length) {
+            return ` <a href="${citations[index]}" target="_blank" class="citation-link">[${num}]</a>`;
+          }
+          return match;
+        });
+      }
 
       // --- BEGIN: Post-process lists and clean up empty items ---
       const tempContainer = document.createElement("div");
@@ -1061,8 +1101,13 @@ export const StreamingResponseExtension = {
         }
       });
 
-      const cleanedHtml = tempContainer.innerHTML;
+      let cleanedHtml = tempContainer.innerHTML;
       // --- END: Post-process lists and clean up empty items ---
+
+      // Process citations if available
+      if (container.citations && container.citations.length > 0) {
+        cleanedHtml = processCitations(cleanedHtml, container.citations);
+      }
 
       // Debug logging after HTML processing
       if (trace.payload?.debugMode === 1 && cleanedHtml.includes('##')) {
@@ -1202,6 +1247,43 @@ export const StreamingResponseExtension = {
         type: "baseten",
         endpoint: "/api/baseten-stream",
         displayName: "Baseten thinking",
+      },
+
+      // Perplexity models
+      {
+        id: 13,
+        name: "sonar",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar",
+      },
+      {
+        id: 14,
+        name: "sonar-pro",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Pro",
+      },
+      {
+        id: 15,
+        name: "sonar-reasoning",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Reasoning",
+      },
+      {
+        id: 16,
+        name: "sonar-reasoning-pro",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Reasoning Pro",
+      },
+      {
+        id: 17,
+        name: "sonar-deep-research",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Deep Research",
       },
     ];
 
@@ -1555,6 +1637,9 @@ export const StreamingResponseExtension = {
                   }
 
                   const content = parsed.content || "";
+                  const citations = parsed.citations || null;
+                  const searchResults = parsed.search_results || null;
+                  
                   if (content || typeof content === "string") {
                     // Handle empty string content too
                     receivedAnyContent = true; // Mark that we have received processable content
@@ -1575,7 +1660,7 @@ export const StreamingResponseExtension = {
 
                     // Update UI only if the fetch wasn't aborted *before* this point
                     if (!abortController.signal.aborted) {
-                      updateContent(content);
+                      updateContent(content, citations, searchResults);
                       localCompleteResponse += content;
                     } else {
                       // Should theoretically not happen if abort check is robust, but good failsafe
@@ -1824,6 +1909,26 @@ export const StreamingResponseExtension = {
           projectName: trace.payload.projectName,
           user_id: trace.payload.user_id,
         };
+
+        // Add Perplexity-specific parameters if this is a Perplexity model
+        if (model.type === 'perplexity') {
+          if (trace.payload.search_mode) payload.search_mode = trace.payload.search_mode;
+          if (trace.payload.reasoning_effort) payload.reasoning_effort = trace.payload.reasoning_effort;
+          if (trace.payload.top_p !== undefined) payload.top_p = trace.payload.top_p;
+          if (trace.payload.search_domain_filter) payload.search_domain_filter = trace.payload.search_domain_filter;
+          if (trace.payload.return_images !== undefined) payload.return_images = trace.payload.return_images;
+          if (trace.payload.return_related_questions !== undefined) payload.return_related_questions = trace.payload.return_related_questions;
+          if (trace.payload.search_recency_filter) payload.search_recency_filter = trace.payload.search_recency_filter;
+          if (trace.payload.search_after_date_filter) payload.search_after_date_filter = trace.payload.search_after_date_filter;
+          if (trace.payload.search_before_date_filter) payload.search_before_date_filter = trace.payload.search_before_date_filter;
+          if (trace.payload.last_updated_after_filter) payload.last_updated_after_filter = trace.payload.last_updated_after_filter;
+          if (trace.payload.last_updated_before_filter) payload.last_updated_before_filter = trace.payload.last_updated_before_filter;
+          if (trace.payload.top_k !== undefined) payload.top_k = trace.payload.top_k;
+          if (trace.payload.presence_penalty !== undefined) payload.presence_penalty = trace.payload.presence_penalty;
+          if (trace.payload.frequency_penalty !== undefined) payload.frequency_penalty = trace.payload.frequency_penalty;
+          if (trace.payload.response_format) payload.response_format = trace.payload.response_format;
+          if (trace.payload.web_search_options) payload.web_search_options = trace.payload.web_search_options;
+        }
 
         // Call the LLM API
         const success = await callLLMAPI(model.endpoint, payload);
