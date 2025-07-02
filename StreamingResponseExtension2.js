@@ -846,6 +846,7 @@ export const StreamingResponseExtension = {
           
           // Create reasoning section immediately if it doesn't exist or is hidden
           if (!reasoningSection || reasoningSection.style.display === 'none') {
+               // Show reasoning section immediately when first reasoning token arrives
                reasoningSection.style.display = 'block';
                reasoningSection.innerHTML = `<div class="ai-thinking-section">
                    <div class="ai-thinking-header expanded" style="background-color: ${darkerBgColour} !important; cursor: pointer; border-radius: 6px 6px 0 0; border-bottom: 1px solid #E2E8F0;" data-reasoning-toggle="true">
@@ -904,13 +905,19 @@ export const StreamingResponseExtension = {
           const reasoningContentEl = reasoningSection.querySelector('.ai-thinking-content');
           reasoningBuffer += text;
           
-          // Basic markdown for reasoning, can be expanded
+          // Enhanced markdown processing for reasoning
           const formattedReasoning = reasoningBuffer
               .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+              .replace(/\*(.*?)\*/g, "<em>$1</em>")
+              .replace(/`(.*?)`/g, "<code>$1</code>")
+              .replace(/\n\n/g, "</p><p>")
               .replace(/\n/g, "<br>");
               
           if(reasoningContentEl) {
-              reasoningContentEl.innerHTML = formattedReasoning;
+              reasoningContentEl.innerHTML = `<p>${formattedReasoning}</p>`;
+              
+              // Scroll reasoning content to show latest thinking
+              reasoningContentEl.scrollTop = reasoningContentEl.scrollHeight;
           }
           return;
       }
@@ -954,25 +961,34 @@ export const StreamingResponseExtension = {
                   }
               }
               
-              // Check if we already have a tool call section for this tool
-              let existingToolSection = toolsSection.querySelector(`[data-tool="${toolData.tool_name}"]`);
+              // Always update or create the latest tool call section
+              let currentToolSection = toolsSection.querySelector(`[data-tool="${toolData.tool_name}"][data-status="active"]`);
               
-              if (!existingToolSection) {
+              if (!currentToolSection) {
+                  // Mark any existing tool sections as inactive
+                  const existingTools = toolsSection.querySelectorAll(`[data-tool="${toolData.tool_name}"]`);
+                  existingTools.forEach(tool => tool.setAttribute('data-status', 'inactive'));
+                  
                   // Enhanced tool call display for web search
                   let toolDetailsHtml = '';
                   if (toolData.tool_name === 'web_search_preview') {
+                      const queryText = toolData.query || toolData.arguments || 'Searching...';
+                      const actionText = toolData.action === 'search' ? 'Vyhledávání' : 
+                                        toolData.action === 'open_page' ? 'Otevírání stránky' :
+                                        toolData.action === 'find_in_page' ? 'Hledání na stránce' : 'Zpracování';
+                      
                       toolDetailsHtml = `
                           <div class="tool-query">
-                              <strong>Dotaz:</strong> ${toolData.query || toolData.arguments}
+                              <strong>Dotaz:</strong> ${queryText}
                           </div>
                           <div class="tool-step">
-                              <span class="tool-step-indicator">⏳</span> ${toolData.step || 'Vyhledávání...'}
+                              <span class="tool-step-indicator">⏳</span> ${actionText}...
                           </div>`;
                   } else {
                       toolDetailsHtml = `<div class="tool-arguments">${toolData.arguments}</div>`;
                   }
                   
-                  const toolCallHtml = `<div class="tool-call-section" data-tool="${toolData.tool_name}">
+                  const toolCallHtml = `<div class="tool-call-section" data-tool="${toolData.tool_name}" data-status="active">
                       <div class="tool-call-header">
                           <span class="tool-icon">${toolName.split(' ')[0]}</span>
                           <span class="tool-name">${toolName.substring(2)}</span>
@@ -981,32 +997,37 @@ export const StreamingResponseExtension = {
                       ${toolDetailsHtml}
                   </div>`;
                   
-                  toolsSection.innerHTML = toolCallHtml; // Replace content instead of append
+                  toolsSection.insertAdjacentHTML('beforeend', toolCallHtml);
+                  currentToolSection = toolsSection.querySelector(`[data-tool="${toolData.tool_name}"][data-status="active"]`);
                   
                   if (trace.payload?.debugMode === 1) {
                       console.log('🔧 NEW TOOL CALL UI CREATED:', {
                           tool_name: toolData.tool_name,
-                          display_name: toolName
+                          display_name: toolName,
+                          query: toolData.query,
+                          action: toolData.action
                       });
                   }
               } else {
-                  // Update existing tool section status
-                  const statusEl = existingToolSection.querySelector('.tool-status');
+                  // Update existing active tool section
+                  const statusEl = currentToolSection.querySelector('.tool-status');
                   if (statusEl) {
-                      statusEl.textContent = 'Spouštím...';
+                      statusEl.textContent = toolData.status === 'searching' ? 'Prohledávám...' : 'Spouštím...';
                       statusEl.style.color = '#6B7280';
                   }
                   
-                  // Update step indicator if exists
-                  const stepIndicator = existingToolSection.querySelector('.tool-step-indicator');
-                  if (stepIndicator) {
-                      stepIndicator.textContent = '⏳';
+                  // Update step text if exists
+                  const stepEl = currentToolSection.querySelector('.tool-step');
+                  if (stepEl && toolData.step) {
+                      stepEl.innerHTML = `<span class="tool-step-indicator">⏳</span> ${toolData.step}`;
                   }
                   
                   if (trace.payload?.debugMode === 1) {
-                      console.log('🔧 EXISTING TOOL CALL UI UPDATED:', {
+                      console.log('🔧 ACTIVE TOOL CALL UI UPDATED:', {
                           tool_name: toolData.tool_name,
-                          display_name: toolName
+                          display_name: toolName,
+                          status: toolData.status,
+                          step: toolData.step
                       });
                   }
               }
@@ -1033,8 +1054,8 @@ export const StreamingResponseExtension = {
                   console.log('🌐 PARSED TOOL RESPONSE DATA:', toolData);
               }
               
-              const toolCallSections = container.querySelectorAll('.tool-call-section');
-              const lastToolCall = toolCallSections[toolCallSections.length - 1];
+              // Find the active tool call section for this tool
+              const lastToolCall = container.querySelector(`[data-tool="${toolData.tool_name}"][data-status="active"]`);
               
               if (lastToolCall) {
                   const statusEl = lastToolCall.querySelector('.tool-status');

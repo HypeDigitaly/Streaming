@@ -148,24 +148,49 @@ export default async function handler(req, res) {
           }
         } else if (chunk.type === 'response.web_search_call.in_progress') {
           streamType = 'tool_call';
+          const webSearchCall = chunk.web_search_call || {};
           content = JSON.stringify({
             tool_name: 'web_search_preview',
-            arguments: chunk.web_search_call?.query || 'Searching...',
+            arguments: webSearchCall.query || 'Searching...',
             status: 'searching',
-            query: chunk.web_search_call?.query,
-            step: 'Vyhledávání na webu...'
+            query: webSearchCall.query,
+            step: 'Vyhledávání na webu...',
+            action: webSearchCall.action || 'search'
           });
           if (debugMode === 1) {
-            console.log('🌐 WEB SEARCH IN PROGRESS:', chunk);
+            console.log('🌐 WEB SEARCH IN PROGRESS:', {
+              chunk_type: chunk.type,
+              web_search_call: webSearchCall,
+              query: webSearchCall.query,
+              action: webSearchCall.action
+            });
+          }
+        } else if (chunk.type === 'response.web_search_call.searching') {
+          streamType = 'tool_call';
+          const webSearchCall = chunk.web_search_call || {};
+          content = JSON.stringify({
+            tool_name: 'web_search_preview',
+            arguments: webSearchCall.query || 'Searching...',
+            status: 'searching',
+            query: webSearchCall.query,
+            step: 'Prohledávání webu...',
+            action: webSearchCall.action || 'search'
+          });
+          if (debugMode === 1) {
+            console.log('🌐 WEB SEARCH SEARCHING:', {
+              chunk_type: chunk.type,
+              web_search_call: webSearchCall
+            });
           }
         } else if (chunk.type === 'response.web_search_call.completed') {
           streamType = 'tool_response';
-          const results = chunk.web_search_call?.results || [];
+          const webSearchCall = chunk.web_search_call || {};
+          const results = webSearchCall.results || [];
           const resultsCount = results.length;
           const topResults = results.slice(0, 3).map(r => ({
-            title: r.title,
-            url: r.url,
-            snippet: r.snippet?.substring(0, 100) + '...'
+            title: r.title || 'Bez názvu',
+            url: r.url || '',
+            snippet: r.snippet ? (r.snippet.substring(0, 100) + (r.snippet.length > 100 ? '...' : '')) : 'Bez popisu'
           }));
           
           content = JSON.stringify({
@@ -173,11 +198,18 @@ export default async function handler(req, res) {
             response: `Nalezeno ${resultsCount} výsledků`,
             results_count: resultsCount,
             top_results: topResults,
-            query: chunk.web_search_call?.query,
-            status: 'completed'
+            query: webSearchCall.query,
+            status: 'completed',
+            action: webSearchCall.action || 'search',
+            domains: webSearchCall.domains || []
           });
           if (debugMode === 1) {
-            console.log('🌐 WEB SEARCH COMPLETED:', chunk);
+            console.log('🌐 WEB SEARCH COMPLETED:', {
+              chunk_type: chunk.type,
+              web_search_call: webSearchCall,
+              results_count: resultsCount,
+              top_results: topResults
+            });
           }
         } else if (chunk.type === 'response.file_search_call.in_progress') {
           streamType = 'tool_call';
