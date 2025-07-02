@@ -150,7 +150,7 @@ export const StreamingResponseExtension = {
           .reasoning-section {
             background-color: #F9FAFB;
             border-radius: 6px;
-            padding: 4px 8px;
+            padding: 0 0 4px 0;
             margin: 0 0 16px 0;
             width: 100%;
             box-sizing: border-box;
@@ -158,7 +158,7 @@ export const StreamingResponseExtension = {
             line-height: 1.2;
           }
           .reasoning-section.collapsed {
-            padding: 3px 8px;
+            padding: 0 0 3px 0;
             cursor: pointer;
           }
           .reasoning-section.has-answer {
@@ -178,7 +178,7 @@ export const StreamingResponseExtension = {
             gap: 6px;
             transition: background-color 0.2s ease, border-radius 0.3s ease;
             user-select: none;
-            margin: -8px -8px 16px -8px;
+            margin: 0 0 16px 0;
           }
           .reasoning-header:hover {
             background-color: ${darkerBgColour};
@@ -256,7 +256,7 @@ export const StreamingResponseExtension = {
             line-height: 1.3;
             color: #4B5563;
             margin: 0 0 8px 0;
-            padding: 0;
+            padding: 0 10px;
             max-height: none;
             overflow: visible;
           }
