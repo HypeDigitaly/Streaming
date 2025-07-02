@@ -56,7 +56,10 @@ export default async function handler(req, res) {
       presence_penalty,
       frequency_penalty,
       response_format,
-      web_search_options
+      web_search_context_size,
+      user_location_latitude,
+      user_location_longitude,
+      user_location_country
     } = req.body;
 
     // Select API key based on projectName
@@ -90,7 +93,10 @@ export default async function handler(req, res) {
         presence_penalty,
         frequency_penalty,
         response_format,
-        web_search_options
+        web_search_context_size,
+        user_location_latitude,
+        user_location_longitude,
+        user_location_country
       });
     }
 
@@ -134,7 +140,29 @@ export default async function handler(req, res) {
     if (presence_penalty !== undefined) requestPayload.presence_penalty = presence_penalty;
     if (frequency_penalty !== undefined) requestPayload.frequency_penalty = frequency_penalty;
     if (response_format) requestPayload.response_format = response_format;
-    if (web_search_options) requestPayload.web_search_options = web_search_options;
+    
+    // Build web_search_options object properly
+    if (web_search_context_size || user_location_latitude || user_location_longitude || user_location_country) {
+      requestPayload.web_search_options = {};
+      
+      if (web_search_context_size) {
+        requestPayload.web_search_options.search_context_size = web_search_context_size;
+      }
+      
+      if (user_location_latitude !== undefined || user_location_longitude !== undefined || user_location_country) {
+        requestPayload.web_search_options.user_location = {};
+        
+        if (user_location_latitude !== undefined) {
+          requestPayload.web_search_options.user_location.latitude = user_location_latitude;
+        }
+        if (user_location_longitude !== undefined) {
+          requestPayload.web_search_options.user_location.longitude = user_location_longitude;
+        }
+        if (user_location_country) {
+          requestPayload.web_search_options.user_location.country = user_location_country;
+        }
+      }
+    }
 
     const response = await fetch('https://api.perplexity.ai/chat/completions', {
       method: 'POST',

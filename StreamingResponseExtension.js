@@ -1927,7 +1927,12 @@ export const StreamingResponseExtension = {
           if (trace.payload.presence_penalty !== undefined) payload.presence_penalty = trace.payload.presence_penalty;
           if (trace.payload.frequency_penalty !== undefined) payload.frequency_penalty = trace.payload.frequency_penalty;
           if (trace.payload.response_format) payload.response_format = trace.payload.response_format;
-          if (trace.payload.web_search_options) payload.web_search_options = trace.payload.web_search_options;
+          
+          // Handle web_search_options properly
+          if (trace.payload.web_search_context_size) payload.web_search_context_size = trace.payload.web_search_context_size;
+          if (trace.payload.user_location_latitude !== undefined) payload.user_location_latitude = trace.payload.user_location_latitude;
+          if (trace.payload.user_location_longitude !== undefined) payload.user_location_longitude = trace.payload.user_location_longitude;
+          if (trace.payload.user_location_country) payload.user_location_country = trace.payload.user_location_country;
         }
 
         // Call the LLM API
