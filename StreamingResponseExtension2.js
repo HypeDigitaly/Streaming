@@ -548,6 +548,30 @@ export const StreamingResponseExtension = {
           .ai-info-footer.tooltip-visible::after {
             transform: rotate(180deg);
           }
+          
+          /* Citation and URL styling */
+          .inline-citation {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+          }
+          .inline-citation:hover {
+            background-color: #2563EB !important;
+            transform: scale(1.05);
+          }
+          .citation-highlight {
+            background-color: #FEF3C7 !important;
+            border-color: #F59E0B !important;
+            transition: all 0.3s ease;
+          }
+          .url-citation {
+            color: #059669;
+            text-decoration: none;
+            border-bottom: 1px dotted #059669;
+          }
+          .url-citation:hover {
+            text-decoration: underline;
+            color: #047857;
+          }
           .model-info-tooltip {
             display: none;
             position: absolute;
@@ -939,6 +963,10 @@ export const StreamingResponseExtension = {
               const toolName = toolData.tool_name === 'web_search_preview' ? '🌐 Vyhledávání na webu' : 
                              toolData.tool_name === 'file_search' ? '📄 Vyhledávání v souborech' : 
                              `🔧 ${toolData.tool_name}`;
+              
+              const actionText = toolData.action === 'search' ? 'Vyhledávání' : 
+                               toolData.action === 'open_page' ? 'Otevírání stránky' :
+                               toolData.action === 'find_in_page' ? 'Hledání na stránce' : 'Zpracovávám';
 
               // Get or create tools section
               let toolsSection = container.querySelector('.streaming-tools-section');
@@ -996,7 +1024,7 @@ export const StreamingResponseExtension = {
                       <div class="tool-header" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                           <span class="tool-icon" style="font-size: 16px;">${toolName.split(' ')[0]}</span>
                           <span class="tool-name" style="font-weight: 500; color: #374151;">${toolName}</span>
-                          <span class="tool-status" style="color: #6B7280; font-size: 14px;">Spouštím...</span>
+                          <span class="tool-status" style="color: #6B7280; font-size: 14px;">${actionText}...</span>
                       </div>
                       <div class="tool-step" style="color: #6B7280; font-size: 14px; margin-bottom: 4px;">
                           <span class="tool-step-indicator">⏳</span> ${step}
@@ -1004,6 +1032,11 @@ export const StreamingResponseExtension = {
                       <div class="tool-query" style="color: #374151; font-size: 14px; background: #FFFFFF; padding: 8px; border-radius: 4px; border: 1px solid #E5E7EB;">
                           <strong>Dotaz:</strong> ${query}
                       </div>
+                      ${toolData.action && toolData.action !== 'search' ? `
+                          <div style="font-size: 12px; color: #6B7280; margin-top: 4px; padding: 4px 8px; background: #F3F4F6; border-radius: 3px;">
+                              📋 Akce: ${actionText}
+                          </div>
+                      ` : ''}
                   `;
 
                   toolsSection.appendChild(toolSection);
@@ -1116,18 +1149,54 @@ export const StreamingResponseExtension = {
                           if (resultsCount > 0 && topResults.length > 0) {
                               resultsHtml += '<div style="margin-top: 8px;">';
                               topResults.forEach((result, index) => {
+                                  const citationId = index + 1;
+                                  const domain = result.domain || (result.url ? new URL(result.url).hostname : '');
+                                  const publishedDate = result.published_date ? new Date(result.published_date).toLocaleDateString('cs-CZ') : '';
+                                  
                                   resultsHtml += `
-                                      <div style="margin-bottom: 8px; padding: 8px; background: #F9FAFB; border-radius: 4px; border-left: 3px solid #3B82F6;">
-                                          <div style="font-weight: 500; color: #1F2937; margin-bottom: 4px;">
-                                              ${index + 1}. ${result.title || 'Bez názvu'}
+                                      <div style="margin-bottom: 12px; padding: 12px; background: #F9FAFB; border-radius: 6px; border-left: 4px solid #3B82F6; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                          <div style="display: flex; align-items: start; gap: 8px; margin-bottom: 6px;">
+                                              <span style="background: #3B82F6; color: white; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 3px; min-width: 20px; text-align: center;">[${citationId}]</span>
+                                              <div style="flex-grow: 1;">
+                                                  <div style="font-weight: 600; color: #1F2937; margin-bottom: 4px; line-height: 1.3;">
+                                                      ${result.title || 'Bez názvu'}
+                                                  </div>
+                                                  ${result.url ? `
+                                                      <a href="${result.url}" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: #059669; text-decoration: none; word-break: break-all; hover: text-decoration: underline;">
+                                                          ${domain}${result.url.length > 60 ? '...' : ''}
+                                                      </a>
+                                                  ` : ''}
+                                                  ${publishedDate ? `<div style="font-size: 11px; color: #6B7280; margin-top: 2px;">📅 ${publishedDate}</div>` : ''}
+                                              </div>
                                           </div>
-                                          ${result.url ? `<div style="font-size: 12px; color: #6B7280; margin-bottom: 4px; word-break: break-all;">${result.url}</div>` : ''}
-                                          <div style="color: #4B5563; font-size: 14px;">
+                                          <div style="color: #4B5563; font-size: 13px; line-height: 1.4; margin-left: 28px;">
                                               ${result.snippet || 'Bez popisu'}
                                           </div>
+                                          ${result.relevance_score ? `
+                                              <div style="margin-top: 6px; margin-left: 28px;">
+                                                  <span style="font-size: 11px; color: #6B7280; background: #E5E7EB; padding: 1px 4px; border-radius: 2px;">
+                                                      Relevance: ${Math.round(result.relevance_score * 100)}%
+                                                  </span>
+                                              </div>
+                                          ` : ''}
                                       </div>
                                   `;
                               });
+                              
+                              // Add citations summary
+                              if (toolResponse.citations && toolResponse.citations.length > 0) {
+                                  resultsHtml += `
+                                      <div style="margin-top: 12px; padding: 8px; background: #EBF8FF; border-radius: 4px; border: 1px solid #BEE3F8;">
+                                          <div style="font-weight: 600; color: #2B6CB0; margin-bottom: 4px; font-size: 12px;">
+                                              📎 Citations (${toolResponse.citations.length})
+                                          </div>
+                                          <div style="font-size: 11px; color: #2C5282;">
+                                              ${toolResponse.citations.map(c => `[${c.citation_id}] ${c.domain}`).join(' • ')}
+                                          </div>
+                                      </div>
+                                  `;
+                              }
+                              
                               resultsHtml += '</div>';
                           } else if (resultsCount === 0) {
                               resultsHtml += `
@@ -1419,6 +1488,11 @@ export const StreamingResponseExtension = {
         .replace(
           /\[([^\]]+)\]\(([^)]+)\)/g,
           '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
+        )
+        // Process inline citations - convert [1], [2] etc. to clickable citation links
+        .replace(
+          /\[(\d+)\]/g,
+          '<span class="inline-citation" style="background: #3B82F6; color: white; font-size: 10px; font-weight: 600; padding: 1px 4px; border-radius: 2px; margin: 0 1px; cursor: pointer;" data-citation="$1">[$1]</span>'
         )
         .replace(/^- (.*$)/gm, (match, content) => {
           const indentation = match.match(/^\s*/)[0].length;
@@ -2470,11 +2544,40 @@ export const StreamingResponseExtension = {
       }
     }
 
+    // Add citation click handlers
+    function addCitationHandlers() {
+      const citations = container.querySelectorAll('.inline-citation');
+      citations.forEach(citation => {
+        citation.addEventListener('click', function() {
+          const citationNum = this.getAttribute('data-citation');
+          
+          // Remove existing highlights
+          container.querySelectorAll('.citation-highlight').forEach(el => {
+            el.classList.remove('citation-highlight');
+          });
+          
+          // Find and highlight the corresponding search result
+          const toolResults = container.querySelectorAll('.tool-results > div > div');
+          toolResults.forEach(result => {
+            const citationSpan = result.querySelector('span');
+            if (citationSpan && citationSpan.textContent.includes(`[${citationNum}]`)) {
+              result.classList.add('citation-highlight');
+              // Scroll to the result
+              result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
+        });
+      });
+    }
+
     // Start the LLM orchestration
     await orchestrateLLMCalls(trace);
 
     // Final processing after streaming completes
-    setTimeout(() => finalizeContent(), 100);
+    setTimeout(() => {
+      finalizeContent();
+      addCitationHandlers();
+    }, 100);
 
     window.voiceflow.chat.interact({ type: "continue" });
   },

@@ -32,7 +32,7 @@ export default async function handler(req, res) {
   res.setHeader('Connection', 'keep-alive');
 
   try {
-    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools } = req.body;
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools, enableWebSearch, enableFileSearch, userLocation, searchContextSize } = req.body;
 
     // Function to check if a model is a reasoning model
     function isReasoningModel(modelName) {
@@ -52,18 +52,22 @@ export default async function handler(req, res) {
     });
 
     if (debugMode === 1) {
-      console.log('📡 OpenAI Payload values:', {
-        model,
-        max_tokens,
-        temperature,
-        projectName,
-        debugMode,
-        systemPrompt,
-        user_id,
-        reasoning,
-        tools,
-      });
-    }
+        console.log('📡 OpenAI Payload values:', {
+          model,
+          max_tokens,
+          temperature,
+          projectName,
+          debugMode,
+          systemPrompt,
+          user_id,
+          reasoning,
+          tools,
+          enableWebSearch,
+          enableFileSearch,
+          userLocation,
+          searchContextSize
+        });
+      }
 
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
@@ -82,6 +86,39 @@ export default async function handler(req, res) {
         tools: tools,
         stream: true, // Always use streaming for real-time updates
       };
+
+      const tools = [];
+        if (enableWebSearch) {
+            const webSearchTool = { type: 'web_search_preview' };
+
+            // Add user location if provided
+            if (userLocation) {
+                webSearchTool.user_location = {
+                    type: 'approximate',
+                    country: userLocation.country || 'US',
+                    city: userLocation.city || null,
+                    region: userLocation.region || null,
+                    timezone: userLocation.timezone || null
+                };
+            }
+
+            // Add search context size if provided
+            if (searchContextSize) {
+                webSearchTool.search_context_size = searchContextSize; // 'low', 'medium', 'high'
+            }
+
+            tools.push(webSearchTool);
+            if (debugMode === 1) {
+                console.log('🌐 WEB SEARCH TOOL ADDED:', webSearchTool);
+            }
+        }
+
+        if (enableFileSearch) {
+            tools.push({ type: 'file_search' });
+            if (debugMode === 1) {
+                console.log('📄 FILE SEARCH TOOL ADDED');
+            }
+        }
 
       // Only add temperature for non-reasoning models
       if (!isReasoningModel(model || 'o4-mini')) {
@@ -192,7 +229,7 @@ export default async function handler(req, res) {
             url: r.url || '',
             snippet: r.snippet ? (r.snippet.substring(0, 100) + (r.snippet.length > 100 ? '...' : '')) : 'Bez popisu'
           }));
-          
+
           content = JSON.stringify({
             tool_name: 'web_search_preview',
             response: `Nalezeno ${resultsCount} výsledků`,
