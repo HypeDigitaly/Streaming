@@ -608,6 +608,128 @@ export const StreamingResponseExtension = {
             margin: 0 0 1em 0;
           }
 
+          /* Perplexity-specific reasoning section styles */
+          .perplexity-reasoning-section {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            margin: 0 0 1em 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+          }
+          .perplexity-reasoning-header {
+            background-color: ${reasoningBgColour};
+            border-bottom: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s ease, border-radius 0.3s ease;
+            user-select: none;
+          }
+          .perplexity-reasoning-header:hover {
+            background-color: ${darkerBgColour};
+          }
+          .perplexity-reasoning-header.expanded {
+            background-color: ${darkerBgColour};
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #E2E8F0;
+          }
+          .perplexity-reasoning-icon {
+            color: #333333;
+            font-size: 14px;
+            margin-right: 6px;
+            flex-shrink: 0;
+            line-height: 1;
+          }
+          .perplexity-reasoning-title {
+            font-weight: 600;
+            color: #333333;
+            font-size: 13px;
+            line-height: 1.2;
+            flex-grow: 1;
+          }
+          .perplexity-reasoning-arrow {
+            color: #333333;
+            font-size: 12px;
+            transition: transform 0.2s ease;
+          }
+          .perplexity-reasoning-header.expanded .perplexity-reasoning-arrow {
+            transform: rotate(180deg);
+          }
+          .perplexity-reasoning-content {
+            padding: 0;
+            background-color: #FFFFFF;
+            border-top: none;
+            display: block;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #374151;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease, border-top 0.3s ease;
+          }
+          .perplexity-reasoning-content.expanded {
+            max-height: 1000px;
+            padding: 12px;
+            border-top: 1px solid #F1F5F9;
+            border-radius: 0 0 6px 6px;
+          }
+          .perplexity-reasoning-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+          }
+          .perplexity-step-checkbox {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            position: relative;
+          }
+          .perplexity-step-checkbox svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 14px;
+            height: 14px;
+          }
+          .perplexity-step-content {
+            flex: 1;
+            font-size: 12px;
+            line-height: 1.4;
+            padding-top: 1px;
+          }
+          .perplexity-step-checkbox .unchecked {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+          }
+          .perplexity-step-checkbox .checked {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+          .perplexity-step-checkbox.is-checked .unchecked {
+            opacity: 0;
+          }
+          .perplexity-step-checkbox.is-checked .checked {
+            opacity: 1;
+          }
+          .perplexity-citation-link {
+            color: #2563EB;
+            text-decoration: none;
+            font-weight: normal;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            display: inline;
+          }
+          .perplexity-citation-link:hover {
+            text-decoration: underline;
+          }
+
           .tool-call-section {
             background-color: #F8FAFC;
             border: 1px solid #E2E8F0;
@@ -1083,6 +1205,99 @@ export const StreamingResponseExtension = {
               if (trace.payload?.debugMode === 1) {
                   console.error('🔧 ERROR PARSING TOOL DATA:', e);
               }
+          }
+          return;
+      }
+
+      if (type === 'perplexity_content') {
+          if (trace.payload?.debugMode === 1) {
+              console.log('🔮 FRONTEND PERPLEXITY PROCESSING:', {
+                  text_length: text?.length || 0,
+                  text_preview: text?.substring(0, 50) + (text?.length > 50 ? '...' : ''),
+                  type: type
+              });
+          }
+
+          // Handle Perplexity-specific content processing
+          if (text) {
+              // Check if content contains thinking blocks
+              if (text.includes('<think>')) {
+                  const thinkMatch = text.match(/<think>([\s\S]*?)(?:<\/think>|$)/);
+                  if (thinkMatch) {
+                      const thinkContent = thinkMatch[1];
+                      
+                      // Get or create Perplexity reasoning section
+                      let perplexityReasoningSection = container.querySelector('.perplexity-reasoning-section');
+                      if (!perplexityReasoningSection) {
+                          perplexityReasoningSection = document.createElement('div');
+                          perplexityReasoningSection.className = 'perplexity-reasoning-section';
+                          perplexityReasoningSection.innerHTML = `
+                              <div class="perplexity-reasoning-header expanded">
+                                  <div class="perplexity-reasoning-icon">🔍</div>
+                                  <div class="perplexity-reasoning-title">Reasoning</div>
+                                  <div class="perplexity-reasoning-arrow">▼</div>
+                              </div>
+                              <div class="perplexity-reasoning-content expanded">
+                                  <div class="perplexity-reasoning-group"></div>
+                              </div>
+                          `;
+                          
+                          // Add click handler
+                          const header = perplexityReasoningSection.querySelector('.perplexity-reasoning-header');
+                          header.addEventListener('click', function() {
+                              const content = perplexityReasoningSection.querySelector('.perplexity-reasoning-content');
+                              const arrow = perplexityReasoningSection.querySelector('.perplexity-reasoning-arrow');
+                              
+                              if (content.classList.contains('expanded')) {
+                                  content.classList.remove('expanded');
+                                  header.classList.remove('expanded');
+                                  arrow.style.transform = 'rotate(0deg)';
+                              } else {
+                                  content.classList.add('expanded');
+                                  header.classList.add('expanded');
+                                  arrow.style.transform = 'rotate(180deg)';
+                              }
+                          });
+                          
+                          // Insert before response section
+                          container.insertBefore(perplexityReasoningSection, responseSection);
+                      }
+                      
+                      // Process thinking content into steps
+                      const reasoningGroup = perplexityReasoningSection.querySelector('.perplexity-reasoning-group');
+                      const steps = thinkContent.split('\n').filter(step => step.trim());
+                      
+                      steps.forEach((stepContent, index) => {
+                          if (stepContent.trim().length > 5) {
+                              const step = document.createElement('div');
+                              step.className = 'perplexity-reasoning-step';
+                              step.innerHTML = `
+                                  <div class="perplexity-step-checkbox is-checked">
+                                      <svg class="unchecked" viewBox="0 0 20 20" fill="none">
+                                          <circle cx="10" cy="10" r="9" stroke="#9CA3AF" stroke-width="2"/>
+                                      </svg>
+                                      <svg class="checked" viewBox="0 0 20 20" fill="none">
+                                          <circle cx="10" cy="10" r="10" fill="#111827"/>
+                                          <path d="M14 7L8.5 12.5L6 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                  </div>
+                                  <div class="perplexity-step-content">${stepContent.trim()}</div>
+                              `;
+                              reasoningGroup.appendChild(step);
+                          }
+                      });
+                  }
+                  
+                  // Extract content after </think> tag
+                  const afterThink = text.split('</think>')[1];
+                  if (afterThink) {
+                      updateContent(afterThink, 'content');
+                  }
+                  return;
+              }
+              
+              // Regular content processing for Perplexity
+              updateContent(text, 'content');
           }
           return;
       }
@@ -1726,6 +1941,46 @@ export const StreamingResponseExtension = {
         displayName: "Baseten thinking",
       },
 
+      // Perplexity models
+      {
+        id: 16,
+        name: "sonar",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar",
+      },
+      {
+        id: 17,
+        name: "sonar-pro",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Pro",
+      },
+      {
+        id: 18,
+        name: "sonar-reasoning",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Reasoning",
+        supportsReasoning: true,
+      },
+      {
+        id: 19,
+        name: "sonar-reasoning-pro",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Reasoning Pro",
+        supportsReasoning: true,
+      },
+      {
+        id: 20,
+        name: "sonar-deep-research",
+        type: "perplexity",
+        endpoint: "/api/perplexity-stream",
+        displayName: "Sonar Deep Research",
+        supportsReasoning: true,
+      },
+
       // OpenAI Reasoning Models
       {
         id: 13,
@@ -1776,6 +2031,12 @@ export const StreamingResponseExtension = {
     function isReasoningModel(modelName) {
       const reasoningModels = ["o4-mini", "o3-mini", "o3"];
       return reasoningModels.includes(modelName);
+    }
+
+    // Function to check if a model is a Perplexity model
+    function isPerplexityModel(modelName) {
+      const perplexityModels = ["sonar", "sonar-pro", "sonar-reasoning", "sonar-reasoning-pro", "sonar-deep-research"];
+      return perplexityModels.includes(modelName);
     }
 
     // Adds AI info footer to the UI
@@ -2383,6 +2644,36 @@ export const StreamingResponseExtension = {
           projectName: trace.payload.projectName,
           user_id: trace.payload.user_id,
         };
+
+        // Add Perplexity-specific parameters if it's a Perplexity model
+        if (model.type === 'perplexity') {
+          if (trace.payload.search_mode) payload.search_mode = trace.payload.search_mode;
+          if (trace.payload.reasoning_effort) payload.reasoning_effort = trace.payload.reasoning_effort;
+          if (trace.payload.top_p !== undefined) payload.top_p = trace.payload.top_p;
+          if (trace.payload.search_domain_filter) payload.search_domain_filter = trace.payload.search_domain_filter;
+          if (trace.payload.return_images !== undefined) payload.return_images = trace.payload.return_images;
+          if (trace.payload.return_related_questions !== undefined) payload.return_related_questions = trace.payload.return_related_questions;
+          if (trace.payload.search_recency_filter) payload.search_recency_filter = trace.payload.search_recency_filter;
+          if (trace.payload.search_after_date_filter) payload.search_after_date_filter = trace.payload.search_after_date_filter;
+          if (trace.payload.search_before_date_filter) payload.search_before_date_filter = trace.payload.search_before_date_filter;
+          if (trace.payload.last_updated_after_filter) payload.last_updated_after_filter = trace.payload.last_updated_after_filter;
+          if (trace.payload.last_updated_before_filter) payload.last_updated_before_filter = trace.payload.last_updated_before_filter;
+          if (trace.payload.top_k !== undefined) payload.top_k = trace.payload.top_k;
+          if (trace.payload.presence_penalty !== undefined) payload.presence_penalty = trace.payload.presence_penalty;
+          if (trace.payload.frequency_penalty !== undefined) payload.frequency_penalty = trace.payload.frequency_penalty;
+          if (trace.payload.response_format) payload.response_format = trace.payload.response_format;
+          if (trace.payload.web_search_options) payload.web_search_options = trace.payload.web_search_options;
+          
+          if (trace.payload.debugMode === 1) {
+            console.log('🔮 PERPLEXITY PARAMETERS ADDED:', {
+              search_mode: payload.search_mode,
+              reasoning_effort: payload.reasoning_effort,
+              return_images: payload.return_images,
+              return_related_questions: payload.return_related_questions,
+              web_search_options: payload.web_search_options
+            });
+          }
+        }
 
         // Only add temperature for non-reasoning models
         if (!isReasoningModel(model.name)) {
