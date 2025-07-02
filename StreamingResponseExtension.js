@@ -170,7 +170,7 @@ export const StreamingResponseExtension = {
           .reasoning-header {
             background-color: ${reasoningBgColour};
             border-bottom: none;
-            border-radius: 6px;
+            border-radius: 6px 6px 0 0;
             padding: 6px 10px;
             cursor: pointer;
             display: flex;
@@ -178,7 +178,7 @@ export const StreamingResponseExtension = {
             gap: 6px;
             transition: background-color 0.2s ease, border-radius 0.3s ease;
             user-select: none;
-            margin-bottom: 16px;
+            margin: -4px -8px 16px -8px;
           }
           .reasoning-header:hover {
             background-color: ${darkerBgColour};
@@ -2048,7 +2048,7 @@ export const StreamingResponseExtension = {
 
         if (isReasoningModel) {
           // Create Perplexity reasoning UI - kompaktní verze
-          const reasoningHTML = `<div class="reasoning-section"><div class="reasoning-header"><div class="reasoning-icon" style="color: #333333; font-size: 14px; margin-right: 6px; flex-shrink: 0; line-height: 1;">🔎</div><div class="reasoning-title-wrapper"><div class="reasoning-title" style="font-weight: 600; color: #333333; font-size: 13px; line-height: 1.2; flex-grow: 1;">Myšlenkový proces</div><svg class="toggle-icon" viewBox="0 0 20 20" fill="currentColor" style="color: #333333; font-size: 12px; transition: transform 0.2s ease;"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" /></svg></div></div><div class="reasoning-content" id="reasoning-content"></div></div><div class="answer-section"><div class="answer-content" id="answer-content" style="padding-top: 24px;"></div></div>`;
+          const reasoningHTML = `<div class="reasoning-section"><div class="reasoning-header"><div class="reasoning-icon" style="color: #333333; font-size: 14px; margin-right: 6px; flex-shrink: 0; line-height: 1;">🔎</div><div class="reasoning-title-wrapper"><div class="reasoning-title" style="font-weight: 600; color: #333333; font-size: 13px; line-height: 1.2; flex-grow: 1;">Myšlenkový proces</div><svg class="toggle-icon" viewBox="0 0 20 20" fill="currentColor" style="color: #333333; font-size: 12px; transition: transform 0.2s ease;"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" /></svg></div></div><div class="reasoning-content" id="reasoning-content"></div></div><div class="answer-section"><div class="answer-content" id="answer-content" style="padding-top: 12px;"></div></div>`;
           
           // Replace responseContent with Perplexity UI
           responseContent.innerHTML = reasoningHTML;
