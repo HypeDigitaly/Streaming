@@ -844,19 +844,16 @@ export const StreamingResponseExtension = {
           
           let reasoningSection = container.querySelector('.streaming-reasoning-section');
           
-          // Create reasoning section immediately if it doesn't exist
+          // Create reasoning section immediately if it doesn't exist or is hidden
           if (!reasoningSection || reasoningSection.style.display === 'none') {
-               if (!reasoningSection) {
-                   reasoningSection = container.querySelector('.streaming-reasoning-section');
-               }
                reasoningSection.style.display = 'block';
                reasoningSection.innerHTML = `<div class="ai-thinking-section">
-                   <div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important; cursor: pointer;" data-reasoning-toggle="true">
+                   <div class="ai-thinking-header expanded" style="background-color: ${darkerBgColour} !important; cursor: pointer; border-radius: 6px 6px 0 0; border-bottom: 1px solid #E2E8F0;" data-reasoning-toggle="true">
                        <div class="ai-thinking-icon" style="color: #333333;">🔎</div>
                        <div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div>
-                       <div class="ai-thinking-arrow" style="color: #333333;">▼</div>
+                       <div class="ai-thinking-arrow" style="color: #333333; transform: rotate(180deg);">▼</div>
                    </div>
-                   <div class="ai-thinking-content" style="display: block; max-height: none; padding: 12px; border-top: 1px solid #F1F5F9; background-color: #FFFFFF;"></div>
+                   <div class="ai-thinking-content expanded" style="display: block; max-height: none; padding: 12px; border-top: 1px solid #F1F5F9; background-color: #FFFFFF; border-radius: 0 0 6px 6px;"></div>
                </div>`;
                
                // Add click handler for this specific reasoning section
@@ -870,22 +867,30 @@ export const StreamingResponseExtension = {
                        const arrow = reasoningSection.querySelector('.ai-thinking-arrow');
                        
                        if (content && arrow) {
-                           const isExpanded = content.style.display !== 'none' && content.style.maxHeight !== '0px';
+                           const isExpanded = content.classList.contains('expanded');
                            
                            if (isExpanded) {
                                // Collapse
+                               content.classList.remove('expanded');
+                               reasoningHeader.classList.remove('expanded');
                                content.style.display = 'none';
                                content.style.maxHeight = '0px';
                                content.style.padding = '0 12px';
                                arrow.style.transform = 'rotate(0deg)';
                                reasoningHeader.style.backgroundColor = reasoningBgColour;
+                               reasoningHeader.style.borderRadius = '6px';
+                               reasoningHeader.style.borderBottom = 'none';
                            } else {
                                // Expand
+                               content.classList.add('expanded');
+                               reasoningHeader.classList.add('expanded');
                                content.style.display = 'block';
                                content.style.maxHeight = 'none';
                                content.style.padding = '12px';
                                arrow.style.transform = 'rotate(180deg)';
                                reasoningHeader.style.backgroundColor = darkerBgColour;
+                               reasoningHeader.style.borderRadius = '6px 6px 0 0';
+                               reasoningHeader.style.borderBottom = '1px solid #E2E8F0';
                            }
                        }
                    });
@@ -928,30 +933,7 @@ export const StreamingResponseExtension = {
                              toolData.tool_name === 'file_search' ? '📄 Vyhledávání v souborech' : 
                              `🔧 ${toolData.tool_name}`;
               
-              // Enhanced tool call display for web search
-              let toolDetailsHtml = '';
-              if (toolData.tool_name === 'web_search_preview') {
-                  toolDetailsHtml = `
-                      <div class="tool-query">
-                          <strong>Dotaz:</strong> ${toolData.query || toolData.arguments}
-                      </div>
-                      <div class="tool-step">
-                          <span class="tool-step-indicator">⏳</span> ${toolData.step || 'Vyhledávání...'}
-                      </div>`;
-              } else {
-                  toolDetailsHtml = `<div class="tool-arguments">${toolData.arguments}</div>`;
-              }
-              
-              const toolCallHtml = `<div class="tool-call-section" data-tool="${toolData.tool_name}">
-                  <div class="tool-call-header">
-                      <span class="tool-icon">${toolName.split(' ')[0]}</span>
-                      <span class="tool-name">${toolName.substring(2)}</span>
-                      <span class="tool-status">Spouštím...</span>
-                  </div>
-                  ${toolDetailsHtml}
-              </div>`;
-              
-              // Add to tools section or create new tools section
+              // Get or create tools section
               let toolsSection = container.querySelector('.streaming-tools-section');
               if (!toolsSection) {
                   toolsSection = document.createElement('div');
@@ -971,13 +953,62 @@ export const StreamingResponseExtension = {
                       console.log('🔧 TOOLS SECTION CREATED AND POSITIONED');
                   }
               }
-              toolsSection.innerHTML += toolCallHtml;
               
-              if (trace.payload?.debugMode === 1) {
-                  console.log('🔧 TOOL CALL UI ADDED:', {
-                      tool_name: toolData.tool_name,
-                      display_name: toolName
-                  });
+              // Check if we already have a tool call section for this tool
+              let existingToolSection = toolsSection.querySelector(`[data-tool="${toolData.tool_name}"]`);
+              
+              if (!existingToolSection) {
+                  // Enhanced tool call display for web search
+                  let toolDetailsHtml = '';
+                  if (toolData.tool_name === 'web_search_preview') {
+                      toolDetailsHtml = `
+                          <div class="tool-query">
+                              <strong>Dotaz:</strong> ${toolData.query || toolData.arguments}
+                          </div>
+                          <div class="tool-step">
+                              <span class="tool-step-indicator">⏳</span> ${toolData.step || 'Vyhledávání...'}
+                          </div>`;
+                  } else {
+                      toolDetailsHtml = `<div class="tool-arguments">${toolData.arguments}</div>`;
+                  }
+                  
+                  const toolCallHtml = `<div class="tool-call-section" data-tool="${toolData.tool_name}">
+                      <div class="tool-call-header">
+                          <span class="tool-icon">${toolName.split(' ')[0]}</span>
+                          <span class="tool-name">${toolName.substring(2)}</span>
+                          <span class="tool-status">Spouštím...</span>
+                      </div>
+                      ${toolDetailsHtml}
+                  </div>`;
+                  
+                  toolsSection.innerHTML = toolCallHtml; // Replace content instead of append
+                  
+                  if (trace.payload?.debugMode === 1) {
+                      console.log('🔧 NEW TOOL CALL UI CREATED:', {
+                          tool_name: toolData.tool_name,
+                          display_name: toolName
+                      });
+                  }
+              } else {
+                  // Update existing tool section status
+                  const statusEl = existingToolSection.querySelector('.tool-status');
+                  if (statusEl) {
+                      statusEl.textContent = 'Spouštím...';
+                      statusEl.style.color = '#6B7280';
+                  }
+                  
+                  // Update step indicator if exists
+                  const stepIndicator = existingToolSection.querySelector('.tool-step-indicator');
+                  if (stepIndicator) {
+                      stepIndicator.textContent = '⏳';
+                  }
+                  
+                  if (trace.payload?.debugMode === 1) {
+                      console.log('🔧 EXISTING TOOL CALL UI UPDATED:', {
+                          tool_name: toolData.tool_name,
+                          display_name: toolName
+                      });
+                  }
               }
           } catch (e) {
               console.warn('Failed to parse tool call data:', text);
