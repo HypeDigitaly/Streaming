@@ -164,29 +164,34 @@ export const StreamingResponseExtension = {
           .reasoning-section.has-answer {
             margin-bottom: 0;
           }
-          .reasoning-section.collapsed .reasoning-content,
-          .reasoning-section.collapsed .reasoning-intro {
+          .reasoning-section.collapsed .reasoning-content {
             display: none;
           }
           .reasoning-header {
+            background-color: ${reasoningBgColour};
+            border-bottom: none;
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
+            transition: background-color 0.2s ease, border-radius 0.3s ease;
+            user-select: none;
             margin-bottom: 6px;
+          }
+          .reasoning-header:hover {
+            background-color: ${darkerBgColour};
           }
           .reasoning-section.collapsed .reasoning-header {
             margin-bottom: 0;
           }
           .reasoning-icon {
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .reasoning-icon svg {
-            width: 28px;
-            height: 28px;
+            color: #333333;
+            font-size: 14px;
+            margin-right: 6px;
+            flex-shrink: 0;
+            line-height: 1;
           }
           .reasoning-title-wrapper {
             flex: 1;
@@ -195,9 +200,11 @@ export const StreamingResponseExtension = {
             justify-content: space-between;
           }
           .reasoning-title {
-            font-size: 13px;
             font-weight: 600;
-            color: #111827;
+            color: #333333;
+            font-size: 13px;
+            line-height: 1.2;
+            flex-grow: 1;
           }
           .reasoning-model {
             font-weight: normal;
@@ -205,24 +212,16 @@ export const StreamingResponseExtension = {
             margin-left: 4px;
           }
           .toggle-icon {
+            color: #333333;
+            font-size: 12px;
+            transition: transform 0.2s ease;
             width: 16px;
             height: 16px;
-            color: #6B7280;
-            transition: transform 0.3s ease;
           }
           .reasoning-section.collapsed .toggle-icon {
             transform: rotate(-180deg);
           }
-          .reasoning-intro {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-            line-height: 1.4;
-            color: #6B7280;
-            margin-bottom: 6px;
-            margin-top: 0;
-          }
+
           .loading-dots {
             display: inline-flex;
             align-items: center;
@@ -2049,7 +2048,7 @@ export const StreamingResponseExtension = {
 
         if (isReasoningModel) {
           // Create Perplexity reasoning UI - kompaktní verze
-          const reasoningHTML = `<div class="reasoning-section"><div class="reasoning-header"><div class="reasoning-icon"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="none" viewBox="0 0 128 128" id="science"><ellipse cx="72" cy="48" stroke="#1B1B1B" stroke-width="6" rx="21.076" ry="10.036" transform="rotate(-45 72 48)"></ellipse><ellipse cx="72" cy="48" stroke="#1B1B1B" stroke-width="6" rx="21.076" ry="10.036" transform="rotate(45 72 48)"></ellipse><path fill="#1B1B1B" d="M107 46.7758C107 45.1189 105.657 43.7758 104 43.7758C102.343 43.7758 101 45.1189 101 46.7758H107ZM70.0342 19C71.6911 19 73.0342 17.6569 73.0342 16C73.0342 14.3431 71.6911 13 70.0342 13V19ZM29.8205 72.6634H32.8205C32.8205 71.446 32.0848 70.3493 30.9583 69.8876L29.8205 72.6634ZM89.611 94.2028C90.1916 95.7546 91.9203 96.5419 93.4721 95.9613C95.0238 95.3807 95.8111 93.652 95.2305 92.1002L89.611 94.2028ZM57.1417 91.2742C58.6739 90.6437 59.4048 88.8904 58.7742 87.3583C58.1437 85.8261 56.3904 85.0952 54.8583 85.7258L57.1417 91.2742ZM86.8025 111V114V111ZM23.3165 69.9974L22.1787 72.7733L23.3165 69.9974ZM55.8648 111L55.8648 114L55.8648 111ZM31.6171 53.0102L29.4088 50.9795L31.6171 53.0102ZM33.6399 48.7818L30.6731 48.3368L33.6399 48.7818ZM39.0923 93.2606L38.6153 90.2988L39.0923 93.2606ZM92.4208 93.1515L95.3162 92.3663C95.2918 92.2764 95.2632 92.1876 95.2305 92.1002L92.4208 93.1515ZM101 46.7758C101 61.4182 98.9356 67.2732 96.6185 70.2041L101.325 73.9252C104.992 69.2875 107 61.607 107 46.7758H101ZM24.0975 65.6194L33.8254 55.0409L29.4088 50.9795L19.681 61.5581L24.0975 65.6194ZM30.9583 69.8876L24.4543 67.2216L22.1787 72.7733L28.6826 75.4393L30.9583 69.8876ZM32.8205 85.3624V72.6634H26.8205V85.3624H32.8205ZM47.3879 88.8862L38.6153 90.2988L39.5692 96.2225L48.3417 94.8099L47.3879 88.8862ZM50.8648 103V91.8481H44.8648V103H50.8648ZM86.8025 108L55.8648 108L55.8648 114L86.8025 114V108ZM89.5253 93.9367L91.6282 101.691L97.4191 100.121L95.3162 92.3663L89.5253 93.9367ZM49.0065 94.6223L57.1417 91.2742L54.8583 85.7258L46.723 89.0738L49.0065 94.6223ZM40.6287 32.7137C48.0449 20.3612 59.6888 19 70.0342 19V13C59.2988 13 44.6452 14.3673 35.4846 29.6252L40.6287 32.7137ZM31.7491 41.1633L30.6731 48.3368L36.6067 49.2268L37.6827 42.0534L31.7491 41.1633ZM86.8025 114C94.049 114 99.3157 107.115 97.4191 100.121L91.6282 101.691C92.4903 104.87 90.0964 108 86.8025 108V114ZM19.681 61.5581C16.3813 65.1463 17.6681 70.9244 22.1787 72.7733L24.4543 67.2216C23.81 66.9575 23.6262 66.132 24.0975 65.6194L19.681 61.5581ZM44.8648 103C44.8648 109.075 49.7897 114 55.8648 114L55.8648 108C53.1034 108 50.8648 105.761 50.8648 103H44.8648ZM33.8254 55.0409C35.3122 53.424 36.2809 51.399 36.6067 49.2268L30.6731 48.3368C30.525 49.3242 30.0847 50.2446 29.4088 50.9795L33.8254 55.0409ZM26.8205 85.3624C26.8205 92.1352 32.8825 97.2992 39.5692 96.2225L38.6153 90.2988C35.5759 90.7882 32.8205 88.441 32.8205 85.3624H26.8205ZM35.4846 29.6252C33.2896 33.2812 32.3184 37.368 31.7491 41.1633L37.6827 42.0534C38.207 38.5581 39.0289 35.3782 40.6287 32.7137L35.4846 29.6252ZM96.6185 70.2041C91.4986 76.6802 86.0249 84.6185 89.611 94.2028L95.2305 92.1002C92.9397 85.9776 96.0444 80.6049 101.325 73.9252L96.6185 70.2041Z"></path></svg></div><div class="reasoning-title-wrapper"><div class="reasoning-title">Reasoning<span class="reasoning-model">with ${formatModelName(payload.model || 'Unknown Model')}</span></div><svg class="toggle-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" /></svg></div></div><div class="reasoning-intro"><span>Thinking</span><div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div><div class="reasoning-content" id="reasoning-content"></div></div><div class="answer-section"><div class="answer-content" id="answer-content"></div></div>`;
+          const reasoningHTML = `<div class="reasoning-section"><div class="reasoning-header"><div class="reasoning-icon" style="color: #333333; font-size: 14px; margin-right: 6px; flex-shrink: 0; line-height: 1;">🔎</div><div class="reasoning-title-wrapper"><div class="reasoning-title" style="font-weight: 600; color: #333333; font-size: 13px; line-height: 1.2; flex-grow: 1;">Reasoning<span class="reasoning-model">with ${formatModelName(payload.model || 'Unknown Model')}</span></div><svg class="toggle-icon" viewBox="0 0 20 20" fill="currentColor" style="color: #333333; font-size: 12px; transition: transform 0.2s ease;"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" /></svg></div></div><div class="reasoning-content" id="reasoning-content"></div></div><div class="answer-section"><div class="answer-content" id="answer-content"></div></div>`;
           
           // Replace responseContent with Perplexity UI
           responseContent.innerHTML = reasoningHTML;
@@ -2278,15 +2277,8 @@ export const StreamingResponseExtension = {
               if (data.choices?.[0]?.delta?.content !== null && data.choices?.[0]?.delta?.content !== undefined) {
                 const content = data.choices[0].delta.content;
                 
-                // Hide thinking animation on first content
+                // Mark first chunk as processed
                 if (isFirstChunk) {
-                  const reasoningIntro = reasoningSection?.querySelector('.reasoning-intro');
-                  if (reasoningIntro) {
-                    reasoningIntro.style.display = 'none';
-                    if (payload.debugMode === 1) {
-                      console.log('🔄 Hiding reasoning intro on first content');
-                    }
-                  }
                   isFirstChunk = false;
                 }
 
