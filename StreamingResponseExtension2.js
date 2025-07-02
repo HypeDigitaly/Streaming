@@ -548,7 +548,7 @@ export const StreamingResponseExtension = {
           .ai-info-footer.tooltip-visible::after {
             transform: rotate(180deg);
           }
-          
+
           /* Citation and URL styling */
           .inline-citation {
             cursor: pointer;
@@ -1085,7 +1085,7 @@ export const StreamingResponseExtension = {
               const toolName = toolData.tool_name === 'web_search_preview' ? '🌐 Vyhledávání na webu' : 
                              toolData.tool_name === 'file_search' ? '📄 Vyhledávání v souborech' : 
                              `🔧 ${toolData.tool_name}`;
-              
+
               const actionText = toolData.action === 'search' ? 'Vyhledávání' : 
                                toolData.action === 'open_page' ? 'Otevírání stránky' :
                                toolData.action === 'find_in_page' ? 'Hledání na stránce' : 'Zpracovávám';
@@ -1225,7 +1225,7 @@ export const StreamingResponseExtension = {
                   const thinkMatch = text.match(/<think>([\s\S]*?)(?:<\/think>|$)/);
                   if (thinkMatch) {
                       const thinkContent = thinkMatch[1];
-                      
+
                       // Get or create Perplexity reasoning section
                       let perplexityReasoningSection = container.querySelector('.perplexity-reasoning-section');
                       if (!perplexityReasoningSection) {
@@ -1241,13 +1241,13 @@ export const StreamingResponseExtension = {
                                   <div class="perplexity-reasoning-group"></div>
                               </div>
                           `;
-                          
+
                           // Add click handler
                           const header = perplexityReasoningSection.querySelector('.perplexity-reasoning-header');
                           header.addEventListener('click', function() {
                               const content = perplexityReasoningSection.querySelector('.perplexity-reasoning-content');
                               const arrow = perplexityReasoningSection.querySelector('.perplexity-reasoning-arrow');
-                              
+
                               if (content.classList.contains('expanded')) {
                                   content.classList.remove('expanded');
                                   header.classList.remove('expanded');
@@ -1258,15 +1258,15 @@ export const StreamingResponseExtension = {
                                   arrow.style.transform = 'rotate(180deg)';
                               }
                           });
-                          
+
                           // Insert before response section
                           container.insertBefore(perplexityReasoningSection, responseSection);
                       }
-                      
+
                       // Process thinking content into steps
                       const reasoningGroup = perplexityReasoningSection.querySelector('.perplexity-reasoning-group');
                       const steps = thinkContent.split('\n').filter(step => step.trim());
-                      
+
                       steps.forEach((stepContent, index) => {
                           if (stepContent.trim().length > 5) {
                               const step = document.createElement('div');
@@ -1287,7 +1287,7 @@ export const StreamingResponseExtension = {
                           }
                       });
                   }
-                  
+
                   // Extract content after </think> tag
                   const afterThink = text.split('</think>')[1];
                   if (afterThink) {
@@ -1295,7 +1295,7 @@ export const StreamingResponseExtension = {
                   }
                   return;
               }
-              
+
               // Regular content processing for Perplexity
               updateContent(text, 'content');
           }
@@ -1367,7 +1367,7 @@ export const StreamingResponseExtension = {
                                   const citationId = index + 1;
                                   const domain = result.domain || (result.url ? new URL(result.url).hostname : '');
                                   const publishedDate = result.published_date ? new Date(result.published_date).toLocaleDateString('cs-CZ') : '';
-                                  
+
                                   resultsHtml += `
                                       <div style="margin-bottom: 12px; padding: 12px; background: #F9FAFB; border-radius: 6px; border-left: 4px solid #3B82F6; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                                           <div style="display: flex; align-items: start; gap: 8px; margin-bottom: 6px;">
@@ -1397,7 +1397,7 @@ export const StreamingResponseExtension = {
                                       </div>
                                   `;
                               });
-                              
+
                               // Add citations summary
                               if (toolResponse.citations && toolResponse.citations.length > 0) {
                                   resultsHtml += `
@@ -1411,7 +1411,7 @@ export const StreamingResponseExtension = {
                                       </div>
                                   `;
                               }
-                              
+
                               resultsHtml += '</div>';
                           } else if (resultsCount === 0) {
                               resultsHtml += `
@@ -2448,6 +2448,8 @@ export const StreamingResponseExtension = {
         } catch (error) {
           // Catch all errors from fetch, reading, processing
           if (error.name === "AbortError") {
+```text
+
             // Log abort reason, but the failure is handled by the Promise.race outcome
             if (payload.debugMode === 1)
               console.log(
@@ -2663,7 +2665,7 @@ export const StreamingResponseExtension = {
           if (trace.payload.frequency_penalty !== undefined) payload.frequency_penalty = trace.payload.frequency_penalty;
           if (trace.payload.response_format) payload.response_format = trace.payload.response_format;
           if (trace.payload.web_search_options) payload.web_search_options = trace.payload.web_search_options;
-          
+
           if (trace.payload.debugMode === 1) {
             console.log('🔮 PERPLEXITY PARAMETERS ADDED:', {
               search_mode: payload.search_mode,
@@ -2841,12 +2843,12 @@ export const StreamingResponseExtension = {
       citations.forEach(citation => {
         citation.addEventListener('click', function() {
           const citationNum = this.getAttribute('data-citation');
-          
+
           // Remove existing highlights
           container.querySelectorAll('.citation-highlight').forEach(el => {
             el.classList.remove('citation-highlight');
           });
-          
+
           // Find and highlight the corresponding search result
           const toolResults = container.querySelectorAll('.tool-results > div > div');
           toolResults.forEach(result => {
