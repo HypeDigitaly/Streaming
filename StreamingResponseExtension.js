@@ -667,6 +667,18 @@ export const StreamingResponseExtension = {
     let deltaCounter = 0;
     let completeResponse = "";
 
+    // Check if this is a reasoning model (similar to PerplexityStreamingExtension)
+    const currentModelId = trace.payload?.modelSequence ? parseInt(trace.payload.modelSequence.split(',')[0]) : null;
+    const isReasoningModel = currentModelId && [12, 15, 16].includes(currentModelId); // Baseten thinking (12), Sonar Reasoning (15), Sonar Reasoning Pro (16)
+    
+    if (trace.payload?.debugMode === 1) {
+      console.log("🧠 REASONING MODEL CHECK:", {
+        modelId: currentModelId,
+        isReasoningModel: isReasoningModel,
+        reasoningModels: [12, 15, 16]
+      });
+    }
+
     // Show container immediately with loading animation
     container.style.display = "block";
 
@@ -932,9 +944,13 @@ export const StreamingResponseExtension = {
 
       // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
       const formattedContent = processBuffer
-        // Process POSTUP tags FIRST to avoid conflicts with other formatting
+        // Process POSTUP tags FIRST to avoid conflicts with other formatting - BUT ONLY FOR REASONING MODELS
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          // Process citations within thinking content
+          if (!isReasoningModel) {
+            // For non-reasoning models, just return the content without thinking wrapper
+            return content.trim();
+          }
+          // Process citations within thinking content for reasoning models only
           const processedContent = container.citations ? processCitations(content.trim(), container.citations, true) : content.trim();
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${processedContent}</div></div>`;
         })
