@@ -23,8 +23,7 @@
  *   "web_search_options": {
  *     "search_context_size": "high",
  *     "user_location": {
- *       "latitude": 40.7128,
- *       "longitude": -74.0060
+ *       "country": "CZ"
  *     }
  *   }
  * }

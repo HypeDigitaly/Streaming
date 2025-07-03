@@ -1,5 +1,74 @@
 import { whitelistedDomains } from '../../config/domains';
 
+/**
+ * Perplexity API Stream Handler
+ * 
+ * Supports all Perplexity API parameters:
+ * 
+ * REQUIRED:
+ * - model: string (e.g. 'sonar-reasoning', 'sonar-reasoning-pro')
+ * - messages: array of message objects OR userData: string
+ * 
+ * BASIC PARAMETERS:
+ * - max_tokens: integer (default: 4096)
+ * - temperature: number (default: 0.2, range: 0-2)
+ * - top_p: number (default: 0.9, range: 0-1)
+ * - top_k: number (default: 0, 0 = disabled)
+ * - presence_penalty: number (default: 0, range: 0-2)
+ * - frequency_penalty: number (default: 0, range: 0-2)
+ * 
+ * SEARCH PARAMETERS:
+ * - search_mode: 'web' | 'academic' (default: 'web')
+ * - return_images: boolean (default: false)
+ * - return_related_questions: boolean (default: false)
+ * - search_domain_filter: array of domains (max 10, prefix with - for deny)
+ * - search_recency_filter: string ('week', 'day', etc.)
+ * - search_after_date_filter: string ('%m/%d/%Y' format)
+ * - search_before_date_filter: string ('%m/%d/%Y' format)
+ * - last_updated_after_filter: string ('%m/%d/%Y' format)
+ * - last_updated_before_filter: string ('%m/%d/%Y' format)
+ * 
+ * REASONING (only for sonar-deep-research):
+ * - reasoning_effort: 'low' | 'medium' | 'high' (default: 'medium')
+ * 
+ * WEB SEARCH OPTIONS:
+ * - web_search_options: object with:
+ *   - search_context_size: 'low' | 'medium' | 'high' (default: 'low')
+ *   - user_location: { country: string } (ISO country code, e.g., 'CZ', 'US', 'DE')
+ * 
+ * OR individual parameters:
+ * - search_context_size: 'low' | 'medium' | 'high'
+ * - user_location: { country: string } (ISO country code, e.g., 'CZ', 'US', 'DE')
+ * 
+ * ADVANCED:
+ * - response_format: object for structured JSON output
+ * 
+ * Example usage:
+ * {
+ *   "model": "sonar-reasoning-pro",
+ *   "messages": [{"role": "user", "content": "What are the latest AI developments?"}],
+ *   "search_mode": "academic",
+ *   "search_context_size": "high",
+ *   "reasoning_effort": "high",
+ *   "return_images": true,
+ *   "search_domain_filter": ["arxiv.org", "nature.com"],
+ *   "search_recency_filter": "week",
+ *   "user_location": {"country": "CZ"}
+ * }
+ * 
+ * CHANGELOG:
+ * - Added full support for all Perplexity API parameters
+ * - FIXED: user_location now correctly uses country code instead of lat/lng
+ * - Added parameter validation with descriptive error messages
+ * - Added comprehensive debugging logs for all parameters
+ * - Added support for web_search_options object and individual parameters
+ * - Added support for reasoning_effort for deep research models
+ * - Added support for academic vs web search modes
+ * - Added support for domain filtering, date filtering, and location-based search
+ * - Added support for advanced model parameters (top_p, top_k, penalties)
+ * - Added support for structured JSON output via response_format
+ */
+
 export default async function handler(req, res) {
   const origin = req.headers.origin;
 
@@ -134,8 +203,13 @@ export default async function handler(req, res) {
       throw new Error('search_domain_filter must be an array with maximum 10 domains');
     }
     
-    if (user_location && (!user_location.latitude || !user_location.longitude)) {
-      throw new Error('user_location must have latitude and longitude properties');
+    if (user_location && (!user_location.country || typeof user_location.country !== 'string')) {
+      throw new Error('user_location must have country property with ISO country code (e.g., "CZ", "US", "DE")');
+    }
+    
+    // Validate country code format (2 letters)
+    if (user_location && user_location.country && !/^[A-Z]{2}$/.test(user_location.country)) {
+      throw new Error('user_location.country must be a valid 2-letter ISO country code in uppercase (e.g., "CZ", "US", "DE")');
     }
     
     // Validate date filters format (%m/%d/%Y)
