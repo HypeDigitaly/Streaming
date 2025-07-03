@@ -1,6 +1,32 @@
 /*
- * PERPLEXITY API EXTENDED PARAMETERS USAGE:
+ * EXTENDED PARAMETERS USAGE:
  * 
+ * OPENAI WEB SEARCH PARAMETERS:
+ * To use OpenAI web search features, add these parameters to your trace.payload:
+ * 
+ * Example trace.payload for OpenAI with forced web search:
+ * {
+ *   "modelSequence": "4,5", // OpenAI model IDs (gpt-4.1, gpt-4.1-mini)
+ *   "model": "gpt-4.1-2025-04-14",
+ *   "userData": "What are the latest news from Prague today?",
+ *   "systemPrompt": "You are a helpful assistant.",
+ *   "enableWebSearch": true,         // Enable web search (model can choose to use)
+ *   "forceWebSearch": true,          // Force web search on every request
+ *   "searchContextSize": "high",     // 'low', 'medium', 'high' - affects cost/quality/latency
+ *   "userLocation": {                // Geographic refinement
+ *     "country": "CZ",               // ISO country code
+ *     "city": "Prague",              // Free text
+ *     "region": "Prague Region",     // Free text
+ *     "timezone": "Europe/Prague"    // IANA timezone
+ *   },
+ *   "tool_choice": {"type": "web_search_preview"}, // Custom tool choice override
+ *   "enableFileSearch": false,       // Enable file search tool
+ *   "reasoning": true,               // Enable reasoning for reasoning models
+ *   "temperature": 0.3,
+ *   "max_tokens": 4096
+ * }
+ * 
+ * PERPLEXITY API EXTENDED PARAMETERS:
  * To use advanced Perplexity features, add these parameters to your trace.payload:
  * 
  * Example trace.payload for academic search with high reasoning:
@@ -29,7 +55,7 @@
  * }
  * 
  * All parameters are optional except model/userData or messages.
- * See pages/api/perplexity-stream.js for full parameter documentation.
+ * See pages/api/openai-stream.js and pages/api/perplexity-stream.js for full parameter documentation.
  */
 
 export const StreamingResponseExtension = {
@@ -2963,6 +2989,19 @@ export const StreamingResponseExtension = {
           projectName: trace.payload.projectName,
           user_id: trace.payload.user_id,
         };
+
+        // Add OpenAI-specific web search parameters
+        if (model.type === 'openai') {
+          // OpenAI web search parameters
+          if (trace.payload.enableWebSearch !== undefined) payload.enableWebSearch = trace.payload.enableWebSearch;
+          if (trace.payload.forceWebSearch !== undefined) payload.forceWebSearch = trace.payload.forceWebSearch;
+          if (trace.payload.searchContextSize) payload.searchContextSize = trace.payload.searchContextSize;
+          if (trace.payload.userLocation) payload.userLocation = trace.payload.userLocation;
+          if (trace.payload.tool_choice) payload.tool_choice = trace.payload.tool_choice;
+          if (trace.payload.enableFileSearch !== undefined) payload.enableFileSearch = trace.payload.enableFileSearch;
+          if (trace.payload.reasoning !== undefined) payload.reasoning = trace.payload.reasoning;
+          if (trace.payload.tools) payload.tools = trace.payload.tools;
+        }
 
         // Add Perplexity-specific parameters
         // Full parameter documentation available in pages/api/perplexity-stream.js

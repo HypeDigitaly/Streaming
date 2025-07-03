@@ -32,7 +32,51 @@ export default async function handler(req, res) {
   res.setHeader('Connection', 'keep-alive');
 
   try {
-    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools, enableWebSearch, enableFileSearch, userLocation, searchContextSize } = req.body;
+    /*
+     * EXPANDED WEB SEARCH PARAMETERS:
+     * 
+     * enableWebSearch: boolean - Enable web search tool (model can choose to use it)
+     * forceWebSearch: boolean - Force web search tool usage on every request using tool_choice
+     * searchContextSize: string - 'low', 'medium', 'high' - Controls search context size (affects cost/quality/latency)
+     * userLocation: object - Geographic location for search refinement
+     *   - country: string (ISO country code, e.g., 'US', 'CZ')
+     *   - city: string (free text, e.g., 'Prague')
+     *   - region: string (free text, e.g., 'Prague Region')
+     *   - timezone: string (IANA timezone, e.g., 'Europe/Prague')
+     * tool_choice: object - Custom tool choice override (e.g., {type: 'web_search_preview'})
+     * 
+     * Example payload for forced web search with Czech location:
+     * {
+     *   "forceWebSearch": true,
+     *   "searchContextSize": "high",
+     *   "userLocation": {
+     *     "country": "CZ",
+     *     "city": "Prague",
+     *     "region": "Prague Region",
+     *     "timezone": "Europe/Prague"
+     *   }
+     * }
+     */
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools, enableWebSearch, enableFileSearch, userLocation, searchContextSize, forceWebSearch, tool_choice } = req.body;
+
+    // Validate web search parameters
+    if (searchContextSize && !['low', 'medium', 'high'].includes(searchContextSize)) {
+      throw new Error(`Invalid searchContextSize '${searchContextSize}'. Must be 'low', 'medium', or 'high'.`);
+    }
+
+    if (userLocation && typeof userLocation !== 'object') {
+      throw new Error('userLocation must be an object with country, city, region, and/or timezone properties.');
+    }
+
+    if (userLocation?.country && typeof userLocation.country !== 'string') {
+      throw new Error('userLocation.country must be a string (ISO country code, e.g., "CZ", "US").');
+    }
+
+    // Check if web search is supported for the model
+    const currentModel = model || 'o4-mini';
+    if ((enableWebSearch || forceWebSearch) && currentModel === 'gpt-4.1-nano') {
+      throw new Error('Web search is not supported for gpt-4.1-nano model.');
+    }
 
     // Function to check if a model is a reasoning model
     function isReasoningModel(modelName) {
@@ -64,6 +108,8 @@ export default async function handler(req, res) {
           tools,
           enableWebSearch,
           enableFileSearch,
+          forceWebSearch,
+          tool_choice,
           userLocation,
           searchContextSize
         });
@@ -76,7 +122,9 @@ export default async function handler(req, res) {
     });
 
     const toolsArray = [];
-        if (enableWebSearch) {
+        
+        // Add web search tool if enabled or forced
+        if (enableWebSearch || forceWebSearch) {
             const webSearchTool = { type: 'web_search_preview' };
 
             // Add user location if provided
@@ -90,14 +138,18 @@ export default async function handler(req, res) {
                 };
             }
 
-            // Add search context size if provided
+            // Add search context size if provided (low, medium, high)
             if (searchContextSize) {
-                webSearchTool.search_context_size = searchContextSize; // 'low', 'medium', 'high'
+                webSearchTool.search_context_size = searchContextSize;
             }
 
             toolsArray.push(webSearchTool);
             if (debugMode === 1) {
-                console.log('🌐 WEB SEARCH TOOL ADDED:', webSearchTool);
+                console.log('🌐 WEB SEARCH TOOL ADDED:', {
+                    ...webSearchTool,
+                    forced: forceWebSearch || false,
+                    enabled: enableWebSearch || false
+                });
             }
         }
 
@@ -119,6 +171,19 @@ export default async function handler(req, res) {
           tools: toolsArray.length > 0 ? toolsArray : tools,
           stream: true, // Always use streaming for real-time updates
         };
+
+        // Force web search tool usage if forceWebSearch is true or tool_choice is explicitly set
+        if (forceWebSearch) {
+          responsesPayload.tool_choice = { type: 'web_search_preview' };
+          if (debugMode === 1) {
+            console.log('🔧 FORCING WEB SEARCH via tool_choice');
+          }
+        } else if (tool_choice) {
+          responsesPayload.tool_choice = tool_choice;
+          if (debugMode === 1) {
+            console.log('🔧 CUSTOM tool_choice SET:', tool_choice);
+          }
+        }
 
       const response = await openai.responses.create(responsesPayload);
 
