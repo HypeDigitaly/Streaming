@@ -1,3 +1,38 @@
+/*
+ * PERPLEXITY API EXTENDED PARAMETERS USAGE:
+ * 
+ * To use advanced Perplexity features, add these parameters to your trace.payload:
+ * 
+ * Example trace.payload for academic search with high reasoning:
+ * {
+ *   "modelSequence": "13,14", // Perplexity model IDs
+ *   "model": "sonar-reasoning-pro",
+ *   "userData": "What are the latest breakthroughs in quantum computing?",
+ *   "systemPrompt": "You are a research assistant specializing in quantum computing.",
+ *   "search_mode": "academic",
+ *   "reasoning_effort": "high",
+ *   "search_context_size": "high", 
+ *   "return_images": true,
+ *   "return_related_questions": true,
+ *   "search_domain_filter": ["arxiv.org", "nature.com", "science.org"],
+ *   "search_recency_filter": "week",
+ *   "search_after_date_filter": "1/1/2024",
+ *   "temperature": 0.3,
+ *   "top_p": 0.9,
+ *   "max_tokens": 4096,
+ *   "web_search_options": {
+ *     "search_context_size": "high",
+ *     "user_location": {
+ *       "latitude": 40.7128,
+ *       "longitude": -74.0060
+ *     }
+ *   }
+ * }
+ * 
+ * All parameters are optional except model/userData or messages.
+ * See pages/api/perplexity-stream.js for full parameter documentation.
+ */
+
 export const StreamingResponseExtension = {
   name: "StreamingResponse",
   type: "response",
@@ -2038,6 +2073,26 @@ export const StreamingResponseExtension = {
       try {
         if (payload.debugMode === 1) {
           console.log('🔮 Perplexity Model:', payload.model);
+          console.log('🔮 Perplexity Extended Parameters:', {
+            search_mode: payload.search_mode,
+            search_context_size: payload.search_context_size,
+            user_location: payload.user_location,
+            search_domain_filter: payload.search_domain_filter,
+            return_images: payload.return_images,
+            return_related_questions: payload.return_related_questions,
+            search_recency_filter: payload.search_recency_filter,
+            search_after_date_filter: payload.search_after_date_filter,
+            search_before_date_filter: payload.search_before_date_filter,
+            last_updated_after_filter: payload.last_updated_after_filter,
+            last_updated_before_filter: payload.last_updated_before_filter,
+            reasoning_effort: payload.reasoning_effort,
+            top_p: payload.top_p,
+            top_k: payload.top_k,
+            presence_penalty: payload.presence_penalty,
+            frequency_penalty: payload.frequency_penalty,
+            response_format: payload.response_format,
+            web_search_options: payload.web_search_options
+          });
         }
 
         // Check if model name contains "reasoning"
@@ -2911,9 +2966,34 @@ export const StreamingResponseExtension = {
         };
 
         // Add Perplexity-specific parameters
+        // Full parameter documentation available in pages/api/perplexity-stream.js
         if (model.type === 'perplexity') {
           payload.apiKey = trace.payload.apiKey;
           payload.messages = trace.payload.messages || trace.payload.userData;
+          
+          // Web search options
+          if (trace.payload.search_mode) payload.search_mode = trace.payload.search_mode;
+          if (trace.payload.search_context_size) payload.search_context_size = trace.payload.search_context_size;
+          if (trace.payload.user_location) payload.user_location = trace.payload.user_location;
+          if (trace.payload.search_domain_filter) payload.search_domain_filter = trace.payload.search_domain_filter;
+          if (trace.payload.return_images !== undefined) payload.return_images = trace.payload.return_images;
+          if (trace.payload.return_related_questions !== undefined) payload.return_related_questions = trace.payload.return_related_questions;
+          if (trace.payload.search_recency_filter) payload.search_recency_filter = trace.payload.search_recency_filter;
+          if (trace.payload.search_after_date_filter) payload.search_after_date_filter = trace.payload.search_after_date_filter;
+          if (trace.payload.search_before_date_filter) payload.search_before_date_filter = trace.payload.search_before_date_filter;
+          if (trace.payload.last_updated_after_filter) payload.last_updated_after_filter = trace.payload.last_updated_after_filter;
+          if (trace.payload.last_updated_before_filter) payload.last_updated_before_filter = trace.payload.last_updated_before_filter;
+          
+          // Reasoning and model parameters
+          if (trace.payload.reasoning_effort) payload.reasoning_effort = trace.payload.reasoning_effort;
+          if (trace.payload.top_p !== undefined) payload.top_p = trace.payload.top_p;
+          if (trace.payload.top_k !== undefined) payload.top_k = trace.payload.top_k;
+          if (trace.payload.presence_penalty !== undefined) payload.presence_penalty = trace.payload.presence_penalty;
+          if (trace.payload.frequency_penalty !== undefined) payload.frequency_penalty = trace.payload.frequency_penalty;
+          if (trace.payload.response_format) payload.response_format = trace.payload.response_format;
+          
+          // Web search options object (takes precedence over individual parameters)
+          if (trace.payload.web_search_options) payload.web_search_options = trace.payload.web_search_options;
         }
 
         // Call the appropriate LLM API based on model type

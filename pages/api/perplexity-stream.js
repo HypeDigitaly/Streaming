@@ -42,7 +42,27 @@ export default async function handler(req, res) {
       debugMode, 
       user_id,
       apiKey,
-      messages 
+      messages,
+      // Web search options
+      search_mode,
+      search_context_size,
+      user_location,
+      search_domain_filter,
+      return_images,
+      return_related_questions,
+      search_recency_filter,
+      search_after_date_filter,
+      search_before_date_filter,
+      last_updated_after_filter,
+      last_updated_before_filter,
+      // Reasoning and model parameters
+      reasoning_effort,
+      top_p,
+      top_k,
+      presence_penalty,
+      frequency_penalty,
+      response_format,
+      web_search_options
     } = req.body;
 
     // Use provided apiKey or get from environment based on projectName
@@ -77,14 +97,98 @@ export default async function handler(req, res) {
       throw new Error('No messages or userData provided');
     }
 
+    // Validate parameters
+    if (temperature !== undefined && (temperature < 0 || temperature >= 2)) {
+      throw new Error('Temperature must be between 0 and 2');
+    }
+    
+    if (top_p !== undefined && (top_p < 0 || top_p > 1)) {
+      throw new Error('top_p must be between 0 and 1');
+    }
+    
+    if (top_k !== undefined && top_k < 0) {
+      throw new Error('top_k must be 0 or positive');
+    }
+    
+    if (presence_penalty !== undefined && (presence_penalty < 0 || presence_penalty > 2)) {
+      throw new Error('presence_penalty must be between 0 and 2');
+    }
+    
+    if (frequency_penalty !== undefined && (frequency_penalty < 0 || frequency_penalty > 2)) {
+      throw new Error('frequency_penalty must be between 0 and 2');
+    }
+    
+    if (search_mode && !['web', 'academic'].includes(search_mode)) {
+      throw new Error('search_mode must be "web" or "academic"');
+    }
+    
+    if (reasoning_effort && !['low', 'medium', 'high'].includes(reasoning_effort)) {
+      throw new Error('reasoning_effort must be "low", "medium", or "high"');
+    }
+    
+    if (search_context_size && !['low', 'medium', 'high'].includes(search_context_size)) {
+      throw new Error('search_context_size must be "low", "medium", or "high"');
+    }
+    
+    if (search_domain_filter && (!Array.isArray(search_domain_filter) || search_domain_filter.length > 10)) {
+      throw new Error('search_domain_filter must be an array with maximum 10 domains');
+    }
+    
+    if (user_location && (!user_location.latitude || !user_location.longitude)) {
+      throw new Error('user_location must have latitude and longitude properties');
+    }
+    
+    // Validate date filters format (%m/%d/%Y)
+    const dateRegex = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+    if (search_after_date_filter && !dateRegex.test(search_after_date_filter)) {
+      throw new Error('search_after_date_filter must be in format %m/%d/%Y (e.g., 3/1/2025)');
+    }
+    if (search_before_date_filter && !dateRegex.test(search_before_date_filter)) {
+      throw new Error('search_before_date_filter must be in format %m/%d/%Y (e.g., 3/1/2025)');
+    }
+    if (last_updated_after_filter && !dateRegex.test(last_updated_after_filter)) {
+      throw new Error('last_updated_after_filter must be in format %m/%d/%Y (e.g., 3/1/2025)');
+    }
+    if (last_updated_before_filter && !dateRegex.test(last_updated_before_filter)) {
+      throw new Error('last_updated_before_filter must be in format %m/%d/%Y (e.g., 3/1/2025)');
+    }
+
     const requestPayload = {
       model: model || 'sonar-reasoning',
       messages: perplexityMessages,
-      return_images: false,
-      return_related_questions: false,
       stream: true,
       max_tokens: max_tokens || 4096,
-      temperature: temperature || 0
+      temperature: temperature !== undefined ? temperature : 0.2,
+      
+      // Web search parameters
+      search_mode: search_mode || 'web',
+      return_images: return_images !== undefined ? return_images : false,
+      return_related_questions: return_related_questions !== undefined ? return_related_questions : false,
+      
+      // Optional parameters - only include if provided
+      ...(top_p !== undefined && { top_p }),
+      ...(top_k !== undefined && { top_k }),
+      ...(presence_penalty !== undefined && { presence_penalty }),
+      ...(frequency_penalty !== undefined && { frequency_penalty }),
+      ...(reasoning_effort && { reasoning_effort }),
+      ...(search_domain_filter && { search_domain_filter }),
+      ...(search_recency_filter && { search_recency_filter }),
+      ...(search_after_date_filter && { search_after_date_filter }),
+      ...(search_before_date_filter && { search_before_date_filter }),
+      ...(last_updated_after_filter && { last_updated_after_filter }),
+      ...(last_updated_before_filter && { last_updated_before_filter }),
+      ...(response_format && { response_format }),
+      
+      // Web search options object
+      ...(web_search_options && { web_search_options }),
+      
+      // If no web_search_options provided but search_context_size or user_location are provided individually
+      ...(!web_search_options && (search_context_size || user_location) && {
+        web_search_options: {
+          ...(search_context_size && { search_context_size }),
+          ...(user_location && { user_location })
+        }
+      })
     };
 
     if (debugMode === 1) {
@@ -96,7 +200,27 @@ export default async function handler(req, res) {
         debugMode,
         systemPrompt,
         user_id,
-        messagesLength: perplexityMessages?.length
+        messagesLength: perplexityMessages?.length,
+        // Web search options
+        search_mode,
+        search_context_size,
+        user_location,
+        search_domain_filter,
+        return_images,
+        return_related_questions,
+        search_recency_filter,
+        search_after_date_filter,
+        search_before_date_filter,
+        last_updated_after_filter,
+        last_updated_before_filter,
+        // Reasoning and model parameters
+        reasoning_effort,
+        top_p,
+        top_k,
+        presence_penalty,
+        frequency_penalty,
+        response_format,
+        web_search_options
       });
 
       console.log('📤 Full Perplexity Request Payload:', JSON.stringify(requestPayload, null, 2));
