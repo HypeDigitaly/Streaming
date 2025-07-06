@@ -26,7 +26,7 @@ export const StreamingResponseExtension = {
 
     // Get custom reasoning background color or use default
     const reasoningBgColour = trace.payload?.reasoningBgColour || "#EBF5FF";
-    
+
     // Function to adjust color brightness
     function adjustColorBrightness(color, percent) {
       const num = parseInt(color.replace("#", ""), 16);
@@ -38,7 +38,7 @@ export const StreamingResponseExtension = {
         (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
         (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
     }
-    
+
     // Generate dynamic colors based on the base color
     const lighterBgColour = adjustColorBrightness(reasoningBgColour, 0.1);
     const darkerBgColour = adjustColorBrightness(reasoningBgColour, -0.1);
@@ -134,7 +134,7 @@ export const StreamingResponseExtension = {
             gap: 0;
             line-height: 1.2;
           }
-          
+
           /* Perplexity reasoning section styles */
           .perplexity-reasoner-container {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -331,7 +331,7 @@ export const StreamingResponseExtension = {
             margin: 0;
             padding: 0;
           }
-          
+
           /* Ensure no extra spacing in Perplexity sections */
           .perplexity-reasoner-container * {
             margin-top: 0;
@@ -339,7 +339,7 @@ export const StreamingResponseExtension = {
           .perplexity-reasoner-container *:first-child {
             margin-top: 0 !important;
           }
-          
+
           /* Citation link styles */
           .citation-link {
             color: #2563EB;
@@ -376,7 +376,7 @@ export const StreamingResponseExtension = {
             padding: 0;
             display: inline;
           }
-          
+
           /* Additional answer content citation styles */
           .answer-content .citation-link {
             color: #2563EB;
@@ -390,7 +390,7 @@ export const StreamingResponseExtension = {
           .answer-content .citation-link:hover {
             text-decoration: underline;
           }
-          
+
           .response-section {
             padding: 0;
             margin: 0;
@@ -436,7 +436,7 @@ export const StreamingResponseExtension = {
           strong {
             font-weight: 600;
           }
-          
+
           /* Optimalizované velikosti a mezery pro nadpisy - kompaktní verze */
           .response-content h1 { 
             font-size: 1.3em; 
@@ -468,7 +468,7 @@ export const StreamingResponseExtension = {
             font-weight: 600; 
             line-height: 1.4;
           }
-          
+
           /* První nadpisy v kontejneru nemají horní mezeru */
           .response-content > h1:first-child,
           .response-content > h2:first-child,
@@ -477,12 +477,12 @@ export const StreamingResponseExtension = {
           .response-content > h5:first-child {
             margin-top: 0;
           }
-          
+
           /* Dodatečná pravidla pro konzistentní spacing - kompaktní verze */
           .response-content > * + * {
             margin-top: 0.4em;
           }
-          
+
           /* Přepsat margin pro specifické kombinace */
           .response-content h1 + *,
           .response-content h2 + *,
@@ -491,7 +491,7 @@ export const StreamingResponseExtension = {
           .response-content h5 + * {
             margin-top: 0.2em !important;
           }
-          
+
           /* Mezery mezi seznamy a paragrafy - kompaktní */
           .response-content ul + p,
           .response-content ol + p,
@@ -499,7 +499,7 @@ export const StreamingResponseExtension = {
           .response-content p + ol {
             margin-top: 0.3em;
           }
-          
+
           /* Optimalizované mezery mezi konsekutivními nadpisy - kompaktní */
           .response-content h1 + h2 {
             margin-top: 0.2em;
@@ -526,21 +526,21 @@ export const StreamingResponseExtension = {
             margin-top: 0.05em;
             margin-bottom: 0.5em;
           }
-          
+
           /* Remove any paragraphs between headers */
           .response-content h1 + p:empty,
           .response-content h2 + p:empty,
           .response-content h3 + p:empty {
             display: none;
           }
-          
+
           /* Remove breaks around headers */
           .response-content br + h1,
           .response-content br + h2,
           .response-content br + h3 {
             margin-top: 0;
           }
-          
+
           .response-content h1 + br,
           .response-content h2 + br,
           .response-content h3 + br {
@@ -819,6 +819,7 @@ export const StreamingResponseExtension = {
             font-size: 10px;
             margin-left: 8px;
             transition: transform 0.2s ease;
+            user-select: none;
           }
           .ai-info-footer.tooltip-visible::after {
             transform: rotate(180deg);
@@ -890,6 +891,7 @@ export const StreamingResponseExtension = {
         border: 1px solid #e0e0e0;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+```text
         max-width: 300px;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -1174,13 +1176,13 @@ export const StreamingResponseExtension = {
       if (header) {
         event.preventDefault();
         event.stopPropagation();
-        
+
         const section = header.parentElement;
         const content = section ? section.querySelector('.ai-thinking-content') : null;
-        
+
         if (content) {
           const isExpanded = content.classList.contains('expanded');
-          
+
           if (isExpanded) {
             content.classList.remove('expanded');
             header.classList.remove('expanded');
@@ -1342,7 +1344,7 @@ export const StreamingResponseExtension = {
 
       // Append to buffer
       buffer += text;
-      
+
       // Keep track of complete response for final processing
       completeResponse += text;
 
@@ -1426,7 +1428,7 @@ export const StreamingResponseExtension = {
         if (headerMatches) {
           console.log("🔍 MARKDOWN DEBUG: Found header lines:", headerMatches);
         }
-        
+
         // Test each regex pattern individually
         console.log("🔍 REGEX TEST: Testing individual patterns:");
         const testPatterns = [
@@ -1434,21 +1436,21 @@ export const StreamingResponseExtension = {
           { name: "Pattern 2", regex: /^## (.+)$/gm },
           { name: "Pattern 3", regex: /##\s+([^\n\r]+)/g }
         ];
-        
+
         testPatterns.forEach(({name, regex}) => {
           const matches = buffer.match(regex);
           console.log(`🔍 REGEX TEST: ${name}:`, matches);
         });
       }
-      
+
       // Special handling for streaming headers - process only complete lines
       let processBuffer = buffer;
-      
+
       // If buffer doesn't end with newline and contains incomplete header, delay processing
       if (buffer.includes('##') && !buffer.endsWith('\n') && !buffer.endsWith('\r\n')) {
         const lines = buffer.split(/\r?\n/);
         const lastLine = lines[lines.length - 1];
-        
+
         // If last line looks like incomplete header, process only complete lines
         if (lastLine.includes('##') && lastLine.length < 100) {
           if (trace.payload?.debugMode === 1) {
@@ -1741,7 +1743,7 @@ export const StreamingResponseExtension = {
         endpoint: "/api/openai-stream",
         displayName: "GPT-4.1",
       },
-      {
+      {```text
         id: 5,
         name: "gpt-4.1-mini-2025-04-14",
         type: "openai",
@@ -2073,22 +2075,22 @@ export const StreamingResponseExtension = {
         if (isReasoningModel) {
           // Create Perplexity reasoning UI - kompaktní verze
           const reasoningHTML = `<div class="reasoning-section"><div class="reasoning-header"><div class="reasoning-icon" style="color: #333333; font-size: 14px; margin-right: 6px; flex-shrink: 0; line-height: 1;">🔎</div><div class="reasoning-title-wrapper"><div class="reasoning-title" style="font-weight: 600; color: #333333; font-size: 13px; line-height: 1.2; flex-grow: 1;">Myšlenkový proces</div><svg class="toggle-icon" viewBox="0 0 20 20" fill="currentColor" style="color: #333333; font-size: 12px; transition: transform 0.2s ease;"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" /></svg></div></div><div class="reasoning-content" id="reasoning-content"></div></div><div class="answer-section"><div class="answer-content" id="answer-content" style="padding-top: 12px;"></div></div>`;
-          
+
           // Replace responseContent with Perplexity UI
           responseContent.innerHTML = reasoningHTML;
-          
+
           // Get references to new elements
           reasoningSection = responseContent.querySelector('.reasoning-section');
           reasoningContent = responseContent.querySelector('#reasoning-content');
           answerContent = responseContent.querySelector('#answer-content');
           answerSection = responseContent.querySelector('.answer-section');
-          
+
           // Create initial reasoning group
           const reasoningGroup = createReasoningGroup();
           reasoningContent.appendChild(reasoningGroup);
           activeReasoningGroup = reasoningGroup;
           isStreaming = true;
-          
+
           // Add overflow handling styles
           reasoningContent.style.overflow = 'visible';
         }
@@ -2136,10 +2138,10 @@ export const StreamingResponseExtension = {
         // Helper functions for reasoning steps
         function createNewStep(content, isComplete = false) {
           const step = createReasoningStep(content, activeReasoningGroup, activeReasoningGroup.children.length, citations);
-          
+
           if (step) {
             activeReasoningGroup.appendChild(step);
-            
+
             const checkbox = step.querySelector('.step-checkbox');
             if (checkbox) {
               checkbox.style.display = 'flex';
@@ -2148,14 +2150,14 @@ export const StreamingResponseExtension = {
                 completedSteps.push(step);
               }
             }
-            
+
             reasoningContent.style.height = 'auto';
-            
+
             void reasoningContent.offsetHeight;
             setTimeout(scrollToBottom, 10);
             setTimeout(scrollToBottom, 50);
             setTimeout(scrollToBottom, 100);
-            
+
             return step;
           }
           return null;
@@ -2163,7 +2165,7 @@ export const StreamingResponseExtension = {
 
         function updateStep(step, content, complete = false) {
           if (!step) return;
-          
+
           const contentDiv = step.querySelector('.step-content');
           if (contentDiv) {
             contentDiv.innerHTML = processCitations(content, citations, true);
@@ -2171,7 +2173,7 @@ export const StreamingResponseExtension = {
               console.log('🔄 Updated step with citations:', citations?.length || 0);
             }
           }
-          
+
           if (complete && !completedSteps.includes(step)) {
             const checkbox = step.querySelector('.step-checkbox');
             if (checkbox) {
@@ -2179,9 +2181,9 @@ export const StreamingResponseExtension = {
             }
             completedSteps.push(step);
           }
-          
+
           reasoningContent.style.height = 'auto';
-          
+
           void reasoningContent.offsetHeight;
           setTimeout(scrollToBottom, 10);
           setTimeout(scrollToBottom, 50);
@@ -2191,11 +2193,11 @@ export const StreamingResponseExtension = {
         // Process thinking content
         function processThinkingContent(content) {
           thinkBuffer += content;
-          
+
           const parts = thinkBuffer.split('\n');
           const incompletePart = parts.pop() || '';
           const completeParts = parts.filter((part) => part.trim());
-          
+
           for (const line of completeParts) {
             const trimmedLine = line.trim();
             if (trimmedLine) {
@@ -2211,7 +2213,7 @@ export const StreamingResponseExtension = {
               }
             }
           }
-          
+
           if (incompletePart.trim()) {
             if (!currentStep) {
               currentStep = createNewStep(incompletePart.trim(), false);
@@ -2226,23 +2228,23 @@ export const StreamingResponseExtension = {
             }
             currentStep = null;
           }
-          
+
           thinkBuffer = incompletePart;
         }
 
         // Update answer content with simplified markdown support and citations
         function updateAnswerContent(text) {
           const trimmedText = text.trim();
-          
+
           // Process citations first
           const textWithCitations = processCitations(trimmedText, citations, false);
-          
+
           if (payload.debugMode === 1) {
             console.log('🔍 PERPLEXITY DEBUG: Raw text for formatting:', textWithCitations.substring(0, 200) + '...');
             console.log('🔍 PERPLEXITY DEBUG: Contains ###?', textWithCitations.includes('###'));
             console.log('🔍 PERPLEXITY DEBUG: Contains line breaks?', textWithCitations.includes('\n'));
           }
-          
+
           // First, normalize line breaks and ensure proper formatting for streaming content
           let normalizedText = textWithCitations
             // Ensure line breaks before and after markdown headers
@@ -2253,11 +2255,11 @@ export const StreamingResponseExtension = {
             .replace(/([.!?])\s*\*\s+/g, '$1\n* ')
             // Ensure line breaks after sentences for better processing
             .replace(/([.!?])\s+([A-ZČŠŽŘŮĚÝÁÍÉÓÚĎ])/g, '$1\n$2');
-          
+
           if (payload.debugMode === 1) {
             console.log('🔍 PERPLEXITY DEBUG: After normalization:', normalizedText.substring(0, 300) + '...');
           }
-          
+
           // Simplified markdown processing for Perplexity complete text
           let formattedContent = normalizedText
             // Headers - handle both line-start and mid-text headers
@@ -2268,7 +2270,7 @@ export const StreamingResponseExtension = {
             .replace(/^# (.+)$/gm, "<h1>$1</h1>")
             // Also handle headers not at line start (for streaming content)
             .replace(/\n### ([^\n]+)\n/g, '\n<h3>$1</h3>\n')
-            .replace(/\n## ([^\n]+)\n/g, '\n<h2>$1</h2>\n')
+            .replace(/\n## ([^\n]+)\n/g, '\n<h2>$1</h3>\n')
             .replace(/\n# ([^\n]+)\n/g, '\n<h1>$1</h1>\n')
             // Bold and italic
             .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -2356,10 +2358,10 @@ export const StreamingResponseExtension = {
               return tableHtml;
             }
           );
-          
+
           // Convert remaining line breaks to HTML breaks for better formatting
           formattedContent = formattedContent.replace(/\n\n+/g, '<br><br>').replace(/\n/g, '<br>');
-          
+
           if (payload.debugMode === 1) {
             console.log('🔍 PERPLEXITY DEBUG: Final formatted content:', formattedContent.substring(0, 300) + '...');
             if (formattedContent.includes('<h3>')) {
@@ -2369,7 +2371,7 @@ export const StreamingResponseExtension = {
               console.log('🔍 PERPLEXITY DEBUG: Successfully found LI tags!');
             }
           }
-          
+
           if (answerContent) {
             answerContent.innerHTML = formattedContent;
             if (payload.debugMode === 1) {
@@ -2402,13 +2404,13 @@ export const StreamingResponseExtension = {
             try {
               const jsonStr = line.slice(5);
               const data = JSON.parse(jsonStr);
-              
+
               if (data.citations) {
                 citations = data.citations;
                 if (payload.debugMode === 1) {
                   console.log('📎 Citations updated:', citations);
                 }
-                
+
                 // Re-process all existing reasoning steps with new citations
                 if (activeReasoningGroup) {
                   const steps = activeReasoningGroup.querySelectorAll('.reasoning-step');
@@ -2426,7 +2428,7 @@ export const StreamingResponseExtension = {
 
               if (data.choices?.[0]?.delta?.content !== null && data.choices?.[0]?.delta?.content !== undefined) {
                 const content = data.choices[0].delta.content;
-                
+
                 // Mark first chunk as processed
                 if (isFirstChunk) {
                   isFirstChunk = false;
@@ -2464,7 +2466,7 @@ export const StreamingResponseExtension = {
                   } else {
                     answer += content;
                     updateAnswerContent(answer);
-                    
+
                     if (!hasStartedAnswer) {
                       hasStartedAnswer = true;
                       setTimeout(() => {
@@ -2508,12 +2510,12 @@ export const StreamingResponseExtension = {
         if (payload.debugMode === 1) {
           console.error('❌ Perplexity API Error:', error);
         }
-        
+
         // Show error in UI
         if (responseContent) {
           responseContent.innerHTML = `<p style="color: #DC2626;">Error: Failed to get response from Perplexity API - ${error.message}</p>`;
         }
-        
+
         return false; // Failure
       } finally {
         isStreaming = false;
@@ -2577,7 +2579,7 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
             });
             console.log(
-              `�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
+              `🌐 Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
             );
           }
 
@@ -2659,7 +2661,21 @@ export const StreamingResponseExtension = {
                     );
                   }
 
-                  const content = parsed.content || "";
+                  // Handle different response formats based on endpoint
+                  let content = "";
+
+                  if (endpoint === "/api/gemini-stream") {
+                    // Handle Gemini streamGenerateContent format
+                    if (parsed.candidates && parsed.candidates[0] && 
+                        parsed.candidates[0].content && parsed.candidates[0].content.parts) {
+                      const parts = parsed.candidates[0].content.parts;
+                      content = parts.map(part => part.text || "").join("");
+                    }
+                  } else {
+                    // Handle other providers' format
+                    content = parsed.content || "";
+                  }
+
                   if (content || typeof content === "string") {
                     // Handle empty string content too
                     receivedAnyContent = true; // Mark that we have received processable content
@@ -2948,7 +2964,7 @@ export const StreamingResponseExtension = {
         if (model.type === 'perplexity') {
           payload.apiKey = trace.payload.apiKey;
           payload.messages = trace.payload.messages || trace.payload.userData;
-          
+
           // Web search options
           if (trace.payload.search_mode) payload.search_mode = trace.payload.search_mode;
           if (trace.payload.search_context_size) payload.search_context_size = trace.payload.search_context_size;
@@ -2961,7 +2977,7 @@ export const StreamingResponseExtension = {
           if (trace.payload.search_before_date_filter) payload.search_before_date_filter = trace.payload.search_before_date_filter;
           if (trace.payload.last_updated_after_filter) payload.last_updated_after_filter = trace.payload.last_updated_after_filter;
           if (trace.payload.last_updated_before_filter) payload.last_updated_before_filter = trace.payload.last_updated_before_filter;
-          
+
           // Reasoning and model parameters
           if (trace.payload.reasoning_effort) payload.reasoning_effort = trace.payload.reasoning_effort;
           if (trace.payload.top_p !== undefined) payload.top_p = trace.payload.top_p;
@@ -2969,7 +2985,7 @@ export const StreamingResponseExtension = {
           if (trace.payload.presence_penalty !== undefined) payload.presence_penalty = trace.payload.presence_penalty;
           if (trace.payload.frequency_penalty !== undefined) payload.frequency_penalty = trace.payload.frequency_penalty;
           if (trace.payload.response_format) payload.response_format = trace.payload.response_format;
-          
+
           // Web search options object (takes precedence over individual parameters)
           if (trace.payload.web_search_options) payload.web_search_options = trace.payload.web_search_options;
         }
@@ -3079,7 +3095,7 @@ export const StreamingResponseExtension = {
 
     // Start the LLM orchestration
     await orchestrateLLMCalls(trace);
-    
+
     // Final processing after streaming completes
     setTimeout(() => finalizeContent(), 100);
 
@@ -3099,4 +3115,3 @@ export const StreamingResponseExtension = {
     window.voiceflow.chat.interact({ type: "continue" });
   },
 };
-
