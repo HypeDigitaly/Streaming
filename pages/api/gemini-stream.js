@@ -1,5 +1,3 @@
-
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { whitelistedDomains } from '../../config/domains';
 
 export default async function handler(req, res) {
@@ -42,15 +40,11 @@ export default async function handler(req, res) {
       throw new Error(`API key not found for project: ${projectName}`);
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    // Get the generative model
-    const genModel = genAI.getGenerativeModel({
-      model: model || 'gemini-2.5-pro-preview-03-25',
-    });
+    const modelName = model || 'gemini-2.5-pro-preview-03-25';
 
     if (debugMode === 1) {
       console.log('📡 Gemini Payload values:', {
-        model,
+        model: modelName,
         max_tokens,
         temperature,
         projectName,
@@ -66,37 +60,124 @@ export default async function handler(req, res) {
       'Connection': 'keep-alive',
     });
 
-    // Create a chat instance with system instruction
-    const chat = genModel.startChat({
-      systemInstruction: systemPrompt,
+    // Prepare the request payload for streamGenerateContent API
+    const requestPayload = {
+      contents: [
+        {
+          parts: [
+            {
+              text: userData
+            }
+          ]
+        }
+      ],
       generationConfig: {
         maxOutputTokens: max_tokens || 4096,
         temperature: temperature || 0,
+      }
+    };
+
+    // Add system instruction if provided
+    if (systemPrompt) {
+      requestPayload.systemInstruction = {
+        parts: [
+          {
+            text: systemPrompt
+          }
+        ]
+      };
+    }
+
+    if (debugMode === 1) {
+      console.log('📡 Gemini API Request payload:', JSON.stringify(requestPayload, null, 2));
+    }
+
+    // Call streamGenerateContent API directly
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse&key=${apiKey}`;
+    
+    const response = await fetch(geminiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify(requestPayload),
     });
 
-    // Send message and get streamed response
-    const response = await chat.sendMessageStream(userData);
+    if (!response.ok) {
+      throw new Error(`Gemini API error: ${response.status} ${response.statusText}`);
+    }
 
     if (debugMode === 1) {
       console.log('📥 Gemini API Response initialized');
     }
 
-    for await (const chunk of response.stream) {
-      if (debugMode === 1) {
-        console.log('📥 Response Chunk:', JSON.stringify(chunk, null, 2));
-      }
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
 
-      const text = chunk.text();
-      if (text) {
-        const data = {
-          type: 'content',
-          content: text
-        };
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) {
+          break;
+        }
 
-        res.write(`data: ${JSON.stringify(data)}\n\n`);
-        res.flush?.();
+        const chunk = decoder.decode(value, { stream: true });
+        const lines = chunk.split('\n');
+
+        for (const line of lines) {
+          if (line.trim() === '') continue;
+          
+          // Process SSE format: "data: {...}"
+          if (line.startsWith('data: ')) {
+            const jsonStr = line.slice(6); // Remove "data: " prefix
+            
+            if (jsonStr.trim() === '') continue;
+            
+            try {
+              const data = JSON.parse(jsonStr);
+              
+              if (debugMode === 1) {
+                console.log('📥 Gemini Response Chunk:', JSON.stringify(data, null, 2));
+              }
+
+              // Extract text from the response according to GenerateContentResponse structure
+              if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                const content = data.candidates[0].content;
+                
+                if (content.parts && content.parts[0] && content.parts[0].text) {
+                  const text = content.parts[0].text;
+                  
+                  if (text) {
+                    const outputData = {
+                      type: 'content',
+                      content: text
+                    };
+
+                    res.write(`data: ${JSON.stringify(outputData)}\n\n`);
+                    res.flush?.();
+                  }
+                }
+              }
+              
+              // Check for finish reason
+              if (data.candidates && data.candidates[0] && data.candidates[0].finishReason) {
+                if (debugMode === 1) {
+                  console.log('📤 Gemini stream finished with reason:', data.candidates[0].finishReason);
+                }
+                break;
+              }
+              
+            } catch (parseError) {
+              if (debugMode === 1) {
+                console.warn('⚠️ Failed to parse JSON chunk:', parseError.message, 'Raw data:', jsonStr);
+              }
+            }
+          }
+        }
       }
+    } finally {
+      reader.releaseLock();
     }
 
     // Explicitly send DONE signal to trigger Voiceflow variable update
@@ -108,7 +189,7 @@ export default async function handler(req, res) {
 
   } catch (error) {
     if (req.body.debugMode === 1) {
-      console.error('Stream Error:', error);
+      console.error('❌ Gemini Stream Error:', error);
     }
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);
     res.end();
