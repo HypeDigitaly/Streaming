@@ -57,7 +57,7 @@ export default async function handler(req, res) {
      *   }
      * }
      */
-    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools, enableWebSearch, enableFileSearch, userLocation, searchContextSize, forceWebSearch, autoWebSearch, autoFileSearch, tool_choice } = req.body;
+    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools, enableWebSearch, enableFileSearch, userLocation, searchContextSize, forceWebSearch, tool_choice } = req.body;
 
     // Validate web search parameters
     if (searchContextSize && !['low', 'medium', 'high'].includes(searchContextSize)) {
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
 
     // Check if web search is supported for the model
     const currentModel = model || 'o4-mini';
-    if ((enableWebSearch || forceWebSearch || autoWebSearch) && currentModel === 'gpt-4.1-nano') {
+    if ((enableWebSearch || forceWebSearch) && currentModel === 'gpt-4.1-nano') {
       throw new Error('Web search is not supported for gpt-4.1-nano model.');
     }
 
@@ -109,8 +109,6 @@ export default async function handler(req, res) {
           enableWebSearch,
           enableFileSearch,
           forceWebSearch,
-          autoWebSearch,
-          autoFileSearch,
           tool_choice,
           userLocation,
           searchContextSize
@@ -125,8 +123,8 @@ export default async function handler(req, res) {
 
     const toolsArray = [];
         
-        // Add web search tool if enabled, forced, or set to auto
-        if (enableWebSearch || forceWebSearch || autoWebSearch) {
+        // Add web search tool if enabled or forced
+        if (enableWebSearch || forceWebSearch) {
             const webSearchTool = { type: 'web_search_preview' };
 
             // Add user location if provided
@@ -150,16 +148,15 @@ export default async function handler(req, res) {
                 console.log('🌐 WEB SEARCH TOOL ADDED:', {
                     ...webSearchTool,
                     forced: forceWebSearch || false,
-                    enabled: enableWebSearch || false,
-                    auto: autoWebSearch || false
+                    enabled: enableWebSearch || false
                 });
             }
         }
 
-        if (enableFileSearch || autoFileSearch) {
+        if (enableFileSearch) {
             toolsArray.push({ type: 'file_search' });
             if (debugMode === 1) {
-                console.log('📄 FILE SEARCH TOOL ADDED', autoFileSearch ? '(AUTO MODE)' : '(ENABLED)');
+                console.log('📄 FILE SEARCH TOOL ADDED');
             }
         }
 
@@ -377,7 +374,7 @@ export default async function handler(req, res) {
         }
       }
     } else {
-      // Use Chat Completions API for non-reasoning models with tools support
+      // Use Chat Completions API for non-reasoning models
       const chatPayload = {
         model: model || 'gpt-4.1-2025-04-14',
         max_tokens: max_tokens || 4096,
@@ -394,39 +391,6 @@ export default async function handler(req, res) {
         stream: true,
         temperature: temperature || 0,
       };
-
-      // Add tools to Chat Completions if available (for auto/conditional usage)
-      if (toolsArray.length > 0) {
-        chatPayload.tools = toolsArray.map(tool => ({
-          type: 'function',
-          function: {
-            name: tool.type === 'web_search_preview' ? 'web_search' : 'file_search',
-            description: tool.type === 'web_search_preview' ? 'Search the web for current information' : 'Search through uploaded files',
-            parameters: {
-              type: 'object',
-              properties: {
-                query: {
-                  type: 'string',
-                  description: 'The search query'
-                }
-              },
-              required: ['query']
-            }
-          }
-        }));
-
-        // Set tool_choice to auto for conditional usage (model decides when to use tools)
-        if (autoWebSearch || autoFileSearch) {
-          chatPayload.tool_choice = 'auto';
-          if (debugMode === 1) {
-            console.log('🔧 CHAT COMPLETIONS: tool_choice set to AUTO for conditional tool usage');
-          }
-        }
-
-        if (debugMode === 1) {
-          console.log('🔧 CHAT COMPLETIONS: Tools added for non-reasoning model:', chatPayload.tools);
-        }
-      }
 
       const response = await openai.chat.completions.create(chatPayload);
 
