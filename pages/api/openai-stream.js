@@ -208,6 +208,25 @@ export default async function handler(req, res) {
                 enableFileSearch: enableFileSearch,
                 vectorStoreIds: vectorStoreIds
             });
+            
+            // LOG DETAILED TOOL CONFIGURATION
+            console.log('🔧 ===== TOOL CONFIGURATION DEBUG =====');
+            console.log('🔧 Web Search Parameters:', {
+                enableWebSearch: enableWebSearch,
+                forceWebSearch: forceWebSearch,
+                userLocation: userLocation,
+                searchContextSize: searchContextSize,
+                tool_choice: tool_choice
+            });
+            console.log('🔧 File Search Parameters:', {
+                enableFileSearch: enableFileSearch,
+                vectorStoreIds: vectorStoreIds,
+                fileSearchMaxResults: fileSearchMaxResults,
+                fileSearchInclude: fileSearchInclude,
+                fileSearchFilters: fileSearchFilters,
+                fileSearchRankingOptions: fileSearchRankingOptions
+            });
+            console.log('🔧 ===== END TOOL CONFIGURATION =====');
         }
         
         // Add web search tool if enabled or forced
@@ -431,6 +450,15 @@ export default async function handler(req, res) {
               query: webSearchCall.query,
               action: webSearchCall.action
             });
+            
+            // LOG WEB SEARCH CALL DETAILS
+            console.log('🌐 ===== WEB SEARCH CALL STARTED =====');
+            console.log('🌐 Search ID:', webSearchCall.id);
+            console.log('🌐 Search Query:', webSearchCall.query);
+            console.log('🌐 Search Action:', webSearchCall.action || 'search');
+            console.log('🌐 Search Status:', webSearchCall.status);
+            console.log('🌐 Full web_search_call object:', JSON.stringify(webSearchCall, null, 2));
+            console.log('🌐 ===== WEB SEARCH CALL DETAILS =====');
           }
         } else if (chunk.type === 'response.web_search_call.searching') {
           streamType = 'tool_call';
@@ -448,6 +476,15 @@ export default async function handler(req, res) {
               chunk_type: chunk.type,
               web_search_call: webSearchCall
             });
+            
+            // LOG WEB SEARCH SEARCHING DETAILS
+            console.log('🌐 ===== WEB SEARCH SEARCHING STATUS =====');
+            console.log('🌐 Search ID:', webSearchCall.id);
+            console.log('🌐 Search Query:', webSearchCall.query);
+            console.log('🌐 Search Action:', webSearchCall.action || 'search');
+            console.log('🌐 Search Status:', webSearchCall.status);
+            console.log('🌐 Full web_search_call object:', JSON.stringify(webSearchCall, null, 2));
+            console.log('🌐 ===== END WEB SEARCH SEARCHING =====');
           }
         } else if (chunk.type === 'response.web_search_call.completed') {
           streamType = 'tool_response';
@@ -480,24 +517,103 @@ export default async function handler(req, res) {
               raw_results: results,
               query: webSearchCall.query
             });
+            
+            // LOG COMPLETE WEB SEARCH RESULTS
+            console.log('🌐 ===== COMPLETE WEB SEARCH RESULTS =====');
+            console.log('🌐 Search Query:', webSearchCall.query);
+            console.log('🌐 Search Action:', webSearchCall.action || 'search');
+            console.log('🌐 Search Domains:', webSearchCall.domains || []);
+            console.log('🌐 Total Results Count:', resultsCount);
+            console.log('🌐 FULL RESULTS ARRAY:');
+            results.forEach((result, index) => {
+              console.log(`🌐 Result ${index + 1}:`, {
+                title: result.title,
+                url: result.url,
+                snippet: result.snippet,
+                published_date: result.published_date,
+                source: result.source,
+                domain: result.domain,
+                language: result.language,
+                type: result.type,
+                score: result.score,
+                metadata: result.metadata,
+                content: result.content ? result.content.substring(0, 200) + '...' : 'No content',
+                full_result: result // Complete result object
+              });
+            });
+            console.log('🌐 ===== END WEB SEARCH RESULTS =====');
           }
         } else if (chunk.type === 'response.file_search_call.in_progress') {
           streamType = 'tool_call';
+          const fileSearchCall = chunk.file_search_call || {};
+          const queries = fileSearchCall.queries || [];
+          
           content = JSON.stringify({
             tool_name: 'file_search',
-            arguments: 'Searching files...'
+            arguments: 'Searching files...',
+            queries: queries,
+            status: 'searching'
           });
+          
           if (debugMode === 1) {
             console.log('📄 FILE SEARCH IN PROGRESS:', chunk);
+            
+            // LOG FILE SEARCH CALL DETAILS
+            console.log('📄 ===== FILE SEARCH CALL STARTED =====');
+            console.log('📄 Search ID:', fileSearchCall.id);
+            console.log('📄 Search Status:', fileSearchCall.status);
+            console.log('📄 Search Queries:', queries);
+            console.log('📄 Full file_search_call object:', JSON.stringify(fileSearchCall, null, 2));
+            console.log('📄 ===== FILE SEARCH CALL DETAILS =====');
           }
         } else if (chunk.type === 'response.file_search_call.completed') {
           streamType = 'tool_response';
+          const fileSearchCall = chunk.file_search_call || {};
+          const searchResults = fileSearchCall.search_results || [];
+          const queries = fileSearchCall.queries || [];
+          const resultsCount = searchResults.length;
+          
           content = JSON.stringify({
             tool_name: 'file_search',
-            response: 'File search completed'
+            response: `File search completed with ${resultsCount} results`,
+            results_count: resultsCount,
+            queries: queries,
+            search_results: searchResults
           });
+          
           if (debugMode === 1) {
             console.log('📄 FILE SEARCH COMPLETED:', chunk);
+            
+            // LOG COMPLETE FILE SEARCH RESULTS
+            console.log('📄 ===== COMPLETE FILE SEARCH RESULTS =====');
+            console.log('📄 File Search ID:', fileSearchCall.id);
+            console.log('📄 Search Status:', fileSearchCall.status);
+            console.log('📄 Search Queries:', queries);
+            console.log('📄 Total Results Count:', resultsCount);
+            
+            if (searchResults && searchResults.length > 0) {
+              console.log('📄 FULL SEARCH RESULTS ARRAY:');
+              searchResults.forEach((result, index) => {
+                console.log(`📄 Search Result ${index + 1}:`, {
+                  id: result.id,
+                  file_id: result.file_id,
+                  filename: result.filename,
+                  score: result.score,
+                  content: result.content ? result.content.substring(0, 300) + '...' : 'No content',
+                  metadata: result.metadata,
+                  type: result.type,
+                  created_at: result.created_at,
+                  updated_at: result.updated_at,
+                  full_result: result // Complete result object
+                });
+              });
+            } else {
+              console.log('📄 No search results available - this might be because the "include" parameter was not used with ["file_search_call.results"]');
+            }
+            
+            console.log('📄 COMPLETE FILE SEARCH CALL OBJECT:');
+            console.log('📄 Full file_search_call:', JSON.stringify(fileSearchCall, null, 2));
+            console.log('📄 ===== END FILE SEARCH RESULTS =====');
           }
         } else if (chunk.type === 'response.completed') {
           if (debugMode === 1) {
