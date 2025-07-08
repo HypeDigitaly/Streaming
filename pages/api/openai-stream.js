@@ -50,7 +50,6 @@ export default async function handler(req, res) {
      * enableFileSearch: boolean - Enable file search tool
      * vectorStoreIds: array - Array of vector store IDs to search in (e.g., ["vs_123", "vs_456"])
      * fileSearchMaxResults: number - Maximum number of results to return (1-50, default 10)
-     * fileSearchRewriteQuery: boolean - Enable query rewriting for better results
      * fileSearchInclude: array - Include additional data in response (e.g., ["file_search_call.results"])
      * fileSearchFilters: object - Metadata filters for search results
      * fileSearchRankingOptions: object - Ranking configuration for result quality
@@ -62,7 +61,6 @@ export default async function handler(req, res) {
      *   "enableFileSearch": true,
      *   "vectorStoreIds": ["vs_abc123", "vs_def456"],
      *   "fileSearchMaxResults": 20,
-     *   "fileSearchRewriteQuery": true,
      *   "fileSearchInclude": ["file_search_call.results"],
      *   "fileSearchFilters": {
      *     "type": "eq",
@@ -90,7 +88,7 @@ export default async function handler(req, res) {
     const { 
       model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools, 
       enableWebSearch, enableFileSearch, userLocation, searchContextSize, forceWebSearch, tool_choice,
-      vectorStoreIds, fileSearchMaxResults, fileSearchRewriteQuery, fileSearchInclude, fileSearchFilters, fileSearchRankingOptions
+      vectorStoreIds, fileSearchMaxResults, fileSearchInclude, fileSearchFilters, fileSearchRankingOptions
     } = req.body;
 
     // Validate web search parameters
@@ -117,10 +115,6 @@ export default async function handler(req, res) {
 
     if (fileSearchMaxResults && (typeof fileSearchMaxResults !== 'number' || fileSearchMaxResults < 1 || fileSearchMaxResults > 50)) {
       throw new Error('fileSearchMaxResults must be a number between 1 and 50.');
-    }
-
-    if (fileSearchRewriteQuery && typeof fileSearchRewriteQuery !== 'boolean') {
-      throw new Error('fileSearchRewriteQuery must be a boolean.');
     }
 
     if (fileSearchInclude && !Array.isArray(fileSearchInclude)) {
@@ -185,7 +179,6 @@ export default async function handler(req, res) {
           searchContextSize,
           vectorStoreIds,
           fileSearchMaxResults,
-          fileSearchRewriteQuery,
           fileSearchInclude,
           fileSearchFilters,
           fileSearchRankingOptions
@@ -266,11 +259,6 @@ export default async function handler(req, res) {
                 fileSearchTool.max_num_results = fileSearchMaxResults;
             }
 
-            // Add query rewriting if enabled
-            if (fileSearchRewriteQuery) {
-                fileSearchTool.rewrite_query = fileSearchRewriteQuery;
-            }
-
             // Add filters if provided
             if (fileSearchFilters) {
                 fileSearchTool.filters = fileSearchFilters;
@@ -288,7 +276,6 @@ export default async function handler(req, res) {
                     ...fileSearchTool,
                     vector_store_count: vectorStoreIds ? vectorStoreIds.length : 0,
                     max_results: fileSearchMaxResults || 10,
-                    query_rewriting_enabled: fileSearchRewriteQuery || false,
                     has_filters: !!fileSearchFilters,
                     has_ranking_options: !!fileSearchRankingOptions
                 });
