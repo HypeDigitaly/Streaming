@@ -190,6 +190,14 @@ export default async function handler(req, res) {
           fileSearchFilters,
           fileSearchRankingOptions
         });
+        
+        // Extra debug for vector store IDs
+        console.log('🔍 VECTOR STORE IDS DEBUG:', {
+          vectorStoreIds: vectorStoreIds,
+          type: typeof vectorStoreIds,
+          isArray: Array.isArray(vectorStoreIds),
+          length: vectorStoreIds ? vectorStoreIds.length : 'undefined'
+        });
       }
 
     res.writeHead(200, {
@@ -199,6 +207,15 @@ export default async function handler(req, res) {
     });
 
     const toolsArray = [];
+        
+        if (debugMode === 1) {
+            console.log('🔧 TOOLS CONSTRUCTION START:', {
+                enableWebSearch: enableWebSearch,
+                forceWebSearch: forceWebSearch,
+                enableFileSearch: enableFileSearch,
+                vectorStoreIds: vectorStoreIds
+            });
+        }
         
         // Add web search tool if enabled or forced
         if (enableWebSearch || forceWebSearch) {
@@ -233,9 +250,15 @@ export default async function handler(req, res) {
         if (enableFileSearch) {
             const fileSearchTool = { type: 'file_search' };
 
-            // Add vector store IDs if provided
+            // Add vector store IDs - ALWAYS required by OpenAI API
             if (vectorStoreIds && vectorStoreIds.length > 0) {
                 fileSearchTool.vector_store_ids = vectorStoreIds;
+            } else {
+                // OpenAI API requires vector_store_ids parameter even if empty
+                fileSearchTool.vector_store_ids = [];
+                if (debugMode === 1) {
+                    console.log('⚠️ FILE SEARCH WARNING: No vector store IDs provided, using empty array');
+                }
             }
 
             // Add maximum number of results if specified
@@ -272,6 +295,19 @@ export default async function handler(req, res) {
             }
         }
 
+    if (debugMode === 1) {
+        console.log('🔧 FINAL TOOLS ARRAY:', {
+            length: toolsArray.length,
+            tools: toolsArray.map((tool, index) => ({
+                index: index,
+                type: tool.type,
+                hasVectorStoreIds: !!(tool.vector_store_ids),
+                vectorStoreIds: tool.vector_store_ids,
+                otherProps: Object.keys(tool).filter(key => key !== 'type' && key !== 'vector_store_ids')
+            }))
+        });
+    }
+
     // Use the new Responses API if reasoning or tools are requested
       if (reasoning || tools || toolsArray.length > 0) {
         const responsesPayload = {
@@ -304,6 +340,10 @@ export default async function handler(req, res) {
             console.log('🔧 CUSTOM tool_choice SET:', tool_choice);
           }
         }
+
+      if (debugMode === 1) {
+        console.log('🚀 FINAL RESPONSES PAYLOAD:', JSON.stringify(responsesPayload, null, 2));
+      }
 
       const response = await openai.responses.create(responsesPayload);
 
