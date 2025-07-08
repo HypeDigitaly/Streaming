@@ -1325,6 +1325,239 @@ export const StreamingResponseExtension = {
       );
     }
 
+    // Store annotations globally for processing
+    let fileSearchAnnotations = [];
+
+    // Function to handle file search annotations
+    function handleFileSearchAnnotations(annotationsData) {
+      try {
+        const data = JSON.parse(annotationsData);
+        const annotations = data.annotations || [];
+        
+        if (trace.payload?.debugMode === 1) {
+          console.log('📎 Received file search annotations:', {
+            count: annotations.length,
+            annotations: annotations,
+            text_index: data.text_index
+          });
+        }
+
+        // Store annotations for later processing
+        fileSearchAnnotations = fileSearchAnnotations.concat(annotations);
+
+        // Create citation elements and append to a citation section
+        if (annotations.length > 0) {
+          addCitationsToUI(annotations);
+        }
+      } catch (error) {
+        if (trace.payload?.debugMode === 1) {
+          console.error('Error parsing file search annotations:', error, annotationsData);
+        }
+      }
+    }
+
+    // Function to add citations to UI
+    function addCitationsToUI(annotations) {
+      // Check if citations section already exists
+      let citationsSection = responseContent.querySelector('.file-citations-section');
+      
+      if (!citationsSection) {
+        // Create citations section
+        citationsSection = document.createElement('div');
+        citationsSection.className = 'file-citations-section';
+        citationsSection.innerHTML = `
+          <div class="citations-header">
+            <h4>📎 Zdroje z dokumentů</h4>
+          </div>
+          <div class="citations-list"></div>
+        `;
+        
+        // Add CSS for citations
+        const citationStyles = document.createElement('style');
+        citationStyles.textContent = `
+          .file-citations-section {
+            margin-top: 16px;
+            padding: 12px;
+            background-color: #f8fafc;
+            border-radius: 6px;
+            border-left: 4px solid #3b82f6;
+          }
+          .citations-header h4 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2937;
+          }
+          .citations-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+          }
+          .citation-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            background-color: #ffffff;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+            font-size: 12px;
+          }
+          .citation-number {
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+          }
+          .citation-filename {
+            font-weight: 600;
+            color: #1f2937;
+          }
+                     .citation-file-id {
+             color: #6b7280;
+             font-family: monospace;
+           }
+           .file-citation-link {
+             color: #3b82f6;
+             text-decoration: none;
+             font-weight: 600;
+             margin: 0 1px;
+             padding: 1px 3px;
+             border-radius: 3px;
+             background-color: #eff6ff;
+             cursor: pointer;
+             transition: background-color 0.2s ease;
+           }
+           .file-citation-link:hover {
+             background-color: #dbeafe;
+             text-decoration: underline;
+           }
+        `;
+        
+        if (!document.head.querySelector('#file-citations-styles')) {
+          citationStyles.id = 'file-citations-styles';
+          document.head.appendChild(citationStyles);
+        }
+        
+        // Append to response content
+        responseContent.appendChild(citationsSection);
+      }
+
+      const citationsList = citationsSection.querySelector('.citations-list');
+      
+      // Add new citations
+      annotations.forEach((annotation, index) => {
+        if (annotation.type === 'file_citation') {
+          // Check if citation already exists
+          const existingCitation = citationsList.querySelector(`[data-file-id="${annotation.file_id}"]`);
+          
+          if (!existingCitation) {
+            const citationItem = document.createElement('div');
+            citationItem.className = 'citation-item';
+            citationItem.setAttribute('data-file-id', annotation.file_id);
+            
+            // Calculate citation number based on all existing citations
+            const citationNumber = fileSearchAnnotations.filter(a => 
+              a.type === 'file_citation' && a.file_id === annotation.file_id
+            ).length;
+            
+            citationItem.innerHTML = `
+              <div class="citation-number">${citationNumber}</div>
+              <div class="citation-filename">${annotation.filename || 'Unknown file'}</div>
+              <div class="citation-file-id">${annotation.file_id}</div>
+            `;
+            
+            citationsList.appendChild(citationItem);
+            
+            if (trace.payload?.debugMode === 1) {
+              console.log('📎 Added citation to UI:', {
+                file_id: annotation.file_id,
+                filename: annotation.filename,
+                citation_number: citationNumber
+              });
+            }
+          }
+        }
+      });
+    }
+
+    // Function to convert file citations in text to clickable links
+    function processFileCitations(text) {
+      if (!fileSearchAnnotations || fileSearchAnnotations.length === 0) {
+        return text;
+      }
+
+      let processedText = text;
+      
+      // Create a map of file_id to citation info
+      const citationMap = {};
+      let citationCounter = 1;
+      
+      fileSearchAnnotations.forEach(annotation => {
+        if (annotation.type === 'file_citation' && !citationMap[annotation.file_id]) {
+          citationMap[annotation.file_id] = {
+            number: citationCounter++,
+            filename: annotation.filename || 'Unknown file',
+            file_id: annotation.file_id
+          };
+        }
+      });
+
+      // Replace file citations with clickable links
+      Object.entries(citationMap).forEach(([fileId, citationInfo]) => {
+        const citationRegex = new RegExp(`\\[${citationInfo.number}\\]`, 'g');
+        processedText = processedText.replace(citationRegex, 
+          `<a href="#citation-${fileId}" class="file-citation-link" title="${citationInfo.filename}">[${citationInfo.number}]</a>`
+        );
+      });
+
+      return processedText;
+    }
+
+    // Function to add citation link handlers
+    function addCitationLinkHandlers() {
+      const citationLinks = responseContent.querySelectorAll('.file-citation-link');
+      
+      citationLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const href = this.getAttribute('href');
+          if (href && href.startsWith('#citation-')) {
+            const fileId = href.replace('#citation-', '');
+            const targetCitation = responseContent.querySelector(`[data-file-id="${fileId}"]`);
+            
+            if (targetCitation) {
+              // Highlight the citation temporarily
+              targetCitation.style.backgroundColor = '#fef3c7';
+              targetCitation.style.transition = 'background-color 0.3s ease';
+              
+              // Scroll to citation
+              targetCitation.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+              });
+              
+              // Remove highlight after 2 seconds
+              setTimeout(() => {
+                targetCitation.style.backgroundColor = '#ffffff';
+              }, 2000);
+              
+              if (trace.payload?.debugMode === 1) {
+                console.log('📎 Scrolled to citation:', fileId);
+              }
+            }
+          }
+        });
+      });
+    }
+
     // Update the answer content with markdown support
     function updateContent(text) {
       if (!text) return;
@@ -1684,11 +1917,17 @@ export const StreamingResponseExtension = {
         console.log("🔍 HTML DEBUG: Found H2 tags:", cleanedHtml.substring(0, 500));
       }
 
-      // Update content with formatting using the cleaned HTML
-      responseContent.innerHTML = cleanedHtml;
+      // Process file citations in the cleaned HTML
+      const htmlWithCitations = processFileCitations(cleanedHtml);
+      
+      // Update content with formatting using the processed HTML
+      responseContent.innerHTML = htmlWithCitations;
 
       // Add URL preview functionality for citation links (from PerplexityExtension)
       addUrlPreviewHandlers();
+      
+      // Add citation link handlers
+      addCitationLinkHandlers();
 
       // Scroll handling
       const scrollContainer = findScrollableParent(element);
@@ -2659,36 +2898,47 @@ export const StreamingResponseExtension = {
                     );
                   }
 
-                  const content = parsed.content || "";
-                  if (content || typeof content === "string") {
-                    // Handle empty string content too
-                    receivedAnyContent = true; // Mark that we have received processable content
-
-                    // --- TTFT Logic ---
-                    if (!firstChunkReceived) {
-                      firstChunkReceived = true;
-                      if (payload.debugMode === 1)
-                        console.log(
-                          `✅ First chunk received from ${endpoint} within timeout.`,
-                        );
-                      // Crucially, clear the TTFT timer now
-                      if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
-                      // Signal that the TTFT hurdle is passed
-                      resolveFirstChunkPromise();
+                  // Handle different types of content
+                  if (parsed.type === 'annotations') {
+                    // Handle file search annotations (citations)
+                    if (payload.debugMode === 1) {
+                      console.log('📎 Processing file search annotations:', parsed.content);
                     }
-                    // --- End TTFT Logic ---
+                    handleFileSearchAnnotations(parsed.content);
+                    receivedAnyContent = true;
+                  } else {
+                    // Handle regular content
+                    const content = parsed.content || "";
+                    if (content || typeof content === "string") {
+                      // Handle empty string content too
+                      receivedAnyContent = true; // Mark that we have received processable content
 
-                    // Update UI only if the fetch wasn't aborted *before* this point
-                    if (!abortController.signal.aborted) {
-                      updateContent(content);
-                      localCompleteResponse += content;
-                    } else {
-                      // Should theoretically not happen if abort check is robust, but good failsafe
-                      if (payload.debugMode === 1)
-                        console.warn(
-                          `⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`,
-                        );
-                      // Do not update UI or localCompleteResponse if aborted
+                      // --- TTFT Logic ---
+                      if (!firstChunkReceived) {
+                        firstChunkReceived = true;
+                        if (payload.debugMode === 1)
+                          console.log(
+                            `✅ First chunk received from ${endpoint} within timeout.`,
+                          );
+                        // Crucially, clear the TTFT timer now
+                        if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
+                        // Signal that the TTFT hurdle is passed
+                        resolveFirstChunkPromise();
+                      }
+                      // --- End TTFT Logic ---
+
+                      // Update UI only if the fetch wasn't aborted *before* this point
+                      if (!abortController.signal.aborted) {
+                        updateContent(content);
+                        localCompleteResponse += content;
+                      } else {
+                        // Should theoretically not happen if abort check is robust, but good failsafe
+                        if (payload.debugMode === 1)
+                          console.warn(
+                            `⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`,
+                          );
+                        // Do not update UI or localCompleteResponse if aborted
+                      }
                     }
                   }
                 } else if (payload.debugMode === 1 && data) {
@@ -2930,7 +3180,7 @@ export const StreamingResponseExtension = {
           user_id: trace.payload.user_id,
         };
 
-        // Add OpenAI-specific web search parameters
+        // Add OpenAI-specific web search and file search parameters
         if (model.type === 'openai') {
           // OpenAI web search parameters
           if (trace.payload.enableWebSearch !== undefined) payload.enableWebSearch = trace.payload.enableWebSearch;
@@ -2938,7 +3188,17 @@ export const StreamingResponseExtension = {
           if (trace.payload.searchContextSize) payload.searchContextSize = trace.payload.searchContextSize;
           if (trace.payload.userLocation) payload.userLocation = trace.payload.userLocation;
           if (trace.payload.tool_choice) payload.tool_choice = trace.payload.tool_choice;
+          
+          // OpenAI file search parameters
           if (trace.payload.enableFileSearch !== undefined) payload.enableFileSearch = trace.payload.enableFileSearch;
+          if (trace.payload.vectorStoreIds) payload.vectorStoreIds = trace.payload.vectorStoreIds;
+          if (trace.payload.fileSearchMaxResults) payload.fileSearchMaxResults = trace.payload.fileSearchMaxResults;
+          if (trace.payload.fileSearchRewriteQuery !== undefined) payload.fileSearchRewriteQuery = trace.payload.fileSearchRewriteQuery;
+          if (trace.payload.fileSearchInclude) payload.fileSearchInclude = trace.payload.fileSearchInclude;
+          if (trace.payload.fileSearchFilters) payload.fileSearchFilters = trace.payload.fileSearchFilters;
+          if (trace.payload.fileSearchRankingOptions) payload.fileSearchRankingOptions = trace.payload.fileSearchRankingOptions;
+          
+          // OpenAI reasoning and tools parameters
           if (trace.payload.reasoning !== undefined) payload.reasoning = trace.payload.reasoning;
           if (trace.payload.tools) payload.tools = trace.payload.tools;
         }

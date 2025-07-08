@@ -45,6 +45,36 @@ export default async function handler(req, res) {
      *   - timezone: string (IANA timezone, e.g., 'Europe/Prague')
      * tool_choice: object - Custom tool choice override (e.g., {type: 'web_search_preview'})
      * 
+     * EXPANDED FILE SEARCH PARAMETERS:
+     * 
+     * enableFileSearch: boolean - Enable file search tool
+     * vectorStoreIds: array - Array of vector store IDs to search in (e.g., ["vs_123", "vs_456"])
+     * fileSearchMaxResults: number - Maximum number of results to return (1-50, default 10)
+     * fileSearchRewriteQuery: boolean - Enable query rewriting for better results
+     * fileSearchInclude: array - Include additional data in response (e.g., ["file_search_call.results"])
+     * fileSearchFilters: object - Metadata filters for search results
+     * fileSearchRankingOptions: object - Ranking configuration for result quality
+     *   - ranker: string ('auto' or 'default-2024-08-21')
+     *   - score_threshold: number (0.0-1.0)
+     * 
+     * Example payload for file search with vector stores:
+     * {
+     *   "enableFileSearch": true,
+     *   "vectorStoreIds": ["vs_abc123", "vs_def456"],
+     *   "fileSearchMaxResults": 20,
+     *   "fileSearchRewriteQuery": true,
+     *   "fileSearchInclude": ["file_search_call.results"],
+     *   "fileSearchFilters": {
+     *     "type": "eq",
+     *     "property": "category",
+     *     "value": "documentation"
+     *   },
+     *   "fileSearchRankingOptions": {
+     *     "ranker": "auto",
+     *     "score_threshold": 0.7
+     *   }
+     * }
+     * 
      * Example payload for forced web search with Czech location:
      * {
      *   "forceWebSearch": true,
@@ -57,7 +87,11 @@ export default async function handler(req, res) {
      *   }
      * }
      */
-    const { model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools, enableWebSearch, enableFileSearch, userLocation, searchContextSize, forceWebSearch, tool_choice } = req.body;
+    const { 
+      model, max_tokens, temperature, userData, systemPrompt, projectName, debugMode, user_id, reasoning, tools, 
+      enableWebSearch, enableFileSearch, userLocation, searchContextSize, forceWebSearch, tool_choice,
+      vectorStoreIds, fileSearchMaxResults, fileSearchRewriteQuery, fileSearchInclude, fileSearchFilters, fileSearchRankingOptions
+    } = req.body;
 
     // Validate web search parameters
     if (searchContextSize && !['low', 'medium', 'high'].includes(searchContextSize)) {
@@ -70,6 +104,43 @@ export default async function handler(req, res) {
 
     if (userLocation?.country && typeof userLocation.country !== 'string') {
       throw new Error('userLocation.country must be a string (ISO country code, e.g., "CZ", "US").');
+    }
+
+    // Validate file search parameters
+    if (vectorStoreIds && !Array.isArray(vectorStoreIds)) {
+      throw new Error('vectorStoreIds must be an array of vector store IDs.');
+    }
+
+    if (vectorStoreIds && vectorStoreIds.some(id => typeof id !== 'string')) {
+      throw new Error('All vectorStoreIds must be strings.');
+    }
+
+    if (fileSearchMaxResults && (typeof fileSearchMaxResults !== 'number' || fileSearchMaxResults < 1 || fileSearchMaxResults > 50)) {
+      throw new Error('fileSearchMaxResults must be a number between 1 and 50.');
+    }
+
+    if (fileSearchRewriteQuery && typeof fileSearchRewriteQuery !== 'boolean') {
+      throw new Error('fileSearchRewriteQuery must be a boolean.');
+    }
+
+    if (fileSearchInclude && !Array.isArray(fileSearchInclude)) {
+      throw new Error('fileSearchInclude must be an array.');
+    }
+
+    if (fileSearchFilters && typeof fileSearchFilters !== 'object') {
+      throw new Error('fileSearchFilters must be an object.');
+    }
+
+    if (fileSearchRankingOptions && typeof fileSearchRankingOptions !== 'object') {
+      throw new Error('fileSearchRankingOptions must be an object.');
+    }
+
+    if (fileSearchRankingOptions?.ranker && !['auto', 'default-2024-08-21'].includes(fileSearchRankingOptions.ranker)) {
+      throw new Error('fileSearchRankingOptions.ranker must be "auto" or "default-2024-08-21".');
+    }
+
+    if (fileSearchRankingOptions?.score_threshold && (typeof fileSearchRankingOptions.score_threshold !== 'number' || fileSearchRankingOptions.score_threshold < 0.0 || fileSearchRankingOptions.score_threshold > 1.0)) {
+      throw new Error('fileSearchRankingOptions.score_threshold must be a number between 0.0 and 1.0.');
     }
 
     // Check if web search is supported for the model
@@ -111,7 +182,13 @@ export default async function handler(req, res) {
           forceWebSearch,
           tool_choice,
           userLocation,
-          searchContextSize
+          searchContextSize,
+          vectorStoreIds,
+          fileSearchMaxResults,
+          fileSearchRewriteQuery,
+          fileSearchInclude,
+          fileSearchFilters,
+          fileSearchRankingOptions
         });
       }
 
@@ -154,9 +231,44 @@ export default async function handler(req, res) {
         }
 
         if (enableFileSearch) {
-            toolsArray.push({ type: 'file_search' });
+            const fileSearchTool = { type: 'file_search' };
+
+            // Add vector store IDs if provided
+            if (vectorStoreIds && vectorStoreIds.length > 0) {
+                fileSearchTool.vector_store_ids = vectorStoreIds;
+            }
+
+            // Add maximum number of results if specified
+            if (fileSearchMaxResults) {
+                fileSearchTool.max_num_results = fileSearchMaxResults;
+            }
+
+            // Add query rewriting if enabled
+            if (fileSearchRewriteQuery) {
+                fileSearchTool.rewrite_query = fileSearchRewriteQuery;
+            }
+
+            // Add filters if provided
+            if (fileSearchFilters) {
+                fileSearchTool.filters = fileSearchFilters;
+            }
+
+            // Add ranking options if provided
+            if (fileSearchRankingOptions) {
+                fileSearchTool.ranking_options = fileSearchRankingOptions;
+            }
+
+            toolsArray.push(fileSearchTool);
+            
             if (debugMode === 1) {
-                console.log('📄 FILE SEARCH TOOL ADDED');
+                console.log('📄 FILE SEARCH TOOL ADDED:', {
+                    ...fileSearchTool,
+                    vector_store_count: vectorStoreIds ? vectorStoreIds.length : 0,
+                    max_results: fileSearchMaxResults || 10,
+                    query_rewriting_enabled: fileSearchRewriteQuery || false,
+                    has_filters: !!fileSearchFilters,
+                    has_ranking_options: !!fileSearchRankingOptions
+                });
             }
         }
 
@@ -171,6 +283,14 @@ export default async function handler(req, res) {
           tools: toolsArray.length > 0 ? toolsArray : tools,
           stream: true, // Always use streaming for real-time updates
         };
+
+        // Add include parameter for file search if specified
+        if (fileSearchInclude && fileSearchInclude.length > 0) {
+          responsesPayload.include = fileSearchInclude;
+          if (debugMode === 1) {
+            console.log('📄 FILE SEARCH INCLUDE ADDED:', fileSearchInclude);
+          }
+        }
 
         // Force web search tool usage if forceWebSearch is true or tool_choice is explicitly set
         if (forceWebSearch) {
@@ -204,11 +324,36 @@ export default async function handler(req, res) {
         if (chunk.type === 'response.output_text.delta') {
           streamType = 'content';
           content = chunk.delta;
+          
+          // Check for annotations (file citations) in the chunk
+          if (chunk.annotations && Array.isArray(chunk.annotations) && chunk.annotations.length > 0) {
+            // Send annotations as a separate stream event
+            const annotationsData = {
+              type: 'annotations',
+              content: JSON.stringify({
+                annotations: chunk.annotations,
+                text_index: chunk.index || 0
+              })
+            };
+            
+            if (debugMode === 1) {
+              console.log('📎 FILE CITATIONS FOUND:', {
+                annotations_count: chunk.annotations.length,
+                annotations: chunk.annotations,
+                text_index: chunk.index
+              });
+            }
+            
+            res.write(`data: ${JSON.stringify(annotationsData)}\n\n`);
+            res.flush?.();
+          }
+          
           if (debugMode === 1) {
             console.log('📝 CONTENT DELTA:', {
               length: content?.length || 0,
               content: content?.substring(0, 50) + (content?.length > 50 ? '...' : ''),
-              chunk_type: chunk.type
+              chunk_type: chunk.type,
+              has_annotations: !!(chunk.annotations && chunk.annotations.length > 0)
             });
           }
         } else if (chunk.type === 'response.reasoning.delta' && chunk.delta?.text) {
