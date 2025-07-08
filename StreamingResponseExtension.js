@@ -1650,29 +1650,7 @@ export const StreamingResponseExtension = {
         },
       );
 
-      // Debug logging for header conversion issues
-      if (trace.payload?.debugMode === 1 && buffer.includes('##')) {
-        console.log("🔍 MARKDOWN DEBUG: Content contains headers:", buffer.substring(0, 500));
-        console.log("🔍 MARKDOWN DEBUG: Buffer length:", buffer.length);
-        console.log("🔍 MARKDOWN DEBUG: Last 50 chars:", buffer.slice(-50));
-        const headerMatches = buffer.match(/^.*##.*$/gm);
-        if (headerMatches) {
-          console.log("🔍 MARKDOWN DEBUG: Found header lines:", headerMatches);
-        }
-        
-        // Test each regex pattern individually
-        console.log("🔍 REGEX TEST: Testing individual patterns:");
-        const testPatterns = [
-          { name: "Pattern 1", regex: /^(\s*)#{2}\s+(.+?)$/gm },
-          { name: "Pattern 2", regex: /^## (.+)$/gm },
-          { name: "Pattern 3", regex: /##\s+([^\n\r]+)/g }
-        ];
-        
-        testPatterns.forEach(({name, regex}) => {
-          const matches = buffer.match(regex);
-          console.log(`🔍 REGEX TEST: ${name}:`, matches);
-        });
-      }
+
       
       // Special handling for streaming headers - process only complete lines
       let processBuffer = buffer;
@@ -1684,9 +1662,6 @@ export const StreamingResponseExtension = {
         
         // If last line looks like incomplete header, process only complete lines
         if (lastLine.includes('##') && lastLine.length < 100) {
-          if (trace.payload?.debugMode === 1) {
-            console.log("🔍 STREAMING: Detected incomplete header line, delaying processing:", lastLine);
-          }
           // Process all but the last line
           processBuffer = lines.slice(0, -1).join('\n') + (lines.length > 1 ? '\n' : '');
         }
@@ -1823,16 +1798,7 @@ export const StreamingResponseExtension = {
         .replace(/(?:^|\n)(<li)/g, "\n<ul>$1")
         .replace(/(<\/li>)(?:\n(?!<li)|$)/g, "$1</ul>");
 
-      // Debug logging after markdown processing
-      if (trace.payload?.debugMode === 1) {
-        console.log("🔍 PROCESSING: processBuffer vs buffer lengths:", processBuffer.length, "vs", buffer.length);
-        if (formattedContent.includes('##')) {
-          console.log("🔍 AFTER MARKDOWN: Still contains ##:", formattedContent.substring(0, 500));
-        }
-        if (formattedContent.includes('<h2>')) {
-          console.log("🔍 AFTER MARKDOWN: Found H2 tags:", formattedContent.match(/<h2>.*?<\/h2>/g));
-        }
-      }
+
 
       // --- BEGIN: Post-process lists and clean up empty items ---
       const tempContainer = document.createElement("div");
@@ -1909,13 +1875,7 @@ export const StreamingResponseExtension = {
       const cleanedHtml = tempContainer.innerHTML;
       // --- END: Post-process lists and clean up empty items ---
 
-      // Debug logging after HTML processing
-      if (trace.payload?.debugMode === 1 && cleanedHtml.includes('##')) {
-        console.log("🔍 HTML DEBUG: Cleaned HTML still contains ##:", cleanedHtml.substring(0, 500));
-      }
-      if (trace.payload?.debugMode === 1 && cleanedHtml.includes('<h2>')) {
-        console.log("🔍 HTML DEBUG: Found H2 tags:", cleanedHtml.substring(0, 500));
-      }
+
 
       // Process file citations in the cleaned HTML
       const htmlWithCitations = processFileCitations(cleanedHtml);
@@ -2761,7 +2721,10 @@ export const StreamingResponseExtension = {
 
     // Generic function to call any LLM API provider with TTFT timeout
     async function callLLMAPI(endpoint, payload) {
-      const TTFT_TIMEOUT_MS = 10000; // Time To First Token timeout (10 seconds)
+      // Determine TTFT timeout based on web search usage
+      const hasWebSearch = payload.enableWebSearch || payload.forceWebSearch;
+      const TTFT_TIMEOUT_MS = hasWebSearch ? 30000 : 10000; // 30s for web search, 10s otherwise
+      
       const abortController = new AbortController();
       let ttftTimeoutId = null;
       let firstChunkReceived = false;
