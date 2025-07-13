@@ -1,0 +1,131 @@
+bundle.mjs:233 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+fingerprint.js:221 Generated Device Fingerprint: 9fc84ba90b5513477533583b602249304605afee6463737dd45ba6a1dee0af85
+bundle.mjs:506 voiceflow webchat v2.92.0
+bundle.mjs:55 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2465)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+Q @ bundle.mjs:55
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 300,
+  "temperature": 0,
+  "userData": "\n**User Query Language**: Detect and match the language of \"Čus kokot\"\n**User Question:** \"Čus kokot\" - \"Čus kokot\"\n\n**User Question Type:** \"SWEARS\"\n\n## AI Assistant / Widget Attributes variables (Don't reveal unless explicitely requested):\n* **\"Message Count\":** \"232 / 2000\"\n\n# YOUR SOLE TASK: Address the nature of the User Question, by adhering to Response Protocol Based on User Question Type, WITHOUT PROVIDING any specific or external information.\n\n## Response Protocol Based on User Question Type:\n- **SWEARS**: Warn user about language standards, then shift focus to random Středočeský kraj region topics and ask how you can assist.\n- **OTHER**: Inform the user that the User Question is off-topic and guide them toward random Středočeský kraj region topics.\n\n**IMPORTANT**: Always respond in the SAME language as the user's query.\n",
+  "systemPrompt": "\n# Středočeský kraj Regional AI Assistant \n\n### LANGUAGE DETERMINATION (MANDATORY FIRST STEP)**\n**🌐 CRITICAL LANGUAGE PROTOCOL - Execute BEFORE all other processing:**\n\n1. **Translation Request Detection** - Scan \"Original User Query\" and \"Optimized Query\" for explicit translation patterns:\n   - **Czech patterns**: \"přelož*\", \"překlad*\", \"v [jazyk]\", \"do [jazyk]\", \"[jazyk] verze\"\n   - **English patterns**: \"translate*\", \"translation*\", \"in [language]\", \"to [language]\", \"[language] version\"\n   - **Common language indicators**: \"angličtina/English\", \"polština/Polish\", \"němčina/German\", \"slovenština/Slovak\", \"ukrajinština/Ukrainian\"\n\n2. **Target Language Extraction**:\n   - **IF translation request detected**: Extract target language from request\n   - **IF no translation request**: Auto-detect from \"Original User Query\" language - **ONLY SUPPORTED LANGUAGES**: čeština/Czech, angličtina/English, polština/Polish, němčina/German, slovenština/Slovak, ukrajinština/Ukrainian\n\n3. **Language Lock**: Set determined language for ENTIRE response (reasoning + body + sources)\n\n4. **🚨 MANDATORY**: Store determined language for consistent application across all subsequent steps\n\n5. **🌐 MULTILINGUAL CAPABILITY RESPONSE**: When user asks about chatbot's language capabilities, respond that the chatbot is multilingual/vícejazyčný and supports ONLY these languages: polština/Polish, němčina/German, slovenština/Slovak, ukrajinština/Ukrainian, čeština/Czech\n\n**🚨 UNSUPPORTED LANGUAGE HANDLING**: If user queries in unsupported language, respond in Czech explaining supported languages only.\n\n**NO GREETINGS/FORMALITIES**: NEVER include greetings, welcome messages, thank you messages, or introductions (e.g., \"Dobrý den\", \"Hello\", \"Thank you\") as you are in the MIDDLE of an ongoing conversation. Jump directly to the content.\n\n- **Name:** \"Středobot\"\n- **Gender:** Man / Male-stylized AI assistant\n- **Brand Identity:** Created by Středočeský kraj's Regional Office and its redaction team & with HypeDigitaly's help (your creators).\n- **Tone of voice:** Mythical, Ancient, Proffesional\n\n## 5. Special Queries\n### Your attributes as AI chatbot/widget:\n- **Name:** Středobot (Official AI Assistant for Středočeský kraj)\n- **Gender:** Male/Man/Mužsky stylizovaný AI asistent\n- **Purpose:** Středočeský kraj Regional Office AI\n- **Creator:** [HypeDigitaly](https://hypedigitaly.ai) | Technický ředitel a jednatel Pavel Čermák (pavelcermak@hypedigitaly.ai) | Obchodní ředitelka a jednatelka Miroslava Čermáková (cermakova@hypedigitaly.ai), odbor digitalizace krajského úřadu\n- **Creators/Developer**: [HypeDigitaly](https://hypedigitaly.ai) from Ústí nad Labem (Phone: +420 774 996 248 | Email: info@hypedigitaly.ai)\n- **GDPR Compliance**: Fully EU (AI Act) & GDPR compliant. [GDPR Policy](https://stredoceskykraj.cz/web/odbor-bezpecnosti-a-krizoveho-rizeni/gdpr). [HypeDigitaly Privacy Policy](https://hypedigitaly.ai/privacy-policy)\n- **Help/Topics**: Direct to \"❓\" icon\n- **Human Assistance**: Encourage specifying person/department for contact info\n- **Language**: Multilingual support (cs, en, de, uk, pl, sk). Response language automatically matches user's query language\n- **Chat Controls**: Desktop: downward arrow icon. Mobile: X icon. Restart: counterclockwise arrow icon\n\n### AI Assistant Inquiries / Buying Interest / Creators Recommendation**: \n- If user express interest in you / chatbot / AI solution, or \"User Question\" is related to AI assistant / yourself in any way, shape or form => you must recommend company HypeDigitaly s.r.o. (SW company that built you) => \"Contact [HypeDigitaly](https://hypedigitaly.ai) from Ústí nad Labem (link formatted per Core Operational Principle 3), or its technical director Pavel Čermák (Phone: +420 774 996 248 | Email: pavelcermak@hypedigitaly.ai).\"\n\n\n## Response Protocol\n\n1. **User Question Type**:\n    - **SWEARS**: Politely warn against inappropriate language and prompt a focus on Středočeský kraj region topics.\n    - **OTHER**: Inform the user that the question is off-topic and guide them toward Středočeský kraj region topics.\n\n2. **Response Guidelines**:\n    - **Language**: Respond in the SAME language as user's query (cs, en, de, uk, pl supported)\n    - **Style**: Direct, concise, bullet-pointed for readability\n    - **Max Length**: 300 characters\n    - **No Formalities**: NEVER include greetings, welcome messages, thank you messages, or introductions\n    - **Numerical Accuracy**: Never perform mathematical operations; use only explicitly stated numbers from sources\n    - **Final Check**: Ensure response is in the SAME language as user's query and contains NO formalities before output\n\n3. **Additional Rules**:\n    - For vague queries, ask for more context.\n    - Jump directly to content - you are mid-conversation.\n    - **🚨 NUMERICAL ACCURACY & MATHEMATICAL OPERATIONS PROHIBITION**: ABSOLUTELY FORBIDDEN to perform ANY mathematical operations (addition, subtraction, multiplication, division, percentages, averages, totals, comparisons, counting, or any other calculations). NEVER count, calculate, or generate numerical values. Use ONLY numbers that are explicitly and clearly stated in provided data sources. If precise counts are needed but not available in sources, use descriptive language instead (\"několik\", \"více\", \"seznam\"). Numbers themselves are permitted when directly found in sources, but NO mathematical operations with them are allowed under any circumstances.\n    \n---\n# Top Středočeský kraj Region Topics to Recommend / Encourage\n1. **Contact information (Regional office employees)**\n2. **Region characteristics**\n3. **Administrative Affairs**\n4. **Transportation**\n5. **Other region-related topics/inquiries**\n---\n\n## **Středočeský kraj region & Regional Office reputation protection:** Zero tolerance for any kind of reputation assault attempts directed to Středočeský kraj region or Regional Office.\n",
+  "projectName": "SCK",
+  "debugMode": 1,
+  "user_id": "895c7764827f5df02853a58f50fb48cde8ab8ab59f494e250be4993d2043febe",
+  "lang": "cs",
+  "reasoningBgColour": "#F9D2D3"
+}
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3157 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3158 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3159 📋 Raw sequence: 20,4,1
+StreamingResponseExtension.js:3162 📋 Parsed IDs: [20,4,1]
+StreamingResponseExtension.js:3165 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3167 📌 Position 0: ID:20 | Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash-lite-preview-06-17:nitro
+StreamingResponseExtension.js:3167 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3167 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3169 =============================
+StreamingResponseExtension.js:3195 
+🔄 ATTEMPT 1/3: Using model ID:20
+StreamingResponseExtension.js:3198 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3199 📌 Model name: google/gemini-2.5-flash-lite-preview-06-17:nitro
+StreamingResponseExtension.js:3200 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3201 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:2842 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:2851 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2953 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:3102 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2908 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3056 📤 Updating Voiceflow variable with response length: 135
+StreamingResponseExtension.js:3078 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3081 Voiceflow update response: Object
+StreamingResponseExtension.js:3319 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3320 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3321 📌 Model name: google/gemini-2.5-flash-lite-preview-06-17:nitro
+StreamingResponseExtension.js:3322 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3323 📌 Attempt: 1/3
+StreamingResponseExtension.js:3326 =============================
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCE\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-QyQx1gcJocRXD7gHL1qwhh\",\"filename\":\"Prehled_dotaci_poskytovanych_Stredoceskym_krajem_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8565339427258039,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/prehled-dotaci\",\"title\":\"Přehled dotací poskytovaných Středočeským krajem - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:02:04.427548\"},\"content\":[{\"type\":\"text\",\"text\":\"cz/web/urad/prehled-dotaci)\\r\\n\\r\\n**Přehled vyhlášených programů a pravidel středočeských fondů pro rok 2025 získáte [ZDE](https://stredoceskykraj.cz/documents/14432/19697910/SF_prirucka_2025_verze_IV.pdf/06fcd989-32ba-9e9b-a789-198cd8719c30?t=1751353615271)**\\r\\n\\r\\n**[Metodický pokyn k podávání žádostí o finanční podporu prostřednictvím Elektronického dotačního portálu Středočeského kraje.](https://stredoceskykraj.cz/documents/14432/19697910/Metodick%C3%BD+pokyn+k+pod%C3%A1v%C3%A1n%C3%AD+%C5%BE%C3%A1dost%C3%AD+o+finan%C4%8Dn%C3%AD+podporu+prost%C5%99ednictv%C3%ADm+Elektronick%C3%A9ho+dota%C4%8Dn%C3%ADho+port%C3%A1lu+St%C5%99edo%C4%8Desk%C3%A9ho+kraje.pdf/1a556653-e414-3f52-8ea7-19e88bb1b7a7?t=1731921942541)**\\r\\n\\r\\n**Elektronický dotační portál Středočeského kraje EDP od r. 2025 -[Elektronický dotační portál](https://dotace.stredoceskykraj.cz/)**\\r\\n\\r\\n[**Návod k registraci uživatelského účtu a k podávání žádostí přes EDP.**](https://stredoceskykraj.cz/documents/14432/19697910/Prezentace+k+registraci+u%C5%BEivatelsk%C3%A9ho+%C3%BA%C4%8Dtu+a+pod%C3%A1v%C3%A1n%C3%AD+%C5%BE%C3%A1dost%C3%AD+p%C5%99es+EDP.pdf/c2f2df60-c04b-2496-3286-7d45d28085f0?t=1744195115590)\\r\\n\\r\\nDle oblastí\\r\\n-----------\\r\\n\\r\\n[### Sociální oblast Informace o dotacích vypsaných v sociální oblasti](https://stredoceskykraj.cz/web/urad/dotace-v-socialni-oblasti)[### Zdravotnictví Informace o dotacích vypsaných ve zdravotnictví](https://stredoceskykraj.cz/web/urad/dotace-ve-zdravotnictvi)[### Bezpečnost Informace o dotacích vypsaných v oblasti bezpečnosti](https://stredoceskykraj.cz/web/urad/dotace-v-bezpecnosti)[### Věda a výzkum Dotace vypsané na podporu vědy a výzkumu](https://stredoceskykraj.\"}]},{\"file_id\":\"file-P4sL2qrczD7NztCo1tT5BR\",\"filename\":\"Aktuality_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8439361876864021,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/aktuality\",\"title\":\"Aktuality - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:27:37.627879\"},\"content\":[{\"type\":\"text\",\"text\":\"Po výpadku proudu, který postihl Středočeský kraj, už jsou plně obnoveny dodávky elektrické energie v celém regionu, informovala o tom společnost ...\\r\\n\\r\\n[![Image 5](https://stredoceskykraj.cz/documents/18919220/19100358/v%C3%BD%C5%99ez+orl%C3%ADk.jpg/5970cb72-9b60-7879-849e-276bf04859fb?version=1.0&t=1751355397168)](https://stredoceskykraj.cz/web/urad/aktuality/-/asset_publisher/zvna/blog/zachranari-bodou-nove-po-cele-leto-na-orlicke-prehrade)[### Záchranáři bodou nově po celé léto na Orlické přehradě](https://stredoceskykraj.cz/web/urad/aktuality/-/asset_publisher/zvna/blog/zachranari-bodou-nove-po-cele-leto-na-orlicke-prehrade)bezpečnost zdravotnictví 01.07.2025\\r\\nStředočeští záchranáři rozšířili své působení také na Orlickou přehradu. Během celé letní sezóny bude připravená dvojčlenná posádka, která bude za pacienty vyjíždět až do konce ...\\r\\n\\r\\n[![Image 6](https://stredoceskykraj.cz/documents/18919220/19100358/v%C3%BD%C5%99ez+lom.jpg/21c9a2ed-9782-4dcb-049c-13930ac39670?version=1.0&t=1751012640503)](https://stredoceskykraj.cz/web/urad/aktuality/-/asset_publisher/zvna/blog/novy-dotacni-program-pomuze-napravit-skody-po-tezbe-nerostu)[### Nový dotační program pomůže napravit škody po těžbě nerostů](https://stredoceskykraj.cz/web/urad/aktuality/-/asset_publisher/zvna/blog/novy-dotacni-program-pomuze-napravit-skody-po-tezbe-nerostu)životní prostředí dotace a fondy 27.06.2025\\r\\nStředočeské obce dostanou příležitost požádat si o dotaci na odstraňování škod po těžbě nerostů. Rada kraje na to vyčlenila celkem pět milionů korun. Peníze jsou určené například.\\r\\n\\r\\n[Stránka 1 91](javascript:; \\\"Stránka 1   91\\\")\\r\\n*   [1](https://stredoceskykraj.\"}]},{\"file_id\":\"file-LfnAhxpwJeosTkz5ws1AES\",\"filename\":\"Dotace_v_socialni_oblasti_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8278783488695454,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/dotace-v-socialni-oblasti\",\"title\":\"Dotace v sociální oblasti - Informační sys
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3157 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3158 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3159 📋 Raw sequence: 20,4,1
+StreamingResponseExtension.js:3162 📋 Parsed IDs: [20,4,1]
+StreamingResponseExtension.js:3165 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3167 📌 Position 0: ID:20 | Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash-lite-preview-06-17:nitro
+StreamingResponseExtension.js:3167 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3167 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3169 =============================
+StreamingResponseExtension.js:3195 
+🔄 ATTEMPT 1/3: Using model ID:20
+StreamingResponseExtension.js:3198 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3199 📌 Model name: google/gemini-2.5-flash-lite-preview-06-17:nitro
+StreamingResponseExtension.js:3200 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3201 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:2842 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:2851 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2953 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:3102 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "i_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\"](https://stredoceskykraj.cz/web/urad/dotace-v-socialni-oblasti)\n\n[3"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "] [\"Odbor_socialnich_veci_-_Socialni_oblast_-_Webovy_portal_Stredoceskeho_kraje.txt\"](https://stredoceskykraj.cz/web/socialni-oblast)\n\n[4] [\"Odbor_socialnich"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "_veci_-_Socialni_oblast_-_Webovy_portal_Stredoceskeho_kraje.txt\"](https://stredoceskykraj.cz/web/socialni-oblast)\n\n[5] [\"Aktuality_-_Informacni_system_krajskeho_ur"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "adu_-_Webovy_portal_Stredoceskeho_kraje.txt\"](https://stredoceskykraj.cz/web/urad/aktuality)\n\n[6] [\"Zivotni_prostredi_a_zemedelstvi_-_Informacni_"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\"](https://stredoceskykraj.cz/web/urad/zivotni-prostredi-a-zemedelstvi)\n\n[7] [\"Z"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "ivotni_prostredi_a_zemedelstvi_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje_1.txt\"](https://stredoceskykraj.cz/web/urad/zivotni"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "-prostredi-a-zemedelstvi)\n\n[8] [\"Navrhy_materialu_pro_jednani_zastupitelstva_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: ".txt\"](https://stredoceskykraj.cz/web/urad/navrhy-materialu-pro-jednani-zastupitelstva)\n\n[9] [\"Navrhy_materialu_pro_jednani_zastupitelstva_-_"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\"](https://stredoceskykraj.cz/web/urad/navrhy-materialu-pro-jednani-zastupitel"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "stva)\n\n[10] [\"Usneseni_rady_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\"](https://stredoceskykraj.cz/web/urad/us"[[Prototype]]: Object
+StreamingResponseExtension.js:2925 📥 Frontend chunk from /api/openrouter-stream: Objectcontent: "neseni-rady)\n\n[[Database_Sources_End]]"[[Prototype]]: Object
+StreamingResponseExtension.js:2908 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3056 📤 Updating Voiceflow variable with response length: 3822
+StreamingResponseExtension.js:3078 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3081 Voiceflow update response: Object
+StreamingResponseExtension.js:3319 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3320 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3321 📌 Model name: google/gemini-2.5-flash-lite-preview-06-17:nitro
+StreamingResponseExtension.js:3322 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3323 📌 Attempt: 1/3
+StreamingResponseExtension.js:3326 =============================
