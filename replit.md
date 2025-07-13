@@ -1,0 +1,86 @@
+# Multi-LLM Streaming Extension
+
+## Overview
+
+This is a Next.js application that serves as a multi-LLM streaming API proxy, designed to provide secure, domain-whitelisted access to multiple LLM providers. The system acts as a middleware layer that handles authentication, routing, and streaming responses from various AI model providers including OpenAI, Anthropic Claude, Google Gemini, Groq, SambaNova, and others.
+
+## User Preferences
+
+Preferred communication style: Simple, everyday language.
+
+## System Architecture
+
+The application follows a simple yet robust architecture:
+
+**Frontend Layer**: Next.js pages with React components for basic UI
+**API Layer**: RESTful endpoints that proxy requests to different LLM providers
+**Security Layer**: Domain whitelist validation and project-specific API key management
+**Streaming Layer**: Server-sent events for real-time response streaming
+
+The system is designed as a proxy service rather than a full-featured application, focusing on secure API access and response streaming.
+
+## Key Components
+
+### API Endpoints Structure
+- **Provider-specific endpoints**: Each LLM provider has its own dedicated endpoint (`/api/openai-stream`, `/api/claude-stream`, etc.)
+- **Unified request format**: All endpoints accept similar request structures with provider-specific parameters
+- **Streaming responses**: All endpoints return Server-Sent Events (SSE) for real-time streaming
+
+### Security Components
+- **Domain whitelist**: Centralized domain validation in `config/domains.js`
+- **Project-based API keys**: Support for multiple projects with dedicated API keys
+- **CORS handling**: Proper cross-origin request handling with credential management
+
+### Frontend Extensions
+- **StreamingResponseExtension**: Advanced client-side component for handling streaming responses with reasoning capabilities
+- **PerplexityReasonerExtension**: Specialized extension for Perplexity API responses with reasoning display
+
+### Model Management
+- **Multi-provider support**: Handles OpenAI, Anthropic, Google Gemini, Groq, SambaNova, OpenRouter, Perplexity, and Baseten
+- **Model sequencing**: Supports fallback sequences between different models
+- **Provider-specific features**: Each provider endpoint handles unique features like web search, reasoning, and multimodal inputs
+
+## Data Flow
+
+1. **Request Processing**: Client sends POST request to provider-specific endpoint
+2. **Security Validation**: Domain whitelist check and API key selection based on project
+3. **Provider Routing**: Request forwarded to appropriate LLM provider with proper authentication
+4. **Response Streaming**: Provider responses streamed back to client via SSE
+5. **Client Rendering**: Frontend extensions handle response display with advanced features
+
+The system uses a simple request-response pattern with streaming capabilities, avoiding complex state management or database operations.
+
+## External Dependencies
+
+### LLM Provider SDKs
+- **OpenAI SDK**: For GPT models and advanced features like web search and reasoning
+- **Anthropic SDK**: For Claude models with caching support
+- **Google Generative AI**: For Gemini models
+- **Groq SDK**: For fast inference models
+- **Direct API calls**: For SambaNova, Perplexity, OpenRouter, and Baseten
+
+### Core Framework
+- **Next.js 14**: Web framework with API routes
+- **React 18**: For minimal frontend components
+- **Node.js**: Runtime environment
+
+### Utilities
+- **node-fetch**: For HTTP requests to providers without official SDKs
+- **Server-Sent Events**: Native browser/Node.js streaming support
+
+## Deployment Strategy
+
+The application is designed for simple deployment on platforms like Replit, Vercel, or similar Node.js hosting services:
+
+**Environment Variables**: All API keys stored as environment variables with optional project-specific variants
+**Static Configuration**: Domain whitelist stored in code for version control
+**Serverless Ready**: API routes designed for serverless deployment
+**No Database**: Stateless design eliminates database requirements
+
+The system uses environment-based configuration for API keys (e.g., `OPENAI_API_KEY`, `OPENAI_API_KEY_PROJECTNAME`) and maintains a simple file-based domain whitelist for security.
+
+**Key Architectural Decisions**:
+- Chosen stateless design for simplicity and scalability
+- Implemented provider-specific endpoints rather than unified endpoint for better error handling and feature support
+- Used environment variables for configuration to support multiple deployment environments
+- Implemented domain whitelisting for security without requiring complex authentication systems
