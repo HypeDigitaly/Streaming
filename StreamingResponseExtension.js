@@ -2020,6 +2020,71 @@ export const StreamingResponseExtension = {
         endpoint: "/api/perplexity-stream",
         displayName: "Sonar Reasoning Pro",
       },
+
+      // OpenRouter models
+      {
+        id: 15,
+        name: "openrouter/auto",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "OpenRouter Auto",
+      },
+      {
+        id: 16,
+        name: "openai/gpt-4o",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "GPT-4o (OpenRouter)",
+      },
+      {
+        id: 17,
+        name: "anthropic/claude-3.5-sonnet",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Claude 3.5 Sonnet (OpenRouter)",
+      },
+      {
+        id: 18,
+        name: "meta-llama/llama-3.1-70b-instruct",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Llama 3.1 70B (OpenRouter)",
+      },
+      {
+        id: 19,
+        name: "google/gemini-2.5-pro-preview",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Gemini 2.5 Pro (OpenRouter)",
+      },
+      {
+        id: 20,
+        name: "google/gemini-2.5-flash",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Gemini 2.5 Flash (OpenRouter)",
+      },
+      {
+        id: 21,
+        name: "google/gemini-2.5-pro",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Gemini 2.5 Pro (OpenRouter)",
+      },
+      {
+        id: 22,
+        name: "anthropic/claude-sonnet-4",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Claude Sonnet 4 (OpenRouter)",
+      },
+      {
+        id: 23,
+        name: "openai/gpt-4.1",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "GPT-4.1 (OpenRouter)",
+      },
     ];
 
     // Function to process model sequence
@@ -3197,10 +3262,44 @@ export const StreamingResponseExtension = {
           if (trace.payload.web_search_options) payload.web_search_options = trace.payload.web_search_options;
         }
 
+        // Add OpenRouter-specific parameters
+        // Full parameter documentation available in pages/api/openrouter-stream.js
+        if (model.type === 'openrouter') {
+          payload.apiKey = trace.payload.apiKey;
+          payload.messages = trace.payload.messages || trace.payload.userData;
+          
+          // Model routing parameters
+          if (trace.payload.models) payload.models = trace.payload.models; // Fallback models array
+          
+          // Provider routing parameters
+          if (trace.payload.provider) payload.provider = trace.payload.provider;
+          
+          // Web search plugin parameters
+          if (trace.payload.plugins) payload.plugins = trace.payload.plugins;
+          if (trace.payload.enableWebSearch !== undefined) payload.enableWebSearch = trace.payload.enableWebSearch;
+          
+          // Standard OpenAI-compatible parameters supported by OpenRouter
+          if (trace.payload.top_p !== undefined) payload.top_p = trace.payload.top_p;
+          if (trace.payload.top_k !== undefined) payload.top_k = trace.payload.top_k;
+          if (trace.payload.presence_penalty !== undefined) payload.presence_penalty = trace.payload.presence_penalty;
+          if (trace.payload.frequency_penalty !== undefined) payload.frequency_penalty = trace.payload.frequency_penalty;
+          if (trace.payload.response_format) payload.response_format = trace.payload.response_format;
+          if (trace.payload.tools) payload.tools = trace.payload.tools;
+          if (trace.payload.tool_choice) payload.tool_choice = trace.payload.tool_choice;
+          if (trace.payload.seed !== undefined) payload.seed = trace.payload.seed;
+          if (trace.payload.stop) payload.stop = trace.payload.stop;
+          
+          // OpenRouter-specific headers
+          if (trace.payload.site_url) payload.site_url = trace.payload.site_url;
+          if (trace.payload.site_name) payload.site_name = trace.payload.site_name;
+        }
+
         // Call the appropriate LLM API based on model type
         let success;
         if (model.type === 'perplexity') {
           success = await callPerplexityAPI(model.endpoint, payload);
+        } else if (model.type === 'openrouter') {
+          success = await callLLMAPI(model.endpoint, payload);
         } else {
           success = await callLLMAPI(model.endpoint, payload);
         }
