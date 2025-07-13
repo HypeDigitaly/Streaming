@@ -155,11 +155,36 @@ export default async function handler(req, res) {
       payload.plugins = [{ id: 'web' }];
     }
 
-    // Handle model shortcuts (e.g., ":online" for web search)
-    if (typeof payload.model === 'string' && payload.model.includes(':online')) {
-      payload.model = payload.model.replace(':online', '');
-      if (!payload.plugins) {
-        payload.plugins = [{ id: 'web' }];
+    // Handle model shortcuts
+    if (typeof payload.model === 'string') {
+      // ":online" for web search
+      if (payload.model.includes(':online')) {
+        payload.model = payload.model.replace(':online', '');
+        if (!payload.plugins) {
+          payload.plugins = [{ id: 'web' }];
+        }
+      }
+      
+      // ":nitro" for throughput priority (speed)
+      if (payload.model.includes(':nitro')) {
+        payload.model = payload.model.replace(':nitro', '');
+        if (!payload.provider) payload.provider = {};
+        payload.provider.sort = 'throughput';
+        
+        if (debugMode === 1) {
+          console.log('🚀 NITRO mode activated: Prioritizing throughput/speed');
+        }
+      }
+      
+      // ":floor" for price priority (cheapest)
+      if (payload.model.includes(':floor')) {
+        payload.model = payload.model.replace(':floor', '');
+        if (!payload.provider) payload.provider = {};
+        payload.provider.sort = 'price';
+        
+        if (debugMode === 1) {
+          console.log('💰 FLOOR mode activated: Prioritizing lowest price');
+        }
       }
     }
 
