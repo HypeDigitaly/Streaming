@@ -593,9 +593,6 @@ export const StreamingResponseExtension = {
           .response-content a {
             word-break: break-all;
           }
-          .response-content a::before {
-            content: "→ ";
-          }
           /* Add spacing for adjacent links */
           .response-content a + a {
             margin-top: 0;
