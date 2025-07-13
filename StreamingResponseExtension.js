@@ -757,6 +757,19 @@ export const StreamingResponseExtension = {
             margin: 0 0 0.6em 0 !important;
             padding: 0 !important;
           }
+          
+          /* Fixed top margins for Database Sources and Web Search Sources sections */
+          .response-content .ai-thinking-section:has(.ai-thinking-title:contains("Databázové zdroje")) {
+            margin-top: 1.2em !important;
+          }
+          .response-content .ai-thinking-section:has(.ai-thinking-title:contains("Webové zdroje")) {
+            margin-top: 1.2em !important;
+          }
+          
+          /* Fallback for browsers that don't support :has() selector */
+          .response-content .ai-thinking-section + .ai-thinking-section {
+            margin-top: 1.2em !important;
+          }
           .response-content .ai-thinking-section + h1,
           .response-content .ai-thinking-section + h2,
           .response-content .ai-thinking-section + h3,
