@@ -2067,7 +2067,7 @@ export const StreamingResponseExtension = {
         name: "google/gemini-2.5-flash-lite-preview-06-17:nitro",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "Gemini 2.5 Flash (OpenRouter)",
+        displayName: "Gemini 2.5 Flash Lite 06-17 (OpenRouter)",
       },
       {
         id: 21,
