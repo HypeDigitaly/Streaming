@@ -1670,9 +1670,16 @@ export const StreamingResponseExtension = {
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
-        // Process Database Sources tags
+        // Process Database Sources tags - handle both paired and standalone end markers
         .replace(/\[\[Database_Sources_Start\]\]([\s\S]*?)\[\[Database_Sources_End\]\]/g, function(match, content) {
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+        })
+        // Handle standalone Database_Sources_End markers - wrap citations after the marker
+        .replace(/\[\[Database_Sources_End\]\]([\s\S]*)/g, function(match, content) {
+          if (content.trim()) {
+            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+          }
+          return '';
         })
         // Process Web Search Sources tags
         .replace(/\[\[Web_Search_Sources_Start\]\]([\s\S]*?)\[\[Web_Search_Sources_End\]\]/g, function(match, content) {
@@ -1801,7 +1808,11 @@ export const StreamingResponseExtension = {
           return `<li class="${indentation > 0 ? "sublist" : ""}">${content.trim()}</li>`;
         })
         .replace(/(?:^|\n)(<li)/g, "\n<ul>$1")
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, "$1</ul>");
+        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, "$1</ul>")
+        // Convert line breaks to HTML - handle empty lines and single line breaks more carefully
+        .replace(/\n\n+/g, '<br><br>') // Double+ newlines become double line breaks
+        .replace(/\n/g, '<br>') // Single newlines become line breaks
+        .replace(/<br><br><br>+/g, '<br><br>'); // Clean up excessive line breaks
 
 
 

@@ -8,6 +8,13 @@ This is a Next.js application that serves as a multi-LLM streaming API proxy, de
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### HTML Formatting Improvements (January 2025)
+- **Line Break Handling**: Fixed empty lines \n not being formatted correctly into HTML by adding proper newline-to-br conversion
+- **Database Section End Marking**: Fixed database section end markers to properly format all citations after `[[Database_Sources_End]]` marker, not just the first one
+- **Streaming Response Processing**: Improved handling of standalone end markers in streaming responses
+
 ## System Architecture
 
 The application follows a simple yet robust architecture:
