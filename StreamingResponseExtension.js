@@ -672,7 +672,7 @@ export const StreamingResponseExtension = {
             background-color: #F8FAFC;
             border: 1px solid #E2E8F0;
             border-radius: 6px;
-            margin: 0;
+            margin: 1.2em 0 0.6em 0;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             overflow: hidden;
           }
@@ -752,23 +752,10 @@ export const StreamingResponseExtension = {
           .ai-thinking-content li {
             margin: 1px 0;
           }
-          /* Remove top spacing, keep bottom spacing around thinking sections - kompaktní */
+          /* Add proper spacing around thinking sections */
           .response-content .ai-thinking-section {
-            margin: 0 0 0.6em 0 !important;
+            margin: 1.2em 0 0.6em 0 !important;
             padding: 0 !important;
-          }
-          
-          /* Fixed top margins for Database Sources and Web Search Sources sections */
-          .response-content .ai-thinking-section:has(.ai-thinking-title:contains("Databázové zdroje")) {
-            margin-top: 1.2em !important;
-          }
-          .response-content .ai-thinking-section:has(.ai-thinking-title:contains("Webové zdroje")) {
-            margin-top: 1.2em !important;
-          }
-          
-          /* Fallback for browsers that don't support :has() selector */
-          .response-content .ai-thinking-section + .ai-thinking-section {
-            margin-top: 1.2em !important;
           }
           .response-content .ai-thinking-section + h1,
           .response-content .ai-thinking-section + h2,
