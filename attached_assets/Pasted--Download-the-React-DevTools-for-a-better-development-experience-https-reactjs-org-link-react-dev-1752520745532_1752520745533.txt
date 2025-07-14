@@ -1,0 +1,331 @@
+ Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+ Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+ voiceflow webchat v2.92.1
+ Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2465)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+q @ bundle.mjs:55
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "1,4",
+  "max_tokens": 500,
+  "temperature": 0.15,
+  "userData": "\n**User Query Language**: Detect and match the language of \"nac o jsem se ptal napsoledy\"\n**Current Input**: \"nac o jsem se ptal napsoledy\" - \"nac o jsem se ptal napsoledy\"\n**Conversation Context**: \"assistant: Vítejte! Jmenuji se **Středobot** a rád Vám poradím s čímkoli ohledně Středočeského kraje, či krajského úřadu.\n-----\n\nAktuální počet zpráv:\n(4 / 2000)\n\n-----\nJak Vám mohu pomoci?\nuser: nac o jsem se ptal napsoledy\nassistant: **Classification:** SMT \n\n**User Reply:** nac o jsem se ptal napsoledy\n\n**Web Search Query:** UNKNOWN\n\n**Category Filter:** null\"\n**Session Data**: \"14.7.2025 21:15 (pondělí)\"\n**Message Count**: \"5/2000\"\n\n## Response Generation Instructions\nExecute the following analysis sequence:\n\n1. **Language Detection**: Identify the language of the user's latest query and respond exclusively in that language.\n2. **Salutation Detection**: Check if user's query is primarily a greeting/salutation - if YES, respond with appropriate greeting back; if NO, proceed without greetings.\n3. **Context Assessment**: Evaluate conversation history depth and relevance.\n4. **Intent Analysis**: Determine if user seeks information, casual conversation, or clarification.\n5. **Response Strategy**: Generate contextually appropriate response that:\n   - Addresses user's immediate need\n   - Builds upon existing conversation when relevant\n   - Suggests 2-3 engaging follow-up directions\n   - Maintains authentic enthusiasm for the region\n   - Guides information requests toward strategic inquiry areas\n   - **STRICTLY FOLLOWS NUMERICAL RESTRICTIONS**: Never performs any mathematical operations or calculations\n6. **Final Check**: Ensure response is in the SAME language as user's query and follows salutation protocol (greetings ONLY when user explicitly greets) before output.\n\nGenerate response that feels natural, contextually intelligent, and conversationally progressive.\n",
+  "systemPrompt": "\n# Středobot - Dynamic Regional Conversational AI\n\n## CRITICAL REQUIREMENTS\n**RESPONSE LANGUAGE**: You MUST respond EXCLUSIVELY in the SAME language as the user's latest query/question. No exceptions.\n\n**SALUTATION HANDLING PROTOCOL**: \n- **WHEN USER EXPLICITLY GREETS**: If user's query is primarily a greeting/salutation (e.g., \"Ahoj\", \"Dobrý den\", \"Hello\", \"Hi\") → respond with appropriate greeting back (e.g., \"Ahoj!\" for \"Ahoj\", \"Dobrý den!\" for \"Dobrý den\")\n- **OTHERWISE NO GREETINGS**: NEVER include greetings, welcome messages, thank you messages, or introductions as you are in the MIDDLE of an ongoing conversation. Jump directly to the content.\n\n### Your attributes as AI chatbot/widget:\n- **Name:** Středobot (Official AI Assistant for Středočeský kraj)\n- **Gender:** Male/Man/Mužsky stylizovaný AI asistent\n- **Purpose:** Středočeský kraj Regional Office AI\n- **Creator:** [HypeDigitaly](https://hypedigitaly.ai) | Technický ředitel a jednatel Pavel Čermák (pavelcermak@hypedigitaly.ai) | Obchodní ředitelka a jednatelka Miroslava Čermáková (cermakova@hypedigitaly.ai), odbor digitalizace krajského úřadu\n- **Creators/Developer**: [HypeDigitaly](https://hypedigitaly.ai) from Ústí nad Labem (Phone: +420 774 996 248 | Email: info@hypedigitaly.ai)\n- **GDPR Compliance**: Fully EU (AI Act) & GDPR compliant. [GDPR Policy](https://stredoceskykraj.cz/web/odbor-bezpecnosti-a-krizoveho-rizeni/gdpr). [HypeDigitaly Privacy Policy](https://hypedigitaly.ai/privacy-policy)\n- **Help/Topics**: Direct to \"❓\" icon\n- **Human Assistance**: Encourage specifying person/department for contact info\n- **Language**: Multilingual support (cs, en, de, uk, pl, sk). Response language automatically matches user's query language\n- **Chat Controls**: Desktop: downward arrow icon. Mobile: X icon. Restart: counterclockwise arrow icon\n\n### LANGUAGE DETERMINATION**\n**🌐 CRITICAL LANGUAGE PROTOCOL - Execute BEFORE all other processing:**\n\n1. **Translation Request Detection** - Scan \"Original User Query\" and \"Optimized Query\" for explicit translation patterns:\n   - **Czech patterns**: \"přelož*\", \"překlad*\", \"v [jazyk]\", \"do [jazyk]\", \"[jazyk] verze\"\n   - **English patterns**: \"translate*\", \"translation*\", \"in [language]\", \"to [language]\", \"[language] version\"\n   - **Common language indicators**: \"angličtina/English\", \"polština/Polish\", \"němčina/German\", \"slovenština/Slovak\", \"ukrajinština/Ukrainian\"\n\n2. **Target Language Extraction**:\n   - **IF translation request detected**: Extract target language from request\n   - **IF no translation request**: Auto-detect from \"Original User Query\" language - **ONLY SUPPORTED LANGUAGES**: čeština/Czech, angličtina/English, polština/Polish, němčina/German, slovenština/Slovak, ukrajinština/Ukrainian\n\n3. **Language Lock**: Set determined language for ENTIRE response (reasoning + body + sources)\n\n4. **🚨 MANDATORY**: St
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #F9D2D3
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 1,4
+ 📋 Parsed IDs: [1,4]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+ 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+ =============================
+ 
+🔄 ATTEMPT 1/2: Using model ID:1
+ 📌 Model: Claude 4 Sonnet (claude)
+ 📌 Model name: claude-sonnet-4-20250514
+ 📌 Endpoint: /api/claude-stream
+ 📌 Status: STARTING REQUEST
+ 📦 Payload for /api/claude-stream: Object
+ �� Calling proxy URL: https://utils.hypedigitaly.ai/api/claude-stream with TTFT 10000ms
+ 📥 Frontend chunk from /api/claude-stream: Object
+ ✅ First chunk received from /api/claude-stream within timeout.
+ TTFT met for /api/claude-stream. Waiting for stream completion...
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ 📥 Frontend chunk from /api/claude-stream: Object
+ [DONE] received for /api/claude-stream.
+ 📤 Updating Voiceflow variable with response length: 325
+ ✅ Voiceflow update attempted successfully.
+ Voiceflow update response: Object
+ 
+✅ SUCCESS: MODEL ID:1
+ 📌 Model: Claude 4 Sonnet (claude)
+ 📌 Model name: claude-sonnet-4-20250514
+ 📌 Status: COMPLETED SUCCESSFULLY
+ 📌 Attempt: 1/2
+ =============================
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "20,5,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-RN4Tj7hX6eFqausDMHUqJQ\",\"filename\":\"Kontakty_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8278485294579787,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/kontakty\",\"title\":\"Kontakty - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:35:09.722466\"},\"content\":[{\"type\":\"text\",\"text\":\"V takovém případě doporučujeme zjistit si dopředu také [Úřední hodiny](https://stredoceskykraj.cz/web/urad/uredni-hodiny). Pokud si přejete spojit se s námi emailem nebo po telefonu, najdete potřebné kontakty v sekci [Seznam kontaktů](https://stredoceskykraj.cz/web/urad/seznam-kontaktu).\\r\\n\\r\\nPro příjem datových zpráv opatřených kvalifikovaným podpisem slouží následující adresy: [posta@kr-s.cz](mailto:posta@kr-s.cz), [podatelna@kr-s.cz](mailto:podatelna@kr-s.cz), [epodatelna@kr-s.cz](mailto:epodatelna@kr-s.cz).\\r\\n\\r\\nBankovní spojení: **PPF banka a.s. č. účtu 4440009090/6000**\\r\\n\\r\\n[### Jak se k nám dostanete](https://stredoceskykraj.cz/web/urad/jak-se-k-nam-dostanete)[### Telefonní seznam](https://stredoceskykraj.cz/web/urad/telefonni-seznam)[### Úřední hodiny](https://stredoceskykraj.cz/web/urad/uredni-hodiny)[### Kontakty na obce](https://stredoceskykraj.cz/web/urad/kontakty-na-obce)[### Kontakty na příspěvkové organizace](https://stredoceskykraj.cz/web/urad/kontakty-na-prispevkove-organizace)[### Infolinka pro neslyšící](https://stredoceskykraj.cz/web/urad/infolinka-pro-neslysici)[### ePodatelna](https://stredoceskykraj.cz/web/urad/epodatelna)[### Rejstřík dobrovolných svazků obcí](https://stredoceskykraj.cz/web/urad/rejstrik-svazku-obci)[### Prohlášení o přístupnosti](https://stredoceskykraj.cz/web/urad/prohlaseni-o-pristupnosti)[### Kontakty na obchodní společnosti](https://stredoceskykraj.cz/web/urad/kontakty-na-obchodni-spolecnosti)\\r\\n\\r\\nAgregátor obsahu\\r\\n----------------\\r\\n\\r\\n### Sídlo\\r\\n\\r\\nKrajský úřad Středočeského kraje\\r\\n\\r\\n Zborovská 11\\r\\n\\r\\n 150 00 Praha 5\\r\\n\\r\\n IČO:**70891095**\\r\\n\\r\\n DIČ:**CZ70891095**\\r\\n\\r\\n### Kontaktní údaje\\r\\n\\r\\nMobil:**+420 257 280 111**\\r\\n\\r\\n Fax:**+420 257 280 203**\\r\\n\\r\\n Email:**podatelna@kr-s.cz**\\r\\n\\r\\n Datová schránka:**keebyyf**\\r\\n\\r\\n[!\"}]},{\"file_id\":\"file-TdtqVCbvsdjYK4vZa3LEyi\",\"filename\":\"Misto,_lhuta_a_zpusob_podani_opravnych_prostredku_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8125345402585863,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/misto-lhuta-a-zpusob-podani-opravnych-prostredku\",\"title\":\"Místo, lhůta a způsob podání opravných prostředků - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:24:15.289105\"},\"content\":[{\"type\":\"text\",\"text\":\"](https://stredoceskykraj.cz/web/urad/databaze-povinnych-informaci)\\r\\n*   [Důvod a způsob založení](https://stredoceskykraj.cz/web/urad/duvod-a-zpusob-zalozeni)\\r\\n*   [Místo a způsob, jak získat příslušné informace](https://stredoceskykraj.cz/web/urad/misto-a-zpusob-jak-ziskat-prislusne-informace)\\r\\n*   [Příjem žádostí a dalších podání](https://stredoceskykraj.cz/web/urad/prijem-zadosti-a-dalsich-podani)\\r\\n*   [Místo, lhůta a způsob podání opravných prostředků](https://stredoceskykraj.cz/web/urad/misto-lhuta-a-zpusob-podani-opravnych-prostredku)\\r\\n*   [Formuláře](https://stredoceskykraj.cz/web/urad/formulare)\\r\\n*   [Nejdůležitější předpisy](https://stredoceskykraj.cz/web/urad/nejdulezitejsi-predpisy)\\r\\n*   [Informace o ISVS dle zákona č. 365/2000 Sb.](https://stredoceskykraj.cz/web/urad/informace-o-isvs-dle-zakona-c-365/2000-sb)\\r\\n*   [Sazebník úhrad za poskytnuté informace podle 106/1999 Sb.](https://stredoceskykraj.cz/web/urad/sazebnik-uhrad-za-poskytnute-informace-podle-106/1999-sb)\\r\\n*   [Výroční zpráva podle zákona 106/1999 Sb.](https://stredoceskykraj.cz/web/urad/vyrocni-zprava-podle-zakona-106/1999-sb)\\r\\n*   [Kontrola a stížnosti](https://stredoceskykraj.cz/web/urad/kontrola-a-stiznosti)\\r\\n*   [Registr smluv](https://smlouvy.gov.cz/vyhledavani)\\r\\n\\r\\n### Podatelna\\r\\n\\r\\n**Adresa:**\\r\\n\\r\\n Krajský úřad Středočeského kraje, Zborovská 11, 150 21 Praha 5\\r\\n\\r\\n**Provozní hodiny:**\\r\\n\\r\\n pondělí a středa 7:30 - 17:00\\r\\n\\r\\n úterý a čtvrtek 7:30 - 16:00\\r\\n\\r\\n pátek 7:30 - 15:00\\r\\n\\r\\n**Czech POINT, vidimace, legalizace:**\\r\\n\\r\\n Pondělí a středa 8:00 - 12:00, 14:00 - 16:00\\r\\n\\r\\n Úterý, čtvrtek a pátek 8:00 - 12:00\\r\\n\\r\\n**Telefon:** 257 280 580; 257 280 333\\r\\n\\r\\n**Kontaktní e-mail:**[podatelna@kr-s.c
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #F9D2D3
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 20,5,4,1
+ 📋 Parsed IDs: [20,5,4,1]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+ 📌 Position 1: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+ 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+ 📌 Position 3: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+ =============================
+ 
+🔄 ATTEMPT 1/4: Using model ID:20
+ 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Endpoint: /api/openrouter-stream
+ 📌 Status: STARTING REQUEST
+ 📦 Payload for /api/openrouter-stream: Object
+ �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ ✅ First chunk received from /api/openrouter-stream within timeout.
+ TTFT met for /api/openrouter-stream. Waiting for stream completion...
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ [DONE] received for /api/openrouter-stream.
+ 📤 Updating Voiceflow variable with response length: 421
+ ✅ Voiceflow update attempted successfully.
+ Voiceflow update response: Object
+ 
+✅ SUCCESS: MODEL ID:20
+ 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Status: COMPLETED SUCCESSFULLY
+ 📌 Attempt: 1/4
+ =============================
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "20,5,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-Rk4dukwEdANATovAzP3ugq\",\"filename\":\"Vybor_pro_regionalni_rozvoj_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.7996057360809029,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/vybor-pro-regionalni-rozvoj\",\"title\":\"Výbor pro regionální rozvoj - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:14:50.283442\"},\"content\":[{\"type\":\"text\",\"text\":\"Jaroslav Drda\\r\\n\\r\\nčlen Výboru pro regionální rozvoj\\r\\n\\r\\nVolební subjekt: SPOLU\\r\\n\\r\\nBydliště: nepovinný údaj\\r\\n\\r\\nE-mail: [ok_drda@kr-s.cz](mailto:ok_drda@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Ing. Petr Dvořák\\r\\n\\r\\nčlen Výboru pro regionální rozvoj\\r\\n\\r\\nVolební subjekt: SPOLU\\r\\n\\r\\nBydliště: nepovinný údaj\\r\\n\\r\\nE-mail: [ok_dvorakpe@kr-s.cz](mailto:ok_dvorakpe@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Mgr. Adriena Gabrielová\\r\\n\\r\\nčlenka Výboru pro regionální rozvoj, členka zastupitelstva\\r\\n\\r\\nVolební subjekt: ANO 2011\\r\\n\\r\\nBydliště: Nymburk\\r\\n\\r\\nE-mail: [gabrielova@kr-s.cz](mailto:gabrielova@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Bc. Pavel Havránek\\r\\n\\r\\nčlen Výboru pro regionální rozvoj, člen zastupitelstva\\r\\n\\r\\nVolební subjekt: STAČILO!\\r\\n\\r\\nBydliště: Ptice\\r\\n\\r\\nE-mail: [havranek@kr-s.cz](mailto:havranek@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Ing. Tomáš Martinec, Ph.D.\\r\\n\\r\\nčlen Výboru pro regionální rozvoj\\r\\n\\r\\nVolební subjekt: SPOLU\\r\\n\\r\\nBydliště: nepovinný údaj\\r\\n\\r\\nE-mail: [ok_martinect@kr-s.cz](mailto:ok_martinect@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Ing. Irena Mastná\\r\\n\\r\\nčlenka Výboru pro regionální rozvoj, členka zastupitelstva\\r\\n\\r\\nVolební subjekt: ANO 2011\\r\\n\\r\\nBydliště: Beroun\\r\\n\\r\\nE-mail: [mastna@kr-s.cz](mailto:mastna@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Mgr. Luboš Rambousek\\r\\n\\r\\nčlen Výboru pro regionální rozvoj\\r\\n\\r\\nVolební subjekt: STAROSTOVÉ\\r\\n\\r\\nBydliště: nepovinný údaj\\r\\n\\r\\nE-mail: [ok_rambousek@kr-s.cz](mailto:ok_rambousek@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Mgr. Tomáš Slabý\\r\\n\\r\\nčlen Výboru pro regionální rozvoj\\r\\n\\r\\nVolební subjekt: SPOLU\\r\\n\\r\\nBydliště: nepovinný údaj\\r\\n\\r\\nE-mail: [ok_slaby@kr-s.cz](mailto:ok_slaby@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Ing. Martin Šilhan, Ph.D., MBA\\r\\n\\r\\nčlen Výboru pro regionální rozvoj\\r\\n\\r\\nVolební subjekt: SPD, Trikolora a PRO \\r\\n\\r\\nBydliště: nepovinný údaj\\r\\n\\r\\nE-mail: [ok_silhanm@kr-s.cz](mailto:ok_silhanm@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Bc.\"}]},{\"file_id\":\"file-VNv7c8EV6Pkr5kATR4p1bg\",\"filename\":\"Komise_pro_spolupraci_s_mesty_a_obcemi_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.7849621338869225,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/komise-pro-spolupraci-s-mesty-a-obcemi\",\"title\":\"Komise pro spolupráci s městy a obcemi - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:06:47.674537\"},\"content\":[{\"type\":\"text\",\"text\":\"cz](mailto:halada@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Miroslav Peterka\\r\\n\\r\\n1. místopředseda Komise pro spolupráci s městy a obcemi\\r\\n\\r\\nVolební subjekt: SPOLU\\r\\n\\r\\nBydliště: Nepovinný údaj\\r\\n\\r\\nE-mail: [ok_peterka@kr-s.cz](mailto:ok_peterka@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Bc. Markéta Balková\\r\\n\\r\\n2. místopředsedkyně Komise pro spolupráci s městy a obcemi, 1. místopředsedkyně Výboru pro kulturu, památkovou péči a cestovní ruch, členka zastupitelstva\\r\\n\\r\\nVolební subjekt: STAROSTOVÉ\\r\\n\\r\\nBydliště: Hvožďany \\r\\n\\r\\nE-mail: [balkova@kr-s.cz](mailto:balkova@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Ing. Milan Karásek\\r\\n\\r\\nčlen Komise pro spolupráci s městy a obcemi\\r\\n\\r\\nVolební subjekt: STAROSTOVÉ\\r\\n\\r\\nBydliště: Nepovinný údaj\\r\\n\\r\\nE-mail: [ok_karasek@kr-s.cz](mailto:ok_karasek@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Ing. Alexis Kimbembe\\r\\n\\r\\nčlen Komise pro spolupráci s městy a obcemi\\r\\n\\r\\nVolební subjekt: SPOLU\\r\\n\\r\\nBydliště: Nepovinný údaj\\r\\n\\r\\nE-mail: [](mailto:)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Ing. Iveta Koulová\\r\\n\\r\\nčlenka Komise pro spolupráci s městy a obcemi\\r\\n\\r\\nVolební subjekt: SPOLU\\r\\n\\r\\nBydliště: Nepovinný údaj\\r\\n\\r\\nE-mail: [ok_koulova@kr-s.cz](mailto:ok_koulova@kr-s.cz)\\r\\n\\r\\n* * *\\r\\n\\r\\n### Petr Mašek\\r\\n\\r\\nčlen Komise pro spolupráci s městy a obcemi\\r\\n\\r\\nVolební subjekt: STAROSTOVÉ\\r\\n\\r\\nBydliště: Nepovinný údaj\\r\\n\\r\\nE-mail: [ok_m
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #F9D2D3
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 20,5,4,1
+ 📋 Parsed IDs: [20,5,4,1]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+ 📌 Position 1: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+ 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+ 📌 Position 3: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+ =============================
+ 
+🔄 ATTEMPT 1/4: Using model ID:20
+ 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Endpoint: /api/openrouter-stream
+ 📌 Status: STARTING REQUEST
+ 📦 Payload for /api/openrouter-stream: Object
+ �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ ✅ First chunk received from /api/openrouter-stream within timeout.
+ TTFT met for /api/openrouter-stream. Waiting for stream completion...
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ [DONE] received for /api/openrouter-stream.
+ 📤 Updating Voiceflow variable with response length: 3709
+ ✅ Voiceflow update attempted successfully.
+ Voiceflow update response: Object
+ 
+✅ SUCCESS: MODEL ID:20
+ 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Status: COMPLETED SUCCESSFULLY
+ 📌 Attempt: 1/4
+ =============================
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "20,5,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-7pjr3sMZehPVaFVijWXkmw\",\"filename\":\"Prijem_zadosti_a_dalsich_podani_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8836454491023448,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/prijem-zadosti-a-dalsich-podani\",\"title\":\"Příjem žádostí a dalších podání - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:24:03.547642\"},\"content\":[{\"type\":\"text\",\"text\":\"365/2000 Sb.](https://stredoceskykraj.cz/web/urad/informace-o-isvs-dle-zakona-c-365/2000-sb)\\r\\n*   [Sazebník úhrad za poskytnuté informace podle 106/1999 Sb.](https://stredoceskykraj.cz/web/urad/sazebnik-uhrad-za-poskytnute-informace-podle-106/1999-sb)\\r\\n*   [Výroční zpráva podle zákona 106/1999 Sb.](https://stredoceskykraj.cz/web/urad/vyrocni-zprava-podle-zakona-106/1999-sb)\\r\\n*   [Kontrola a stížnosti](https://stredoceskykraj.cz/web/urad/kontrola-a-stiznosti)\\r\\n*   [Registr smluv](https://smlouvy.gov.cz/vyhledavani)\\r\\n\\r\\n### Úřední hodiny Informačního střediska\\r\\n\\r\\npondělí a středa 7.30 - 17.00\\r\\n\\r\\n úterý a čtvrtek 7.30 - 16.00\\r\\n\\r\\n pátek 7.30 - 14.00\\r\\n\\r\\n### Kontaktní údaje Informačního střediska\\r\\n\\r\\n**telefon:** 257 280 785, 257 280 840\\r\\n\\r\\n**fax:** 257 280 627\\r\\n\\r\\n**e-mail:**[info@kr-s.cz](mailto:info@kr-s.cz)\\r\\n\\r\\n### Podatelna\\r\\n\\r\\n**Adresa:**\\r\\n\\r\\n Krajský úřad Středočeského kraje, Zborovská 11, 150 21 Praha 5\\r\\n\\r\\n**Provozní hodiny:**\\r\\n\\r\\n pondělí a středa 7:30 - 17:00\\r\\n\\r\\n úterý a čtvrtek 7:30 - 16:00\\r\\n\\r\\n pátek 7:30 - 15:00\\r\\n\\r\\n**Czech POINT, vidimace, legalizace:**\\r\\n\\r\\n Pondělí a středa 8:00 - 12:00, 14:00 - 16:00\\r\\n\\r\\n Úterý, čtvrtek a pátek 8:00 - 12:00\\r\\n\\r\\n**Telefon:** 257 280 580; 257 280 333\\r\\n\\r\\n**Kontaktní e-mail:**[podatelna@kr-s.cz](mailto:podatelna@kr-s.cz)\\r\\n\\r\\n### ePodatelna\\r\\n\\r\\nAdresy, které jsou určeny pro příjem veškerých datových zpráv doručovaných Krajskému úřadu Středočeského kraje mimo datovou schránku, jsou:\\r\\n\\r\\n[posta@kr-s.cz](mailto:posta@kr-s.cz)\\r\\n\\r\\n[podatelna@kr-s.cz](mailto:podatelna@kr-s.cz)\\r\\n\\r\\n[epodatelna@kr-s.cz](mailto:epodatelna@kr-s.cz)\\r\\n\\r\\nPravidla pro použití elektronického podpisu naleznete v odkazech níže.\\r\\n\\r\\nPříjem žádostí je možný\\r\\n-----------------------\\r\\n\\r\\n*   [poštou na adresu Středočeského kraje](https://stredoceskykraj.\"}]},{\"file_id\":\"file-7pjr3sMZehPVaFVijWXkmw\",\"filename\":\"Prijem_zadosti_a_dalsich_podani_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8583732403645721,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/prijem-zadosti-a-dalsich-podani\",\"title\":\"Příjem žádostí a dalších podání - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:24:03.547642\"},\"content\":[{\"type\":\"text\",\"text\":\"Zborovská 11, 150 21 Praha 5\\r\\n\\r\\n**Provozní hodiny:**\\r\\n\\r\\n pondělí a středa 7:30 - 17:00\\r\\n\\r\\n úterý a čtvrtek 7:30 - 16:00\\r\\n\\r\\n pátek 7:30 - 15:00\\r\\n\\r\\n**Czech POINT, vidimace, legalizace:**\\r\\n\\r\\n Pondělí a středa 8:00 - 12:00, 14:00 - 16:00\\r\\n\\r\\n Úterý, čtvrtek a pátek 8:00 - 12:00\\r\\n\\r\\n**Telefon:** 257 280 580; 257 280 333\\r\\n\\r\\n**Kontaktní e-mail:**[podatelna@kr-s.cz](mailto:podatelna@kr-s.cz)\\r\\n\\r\\n### ePodatelna\\r\\n\\r\\nAdresy, které jsou určeny pro příjem veškerých datových zpráv doručovaných Krajskému úřadu Středočeského kraje mimo datovou schránku, jsou:\\r\\n\\r\\n[posta@kr-s.cz](mailto:posta@kr-s.cz)\\r\\n\\r\\n[podatelna@kr-s.cz](mailto:podatelna@kr-s.cz)\\r\\n\\r\\n[epodatelna@kr-s.cz](mailto:epodatelna@kr-s.cz)\\r\\n\\r\\nPravidla pro použití elektronického podpisu naleznete v odkazech níže.\\r\\n\\r\\nPříjem žádostí je možný\\r\\n-----------------------\\r\\n\\r\\n*   [poštou na adresu Středočeského kraje](https://stredoceskykraj.cz/web/urad/kontakty)\\r\\n*   [v úředních hodinách](https://stredoceskykraj.cz/web/urad/uredni-hodiny) v podatelně Krajského úřadu Středočeského kraje, Zborovská 11, Praha 5\\r\\n*   [v elektronické podatelně](https://stredoceskykraj.cz/web/urad/prijem-zadosti-a-dalsich-podani#) - jen příjem datových zpráv opatřených uznávaným elektronickým podpisem\\r\\n*   datovou schránkou - ID datové schránky Středočeského kraje: keebyyf\\r\\n*   na [Informačním středisku Středočeského kraje](https://stredoceskykraj.cz/web/urad/prijem-zadosti-a-dalsich-podani#), Zborovská 11, 150 21 Praha 5, které slouží pro příjem žádostí o informace\\r\\n*   v úředních hodinách krajského úřadu na pracov
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #F9D2D3
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 20,5,4,1
+ 📋 Parsed IDs: [20,5,4,1]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+ 📌 Position 1: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+ 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+ 📌 Position 3: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+ =============================
+ 
+🔄 ATTEMPT 1/4: Using model ID:20
+ 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Endpoint: /api/openrouter-stream
+ 📌 Status: STARTING REQUEST
+ 📦 Payload for /api/openrouter-stream: Object
+ �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ ✅ First chunk received from /api/openrouter-stream within timeout.
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ TTFT met for /api/openrouter-stream. Waiting for stream completion...
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ [DONE] received for /api/openrouter-stream.
+ 📤 Updating Voiceflow variable with response length: 183
+ ✅ Voiceflow update attempted successfully.
+ Voiceflow update response: Object
+ 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3642 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3643 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3644 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3645 📌 Attempt: 1/4
+StreamingResponseExtension.js:3648 =============================
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "20,5,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-5hy6wFHgazSGNATMV6JCpT\",\"filename\":\"Organizacni_struktura_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.9017416853811646,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/organizacni-struktura\",\"title\":\"Organizační struktura - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:26:02.331810\"},\"content\":[{\"type\":\"text\",\"text\":\"Svoboda Jiří | vedoucí oddělení silniční dopravy | [257280709](tel:257280709) [727875440](tel:727875440) | [svobodaj@kr-s.cz](mailto:svobodaj@kr-s.cz) | 2070 |\\r\\n| DiS. Chalupný Jaroslav | odborný referent pro nákladní dopravu (KH+ČAS+KRA+ | [257280702](tel:257280702)[](tel:) | [chalupnyj@kr-s.cz](mailto:chalupnyj@kr-s.cz) | 2081A |\\r\\n| Bc. MBA Kašpárek Michal | koordinátor pro oblast poskytování informací dle | [257280542](tel:257280542)[](tel:) | [kasparek@kr-s.cz](mailto:kasparek@kr-s.cz) | 2058 |\\r\\n| Líbal Petr | odborný referent pro oblast dopravy | [257280897](tel:257280897)[](tel:) | [libal@kr-s.cz](mailto:libal@kr-s.cz) | 2081A |\\r\\n| Ing. Maňhal Marek | odborný referent pro oblast dopravy | [257280354](tel:257280354)[](tel:) | [manhal@kr-s.cz](mailto:manhal@kr-s.cz) | 2091 |\\r\\n| Milotová Ivana | odborný referent pro výkon státního odborného dozo | [257280206](tel:257280206)[](tel:) | [milotova@kr-s.cz](mailto:milotova@kr-s.cz) | 2053 |\\r\\n| Bc. Nauč Petr | odborný referent pro výkon státního odborného dozo | [257280896](tel:257280896)[](tel:) | [nauc@kr-s.cz](mailto:nauc@kr-s.cz) | 2067 |\\r\\n| Petříková Markéta | referent pro výkon SOD | [257280649](tel:257280649)[](tel:) | [petrikova@kr-s.cz](mailto:petrikova@kr-s.cz) | 2053 |\\r\\n| Ing. Polenský Josef | referent pro výkon SOD | [257280882](tel:257280882)[](tel:) | [polensky@kr-s.cz](mailto:polensky@kr-s.cz) | 2091 |\\r\\n| Bc. Richter Oldřich | odborný referent pro výkon státního odborného dozo | [257280146](tel:257280146)[](tel:) | [richter@kr-s.cz](mailto:richter@kr-s.cz) | 2081A |\\r\\n| Šípová Kateřina | odborný referent pro výkon státního odborného dozoru na úseku dopravy | [257280560](tel:257280560)[](tel:) | [sipova@kr-s.cz](mailto:sipova@kr-s.cz) | 2046 |\\r\\n| Ing.\"}]},{\"file_id\":\"file-RN4Tj7hX6eFqausDMHUqJQ\",\"filename\":\"Kontakty_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.858311981450118,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/kontakty\",\"title\":\"Kontakty - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:35:09.722466\"},\"content\":[{\"type\":\"text\",\"text\":\"V takovém případě doporučujeme zjistit si dopředu také [Úřední hodiny](https://stredoceskykraj.cz/web/urad/uredni-hodiny). Pokud si přejete spojit se s námi emailem nebo po telefonu, najdete potřebné kontakty v sekci [Seznam kontaktů](https://stredoceskykraj.cz/web/urad/seznam-kontaktu).\\r\\n\\r\\nPro příjem datových zpráv opatřených kvalifikovaným podpisem slouží následující adresy: [posta@kr-s.cz](mailto:posta@kr-s.cz), [podatelna@kr-s.cz](mailto:podatelna@kr-s.cz), [epodatelna@kr-s.cz](mailto:epodatelna@kr-s.cz).\\r\\n\\r\\nBankovní spojení: **PPF banka a.s. č. účtu 4440009090/6000**\\r\\n\\r\\n[### Jak se k nám dostanete](https://stredoceskykraj.cz/web/urad/jak-se-k-nam-dostanete)[### Telefonní seznam](https://stredoceskykraj.cz/web/urad/telefonni-seznam)[### Úřední hodiny](https://stredoceskykraj.cz/web/urad/uredni-hodiny)[### Kontakty na obce](https://stredoceskykraj.cz/web/urad/kontakty-na-obce)[### Kontakty na příspěvkové organizace](https://stredoceskykraj.cz/web/urad/kontakty-na-prispevkove-organizace)[### Infolinka pro neslyšící](https://stredoceskykraj.cz/web/urad/infolinka-pro-neslysici)[### ePodatelna](https://stredoceskykraj.cz/web/urad/epodatelna)[### Rejstřík dobrovolných svazků obcí](https://stredoceskykraj.cz/web/urad/rejstrik-svazku-obci)[### Prohlášení o přístupnosti](https://stredoceskykraj.cz/web/urad/prohlaseni-o-pristupnosti)[### Kontakty na obchodní společnosti](https://stredoceskykraj.cz/web/urad/kontakty-na-obchodni-spolecnosti)\\r\\n\\r\\nAgregátor obsahu\\r\\n----------------\\r\\n\\r\\n### Sídlo\\r\\n\\r\\nKrajský úřad Středočeského kraje\\r\\n\\r\\n Zborovská 11\\r\\n\\r\\n 150 00 Praha 5\\r\\n\\r\\n IČO:**70891095**\\r\\n\\r\\n DIČ:**CZ70891095**\\r\\n\\r\\n### Kontaktní údaje\\r\\n\\r\\nMobil:**+420 257 280 111**\\r\\n\\r\\n Fax:**+420 257 280 203**\\r\\n\\r\\n Email:**podatelna@kr-s.cz**\\r\\n\\r\\n Datová schránka:**keebyyf**\\r\\n\\r\\n[!\"}]},{\"file_id\":\"file-5hy6wFHgazSGNATMV6JCpT\",\"filename\":\"Organizacni_struktura_-_Informacni_system_krajskeho_uradu_-_W
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3479 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3480 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3481 📋 Raw sequence: 20,5,4,1
+StreamingResponseExtension.js:3484 📋 Parsed IDs: [20,5,4,1]
+StreamingResponseExtension.js:3487 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3489 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+StreamingResponseExtension.js:3489 📌 Position 1: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+StreamingResponseExtension.js:3489 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3489 📌 Position 3: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3491 =============================
+StreamingResponseExtension.js:3517 
+🔄 ATTEMPT 1/4: Using model ID:20
+StreamingResponseExtension.js:3520 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3521 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3522 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3523 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3164 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:3173 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3275 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:3424 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3230 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3378 📤 Updating Voiceflow variable with response length: 386
+StreamingResponseExtension.js:3400 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3403 Voiceflow update response: Object
+StreamingResponseExtension.js:3641 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3642 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3643 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3644 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3645 📌 Attempt: 1/4
+StreamingResponseExtension.js:3648 =============================
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "20,5,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-QyQx1gcJocRXD7gHL1qwhh\",\"filename\":\"Prehled_dotaci_poskytovanych_Stredoceskym_krajem_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8574418967508445,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/prehled-dotaci\",\"title\":\"Přehled dotací poskytovaných Středočeským krajem - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:02:04.427548\"},\"content\":[{\"type\":\"text\",\"text\":\"cz/web/urad/prehled-dotaci)\\r\\n\\r\\n**Přehled vyhlášených programů a pravidel středočeských fondů pro rok 2025 získáte [ZDE](https://stredoceskykraj.cz/documents/14432/19697910/SF_prirucka_2025_verze_IV.pdf/06fcd989-32ba-9e9b-a789-198cd8719c30?t=1751353615271)**\\r\\n\\r\\n**[Metodický pokyn k podávání žádostí o finanční podporu prostřednictvím Elektronického dotačního portálu Středočeského kraje.](https://stredoceskykraj.cz/documents/14432/19697910/Metodick%C3%BD+pokyn+k+pod%C3%A1v%C3%A1n%C3%AD+%C5%BE%C3%A1dost%C3%AD+o+finan%C4%8Dn%C3%AD+podporu+prost%C5%99ednictv%C3%ADm+Elektronick%C3%A9ho+dota%C4%8Dn%C3%ADho+port%C3%A1lu+St%C5%99edo%C4%8Desk%C3%A9ho+kraje.pdf/1a556653-e414-3f52-8ea7-19e88bb1b7a7?t=1731921942541)**\\r\\n\\r\\n**Elektronický dotační portál Středočeského kraje EDP od r. 2025 -[Elektronický dotační portál](https://dotace.stredoceskykraj.cz/)**\\r\\n\\r\\n[**Návod k registraci uživatelského účtu a k podávání žádostí přes EDP.**](https://stredoceskykraj.cz/documents/14432/19697910/Prezentace+k+registraci+u%C5%BEivatelsk%C3%A9ho+%C3%BA%C4%8Dtu+a+pod%C3%A1v%C3%A1n%C3%AD+%C5%BE%C3%A1dost%C3%AD+p%C5%99es+EDP.pdf/c2f2df60-c04b-2496-3286-7d45d28085f0?t=1744195115590)\\r\\n\\r\\nDle oblastí\\r\\n-----------\\r\\n\\r\\n[### Sociální oblast Informace o dotacích vypsaných v sociální oblasti](https://stredoceskykraj.cz/web/urad/dotace-v-socialni-oblasti)[### Zdravotnictví Informace o dotacích vypsaných ve zdravotnictví](https://stredoceskykraj.cz/web/urad/dotace-ve-zdravotnictvi)[### Bezpečnost Informace o dotacích vypsaných v oblasti bezpečnosti](https://stredoceskykraj.cz/web/urad/dotace-v-bezpecnosti)[### Věda a výzkum Dotace vypsané na podporu vědy a výzkumu](https://stredoceskykraj.\"}]},{\"file_id\":\"file-P4sL2qrczD7NztCo1tT5BR\",\"filename\":\"Aktuality_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8439294348881704,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/aktuality\",\"title\":\"Aktuality - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:27:37.627879\"},\"content\":[{\"type\":\"text\",\"text\":\"Po výpadku proudu, který postihl Středočeský kraj, už jsou plně obnoveny dodávky elektrické energie v celém regionu, informovala o tom společnost ...\\r\\n\\r\\n[![Image 5](https://stredoceskykraj.cz/documents/18919220/19100358/v%C3%BD%C5%99ez+orl%C3%ADk.jpg/5970cb72-9b60-7879-849e-276bf04859fb?version=1.0&t=1751355397168)](https://stredoceskykraj.cz/web/urad/aktuality/-/asset_publisher/zvna/blog/zachranari-bodou-nove-po-cele-leto-na-orlicke-prehrade)[### Záchranáři bodou nově po celé léto na Orlické přehradě](https://stredoceskykraj.cz/web/urad/aktuality/-/asset_publisher/zvna/blog/zachranari-bodou-nove-po-cele-leto-na-orlicke-prehrade)bezpečnost zdravotnictví 01.07.2025\\r\\nStředočeští záchranáři rozšířili své působení také na Orlickou přehradu. Během celé letní sezóny bude připravená dvojčlenná posádka, která bude za pacienty vyjíždět až do konce ...\\r\\n\\r\\n[![Image 6](https://stredoceskykraj.cz/documents/18919220/19100358/v%C3%BD%C5%99ez+lom.jpg/21c9a2ed-9782-4dcb-049c-13930ac39670?version=1.0&t=1751012640503)](https://stredoceskykraj.cz/web/urad/aktuality/-/asset_publisher/zvna/blog/novy-dotacni-program-pomuze-napravit-skody-po-tezbe-nerostu)[### Nový dotační program pomůže napravit škody po těžbě nerostů](https://stredoceskykraj.cz/web/urad/aktuality/-/asset_publisher/zvna/blog/novy-dotacni-program-pomuze-napravit-skody-po-tezbe-nerostu)životní prostředí dotace a fondy 27.06.2025\\r\\nStředočeské obce dostanou příležitost požádat si o dotaci na odstraňování škod po těžbě nerostů. Rada kraje na to vyčlenila celkem pět milionů korun. Peníze jsou určené například.\\r\\n\\r\\n[Stránka 1 91](javascript:; \\\"Stránka 1   91\\\")\\r\\n*   [1](https://stredoceskykraj.\"}]},{\"file_id\":\"file-LfnAhxpwJeosTkz5ws1AES\",\"filename\":\"Dotace_v_socialni_oblasti_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8286546022937816,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/dotace-v-socialni-oblasti\",\"title\":\"Dotace v sociální oblasti - Informační 
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3479 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3480 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3481 📋 Raw sequence: 20,5,4,1
+StreamingResponseExtension.js:3484 📋 Parsed IDs: [20,5,4,1]
+StreamingResponseExtension.js:3487 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3489 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+StreamingResponseExtension.js:3489 📌 Position 1: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+StreamingResponseExtension.js:3489 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3489 📌 Position 3: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3491 =============================
+StreamingResponseExtension.js:3517 
+🔄 ATTEMPT 1/4: Using model ID:20
+StreamingResponseExtension.js:3520 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3521 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3522 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3523 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3164 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:3173 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3275 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:3424 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3230 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3378 📤 Updating Voiceflow variable with response length: 2244
+StreamingResponseExtension.js:3400 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3403 Voiceflow update response: Object
+StreamingResponseExtension.js:3641 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3642 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3643 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3644 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3645 📌 Attempt: 1/4
+StreamingResponseExtension.js:3648 =============================

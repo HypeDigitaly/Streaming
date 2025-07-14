@@ -1821,11 +1821,33 @@ export const StreamingResponseExtension = {
       let initialProcessedContent = processBuffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+          // Apply formatting to the content within POSTUP sections
+          const formattedContent = content.trim()
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .map(line => {
+              // Process markdown links in the content
+              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                let cleanUrl = url.trim();
+                if (cleanUrl.includes('%')) {
+                  cleanUrl = decodeUrlSafely(cleanUrl);
+                }
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+              });
+            })
+            .join('<br>\n');
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
         })
         // Process Database Sources tags - handle both paired and standalone end markers
         .replace(/\[\[Database_Sources_Start\]\]([\s\S]*?)\[\[Database_Sources_End\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+          // Apply markdown formatting to the content within Database Sources
+          const formattedContent = content.trim()
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .join('<br>\n');
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
         })
         // Handle standalone Database_Sources_End markers - wrap citations after the marker
         // Process each citation individually to avoid packing them together
@@ -1863,14 +1885,30 @@ export const StreamingResponseExtension = {
               }
             }
             
-            const processedContent = processedLines.join('\n');
+            const processedContent = processedLines.join('<br>\n');
             return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${processedContent}</div></div>`;
           }
           return '';
         })
         // Process Web Search Sources tags
         .replace(/\[\[Web_Search_Sources_Start\]\]([\s\S]*?)\[\[Web_Search_Sources_End\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+          // Apply formatting to the content within Web Search Sources
+          const formattedContent = content.trim()
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .map(line => {
+              // Process markdown links in the content
+              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                let cleanUrl = url.trim();
+                if (cleanUrl.includes('%')) {
+                  cleanUrl = decodeUrlSafely(cleanUrl);
+                }
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+              });
+            })
+            .join('<br>\n');
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')

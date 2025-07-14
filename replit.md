@@ -20,6 +20,9 @@ Preferred communication style: Simple, everyday language.
 - **Improved Content Type Spacing**: Better spacing between different content types (paragraphs, headers, lists, line breaks)
 - **Enhanced HTML Cleanup**: Added post-processing to remove empty paragraphs and normalize consecutive break tags
 - **Better CSS Typography**: Improved font styling, colors, and spacing for better readability
+- **Fixed Special Section Formatting**: Improved line break handling in `[[Database_Sources_Start]]...[[Database_Sources_End]]`, `[[Web_Search_Sources_Start]]...[[Web_Search_Sources_End]]`, and `[[POSTUP_START]]...[[POSTUP_END]]` sections
+- **Proper Link Formatting in Special Sections**: Added markdown link processing within special sections with proper URL decoding
+- **Consistent Line Breaks**: All special sections now properly format content with `<br>` tags between lines to prevent cluttered display
 
 ### Comprehensive URL Formatting Fix (January 2025)
 - **Fixed PDF Link Streaming Issues**: Resolved persistent URL encoding problems that broke PDF and document links during streaming
