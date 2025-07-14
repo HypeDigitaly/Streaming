@@ -1576,353 +1576,142 @@ export const StreamingResponseExtension = {
       // Keep track of complete response for final processing
       completeResponse += text;
 
-      // Post-process buffer to handle various image URL patterns
+      // Optimized markdown conversion - fewer passes, cached patterns
+      let processedBuffer = buffer;
 
-      // Pattern 1: Complete URLs with image extensions (including query parameters)
-      buffer = buffer.replace(
-        /\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?)\b/gi,
-        function (match, imageUrl) {
-          // Skip if already in markdown or HTML format
-          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-          if (
-            beforeMatch.includes("![") &&
-            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
-          ) {
-            return match;
-          }
-          if (beforeMatch.includes("<img")) {
-            return match;
-          }
-          return `![Image](${imageUrl})`;
-        },
-      );
+      // Only run expensive operations when we have substantial content or end markers
+      const shouldRunExpensiveOps = processedBuffer.length > 500 || 
+                                   processedBuffer.includes('[[') || 
+                                   processedBuffer.includes(']]') ||
+                                   processedBuffer.includes('\n');
 
-      // Pattern 2: Image filenames with query parameters (e.g., DSC_6532.jpg?tok=xyz)
-      buffer = buffer.replace(
-        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_.-]+)\b/gi,
-        function (match, imageUrl) {
-          // Skip if already in markdown or HTML format
-          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-          if (
-            beforeMatch.includes("![") &&
-            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
-          ) {
-            return match;
+      if (shouldRunExpensiveOps) {
+        // Single pass for all image patterns
+        processedBuffer = processedBuffer.replace(
+          /\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?|[a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[a-zA-Z0-9=&_.-]+)?)\b/gi,
+          function (match, url) {
+            // Quick check to avoid double-processing
+            if (processedBuffer.includes(`![Image](${url})`)) return match;
+            return `![Image](${url})`;
           }
-          if (beforeMatch.includes("<img")) {
-            return match;
-          }
-          return `![Image](${imageUrl})`;
-        },
-      );
+        );
 
-      // Pattern 3: Standalone image filenames (without query params)
-      buffer = buffer.replace(
-        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi,
-        function (match, filename) {
-          // Skip if already in markdown or HTML format
-          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-          if (
-            beforeMatch.includes("![") &&
-            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
-          ) {
-            return match;
-          }
-          if (beforeMatch.includes("<img")) {
-            return match;
-          }
-          // Skip if this looks like it might be part of a larger URL
-          const contextBefore = buffer.substring(
-            Math.max(0, buffer.indexOf(match) - 10),
-            buffer.indexOf(match),
-          );
-          const contextAfter = buffer.substring(
-            buffer.indexOf(match) + match.length,
-            buffer.indexOf(match) + match.length + 10,
-          );
-          if (contextBefore.includes("?") || contextAfter.match(/^[\?=&]/)) {
-            return match; // Skip fragments that will be processed by other patterns
-          }
-          return `![Image](${filename})`;
-        },
-      );
-
-      // --- START: Auto-link document files ---
-      const docExtensions = ['pdf', 'docx', 'doc', 'xlsx', 'xls', 'ppt', 'pptx', 'zip', 'rar', 'txt'];
-      // Updated regex to support Unicode characters in file paths and names.
-      const docExtRegex = new RegExp(`(?<!\\]\\()\\b((?:[\\p{L}\\d\\s.,%()-_]+\\/)*[\\p{L}\\d\\s.,%()-_]+\\.(?:${docExtensions.join('|')}))\\b`, 'giu');
-      
-      buffer = buffer.replace(docExtRegex, (match, url) => {
-        // Double-check to avoid wrapping something that looks like the end of a markdown link.
-        const textAfter = buffer.substring(buffer.indexOf(match) + match.length);
-        if (textAfter.trim().startsWith(')')) {
-          return match; // It's likely already a markdown link, so don't touch it.
+        // Only run Unicode regex for document files when we detect file extensions
+        if (/\.(pdf|docx?|xlsx?|pptx?|zip|rar|txt)\b/i.test(processedBuffer)) {
+          const docExtensions = ['pdf', 'docx', 'doc', 'xlsx', 'xls', 'ppt', 'pptx', 'zip', 'rar', 'txt'];
+          const docExtRegex = new RegExp(`(?<!\\]\\()\\b((?:[\\p{L}\\d\\s.,%()-_]+\\/)*[\\p{L}\\d\\s.,%()-_]+\\.(?:${docExtensions.join('|')}))\\b`, 'giu');
+          
+          processedBuffer = processedBuffer.replace(docExtRegex, (match, url) => {
+            // Quick check to avoid double-processing
+            if (processedBuffer.includes(`[${url}](`)) return match;
+            return `[${url}](${url})`;
+          });
         }
-        // It's a standalone file path, so let's make it a clickable link.
-        return `[${url}](${url})`;
-      });
-      // --- END: Auto-link document files ---
 
-      
-      // Special handling for streaming headers - process only complete lines
-      let processBuffer = buffer;
-      
-      // If buffer doesn't end with newline and contains incomplete header, delay processing
-      if (buffer.includes('##') && !buffer.endsWith('\n') && !buffer.endsWith('\r\n')) {
-        const lines = buffer.split(/\r?\n/);
-        const lastLine = lines[lines.length - 1];
-        
-        // If last line looks like incomplete header, process only complete lines
-        if (lastLine.includes('##') && lastLine.length < 100) {
-          // Process all but the last line
-          processBuffer = lines.slice(0, -1).join('\n') + (lines.length > 1 ? '\n' : '');
-        }
-      }
-
-      // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
-      const formattedContent = processBuffer
-        // Process POSTUP tags FIRST to avoid conflicts with other formatting
-        .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
-        })
-        // Process Database Sources tags (greedy to capture all content)
-        .replace(/\[\[Database_Sources_Start\]\]([\s\S]*)\[\[Database_Sources_End\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
-        })
-        // Process Web Search Sources tags
-        .replace(/\[\[Web_Search_Sources_Start\]\]([\s\S]*?)\[\[Web_Search_Sources_End\]\]/g, function(match, content) {
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
-        })
-        // Remove empty paragraphs and extra whitespace around thinking sections
-        .replace(/<p>\s*<\/p>/g, '')
-        .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
-        .replace(/<\/div>\s*\n/g, '</div>')
-        // Headers - H1 to H5 (multiple approaches for robustness)
-        .replace(/^(\s*)#{5}\s+(.+?)$/gm, "<h5>$2</h5>")
-        .replace(/^(\s*)#{4}\s+(.+?)$/gm, "<h4>$2</h4>")
-        .replace(/^(\s*)#{3}\s+(.+?)$/gm, "<h3>$2</h3>")
-        .replace(/^(\s*)#{2}\s+(.+?)$/gm, "<h2>$2</h2>")
-        .replace(/^(\s*)#{1}\s+(.+?)$/gm, "<h1>$2</h1>")
-        // Fallback headers - no leading whitespace
-        .replace(/^##### (.+)$/gm, "<h5>$1</h5>")
-        .replace(/^#### (.+)$/gm, "<h4>$1</h4>")
-        .replace(/^### (.+)$/gm, "<h3>$1</h3>")
-        .replace(/^## (.+)$/gm, "<h2>$1</h2>")
-        .replace(/^# (.+)$/gm, "<h1>$1</h1>")
-        // Ultra-simple fallback for stubborn cases
-        .replace(/##\s+([^\n\r]+)/g, "<h2>$1</h2>")
-        .replace(/#\s+([^\n\r]+)/g, "<h1>$1</h1>")
-        // Brutal fallback - replace any remaining ## patterns
-        .replace(/##\s*([^#\n\r]+)/g, "<h2>$1</h2>")
-        .replace(/^([^<\n\r]*?)##\s*([^#\n\r]+)/gm, "$1<h2>$2</h2>")
-        // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
-        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
-          // Clean and validate the URL
-          let cleanUrl = url.trim();
-
-          // Convert HTTP to HTTPS if it's a full URL starting with http://
-          if (cleanUrl.match(/^http:\/\//i)) {
-            cleanUrl = cleanUrl.replace(/^http:\/\//i, "https://");
-          }
-
-          // Use alt text if provided, otherwise use empty string
-          const altText = alt ? alt.trim() : "";
-
-          if (trace.payload?.debugMode === 1) {
-            console.log("Converting markdown image to HTML:", {
-              original: match,
-              cleanUrl,
-              altText,
+        // Process special sections only when markers are present
+        if (processedBuffer.includes('[[')) {
+          processedBuffer = processedBuffer
+            .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, (match, content) => {
+              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+            })
+            .replace(/\[\[Database_Sources_Start\]\]([\s\S]*)\[\[Database_Sources_End\]\]/g, (match, content) => {
+              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+            })
+            .replace(/\[\[Web_Search_Sources_Start\]\]([\s\S]*?)\[\[Web_Search_Sources_End\]\]/g, (match, content) => {
+              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
             });
-          }
+        }
 
-          return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
-        })
-        // Bold formatting only (AFTER image processing to prevent URL corruption)
-        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Double asterisks for bold
-        // Line separators (three or more hyphens)
-        .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
-        // List items
-        .replace(/^\* (.*$)/gm, "<li>$1</li>")
-        .replace(/^- (.*$)/gm, "<li>$1</li>")
-        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
-        .replace(/^\\d+\\.\\s+(.*$)/gm, "<li>$1</li>")
-        // Code
-        .replace(/`([^`]+)`/g, "<code>$1</code>")
-        // Tables - Improved processing for markdown tables
-        .replace(
-          /(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm,
-          function (match) {
-            // Clean up the match and split into lines
-            const tableContent = match.trim();
-            const rows = tableContent.split("\n").filter((row) => row.trim());
+        // Consolidated markdown processing - single pass for most operations
+        processedBuffer = processedBuffer
+          // Clean up empty elements first
+          .replace(/<p>\s*<\/p>/g, '')
+          .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
+          .replace(/<\/div>\s*\n/g, '</div>')
+          // Headers - consolidated patterns
+          .replace(/^(\s*)#{1,5}\s+(.+?)$/gm, (match, spaces, content) => {
+            const level = match.match(/#{1,5}/)[0].length;
+            return `<h${level}>${content}</h${level}>`;
+          })
+          // Fallback header patterns
+          .replace(/##\s*([^#\n\r]+)/g, "<h2>$1</h2>")
+          .replace(/#\s+([^\n\r]+)/g, "<h1>$1</h1>")
+          // Images: Convert markdown to HTML
+          .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
+            const cleanUrl = url.trim().replace(/^http:\/\//i, "https://");
+            const altText = alt ? alt.trim() : "";
+            return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
+          })
+          // Text formatting
+          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+          .replace(/`([^`]+)`/g, "<code>$1</code>")
+          // Line separators
+          .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
+          // Links (after image processing)
+          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+          // Lists - simplified processing
+          .replace(/^[\*\-] (.+)$/gm, "<li>$1</li>")
+          .replace(/^\s{2,}[\*\-] (.+)$/gm, '<li class="sublist">$1</li>')
+          // Wrap consecutive list items
+          .replace(/(<li.*?<\/li>)(\s*<li.*?<\/li>)*/g, '<ul>$&</ul>')
+          .replace(/<\/ul>\s*<ul>/g, '');
 
-            // Check if this is really a table (at least 2 rows: header + separator)
-            if (rows.length < 2) return match;
+        // Only do table processing if we detect table markers
+        if (processedBuffer.includes('|')) {
+          processedBuffer = processedBuffer.replace(
+            /(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm,
+            function (match) {
+              const tableContent = match.trim();
+              const rows = tableContent.split("\n").filter((row) => row.trim());
+              if (rows.length < 2) return match;
 
-            let tableHtml = '<table class="markdown-table">\n';
-            let headerProcessed = false;
+              let tableHtml = '<table class="markdown-table">';
+              let headerProcessed = false;
 
-            // Process each row
-            rows.forEach((row, rowIndex) => {
-              const trimmedRow = row.trim();
+              rows.forEach((row, rowIndex) => {
+                const trimmedRow = row.trim();
+                if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) return;
 
-              // Skip the separator row (contains only dashes, spaces, pipes, and colons)
-              if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) {
-                return;
-              }
+                tableHtml += "<tr>";
+                const cells = trimmedRow.startsWith("|") && trimmedRow.endsWith("|") 
+                  ? trimmedRow.slice(1, -1).split("|") 
+                  : trimmedRow.split("|");
 
-              // Start the row
-              tableHtml += "  <tr>\n";
+                cells.forEach((cell) => {
+                  const cellContent = cell.trim();
+                  const cellTag = !headerProcessed && rowIndex === 0 ? "th" : "td";
+                  tableHtml += `<${cellTag}>${cellContent}</${cellTag}>`;
+                });
 
-              // Extract cells - handle pipes that might be at start/end
-              let cells;
-              if (trimmedRow.startsWith("|") && trimmedRow.endsWith("|")) {
-                cells = trimmedRow.slice(1, -1).split("|");
-              } else {
-                cells = trimmedRow.split("|");
-              }
-
-              // Process each cell
-              cells.forEach((cell) => {
-                const cellContent = cell.trim();
-                // First row (after potential separator) is header
-                const cellTag =
-                  !headerProcessed && rowIndex === 0 ? "th" : "td";
-                tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
+                if (!headerProcessed && rowIndex === 0) headerProcessed = true;
+                tableHtml += "</tr>";
               });
 
-              // Mark header as processed after first actual content row
-              if (!headerProcessed && rowIndex === 0) {
-                headerProcessed = true;
-              }
-
-              // End the row
-              tableHtml += "  </tr>\n";
-            });
-
-            // End the table
-            tableHtml += "</table>";
-            return tableHtml;
-          },
-        )
-        // Convert regular markdown links to HTML links (AFTER image processing)
-        .replace(
-          /\[([^\]]+)\]\(([^)]+)\)/g,
-          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
-        )
-        .replace(/^- (.*$)/gm, (match, content) => {
-          const indentation = match.match(/^\s*/)[0].length;
-          return `<li class="${indentation > 0 ? "sublist" : ""}">${content.trim()}</li>`;
-        })
-        .replace(/(?:^|\n)(<li)/g, "\n<ul>$1")
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, "$1</ul>");
-
-
-
-      // --- BEGIN: Post-process lists and clean up empty items ---
-      const tempContainer = document.createElement("div");
-      // Use DOMParser for potentially cleaner initial parsing if needed, but innerHTML is often sufficient
-      tempContainer.innerHTML = formattedContent;
-
-      // Function to wrap consecutive LIs
-      function wrapListItems(listType /* 'ol' or 'ul' */) {
-        const items = tempContainer.querySelectorAll("li"); // Get all LIs
-        let currentList = null;
-
-        items.forEach((li, index) => {
-          // Rough heuristic: Check if it looks like a numbered list item was intended
-          // This relies on the number potentially being left as text by the simple regex
-          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim());
-          const targetListType = looksNumbered ? "ol" : "ul";
-
-          // Only process items matching the current function call type (ol or ul)
-          if (targetListType !== listType) return;
-
-          // Skip items already inside a list (e.g., nested lists - handle later if needed)
-          if (
-            li.parentElement.tagName === "OL" ||
-            li.parentElement.tagName === "UL"
-          ) {
-            currentList = null; // Reset sequence if we encounter an already nested item
-            return;
-          }
-
-          const prevSibling = li.previousElementSibling;
-
-          // Start a new list if needed
-          if (
-            !currentList ||
-            !prevSibling ||
-            prevSibling.tagName !== "LI" ||
-            prevSibling.parentElement.tagName !== listType.toUpperCase()
-          ) {
-            currentList = document.createElement(listType);
-            li.parentNode.insertBefore(currentList, li);
-          }
-
-          // Move the li into the current list
-          if (currentList) {
-            currentList.appendChild(li);
-          }
-        });
+              return tableHtml + "</table>";
+            }
+          );
+        }
       }
 
-      // Wrap OL items first, then UL items
-      wrapListItems("ol");
-      wrapListItems("ul");
-
-      // Clean up empty numbered list items (modified check)
-      const listItems = tempContainer.querySelectorAll("ol > li, ul > li");
-      listItems.forEach((li) => {
-        // Check if the list item is effectively empty or just a marker
-        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, "").trim(); // Remove number marker for check
-        if (contentCheck === "" || contentCheck === "<br>") {
-          // Check if it's truly empty, not containing other important tags
-          if (!li.querySelector("a, img, code, strong, em, ul, ol")) {
-            li.remove();
-          }
-        }
-      });
-
-      // Remove any potentially empty OL/UL tags left after cleaning LIs
-      tempContainer.querySelectorAll("ol, ul").forEach((list) => {
-        if (!list.hasChildNodes()) {
-          list.remove();
-        }
-      });
-
-      const cleanedHtml = tempContainer.innerHTML;
-      // --- END: Post-process lists and clean up empty items ---
-
-
-
-      // Process file citations in the cleaned HTML
-      const htmlWithCitations = processFileCitations(cleanedHtml);
+      // Process file citations in the processed content
+      const htmlWithCitations = processFileCitations(processedBuffer);
       
-      // Update content with formatting using the processed HTML
+      // Update content with formatting
       responseContent.innerHTML = htmlWithCitations;
 
-      // Add URL preview functionality for citation links (from PerplexityExtension)
-      addUrlPreviewHandlers();
-      
-      // Add citation link handlers
-      addCitationLinkHandlers();
+      // Add handlers only when needed
+      if (htmlWithCitations.includes('citation-link')) {
+        addUrlPreviewHandlers();
+        addCitationLinkHandlers();
+      }
 
-      // Scroll handling
+      // Optimized scroll handling
       const scrollContainer = findScrollableParent(element);
       if (scrollContainer) {
-        const maxScroll =
-          scrollContainer.scrollHeight - scrollContainer.clientHeight;
-        const isNearBottom =
-          scrollContainer.scrollTop + scrollContainer.clientHeight >=
-          maxScroll - 100;
-
+        const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+        const isNearBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= maxScroll - 100;
         if (isNearBottom) {
-          scrollContainer.scrollTo({
-            top: scrollContainer.scrollHeight,
-            behavior: "smooth",
-          });
+          scrollContainer.scrollTo({ top: scrollContainer.scrollHeight, behavior: "smooth" });
         }
       }
     }
