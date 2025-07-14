@@ -1647,6 +1647,20 @@ export const StreamingResponseExtension = {
         },
       );
 
+      // --- START: Auto-link document files ---
+      const docExtensions = ['pdf', 'docx', 'doc', 'xlsx', 'xls', 'ppt', 'pptx', 'zip', 'rar', 'txt'];
+      const docExtRegex = new RegExp(`(?<!\\]\\()\\b((?:[\\w\\d\\s.,%()-]+\\/)*[\\w\\d\\s.,%()-]+\\.(?:${docExtensions.join('|')}))\\b`, 'gi');
+      
+      buffer = buffer.replace(docExtRegex, (match, url) => {
+        // Double-check to avoid wrapping something that looks like the end of a markdown link.
+        const textAfter = buffer.substring(buffer.indexOf(match) + match.length);
+        if (textAfter.trim().startsWith(')')) {
+          return match; // It's likely already a markdown link, so don't touch it.
+        }
+        // It's a standalone file path, so let's make it a clickable link.
+        return `[${url}](${url})`;
+      });
+      // --- END: Auto-link document files ---
 
       
       // Special handling for streaming headers - process only complete lines
@@ -1670,8 +1684,8 @@ export const StreamingResponseExtension = {
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
-        // Process Database Sources tags
-        .replace(/\[\[Database_Sources_Start\]\]([\s\S]*?)\[\[Database_Sources_End\]\]/g, function(match, content) {
+        // Process Database Sources tags (greedy to capture all content)
+        .replace(/\[\[Database_Sources_Start\]\]([\s\S]*)\[\[Database_Sources_End\]\]/g, function(match, content) {
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
         // Process Web Search Sources tags
