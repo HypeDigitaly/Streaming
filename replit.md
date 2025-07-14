@@ -34,6 +34,12 @@ Preferred communication style: Simple, everyday language.
 - **Infinite loop protection**: Added safety limits to prevent infinite decoding loops
 - **Improved file link handling**: Better processing of heavily encoded file identifiers in Database Sources
 
+### January 14, 2025 - Fixed Link Text Decoding
+- **Link text decoding**: Added URL decoding to link text (filenames) in addition to URLs in all thinking sections
+- **Database Sources improvement**: Fixed display of encoded filenames like `KUSK0C1CC9FT%20P%C5%99%C3%ADloha` → `KUSK0C1CC9FT Příloha`
+- **Comprehensive link processing**: Updated POSTUP, Database Sources, and Web Search Sources to decode both URLs and link text
+- **Czech character support**: Proper decoding of Czech characters in file names and link text
+
 These changes address the formatting issues in the Voiceflow UI where line breaks and empty lines were not displaying properly, and fix the URL encoding and overflow issues in the Database Sources section, making the content more readable and visually appealing.
 
 ## System Architecture

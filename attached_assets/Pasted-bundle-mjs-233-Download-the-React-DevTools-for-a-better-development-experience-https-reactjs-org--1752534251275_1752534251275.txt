@@ -1,0 +1,74 @@
+bundle.mjs:233 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+fingerprint.js:221 Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+bundle.mjs:506 voiceflow webchat v2.92.1
+bundle.mjs:55 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2465)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+q @ bundle.mjs:55
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 16000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-RRsbQrNWFcbMNFAuFoHWuD\",\"filename\":\"Povinne_informace_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.90376042028539,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/povinne-informace\",\"title\":\"Povinné informace - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:23:23.726158\"},\"content\":[{\"type\":\"text\",\"text\":\"**[Kontaktní spojení](https://stredoceskykraj.cz/web/urad/kontakty)**\\r\\n    *   4.1 **[Kontaktní poštovní adresa](https://stredoceskykraj.cz/web/urad/kontakty)**\\r\\n    *   4.2 **[Adresa úřadovny pro osobní návštěvu](https://stredoceskykraj.cz/web/urad/kontakty)**\\r\\n    *   4.3 **[Úřední hodiny](https://stredoceskykraj.cz/web/urad/uredni-hodiny)**\\r\\n    *   4.4 **Telefonní čísla:** +420 257 280 111; **[Telefonní seznam na jednotlivá pracoviště](https://stredoceskykraj.cz/web/urad/telefonni-seznam)**\\r\\n    *   4.5 **Adresa internetové stránky**: **[https://stredoceskykraj.cz](https://stredoceskykraj.cz/)**\\r\\n    *   4.6 **[Adresa podatelny](https://stredoceskykraj.cz/web/urad/kontakty)**\\r\\n    *   4.7**[Elektronická adresa podatelny(ePodatelna)](https://stredoceskykraj.cz/web/urad/epodatelna)**\\r\\n    *   4.8 **Datová schránka:**keebyyf\\r\\n\\r\\n5.   **Případné platby lze poukázat:** 4440009090/6000 zřízen u PPF banka a.s.\\r\\n6.   **IČO** 70891095\\r\\n7.   **DIČ** CZ70891095\\r\\n8.   **Dokumenty**\\r\\n    *   8.1 **[Seznamy hlavních dokumentů](https://stredoceskykraj.cz/documents/14432/19629236/8.1+Seznamy+hlavn%C3%ADch+dokument%C5%AF.docx/9359540c-37b2-ca56-de6b-d4d60f2b106c?t=1699290655189)**\\r\\n    *   8.2 **[Rozpočet](https://stredoceskykraj.cz/web/urad/majetkove-hospodarstvi-sluzby)**\\r\\n\\r\\n9.   **[Žádosti o informace](https://stredoceskykraj.cz/web/urad/misto-a-zpusob-jak-ziskat-prislusne-informace)**\\r\\n10.   [**Příjem žádostí a dalších podání**](https://stredoceskykraj.cz/web/urad/prijem-zadosti-a-dalsich-podani)\\r\\n11.\"}]},{\"file_id\":\"file-K74oSQYip2qvgHQfPbRLoC\",\"filename\":\"Misto_a_zpusob,_jak_ziskat_prislusne_informace_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8971629093728746,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/misto-a-zpusob-jak-ziskat-prislusne-informace\",\"title\":\"Místo a způsob, jak získat příslušné informace - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:23:51.623046\"},\"content\":[{\"type\":\"text\",\"text\":\"](https://stredoceskykraj.cz/web/urad/sazebnik-uhrad-za-poskytnute-informace-podle-106/1999-sb)\\r\\n*   [Výroční zpráva podle zákona 106/1999 Sb.](https://stredoceskykraj.cz/web/urad/vyrocni-zprava-podle-zakona-106/1999-sb)\\r\\n*   [Kontrola a stížnosti](https://stredoceskykraj.cz/web/urad/kontrola-a-stiznosti)\\r\\n*   [Registr smluv](https://smlouvy.gov.cz/vyhledavani)\\r\\n\\r\\n### Podatelna\\r\\n\\r\\n**Adresa:**\\r\\n\\r\\n Krajský úřad Středočeského kraje, Zborovská 11, 150 21 Praha 5\\r\\n\\r\\n**Provozní hodiny:**\\r\\n\\r\\n pondělí a středa 7:30 - 17:00\\r\\n\\r\\n úterý a čtvrtek 7:30 - 16:00\\r\\n\\r\\n pátek 7:30 - 15:00\\r\\n\\r\\n**Czech POINT, vidimace, legalizace:**\\r\\n\\r\\n Pondělí a středa 8:00 - 12:00, 14:00 - 16:00\\r\\n\\r\\n Úterý, čtvrtek a pátek 8:00 - 12:00\\r\\n\\r\\n**Telefon:** 257 280 580; 257 280 333\\r\\n\\r\\n**Kontaktní e-mail:**[podatelna@kr-s.cz](mailto:podatelna@kr-s.cz)\\r\\n\\r\\n### ePodatelna\\r\\n\\r\\nAdresy, které jsou určeny pro příjem veškerých datových zpráv doručovaných Krajskému úřadu Středočeského kraje mimo datovou schránku, jsou:\\r\\n\\r\\n[posta@kr-s.cz](mailto:posta@kr-s.cz)\\r\\n\\r\\n[podatelna@kr-s.cz](mailto:podatelna@kr-s.cz)\\r\\n\\r\\n[epodatelna@kr-s.cz](mailto:epodatelna@kr-s.cz)\\r\\n\\r\\nPravidla pro použití elektronického podpisu naleznete v odkazech níže.\\r\\n\\r\\n### Kontaktní údaje Informačního střediska\\r\\n\\r\\n**telefon:** 257 280 785, 257 280 840\\r\\n\\r\\n**fax:** 257 280 627\\r\\n\\r\\n**e-mail:**[info@kr-s.cz](mailto:info@kr-s.cz)\\r\\n\\r\\n### Úřední hodiny Informačního střediska\\r\\n\\r\\npondělí a středa 7.30 - 17.00\\r\\n\\r\\n úterý a čtvrtek 7.30 - 16.00\\r\\n\\r\\n pátek 7.30 - 14.00\\r\\n\\r\\nPrávo na informace je zakotveno v Listině základních práv a svobod v čl. 17. Podmínky a způsob poskytování informací státními orgány a orgány územní samosprávy stanoví zákon č. 106/1999 Sb., o svobodném přístupu k informacím, ve znění pozdějších předpisů.\"}]},{\"file_id\":\"file-RN4Tj7hX6eFqausDMHUqJQ\",\"filename\":\"Kontakty_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3625 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3626 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3627 📋 Raw sequence: 20,4,1
+StreamingResponseExtension.js:3630 📋 Parsed IDs: [20,4,1]
+StreamingResponseExtension.js:3633 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3635 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+StreamingResponseExtension.js:3635 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3635 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3637 =============================
+StreamingResponseExtension.js:3663 
+🔄 ATTEMPT 1/3: Using model ID:20
+StreamingResponseExtension.js:3666 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3667 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3668 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3669 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3310 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:3319 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3421 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:3570 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3393 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3376 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3524 📤 Updating Voiceflow variable with response length: 2179
+StreamingResponseExtension.js:3546 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3549 Voiceflow update response: Object
+StreamingResponseExtension.js:3787 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3788 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3789 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3790 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3791 📌 Attempt: 1/3
+StreamingResponseExtension.js:3794 =============================

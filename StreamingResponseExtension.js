@@ -1924,10 +1924,19 @@ export const StreamingResponseExtension = {
               // Process markdown links in the content with improved URL decoding
               return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
+                let cleanLinkText = linkText.trim();
+                
+                // Decode URL if it contains encoded characters
                 if (cleanUrl.includes('%')) {
                   cleanUrl = decodeUrlSafely(cleanUrl);
                 }
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${linkText}</a>`;
+                
+                // Decode link text if it contains encoded characters
+                if (cleanLinkText.includes('%')) {
+                  cleanLinkText = decodeUrlSafely(cleanLinkText);
+                }
+                
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
               });
             })
             .join('<br>\n');
@@ -1944,10 +1953,19 @@ export const StreamingResponseExtension = {
               // Process markdown links in the content with improved URL decoding
               return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
+                let cleanLinkText = linkText.trim();
+                
+                // Decode URL if it contains encoded characters
                 if (cleanUrl.includes('%')) {
                   cleanUrl = decodeUrlSafely(cleanUrl);
                 }
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${linkText}</a>`;
+                
+                // Decode link text if it contains encoded characters
+                if (cleanLinkText.includes('%')) {
+                  cleanLinkText = decodeUrlSafely(cleanLinkText);
+                }
+                
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
               });
             })
             .join('<br>\n');
@@ -1979,10 +1997,19 @@ export const StreamingResponseExtension = {
                   // Process markdown links in citations with improved URL decoding
                   line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
                     let cleanUrl = url.trim();
+                    let cleanLinkText = linkText.trim();
+                    
+                    // Decode URL if it contains encoded characters
                     if (cleanUrl.includes('%')) {
                       cleanUrl = decodeUrlSafely(cleanUrl);
                     }
-                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${linkText}</a>`;
+                    
+                    // Decode link text if it contains encoded characters
+                    if (cleanLinkText.includes('%')) {
+                      cleanLinkText = decodeUrlSafely(cleanLinkText);
+                    }
+                    
+                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
                   });
                 }
                 processedLines.push(line);
@@ -2005,10 +2032,19 @@ export const StreamingResponseExtension = {
               // Process markdown links in the content with improved URL decoding
               return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
+                let cleanLinkText = linkText.trim();
+                
+                // Decode URL if it contains encoded characters
                 if (cleanUrl.includes('%')) {
                   cleanUrl = decodeUrlSafely(cleanUrl);
                 }
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${linkText}</a>`;
+                
+                // Decode link text if it contains encoded characters
+                if (cleanLinkText.includes('%')) {
+                  cleanLinkText = decodeUrlSafely(cleanLinkText);
+                }
+                
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
               });
             })
             .join('<br>\n');
