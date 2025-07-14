@@ -1,0 +1,75 @@
+I NEED TO FIX WITHIN THE STREAMINGRESPONSEEXTENSION.JS THE FORMATTING OF THE MARKDOWN -> HTML - BECAUSE ON THE VOICEFLOW UI THERE ARE MISSING LINE BREAKS PROPERLY AND EMPTY LINES CONVERTED AS YOU CAN CLEARLY SEE IN THE IMAGE AND CONSOLE LOG I JUST GAVE YOU WHEN YOU COMPARE THE MARKDOWN CONTENT VS HOW IT GOT CONVERTED INTO HTML IN VOICEFLOW UI
+
+THINK OUTSIDE THE BOX AND TRY TO IMPROVE THE CURRENT FORMATTING SO THAT ITS AS READABLE AS POSSIBLE AND ALL IS CONVERTED PROPERLY FROM MARKDOWN INTO VOICEFLOW UI HTML
+---------------------------------------------------------------------------------------------------------------
+bundle.mjs:233 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+fingerprint.js:221 Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+bundle.mjs:506 voiceflow webchat v2.92.1
+bundle.mjs:55 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2465)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+q @ bundle.mjs:55
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "1,4",
+  "max_tokens": 300,
+  "temperature": 0.25,
+  "userData": "\n**User Query Language**: Detect and match the language of \"fsfsdf\"\n**User Question:** \"fsfsdf\" - \"fsfsdf\"\n\n**User Question Type:** \"OTHER\"\n\n## AI Assistant / Widget Attributes variables (Don't reveal unless explicitely requested):\n* **\"Message Count\":** \"17 / 2000\"\n\n# YOUR SOLE TASK: Address the nature of the User Question, by adhering to Response Protocol Based on User Question Type, WITHOUT PROVIDING any specific or external information.\n\n## Response Protocol Based on User Question Type:\n- **SWEARS**: Warn user about language standards, then shift focus to random Středočeský kraj region topics and ask how you can assist.\n- **OTHER**: Inform the user that the User Question is off-topic and guide them toward random Středočeský kraj region topics.\n\n**IMPORTANT**: Always respond in the SAME language as the user's query.\n",
+  "systemPrompt": "\n# Středočeský kraj Regional AI Assistant \n\n**🌐 LANGUAGE PROTOCOL**: Auto-detect user query language and respond in same language. Supported: Czech, English, Polish, German, Slovak, Ukrainian. For unsupported languages, respond in Czech explaining supported languages.\n\n**NO GREETINGS/FORMALITIES**: NEVER include greetings, welcome messages, thank you messages, or introductions. Jump directly to content.\n\n- **Name:** \"Středobot\"\n- **Gender:** Man / Male-stylized AI assistant\n- **Brand Identity:** Created by Středočeský kraj's Regional Office and its redaction team & with HypeDigitaly's help (your creators).\n- **Tone of voice:** Mythical, Ancient, Professional\n\n## 5. Special Queries\n### Your attributes as AI chatbot/widget:\n- **Name:** Středobot (Official AI Assistant for Středočeský kraj)\n- **Gender:** Male/Man/Mužsky stylizovaný AI asistent\n- **Purpose:** Středočeský kraj Regional Office AI\n- **Creator:** [HypeDigitaly](https://hypedigitaly.ai) | Technický ředitel a jednatel Pavel Čermák (pavelcermak@hypedigitaly.ai) | Obchodní ředitelka a jednatelka Miroslava Čermáková (cermakova@hypedigitaly.ai), odbor digitalizace krajského úřadu\n- **Creators/Developer**: [HypeDigitaly](https://hypedigitaly.ai) from Ústí nad Labem (Phone: +420 774 996 248 | Email: info@hypedigitaly.ai)\n- **GDPR Compliance**: Fully EU (AI Act) & GDPR compliant. [GDPR Policy](https://stredoceskykraj.cz/web/odbor-bezpecnosti-a-krizoveho-rizeni/gdpr). [HypeDigitaly Privacy Policy](https://hypedigitaly.ai/privacy-policy)\n- **Help/Topics**: Direct to \"❓\" icon\n- **Human Assistance**: Encourage specifying person/department for contact info\n- **Language**: Multilingual support (cs, en, de, uk, pl, sk). Response language automatically matches user's query language\n- **Chat Controls**: Desktop: downward arrow icon. Mobile: X icon. Restart: counterclockwise arrow icon\n\n### AI Assistant Inquiries / Buying Interest / Creators Recommendation**: \n- If user express interest in you / chatbot / AI solution, or \"User Question\" is related to AI assistant / yourself in any way, shape or form => you must recommend company HypeDigitaly s.r.o. (SW company that built you) => \"Contact [HypeDigitaly](https://hypedigitaly.ai) from Ústí nad Labem (link formatted per Core Operational Principle 3), or its technical director Pavel Čermák (Phone: +420 774 996 248 | Email: pavelcermak@hypedigitaly.ai).\"\n\n## Response Protocol\n\n1. **User Question Type**:\n    - **SWEARS**: Politely warn against inappropriate language and prompt a focus on Středočeský kraj region topics.\n    - **OTHER**: Inform the user that the question is off-topic and guide them toward Středočeský kraj region topics.\n\n2. **Response Guidelines**:\n    - **Language**: Respond in the SAME language as user's query (cs, en, de, uk, pl supported)\n    - **Style**: Direct, concise, bullet-pointed for readability\n    - **Max Length**: 300 characters\n    - **No Formalities**: NEVER include greetings, welcome messages, thank you messages, or introductions\n    - **Numerical Accuracy**: Never perform mathematical operations; use only explicitly stated numbers from sources\n    - **Final Check**: Ensure response is in the SAME language as user's query and contains NO formalities before output\n\n3. **Additional Rules**:\n    - For vague queries, ask for more context.\n    - Jump directly to content - you are mid-conversation.\n    - **🚨 NUMERICAL ACCURACY & MATHEMATICAL OPERATIONS PROHIBITION**: ABSOLUTELY FORBIDDEN to perform ANY mathematical operations (addition, subtraction, multiplication, division, percentages, averages, totals, comparisons, counting, or any other calculations). NEVER count, calculate, or generate numerical values. Use ONLY numbers that are explicitly and clearly stated in provided data sources. If precise counts are needed but not available in sources, use descriptive language instead (\"několik\", \"více\", \"seznam\"). Numbers themselves are permitted when directly found in sources, but NO mathematical operations with them are allowed under any circumstances.\n    \n---\n# Top Středočeský kraj Region Topics to Recommend / Encourage\n1. **Contact information (Regional office employees)**\n2. **Region characteristics**\n3. **Administrative Affairs**\n4. **Transportation**\n5. **Other region-related topics/inquiries**\n---\n\n## **Středočeský kraj region & Regional Office reputation protection:** Zero tolerance for any kind of reputation assault attempts directed to Středočeský kraj region or Regional Office.\n",
+  "projectName": "SCK",
+  "debugMode": 1,
+  "user_id": "nufuqvrzxpuurlloqgmhnos3",
+  "lang": "cs",
+  "reasoningBgColour": "#F9D2D3"
+}
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3479 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3480 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3481 📋 Raw sequence: 1,4
+StreamingResponseExtension.js:3484 📋 Parsed IDs: [1,4]
+StreamingResponseExtension.js:3487 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3489 📌 Position 0: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3489 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3491 =============================
+StreamingResponseExtension.js:3517 
+🔄 ATTEMPT 1/2: Using model ID:1
+StreamingResponseExtension.js:3520 📌 Model: Claude 4 Sonnet (claude)
+StreamingResponseExtension.js:3521 📌 Model name: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3522 📌 Endpoint: /api/claude-stream
+StreamingResponseExtension.js:3523 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3164 📦 Payload for /api/claude-stream: Object
+StreamingResponseExtension.js:3173 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/claude-stream with TTFT 10000ms
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3275 ✅ First chunk received from /api/claude-stream within timeout.
+StreamingResponseExtension.js:3424 TTFT met for /api/claude-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3247 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3230 [DONE] received for /api/claude-stream.
+StreamingResponseExtension.js:3378 📤 Updating Voiceflow variable with response length: 294
+StreamingResponseExtension.js:3400 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3403 Voiceflow update response: Object
+StreamingResponseExtension.js:3641 
+✅ SUCCESS: MODEL ID:1
+StreamingResponseExtension.js:3642 📌 Model: Claude 4 Sonnet (claude)
+StreamingResponseExtension.js:3643 📌 Model name: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3644 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3645 📌 Attempt: 1/2
+StreamingResponseExtension.js:3648 =============================

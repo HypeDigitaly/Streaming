@@ -578,10 +578,33 @@ export const StreamingResponseExtension = {
           .response-content br {
             margin: 0;
             line-height: 1;
+            display: block;
+            margin-top: 0.6em;
+            margin-bottom: 0.6em;
+            content: "";
           }
+          
+          /* Better spacing for consecutive line breaks */
+          .response-content br + br {
+            margin-top: 0;
+            margin-bottom: 0.3em;
+          }
+          
+          /* Improve paragraph spacing */
           .response-content p {
-            margin: 0 0 0.5em 0;
-            line-height: 1.5;
+            margin: 0 0 0.8em 0;
+            line-height: 1.6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+          }
+          
+          /* Better spacing between different content types */
+          .response-content p + br {
+            margin-top: 0.3em;
+          }
+          
+          .response-content br + p {
+            margin-top: 0.3em;
           }
           .response-content p:last-child {
             margin-bottom: 0;
@@ -642,12 +665,52 @@ export const StreamingResponseExtension = {
           }
           .response-content code {
             /* Style for inline code */
-            background-color: #f0f0f0; /* Light grey background */
-            padding: 0.1em 0.4em; /* Small padding */
+            background-color: #f5f5f5; /* Light grey background */
+            padding: 0.2em 0.4em; /* Small padding */
             border-radius: 4px; /* Rounded corners */
-            font-family: monospace; /* Monospace font */
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace; /* Monospace font */
             margin: 0;
-            line-height: 1;
+            line-height: 1.4;
+            font-size: 0.9em;
+            color: #d73a49;
+            border: 1px solid #e1e5e9;
+          }
+          
+          /* Pre-formatted code blocks */
+          .response-content pre {
+            background-color: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            padding: 1em;
+            margin: 1em 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.45;
+          }
+          
+          .response-content pre code {
+            background-color: transparent;
+            padding: 0;
+            border: none;
+            color: inherit;
+            font-size: inherit;
+          }
+          
+          /* Blockquote styling */
+          .response-content blockquote {
+            border-left: 4px solid #e1e5e9;
+            margin: 1em 0;
+            padding: 0.5em 1em;
+            background-color: #f8f9fa;
+            border-radius: 0 4px 4px 0;
+            font-style: italic;
+            color: #6a737d;
+          }
+          
+          .response-content blockquote p {
+            margin: 0;
+            line-height: 1.5;
           }
           .response-content .markdown-table {
             border-collapse: collapse;
@@ -672,7 +735,7 @@ export const StreamingResponseExtension = {
             background-color: #F8FAFC;
             border: 1px solid #E2E8F0;
             border-radius: 6px;
-            margin: 0;
+            margin: 1.2em 0 0.6em 0;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             overflow: hidden;
           }
@@ -752,9 +815,9 @@ export const StreamingResponseExtension = {
           .ai-thinking-content li {
             margin: 1px 0;
           }
-          /* Remove top spacing, keep bottom spacing around thinking sections - kompaktní */
+          /* Add proper spacing around thinking sections */
           .response-content .ai-thinking-section {
-            margin: 0 0 0.6em 0 !important;
+            margin: 1.2em 0 0.6em 0 !important;
             padding: 0 !important;
           }
           .response-content .ai-thinking-section + h1,
@@ -1518,6 +1581,56 @@ export const StreamingResponseExtension = {
     }
 
     // Function to add citation link handlers
+    // Function to decode URL-encoded Czech characters
+    function decodeUrlSafely(url) {
+      try {
+        return decodeURIComponent(url);
+      } catch (e) {
+        // If decoding fails, try manual fixes for common Czech characters
+        return url
+          .replace(/%20/g, ' ')
+          .replace(/%C4%8D/g, 'č')
+          .replace(/%C4%8C/g, 'Č')
+          .replace(/%C5%99/g, 'ř')
+          .replace(/%C5%98/g, 'Ř')
+          .replace(/%C3%A1/g, 'á')
+          .replace(/%C3%81/g, 'Á')
+          .replace(/%C3%AD/g, 'í')
+          .replace(/%C3%8D/g, 'Í')
+          .replace(/%C3%A9/g, 'é')
+          .replace(/%C3%89/g, 'É')
+          .replace(/%C5%A1/g, 'š')
+          .replace(/%C5%A0/g, 'Š')
+          .replace(/%C5%BE/g, 'ž')
+          .replace(/%C5%BD/g, 'Ž')
+          .replace(/%C3%BD/g, 'ý')
+          .replace(/%C3%9D/g, 'Ý')
+          .replace(/%C4%9B/g, 'ě')
+          .replace(/%C4%9A/g, 'Ě')
+          .replace(/%C5%AF/g, 'ů')
+          .replace(/%C5%AE/g, 'Ů')
+          .replace(/%C3%BA/g, 'ú')
+          .replace(/%C3%9A/g, 'Ú')
+          .replace(/%C5%88/g, 'ň')
+          .replace(/%C5%87/g, 'Ň')
+          .replace(/%C4%8F/g, 'ď')
+          .replace(/%C4%8E/g, 'Ď')
+          .replace(/%C5%A5/g, 'ť')
+          .replace(/%C5%A4/g, 'Ť')
+          .replace(/%C3%B3/g, 'ó')
+          .replace(/%C3%93/g, 'Ó')
+          .replace(/%2F/g, '/')
+          .replace(/%3F/g, '?')
+          .replace(/%3D/g, '=')
+          .replace(/%26/g, '&')
+          .replace(/%2E/g, '.')
+          .replace(/%2D/g, '-')
+          .replace(/%5F/g, '_')
+          .replace(/%28/g, '(')
+          .replace(/%29/g, ')');
+      }
+    }
+
     function addCitationLinkHandlers() {
       const citationLinks = responseContent.querySelectorAll('.file-citation-link');
       
@@ -1576,152 +1689,585 @@ export const StreamingResponseExtension = {
       // Keep track of complete response for final processing
       completeResponse += text;
 
-      // Optimized markdown conversion - fewer passes, cached patterns
-      let processedBuffer = buffer;
-
-      // Only run expensive operations when we have substantial content or end markers
-      const shouldRunExpensiveOps = processedBuffer.length > 500 || 
-                                   processedBuffer.includes('[[') || 
-                                   processedBuffer.includes(']]') ||
-                                   processedBuffer.includes('\n');
-
-      if (shouldRunExpensiveOps) {
-        // Single pass for all image patterns - fixed to avoid catching HTML links
-        processedBuffer = processedBuffer.replace(
-          /(?<!<[^>]*)\b(https?:\/\/[^\s<>]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s<>]*)?)\b(?![^<]*>)/gi,
-          function (match, url) {
-            // Quick check to avoid double-processing
-            if (processedBuffer.includes(`![Image](${url})`)) return match;
-            return `![Image](${url})`;
-          }
-        );
-
-        // Handle standalone image filenames (not in HTML context)
-        processedBuffer = processedBuffer.replace(
-          /(?<!<[^>]*|href=["']|src=["'])\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[a-zA-Z0-9=&_.-]+)?)\b(?![^<]*>|["'])/gi,
-          function (match, filename) {
-            // Skip if already processed or looks like part of a URL
-            if (processedBuffer.includes(`![Image](${filename})`) || processedBuffer.includes(`/${filename}`)) return match;
-            return `![Image](${filename})`;
-          }
-        );
-
-        // Only run Unicode regex for document files when we detect file extensions
-        if (/\.(pdf|docx?|xlsx?|pptx?|zip|rar|txt)\b/i.test(processedBuffer)) {
-          const docExtensions = ['pdf', 'docx', 'doc', 'xlsx', 'xls', 'ppt', 'pptx', 'zip', 'rar', 'txt'];
-          const docExtRegex = new RegExp(`(?<!\\]\\()\\b((?:[\\p{L}\\d\\s.,%()-_]+\\/)*[\\p{L}\\d\\s.,%()-_]+\\.(?:${docExtensions.join('|')}))\\b`, 'giu');
-          
-          processedBuffer = processedBuffer.replace(docExtRegex, (match, url) => {
-            // Quick check to avoid double-processing
-            if (processedBuffer.includes(`[${url}](`)) return match;
-            return `[${url}](${url})`;
-          });
-        }
-
-        // Process special sections only when markers are present
-        if (processedBuffer.includes('[[')) {
-          processedBuffer = processedBuffer
-            .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, (match, content) => {
-              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
-            })
-            .replace(/\[\[Database_Sources_Start\]\]([\s\S]*)\[\[Database_Sources_End\]\]/g, (match, content) => {
-              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
-            })
-            .replace(/\[\[Web_Search_Sources_Start\]\]([\s\S]*?)\[\[Web_Search_Sources_End\]\]/g, (match, content) => {
-              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+      // Post-process buffer to handle various image URL patterns and fix URL encoding issues
+      
+      // First, let's fix any broken URL encoding that might be causing issues with links
+      // This is particularly important for PDF links and other document links
+      buffer = buffer.replace(/\[([^\]]+)\]\(([^)]*%[^)]*)\)/g, function(match, linkText, url) {
+        // If URL contains % encoding, try to decode it properly
+        let cleanUrl = url.trim();
+        if (cleanUrl.includes('%')) {
+          cleanUrl = decodeUrlSafely(cleanUrl);
+          if (trace.payload?.debugMode === 1) {
+            console.log("🔗 URL DECODE: Fixed encoded URL in buffer:", {
+              original: url,
+              cleaned: cleanUrl,
+              linkText: linkText
             });
+          }
         }
+        return `[${linkText}](${cleanUrl})`;
+      });
 
-        // Consolidated markdown processing - single pass for most operations
-        processedBuffer = processedBuffer
-          // Clean up empty elements first
-          .replace(/<p>\s*<\/p>/g, '')
-          .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
-          .replace(/<\/div>\s*\n/g, '</div>')
-          // Headers - consolidated patterns
-          .replace(/^(\s*)#{1,5}\s+(.+?)$/gm, (match, spaces, content) => {
-            const level = match.match(/#{1,5}/)[0].length;
-            return `<h${level}>${content}</h${level}>`;
-          })
-          // Fallback header patterns
-          .replace(/##\s*([^#\n\r]+)/g, "<h2>$1</h2>")
-          .replace(/#\s+([^\n\r]+)/g, "<h1>$1</h1>")
-          // Images: Convert markdown to HTML
-          .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
-            const cleanUrl = url.trim().replace(/^http:\/\//i, "https://");
-            const altText = alt ? alt.trim() : "";
-            return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
-          })
-          // Text formatting
-          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-          .replace(/`([^`]+)`/g, "<code>$1</code>")
-          // Line separators
-          .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
-          // Links (after image processing)
-          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-          // Lists - simplified processing
-          .replace(/^[\*\-] (.+)$/gm, "<li>$1</li>")
-          .replace(/^\s{2,}[\*\-] (.+)$/gm, '<li class="sublist">$1</li>')
-          // Wrap consecutive list items
-          .replace(/(<li.*?<\/li>)(\s*<li.*?<\/li>)*/g, '<ul>$&</ul>')
-          .replace(/<\/ul>\s*<ul>/g, '');
+      // Pattern 1: Complete URLs with image extensions (including query parameters)
+      buffer = buffer.replace(
+        /\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?)\b/gi,
+        function (match, imageUrl) {
+          // Skip if already in markdown or HTML format
+          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+          if (
+            beforeMatch.includes("![") &&
+            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
+          ) {
+            return match;
+          }
+          if (beforeMatch.includes("<img")) {
+            return match;
+          }
+          return `![Image](${imageUrl})`;
+        },
+      );
 
-        // Only do table processing if we detect table markers
-        if (processedBuffer.includes('|')) {
-          processedBuffer = processedBuffer.replace(
-            /(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm,
-            function (match) {
-              const tableContent = match.trim();
-              const rows = tableContent.split("\n").filter((row) => row.trim());
-              if (rows.length < 2) return match;
+      // Pattern 2: Image filenames with query parameters (e.g., DSC_6532.jpg?tok=xyz)
+      buffer = buffer.replace(
+        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_.-]+)\b/gi,
+        function (match, imageUrl) {
+          // Skip if already in markdown or HTML format
+          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+          if (
+            beforeMatch.includes("![") &&
+            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
+          ) {
+            return match;
+          }
+          if (beforeMatch.includes("<img")) {
+            return match;
+          }
+          return `![Image](${imageUrl})`;
+        },
+      );
 
-              let tableHtml = '<table class="markdown-table">';
-              let headerProcessed = false;
+      // Pattern 3: Standalone image filenames (without query params)
+      buffer = buffer.replace(
+        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi,
+        function (match, filename) {
+          // Skip if already in markdown or HTML format
+          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+          if (
+            beforeMatch.includes("![") &&
+            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
+          ) {
+            return match;
+          }
+          if (beforeMatch.includes("<img")) {
+            return match;
+          }
+          // Skip if this looks like it might be part of a larger URL
+          const contextBefore = buffer.substring(
+            Math.max(0, buffer.indexOf(match) - 10),
+            buffer.indexOf(match),
+          );
+          const contextAfter = buffer.substring(
+            buffer.indexOf(match) + match.length,
+            buffer.indexOf(match) + match.length + 10,
+          );
+          if (contextBefore.includes("?") || contextAfter.match(/^[\?=&]/)) {
+            return match; // Skip fragments that will be processed by other patterns
+          }
+          return `![Image](${filename})`;
+        },
+      );
 
-              rows.forEach((row, rowIndex) => {
-                const trimmedRow = row.trim();
-                if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) return;
 
-                tableHtml += "<tr>";
-                const cells = trimmedRow.startsWith("|") && trimmedRow.endsWith("|") 
-                  ? trimmedRow.slice(1, -1).split("|") 
-                  : trimmedRow.split("|");
+      
+      // Special handling for streaming content - process only complete elements
+      let processBuffer = buffer;
+      
+      // If buffer doesn't end with newline and contains incomplete header, delay processing
+      if (buffer.includes('##') && !buffer.endsWith('\n') && !buffer.endsWith('\r\n')) {
+        const lines = buffer.split(/\r?\n/);
+        const lastLine = lines[lines.length - 1];
+        
+        // If last line looks like incomplete header, process only complete lines
+        if (lastLine.includes('##') && lastLine.length < 100) {
+          // Process all but the last line
+          processBuffer = lines.slice(0, -1).join('\n') + (lines.length > 1 ? '\n' : '');
+        }
+      }
+      
+      // Handle incomplete markdown links - delay processing if link appears incomplete
+      if (buffer.includes('[') && buffer.includes('](') && !buffer.endsWith(')')) {
+        // Check if we have an incomplete link at the end
+        const linkStart = buffer.lastIndexOf('[');
+        const linkMiddle = buffer.lastIndexOf('](', linkStart);
+        
+        if (linkStart !== -1 && linkMiddle !== -1 && linkMiddle > linkStart) {
+          // We have an incomplete link, process everything up to the link start
+          const beforeLink = buffer.substring(0, linkStart);
+          const afterLink = buffer.substring(linkStart);
+          
+          // Only delay if the link looks like it's being streamed and is very short or ends mid-URL
+          // But be more permissive with Czech websites that may have longer encoded URLs
+          if (afterLink.includes('%') && afterLink.length - linkStart < 30 && !afterLink.includes('stredoceskykraj.cz')) {
+            processBuffer = beforeLink;
+            if (trace.payload?.debugMode === 1) {
+              console.log("🔗 DELAY: Incomplete link detected, delaying processing:", afterLink.substring(0, 50) + "...");
+            }
+          }
+        }
+      }
 
-                cells.forEach((cell) => {
-                  const cellContent = cell.trim();
-                  const cellTag = !headerProcessed && rowIndex === 0 ? "th" : "td";
-                  tableHtml += `<${cellTag}>${cellContent}</${cellTag}>`;
-                });
+      // First, process special tags and basic formatting
+      let initialProcessedContent = processBuffer
+        // Process POSTUP tags FIRST to avoid conflicts with other formatting
+        .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
+          // Apply formatting to the content within POSTUP sections
+          const formattedContent = content.trim()
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .map(line => {
+              // Process markdown links in the content
+              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                let cleanUrl = url.trim();
+                if (cleanUrl.includes('%')) {
+                  cleanUrl = decodeUrlSafely(cleanUrl);
+                }
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+              });
+            })
+            .join('<br>\n');
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
+        })
+        // Process Database Sources tags - handle both paired and standalone end markers
+        .replace(/\[\[Database_Sources_Start\]\]([\s\S]*?)\[\[Database_Sources_End\]\]/g, function(match, content) {
+          // Apply markdown formatting to the content within Database Sources
+          const formattedContent = content.trim()
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .join('<br>\n');
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
+        })
+        // Handle standalone Database_Sources_End markers - wrap citations after the marker
+        // Process each citation individually to avoid packing them together
+        .replace(/\[\[Database_Sources_End\]\]([\s\S]*)/g, function(match, content) {
+          if (content.trim()) {
+            if (trace.payload?.debugMode === 1) {
+              console.log("🗄️ Database_Sources_End processing:", {
+                matchLength: match.length,
+                contentLength: content.length,
+                contentPreview: content.substring(0, 200) + (content.length > 200 ? "..." : ""),
+                contentLines: content.split('\n').length
+              });
+            }
+            
+            // Process the content to handle citations properly
+            // Split into lines and process each line that contains citations
+            const lines = content.split('\n');
+            const processedLines = [];
+            
+            for (let line of lines) {
+              line = line.trim();
+              if (line) {
+                // Check if line contains citations (numbers in brackets)
+                if (line.match(/\[\d+\]/)) {
+                  // Process markdown links in citations
+                  line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                    let cleanUrl = url.trim();
+                    if (cleanUrl.includes('%')) {
+                      cleanUrl = decodeUrlSafely(cleanUrl);
+                    }
+                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+                  });
+                }
+                processedLines.push(line);
+              }
+            }
+            
+            const processedContent = processedLines.join('<br>\n');
+            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${processedContent}</div></div>`;
+          }
+          return '';
+        })
+        // Process Web Search Sources tags
+        .replace(/\[\[Web_Search_Sources_Start\]\]([\s\S]*?)\[\[Web_Search_Sources_End\]\]/g, function(match, content) {
+          // Apply formatting to the content within Web Search Sources
+          const formattedContent = content.trim()
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .map(line => {
+              // Process markdown links in the content
+              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                let cleanUrl = url.trim();
+                if (cleanUrl.includes('%')) {
+                  cleanUrl = decodeUrlSafely(cleanUrl);
+                }
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+              });
+            })
+            .join('<br>\n');
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
+        })
+        // Remove empty paragraphs and extra whitespace around thinking sections
+        .replace(/<p>\s*<\/p>/g, '')
+        .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
+        .replace(/<\/div>\s*\n/g, '</div>')
+        // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
+          // Clean and validate the URL
+          let cleanUrl = url.trim();
 
-                if (!headerProcessed && rowIndex === 0) headerProcessed = true;
-                tableHtml += "</tr>";
+          // Convert HTTP to HTTPS if it's a full URL starting with http://
+          if (cleanUrl.match(/^http:\/\//i)) {
+            cleanUrl = cleanUrl.replace(/^http:\/\//i, "https://");
+          }
+
+          // Use alt text if provided, otherwise use empty string
+          const altText = alt ? alt.trim() : "";
+
+          if (trace.payload?.debugMode === 1) {
+            console.log("Converting markdown image to HTML:", {
+              original: match,
+              cleanUrl,
+              altText,
+            });
+          }
+
+          return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
+        })
+        // Line separators (three or more hyphens)
+        .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />');
+        
+      // Use the improved markdownToHtml function
+      const cleanedMarkdown = initialProcessedContent
+        .trim()
+        .replace(/^\s+/gm, '') // Remove leading spaces from each line
+        .replace(/\n{3,}/g, '\n\n'); // Clean up excessive newlines but preserve double newlines for paragraphs
+      
+      // Split content into lines for better processing
+      const lines = cleanedMarkdown.split('\n');
+      const processedLines = [];
+      let currentList = null;
+      let isInParagraph = false;
+      let lastLineWasHeader = false;
+      let consecutiveEmptyLines = 0;
+      
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        const nextLine = i < lines.length - 1 ? lines[i + 1].trim() : '';
+        const isCurrentLineHeader = line.startsWith('#');
+        const isNextLineHeader = nextLine.startsWith('#');
+        
+        // Handle blockquotes
+        if (line.startsWith('> ')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<blockquote><p>${line.slice(2).trim()}</p></blockquote>`);
+          lastLineWasHeader = false;
+          continue;
+        }
+        
+        // Handle headers
+        if (line.startsWith('###')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<h3>${line.slice(3).trim()}</h3>`);
+          lastLineWasHeader = true;
+          continue;
+        }
+        if (line.startsWith('##')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<h2>${line.slice(2).trim()}</h2>`);
+          lastLineWasHeader = true;
+          continue;
+        }
+        if (line.startsWith('#')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<h1>${line.slice(1).trim()}</h1>`);
+          lastLineWasHeader = true;
+          continue;
+        }
+        
+        // Handle lists
+        const orderedListMatch = line.match(/^\d+\.\s+(.+)/);
+        const unorderedListMatch = line.match(/^[-*+]\s+(.+)/);
+        
+        if (orderedListMatch || unorderedListMatch) {
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          
+          const listContent = (orderedListMatch || unorderedListMatch)[1];
+          const listType = orderedListMatch ? 'ol' : 'ul';
+          
+          if (!currentList) {
+            currentList = { type: listType };
+            // Add a newline before list only if previous line wasn't a header
+            if (!lastLineWasHeader && processedLines.length > 0) {
+              processedLines.push('');
+            }
+            processedLines.push(`<${listType}>`);
+          } else if (currentList.type !== listType) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = { type: listType };
+            processedLines.push(`<${listType}>`);
+          }
+          
+          processedLines.push(`<li>${listContent}</li>`);
+          lastLineWasHeader = false;
+          continue;
+        }
+        
+        // Close list if we're not in a list item anymore
+        if (currentList && line && !line.match(/^([-*+]|\d+\.)\s/)) {
+          processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+          currentList = null;
+        }
+        
+        // Handle empty lines and paragraphs
+        if (line === '') {
+          consecutiveEmptyLines++;
+          
+          // Handle empty lines - these should create paragraph breaks or line breaks
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          
+          // Only add line break if we haven't already added one (avoid multiple consecutive line breaks)
+          if (consecutiveEmptyLines === 1) {
+            processedLines.push('<br>');
+          }
+          
+          lastLineWasHeader = false;
+        } else if (line) {
+          consecutiveEmptyLines = 0;
+          // Handle non-empty lines
+          if (!isInParagraph) {
+            // Add a newline before paragraph only if previous line wasn't a header
+            if (!lastLineWasHeader && processedLines.length > 0 && !isCurrentLineHeader) {
+              processedLines.push('');
+            }
+            processedLines.push('<p>');
+            isInParagraph = true;
+          }
+          processedLines.push(line);
+          lastLineWasHeader = false;
+        }
+      }
+      
+      // Close any open tags
+      if (currentList) {
+        processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+      }
+      if (isInParagraph) {
+        processedLines.push('</p>');
+      }
+      
+      // Join lines and apply remaining markdown formatting
+      const formattedContent = processedLines.join('\n')
+        // Bold
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Italic
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Code
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+        // Links - improved processing for streaming content
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+          // Check if this is a complete link (not broken by streaming)
+          const trimmedUrl = url.trim();
+          
+          // Skip processing if URL looks incomplete due to streaming
+          // Only skip if URL is very short (less than 3 chars) or obviously incomplete
+          if (trimmedUrl.length < 3) {
+            return match; // Return as-is for now, will be processed later
+          }
+          
+          // Clean up URL encoding and ensure proper format
+          let cleanUrl = trimmedUrl;
+          if (cleanUrl.includes('%')) {
+            cleanUrl = decodeUrlSafely(cleanUrl);
+          }
+          
+          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+        })
+        // Tables - Improved processing for markdown tables
+        .replace(
+          /(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm,
+          function (match) {
+            // Clean up the match and split into lines
+            const tableContent = match.trim();
+            const rows = tableContent.split("\n").filter((row) => row.trim());
+
+            // Check if this is really a table (at least 2 rows: header + separator)
+            if (rows.length < 2) return match;
+
+            let tableHtml = '<table class="markdown-table">\n';
+            let headerProcessed = false;
+
+            // Process each row
+            rows.forEach((row, rowIndex) => {
+              const trimmedRow = row.trim();
+
+              // Skip the separator row (contains only dashes, spaces, pipes, and colons)
+              if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) {
+                return;
+              }
+
+              // Start the row
+              tableHtml += "  <tr>\n";
+
+              // Extract cells - handle pipes that might be at start/end
+              let cells;
+              if (trimmedRow.startsWith("|") && trimmedRow.endsWith("|")) {
+                cells = trimmedRow.slice(1, -1).split("|");
+              } else {
+                cells = trimmedRow.split("|");
+              }
+
+              // Process each cell
+              cells.forEach((cell) => {
+                const cellContent = cell.trim();
+                // First row (after potential separator) is header
+                const cellTag =
+                  !headerProcessed && rowIndex === 0 ? "th" : "td";
+                tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
               });
 
-              return tableHtml + "</table>";
-            }
-          );
-        }
-      }
+              // Mark header as processed after first actual content row
+              if (!headerProcessed && rowIndex === 0) {
+                headerProcessed = true;
+              }
 
-      // Process file citations in the processed content
-      const htmlWithCitations = processFileCitations(processedBuffer);
+              // End the row
+              tableHtml += "  </tr>\n";
+            });
+
+            // End the table
+            tableHtml += "</table>";
+            return tableHtml;
+          },
+        )
+        // Clean up any extra newlines between elements and improve spacing
+        .replace(/>\n</g, '>\n<')
+        .replace(/<br>\s*<br>/g, '<br>') // Remove duplicate line breaks
+        .replace(/<\/p>\s*<br>/g, '</p>') // Remove unnecessary line breaks after paragraphs
+        .replace(/<br>\s*<p>/g, '<p>') // Remove unnecessary line breaks before paragraphs
+        .replace(/<\/h[1-6]>\s*<br>/g, function(match) {
+          return match.replace('<br>', ''); // Remove line breaks after headers
+        })
+        .replace(/<\/ul>\s*<br>/g, '</ul>') // Remove line breaks after lists
+        .replace(/<\/ol>\s*<br>/g, '</ol>') // Remove line breaks after lists
+        .trim();
+
+
+
+      // --- BEGIN: Post-process HTML and clean up empty items ---
+      const tempContainer = document.createElement("div");
+      tempContainer.innerHTML = formattedContent;
       
-      // Update content with formatting
+      // Clean up empty list items
+      const listItems = tempContainer.querySelectorAll("ol > li, ul > li");
+      listItems.forEach((li) => {
+        const contentCheck = li.innerHTML.trim();
+        if (contentCheck === "" || contentCheck === "<br>") {
+          // Check if it's truly empty, not containing other important tags
+          if (!li.querySelector("a, img, code, strong, em, ul, ol")) {
+            li.remove();
+          }
+        }
+      });
+
+      // Remove any potentially empty OL/UL tags left after cleaning LIs
+      tempContainer.querySelectorAll("ol, ul").forEach((list) => {
+        if (!list.hasChildNodes()) {
+          list.remove();
+        }
+      });
+
+      // Clean up empty paragraphs that contain only whitespace or br tags
+      tempContainer.querySelectorAll("p").forEach((p) => {
+        const content = p.innerHTML.trim();
+        if (content === "" || content === "<br>" || content === "<br/>") {
+          p.remove();
+        }
+      });
+
+      // Remove excessive consecutive br tags
+      tempContainer.querySelectorAll("br").forEach((br) => {
+        let nextSibling = br.nextSibling;
+        let consecutiveBrs = 0;
+        
+        while (nextSibling && nextSibling.nodeType === 1 && nextSibling.tagName === "BR") {
+          consecutiveBrs++;
+          let toRemove = nextSibling;
+          nextSibling = nextSibling.nextSibling;
+          if (consecutiveBrs > 1) { // Allow max 2 consecutive br tags
+            toRemove.remove();
+          }
+        }
+      });
+
+      const cleanedHtml = tempContainer.innerHTML;
+      // --- END: Post-process HTML and clean up empty items ---
+
+
+
+      // Process file citations in the cleaned HTML
+      const htmlWithCitations = processFileCitations(cleanedHtml);
+      
+      // Update content with formatting using the processed HTML
       responseContent.innerHTML = htmlWithCitations;
 
-      // Add handlers only when needed
-      if (htmlWithCitations.includes('citation-link')) {
-        addUrlPreviewHandlers();
-        addCitationLinkHandlers();
-      }
+      // Add URL preview functionality for citation links (from PerplexityExtension)
+      addUrlPreviewHandlers();
+      
+      // Add citation link handlers
+      addCitationLinkHandlers();
 
-      // Optimized scroll handling
+      // Scroll handling
       const scrollContainer = findScrollableParent(element);
       if (scrollContainer) {
-        const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-        const isNearBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= maxScroll - 100;
+        const maxScroll =
+          scrollContainer.scrollHeight - scrollContainer.clientHeight;
+        const isNearBottom =
+          scrollContainer.scrollTop + scrollContainer.clientHeight >=
+          maxScroll - 100;
+
         if (isNearBottom) {
-          scrollContainer.scrollTo({ top: scrollContainer.scrollHeight, behavior: "smooth" });
+          scrollContainer.scrollTo({
+            top: scrollContainer.scrollHeight,
+            behavior: "smooth",
+          });
         }
       }
     }
@@ -2399,6 +2945,7 @@ export const StreamingResponseExtension = {
             function (match) {
               const tableContent = match.trim();
               const rows = tableContent.split("\n").filter((row) => row.trim());
+
               if (rows.length < 2) return match;
 
               let tableHtml = '<table class="markdown-table">\n';
@@ -2408,7 +2955,9 @@ export const StreamingResponseExtension = {
                 const trimmedRow = row.trim();
 
                 // Skip separator row
-                if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) return;
+                if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) {
+                  return;
+                }
 
                 tableHtml += "  <tr>\n";
 
@@ -3212,6 +3761,54 @@ export const StreamingResponseExtension = {
           console.log("🔍 FINALIZE: Processing remaining buffer content");
         }
         updateContent(''); // Trigger final processing with complete buffer
+      }
+      
+      // Final pass to process any remaining incomplete links
+      if (responseContent) {
+        let finalContent = responseContent.innerHTML;
+        
+        // Process any remaining incomplete markdown links with more aggressive URL decoding
+        finalContent = finalContent.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+          let cleanUrl = url.trim();
+          
+          // More aggressive URL decoding for final processing
+          if (cleanUrl.includes('%')) {
+            cleanUrl = decodeUrlSafely(cleanUrl);
+            if (trace.payload?.debugMode === 1) {
+              console.log("🔗 FINALIZE: Decoded URL:", {
+                original: url,
+                cleaned: cleanUrl,
+                linkText: linkText
+              });
+            }
+          }
+          
+          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+        });
+        
+        // Also process any remaining broken URLs in the text that might not be in markdown format
+        finalContent = finalContent.replace(/href="([^"]*%[^"]*)"/g, function(match, url) {
+          let cleanUrl = url.trim();
+          if (cleanUrl.includes('%')) {
+            cleanUrl = decodeUrlSafely(cleanUrl);
+            if (trace.payload?.debugMode === 1) {
+              console.log("🔗 FINALIZE: Fixed href URL:", {
+                original: url,
+                cleaned: cleanUrl
+              });
+            }
+          }
+          return `href="${cleanUrl}"`;
+        });
+        
+        // Update the content if changes were made
+        if (finalContent !== responseContent.innerHTML) {
+          responseContent.innerHTML = finalContent;
+          
+          if (trace.payload?.debugMode === 1) {
+            console.log("🔗 FINALIZE: Processed remaining links");
+          }
+        }
       }
     }
 
