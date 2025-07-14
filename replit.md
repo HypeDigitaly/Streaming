@@ -27,6 +27,13 @@ Preferred communication style: Simple, everyday language.
 - **Improved thinking section styling**: Updated Database Sources, Web Search Sources, and POSTUP sections with better URL handling
 - **Added CSS word wrapping**: Enhanced ai-thinking-content styles to prevent text overflow in Voiceflow UI
 
+### January 14, 2025 - Enhanced Multi-Level URL Decoding
+- **Iterative URL decoding**: Implemented recursive decoding that handles multiple levels of URL encoding (e.g., `%20` → ` `)
+- **Manual fallback decoding**: Added comprehensive manual character replacement for Czech characters and special symbols
+- **Debug logging**: Added detailed logging to track URL decoding process and identify encoding issues
+- **Infinite loop protection**: Added safety limits to prevent infinite decoding loops
+- **Improved file link handling**: Better processing of heavily encoded file identifiers in Database Sources
+
 These changes address the formatting issues in the Voiceflow UI where line breaks and empty lines were not displaying properly, and fix the URL encoding and overflow issues in the Database Sources section, making the content more readable and visually appealing.
 
 ## System Architecture

@@ -1,0 +1,259 @@
+ Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+ Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+ voiceflow webchat v2.92.1
+ Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2465)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+q @ bundle.mjs:55
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 16000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-XALnHgRdHBiWyuKaj8xLLw\",\"filename\":\"Usneseni_rady_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.833905397287131,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/usneseni-rady\",\"title\":\"Usnesení rady - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:09:20.600139\"},\"content\":[{\"type\":\"text\",\"text\":\"1559(2025), formát pdf, velikost 133 KB\\\")\\r\\n\\r\\nDatum jednání: **26. 6. 2025**, číslo: **24/2025**\\r\\n\\r\\nČíslo usnesení: **010-24/2025/RK**\\r\\n\\r\\nPředmět: **Rozpočtová úprava č. 330/03/2025 – navýšení běžných výdajů kapitoly 03 – Informatika, převodem finančních prostředků z kapitoly 23 – Ostatní, Rezerva Středočeského kraje**\\r\\n\\r\\n[010-24/2025/RK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=ffed11e2-5b7c-cd4a-357e-ac7e6d374956 \\\"Stáhnout soubor 010-24/2025/RK, formát pdf, velikost 83 KB\\\")[Rozpočtová úprava č. 330/03/2025](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=02da7eb9-fb35-edc5-dbf2-0749fd01394c \\\"Stáhnout soubor Rozpočtová úprava č. 330/03/2025, formát xls, velikost 33 KB\\\")[EO_Tisk č. 1554(2025)](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=4340f03d-910d-9675-112d-919d2b7d592e \\\"Stáhnout soubor EO_Tisk č. 1554(2025), formát pdf, velikost 124 KB\\\")\\r\\n\\r\\nDatum jednání: **26. 6. 2025**, číslo: **24/2025**\\r\\n\\r\\nČíslo usnesení: **011-24/2025/RK**\\r\\n\\r\\nPředmět: **Limity běžných výdajů kapitol pro sestavení rozpočtu Středočeského kraje na rok 2026**\\r\\n\\r\\n[011-24/2025/RK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=1e2bce64-a476-69bb-8c89-62da558f8c76 \\\"Stáhnout soubor 011-24/2025/RK, formát pdf, velikost 91 KB\\\")[DZ Tisk č. (2025)](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=2432d7ce-3576-352f-d92c-f3c1b073fb5c \\\"Stáhnout soubor DZ Tisk č. (2025), formát doc, velikost 102 KB\\\")[Příloha č.\"}]},{\"file_id\":\"file-3Srs3dFMA9B2QUfLqomxVV\",\"filename\":\"Usneseni_a_zapisy_Zastupitelstva_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.822457663169066,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/usneseni-zastupitelstva\",\"title\":\"Usnesení a zápisy Zastupitelstva - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:10:13.908302\"},\"content\":[{\"type\":\"text\",\"text\":\"formát pdf, velikost 75 KB\\\")\\r\\n\\r\\nDatum jednání: **09.06.2025**, číslo: **5/2025**\\r\\n\\r\\nČíslo usnesení: **007-05/2025/ZK**\\r\\n\\r\\nPředmět: **Změna ve složení Výboru pro tělovýchovu a sport Zastupitelstva Středočeského kraje**\\r\\n\\r\\n[007-05/2025/ZK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=b8dca730-2d96-6bb5-43e7-887d235ff4ed \\\"Stáhnout soubor 007-05/2025/ZK, formát pdf, velikost 71 KB\\\")\\r\\n\\r\\nDatum jednání: **09.06.2025**, číslo: **5/2025**\\r\\n\\r\\nČíslo usnesení: **008-05/2025/ZK**\\r\\n\\r\\nPředmět: **Změny ve složení výborů Zastupitelstva Středočeského kraje**\\r\\n\\r\\n[008-05/2025/ZK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=f07f04e1-89f4-aa83-2f4d-8761998b95db \\\"Stáhnout soubor 008-05/2025/ZK, formát pdf, velikost 77 KB\\\")\\r\\n\\r\\nDatum jednání: **09.06.2025**, číslo: **5/2025**\\r\\n\\r\\nČíslo usnesení: **009-05/2025/ZK**\\r\\n\\r\\nPředmět: **Změna ve smlouvě k Usnesení č. 006-04/2025/ZK ze dne 31.3.2025, Rozpočtová úprava č. 141/01/2024 – převod finančních prostředků z kapitoly 23 – Ostatní, Rezerva SK do kapitoly 01 – Činnost Zastupitelstva, k poskytnutí finančního daru neziskové organizaci**\\r\\n\\r\\n[009-05/2025/ZK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=ef361877-dc08-e37f-443f-156575dc179a \\\"Stáhnout soubor 009-05/2025/ZK, formát pdf, velikost 74 KB\\\")[př. 1 původní návrh smlouvy](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=bad35a3a-241f-6312-b74b-b95f50b51067 \\\"Stáhnout soubor př. 1 původní návrh smlouvy, formát pdf, velikost 662 KB\\\")[př.\"}]},{\"file_id\":\"file-3Srs3dFMA9B2QUfLqomxVV\",\"filename\":\"Usneseni_a_zapisy_Zastupitelstva_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8189931782482024,\"attributes\":{\"source_url\":\"https://stredoceskykra
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #F9D2D3
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 20,4,1
+ 📋 Parsed IDs: [20,4,1]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+ 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+ 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+ =============================
+ 
+🔄 ATTEMPT 1/3: Using model ID:20
+ 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Endpoint: /api/openrouter-stream
+ 📌 Status: STARTING REQUEST
+ 📦 Payload for /api/openrouter-stream: Object
+ �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ ✅ First chunk received from /api/openrouter-stream within timeout.
+ TTFT met for /api/openrouter-stream. Waiting for stream completion...
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:1750 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:1750 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:1750 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:1750 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:1750 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3330 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3478 📤 Updating Voiceflow variable with response length: 12996
+StreamingResponseExtension.js:3500 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3503 Voiceflow update response: Object
+StreamingResponseExtension.js:3741 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3742 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3743 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3744 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3745 📌 Attempt: 1/3
+StreamingResponseExtension.js:3748 =============================
+StreamingResponseExtension.js:3823 🔍 FINALIZE: Processing remaining buffer content
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 16000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-TCz3yWAm89UDtoStZvtrbu\",\"filename\":\"Doprava_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.7658476325742042,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/doprava3\",\"title\":\"Doprava - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:20:45.703818\"},\"content\":[{\"type\":\"text\",\"text\":\"Úzká vazba s hlavním městem a hustá dopravní síť činí kraj z hlediska dopravy mimořádně významným. Přes jeho území vedou historicky radiálně uspořádané hlavní železniční tratě i silniční tranzitní sítě. Své zastoupení zde má i vodní doprava. Přibližně třemi čtvrtinami své délky vede Středočeským krajem také labsko-vltavská cesta, kterou jako jedinou v republice využívá vnitrostátní i mezinárodní lodní doprava.\\r\\n\\r\\nVeřejnou dopravu zajišťuje ve středních Čechách přes 700 autobusových linek a přes 1700 vlakových spojů na 50 železničních tratích.\\r\\n\\r\\nStředočeský kraj ve spolupráci s Prahou zahájil jednání vedoucí k vytvoření jednotného integrovaného dopravního systému. Cestujícím by měl přinést následující výhody: jednotný tarif, jednotný jízdní doklad pro veškeré integrované spoje, zjednodušení plateb, jednotný a efektivní informační systém, sjednocené standardy kvality apod. S rostoucí atraktivitou systému bude i tendence zkracovat intervaly mezi spoji a dobu čekání mezi přípojnými spoji, budovat více zastávek a nasazovat nízkopodlažní spoje. Organizátorem veřejné dopravy na území Středočeského kraje je příspěvková organizace Integrovaná doprava Středočeského kraje (IDSK).\\r\\n\\r\\nV rámci zvýšení úrovně železniční dopravy právě probíhá rekonstrukce mezinárodních železničních koridorů. Také se postupně pracuje na projektech rozvoje příměstské kolejové dopravy, mezi které patří např. výstavba nových železničních zastávek, modernizace hlavních železničních koridorů a v dlouhodobém časovém horizontu např. výstavba železniční trati mezi Prahou a Kladnem s napojením na letiště Václava Havla v Praze Ruzyni, či rychlého železničního spojení Prahy, Mladé Boleslavi a Liberce.\\r\\n\\r\\nStředočeský kraj usiluje o snížení ekologické zátěže.\"}]},{\"file_id\":\"file-6pKv8YbmStBJDiBU3nnTHJ\",\"filename\":\"Verejna_doprava_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.7588230800824672,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/verejna-doprava1\",\"title\":\"Veřejná doprava - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T11:52:47.884020\"},\"content\":[{\"type\":\"text\",\"text\":\"cz/web/urad/verejna-doprava)\\r\\n\\r\\nRozcestník informací\\r\\n--------------------\\r\\n\\r\\n[### **Integrovaná doprava Středočeského kraje, p.o.** Organizátor veřejné dopravy Středočeského kraje](https://www.idsk.cz/)[### **Veřejná doprava, jízdní řády - stížnosti, připomínky** Přímé vyřízení dotazů a stížností.](https://idsk.cz/kontakty)[### **Pražská integrovaná doprava** Změny v dopravě, výluky, jízdní řády, tarif](https://pid.cz/)[### **PID Lítačka** Předplatné a krátkodobé jízdenky](https://app.pidlitacka.cz/)[### **Bezbariérová přeprava** Speciální doprava osob se sníženou schopností pohybu a orientace](https://www.bezba.cz/)[### **Aktuální poloha spojů** Poloha autobusových spojů podle GPS](https://mapa.pid.cz/)[### **Parkoviště P+R** Záchytná parkoviště na území Středočeského kraje](https://stredoceskykraj.cz/web/odbor-verejne-mobility/p-r)[### **Cyklodoprava** Krajská cyklodoprava a mapa cyklokoncepce.](https://www.stredoceskykraj.cz/web/odbor-verejne-mobility/cyklodoprava)[### **Cykloturistika** Tipy na výlet](https://www.strednicechy.cz/tipy-na-vylety/)[### **Výběrové řízení zajištění dopravní obslužnosti - autobusová doprava.** Informace o výběrových řízeních.](https://stredoceskykraj.cz/web/odbor-verejne-mobility/vyberove-rizeni)[### **Veřejná mobilita** Prezentace a studie](https://stredoceskykraj.cz/web/odbor-verejne-mobility/test)\\r\\n\\r\\nKontakty\\r\\n--------\\r\\n\\r\\n[### Kontaktní osoby odboru veřejné mobility](https://www.stredoceskykraj.cz/web/urad/seznam-kontaktu#/490)\\r\\n\\r\\nDOPRAVNÍ OBSLUŽNOST STŘEDOČESKÉHO KRAJE\\r\\n---------------------------------------\\r\\n\\r\\nDopravní obslužnost Středočeského kraje tvoří především páteřní železniční doprava s návazností na regionální autobusovou dopravu.\\r\\n\\r\\nOrganizaci dopravy na území Středočeského kraje je pověřená společnost INTEGROVANÁ DOPRAVA STŘEDOČESKÉHO KRAJE, příspěvková organizace.\"}]},{\"file_id\":\"file-KKjXWGuCXwQjXRtLmvS2oK\",\"filename\":\"Verejna_doprava_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kra
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3579 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3580 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3581 📋 Raw sequence: 20,4,1
+StreamingResponseExtension.js:3584 📋 Parsed IDs: [20,4,1]
+StreamingResponseExtension.js:3587 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3589 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+StreamingResponseExtension.js:3589 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3589 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3591 =============================
+StreamingResponseExtension.js:3617 
+🔄 ATTEMPT 1/3: Using model ID:20
+StreamingResponseExtension.js:3620 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3621 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3622 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3623 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3264 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:3273 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3375 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:3524 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3347 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3330 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3478 📤 Updating Voiceflow variable with response length: 3496
+StreamingResponseExtension.js:3500 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3503 Voiceflow update response: Object
+StreamingResponseExtension.js:3741 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3742 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3743 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3744 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3745 📌 Attempt: 1/3
+StreamingResponseExtension.js:3748 =============================

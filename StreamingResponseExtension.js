@@ -1598,84 +1598,130 @@ export const StreamingResponseExtension = {
     // Function to add citation link handlers
     // Function to decode URL-encoded Czech characters
     function decodeUrlSafely(url) {
+      if (trace.payload?.debugMode === 1) {
+        console.log('🔗 URL DECODE: Starting decode for:', url);
+      }
+      
       try {
-        // First try standard decoding
-        let decodedUrl = decodeURIComponent(url);
+        // First try standard decoding - keep decoding until no more changes
+        let decodedUrl = url;
+        let previousUrl = '';
+        let attempts = 0;
+        const maxAttempts = 10; // Prevent infinite loops
         
-        // If successful, try one more round of decoding in case of double encoding
-        try {
-          const doubleDecoded = decodeURIComponent(decodedUrl);
-          // Only use double decoded if it's significantly different (indicates double encoding)
-          if (doubleDecoded !== decodedUrl && doubleDecoded.length > decodedUrl.length) {
-            decodedUrl = doubleDecoded;
+        while (decodedUrl !== previousUrl && attempts < maxAttempts) {
+          previousUrl = decodedUrl;
+          try {
+            const nextDecoded = decodeURIComponent(decodedUrl);
+            if (nextDecoded !== decodedUrl) {
+              decodedUrl = nextDecoded;
+              attempts++;
+              if (trace.payload?.debugMode === 1) {
+                console.log(`🔗 URL DECODE: Attempt ${attempts}:`, decodedUrl);
+              }
+            } else {
+              break;
+            }
+          } catch (e) {
+            // If decoding fails, try manual character replacement
+            if (trace.payload?.debugMode === 1) {
+              console.log('🔗 URL DECODE: decodeURIComponent failed, trying manual:', e.message);
+            }
+            break;
           }
-        } catch (e) {
-          // Single decoding worked, double decoding failed - keep single
+        }
+        
+        if (trace.payload?.debugMode === 1) {
+          console.log('🔗 URL DECODE: Final result:', decodedUrl);
         }
         
         return decodedUrl;
       } catch (e) {
         // If standard decoding fails, try manual fixes for common encoded characters
-        return url
-          .replace(/%20/g, ' ')
-          .replace(/%C4%8D/g, 'č')
-          .replace(/%C4%8C/g, 'Č')
-          .replace(/%C5%99/g, 'ř')
-          .replace(/%C5%98/g, 'Ř')
-          .replace(/%C3%A1/g, 'á')
-          .replace(/%C3%81/g, 'Á')
-          .replace(/%C3%AD/g, 'í')
-          .replace(/%C3%8D/g, 'Í')
-          .replace(/%C3%A9/g, 'é')
-          .replace(/%C3%89/g, 'É')
-          .replace(/%C5%A1/g, 'š')
-          .replace(/%C5%A0/g, 'Š')
-          .replace(/%C5%BE/g, 'ž')
-          .replace(/%C5%BD/g, 'Ž')
-          .replace(/%C3%BD/g, 'ý')
-          .replace(/%C3%9D/g, 'Ý')
-          .replace(/%C4%9B/g, 'ě')
-          .replace(/%C4%9A/g, 'Ě')
-          .replace(/%C5%AF/g, 'ů')
-          .replace(/%C5%AE/g, 'Ů')
-          .replace(/%C3%BA/g, 'ú')
-          .replace(/%C3%9A/g, 'Ú')
-          .replace(/%C5%88/g, 'ň')
-          .replace(/%C5%87/g, 'Ň')
-          .replace(/%C4%8F/g, 'ď')
-          .replace(/%C4%8E/g, 'Ď')
-          .replace(/%C5%A5/g, 'ť')
-          .replace(/%C5%A4/g, 'Ť')
-          .replace(/%C3%B3/g, 'ó')
-          .replace(/%C3%93/g, 'Ó')
-          .replace(/%2F/g, '/')
-          .replace(/%3F/g, '?')
-          .replace(/%3D/g, '=')
-          .replace(/%26/g, '&')
-          .replace(/%2E/g, '.')
-          .replace(/%2D/g, '-')
-          .replace(/%5F/g, '_')
-          .replace(/%28/g, '(')
-          .replace(/%29/g, ')')
-          .replace(/%3A/g, ':')
-          .replace(/%5C/g, '\\')
-          .replace(/%22/g, '"')
-          .replace(/%27/g, "'")
-          .replace(/%2B/g, '+')
-          .replace(/%2C/g, ',')
-          .replace(/%3B/g, ';')
-          .replace(/%40/g, '@')
-          .replace(/%23/g, '#')
-          .replace(/%24/g, '$')
-          .replace(/%25/g, '%')
-          .replace(/%5E/g, '^')
-          .replace(/%60/g, '`')
-          .replace(/%7B/g, '{')
-          .replace(/%7D/g, '}')
-          .replace(/%5B/g, '[')
-          .replace(/%5D/g, ']')
-          .replace(/%7C/g, '|')
-          .replace(/%7E/g, '~');
+        if (trace.payload?.debugMode === 1) {
+          console.log('🔗 URL DECODE: Starting manual decode for:', url);
+        }
+        
+        let manualDecoded = url;
+        let previousManual = '';
+        let attempts = 0;
+        const maxAttempts = 10; // Prevent infinite loops
+        
+        // Keep applying manual decoding until no more changes occur
+        while (manualDecoded !== previousManual && attempts < maxAttempts) {
+          previousManual = manualDecoded;
+          manualDecoded = manualDecoded
+            .replace(/%20/g, ' ')
+            .replace(/%C4%8D/g, 'č')
+            .replace(/%C4%8C/g, 'Č')
+            .replace(/%C5%99/g, 'ř')
+            .replace(/%C5%98/g, 'Ř')
+            .replace(/%C3%A1/g, 'á')
+            .replace(/%C3%81/g, 'Á')
+            .replace(/%C3%AD/g, 'í')
+            .replace(/%C3%8D/g, 'Í')
+            .replace(/%C3%A9/g, 'é')
+            .replace(/%C3%89/g, 'É')
+            .replace(/%C5%A1/g, 'š')
+            .replace(/%C5%A0/g, 'Š')
+            .replace(/%C5%BE/g, 'ž')
+            .replace(/%C5%BD/g, 'Ž')
+            .replace(/%C3%BD/g, 'ý')
+            .replace(/%C3%9D/g, 'Ý')
+            .replace(/%C4%9B/g, 'ě')
+            .replace(/%C4%9A/g, 'Ě')
+            .replace(/%C5%AF/g, 'ů')
+            .replace(/%C5%AE/g, 'Ů')
+            .replace(/%C3%BA/g, 'ú')
+            .replace(/%C3%9A/g, 'Ú')
+            .replace(/%C5%88/g, 'ň')
+            .replace(/%C5%87/g, 'Ň')
+            .replace(/%C4%8F/g, 'ď')
+            .replace(/%C4%8E/g, 'Ď')
+            .replace(/%C5%A5/g, 'ť')
+            .replace(/%C5%A4/g, 'Ť')
+            .replace(/%C3%B3/g, 'ó')
+            .replace(/%C3%93/g, 'Ó')
+            .replace(/%2F/g, '/')
+            .replace(/%3F/g, '?')
+            .replace(/%3D/g, '=')
+            .replace(/%26/g, '&')
+            .replace(/%2E/g, '.')
+            .replace(/%2D/g, '-')
+            .replace(/%5F/g, '_')
+            .replace(/%28/g, '(')
+            .replace(/%29/g, ')')
+            .replace(/%3A/g, ':')
+            .replace(/%5C/g, '\\')
+            .replace(/%22/g, '"')
+            .replace(/%27/g, "'")
+            .replace(/%2B/g, '+')
+            .replace(/%2C/g, ',')
+            .replace(/%3B/g, ';')
+            .replace(/%40/g, '@')
+            .replace(/%23/g, '#')
+            .replace(/%24/g, '$')
+            .replace(/%25/g, '%')
+            .replace(/%5E/g, '^')
+            .replace(/%60/g, '`')
+            .replace(/%7B/g, '{')
+            .replace(/%7D/g, '}')
+            .replace(/%5B/g, '[')
+            .replace(/%5D/g, ']')
+            .replace(/%7C/g, '|')
+            .replace(/%7E/g, '~');
+          attempts++;
+          
+          if (trace.payload?.debugMode === 1) {
+            console.log(`🔗 URL DECODE: Manual attempt ${attempts}:`, manualDecoded);
+          }
+        }
+        
+        if (trace.payload?.debugMode === 1) {
+          console.log('🔗 URL DECODE: Final manual result:', manualDecoded);
+        }
+        
+        return manualDecoded;
       }
     }
 
