@@ -10,6 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Major Markdown to HTML Conversion Improvements (January 2025)
+- **Complete Markdown Parser Rewrite**: Replaced the complex regex-based markdown processing with a robust line-by-line parser
+- **Fixed Empty Line Handling**: Empty lines (\n) now properly convert to paragraph breaks instead of interfering with other HTML elements
+- **Fixed Bullet Point Processing**: Bullet points (-,*,+) and numbered lists (1.,2.,3.) now properly wrap in `<ul>` and `<ol>` tags
+- **Fixed Link Processing**: Markdown links `[text](url)` now correctly convert to `<a href="url" target="_blank">text</a>`
+- **Multi-Level List Support**: Added proper support for nested lists with indentation
+- **Header Processing**: Improved handling of headers (#, ##, ###) to prevent conflicts with other formatting
+- **Paragraph Management**: Added proper paragraph wrapping with `<p>` tags that don't interfere with lists and headers
+
 ### HTML Formatting Improvements (January 2025)
 - **Line Break Handling**: Fixed empty lines \n not being formatted correctly into HTML by adding proper newline-to-br conversion
 - **Database Section End Marking**: Fixed database section end markers to properly format all citations after `[[Database_Sources_End]]` marker, not just the first one

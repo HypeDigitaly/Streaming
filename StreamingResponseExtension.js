@@ -1730,17 +1730,154 @@ export const StreamingResponseExtension = {
 
           return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
-        // Bold formatting only (AFTER image processing to prevent URL corruption)
+        // Convert regular markdown links to HTML links (MUST be done BEFORE other text processing)
+        .replace(
+          /\[([^\]]+)\]\(([^)]+)\)/g,
+          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
+        )
+        // Bold formatting (AFTER image and link processing to prevent URL corruption)
         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Double asterisks for bold
-        // Line separators (three or more hyphens)
-        .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
-        // List items
-        .replace(/^\* (.*$)/gm, "<li>$1</li>")
-        .replace(/^- (.*$)/gm, "<li>$1</li>")
-        .replace(/^\s{2}- (.*$)/gm, '<li class="sublist">$1</li>')
-        .replace(/^\\d+\\.\\s+(.*$)/gm, "<li>$1</li>")
+        // Italic formatting
+        .replace(/\*(.*?)\*/g, "<em>$1</em>") // Single asterisks for italic
         // Code
         .replace(/`([^`]+)`/g, "<code>$1</code>")
+        // Line separators (three or more hyphens)
+        .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
+        // Apply improved line-by-line processing for better markdown handling
+        
+      // Use the improved markdownToHtml function
+      const cleanedMarkdown = processBuffer
+        .trim()
+        .replace(/^\s+/gm, '') // Remove leading spaces from each line
+        .replace(/\n{3,}/g, '\n\n'); // Clean up excessive newlines
+      
+      // Split content into lines for better processing
+      const lines = cleanedMarkdown.split('\n');
+      const processedLines = [];
+      let currentList = null;
+      let isInParagraph = false;
+      let lastLineWasHeader = false;
+      
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        const nextLine = i < lines.length - 1 ? lines[i + 1].trim() : '';
+        const isCurrentLineHeader = line.startsWith('#');
+        const isNextLineHeader = nextLine.startsWith('#');
+        
+        // Handle headers
+        if (line.startsWith('###')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<h3>${line.slice(3).trim()}</h3>`);
+          lastLineWasHeader = true;
+          continue;
+        }
+        if (line.startsWith('##')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<h2>${line.slice(2).trim()}</h2>`);
+          lastLineWasHeader = true;
+          continue;
+        }
+        if (line.startsWith('#')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<h1>${line.slice(1).trim()}</h1>`);
+          lastLineWasHeader = true;
+          continue;
+        }
+        
+        // Handle lists
+        const orderedListMatch = line.match(/^\d+\.\s+(.+)/);
+        const unorderedListMatch = line.match(/^[-*+]\s+(.+)/);
+        
+        if (orderedListMatch || unorderedListMatch) {
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          
+          const listContent = (orderedListMatch || unorderedListMatch)[1];
+          const listType = orderedListMatch ? 'ol' : 'ul';
+          
+          if (!currentList) {
+            currentList = { type: listType };
+            // Add a newline before list only if previous line wasn't a header
+            if (!lastLineWasHeader && processedLines.length > 0) {
+              processedLines.push('');
+            }
+            processedLines.push(`<${listType}>`);
+          } else if (currentList.type !== listType) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = { type: listType };
+            processedLines.push(`<${listType}>`);
+          }
+          
+          processedLines.push(`<li>${listContent}</li>`);
+          lastLineWasHeader = false;
+          continue;
+        }
+        
+        // Close list if we're not in a list item anymore
+        if (currentList && line && !line.match(/^([-*+]|\d+\.)\s/)) {
+          processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+          currentList = null;
+        }
+        
+        // Handle paragraphs
+        if (line) {
+          if (!isInParagraph) {
+            // Add a newline before paragraph only if previous line wasn't a header
+            if (!lastLineWasHeader && processedLines.length > 0 && !isCurrentLineHeader) {
+              processedLines.push('');
+            }
+            processedLines.push('<p>');
+            isInParagraph = true;
+          }
+          processedLines.push(line);
+          lastLineWasHeader = false;
+        } else if (isInParagraph) {
+          processedLines.push('</p>');
+          isInParagraph = false;
+        }
+      }
+      
+      // Close any open tags
+      if (currentList) {
+        processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+      }
+      if (isInParagraph) {
+        processedLines.push('</p>');
+      }
+      
+      // Join lines and apply remaining markdown formatting
+      const formattedContent = processedLines.join('\n')
+        // Bold
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Italic
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Code
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+        // Links
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         // Tables - Improved processing for markdown tables
         .replace(
           /(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm,
@@ -1798,81 +1935,20 @@ export const StreamingResponseExtension = {
             return tableHtml;
           },
         )
-        // Convert regular markdown links to HTML links (AFTER image processing)
-        .replace(
-          /\[([^\]]+)\]\(([^)]+)\)/g,
-          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
-        )
-        .replace(/^- (.*$)/gm, (match, content) => {
-          const indentation = match.match(/^\s*/)[0].length;
-          return `<li class="${indentation > 0 ? "sublist" : ""}">${content.trim()}</li>`;
-        })
-        .replace(/(?:^|\n)(<li)/g, "\n<ul>$1")
-        .replace(/(<\/li>)(?:\n(?!<li)|$)/g, "$1</ul>")
-        // Convert line breaks to HTML - handle empty lines and single line breaks more carefully
-        .replace(/\n\n+/g, '<br><br>') // Double+ newlines become double line breaks
-        .replace(/\n/g, '<br>') // Single newlines become line breaks
-        .replace(/<br><br><br>+/g, '<br><br>'); // Clean up excessive line breaks
+        // Clean up any extra newlines between elements
+        .replace(/>\n</g, '>\n<')
+        .trim();
 
 
 
-      // --- BEGIN: Post-process lists and clean up empty items ---
+      // --- BEGIN: Post-process HTML and clean up empty items ---
       const tempContainer = document.createElement("div");
-      // Use DOMParser for potentially cleaner initial parsing if needed, but innerHTML is often sufficient
       tempContainer.innerHTML = formattedContent;
-
-      // Function to wrap consecutive LIs
-      function wrapListItems(listType /* 'ol' or 'ul' */) {
-        const items = tempContainer.querySelectorAll("li"); // Get all LIs
-        let currentList = null;
-
-        items.forEach((li, index) => {
-          // Rough heuristic: Check if it looks like a numbered list item was intended
-          // This relies on the number potentially being left as text by the simple regex
-          const looksNumbered = /^\\d+\\.\\s*/.test(li.textContent.trim());
-          const targetListType = looksNumbered ? "ol" : "ul";
-
-          // Only process items matching the current function call type (ol or ul)
-          if (targetListType !== listType) return;
-
-          // Skip items already inside a list (e.g., nested lists - handle later if needed)
-          if (
-            li.parentElement.tagName === "OL" ||
-            li.parentElement.tagName === "UL"
-          ) {
-            currentList = null; // Reset sequence if we encounter an already nested item
-            return;
-          }
-
-          const prevSibling = li.previousElementSibling;
-
-          // Start a new list if needed
-          if (
-            !currentList ||
-            !prevSibling ||
-            prevSibling.tagName !== "LI" ||
-            prevSibling.parentElement.tagName !== listType.toUpperCase()
-          ) {
-            currentList = document.createElement(listType);
-            li.parentNode.insertBefore(currentList, li);
-          }
-
-          // Move the li into the current list
-          if (currentList) {
-            currentList.appendChild(li);
-          }
-        });
-      }
-
-      // Wrap OL items first, then UL items
-      wrapListItems("ol");
-      wrapListItems("ul");
-
-      // Clean up empty numbered list items (modified check)
+      
+      // Clean up empty list items
       const listItems = tempContainer.querySelectorAll("ol > li, ul > li");
       listItems.forEach((li) => {
-        // Check if the list item is effectively empty or just a marker
-        const contentCheck = li.innerHTML.replace(/^\\d+\\.\\s*/, "").trim(); // Remove number marker for check
+        const contentCheck = li.innerHTML.trim();
         if (contentCheck === "" || contentCheck === "<br>") {
           // Check if it's truly empty, not containing other important tags
           if (!li.querySelector("a, img, code, strong, em, ul, ol")) {
@@ -1889,7 +1965,7 @@ export const StreamingResponseExtension = {
       });
 
       const cleanedHtml = tempContainer.innerHTML;
-      // --- END: Post-process lists and clean up empty items ---
+      // --- END: Post-process HTML and clean up empty items ---
 
 
 
