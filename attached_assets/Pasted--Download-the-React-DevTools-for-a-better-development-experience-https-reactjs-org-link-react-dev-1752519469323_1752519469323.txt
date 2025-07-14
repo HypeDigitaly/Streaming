@@ -1,0 +1,179 @@
+ Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+ Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+ voiceflow webchat v2.92.1
+ Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2465)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+q @ bundle.mjs:55
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "20,5,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-EDzK1m3vAshHkLbcA722bB\",\"filename\":\"Uredni_deska_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.5589350847703547,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/uredni-deska\",\"title\":\"Úřední deska - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:26:17.092823\"},\"content\":[{\"type\":\"text\",\"text\":\"formát pdf, velikost 277 KB\\\") | 097300/2025/KUSK OSŽPS/LAŠ |\\r\\n| [VPS Kladno a Lidice (změna) vyvěšení na úřední desku](https://stredoceskykraj.cz/web/urad/uredni-deska#) Vyvěšeno: **od 09.07.2025 do 24.07.2025** | Vystavil: **Krajský úřad Středočeského kraje, IČ:70891095** [**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=caf1bedc-9b48-8952-3680-e454b8c4f252 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Lidice_A_, formát pdf, velikost 113 KB\\\")[**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=caf1bedc-9b48-8952-3680-e454b8c4f252 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Lidice_A_, formát pdf, velikost 113 KB\\\") | 097288/2025/KUSK OSŽPS/LAŠ |\\r\\n| [VPS Kladno a Svinařov (změna) vyvěšení na úřední desku](https://stredoceskykraj.cz/web/urad/uredni-deska#) Vyvěšeno: **od 09.07.2025 do 24.07.2025** | Vystavil: **Krajský úřad Středočeskéhoe kraje** [**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=de486a0b-7a55-5950-3aad-eb0051fbf2da \\\"Stáhnout soubor Dohoda_-_Kladno_a_Svinarov_A_, formát pdf, velikost 317 KB\\\")[**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=de486a0b-7a55-5950-3aad-eb0051fbf2da \\\"Stáhnout soubor Dohoda_-_Kladno_a_Svinarov_A_, formát pdf, velikost 317 KB\\\") | 097281/2025/KUSK OSŽPS/LAŠ |\\r\\n\\r\\nZobrazeno 1 až 15 z celkem 6985 záznamů \\r\\n\\r\\nPočet záznamů na stránce:\\r\\n\\r\\n1 2 3 4 5…466\\r\\n\\r\\n**Zákon č.\"}]},{\"file_id\":\"file-EsDRgT4TaGGA9jxqKrWNAt\",\"filename\":\"Odbory_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.46822339690616466,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/odbory\",\"title\":\"Odbory - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:26:27.599576\"},\"content\":[{\"type\":\"text\",\"text\":\"cz/web/odbor-legislativne-pravni/krajsky-investor)[### Odbor správní a krajský živnostenský úřad](https://stredoceskykraj.cz/web/odbor-spravni-a-krajsky-zivnostensky-urad/cleneni-odboru)[### Odbor personální](https://stredoceskykraj.cz/web/odbor-personalni/personalni)[### Oddělení interního auditu](https://stredoceskykraj.cz/web/urad/seznam-kontaktu#/542)\\r\\n\\r\\n* * *\\r\\n\\r\\nSekce finanční a majetková\\r\\n--------------------------\\r\\n\\r\\n### Zástupce ředitele - sekce finanční a majetková\\r\\n\\r\\n[### Odbor kontroly](https://stredoceskykraj.cz/web/odbor-kontroly/kontrola)[### Odbor finanční](https://stredoceskykraj.cz/web/odbor-financni/finance)[### Oddělení hospodářské správy](https://stredoceskykraj.cz/web/urad/seznam-kontaktu#/150)[### Odbor řízení dotačních projektů](https://stredoceskykraj.cz/web/odbor-rizeni-dotacnich-projektu/dotacni-projekty)[### Odbor majetku](https://stredoceskykraj.cz/web/odbor-majetku/odbor-majetku)\\r\\n\\r\\n* * *\\r\\n\\r\\nSekce veřejných služeb\\r\\n----------------------\\r\\n\\r\\n### Zástupce ředitele - sekce veřejných služeb\\r\\n\\r\\n[### Odbor dopravy](https://stredoceskykraj.cz/web/doprava/doprava)[### Odbor kultury a památkové péče](https://stredoceskykraj.cz/web/odbor-kultury-a-pamatkove-pece/kultura-a-pamatkova-pece)[### Odbor sociálních věcí](https://stredoceskykraj.cz/web/socialni-oblast/odbor-socialni-veci)[### Odbor školství](https://stredoceskykraj.cz/web/skolstvi/skolstvi)[### Odbor územního plánování a krajský stavební úřad](https://stredoceskykraj.cz/web/odbor-uzemni-planovani-a-krajsky-stavebni-rad/odbor_uzemni-planovani-a-krajsky-stavebni-urad)[### Odbor veřejné mobility](https://stredoceskykraj.cz/web/odbor-verejne-mobility/odbor-verejne-mobility1)[### Odbor zdravotnictví](https://stredoceskykraj.cz/web/zdravotnictvi/zdravotnictvi)[### Odbor životního prostředí a zemědělství](https://stredoceskykraj.cz/web/zivotni-prostredi/zivotni-prostredi-a-zemedelstvi)\\r\\n\\r\\nSkrytá\"}]},{\"file_id\":\"file-EsDRgT4TaGGA9jxqKrWNAt\",\"filename\":\"Odbory_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.4291640361760378,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/odbory\",\"title\":\"Odb
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #F9D2D3
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 20,5,4,1
+ 📋 Parsed IDs: [20,5,4,1]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+ 📌 Position 1: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+ 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+ 📌 Position 3: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+ =============================
+ 
+🔄 ATTEMPT 1/4: Using model ID:20
+ 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Endpoint: /api/openrouter-stream
+ 📌 Status: STARTING REQUEST
+ 📦 Payload for /api/openrouter-stream: Object
+ �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ ✅ First chunk received from /api/openrouter-stream within timeout.
+ TTFT met for /api/openrouter-stream. Waiting for stream completion...
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ [DONE] received for /api/openrouter-stream.
+ 📤 Updating Voiceflow variable with response length: 1177
+ ✅ Voiceflow update attempted successfully.
+ Voiceflow update response: Object
+ 
+✅ SUCCESS: MODEL ID:20
+ 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3519 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3520 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3521 📌 Attempt: 1/4
+StreamingResponseExtension.js:3524 =============================
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "20,5,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-5hy6wFHgazSGNATMV6JCpT\",\"filename\":\"Organizacni_struktura_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.9397502026187842,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/organizacni-struktura\",\"title\":\"Organizační struktura - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:26:02.331810\"},\"content\":[{\"type\":\"text\",\"text\":\"Mezi jeho agendu patří zejména plnění usnesení zastupitelstva a rady, vydávání vnitřních předpisů krajského úřadu po schválení radou či zastupitelstvem a plnění funkce zaměstnavatele vůči zaměstnancům krajského úřadu. V době výkonu funkce nesmí vykonávat funkce v politických stranách a hnutích. Zodpovědný je hejtmance.\\r\\n\\r\\n[Více](https://stredoceskykraj.cz/web/urad/organizacni-struktura#)[Méně](https://stredoceskykraj.cz/web/urad/organizacni-struktura#)\\r\\n\\r\\n| Jméno | Funkce | Telefon | E-mail | Místnost |\\r\\n| --- | --- | --- | --- | --- |\\r\\n| Mgr. Louška Jan | ředitel krajského úřadu | [257280495](tel:257280495)[](tel:) | [louska@kr-s.cz](mailto:louska@kr-s.cz) | 3025A |\\r\\n| Mgr. Jelínková Renáta | organizační pracovník | [257280986](tel:257280986) [725985914](tel:725985914) | [jelinkova@kr-s.cz](mailto:jelinkova@kr-s.cz) | 3026 |\\r\\n| Bc. DiS., MPA Šulcová Jana | organizační pracovník | [257280239](tel:257280239)[](tel:) | [sulcovaj@kr-s.cz](mailto:sulcovaj@kr-s.cz) | 3026 |\\r\\n\\r\\nOdbor bezpečnosti a krizového řízení (OBŘ)| Jméno | Funkce | Telefon | E-mail | Místnost |\\r\\n| --- | --- | --- | --- | --- |\\r\\n| Mgr. Sviták Roman | vedoucí Odboru bezpečnosti a krizového řízení | [257280586](tel:257280586) [702168124](tel:702168124) | [svitak@kr-s.cz](mailto:svitak@kr-s.cz) | 0075 |\\r\\n| DiS. Jochová Lenka | ekonom | [257280456](tel:257280456) [607050649](tel:607050649) | [jochoval@kr-s.cz](mailto:jochoval@kr-s.cz) | 5022 |\\r\\n| Nýdecká Monika | organizační pracovník | [257280119](tel:257280119) [724187424](tel:724187424) | [nydecka@kr-s.cz](mailto:nydecka@kr-s.cz) | 0074 |\\r\\n\\r\\noddělení krizového řízení (OBŘKŘ)| Jméno | Funkce | Telefon | E-mail | Místnost |\\r\\n| --- | --- | --- | --- | --- |\\r\\n| Ing.\"}]},{\"file_id\":\"file-5hy6wFHgazSGNATMV6JCpT\",\"filename\":\"Organizacni_struktura_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.9378402132529932,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/organizacni-struktura\",\"title\":\"Organizační struktura - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:26:02.331810\"},\"content\":[{\"type\":\"text\",\"text\":\"cz/web/urad/organizacni-struktura#/113)\\r\\n            *   [oddělení ochrany ovzduší](https://stredoceskykraj.cz/web/urad/organizacni-struktura#/123)\\r\\n            *   [oddělení vodního hospodářství](https://stredoceskykraj.cz/web/urad/organizacni-struktura#/141)\\r\\n            *   [oddělení zemědělství a lesnictví](https://stredoceskykraj.cz/web/urad/organizacni-struktura#/190)\\r\\n            *   [oddělení řízení projektů v oblasti životního prostředí](https://stredoceskykraj.cz/web/urad/organizacni-struktura#/192)\\r\\n            *   [oddělení jednotného environmentálního stanoviska](https://stredoceskykraj.cz/web/urad/organizacni-struktura#/554)\\r\\n\\r\\nŘEDITEL KRAJSKÉHO ÚŘADU (ŘÚ)\\r\\n----------------------------\\r\\n\\r\\nŘeditel krajského úřadu řídí Krajský úřad v souladu s § 69 zákona o krajích č. 129/2000 Sb. v platném znění. Je nadřízený všem zaměstnancům krajského úřadu a kontroluje jejich činnost. Mezi jeho agendu patří zejména plnění usnesení zastupitelstva a rady, vydávání vnitřních předpisů krajského úřadu po schválení radou či zastupitelstvem a plnění funkce zaměstnavatele vůči zaměstnancům krajského úřadu. V době výkonu funkce nesmí vykonávat funkce v politických stranách a hnutích. Zodpovědný je hejtmance.\\r\\n\\r\\n[Více](https://stredoceskykraj.cz/web/urad/organizacni-struktura#)[Méně](https://stredoceskykraj.cz/web/urad/organizacni-struktura#)\\r\\n\\r\\n| Jméno | Funkce | Telefon | E-mail | Místnost |\\r\\n| --- | --- | --- | --- | --- |\\r\\n| Mgr. Louška Jan | ředitel krajského úřadu | [257280495](tel:257280495)[](tel:) | [louska@kr-s.cz](mailto:louska@kr-s.cz) | 3025A |\\r\\n| Mgr. Jelínková Renáta | organizační pracovník | [257280986](tel:257280986) [725985914](tel:725985914) | [jelinkova@kr-s.cz](mailto:jelinkova@kr-s.cz) | 3026 |\\r\\n| Bc.\"}]},{\"file_id\":\"file-5hy6wFHgazSGNATMV6JCpT\",\"filename\":\"Organizacni_struktura_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.87968973899
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3355 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3356 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3357 📋 Raw sequence: 20,5,4,1
+StreamingResponseExtension.js:3360 📋 Parsed IDs: [20,5,4,1]
+StreamingResponseExtension.js:3363 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3365 📌 Position 0: ID:20 | Gemini 2.5 Flash (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+StreamingResponseExtension.js:3365 📌 Position 1: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+StreamingResponseExtension.js:3365 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3365 📌 Position 3: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3367 =============================
+StreamingResponseExtension.js:3393 
+🔄 ATTEMPT 1/4: Using model ID:20
+StreamingResponseExtension.js:3396 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3397 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3398 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3399 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3040 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:3049 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3151 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:3300 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3106 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3254 📤 Updating Voiceflow variable with response length: 289
+StreamingResponseExtension.js:3276 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3279 Voiceflow update response: Object
+StreamingResponseExtension.js:3517 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3518 📌 Model: Gemini 2.5 Flash (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3519 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3520 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3521 📌 Attempt: 1/4
+StreamingResponseExtension.js:3524 =============================
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "1,4",
+  "max_tokens": 300,
+  "temperature": 0,
+  "userData": "\n**User Query Language**: Detect and match the language of \"kolik je krajů v čr?\n\n\"\n**User Question:** \"kolik je krajů v čr?\" - \"kolik je krajů v čr?\n\n\"\n\n**User Question Type:** \"OTHER\"\n\n## AI Assistant / Widget Attributes variables (Don't reveal unless explicitely requested):\n* **\"Message Count\":** \"3 / 2000\"\n\n# YOUR SOLE TASK: Address the nature of the User Question, by adhering to Response Protocol Based on User Question Type, WITHOUT PROVIDING any specific or external information.\n\n## Response Protocol Based on User Question Type:\n- **SWEARS**: Warn user about language standards, then shift focus to random Středočeský kraj region topics and ask how you can assist.\n- **OTHER**: Inform the user that the User Question is off-topic and guide them toward random Středočeský kraj region topics.\n\n**IMPORTANT**: Always respond in the SAME language as the user's query.\n",
+  "systemPrompt": "\n# Středočeský kraj Regional AI Assistant \n\n### LANGUAGE DETERMINATION (MANDATORY FIRST STEP)**\n**🌐 CRITICAL LANGUAGE PROTOCOL - Execute BEFORE all other processing:**\n\n1. **Translation Request Detection** - Scan \"Original User Query\" and \"Optimized Query\" for explicit translation patterns:\n   - **Czech patterns**: \"přelož*\", \"překlad*\", \"v [jazyk]\", \"do [jazyk]\", \"[jazyk] verze\"\n   - **English patterns**: \"translate*\", \"translation*\", \"in [language]\", \"to [language]\", \"[language] version\"\n   - **Common language indicators**: \"angličtina/English\", \"polština/Polish\", \"němčina/German\", \"slovenština/Slovak\", \"ukrajinština/Ukrainian\"\n\n2. **Target Language Extraction**:\n   - **IF translation request detected**: Extract target language from request\n   - **IF no translation request**: Auto-detect from \"Original User Query\" language - **ONLY SUPPORTED LANGUAGES**: čeština/Czech, angličtina/English, polština/Polish, němčina/German, slovenština/Slovak, ukrajinština/Ukrainian\n\n3. **Language Lock**: Set determined language for ENTIRE response (reasoning + body + sources)\n\n4. **🚨 MANDATORY**: Store determined language for consistent application across all subsequent steps\n\n5. **🌐 MULTILINGUAL CAPABILITY RESPONSE**: When user asks about chatbot's language capabilities, respond that the chatbot is multilingual/vícejazyčný and supports ONLY these languages: polština/Polish, němčina/German, slovenština/Slovak, ukrajinština/Ukrainian, čeština/Czech\n\n**🚨 UNSUPPORTED LANGUAGE HANDLING**: If user queries in unsupported language, respond in Czech explaining supported languages only.\n\n**NO GREETINGS/FORMALITIES**: NEVER include greetings, welcome messages, thank you messages, or introductions (e.g., \"Dobrý den\", \"Hello\", \"Thank you\") as you are in the MIDDLE of an ongoing conversation. Jump directly to the content.\n\n- **Name:** \"Středobot\"\n- **Gender:** Man / Male-stylized AI assistant\n- **Brand Identity:** Created by Středočeský kraj's Regional Office and its redaction team & with HypeDigitaly's help (your creators).\n- **Tone of voice:** Mythical, Ancient, Proffesional\n\n## 5. Special Queries\n### Your attributes as AI chatbot/widget:\n- **Name:** Středobot (Official AI Assistant for Středočeský kraj)\n- **Gender:** Male/Man/Mužsky stylizovaný AI asistent\n- **Purpose:** Středočeský kraj Regional Office AI\n- **Creator:** [HypeDigitaly](https://hypedigitaly.ai) | Technický ředitel a jednatel Pavel Čermák (pavelcermak@hypedigitaly.ai) | Obchodní ředitelka a jednatelka Miroslava Čermáková (cermakova@hypedigitaly.ai), odbor digitalizace krajského úřadu\n- **Creators/Developer**: [HypeDigitaly](https://hypedigitaly.ai) from Ústí nad Labem (Phone: +420 774 996 248 | Email: info@hypedigitaly.ai)\n- **GDPR Compliance**: Fully EU (AI Act) & GDPR compliant. [GDPR Policy](https://stredoceskykraj.cz/web/odbor-bezpecnosti-a-krizoveho-rizeni/gdpr). [HypeDigitaly Privacy Policy](https://hypedigitaly.ai/privacy-policy)\n- **Help/Topics**: Direct to \"❓\" icon\n- **Human Assistance**: Encourage specifying person/department for contact info\n- **Language**: Multilingual support (cs, en, de, uk, pl, sk). Response language automatically matches user's query language\n- **Chat Controls**: Desktop: downward arrow icon. Mobile: X icon. Restart: counterclockwise arrow icon\n\n### AI Assistant Inquiries / Buying Interest / Creators Recommendation**: \n- If user express interest in you / chatbot / AI solution, or \"User Question\" is related to AI assistant / yourself in any way, shape or form => you must recommend company HypeDigitaly s.r.o. (SW company that built you) => \"Contact [HypeDigitaly](https://hypedigitaly.ai) from Ústí nad Labem (link formatted per Core Operational Principle 3), or its technical director Pavel Čermák (Phone: +420 774 996 248 | Email: pavelcermak@hypedigitaly.ai).\"\n\n\n## Response Protocol\n\n1. **User Question Type**:\n    - **SWEARS**: Politely warn against inappropriate language and prompt a focus on Středočeský kraj region topics.\n    - **OTHER**: Inform the user that the question is off-topic and guide them toward Středočeský kraj region topics.\n\n2. **Response Guidelines**:\n    - **Language**: Respond in the SAME language as user's query (cs, en, de, uk, pl supported)\n    - **Style**: Direct, concise, bullet-pointed for readability\n    - **Max Length**: 300 characters\n    - **No Formalities**: NEVER include greetings, welcome messages, thank you messages, or introductions\n    - **Numerical Accuracy**: Never perform mathematical operations; use only explicitly stated numbers from sources\n    - **Final Check**: Ensure response is in the SAME language as user's query and contains NO formalities before output\n\n3. **Additional Rules**:\n    - For vague queries, ask for more context.\n    - Jump directly to content - you are mid-conversation.\n    - **🚨 NUMERICAL ACCURACY & MATHEMATICAL OPERATIONS PROHIBITION**: ABSOLUTELY FORBIDDEN to perform ANY mathematical operations (addition, subtraction, multiplication, division, percentages, averages, totals, comparisons, counting, or any other calculations). NEVER count, calculate, or generate numerical values. Use ONLY numbers that are explicitly and clearly stated in provided data sources. If precise counts are needed but not available in sources, use descriptive language instead (\"několik\", \"více\", \"seznam\"). Numbers themselves are permitted when directly found in sources, but NO mathematical operations with them are allowed under any circumstances.\n    \n---\n# Top Středočeský kraj Region Topics to Recommend / Encourage\n1. **Contact information (Regional office employees)**\n2. **Region characteristics**\n3. **Administrative Affairs**\n4. **Transportation**\n5. **Other region-related topics/inquiries**\n---\n\n## **Středočeský kraj region & Regional Office reputation protection:** Zero tolerance for any kind of reputation assault attempts directed to Středočeský kraj region or Regional Office.\n",
+  "projectName": "SCK",
+  "debugMode": 1,
+  "user_id": "hlms3lo10y5mrj61na6fd06x",
+  "lang": "cs",
+  "reasoningBgColour": "#F9D2D3"
+}
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3355 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3356 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3357 📋 Raw sequence: 1,4
+StreamingResponseExtension.js:3360 📋 Parsed IDs: [1,4]
+StreamingResponseExtension.js:3363 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3365 📌 Position 0: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3365 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3367 =============================
+StreamingResponseExtension.js:3393 
+🔄 ATTEMPT 1/2: Using model ID:1
+StreamingResponseExtension.js:3396 📌 Model: Claude 4 Sonnet (claude)
+StreamingResponseExtension.js:3397 📌 Model name: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3398 📌 Endpoint: /api/claude-stream
+StreamingResponseExtension.js:3399 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3040 📦 Payload for /api/claude-stream: Object
+StreamingResponseExtension.js:3049 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/claude-stream with TTFT 10000ms
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3151 ✅ First chunk received from /api/claude-stream within timeout.
+StreamingResponseExtension.js:3300 TTFT met for /api/claude-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3106 [DONE] received for /api/claude-stream.
+StreamingResponseExtension.js:3254 📤 Updating Voiceflow variable with response length: 493
+StreamingResponseExtension.js:3276 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3279 Voiceflow update response: Object
+StreamingResponseExtension.js:3517 
+✅ SUCCESS: MODEL ID:1
+StreamingResponseExtension.js:3518 📌 Model: Claude 4 Sonnet (claude)
+StreamingResponseExtension.js:3519 📌 Model name: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3520 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3521 📌 Attempt: 1/2
+StreamingResponseExtension.js:3524 =============================
