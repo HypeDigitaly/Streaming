@@ -1861,6 +1861,16 @@ export const StreamingResponseExtension = {
                 if (cleanUrl.includes('%')) {
                   cleanUrl = decodeUrlSafely(cleanUrl);
                 }
+                
+                // Ensure URL has proper protocol
+                if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://') && !cleanUrl.startsWith('mailto:')) {
+                  if (cleanUrl.includes('@')) {
+                    cleanUrl = 'mailto:' + cleanUrl;
+                  } else {
+                    cleanUrl = 'https://' + cleanUrl;
+                  }
+                }
+                
                 return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
               });
             })
@@ -1874,6 +1884,26 @@ export const StreamingResponseExtension = {
             .split('\n')
             .map(line => line.trim())
             .filter(line => line.length > 0)
+            .map(line => {
+              // Process markdown links in the content
+              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                let cleanUrl = url.trim();
+                if (cleanUrl.includes('%')) {
+                  cleanUrl = decodeUrlSafely(cleanUrl);
+                }
+                
+                // Ensure URL has proper protocol
+                if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://') && !cleanUrl.startsWith('mailto:')) {
+                  if (cleanUrl.includes('@')) {
+                    cleanUrl = 'mailto:' + cleanUrl;
+                  } else {
+                    cleanUrl = 'https://' + cleanUrl;
+                  }
+                }
+                
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+              });
+            })
             .join('<br>\n');
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
         })
@@ -1898,17 +1928,25 @@ export const StreamingResponseExtension = {
             for (let line of lines) {
               line = line.trim();
               if (line) {
-                // Check if line contains citations (numbers in brackets)
-                if (line.match(/\[\d+\]/)) {
-                  // Process markdown links in citations
-                  line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
-                    let cleanUrl = url.trim();
-                    if (cleanUrl.includes('%')) {
-                      cleanUrl = decodeUrlSafely(cleanUrl);
+                // Process ALL markdown links in citations, not just those with [number] patterns
+                line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                  let cleanUrl = url.trim();
+                  if (cleanUrl.includes('%')) {
+                    cleanUrl = decodeUrlSafely(cleanUrl);
+                  }
+                  
+                  // Ensure URL has proper protocol
+                  if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://') && !cleanUrl.startsWith('mailto:')) {
+                    if (cleanUrl.includes('@')) {
+                      cleanUrl = 'mailto:' + cleanUrl;
+                    } else {
+                      cleanUrl = 'https://' + cleanUrl;
                     }
-                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
-                  });
-                }
+                  }
+                  
+                  return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+                });
+                
                 processedLines.push(line);
               }
             }
@@ -1932,6 +1970,16 @@ export const StreamingResponseExtension = {
                 if (cleanUrl.includes('%')) {
                   cleanUrl = decodeUrlSafely(cleanUrl);
                 }
+                
+                // Ensure URL has proper protocol
+                if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://') && !cleanUrl.startsWith('mailto:')) {
+                  if (cleanUrl.includes('@')) {
+                    cleanUrl = 'mailto:' + cleanUrl;
+                  } else {
+                    cleanUrl = 'https://' + cleanUrl;
+                  }
+                }
+                
                 return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
               });
             })
@@ -2157,7 +2205,7 @@ export const StreamingResponseExtension = {
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         // Code
         .replace(/`(.*?)`/g, '<code>$1</code>')
-        // Links - improved processing for streaming content
+        // Links - improved processing for streaming content with better URL handling
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
           // Check if this is a complete link (not broken by streaming)
           const trimmedUrl = url.trim();
@@ -2172,6 +2220,15 @@ export const StreamingResponseExtension = {
           let cleanUrl = trimmedUrl;
           if (cleanUrl.includes('%')) {
             cleanUrl = decodeUrlSafely(cleanUrl);
+          }
+          
+          // Ensure URL has proper protocol
+          if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://') && !cleanUrl.startsWith('mailto:')) {
+            if (cleanUrl.includes('@')) {
+              cleanUrl = 'mailto:' + cleanUrl;
+            } else {
+              cleanUrl = 'https://' + cleanUrl;
+            }
           }
           
           return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
