@@ -1711,7 +1711,7 @@ export const StreamingResponseExtension = {
         isFirstChunk = false;
       }
 
-      // Append to buffer
+      // Append to buffer and normalize line breaks from stream
       buffer += text;
       
       // Keep track of complete response for final processing
@@ -2059,9 +2059,9 @@ export const StreamingResponseExtension = {
           continue;
         }
         
-        // Handle lists
+        // Handle lists (including bullet points with •)
         const orderedListMatch = line.match(/^\d+\.\s+(.+)/);
-        const unorderedListMatch = line.match(/^[-*+]\s+(.+)/);
+        const unorderedListMatch = line.match(/^[-*+•]\s+(.+)/);
         
         if (orderedListMatch || unorderedListMatch) {
           if (isInParagraph) {
@@ -2091,7 +2091,7 @@ export const StreamingResponseExtension = {
         }
         
         // Close list if we're not in a list item anymore
-        if (currentList && line && !line.match(/^([-*+]|\d+\.)\s/)) {
+        if (currentList && line && !line.match(/^([-*+•]|\d+\.)\s/)) {
           processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
           currentList = null;
         }
@@ -2143,6 +2143,10 @@ export const StreamingResponseExtension = {
       }
       if (isInParagraph) {
         processedLines.push('</p>');
+      }
+      
+      if (payload.debugMode === 1) {
+        console.log('🔍 MARKDOWN DEBUG: Processed lines:', processedLines.slice(0, 20));
       }
       
       // Join lines and apply remaining markdown formatting
@@ -2914,29 +2918,34 @@ export const StreamingResponseExtension = {
         function updateAnswerContent(text) {
           const trimmedText = text.trim();
           
-          // Process citations first
-          const textWithCitations = processCitations(trimmedText, citations, false);
+                // Process citations first
+      const textWithCitations = processCitations(trimmedText, citations, false);
+      
+      if (payload.debugMode === 1) {
+        console.log('🔍 MARKDOWN DEBUG: Raw text for formatting:', textWithCitations.substring(0, 200) + '...');
+        console.log('🔍 MARKDOWN DEBUG: Contains ###?', textWithCitations.includes('###'));
+        console.log('🔍 MARKDOWN DEBUG: Contains line breaks?', textWithCitations.includes('\n'));
+        console.log('🔍 MARKDOWN DEBUG: Contains bullet •?', textWithCitations.includes('•'));
+        console.log('🔍 MARKDOWN DEBUG: Full text:', JSON.stringify(textWithCitations));
+      }
           
-          if (payload.debugMode === 1) {
-            console.log('🔍 PERPLEXITY DEBUG: Raw text for formatting:', textWithCitations.substring(0, 200) + '...');
-            console.log('🔍 PERPLEXITY DEBUG: Contains ###?', textWithCitations.includes('###'));
-            console.log('🔍 PERPLEXITY DEBUG: Contains line breaks?', textWithCitations.includes('\n'));
-          }
+                // First, normalize line breaks and ensure proper formatting for streaming content
+      let normalizedText = textWithCitations
+        // Convert \n from stream to actual line breaks
+        .replace(/\\n/g, '\n')
+        // Ensure line breaks before and after markdown headers
+        .replace(/([.!?])\s*###\s*/g, '$1\n\n### ')
+        .replace(/###\s*([^\n]+)/g, '\n\n### $1\n\n')
+        // Ensure line breaks before list items (including • bullet points)
+        .replace(/([.!?])\s*([-*+•])\s+/g, '$1\n$2 ')
+        .replace(/([.!?])\s*(\d+\.)\s+/g, '$1\n$2 ')
+        // Ensure line breaks after sentences for better processing
+        .replace(/([.!?])\s+([A-ZČŠŽŘŮĚÝÁÍÉÓÚĎ])/g, '$1\n$2');
           
-          // First, normalize line breaks and ensure proper formatting for streaming content
-          let normalizedText = textWithCitations
-            // Ensure line breaks before and after markdown headers
-            .replace(/([.!?])\s*###\s*/g, '$1\n\n### ')
-            .replace(/###\s*([^\n]+)/g, '\n\n### $1\n\n')
-            // Ensure line breaks before list items
-            .replace(/([.!?])\s*-\s+/g, '$1\n- ')
-            .replace(/([.!?])\s*\*\s+/g, '$1\n* ')
-            // Ensure line breaks after sentences for better processing
-            .replace(/([.!?])\s+([A-ZČŠŽŘŮĚÝÁÍÉÓÚĎ])/g, '$1\n$2');
-          
-          if (payload.debugMode === 1) {
-            console.log('🔍 PERPLEXITY DEBUG: After normalization:', normalizedText.substring(0, 300) + '...');
-          }
+                if (payload.debugMode === 1) {
+        console.log('🔍 MARKDOWN DEBUG: After normalization:', normalizedText.substring(0, 300) + '...');
+        console.log('🔍 MARKDOWN DEBUG: Normalized text lines:', normalizedText.split('\n').slice(0, 10));
+      }
           
           // Simplified markdown processing for Perplexity complete text
           let formattedContent = normalizedText
@@ -3039,15 +3048,22 @@ export const StreamingResponseExtension = {
           
           // Content is now properly formatted with explicit HTML structure
           
-          if (payload.debugMode === 1) {
-            console.log('🔍 PERPLEXITY DEBUG: Final formatted content:', formattedContent.substring(0, 300) + '...');
-            if (formattedContent.includes('<h3>')) {
-              console.log('🔍 PERPLEXITY DEBUG: Successfully found H3 tags!');
-            }
-            if (formattedContent.includes('<li>')) {
-              console.log('🔍 PERPLEXITY DEBUG: Successfully found LI tags!');
-            }
-          }
+                if (payload.debugMode === 1) {
+        console.log('🔍 MARKDOWN DEBUG: Final formatted content:', formattedContent.substring(0, 300) + '...');
+        console.log('🔍 MARKDOWN DEBUG: Final HTML structure:', formattedContent.replace(/\s+/g, ' ').substring(0, 500));
+        if (formattedContent.includes('<h3>')) {
+          console.log('🔍 MARKDOWN DEBUG: Successfully found H3 tags!');
+        }
+        if (formattedContent.includes('<li>')) {
+          console.log('🔍 MARKDOWN DEBUG: Successfully found LI tags!');
+        }
+        if (formattedContent.includes('<br>')) {
+          console.log('🔍 MARKDOWN DEBUG: Successfully found BR tags!');
+        }
+        if (formattedContent.includes('<ul>')) {
+          console.log('🔍 MARKDOWN DEBUG: Successfully found UL tags!');
+        }
+      }
           
           if (answerContent) {
             answerContent.innerHTML = formattedContent;
