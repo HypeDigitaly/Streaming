@@ -10,6 +10,12 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Database Citation Display Fix (January 2025)
+- **Fixed Database Section Processing**: Resolved issue where only the first citation was displayed in the "Databázové zdroje" section despite all citations being properly wrapped in database tags
+- **Simplified Regex Pattern**: Replaced complex regex patterns with simpler capture for `[[Database_Sources_End]]` markers to ensure all citations are included
+- **Added Debug Logging**: Added comprehensive debugging for database section processing to track content capture and processing
+- **Fixed JavaScript Syntax Error**: Resolved duplicate `formattedContent` variable declaration that was causing initialization errors
+
 ### Major Markdown to HTML Conversion Improvements (January 2025)
 - **Complete Markdown Parser Rewrite**: Replaced the complex regex-based markdown processing with a robust line-by-line parser
 - **Fixed Empty Line Handling**: Empty lines (\n) now properly convert to paragraph breaks instead of interfering with other HTML elements

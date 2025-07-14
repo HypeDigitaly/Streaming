@@ -1675,8 +1675,17 @@ export const StreamingResponseExtension = {
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
         // Handle standalone Database_Sources_End markers - wrap citations after the marker
+        // Simplest approach: capture everything after the marker
         .replace(/\[\[Database_Sources_End\]\]([\s\S]*)/g, function(match, content) {
           if (content.trim()) {
+            if (trace.payload?.debugMode === 1) {
+              console.log("🗄️ Database_Sources_End processing:", {
+                matchLength: match.length,
+                contentLength: content.length,
+                contentPreview: content.substring(0, 200) + (content.length > 200 ? "..." : ""),
+                contentLines: content.split('\n').length
+              });
+            }
             return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
           }
           return '';
