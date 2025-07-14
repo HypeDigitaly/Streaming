@@ -1969,7 +1969,7 @@ export const StreamingResponseExtension = {
               });
             })
             .join('<br>\n');
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important; cursor: pointer; padding: 8px 12px; border-radius: 6px; display: flex; align-items: center; gap: 8px; margin: 8px 0 4px 0; font-size: 14px; font-weight: 500;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333; transition: transform 0.2s ease; margin-left: auto;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden; padding: 0 12px 8px 12px; display: block;">${formattedContent}</div></div>`;
         })
         // Handle standalone Database_Sources_End markers - wrap citations after the marker
         // Process each citation individually to avoid packing them together
@@ -2017,7 +2017,7 @@ export const StreamingResponseExtension = {
             }
             
             const processedContent = processedLines.join('<br>\n');
-            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedContent}</div></div>`;
+            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important; cursor: pointer; padding: 8px 12px; border-radius: 6px; display: flex; align-items: center; gap: 8px; margin: 8px 0 4px 0; font-size: 14px; font-weight: 500;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333; transition: transform 0.2s ease; margin-left: auto;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden; padding: 0 12px 8px 12px; display: block;">${processedContent}</div></div>`;
           }
           return '';
         })
