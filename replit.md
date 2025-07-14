@@ -40,6 +40,12 @@ Preferred communication style: Simple, everyday language.
 - **Comprehensive link processing**: Updated POSTUP, Database Sources, and Web Search Sources to decode both URLs and link text
 - **Czech character support**: Proper decoding of Czech characters in file names and link text
 
+### January 14, 2025 - Fixed General Markdown Link Text Decoding
+- **General markdown links**: Fixed link text decoding in general markdown processing (not just special sections)
+- **Consistent encoding**: Ensured all markdown link patterns decode both URLs and link text consistently
+- **File link formatting**: Fixed issue where file links displayed with encoded characters in link text
+- **Improved readability**: Link text now properly displays Czech characters and spaces instead of URL encoding
+
 These changes address the formatting issues in the Voiceflow UI where line breaks and empty lines were not displaying properly, and fix the URL encoding and overflow issues in the Database Sources section, making the content more readable and visually appealing.
 
 ## System Architecture

@@ -2259,7 +2259,13 @@ export const StreamingResponseExtension = {
             cleanUrl = decodeUrlSafely(cleanUrl);
           }
           
-          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; text-decoration-color: #93c5fd;">${linkText}</a>`;
+          // Also decode the link text if it contains encoded characters
+          let cleanLinkText = linkText.trim();
+          if (cleanLinkText.includes('%')) {
+            cleanLinkText = decodeUrlSafely(cleanLinkText);
+          }
+          
+          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; text-decoration-color: #93c5fd;">${cleanLinkText}</a>`;
         })
         // Tables - Improved processing for markdown tables
         .replace(
