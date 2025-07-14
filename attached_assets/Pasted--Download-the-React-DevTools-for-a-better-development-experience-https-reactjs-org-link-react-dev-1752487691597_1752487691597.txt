@@ -1,0 +1,281 @@
+ Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+ Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+ voiceflow webchat v2.92.0
+ Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2465)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+Q @ bundle.mjs:55
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 500,
+  "temperature": 0.3,
+  "userData": "\n**User Query Language**: Detect and match the language of \"ahoj\"\n**Current Input**: \"ahoj\" - \"ahoj\"\n**Conversation Context**: \"assistant: Vítejte! Jmenuji se **Středobot** a rád Vám poradím s čímkoli ohledně Středočeského kraje, či krajského úřadu.\n-----\n\nAktuální počet zpráv:\n(84 / 2000)\n\n-----\nJak Vám můžu být nápomocen?\nuser: ahoj\"\n**Session Data**: \"14.7.2025 11:55 (pondělí)\"\n**Message Count**: \"85/2000\"\n\n## Response Generation Instructions\nExecute the following analysis sequence:\n\n1. **Language Detection**: Identify the language of the user's latest query and respond exclusively in that language.\n2. **No Formalities Check**: NEVER include greetings, welcome messages, or introductions - jump directly to content.\n3. **Context Assessment**: Evaluate conversation history depth and relevance.\n4. **Intent Analysis**: Determine if user seeks information, casual conversation, or clarification.\n5. **Response Strategy**: Generate contextually appropriate response that:\n   - Addresses user's immediate need\n   - Builds upon existing conversation when relevant\n   - Suggests 2-3 engaging follow-up directions\n   - Maintains authentic enthusiasm for the region\n   - Guides information requests toward strategic inquiry areas\n   - **STRICTLY FOLLOWS NUMERICAL RESTRICTIONS**: Never performs any mathematical operations or calculations\n6. **Final Check**: Ensure response is in the SAME language as user's query and contains NO greetings/formalities before output.\n\nGenerate response that feels natural, contextually intelligent, and conversationally progressive.\n",
+  "systemPrompt": "\n# Středobot - Dynamic Regional Conversational AI\n\n## CRITICAL REQUIREMENTS\n**RESPONSE LANGUAGE**: You MUST respond EXCLUSIVELY in the SAME language as the user's latest query/question. No exceptions.\n\n**NO GREETINGS/FORMALITIES**: NEVER include greetings, welcome messages, thank you messages, or introductions (e.g., \"Dobrý den\", \"Hello\", \"Thank you\") as you are in the MIDDLE of an ongoing conversation. Jump directly to the content.\n\n### Your attributes as AI chatbot/widget:\n- **Name:** Středobot (Official AI Assistant for Středočeský kraj)\n- **Gender:** Male/Man/Mužsky stylizovaný AI asistent\n- **Purpose:** Středočeský kraj Regional Office AI\n- **Creator:** [HypeDigitaly](https://hypedigitaly.ai) | Technický ředitel a jednatel Pavel Čermák (pavelcermak@hypedigitaly.ai) | Obchodní ředitelka a jednatelka Miroslava Čermáková (cermakova@hypedigitaly.ai), odbor digitalizace krajského úřadu\n- **Creators/Developer**: [HypeDigitaly](https://hypedigitaly.ai) from Ústí nad Labem (Phone: +420 774 996 248 | Email: info@hypedigitaly.ai)\n- **GDPR Compliance**: Fully EU (AI Act) & GDPR compliant. [GDPR Policy](https://stredoceskykraj.cz/web/odbor-bezpecnosti-a-krizoveho-rizeni/gdpr). [HypeDigitaly Privacy Policy](https://hypedigitaly.ai/privacy-policy)\n- **Help/Topics**: Direct to \"❓\" icon\n- **Human Assistance**: Encourage specifying person/department for contact info\n- **Language**: Multilingual support (cs, en, de, uk, pl, sk). Response language automatically matches user's query language\n- **Chat Controls**: Desktop: downward arrow icon. Mobile: X icon. Restart: counterclockwise arrow icon\n\n### LANGUAGE DETERMINATION**\n**🌐 CRITICAL LANGUAGE PROTOCOL - Execute BEFORE all other processing:**\n\n1. **Translation Request Detection** - Scan \"Original User Query\" and \"Optimized Query\" for explicit translation patterns:\n   - **Czech patterns**: \"přelož*\", \"překlad*\", \"v [jazyk]\", \"do [jazyk]\", \"[jazyk] verze\"\n   - **English patterns**: \"translate*\", \"translation*\", \"in [language]\", \"to [language]\", \"[language] version\"\n   - **Common language indicators**: \"angličtina/English\", \"polština/Polish\", \"němčina/German\", \"slovenština/Slovak\", \"ukrajinština/Ukrainian\"\n\n2. **Target Language Extraction**:\n   - **IF translation request detected**: Extract target language from request\n   - **IF no translation request**: Auto-detect from \"Original User Query\" language - **ONLY SUPPORTED LANGUAGES**: čeština/Czech, angličtina/English, polština/Polish, němčina/German, slovenština/Slovak, ukrajinština/Ukrainian\n\n3. **Language Lock**: Set determined language for ENTIRE response (reasoning + body + sources)\n\n4. **🚨 MANDATORY**: Store determined language for consistent application across all subsequent steps\n\n5. **🌐 MULTILINGUAL CAPABILITY RESPONSE**: When user asks about chatbot's language capabilities, respond that the chatbot is multilingual/vícejazyčný and supports ONLY these languages: polština/Polish, němčina/German, slovenština/Slovak, ukrajinština/Ukrainian, čeština/Czech\n\n**🚨 UNSUPPORTED LANGUAGE HANDLING**: If user queries in unsupported language, respond in Czech explaining supported languages only.\n\n### AI chatbot interest inquiries:\n- If user explicitely 
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #F9D2D3
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 20,4,1
+ 📋 Parsed IDs: [20,4,1]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:20 | Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+ 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+ 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+ =============================
+ 
+🔄 ATTEMPT 1/3: Using model ID:20
+ 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Endpoint: /api/openrouter-stream
+ 📌 Status: STARTING REQUEST
+ 📦 Payload for /api/openrouter-stream: Object
+ �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ ✅ First chunk received from /api/openrouter-stream within timeout.
+ TTFT met for /api/openrouter-stream. Waiting for stream completion...
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ [DONE] received for /api/openrouter-stream.
+ 📤 Updating Voiceflow variable with response length: 302
+ ✅ Voiceflow update attempted successfully.
+ Voiceflow update response: Object
+ 
+✅ SUCCESS: MODEL ID:20
+ 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Status: COMPLETED SUCCESSFULLY
+ 📌 Attempt: 1/3
+ =============================
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCE\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-RRsbQrNWFcbMNFAuFoHWuD\",\"filename\":\"Povinne_informace_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.90376042028539,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/povinne-informace\",\"title\":\"Povinné informace - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:23:23.726158\"},\"content\":[{\"type\":\"text\",\"text\":\"**[Kontaktní spojení](https://stredoceskykraj.cz/web/urad/kontakty)**\\r\\n    *   4.1 **[Kontaktní poštovní adresa](https://stredoceskykraj.cz/web/urad/kontakty)**\\r\\n    *   4.2 **[Adresa úřadovny pro osobní návštěvu](https://stredoceskykraj.cz/web/urad/kontakty)**\\r\\n    *   4.3 **[Úřední hodiny](https://stredoceskykraj.cz/web/urad/uredni-hodiny)**\\r\\n    *   4.4 **Telefonní čísla:** +420 257 280 111; **[Telefonní seznam na jednotlivá pracoviště](https://stredoceskykraj.cz/web/urad/telefonni-seznam)**\\r\\n    *   4.5 **Adresa internetové stránky**: **[https://stredoceskykraj.cz](https://stredoceskykraj.cz/)**\\r\\n    *   4.6 **[Adresa podatelny](https://stredoceskykraj.cz/web/urad/kontakty)**\\r\\n    *   4.7**[Elektronická adresa podatelny(ePodatelna)](https://stredoceskykraj.cz/web/urad/epodatelna)**\\r\\n    *   4.8 **Datová schránka:**keebyyf\\r\\n\\r\\n5.   **Případné platby lze poukázat:** 4440009090/6000 zřízen u PPF banka a.s.\\r\\n6.   **IČO** 70891095\\r\\n7.   **DIČ** CZ70891095\\r\\n8.   **Dokumenty**\\r\\n    *   8.1 **[Seznamy hlavních dokumentů](https://stredoceskykraj.cz/documents/14432/19629236/8.1+Seznamy+hlavn%C3%ADch+dokument%C5%AF.docx/9359540c-37b2-ca56-de6b-d4d60f2b106c?t=1699290655189)**\\r\\n    *   8.2 **[Rozpočet](https://stredoceskykraj.cz/web/urad/majetkove-hospodarstvi-sluzby)**\\r\\n\\r\\n9.   **[Žádosti o informace](https://stredoceskykraj.cz/web/urad/misto-a-zpusob-jak-ziskat-prislusne-informace)**\\r\\n10.   [**Příjem žádostí a dalších podání**](https://stredoceskykraj.cz/web/urad/prijem-zadosti-a-dalsich-podani)\\r\\n11.\"}]},{\"file_id\":\"file-K74oSQYip2qvgHQfPbRLoC\",\"filename\":\"Misto_a_zpusob,_jak_ziskat_prislusne_informace_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8971629093728746,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/misto-a-zpusob-jak-ziskat-prislusne-informace\",\"title\":\"Místo a způsob, jak získat příslušné informace - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:23:51.623046\"},\"content\":[{\"type\":\"text\",\"text\":\"](https://stredoceskykraj.cz/web/urad/sazebnik-uhrad-za-poskytnute-informace-podle-106/1999-sb)\\r\\n*   [Výroční zpráva podle zákona 106/1999 Sb.](https://stredoceskykraj.cz/web/urad/vyrocni-zprava-podle-zakona-106/1999-sb)\\r\\n*   [Kontrola a stížnosti](https://stredoceskykraj.cz/web/urad/kontrola-a-stiznosti)\\r\\n*   [Registr smluv](https://smlouvy.gov.cz/vyhledavani)\\r\\n\\r\\n### Podatelna\\r\\n\\r\\n**Adresa:**\\r\\n\\r\\n Krajský úřad Středočeského kraje, Zborovská 11, 150 21 Praha 5\\r\\n\\r\\n**Provozní hodiny:**\\r\\n\\r\\n pondělí a středa 7:30 - 17:00\\r\\n\\r\\n úterý a čtvrtek 7:30 - 16:00\\r\\n\\r\\n pátek 7:30 - 15:00\\r\\n\\r\\n**Czech POINT, vidimace, legalizace:**\\r\\n\\r\\n Pondělí a středa 8:00 - 12:00, 14:00 - 16:00\\r\\n\\r\\n Úterý, čtvrtek a pátek 8:00 - 12:00\\r\\n\\r\\n**Telefon:** 257 280 580; 257 280 333\\r\\n\\r\\n**Kontaktní e-mail:**[podatelna@kr-s.cz](mailto:podatelna@kr-s.cz)\\r\\n\\r\\n### ePodatelna\\r\\n\\r\\nAdresy, které jsou určeny pro příjem veškerých datových zpráv doručovaných Krajskému úřadu Středočeského kraje mimo datovou schránku, jsou:\\r\\n\\r\\n[posta@kr-s.cz](mailto:posta@kr-s.cz)\\r\\n\\r\\n[podatelna@kr-s.cz](mailto:podatelna@kr-s.cz)\\r\\n\\r\\n[epodatelna@kr-s.cz](mailto:epodatelna@kr-s.cz)\\r\\n\\r\\nPravidla pro použití elektronického podpisu naleznete v odkazech níže.\\r\\n\\r\\n### Kontaktní údaje Informačního střediska\\r\\n\\r\\n**telefon:** 257 280 785, 257 280 840\\r\\n\\r\\n**fax:** 257 280 627\\r\\n\\r\\n**e-mail:**[info@kr-s.cz](mailto:info@kr-s.cz)\\r\\n\\r\\n### Úřední hodiny Informačního střediska\\r\\n\\r\\npondělí a středa 7.30 - 17.00\\r\\n\\r\\n úterý a čtvrtek 7.30 - 16.00\\r\\n\\r\\n pátek 7.30 - 14.00\\r\\n\\r\\nPrávo na informace je zakotveno v Listině základních práv a svobod v čl. 17. Podmínky a způsob poskytování informací státními orgány a orgány územní samosprávy stanoví zákon č. 106/1999 Sb., o svobodném přístupu k informacím, ve znění pozdějších předpisů.\"}]},{\"file_id\":\"file-RN4Tj7hX6eFqausDMHUqJQ\",\"filename\":\"Kontakty_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #F9D2D3
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 20,4,1
+ 📋 Parsed IDs: [20,4,1]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:20 | Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+ 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+ 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+ =============================
+ 
+🔄 ATTEMPT 1/3: Using model ID:20
+ 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Endpoint: /api/openrouter-stream
+ 📌 Status: STARTING REQUEST
+ 📦 Payload for /api/openrouter-stream: Object
+ �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ ✅ First chunk received from /api/openrouter-stream within timeout.
+ TTFT met for /api/openrouter-stream. Waiting for stream completion...
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ 📥 Frontend chunk from /api/openrouter-stream: Object
+ [DONE] received for /api/openrouter-stream.
+ 📤 Updating Voiceflow variable with response length: 7709
+ ✅ Voiceflow update attempted successfully.
+ Voiceflow update response: Object
+ 
+✅ SUCCESS: MODEL ID:20
+ 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+ 📌 Model name: google/gemini-2.5-flash
+ 📌 Status: COMPLETED SUCCESSFULLY
+ 📌 Attempt: 1/3
+ =============================
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCE\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-EDzK1m3vAshHkLbcA722bB\",\"filename\":\"Uredni_deska_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.7869326171495404,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/uredni-deska\",\"title\":\"Úřední deska - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:26:17.092823\"},\"content\":[{\"type\":\"text\",\"text\":\"cz/web/urad/uredni-deska#) Vyvěšeno: **od 09.07.2025 do 24.07.2025** | Vystavil: **Krajský úřad Středočeského kraje, IČ:70891095** [**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=976fdb2a-4d23-0a37-33fe-36a8e852c939 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Trebusice_A_, formát pdf, velikost 128 KB\\\")[**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=976fdb2a-4d23-0a37-33fe-36a8e852c939 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Trebusice_A_, formát pdf, velikost 128 KB\\\") | 097471/2025/KUSK OSŽPS/LAŠ |\\r\\n| [VPS Kladno a Otvovice (změna) vyvěšení na úřední desku](https://stredoceskykraj.cz/web/urad/uredni-deska#) Vyvěšeno: **od 09.07.2025 do 24.07.2025** | Vystavil: **Krajský úřad Středočeského kraje, IČ:70891095** [**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=4cc5bafa-c25d-fc0a-127a-fc21894a8219 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Otvovice_A_, formát pdf, velikost 141 KB\\\")[**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=4cc5bafa-c25d-fc0a-127a-fc21894a8219 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Otvovice_A_, formát pdf, velikost 141 KB\\\") | 097461/2025/KUSK OSŽPS/LAŠ |\\r\\n| [VPS Kladno a Cvrčovice (změna) vyvěšení na úřední desku](https://stredoceskykraj.cz/web/urad/uredni-deska#) Vyvěšeno: **od 09.07.2025 do 24.07.2025** | Vystavil: **Krajský úřad Středočeského kraje, IČ:70891095** [**příloha č.1**](https://stredoceskykraj.\"}]},{\"file_id\":\"file-EDzK1m3vAshHkLbcA722bB\",\"filename\":\"Uredni_deska_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.6941677154154685,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/uredni-deska\",\"title\":\"Úřední deska - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:26:17.092823\"},\"content\":[{\"type\":\"text\",\"text\":\"07.2025** | Vystavil: **Krajský úřad Středočeského kraje, IČ:70891095** [**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=7aaf7cf1-a977-5df7-a77e-7f0479195940 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Cvrcovice_A_, formát pdf, velikost 136 KB\\\")[**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=7aaf7cf1-a977-5df7-a77e-7f0479195940 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Cvrcovice_A_, formát pdf, velikost 136 KB\\\") | 097454/2025/KUSK OSŽPS/LAŠ |\\r\\n| [VPS Kladno a Žilina (změna) vyvěšení na úřední desku](https://stredoceskykraj.cz/web/urad/uredni-deska#) Vyvěšeno: **od 09.07.2025 do 24.07.2025** | Vystavil: **Krajský úřad Středočeského kraje, IČ:70891095** [**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=b6828f13-75a7-29f7-450f-9f7f33378524 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Zilina_A_, formát pdf, velikost 130 KB\\\")[**příloha č.1**](https://stredoceskykraj.cz/o/urednideska-rest/uredni-deska/get-priloha-by-uuid?prilohaUuid=b6828f13-75a7-29f7-450f-9f7f33378524 \\\"Stáhnout soubor Dohoda_-_Kladno_a_Zilina_A_, formát pdf, velikost 130 KB\\\") | 097371/2025/KUSK OSŽPS/LAŠ |\\r\\n| [VPS Kladno a Velká Dobrá (změna) vyvěšení na úřední desku](https://stredoceskykraj.cz/web/urad/uredni-deska#) Vyvěšeno: **od 09.07.2025 do 24.07.2025** | Vystavil: **Krajský úřad Středočeského kraje, IČ:70891095** [**příloha č.1**](https://stredoceskykraj.\"}]},{\"file_id\":\"file-P1Ax8HmJduKzjoCuJwmwrS\",\"filename\":\"Cena_hejtmanky_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.685386763724511,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/cena-hejtmanky\",\"title\":\"Cena hejtmanky - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:32:00.703407\"},\"content\":[{\"type\":\"text\",\"text\":\"[Image 2](https://stredoceskykraj.cz/documents/14432/0/Cena+hejtmanky+2024+spole%C4%8Dn%C3%A9+foto+J+Joachim.jpg/15aba3e5-5cb2-48f8-20df-65b73718e367?t=1744094600648)\\r\\n\\r\\n**Hejtmanka Petra Peckov
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #F9D2D3
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 20,4,1
+ 📋 Parsed IDs: [20,4,1]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:20 | Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+ 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3178 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3180 =============================
+StreamingResponseExtension.js:3206 
+🔄 ATTEMPT 1/3: Using model ID:20
+StreamingResponseExtension.js:3209 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3210 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3211 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3212 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:2853 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:2862 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2964 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3113 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2919 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3067 📤 Updating Voiceflow variable with response length: 1311
+StreamingResponseExtension.js:3089 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3092 Voiceflow update response: Object
+StreamingResponseExtension.js:3330 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3331 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3332 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3333 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3334 📌 Attempt: 1/3
+StreamingResponseExtension.js:3337 =============================
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 8000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCE\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-XALnHgRdHBiWyuKaj8xLLw\",\"filename\":\"Usneseni_rady_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.833905397287131,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/usneseni-rady\",\"title\":\"Usnesení rady - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:09:20.600139\"},\"content\":[{\"type\":\"text\",\"text\":\"1559(2025), formát pdf, velikost 133 KB\\\")\\r\\n\\r\\nDatum jednání: **26. 6. 2025**, číslo: **24/2025**\\r\\n\\r\\nČíslo usnesení: **010-24/2025/RK**\\r\\n\\r\\nPředmět: **Rozpočtová úprava č. 330/03/2025 – navýšení běžných výdajů kapitoly 03 – Informatika, převodem finančních prostředků z kapitoly 23 – Ostatní, Rezerva Středočeského kraje**\\r\\n\\r\\n[010-24/2025/RK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=ffed11e2-5b7c-cd4a-357e-ac7e6d374956 \\\"Stáhnout soubor 010-24/2025/RK, formát pdf, velikost 83 KB\\\")[Rozpočtová úprava č. 330/03/2025](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=02da7eb9-fb35-edc5-dbf2-0749fd01394c \\\"Stáhnout soubor Rozpočtová úprava č. 330/03/2025, formát xls, velikost 33 KB\\\")[EO_Tisk č. 1554(2025)](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=4340f03d-910d-9675-112d-919d2b7d592e \\\"Stáhnout soubor EO_Tisk č. 1554(2025), formát pdf, velikost 124 KB\\\")\\r\\n\\r\\nDatum jednání: **26. 6. 2025**, číslo: **24/2025**\\r\\n\\r\\nČíslo usnesení: **011-24/2025/RK**\\r\\n\\r\\nPředmět: **Limity běžných výdajů kapitol pro sestavení rozpočtu Středočeského kraje na rok 2026**\\r\\n\\r\\n[011-24/2025/RK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=1e2bce64-a476-69bb-8c89-62da558f8c76 \\\"Stáhnout soubor 011-24/2025/RK, formát pdf, velikost 91 KB\\\")[DZ Tisk č. (2025)](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=2432d7ce-3576-352f-d92c-f3c1b073fb5c \\\"Stáhnout soubor DZ Tisk č. (2025), formát doc, velikost 102 KB\\\")[Příloha č.\"}]},{\"file_id\":\"file-3Srs3dFMA9B2QUfLqomxVV\",\"filename\":\"Usneseni_a_zapisy_Zastupitelstva_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.8221949968067005,\"attributes\":{\"source_url\":\"https://stredoceskykraj.cz/web/urad/usneseni-zastupitelstva\",\"title\":\"Usnesení a zápisy Zastupitelstva - Informační systém krajského úřadu - Webový portál Středočeského kraje\",\"script_name\":\"scrape_sitemap_GPT\",\"upload_timestamp\":\"2025-07-10T12:10:13.908302\"},\"content\":[{\"type\":\"text\",\"text\":\"formát pdf, velikost 75 KB\\\")\\r\\n\\r\\nDatum jednání: **09.06.2025**, číslo: **5/2025**\\r\\n\\r\\nČíslo usnesení: **007-05/2025/ZK**\\r\\n\\r\\nPředmět: **Změna ve složení Výboru pro tělovýchovu a sport Zastupitelstva Středočeského kraje**\\r\\n\\r\\n[007-05/2025/ZK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=b8dca730-2d96-6bb5-43e7-887d235ff4ed \\\"Stáhnout soubor 007-05/2025/ZK, formát pdf, velikost 71 KB\\\")\\r\\n\\r\\nDatum jednání: **09.06.2025**, číslo: **5/2025**\\r\\n\\r\\nČíslo usnesení: **008-05/2025/ZK**\\r\\n\\r\\nPředmět: **Změny ve složení výborů Zastupitelstva Středočeského kraje**\\r\\n\\r\\n[008-05/2025/ZK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=f07f04e1-89f4-aa83-2f4d-8761998b95db \\\"Stáhnout soubor 008-05/2025/ZK, formát pdf, velikost 77 KB\\\")\\r\\n\\r\\nDatum jednání: **09.06.2025**, číslo: **5/2025**\\r\\n\\r\\nČíslo usnesení: **009-05/2025/ZK**\\r\\n\\r\\nPředmět: **Změna ve smlouvě k Usnesení č. 006-04/2025/ZK ze dne 31.3.2025, Rozpočtová úprava č. 141/01/2024 – převod finančních prostředků z kapitoly 23 – Ostatní, Rezerva SK do kapitoly 01 – Činnost Zastupitelstva, k poskytnutí finančního daru neziskové organizaci**\\r\\n\\r\\n[009-05/2025/ZK](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=ef361877-dc08-e37f-443f-156575dc179a \\\"Stáhnout soubor 009-05/2025/ZK, formát pdf, velikost 74 KB\\\")[př. 1 původní návrh smlouvy](https://stredoceskykraj.cz/o/usneseni-rest/usneseni-zastupitelstva/get-priloha-by-uuid?prilohaUuid=bad35a3a-241f-6312-b74b-b95f50b51067 \\\"Stáhnout soubor př. 1 původní návrh smlouvy, formát pdf, velikost 662 KB\\\")[př.\"}]},{\"file_id\":\"file-3Srs3dFMA9B2QUfLqomxVV\",\"filename\":\"Usneseni_a_zapisy_Zastupitelstva_-_Informacni_system_krajskeho_uradu_-_Webovy_portal_Stredoceskeho_kraje.txt\",\"score\":0.819017918837477,\"attributes\":{\"source_url\":\"https://stredoceskykraj.
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3168 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3169 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3170 📋 Raw sequence: 20,4,1
+StreamingResponseExtension.js:3173 📋 Parsed IDs: [20,4,1]
+StreamingResponseExtension.js:3176 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3178 📌 Position 0: ID:20 | Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter) | Model: google/gemini-2.5-flash
+StreamingResponseExtension.js:3178 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3178 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3180 =============================
+StreamingResponseExtension.js:3206 
+🔄 ATTEMPT 1/3: Using model ID:20
+StreamingResponseExtension.js:3209 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3210 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3211 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3212 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:2853 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:2862 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2964 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:3113 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2936 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2919 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3067 📤 Updating Voiceflow variable with response length: 4195
+StreamingResponseExtension.js:3089 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3092 Voiceflow update response: Object
+StreamingResponseExtension.js:3330 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:3331 📌 Model: Gemini 2.5 Flash Lite 06-17 (OpenRouter) (openrouter)
+StreamingResponseExtension.js:3332 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3333 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3334 📌 Attempt: 1/3
+StreamingResponseExtension.js:3337 =============================
