@@ -1518,6 +1518,56 @@ export const StreamingResponseExtension = {
     }
 
     // Function to add citation link handlers
+    // Function to decode URL-encoded Czech characters
+    function decodeUrlSafely(url) {
+      try {
+        return decodeURIComponent(url);
+      } catch (e) {
+        // If decoding fails, try manual fixes for common Czech characters
+        return url
+          .replace(/%20/g, ' ')
+          .replace(/%C4%8D/g, 'č')
+          .replace(/%C4%8C/g, 'Č')
+          .replace(/%C5%99/g, 'ř')
+          .replace(/%C5%98/g, 'Ř')
+          .replace(/%C3%A1/g, 'á')
+          .replace(/%C3%81/g, 'Á')
+          .replace(/%C3%AD/g, 'í')
+          .replace(/%C3%8D/g, 'Í')
+          .replace(/%C3%A9/g, 'é')
+          .replace(/%C3%89/g, 'É')
+          .replace(/%C5%A1/g, 'š')
+          .replace(/%C5%A0/g, 'Š')
+          .replace(/%C5%BE/g, 'ž')
+          .replace(/%C5%BD/g, 'Ž')
+          .replace(/%C3%BD/g, 'ý')
+          .replace(/%C3%9D/g, 'Ý')
+          .replace(/%C4%9B/g, 'ě')
+          .replace(/%C4%9A/g, 'Ě')
+          .replace(/%C5%AF/g, 'ů')
+          .replace(/%C5%AE/g, 'Ů')
+          .replace(/%C3%BA/g, 'ú')
+          .replace(/%C3%9A/g, 'Ú')
+          .replace(/%C5%88/g, 'ň')
+          .replace(/%C5%87/g, 'Ň')
+          .replace(/%C4%8F/g, 'ď')
+          .replace(/%C4%8E/g, 'Ď')
+          .replace(/%C5%A5/g, 'ť')
+          .replace(/%C5%A4/g, 'Ť')
+          .replace(/%C3%B3/g, 'ó')
+          .replace(/%C3%93/g, 'Ó')
+          .replace(/%2F/g, '/')
+          .replace(/%3F/g, '?')
+          .replace(/%3D/g, '=')
+          .replace(/%26/g, '&')
+          .replace(/%2E/g, '.')
+          .replace(/%2D/g, '-')
+          .replace(/%5F/g, '_')
+          .replace(/%28/g, '(')
+          .replace(/%29/g, ')');
+      }
+    }
+
     function addCitationLinkHandlers() {
       const citationLinks = responseContent.querySelectorAll('.file-citation-link');
       
@@ -1576,7 +1626,25 @@ export const StreamingResponseExtension = {
       // Keep track of complete response for final processing
       completeResponse += text;
 
-      // Post-process buffer to handle various image URL patterns
+      // Post-process buffer to handle various image URL patterns and fix URL encoding issues
+      
+      // First, let's fix any broken URL encoding that might be causing issues with links
+      // This is particularly important for PDF links and other document links
+      buffer = buffer.replace(/\[([^\]]+)\]\(([^)]*%[^)]*)\)/g, function(match, linkText, url) {
+        // If URL contains % encoding, try to decode it properly
+        let cleanUrl = url.trim();
+        if (cleanUrl.includes('%')) {
+          cleanUrl = decodeUrlSafely(cleanUrl);
+          if (trace.payload?.debugMode === 1) {
+            console.log("🔗 URL DECODE: Fixed encoded URL in buffer:", {
+              original: url,
+              cleaned: cleanUrl,
+              linkText: linkText
+            });
+          }
+        }
+        return `[${linkText}](${cleanUrl})`;
+      });
 
       // Pattern 1: Complete URLs with image extensions (including query parameters)
       buffer = buffer.replace(
@@ -1675,8 +1743,9 @@ export const StreamingResponseExtension = {
           const beforeLink = buffer.substring(0, linkStart);
           const afterLink = buffer.substring(linkStart);
           
-          // Only delay if the link looks like it's being streamed (contains URL encoding)
-          if (afterLink.includes('%') || afterLink.includes('stredoceskykraj.cz')) {
+          // Only delay if the link looks like it's being streamed and is very short or ends mid-URL
+          // But be more permissive with Czech websites that may have longer encoded URLs
+          if (afterLink.includes('%') && afterLink.length - linkStart < 30 && !afterLink.includes('stredoceskykraj.cz')) {
             processBuffer = beforeLink;
             if (trace.payload?.debugMode === 1) {
               console.log("🔗 DELAY: Incomplete link detected, delaying processing:", afterLink.substring(0, 50) + "...");
@@ -1721,25 +1790,8 @@ export const StreamingResponseExtension = {
                   // Process markdown links in citations
                   line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
                     let cleanUrl = url.trim();
-                    try {
-                      if (cleanUrl.includes('%')) {
-                        cleanUrl = decodeURIComponent(cleanUrl);
-                      }
-                    } catch (e) {
-                      // If decoding fails, try manual fixes
-                      cleanUrl = cleanUrl
-                        .replace(/%20/g, ' ')
-                        .replace(/%C4%8D/g, 'č')
-                        .replace(/%C5%99/g, 'ř')
-                        .replace(/%C3%A1/g, 'á')
-                        .replace(/%C3%AD/g, 'í')
-                        .replace(/%C3%A9/g, 'é')
-                        .replace(/%C5%A1/g, 'š')
-                        .replace(/%C5%BE/g, 'ž')
-                        .replace(/%C3%BD/g, 'ý')
-                        .replace(/%C4%9B/g, 'ě')
-                        .replace(/%C5%AF/g, 'ů')
-                        .replace(/%C3%BA/g, 'ú');
+                    if (cleanUrl.includes('%')) {
+                      cleanUrl = decodeUrlSafely(cleanUrl);
                     }
                     return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
                   });
@@ -1924,34 +1976,15 @@ export const StreamingResponseExtension = {
           const trimmedUrl = url.trim();
           
           // Skip processing if URL looks incomplete due to streaming
-          // More conservative check: only skip if URL is very short and doesn't contain common patterns
-          if (trimmedUrl.length < 3 || (trimmedUrl.length < 8 && !trimmedUrl.includes('.'))) {
+          // Only skip if URL is very short (less than 3 chars) or obviously incomplete
+          if (trimmedUrl.length < 3) {
             return match; // Return as-is for now, will be processed later
           }
           
           // Clean up URL encoding and ensure proper format
           let cleanUrl = trimmedUrl;
-          try {
-            // Decode URL encoding for all URLs that contain % symbols
-            if (cleanUrl.includes('%')) {
-              cleanUrl = decodeURIComponent(cleanUrl);
-            }
-          } catch (e) {
-            // If decoding fails, try manual fixes for common Czech characters
-            cleanUrl = cleanUrl
-              .replace(/%20/g, ' ')
-              .replace(/%C4%8D/g, 'č')
-              .replace(/%C5%99/g, 'ř')
-              .replace(/%C3%A1/g, 'á')
-              .replace(/%C3%AD/g, 'í')
-              .replace(/%C3%A9/g, 'é')
-              .replace(/%C3%AD/g, 'í')
-              .replace(/%C5%A1/g, 'š')
-              .replace(/%C5%BE/g, 'ž')
-              .replace(/%C3%BD/g, 'ý')
-              .replace(/%C4%9B/g, 'ě')
-              .replace(/%C5%AF/g, 'ů')
-              .replace(/%C3%BA/g, 'ú');
+          if (cleanUrl.includes('%')) {
+            cleanUrl = decodeUrlSafely(cleanUrl);
           }
           
           return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
@@ -3577,28 +3610,33 @@ export const StreamingResponseExtension = {
           let cleanUrl = url.trim();
           
           // More aggressive URL decoding for final processing
-          try {
-            if (cleanUrl.includes('%')) {
-              cleanUrl = decodeURIComponent(cleanUrl);
+          if (cleanUrl.includes('%')) {
+            cleanUrl = decodeUrlSafely(cleanUrl);
+            if (trace.payload?.debugMode === 1) {
+              console.log("🔗 FINALIZE: Decoded URL:", {
+                original: url,
+                cleaned: cleanUrl,
+                linkText: linkText
+              });
             }
-          } catch (e) {
-            // If decoding fails, try manual fixes for common Czech characters
-            cleanUrl = cleanUrl
-              .replace(/%20/g, ' ')
-              .replace(/%C4%8D/g, 'č')
-              .replace(/%C5%99/g, 'ř')
-              .replace(/%C3%A1/g, 'á')
-              .replace(/%C3%AD/g, 'í')
-              .replace(/%C3%A9/g, 'é')
-              .replace(/%C5%A1/g, 'š')
-              .replace(/%C5%BE/g, 'ž')
-              .replace(/%C3%BD/g, 'ý')
-              .replace(/%C4%9B/g, 'ě')
-              .replace(/%C5%AF/g, 'ů')
-              .replace(/%C3%BA/g, 'ú');
           }
           
           return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+        });
+        
+        // Also process any remaining broken URLs in the text that might not be in markdown format
+        finalContent = finalContent.replace(/href="([^"]*%[^"]*)"/g, function(match, url) {
+          let cleanUrl = url.trim();
+          if (cleanUrl.includes('%')) {
+            cleanUrl = decodeUrlSafely(cleanUrl);
+            if (trace.payload?.debugMode === 1) {
+              console.log("🔗 FINALIZE: Fixed href URL:", {
+                original: url,
+                cleaned: cleanUrl
+              });
+            }
+          }
+          return `href="${cleanUrl}"`;
         });
         
         // Update the content if changes were made
