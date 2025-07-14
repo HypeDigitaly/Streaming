@@ -10,14 +10,6 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### January 14, 2025 - Replaced Blue Color with Black in StreamingExtension
-- **Replaced all blue color references with black**: Changed all instances of `#2563eb` (blue) to `#000000` (black) in text formatting
-- **Updated citation link styles**: Changed citation links from blue to black color for better readability
-- **Updated bold text formatting**: Changed bold text from blue to black to match user preference
-- **Updated markdown link formatting**: Changed all markdown links from blue to black in all sections
-- **Updated special section links**: Changed links in POSTUP, Database Sources, Web Search Sources, and reasoning sections from blue to black
-- **Consistent color scheme**: All text formatting now uses black color instead of blue highlighting
-
 ### January 14, 2025 - Improved Markdown-to-HTML Formatting
 - **Fixed empty line handling**: Replaced `<br>` tags with properly spaced paragraph breaks using `<p style="margin: 0.5em 0; height: 1em;">&nbsp;</p>`
 - **Enhanced header formatting**: Added proper styling with margins and font weights for H1, H2, H3 tags

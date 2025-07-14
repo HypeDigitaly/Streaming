@@ -1936,7 +1936,7 @@ export const StreamingResponseExtension = {
                   cleanLinkText = decodeUrlSafely(cleanLinkText);
                 }
                 
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #000000; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
               });
             })
             .join('<br>\n');
@@ -1965,7 +1965,7 @@ export const StreamingResponseExtension = {
                   cleanLinkText = decodeUrlSafely(cleanLinkText);
                 }
                 
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #000000; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
               });
             })
             .join('<br>\n');
@@ -2009,7 +2009,7 @@ export const StreamingResponseExtension = {
                       cleanLinkText = decodeUrlSafely(cleanLinkText);
                     }
                     
-                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #000000; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
+                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
                   });
                 }
                 processedLines.push(line);
@@ -2044,7 +2044,7 @@ export const StreamingResponseExtension = {
                   cleanLinkText = decodeUrlSafely(cleanLinkText);
                 }
                 
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #000000; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
               });
             })
             .join('<br>\n');
@@ -2237,7 +2237,7 @@ export const StreamingResponseExtension = {
       // Join lines and apply remaining markdown formatting
       const formattedContent = processedLines.join('\n')
         // Bold
-        .replace(/\*\*(.*?)\*\*/g, '<strong style="font-weight: bold; color: #000000;">$1</strong>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong style="font-weight: bold; color: #2563eb;">$1</strong>')
         // Italic
         .replace(/\*(.*?)\*/g, '<em style="font-style: italic; color: #6b7280;">$1</em>')
         // Code
@@ -2265,7 +2265,7 @@ export const StreamingResponseExtension = {
             cleanLinkText = decodeUrlSafely(cleanLinkText);
           }
           
-          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #000000; text-decoration: underline; text-decoration-color: #000000;">${cleanLinkText}</a>`;
+          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; text-decoration-color: #93c5fd;">${cleanLinkText}</a>`;
         })
         // Tables - Improved processing for markdown tables
         .replace(
