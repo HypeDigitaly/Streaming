@@ -10,6 +10,12 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### January 14, 2025 - Fixed Bold Text Color in Streaming Extensions
+- **Changed bold text color from blue to black**: Updated all instances of bold text formatting in both StreamingResponseExtension.js and PerplexityStreamingExtension.js
+- **Preserved blue color for URLs**: Kept the blue color styling for URL links as requested
+- **Consistent formatting**: Ensured all bold text now uses `color: #000000` instead of the previous blue color `#2563eb`
+- **Multiple function updates**: Fixed bold text formatting in `updateContent`, `updateAnswerContent`, and `markdownToHtml` functions
+
 ### January 14, 2025 - Improved Markdown-to-HTML Formatting
 - **Fixed empty line handling**: Replaced `<br>` tags with properly spaced paragraph breaks using `<p style="margin: 0.5em 0; height: 1em;">&nbsp;</p>`
 - **Enhanced header formatting**: Added proper styling with margins and font weights for H1, H2, H3 tags

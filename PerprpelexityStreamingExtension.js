@@ -865,7 +865,7 @@ export const PerplexityReasonerExtension = {
           processedLines
             .join('\n')
             // Bold
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong style="font-weight: bold; color: #000000;">$1</strong>')
             // Italic
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
             // Code

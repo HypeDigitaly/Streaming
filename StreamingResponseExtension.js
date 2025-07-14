@@ -2237,7 +2237,7 @@ export const StreamingResponseExtension = {
       // Join lines and apply remaining markdown formatting
       const formattedContent = processedLines.join('\n')
         // Bold
-        .replace(/\*\*(.*?)\*\*/g, '<strong style="font-weight: bold; color: #2563eb;">$1</strong>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong style="font-weight: bold; color: #000000;">$1</strong>')
         // Italic
         .replace(/\*(.*?)\*/g, '<em style="font-style: italic; color: #6b7280;">$1</em>')
         // Code
@@ -3050,7 +3050,7 @@ export const StreamingResponseExtension = {
             .replace(/\n## ([^\n]+)\n/g, '\n<h2>$1</h2>\n')
             .replace(/\n# ([^\n]+)\n/g, '\n<h1>$1</h1>\n')
             // Bold and italic
-            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\*\*(.*?)\*\*/g, "<strong style=\"font-weight: bold; color: #000000;\">$1</strong>")
             .replace(/\*(.*?)\*/g, "<em>$1</em>")
             // Code
             .replace(/`([^`]+)`/g, "<code>$1</code>")
