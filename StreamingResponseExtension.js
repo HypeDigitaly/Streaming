@@ -1649,7 +1649,7 @@ export const StreamingResponseExtension = {
 
 
       
-      // Special handling for streaming headers - process only complete lines
+      // Special handling for streaming content - process only complete elements
       let processBuffer = buffer;
       
       // If buffer doesn't end with newline and contains incomplete header, delay processing
@@ -1661,6 +1661,27 @@ export const StreamingResponseExtension = {
         if (lastLine.includes('##') && lastLine.length < 100) {
           // Process all but the last line
           processBuffer = lines.slice(0, -1).join('\n') + (lines.length > 1 ? '\n' : '');
+        }
+      }
+      
+      // Handle incomplete markdown links - delay processing if link appears incomplete
+      if (buffer.includes('[') && buffer.includes('](') && !buffer.endsWith(')')) {
+        // Check if we have an incomplete link at the end
+        const linkStart = buffer.lastIndexOf('[');
+        const linkMiddle = buffer.lastIndexOf('](', linkStart);
+        
+        if (linkStart !== -1 && linkMiddle !== -1 && linkMiddle > linkStart) {
+          // We have an incomplete link, process everything up to the link start
+          const beforeLink = buffer.substring(0, linkStart);
+          const afterLink = buffer.substring(linkStart);
+          
+          // Only delay if the link looks like it's being streamed (contains URL encoding)
+          if (afterLink.includes('%') || afterLink.includes('stredoceskykraj.cz')) {
+            processBuffer = beforeLink;
+            if (trace.payload?.debugMode === 1) {
+              console.log("🔗 DELAY: Incomplete link detected, delaying processing:", afterLink.substring(0, 50) + "...");
+            }
+          }
         }
       }
 
@@ -1855,8 +1876,30 @@ export const StreamingResponseExtension = {
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         // Code
         .replace(/`(.*?)`/g, '<code>$1</code>')
-        // Links
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        // Links - improved processing for streaming content
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+          // Check if this is a complete link (not broken by streaming)
+          const trimmedUrl = url.trim();
+          
+          // Skip processing if URL looks incomplete due to streaming
+          if (trimmedUrl.length < 3 || trimmedUrl.includes('%') && trimmedUrl.length < 20) {
+            return match; // Return as-is for now, will be processed later
+          }
+          
+          // Clean up URL encoding and ensure proper format
+          let cleanUrl = trimmedUrl;
+          try {
+            // Only decode if it's a properly formed URL
+            if (cleanUrl.includes('%') && cleanUrl.match(/^https?:\/\//) || cleanUrl.includes('stredoceskykraj.cz')) {
+              cleanUrl = decodeURIComponent(cleanUrl);
+            }
+          } catch (e) {
+            // If decoding fails, use original URL
+            cleanUrl = trimmedUrl;
+          }
+          
+          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+        })
         // Tables - Improved processing for markdown tables
         .replace(
           /(?:^|\n)(\s*\|[^\n]+\|\n\s*\|[\s\-:|]+\|\n(?:\s*\|[^\n]+\|\n?)*)/gm,
@@ -3467,6 +3510,43 @@ export const StreamingResponseExtension = {
           console.log("🔍 FINALIZE: Processing remaining buffer content");
         }
         updateContent(''); // Trigger final processing with complete buffer
+      }
+      
+      // Final pass to process any remaining incomplete links
+      if (responseContent) {
+        let finalContent = responseContent.innerHTML;
+        
+        // Process any remaining incomplete markdown links with more aggressive URL decoding
+        finalContent = finalContent.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+          let cleanUrl = url.trim();
+          
+          // More aggressive URL decoding for final processing
+          try {
+            if (cleanUrl.includes('%')) {
+              cleanUrl = decodeURIComponent(cleanUrl);
+            }
+          } catch (e) {
+            // If decoding fails, try manual fixes for common issues
+            cleanUrl = cleanUrl
+              .replace(/%20/g, ' ')
+              .replace(/%C4%8D/g, 'č')
+              .replace(/%C5%99/g, 'ř')
+              .replace(/%C3%A1/g, 'á')
+              .replace(/%C3%AD/g, 'í')
+              .replace(/%C3%A9/g, 'é');
+          }
+          
+          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+        });
+        
+        // Update the content if changes were made
+        if (finalContent !== responseContent.innerHTML) {
+          responseContent.innerHTML = finalContent;
+          
+          if (trace.payload?.debugMode === 1) {
+            console.log("🔗 FINALIZE: Processed remaining links");
+          }
+        }
       }
     }
 

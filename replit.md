@@ -10,6 +10,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Streaming Link Display Fix (January 2025)
+- **Fixed PDF Link Streaming**: Resolved issue where PDF links and other URLs were broken during streaming due to URL encoding chunks
+- **Enhanced Link Processing**: Improved markdown link regex to handle incomplete links during streaming by delaying processing until complete
+- **Added Buffer Management**: Added logic to detect incomplete markdown links and delay processing until the full URL is received
+- **Improved URL Decoding**: Added comprehensive URL decoding in finalizeContent() to handle Czech characters and URL encoding
+- **Added Debug Logging**: Enhanced debugging for link processing to track incomplete links and URL decoding
+
 ### Database Citation Display Fix (January 2025)
 - **Fixed Database Section Processing**: Resolved issue where only the first citation was displayed in the "Databázové zdroje" section despite all citations being properly wrapped in database tags
 - **Simplified Regex Pattern**: Replaced complex regex patterns with simpler capture for `[[Database_Sources_End]]` markers to ensure all citations are included
