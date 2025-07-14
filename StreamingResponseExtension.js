@@ -1586,13 +1586,23 @@ export const StreamingResponseExtension = {
                                    processedBuffer.includes('\n');
 
       if (shouldRunExpensiveOps) {
-        // Single pass for all image patterns
+        // Single pass for all image patterns - fixed to avoid catching HTML links
         processedBuffer = processedBuffer.replace(
-          /\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?|[a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[a-zA-Z0-9=&_.-]+)?)\b/gi,
+          /(?<!<[^>]*)\b(https?:\/\/[^\s<>]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s<>]*)?)\b(?![^<]*>)/gi,
           function (match, url) {
             // Quick check to avoid double-processing
             if (processedBuffer.includes(`![Image](${url})`)) return match;
             return `![Image](${url})`;
+          }
+        );
+
+        // Handle standalone image filenames (not in HTML context)
+        processedBuffer = processedBuffer.replace(
+          /(?<!<[^>]*|href=["']|src=["'])\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[a-zA-Z0-9=&_.-]+)?)\b(?![^<]*>|["'])/gi,
+          function (match, filename) {
+            // Skip if already processed or looks like part of a URL
+            if (processedBuffer.includes(`![Image](${filename})`) || processedBuffer.includes(`/${filename}`)) return match;
+            return `![Image](${filename})`;
           }
         );
 
@@ -2389,7 +2399,6 @@ export const StreamingResponseExtension = {
             function (match) {
               const tableContent = match.trim();
               const rows = tableContent.split("\n").filter((row) => row.trim());
-
               if (rows.length < 2) return match;
 
               let tableHtml = '<table class="markdown-table">\n';
@@ -2399,9 +2408,7 @@ export const StreamingResponseExtension = {
                 const trimmedRow = row.trim();
 
                 // Skip separator row
-                if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) {
-                  return;
-                }
+                if (rowIndex === 1 && /^\s*\|[\s\-:|]+\|\s*$/.test(trimmedRow)) return;
 
                 tableHtml += "  <tr>\n";
 
