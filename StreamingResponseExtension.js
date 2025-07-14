@@ -1649,7 +1649,8 @@ export const StreamingResponseExtension = {
 
       // --- START: Auto-link document files ---
       const docExtensions = ['pdf', 'docx', 'doc', 'xlsx', 'xls', 'ppt', 'pptx', 'zip', 'rar', 'txt'];
-      const docExtRegex = new RegExp(`(?<!\\]\\()\\b((?:[\\w\\d\\s.,%()-]+\\/)*[\\w\\d\\s.,%()-]+\\.(?:${docExtensions.join('|')}))\\b`, 'gi');
+      // Updated regex to support Unicode characters in file paths and names.
+      const docExtRegex = new RegExp(`(?<!\\]\\()\\b((?:[\\p{L}\\d\\s.,%()-_]+\\/)*[\\p{L}\\d\\s.,%()-_]+\\.(?:${docExtensions.join('|')}))\\b`, 'giu');
       
       buffer = buffer.replace(docExtRegex, (match, url) => {
         // Double-check to avoid wrapping something that looks like the end of a markdown link.
