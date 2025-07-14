@@ -830,7 +830,28 @@ export const PerplexityReasonerExtension = {
             currentList = null
           }
   
-          // Handle paragraphs
+          // Handle blockquotes
+          if (line.startsWith('>')) {
+            if (currentList) {
+              processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>')
+              currentList = null
+            }
+            if (isInParagraph) {
+              processedLines.push('</p>')
+              isInParagraph = false
+            }
+            
+            const blockquoteContent = line.slice(1).trim()
+            // Add a newline before blockquote only if previous line wasn't a header
+            if (!lastLineWasHeader && processedLines.length > 0) {
+              processedLines.push('')
+            }
+            processedLines.push(`<blockquote class="answer-blockquote"><p>${blockquoteContent}</p></blockquote>`)
+            lastLineWasHeader = false
+            continue
+          }
+
+          // Handle paragraphs and empty lines
           if (line) {
             if (!isInParagraph) {
               // Add a newline before paragraph only if previous line wasn't a header
@@ -846,9 +867,17 @@ export const PerplexityReasonerExtension = {
             }
             processedLines.push(line)
             lastLineWasHeader = false
-          } else if (isInParagraph) {
-            processedLines.push('</p>')
-            isInParagraph = false
+          } else {
+            // Empty line - close current paragraph and add proper separation
+            if (isInParagraph) {
+              processedLines.push('</p>')
+              isInParagraph = false
+              // Add space between paragraphs only if there's content after
+              const nextNonEmptyLine = lines.slice(i + 1).find(l => l.trim())
+              if (nextNonEmptyLine && !nextNonEmptyLine.startsWith('#')) {
+                processedLines.push('')
+              }
+            }
           }
         }
   
@@ -868,7 +897,9 @@ export const PerplexityReasonerExtension = {
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             // Italic
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            // Code
+            // Code blocks (three backticks)
+            .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+            // Inline code (single backticks)
             .replace(/`(.*?)`/g, '<code>$1</code>')
             // Links
             .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')

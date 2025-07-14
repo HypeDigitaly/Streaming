@@ -774,13 +774,69 @@ export const StreamingResponseExtension = {
           .response-content * + .ai-thinking-section {
             margin-top: 0 !important;
           }
-          /* Aggressive margin/padding removal */
+          /* Paragraph and line break styling */
+          .response-content p {
+            margin: 0.5em 0;
+            line-height: 1.6;
+          }
           .response-content p:empty {
             display: none;
+          }
+          .response-content br {
+            display: block;
+            margin: 0.5em 0;
+          }
+          .response-content br + br {
+            display: none; /* Prevent consecutive line breaks */
           }
           .response-content br + .ai-thinking-section,
           .response-content .ai-thinking-section + br {
             display: none;
+          }
+          /* Better spacing between elements */
+          .response-content p + p {
+            margin-top: 1em;
+          }
+          .response-content br + p {
+            margin-top: 0.5em;
+          }
+          .response-content p + br {
+            margin-top: 0.3em;
+          }
+          /* Code and pre-formatted text styling */
+          .response-content code {
+            background-color: #f3f4f6;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            border: 1px solid #e5e7eb;
+          }
+          .response-content pre {
+            background-color: #f8f9fa;
+            padding: 1em;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1em 0;
+            border: 1px solid #e5e7eb;
+            line-height: 1.4;
+          }
+          .response-content pre code {
+            background: none;
+            padding: 0;
+            border: none;
+            font-size: 0.9em;
+          }
+          /* Blockquote styling */
+          .response-content blockquote {
+            margin: 1em 0;
+            padding: 0.5em 1em;
+            border-left: 4px solid #d1d5db;
+            background-color: #f9fafb;
+            font-style: italic;
+          }
+          .response-content blockquote p {
+            margin: 0.5em 0;
           }
           .ai-info-footer {
             display: flex;
@@ -1899,6 +1955,27 @@ export const StreamingResponseExtension = {
           continue;
         }
         
+        // Handle blockquotes
+        if (line.startsWith('>')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          
+          const blockquoteContent = line.slice(1).trim();
+          // Add a newline before blockquote only if previous line wasn't a header
+          if (!lastLineWasHeader && processedLines.length > 0) {
+            processedLines.push('');
+          }
+          processedLines.push(`<blockquote><p>${blockquoteContent}</p></blockquote>`);
+          lastLineWasHeader = false;
+          continue;
+        }
+        
         // Handle lists
         const orderedListMatch = line.match(/^\d+\.\s+(.+)/);
         const unorderedListMatch = line.match(/^[-*+]\s+(.+)/);
@@ -1936,7 +2013,7 @@ export const StreamingResponseExtension = {
           currentList = null;
         }
         
-        // Handle paragraphs
+        // Handle paragraphs and empty lines
         if (line) {
           if (!isInParagraph) {
             // Add a newline before paragraph only if previous line wasn't a header
@@ -1948,9 +2025,17 @@ export const StreamingResponseExtension = {
           }
           processedLines.push(line);
           lastLineWasHeader = false;
-        } else if (isInParagraph) {
-          processedLines.push('</p>');
-          isInParagraph = false;
+        } else {
+          // Empty line - close current paragraph and add proper separation
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+            // Add space between paragraphs only if there's content after
+            const nextNonEmptyLine = lines.slice(i + 1).find(l => l.trim());
+            if (nextNonEmptyLine && !nextNonEmptyLine.startsWith('#')) {
+              processedLines.push('');
+            }
+          }
         }
       }
       
@@ -1968,7 +2053,9 @@ export const StreamingResponseExtension = {
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         // Italic
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        // Code
+        // Code blocks (three backticks)
+        .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+        // Inline code (single backticks)
         .replace(/`(.*?)`/g, '<code>$1</code>')
         // Links - improved processing for streaming content
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
