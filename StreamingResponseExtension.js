@@ -578,10 +578,33 @@ export const StreamingResponseExtension = {
           .response-content br {
             margin: 0;
             line-height: 1;
+            display: block;
+            margin-top: 0.6em;
+            margin-bottom: 0.6em;
+            content: "";
           }
+          
+          /* Better spacing for consecutive line breaks */
+          .response-content br + br {
+            margin-top: 0;
+            margin-bottom: 0.3em;
+          }
+          
+          /* Improve paragraph spacing */
           .response-content p {
-            margin: 0 0 0.5em 0;
-            line-height: 1.5;
+            margin: 0 0 0.8em 0;
+            line-height: 1.6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+          }
+          
+          /* Better spacing between different content types */
+          .response-content p + br {
+            margin-top: 0.3em;
+          }
+          
+          .response-content br + p {
+            margin-top: 0.3em;
           }
           .response-content p:last-child {
             margin-bottom: 0;
@@ -642,12 +665,52 @@ export const StreamingResponseExtension = {
           }
           .response-content code {
             /* Style for inline code */
-            background-color: #f0f0f0; /* Light grey background */
-            padding: 0.1em 0.4em; /* Small padding */
+            background-color: #f5f5f5; /* Light grey background */
+            padding: 0.2em 0.4em; /* Small padding */
             border-radius: 4px; /* Rounded corners */
-            font-family: monospace; /* Monospace font */
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace; /* Monospace font */
             margin: 0;
-            line-height: 1;
+            line-height: 1.4;
+            font-size: 0.9em;
+            color: #d73a49;
+            border: 1px solid #e1e5e9;
+          }
+          
+          /* Pre-formatted code blocks */
+          .response-content pre {
+            background-color: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            padding: 1em;
+            margin: 1em 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.45;
+          }
+          
+          .response-content pre code {
+            background-color: transparent;
+            padding: 0;
+            border: none;
+            color: inherit;
+            font-size: inherit;
+          }
+          
+          /* Blockquote styling */
+          .response-content blockquote {
+            border-left: 4px solid #e1e5e9;
+            margin: 1em 0;
+            padding: 0.5em 1em;
+            background-color: #f8f9fa;
+            border-radius: 0 4px 4px 0;
+            font-style: italic;
+            color: #6a737d;
+          }
+          
+          .response-content blockquote p {
+            margin: 0;
+            line-height: 1.5;
           }
           .response-content .markdown-table {
             border-collapse: collapse;
@@ -1843,7 +1906,7 @@ export const StreamingResponseExtension = {
       const cleanedMarkdown = initialProcessedContent
         .trim()
         .replace(/^\s+/gm, '') // Remove leading spaces from each line
-        .replace(/\n{3,}/g, '\n\n'); // Clean up excessive newlines
+        .replace(/\n{3,}/g, '\n\n'); // Clean up excessive newlines but preserve double newlines for paragraphs
       
       // Split content into lines for better processing
       const lines = cleanedMarkdown.split('\n');
@@ -1851,12 +1914,28 @@ export const StreamingResponseExtension = {
       let currentList = null;
       let isInParagraph = false;
       let lastLineWasHeader = false;
+      let consecutiveEmptyLines = 0;
       
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i].trim();
         const nextLine = i < lines.length - 1 ? lines[i + 1].trim() : '';
         const isCurrentLineHeader = line.startsWith('#');
         const isNextLineHeader = nextLine.startsWith('#');
+        
+        // Handle blockquotes
+        if (line.startsWith('> ')) {
+          if (currentList) {
+            processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
+            currentList = null;
+          }
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          processedLines.push(`<blockquote><p>${line.slice(2).trim()}</p></blockquote>`);
+          lastLineWasHeader = false;
+          continue;
+        }
         
         // Handle headers
         if (line.startsWith('###')) {
@@ -1936,8 +2015,25 @@ export const StreamingResponseExtension = {
           currentList = null;
         }
         
-        // Handle paragraphs
-        if (line) {
+        // Handle empty lines and paragraphs
+        if (line === '') {
+          consecutiveEmptyLines++;
+          
+          // Handle empty lines - these should create paragraph breaks or line breaks
+          if (isInParagraph) {
+            processedLines.push('</p>');
+            isInParagraph = false;
+          }
+          
+          // Only add line break if we haven't already added one (avoid multiple consecutive line breaks)
+          if (consecutiveEmptyLines === 1) {
+            processedLines.push('<br>');
+          }
+          
+          lastLineWasHeader = false;
+        } else if (line) {
+          consecutiveEmptyLines = 0;
+          // Handle non-empty lines
           if (!isInParagraph) {
             // Add a newline before paragraph only if previous line wasn't a header
             if (!lastLineWasHeader && processedLines.length > 0 && !isCurrentLineHeader) {
@@ -1948,9 +2044,6 @@ export const StreamingResponseExtension = {
           }
           processedLines.push(line);
           lastLineWasHeader = false;
-        } else if (isInParagraph) {
-          processedLines.push('</p>');
-          isInParagraph = false;
         }
       }
       
@@ -2046,8 +2139,16 @@ export const StreamingResponseExtension = {
             return tableHtml;
           },
         )
-        // Clean up any extra newlines between elements
+        // Clean up any extra newlines between elements and improve spacing
         .replace(/>\n</g, '>\n<')
+        .replace(/<br>\s*<br>/g, '<br>') // Remove duplicate line breaks
+        .replace(/<\/p>\s*<br>/g, '</p>') // Remove unnecessary line breaks after paragraphs
+        .replace(/<br>\s*<p>/g, '<p>') // Remove unnecessary line breaks before paragraphs
+        .replace(/<\/h[1-6]>\s*<br>/g, function(match) {
+          return match.replace('<br>', ''); // Remove line breaks after headers
+        })
+        .replace(/<\/ul>\s*<br>/g, '</ul>') // Remove line breaks after lists
+        .replace(/<\/ol>\s*<br>/g, '</ol>') // Remove line breaks after lists
         .trim();
 
 
@@ -2072,6 +2173,29 @@ export const StreamingResponseExtension = {
       tempContainer.querySelectorAll("ol, ul").forEach((list) => {
         if (!list.hasChildNodes()) {
           list.remove();
+        }
+      });
+
+      // Clean up empty paragraphs that contain only whitespace or br tags
+      tempContainer.querySelectorAll("p").forEach((p) => {
+        const content = p.innerHTML.trim();
+        if (content === "" || content === "<br>" || content === "<br/>") {
+          p.remove();
+        }
+      });
+
+      // Remove excessive consecutive br tags
+      tempContainer.querySelectorAll("br").forEach((br) => {
+        let nextSibling = br.nextSibling;
+        let consecutiveBrs = 0;
+        
+        while (nextSibling && nextSibling.nodeType === 1 && nextSibling.tagName === "BR") {
+          consecutiveBrs++;
+          let toRemove = nextSibling;
+          nextSibling = nextSibling.nextSibling;
+          if (consecutiveBrs > 1) { // Allow max 2 consecutive br tags
+            toRemove.remove();
+          }
         }
       });
 

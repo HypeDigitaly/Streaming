@@ -10,6 +10,17 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Enhanced Markdown to HTML Conversion (January 2025)
+- **Fixed Empty Line Handling**: Resolved issue where empty lines in markdown content were not properly converted to HTML line breaks
+- **Improved Line Break Spacing**: Added better CSS styling for `<br>` tags with proper top and bottom margins (0.6em)
+- **Enhanced Paragraph Formatting**: Improved paragraph spacing with better margins (0.8em bottom) and line height (1.6)
+- **Added Blockquote Support**: Implemented proper blockquote parsing and styling with left border and italic text
+- **Better Code Block Styling**: Enhanced inline code and pre-formatted code blocks with proper backgrounds, borders, and monospace fonts
+- **Consecutive Line Break Management**: Added logic to prevent excessive consecutive line breaks while preserving intentional spacing
+- **Improved Content Type Spacing**: Better spacing between different content types (paragraphs, headers, lists, line breaks)
+- **Enhanced HTML Cleanup**: Added post-processing to remove empty paragraphs and normalize consecutive break tags
+- **Better CSS Typography**: Improved font styling, colors, and spacing for better readability
+
 ### Comprehensive URL Formatting Fix (January 2025)
 - **Fixed PDF Link Streaming Issues**: Resolved persistent URL encoding problems that broke PDF and document links during streaming
 - **Centralized URL Decoding**: Created decodeUrlSafely() function with comprehensive Czech character decoding including č, ř, á, í, é, š, ž, ý, ě, ů, ú, ň, ď, ť, ó
