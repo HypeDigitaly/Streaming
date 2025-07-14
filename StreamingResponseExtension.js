@@ -1664,8 +1664,8 @@ export const StreamingResponseExtension = {
         }
       }
 
-      // Format markdown content - CRITICAL: Process images BEFORE italic formatting to prevent URL corruption
-      const formattedContent = processBuffer
+      // First, process special tags and basic formatting
+      let initialProcessedContent = processBuffer
         // Process POSTUP tags FIRST to avoid conflicts with other formatting
         .replace(/\[\[POSTUP_START\]\]([\s\S]*?)\[\[POSTUP_END\]\]/g, function(match, content) {
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
@@ -1689,24 +1689,6 @@ export const StreamingResponseExtension = {
         .replace(/<p>\s*<\/p>/g, '')
         .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')
         .replace(/<\/div>\s*\n/g, '</div>')
-        // Headers - H1 to H5 (multiple approaches for robustness)
-        .replace(/^(\s*)#{5}\s+(.+?)$/gm, "<h5>$2</h5>")
-        .replace(/^(\s*)#{4}\s+(.+?)$/gm, "<h4>$2</h4>")
-        .replace(/^(\s*)#{3}\s+(.+?)$/gm, "<h3>$2</h3>")
-        .replace(/^(\s*)#{2}\s+(.+?)$/gm, "<h2>$2</h2>")
-        .replace(/^(\s*)#{1}\s+(.+?)$/gm, "<h1>$2</h1>")
-        // Fallback headers - no leading whitespace
-        .replace(/^##### (.+)$/gm, "<h5>$1</h5>")
-        .replace(/^#### (.+)$/gm, "<h4>$1</h4>")
-        .replace(/^### (.+)$/gm, "<h3>$1</h3>")
-        .replace(/^## (.+)$/gm, "<h2>$1</h2>")
-        .replace(/^# (.+)$/gm, "<h1>$1</h1>")
-        // Ultra-simple fallback for stubborn cases
-        .replace(/##\s+([^\n\r]+)/g, "<h2>$1</h2>")
-        .replace(/#\s+([^\n\r]+)/g, "<h1>$1</h1>")
-        // Brutal fallback - replace any remaining ## patterns
-        .replace(/##\s*([^#\n\r]+)/g, "<h2>$1</h2>")
-        .replace(/^([^<\n\r]*?)##\s*([^#\n\r]+)/gm, "$1<h2>$2</h2>")
         // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
         .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
           // Clean and validate the URL
@@ -1730,23 +1712,11 @@ export const StreamingResponseExtension = {
 
           return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
-        // Convert regular markdown links to HTML links (MUST be done BEFORE other text processing)
-        .replace(
-          /\[([^\]]+)\]\(([^)]+)\)/g,
-          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
-        )
-        // Bold formatting (AFTER image and link processing to prevent URL corruption)
-        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Double asterisks for bold
-        // Italic formatting
-        .replace(/\*(.*?)\*/g, "<em>$1</em>") // Single asterisks for italic
-        // Code
-        .replace(/`([^`]+)`/g, "<code>$1</code>")
         // Line separators (three or more hyphens)
-        .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
-        // Apply improved line-by-line processing for better markdown handling
+        .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />');
         
       // Use the improved markdownToHtml function
-      const cleanedMarkdown = processBuffer
+      const cleanedMarkdown = initialProcessedContent
         .trim()
         .replace(/^\s+/gm, '') // Remove leading spaces from each line
         .replace(/\n{3,}/g, '\n\n'); // Clean up excessive newlines
