@@ -1938,7 +1938,7 @@ export const StreamingResponseExtension = {
           return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
         // Line separators (three or more hyphens)
-        .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />');
+        .replace(/^-{3,}$/gm, '<hr style="margin: 2em 0; border: none; border-top: 2px solid #e5e7eb; width: 100%;" />');
         
       // Use the improved markdownToHtml function
       const cleanedMarkdown = initialProcessedContent
@@ -1970,7 +1970,7 @@ export const StreamingResponseExtension = {
             processedLines.push('</p>');
             isInParagraph = false;
           }
-          processedLines.push(`<blockquote><p>${line.slice(2).trim()}</p></blockquote>`);
+          processedLines.push(`<blockquote style="margin: 1em 0; padding: 0.8em 1em; border-left: 4px solid #ddd; background-color: #f9f9f9; font-style: italic;"><p style="margin: 0; line-height: 1.4;">${line.slice(2).trim()}</p></blockquote>`);
           lastLineWasHeader = false;
           continue;
         }
@@ -1985,7 +1985,7 @@ export const StreamingResponseExtension = {
             processedLines.push('</p>');
             isInParagraph = false;
           }
-          processedLines.push(`<h3>${line.slice(3).trim()}</h3>`);
+          processedLines.push(`<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">${line.slice(3).trim()}</h3>`);
           lastLineWasHeader = true;
           continue;
         }
@@ -1998,7 +1998,7 @@ export const StreamingResponseExtension = {
             processedLines.push('</p>');
             isInParagraph = false;
           }
-          processedLines.push(`<h2>${line.slice(2).trim()}</h2>`);
+          processedLines.push(`<h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">${line.slice(2).trim()}</h2>`);
           lastLineWasHeader = true;
           continue;
         }
@@ -2011,7 +2011,7 @@ export const StreamingResponseExtension = {
             processedLines.push('</p>');
             isInParagraph = false;
           }
-          processedLines.push(`<h1>${line.slice(1).trim()}</h1>`);
+          processedLines.push(`<h1 style="margin: 1.5em 0 0.7em 0; font-weight: bold; color: #333; font-size: 1.4em;">${line.slice(1).trim()}</h1>`);
           lastLineWasHeader = true;
           continue;
         }
@@ -2031,18 +2031,18 @@ export const StreamingResponseExtension = {
           
           if (!currentList) {
             currentList = { type: listType };
-            // Add a newline before list only if previous line wasn't a header
+            // Add proper spacing before lists
             if (!lastLineWasHeader && processedLines.length > 0) {
-              processedLines.push('');
+              processedLines.push('<div style="margin: 0.3em 0;"></div>');
             }
-            processedLines.push(`<${listType}>`);
+            processedLines.push(`<${listType} style="margin: 0.5em 0; padding-left: 1.5em;">`);
           } else if (currentList.type !== listType) {
             processedLines.push(currentList.type === 'ol' ? '</ol>' : '</ul>');
             currentList = { type: listType };
-            processedLines.push(`<${listType}>`);
+            processedLines.push(`<${listType} style="margin: 0.5em 0; padding-left: 1.5em;">`);
           }
           
-          processedLines.push(`<li>${listContent}</li>`);
+          processedLines.push(`<li style="margin: 0.2em 0; line-height: 1.4;">${listContent}</li>`);
           lastLineWasHeader = false;
           continue;
         }
@@ -2057,15 +2057,16 @@ export const StreamingResponseExtension = {
         if (line === '') {
           consecutiveEmptyLines++;
           
-          // Handle empty lines - these should create paragraph breaks or line breaks
+          // Handle empty lines - these should create proper paragraph breaks
           if (isInParagraph) {
             processedLines.push('</p>');
             isInParagraph = false;
           }
           
-          // Only add line break if we haven't already added one (avoid multiple consecutive line breaks)
+          // Add a proper paragraph break for empty lines
+          // But only add one empty paragraph per sequence of empty lines
           if (consecutiveEmptyLines === 1) {
-            processedLines.push('<br>');
+            processedLines.push('<p style="margin: 0.5em 0; height: 1em;">&nbsp;</p>');
           }
           
           lastLineWasHeader = false;
@@ -2073,12 +2074,12 @@ export const StreamingResponseExtension = {
           consecutiveEmptyLines = 0;
           // Handle non-empty lines
           if (!isInParagraph) {
-            // Add a newline before paragraph only if previous line wasn't a header
-            if (!lastLineWasHeader && processedLines.length > 0 && !isCurrentLineHeader) {
-              processedLines.push('');
-            }
-            processedLines.push('<p>');
+            // Start a new paragraph with proper spacing
+            processedLines.push('<p style="margin: 0.25em 0; line-height: 1.4;">');
             isInParagraph = true;
+          } else {
+            // Add line break within paragraph for continuous text
+            processedLines.push('<br>');
           }
           processedLines.push(line);
           lastLineWasHeader = false;
@@ -2096,11 +2097,11 @@ export const StreamingResponseExtension = {
       // Join lines and apply remaining markdown formatting
       const formattedContent = processedLines.join('\n')
         // Bold
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong style="font-weight: bold; color: #2563eb;">$1</strong>')
         // Italic
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\*(.*?)\*/g, '<em style="font-style: italic; color: #6b7280;">$1</em>')
         // Code
-        .replace(/`(.*?)`/g, '<code>$1</code>')
+        .replace(/`(.*?)`/g, '<code style="background-color: #f3f4f6; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; font-size: 0.9em; color: #dc2626;">$1</code>')
         // Links - improved processing for streaming content
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
           // Check if this is a complete link (not broken by streaming)
@@ -2118,7 +2119,7 @@ export const StreamingResponseExtension = {
             cleanUrl = decodeUrlSafely(cleanUrl);
           }
           
-          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; text-decoration-color: #93c5fd;">${linkText}</a>`;
         })
         // Tables - Improved processing for markdown tables
         .replace(
@@ -2131,7 +2132,7 @@ export const StreamingResponseExtension = {
             // Check if this is really a table (at least 2 rows: header + separator)
             if (rows.length < 2) return match;
 
-            let tableHtml = '<table class="markdown-table">\n';
+            let tableHtml = '<table style="border-collapse: collapse; width: 100%; margin: 1em 0; border: 1px solid #e5e7eb; border-radius: 6px; overflow: hidden;">\n';
             let headerProcessed = false;
 
             // Process each row
@@ -2160,7 +2161,10 @@ export const StreamingResponseExtension = {
                 // First row (after potential separator) is header
                 const cellTag =
                   !headerProcessed && rowIndex === 0 ? "th" : "td";
-                tableHtml += `    <${cellTag}>${cellContent}</${cellTag}>\n`;
+                const cellStyle = cellTag === "th" 
+                  ? 'padding: 0.75em; background-color: #f9fafb; border-bottom: 2px solid #e5e7eb; font-weight: bold; text-align: left;'
+                  : 'padding: 0.75em; border-bottom: 1px solid #e5e7eb; text-align: left;';
+                tableHtml += `    <${cellTag} style="${cellStyle}">${cellContent}</${cellTag}>\n`;
               });
 
               // Mark header as processed after first actual content row

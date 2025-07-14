@@ -8,6 +8,20 @@ This is a Next.js-based API proxy service that provides unified streaming capabi
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### January 14, 2025 - Improved Markdown-to-HTML Formatting
+- **Fixed empty line handling**: Replaced `<br>` tags with properly spaced paragraph breaks using `<p style="margin: 0.5em 0; height: 1em;">&nbsp;</p>`
+- **Enhanced header formatting**: Added proper styling with margins and font weights for H1, H2, H3 tags
+- **Improved list formatting**: Added proper spacing and padding for ordered/unordered lists
+- **Better blockquote styling**: Added background color, borders, and italic styling for blockquotes
+- **Enhanced text formatting**: Added colored styling for bold, italic, and code elements
+- **Improved table styling**: Added borders, proper cell padding, and header styling
+- **Better link styling**: Added blue color and underline styling for links
+- **Enhanced horizontal rules**: Added proper margin and border styling for separators
+
+These changes address the formatting issues in the Voiceflow UI where line breaks and empty lines were not displaying properly, making the content more readable and visually appealing.
+
 ## System Architecture
 
 ### Backend Architecture
