@@ -598,16 +598,44 @@ export const StreamingResponseExtension = {
             overflow-wrap: break-word;
           }
           
+          /* Better spacing for line breaks */
+          .response-content br {
+            display: block;
+            margin: 0.4em 0;
+            line-height: 1;
+          }
+          
+          /* Multiple consecutive line breaks */
+          .response-content br + br {
+            margin-top: 0.2em;
+          }
+          
           /* Better spacing between different content types */
           .response-content p + br {
-            margin-top: 0.3em;
+            margin-top: 0.2em;
           }
           
           .response-content br + p {
-            margin-top: 0.3em;
+            margin-top: 0.2em;
           }
+          
           .response-content p:last-child {
             margin-bottom: 0;
+          }
+          
+          /* Ensure proper spacing around headers after line breaks */
+          .response-content br + h1,
+          .response-content br + h2,
+          .response-content br + h3,
+          .response-content br + h4,
+          .response-content br + h5 {
+            margin-top: 0.4em;
+          }
+          
+          /* Ensure proper spacing around lists after line breaks */
+          .response-content br + ul,
+          .response-content br + ol {
+            margin-top: 0.3em;
           }
           /* Zajistit konzistentní spacing pro všechny elementy */
           .response-content > *:first-child {
@@ -1940,25 +1968,24 @@ export const StreamingResponseExtension = {
         // Line separators (three or more hyphens)
         .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />');
         
-      // Use the improved markdownToHtml function
+      // Improved markdown to HTML conversion with better line break handling
       const cleanedMarkdown = initialProcessedContent
         .trim()
         .replace(/^\s+/gm, '') // Remove leading spaces from each line
-        .replace(/\n{3,}/g, '\n\n'); // Clean up excessive newlines but preserve double newlines for paragraphs
+        .replace(/\n{4,}/g, '\n\n\n'); // Allow max 3 consecutive newlines
       
-      // Split content into lines for better processing
+      // Split content into lines for processing
       const lines = cleanedMarkdown.split('\n');
       const processedLines = [];
       let currentList = null;
       let isInParagraph = false;
       let lastLineWasHeader = false;
-      let consecutiveEmptyLines = 0;
+      let emptyLineCount = 0;
       
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i].trim();
         const nextLine = i < lines.length - 1 ? lines[i + 1].trim() : '';
         const isCurrentLineHeader = line.startsWith('#');
-        const isNextLineHeader = nextLine.startsWith('#');
         
         // Handle blockquotes
         if (line.startsWith('> ')) {
@@ -1969,6 +1996,10 @@ export const StreamingResponseExtension = {
           if (isInParagraph) {
             processedLines.push('</p>');
             isInParagraph = false;
+          }
+          if (emptyLineCount > 0) {
+            processedLines.push('<br>');
+            emptyLineCount = 0;
           }
           processedLines.push(`<blockquote><p>${line.slice(2).trim()}</p></blockquote>`);
           lastLineWasHeader = false;
@@ -1985,6 +2016,10 @@ export const StreamingResponseExtension = {
             processedLines.push('</p>');
             isInParagraph = false;
           }
+          if (emptyLineCount > 0 && processedLines.length > 0) {
+            processedLines.push('<br>');
+            emptyLineCount = 0;
+          }
           processedLines.push(`<h3>${line.slice(3).trim()}</h3>`);
           lastLineWasHeader = true;
           continue;
@@ -1998,6 +2033,10 @@ export const StreamingResponseExtension = {
             processedLines.push('</p>');
             isInParagraph = false;
           }
+          if (emptyLineCount > 0 && processedLines.length > 0) {
+            processedLines.push('<br>');
+            emptyLineCount = 0;
+          }
           processedLines.push(`<h2>${line.slice(2).trim()}</h2>`);
           lastLineWasHeader = true;
           continue;
@@ -2010,6 +2049,10 @@ export const StreamingResponseExtension = {
           if (isInParagraph) {
             processedLines.push('</p>');
             isInParagraph = false;
+          }
+          if (emptyLineCount > 0 && processedLines.length > 0) {
+            processedLines.push('<br>');
+            emptyLineCount = 0;
           }
           processedLines.push(`<h1>${line.slice(1).trim()}</h1>`);
           lastLineWasHeader = true;
@@ -2031,9 +2074,9 @@ export const StreamingResponseExtension = {
           
           if (!currentList) {
             currentList = { type: listType };
-            // Add a newline before list only if previous line wasn't a header
-            if (!lastLineWasHeader && processedLines.length > 0) {
-              processedLines.push('');
+            if (emptyLineCount > 0 && processedLines.length > 0) {
+              processedLines.push('<br>');
+              emptyLineCount = 0;
             }
             processedLines.push(`<${listType}>`);
           } else if (currentList.type !== listType) {
@@ -2053,33 +2096,42 @@ export const StreamingResponseExtension = {
           currentList = null;
         }
         
-        // Handle empty lines and paragraphs
+        // Handle empty lines
         if (line === '') {
-          consecutiveEmptyLines++;
+          emptyLineCount++;
           
-          // Handle empty lines - these should create paragraph breaks or line breaks
+          // Close paragraph if we're in one
           if (isInParagraph) {
             processedLines.push('</p>');
             isInParagraph = false;
           }
           
-          // Only add line break if we haven't already added one (avoid multiple consecutive line breaks)
-          if (consecutiveEmptyLines === 1) {
-            processedLines.push('<br>');
-          }
-          
           lastLineWasHeader = false;
         } else if (line) {
-          consecutiveEmptyLines = 0;
           // Handle non-empty lines
-          if (!isInParagraph) {
-            // Add a newline before paragraph only if previous line wasn't a header
-            if (!lastLineWasHeader && processedLines.length > 0 && !isCurrentLineHeader) {
-              processedLines.push('');
+          
+          // Add line breaks for accumulated empty lines
+          if (emptyLineCount > 0) {
+            // Add appropriate spacing based on context
+            if (emptyLineCount === 1) {
+              processedLines.push('<br>');
+            } else if (emptyLineCount === 2) {
+              processedLines.push('<br><br>');
+            } else if (emptyLineCount >= 3) {
+              processedLines.push('<br><br><br>');
             }
+            emptyLineCount = 0;
+          }
+          
+          // Start new paragraph if not in one
+          if (!isInParagraph) {
             processedLines.push('<p>');
             isInParagraph = true;
+          } else {
+            // Add space between lines within the same paragraph
+            processedLines.push(' ');
           }
+          
           processedLines.push(line);
           lastLineWasHeader = false;
         }
@@ -2094,7 +2146,7 @@ export const StreamingResponseExtension = {
       }
       
       // Join lines and apply remaining markdown formatting
-      const formattedContent = processedLines.join('\n')
+      const formattedContent = processedLines.join('')
         // Bold
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         // Italic
@@ -2177,16 +2229,15 @@ export const StreamingResponseExtension = {
             return tableHtml;
           },
         )
-        // Clean up any extra newlines between elements and improve spacing
-        .replace(/>\n</g, '>\n<')
-        .replace(/<br>\s*<br>/g, '<br>') // Remove duplicate line breaks
-        .replace(/<\/p>\s*<br>/g, '</p>') // Remove unnecessary line breaks after paragraphs
-        .replace(/<br>\s*<p>/g, '<p>') // Remove unnecessary line breaks before paragraphs
-        .replace(/<\/h[1-6]>\s*<br>/g, function(match) {
-          return match.replace('<br>', ''); // Remove line breaks after headers
+        // Clean up any redundant spacing patterns
+        .replace(/<br><br><br><br>/g, '<br><br><br>') // Max 3 consecutive line breaks
+        .replace(/<\/p><br><p>/g, '</p><p>') // Clean paragraph transitions
+        .replace(/<\/h[1-6]><br><br>/g, function(match) {
+          return match.replace('<br><br>', '<br>'); // Reduce spacing after headers
         })
-        .replace(/<\/ul>\s*<br>/g, '</ul>') // Remove line breaks after lists
-        .replace(/<\/ol>\s*<br>/g, '</ol>') // Remove line breaks after lists
+        .replace(/<\/ul><br>/g, '</ul>') // Remove line breaks after lists
+        .replace(/<\/ol><br>/g, '</ol>') // Remove line breaks after lists
+        .replace(/<\/blockquote><br>/g, '</blockquote>') // Remove line breaks after blockquotes
         .trim();
 
 
@@ -2986,8 +3037,7 @@ export const StreamingResponseExtension = {
             }
           );
           
-          // Convert remaining line breaks to HTML breaks for better formatting
-          formattedContent = formattedContent.replace(/\n\n+/g, '<br><br>').replace(/\n/g, '<br>');
+          // Content is now properly formatted with explicit HTML structure
           
           if (payload.debugMode === 1) {
             console.log('🔍 PERPLEXITY DEBUG: Final formatted content:', formattedContent.substring(0, 300) + '...');
