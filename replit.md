@@ -20,7 +20,14 @@ Preferred communication style: Simple, everyday language.
 - **Better link styling**: Added blue color and underline styling for links
 - **Enhanced horizontal rules**: Added proper margin and border styling for separators
 
-These changes address the formatting issues in the Voiceflow UI where line breaks and empty lines were not displaying properly, making the content more readable and visually appealing.
+### January 14, 2025 - Fixed File & Link Formatting Issues
+- **Improved URL decoding**: Enhanced `decodeUrlSafely()` function to handle double-encoded URLs and additional special characters
+- **Fixed Database Sources overflow**: Added proper CSS styling to contain long URLs within collapsible sections
+- **Enhanced link containment**: Added `word-break: break-all` and `overflow-wrap: break-word` for all links in thinking sections
+- **Improved thinking section styling**: Updated Database Sources, Web Search Sources, and POSTUP sections with better URL handling
+- **Added CSS word wrapping**: Enhanced ai-thinking-content styles to prevent text overflow in Voiceflow UI
+
+These changes address the formatting issues in the Voiceflow UI where line breaks and empty lines were not displaying properly, and fix the URL encoding and overflow issues in the Database Sources section, making the content more readable and visually appealing.
 
 ## System Architecture
 

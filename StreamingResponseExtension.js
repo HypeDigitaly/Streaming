@@ -792,6 +792,10 @@ export const StreamingResponseExtension = {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease, padding 0.3s ease, border-top 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
           }
           .ai-thinking-content.expanded {
             max-height: 1000px;
@@ -805,8 +809,19 @@ export const StreamingResponseExtension = {
           .ai-thinking-content > *:last-child {
             margin-bottom: 0;
           }
+          .ai-thinking-content a {
+            word-break: break-all;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            display: inline-block;
+            max-width: 100%;
+          }
           .ai-thinking-content p {
             margin: 3px 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
           }
           .ai-thinking-content ul, .ai-thinking-content ol {
             margin: 3px 0;
@@ -1584,9 +1599,23 @@ export const StreamingResponseExtension = {
     // Function to decode URL-encoded Czech characters
     function decodeUrlSafely(url) {
       try {
-        return decodeURIComponent(url);
+        // First try standard decoding
+        let decodedUrl = decodeURIComponent(url);
+        
+        // If successful, try one more round of decoding in case of double encoding
+        try {
+          const doubleDecoded = decodeURIComponent(decodedUrl);
+          // Only use double decoded if it's significantly different (indicates double encoding)
+          if (doubleDecoded !== decodedUrl && doubleDecoded.length > decodedUrl.length) {
+            decodedUrl = doubleDecoded;
+          }
+        } catch (e) {
+          // Single decoding worked, double decoding failed - keep single
+        }
+        
+        return decodedUrl;
       } catch (e) {
-        // If decoding fails, try manual fixes for common Czech characters
+        // If standard decoding fails, try manual fixes for common encoded characters
         return url
           .replace(/%20/g, ' ')
           .replace(/%C4%8D/g, 'č')
@@ -1627,7 +1656,26 @@ export const StreamingResponseExtension = {
           .replace(/%2D/g, '-')
           .replace(/%5F/g, '_')
           .replace(/%28/g, '(')
-          .replace(/%29/g, ')');
+          .replace(/%29/g, ')')
+          .replace(/%3A/g, ':')
+          .replace(/%5C/g, '\\')
+          .replace(/%22/g, '"')
+          .replace(/%27/g, "'")
+          .replace(/%2B/g, '+')
+          .replace(/%2C/g, ',')
+          .replace(/%3B/g, ';')
+          .replace(/%40/g, '@')
+          .replace(/%23/g, '#')
+          .replace(/%24/g, '$')
+          .replace(/%25/g, '%')
+          .replace(/%5E/g, '^')
+          .replace(/%60/g, '`')
+          .replace(/%7B/g, '{')
+          .replace(/%7D/g, '}')
+          .replace(/%5B/g, '[')
+          .replace(/%5D/g, ']')
+          .replace(/%7C/g, '|')
+          .replace(/%7E/g, '~');
       }
     }
 
@@ -1827,17 +1875,17 @@ export const StreamingResponseExtension = {
             .map(line => line.trim())
             .filter(line => line.length > 0)
             .map(line => {
-              // Process markdown links in the content
+              // Process markdown links in the content with improved URL decoding
               return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
                 if (cleanUrl.includes('%')) {
                   cleanUrl = decodeUrlSafely(cleanUrl);
                 }
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${linkText}</a>`;
               });
             })
             .join('<br>\n');
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
         })
         // Process Database Sources tags - handle both paired and standalone end markers
         .replace(/\[\[Database_Sources_Start\]\]([\s\S]*?)\[\[Database_Sources_End\]\]/g, function(match, content) {
@@ -1846,8 +1894,18 @@ export const StreamingResponseExtension = {
             .split('\n')
             .map(line => line.trim())
             .filter(line => line.length > 0)
+            .map(line => {
+              // Process markdown links in the content with improved URL decoding
+              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                let cleanUrl = url.trim();
+                if (cleanUrl.includes('%')) {
+                  cleanUrl = decodeUrlSafely(cleanUrl);
+                }
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${linkText}</a>`;
+              });
+            })
             .join('<br>\n');
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
         })
         // Handle standalone Database_Sources_End markers - wrap citations after the marker
         // Process each citation individually to avoid packing them together
@@ -1872,13 +1930,13 @@ export const StreamingResponseExtension = {
               if (line) {
                 // Check if line contains citations (numbers in brackets)
                 if (line.match(/\[\d+\]/)) {
-                  // Process markdown links in citations
+                  // Process markdown links in citations with improved URL decoding
                   line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
                     let cleanUrl = url.trim();
                     if (cleanUrl.includes('%')) {
                       cleanUrl = decodeUrlSafely(cleanUrl);
                     }
-                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${linkText}</a>`;
                   });
                 }
                 processedLines.push(line);
@@ -1886,7 +1944,7 @@ export const StreamingResponseExtension = {
             }
             
             const processedContent = processedLines.join('<br>\n');
-            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${processedContent}</div></div>`;
+            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedContent}</div></div>`;
           }
           return '';
         })
@@ -1898,17 +1956,17 @@ export const StreamingResponseExtension = {
             .map(line => line.trim())
             .filter(line => line.length > 0)
             .map(line => {
-              // Process markdown links in the content
+              // Process markdown links in the content with improved URL decoding
               return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
                 if (cleanUrl.includes('%')) {
                   cleanUrl = decodeUrlSafely(cleanUrl);
                 }
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${linkText}</a>`;
               });
             })
             .join('<br>\n');
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${formattedContent}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
