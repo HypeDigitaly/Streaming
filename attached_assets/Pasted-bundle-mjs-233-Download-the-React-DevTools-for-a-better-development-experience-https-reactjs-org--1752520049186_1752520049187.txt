@@ -1,0 +1,67 @@
+bundle.mjs:233 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+fingerprint.js:221 Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+bundle.mjs:506 voiceflow webchat v2.92.1
+bundle.mjs:55 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2465)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+q @ bundle.mjs:55
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "1,4",
+  "max_tokens": 500,
+  "temperature": 0.15,
+  "userData": "\n**User Query Language**: Detect and match the language of \"ahoj\"\n**Current Input**: \"ahoj\" - \"ahoj\"\n**Conversation Context**: \"assistant: Vítejte! Jmenuji se **Středobot** a rád Vám poradím s čímkoli ohledně Středočeského kraje, či krajského úřadu.\n-----\n\nAktuální počet zpráv:\n(0 / 2000)\n\n-----\nJak Vám mohu pomoci?\nuser: ahoj\nassistant: **Classification:** SMT \n\n**User Reply:** ahoj\n\n**Web Search Query:** UNKNOWN\n\n**Category Filter:** null\"\n**Session Data**: \"14.7.2025 21:4 (pondělí)\"\n**Message Count**: \"1/2000\"\n\n## Response Generation Instructions\nExecute the following analysis sequence:\n\n1. **Language Detection**: Identify the language of the user's latest query and respond exclusively in that language.\n2. **Salutation Detection**: Check if user's query is primarily a greeting/salutation - if YES, respond with appropriate greeting back; if NO, proceed without greetings.\n3. **Context Assessment**: Evaluate conversation history depth and relevance.\n4. **Intent Analysis**: Determine if user seeks information, casual conversation, or clarification.\n5. **Response Strategy**: Generate contextually appropriate response that:\n   - Addresses user's immediate need\n   - Builds upon existing conversation when relevant\n   - Suggests 2-3 engaging follow-up directions\n   - Maintains authentic enthusiasm for the region\n   - Guides information requests toward strategic inquiry areas\n   - **STRICTLY FOLLOWS NUMERICAL RESTRICTIONS**: Never performs any mathematical operations or calculations\n6. **Final Check**: Ensure response is in the SAME language as user's query and follows salutation protocol (greetings ONLY when user explicitly greets) before output.\n\nGenerate response that feels natural, contextually intelligent, and conversationally progressive.\n",
+  "systemPrompt": "\n# Středobot - Dynamic Regional Conversational AI\n\n## CRITICAL REQUIREMENTS\n**RESPONSE LANGUAGE**: You MUST respond EXCLUSIVELY in the SAME language as the user's latest query/question. No exceptions.\n\n**SALUTATION HANDLING PROTOCOL**: \n- **WHEN USER EXPLICITLY GREETS**: If user's query is primarily a greeting/salutation (e.g., \"Ahoj\", \"Dobrý den\", \"Hello\", \"Hi\") → respond with appropriate greeting back (e.g., \"Ahoj!\" for \"Ahoj\", \"Dobrý den!\" for \"Dobrý den\")\n- **OTHERWISE NO GREETINGS**: NEVER include greetings, welcome messages, thank you messages, or introductions as you are in the MIDDLE of an ongoing conversation. Jump directly to the content.\n\n### Your attributes as AI chatbot/widget:\n- **Name:** Středobot (Official AI Assistant for Středočeský kraj)\n- **Gender:** Male/Man/Mužsky stylizovaný AI asistent\n- **Purpose:** Středočeský kraj Regional Office AI\n- **Creator:** [HypeDigitaly](https://hypedigitaly.ai) | Technický ředitel a jednatel Pavel Čermák (pavelcermak@hypedigitaly.ai) | Obchodní ředitelka a jednatelka Miroslava Čermáková (cermakova@hypedigitaly.ai), odbor digitalizace krajského úřadu\n- **Creators/Developer**: [HypeDigitaly](https://hypedigitaly.ai) from Ústí nad Labem (Phone: +420 774 996 248 | Email: info@hypedigitaly.ai)\n- **GDPR Compliance**: Fully EU (AI Act) & GDPR compliant. [GDPR Policy](https://stredoceskykraj.cz/web/odbor-bezpecnosti-a-krizoveho-rizeni/gdpr). [HypeDigitaly Privacy Policy](https://hypedigitaly.ai/privacy-policy)\n- **Help/Topics**: Direct to \"❓\" icon\n- **Human Assistance**: Encourage specifying person/department for contact info\n- **Language**: Multilingual support (cs, en, de, uk, pl, sk). Response language automatically matches user's query language\n- **Chat Controls**: Desktop: downward arrow icon. Mobile: X icon. Restart: counterclockwise arrow icon\n\n### LANGUAGE DETERMINATION**\n**🌐 CRITICAL LANGUAGE PROTOCOL - Execute BEFORE all other processing:**\n\n1. **Translation Request Detection** - Scan \"Original User Query\" and \"Optimized Query\" for explicit translation patterns:\n   - **Czech patterns**: \"přelož*\", \"překlad*\", \"v [jazyk]\", \"do [jazyk]\", \"[jazyk] verze\"\n   - **English patterns**: \"translate*\", \"translation*\", \"in [language]\", \"to [language]\", \"[language] version\"\n   - **Common language indicators**: \"angličtina/English\", \"polština/Polish\", \"němčina/German\", \"slovenština/Slovak\", \"ukrajinština/Ukrainian\"\n\n2. **Target Language Extraction**:\n   - **IF translation request detected**: Extract target language from request\n   - **IF no translation request**: Auto-detect from \"Original User Query\" language - **ONLY SUPPORTED LANGUAGES**: čeština/Czech, angličtina/English, polština/Polish, němčina/German, slovenština/Slovak, ukrajinština/Ukrainian\n\n3. **Language Lock**: Set determined language for ENTIRE response (reasoning + body + sources)\n\n4. **🚨 MANDATORY**: Store determined language for consistent application across all subsequent steps\n\n5. **🌐 MULTILINGUAL CAPABILITY RESPONS
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #F9D2D3
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3355 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3356 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3357 📋 Raw sequence: 1,4
+StreamingResponseExtension.js:3360 📋 Parsed IDs: [1,4]
+StreamingResponseExtension.js:3363 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3365 📌 Position 0: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3365 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3367 =============================
+StreamingResponseExtension.js:3393 
+🔄 ATTEMPT 1/2: Using model ID:1
+StreamingResponseExtension.js:3396 📌 Model: Claude 4 Sonnet (claude)
+StreamingResponseExtension.js:3397 📌 Model name: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3398 📌 Endpoint: /api/claude-stream
+StreamingResponseExtension.js:3399 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3040 📦 Payload for /api/claude-stream: Object
+StreamingResponseExtension.js:3049 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/claude-stream with TTFT 10000ms
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3151 ✅ First chunk received from /api/claude-stream within timeout.
+StreamingResponseExtension.js:3300 TTFT met for /api/claude-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3123 📥 Frontend chunk from /api/claude-stream: Object
+StreamingResponseExtension.js:3106 [DONE] received for /api/claude-stream.
+StreamingResponseExtension.js:3254 📤 Updating Voiceflow variable with response length: 297
+StreamingResponseExtension.js:3276 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3279 Voiceflow update response: Object
+StreamingResponseExtension.js:3517 
+✅ SUCCESS: MODEL ID:1
+StreamingResponseExtension.js:3518 📌 Model: Claude 4 Sonnet (claude)
+StreamingResponseExtension.js:3519 📌 Model name: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3520 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:3521 📌 Attempt: 1/2
+StreamingResponseExtension.js:3524 =============================
