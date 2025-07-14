@@ -1,0 +1,97 @@
+# Multi-LLM Streaming Extension
+
+## Overview
+
+This is a Next.js-based API proxy service that provides unified streaming capabilities for multiple Large Language Model (LLM) providers. The system acts as a middleware layer that handles authentication, domain security, and streaming responses from various AI providers including OpenAI, Anthropic Claude, Google Gemini, Groq, SambaNova, Perplexity, and others.
+
+## User Preferences
+
+Preferred communication style: Simple, everyday language.
+
+## System Architecture
+
+### Backend Architecture
+- **Framework**: Next.js with API routes
+- **Runtime**: Node.js serverless functions
+- **Architecture Pattern**: Proxy/Gateway pattern with individual endpoints per provider
+- **Security**: Domain whitelist-based access control
+- **Response Format**: Server-Sent Events (SSE) for real-time streaming
+
+### Frontend Extensions
+- **Streaming Response Extension**: JavaScript client-side extension for rendering streaming responses
+- **Perplexity Reasoner Extension**: Specialized extension for handling Perplexity's reasoning capabilities
+- **Integration**: Designed to work with Voiceflow chat widgets
+
+## Key Components
+
+### API Endpoints
+Each LLM provider has its own dedicated streaming endpoint:
+- `/api/openai-stream` - OpenAI GPT models with web search and reasoning capabilities
+- `/api/claude-stream` - Anthropic Claude models
+- `/api/gemini-stream` - Google Gemini models
+- `/api/groq-stream` - Groq models
+- `/api/sambanova-stream` - SambaNova models
+- `/api/perplexity-stream` - Perplexity models with web search
+- `/api/openrouter-stream` - OpenRouter proxy for multiple models
+- `/api/baseten-stream` - Baseten model hosting platform
+- `/api/voiceflow-variable-update` - Voiceflow state management
+
+### Security Layer
+- **Domain Whitelist**: Centralized domain validation through `config/domains.js`
+- **CORS Configuration**: Proper cross-origin resource sharing setup
+- **API Key Management**: Project-specific API key selection with fallback to default keys
+
+### Client Extensions
+- **StreamingResponseExtension.js**: Handles real-time streaming, model failover, and UI rendering
+- **PerplexityReasonerExtension.js**: Specialized for Perplexity's reasoning display
+
+## Data Flow
+
+1. **Request Validation**: Origin domain checked against whitelist
+2. **API Key Selection**: Project-specific or default API key selection
+3. **Provider Routing**: Request forwarded to appropriate LLM provider
+4. **Streaming Response**: Real-time response streaming via SSE
+5. **Client Rendering**: JavaScript extensions handle UI updates and display
+
+## External Dependencies
+
+### LLM Provider SDKs
+- `@anthropic-ai/sdk` - Anthropic Claude integration
+- `openai` - OpenAI API client
+- `@google/generative-ai` - Google Gemini integration
+- `groq-sdk` - Groq API client
+- `node-fetch` - HTTP client for other providers
+
+### Framework Dependencies
+- `next` - Next.js framework
+- `react` and `react-dom` - React runtime
+
+### Environment Variables
+- Provider API keys (e.g., `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`)
+- Project-specific keys (e.g., `OPENAI_API_KEY_PROJECTNAME`)
+- Voiceflow integration keys
+
+## Deployment Strategy
+
+### Environment Setup
+- **Platform**: Designed for serverless deployment (Replit, Vercel, etc.)
+- **Configuration**: Environment variables for API keys and secrets
+- **Domain Management**: Whitelist configuration for security
+
+### Key Features
+- **Multi-Model Support**: Single interface for multiple LLM providers
+- **Failover Logic**: Automatic model switching on failures
+- **Debug Mode**: Comprehensive logging for troubleshooting
+- **Customizable UI**: Configurable colors and styling for chat interfaces
+- **Web Search Integration**: Advanced search capabilities through OpenAI and Perplexity
+- **Reasoning Display**: Visual representation of model reasoning processes
+
+### Project Structure
+```
+/pages/api/          # API endpoints for each provider
+/config/             # Configuration files (domains, etc.)
+/                    # Client-side extensions
+/attached_assets/    # Documentation and examples
+```
+
+The system is designed to be easily extensible for new LLM providers and can be customized for specific use cases while maintaining security and performance standards.
