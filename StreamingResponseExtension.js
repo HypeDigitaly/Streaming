@@ -342,7 +342,7 @@ export const StreamingResponseExtension = {
           
           /* Citation link styles */
           .citation-link {
-            color: #000000;
+            color: #2563EB;
             text-decoration: none;
             font-weight: normal;
             cursor: pointer;
@@ -361,7 +361,7 @@ export const StreamingResponseExtension = {
             padding: 0;
           }
           .reasoning-content .citation-link:hover {
-            color: #000000;
+            color: #2563EB;
             text-decoration: underline;
           }
           .step-content {
@@ -379,7 +379,7 @@ export const StreamingResponseExtension = {
           
           /* Additional answer content citation styles */
           .answer-content .citation-link {
-            color: #000000;
+            color: #2563EB;
             text-decoration: none;
             font-weight: normal;
             cursor: pointer;
