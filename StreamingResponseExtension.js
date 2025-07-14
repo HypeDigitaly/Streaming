@@ -1696,7 +1696,7 @@ export const StreamingResponseExtension = {
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
         })
         // Handle standalone Database_Sources_End markers - wrap citations after the marker
-        // Simplest approach: capture everything after the marker
+        // Process each citation individually to avoid packing them together
         .replace(/\[\[Database_Sources_End\]\]([\s\S]*)/g, function(match, content) {
           if (content.trim()) {
             if (trace.payload?.debugMode === 1) {
@@ -1707,7 +1707,49 @@ export const StreamingResponseExtension = {
                 contentLines: content.split('\n').length
               });
             }
-            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${content.trim()}</div></div>`;
+            
+            // Process the content to handle citations properly
+            // Split into lines and process each line that contains citations
+            const lines = content.split('\n');
+            const processedLines = [];
+            
+            for (let line of lines) {
+              line = line.trim();
+              if (line) {
+                // Check if line contains citations (numbers in brackets)
+                if (line.match(/\[\d+\]/)) {
+                  // Process markdown links in citations
+                  line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                    let cleanUrl = url.trim();
+                    try {
+                      if (cleanUrl.includes('%')) {
+                        cleanUrl = decodeURIComponent(cleanUrl);
+                      }
+                    } catch (e) {
+                      // If decoding fails, try manual fixes
+                      cleanUrl = cleanUrl
+                        .replace(/%20/g, ' ')
+                        .replace(/%C4%8D/g, 'č')
+                        .replace(/%C5%99/g, 'ř')
+                        .replace(/%C3%A1/g, 'á')
+                        .replace(/%C3%AD/g, 'í')
+                        .replace(/%C3%A9/g, 'é')
+                        .replace(/%C5%A1/g, 'š')
+                        .replace(/%C5%BE/g, 'ž')
+                        .replace(/%C3%BD/g, 'ý')
+                        .replace(/%C4%9B/g, 'ě')
+                        .replace(/%C5%AF/g, 'ů')
+                        .replace(/%C3%BA/g, 'ú');
+                    }
+                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+                  });
+                }
+                processedLines.push(line);
+              }
+            }
+            
+            const processedContent = processedLines.join('\n');
+            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content">${processedContent}</div></div>`;
           }
           return '';
         })
@@ -1882,20 +1924,34 @@ export const StreamingResponseExtension = {
           const trimmedUrl = url.trim();
           
           // Skip processing if URL looks incomplete due to streaming
-          if (trimmedUrl.length < 3 || trimmedUrl.includes('%') && trimmedUrl.length < 20) {
+          // More conservative check: only skip if URL is very short and doesn't contain common patterns
+          if (trimmedUrl.length < 3 || (trimmedUrl.length < 8 && !trimmedUrl.includes('.'))) {
             return match; // Return as-is for now, will be processed later
           }
           
           // Clean up URL encoding and ensure proper format
           let cleanUrl = trimmedUrl;
           try {
-            // Only decode if it's a properly formed URL
-            if (cleanUrl.includes('%') && cleanUrl.match(/^https?:\/\//) || cleanUrl.includes('stredoceskykraj.cz')) {
+            // Decode URL encoding for all URLs that contain % symbols
+            if (cleanUrl.includes('%')) {
               cleanUrl = decodeURIComponent(cleanUrl);
             }
           } catch (e) {
-            // If decoding fails, use original URL
-            cleanUrl = trimmedUrl;
+            // If decoding fails, try manual fixes for common Czech characters
+            cleanUrl = cleanUrl
+              .replace(/%20/g, ' ')
+              .replace(/%C4%8D/g, 'č')
+              .replace(/%C5%99/g, 'ř')
+              .replace(/%C3%A1/g, 'á')
+              .replace(/%C3%AD/g, 'í')
+              .replace(/%C3%A9/g, 'é')
+              .replace(/%C3%AD/g, 'í')
+              .replace(/%C5%A1/g, 'š')
+              .replace(/%C5%BE/g, 'ž')
+              .replace(/%C3%BD/g, 'ý')
+              .replace(/%C4%9B/g, 'ě')
+              .replace(/%C5%AF/g, 'ů')
+              .replace(/%C3%BA/g, 'ú');
           }
           
           return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
@@ -3526,14 +3582,20 @@ export const StreamingResponseExtension = {
               cleanUrl = decodeURIComponent(cleanUrl);
             }
           } catch (e) {
-            // If decoding fails, try manual fixes for common issues
+            // If decoding fails, try manual fixes for common Czech characters
             cleanUrl = cleanUrl
               .replace(/%20/g, ' ')
               .replace(/%C4%8D/g, 'č')
               .replace(/%C5%99/g, 'ř')
               .replace(/%C3%A1/g, 'á')
               .replace(/%C3%AD/g, 'í')
-              .replace(/%C3%A9/g, 'é');
+              .replace(/%C3%A9/g, 'é')
+              .replace(/%C5%A1/g, 'š')
+              .replace(/%C5%BE/g, 'ž')
+              .replace(/%C3%BD/g, 'ý')
+              .replace(/%C4%9B/g, 'ě')
+              .replace(/%C5%AF/g, 'ů')
+              .replace(/%C3%BA/g, 'ú');
           }
           
           return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
