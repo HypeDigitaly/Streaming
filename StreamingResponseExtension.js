@@ -1998,9 +1998,70 @@ export const StreamingResponseExtension = {
             .join('<br>\n');
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
         })
-        // Handle standalone Database_Sources_End markers - this means citations will follow
-        // Mark the end of database sources and prepare to capture following citations
-        .replace(/\[\[Database_Sources_End\]\]/g, '[[DATABASE_SOURCES_CITATIONS_START]]')
+        // Handle standalone Database_Sources_End markers - wrap citations that come immediately after
+        // This addresses the streaming issue where citations are processed separately from database sections
+        .replace(/\[\[Database_Sources_End\]\]\s*\n((?:\[\d+\][\s\S]*?\n)*)/g, function(match, content) {
+          if (content.trim()) {
+            if (trace.payload?.debugMode === 1) {
+              console.log("🗄️ Database_Sources_End processing:", {
+                matchLength: match.length,
+                contentLength: content.length,
+                contentPreview: content.substring(0, 200) + (content.length > 200 ? "..." : ""),
+                contentLines: content.split('\n').length
+              });
+            }
+            
+            // Process the content to handle citations properly
+            // Split into lines and process each line that contains citations
+            const lines = content.split('\n');
+            const processedLines = [];
+            let hasValidContent = false;
+            
+            for (let line of lines) {
+              line = line.trim();
+              if (line) {
+                // Only process lines that contain citations or database-related content
+                if (line.match(/^\[\d+\]/)) {
+                  hasValidContent = true;
+                  // Process markdown links in citations with improved URL decoding
+                  // Use improved regex to handle parentheses in filenames
+                  line = line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
+                    let cleanUrl = url.trim();
+                    let cleanLinkText = linkText.trim();
+                    
+                    // Decode URL if it contains encoded characters
+                    if (cleanUrl.includes('%')) {
+                      cleanUrl = decodeUrlSafely(cleanUrl);
+                    }
+                    
+                    // Decode link text if it contains encoded characters
+                    if (cleanLinkText.includes('%')) {
+                      cleanLinkText = decodeUrlSafely(cleanLinkText);
+                    }
+                    
+                    return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
+                  });
+                  processedLines.push(line);
+                } else if (line.includes('file-') || line.includes('.pdf') || line.includes('.txt') || line.includes('.doc')) {
+                  // This looks like database-related content
+                  hasValidContent = true;
+                  processedLines.push(line);
+                } else {
+                  // Stop processing if we hit non-database content
+                  break;
+                }
+              }
+            }
+            
+            if (hasValidContent) {
+              const processedContent = processedLines.join('<br>\n');
+              // Return database section and any remaining content after citations
+              const remainingContent = content.substring(processedLines.join('\n').length);
+              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedContent}</div></div>${remainingContent}`;
+            }
+          }
+          return '';
+        })
         // Process Web Search Sources tags
         .replace(/\[\[Web_Search_Sources_Start\]\]([\s\S]*?)\[\[Web_Search_Sources_End\]\]/g, function(match, content) {
           // Apply formatting to the content within Web Search Sources
@@ -2030,69 +2091,6 @@ export const StreamingResponseExtension = {
             })
             .join('<br>\n');
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
-        })
-        // Handle database citations that come after Database_Sources_End marker
-        .replace(/\[\[DATABASE_SOURCES_CITATIONS_START\]\]([\s\S]*?)(?=\n\n|\n[A-Z]|\n#|$)/g, function(match, content) {
-          if (content.trim()) {
-            if (trace.payload?.debugMode === 1) {
-              console.log("🗄️ Processing database citations after Database_Sources_End:", {
-                contentLength: content.length,
-                contentPreview: content.substring(0, 200) + (content.length > 200 ? "..." : ""),
-                contentLines: content.split('\n').length
-              });
-            }
-            
-            // Split content into lines and process citations
-            const lines = content.split('\n');
-            const citationLines = [];
-            let nonCitationContent = '';
-            let processingCitations = true;
-            
-            for (let i = 0; i < lines.length; i++) {
-              const line = lines[i].trim();
-              
-              if (line && processingCitations) {
-                // Check if this line starts with a citation [1], [2], etc.
-                if (line.match(/^\[\d+\]/)) {
-                  // Process markdown links in citations
-                  const processedLine = line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
-                    let cleanUrl = url.trim();
-                    let cleanLinkText = linkText.trim();
-                    
-                    // Decode URL if it contains encoded characters
-                    if (cleanUrl.includes('%')) {
-                      cleanUrl = decodeUrlSafely(cleanUrl);
-                    }
-                    
-                    // Decode link text if it contains encoded characters
-                    if (cleanLinkText.includes('%')) {
-                      cleanLinkText = decodeUrlSafely(cleanLinkText);
-                    }
-                    
-                    return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
-                  });
-                  citationLines.push(processedLine);
-                } else if (line.includes('file-') || line.includes('.pdf') || line.includes('.txt') || line.includes('.doc')) {
-                  // This also looks like database-related content
-                  citationLines.push(line);
-                } else if (line.length > 0) {
-                  // Non-citation content - stop processing citations and collect the rest
-                  processingCitations = false;
-                  nonCitationContent = lines.slice(i).join('\n');
-                  break;
-                }
-              }
-            }
-            
-            if (citationLines.length > 0) {
-              const processedContent = citationLines.join('<br>\n');
-              const databaseSection = `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedContent}</div></div>`;
-              
-              // Return database section plus any remaining non-citation content
-              return databaseSection + (nonCitationContent ? '\n' + nonCitationContent : '');
-            }
-          }
-          return content; // Return original content if no citations found
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
