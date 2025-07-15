@@ -2694,10 +2694,10 @@ export const StreamingResponseExtension = {
       // Baseten models
       {
         id: 11,
-        name: "deepseek-ai/DeepSeek-V3-0324",
+        name: "meta-llama/Llama-4-Maverick-17B-128E-Instruct",
         type: "baseten",
         endpoint: "/api/baseten-stream",
-        displayName: "Baseten",
+        displayName: "LLama 4 Maverick",
       },
       {
         id: 12,
