@@ -2545,18 +2545,19 @@ export const StreamingResponseExtension = {
         return `⟨⟨${sectionId}⟩⟩`;
       });
       
-      // Remove unique symbols used for file link processing
-      let finalHtml = tempHtml
-        .replace(/⟨⟨FILELINK_START⟩⟩/g, '')
-        .replace(/⟨⟨FILELINK_END⟩⟩/g, '');
-      
-      // Restore database sections after other processing
+      // Restore database sections first before removing filelink tags
+      let finalHtml = tempHtml;
       databaseSections.forEach(section => {
         if (trace.payload?.debugMode === 1) {
           console.log(`🗄️ Restoring database section ${section.id}`);
         }
         finalHtml = finalHtml.replace(`⟨⟨${section.id}⟩⟩`, section.content);
       });
+      
+      // Remove unique symbols used for file link processing AFTER restoring database sections
+      finalHtml = finalHtml
+        .replace(/⟨⟨FILELINK_START⟩⟩/g, '')
+        .replace(/⟨⟨FILELINK_END⟩⟩/g, '');
       
       if (trace.payload?.debugMode === 1 && databaseSections.length > 0) {
         console.log(`🗄️ Database sections in final HTML:`, finalHtml.includes('class="ai-thinking-section"') && finalHtml.includes('🗄️'));

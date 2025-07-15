@@ -10,6 +10,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### July 15, 2025 - Fixed FILELINK Tags Appearing in Database Section
+- **Fixed filelink tag output issue**: Resolved problem where `⟨⟨FILELINK_START⟩⟩` and `⟨⟨FILELINK_END⟩⟩` tags were sometimes appearing in the database section output
+- **Reordered processing sequence**: Changed the order of operations to restore database sections first, then remove filelink tags
+- **Updated StreamingResponseExtension.js**: Modified the tag removal logic to prevent interference with database section restoration
+- **Root cause**: Database sections were being stored with filelink tags, then tags were removed globally, then sections were restored with tags still intact
+- **Solution**: Restore database sections first, then remove filelink tags from the complete HTML
+
 ### January 15, 2025 - Fixed Database Section Packing Issue
 - **Fixed Database Section citation containment**: Updated regex pattern from `\[\[Database_Sources_End\]\]([\s\S]*)` to `\[\[Database_Sources_End\]\]\s*\n((?:\[\d+\][\s\S]*?\n)*)`
 - **Improved citation filtering**: Added logic to only process lines that start with `[digits]` and stop at non-database content
