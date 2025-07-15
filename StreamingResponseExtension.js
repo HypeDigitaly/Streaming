@@ -2531,12 +2531,55 @@ export const StreamingResponseExtension = {
       // Remove any remaining isolated database markers
       processedHtml = processedHtml.replace(/⟨⟨DBSOURCE_MARKER⟩⟩/g, '');
       
-      // Remove unique symbols used for file link and database source processing
-      const finalHtml = processedHtml
+      // Store database sections before removing symbols to prevent them from being lost
+      const databaseSections = [];
+      let tempHtml = processedHtml;
+      
+      // Extract and store database sections
+      tempHtml = tempHtml.replace(/⟨⟨DBSOURCE_START⟩⟩(.*?)⟨⟨DBSOURCE_END⟩⟩/gs, function(match, content) {
+        const sectionId = `DB_SECTION_${databaseSections.length}`;
+        databaseSections.push({ id: sectionId, content: content });
+        if (trace.payload?.debugMode === 1) {
+          console.log(`🗄️ Storing database section ${sectionId}:`, content.substring(0, 100) + "...");
+        }
+        return `⟨⟨${sectionId}⟩⟩`;
+      });
+      
+      // Remove unique symbols used for file link processing
+      let finalHtml = tempHtml
         .replace(/⟨⟨FILELINK_START⟩⟩/g, '')
-        .replace(/⟨⟨FILELINK_END⟩⟩/g, '')
+        .replace(/⟨⟨FILELINK_END⟩⟩/g, '');
+      
+      // Restore database sections after other processing
+      databaseSections.forEach(section => {
+        if (trace.payload?.debugMode === 1) {
+          console.log(`🗄️ Restoring database section ${section.id}`);
+        }
+        finalHtml = finalHtml.replace(`⟨⟨${section.id}⟩⟩`, section.content);
+      });
+      
+      if (trace.payload?.debugMode === 1 && databaseSections.length > 0) {
+        console.log(`🗄️ Database sections in final HTML:`, finalHtml.includes('class="ai-thinking-section"') && finalHtml.includes('🗄️'));
+      }
+      
+      // Clean up any remaining symbols
+      finalHtml = finalHtml
         .replace(/⟨⟨DBSOURCE_START⟩⟩/g, '')
         .replace(/⟨⟨DBSOURCE_END⟩⟩/g, '');
+      
+      // Double-check for database sections in final HTML and log for debugging
+      if (trace.payload?.debugMode === 1) {
+        const hasDbSections = finalHtml.includes('Databázové zdroje');
+        const hasDbIcon = finalHtml.includes('🗄️');
+        const hasThinkingSection = finalHtml.includes('ai-thinking-section');
+        console.log(`🗄️ Final HTML check - DB sections: ${hasDbSections}, DB icon: ${hasDbIcon}, thinking sections: ${hasThinkingSection}`);
+        
+        if (hasDbSections && hasDbIcon && hasThinkingSection) {
+          console.log(`✅ Database section successfully preserved in final HTML`);
+        } else {
+          console.log(`❌ Database section may have been lost during processing`);
+        }
+      }
       
       // Update content with formatting using the processed HTML
       responseContent.innerHTML = finalHtml;
@@ -4049,11 +4092,31 @@ export const StreamingResponseExtension = {
 
     // Add final processing function for when streaming ends
     async function finalizeContent() {
+      // Check if database sections are already present before final processing
+      const existingDbSections = responseContent.innerHTML.includes('Databázové zdroje');
+      
       if (buffer !== completeResponse && buffer.includes('##')) {
         if (trace.payload?.debugMode === 1) {
           console.log("🔍 FINALIZE: Processing remaining buffer content");
+          console.log("🗄️ FINALIZE: Database sections already present:", existingDbSections);
         }
+        
+        // Store existing database sections before final processing
+        const existingContent = responseContent.innerHTML;
+        const existingDbContent = existingContent.match(/<div class="ai-thinking-section">.*?🗄️.*?<\/div><\/div>/gs) || [];
+        
         updateContent(''); // Trigger final processing with complete buffer
+        
+        // Restore database sections if they were lost
+        if (existingDbSections && existingDbContent.length > 0) {
+          const newContent = responseContent.innerHTML;
+          if (!newContent.includes('Databázové zdroje')) {
+            if (trace.payload?.debugMode === 1) {
+              console.log("🗄️ FINALIZE: Restoring lost database sections");
+            }
+            responseContent.innerHTML = newContent + existingDbContent.join('');
+          }
+        }
       }
       
       // Final pass to process any remaining incomplete links
