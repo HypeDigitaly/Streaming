@@ -1921,10 +1921,22 @@ export const StreamingResponseExtension = {
             .map(line => line.trim())
             .filter(line => line.length > 0)
             .map(line => {
-              // Process markdown links in the content with improved URL decoding
-              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+              // Process markdown links in the content with improved URL decoding and parentheses handling
+              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)]*)*)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
                 let cleanLinkText = linkText.trim();
+                
+                // Smart file extension detection for proper URL truncation
+                const fileExtensions = ['.pdf', '.docx', '.xlsx', '.pptx', '.doc', '.xls', '.ppt', '.txt', '.rtf', '.odt', '.ods', '.odp', '.csv', '.zip', '.rar', '.7z', '.tar', '.gz'];
+                for (const ext of fileExtensions) {
+                  const extPattern = new RegExp('\\' + ext + '(?:[^a-zA-Z0-9]|$)', 'i');
+                  const extMatch = cleanUrl.match(extPattern);
+                  if (extMatch) {
+                    const extIndex = extMatch.index + ext.length;
+                    cleanUrl = cleanUrl.substring(0, extIndex);
+                    break;
+                  }
+                }
                 
                 // Decode URL if it contains encoded characters
                 if (cleanUrl.includes('%')) {
@@ -1950,10 +1962,22 @@ export const StreamingResponseExtension = {
             .map(line => line.trim())
             .filter(line => line.length > 0)
             .map(line => {
-              // Process markdown links in the content with improved URL decoding
-              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+              // Process markdown links in the content with improved URL decoding and parentheses handling
+              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)]*)*)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
                 let cleanLinkText = linkText.trim();
+                
+                // Smart file extension detection for proper URL truncation
+                const fileExtensions = ['.pdf', '.docx', '.xlsx', '.pptx', '.doc', '.xls', '.ppt', '.txt', '.rtf', '.odt', '.ods', '.odp', '.csv', '.zip', '.rar', '.7z', '.tar', '.gz'];
+                for (const ext of fileExtensions) {
+                  const extPattern = new RegExp('\\' + ext + '(?:[^a-zA-Z0-9]|$)', 'i');
+                  const extMatch = cleanUrl.match(extPattern);
+                  if (extMatch) {
+                    const extIndex = extMatch.index + ext.length;
+                    cleanUrl = cleanUrl.substring(0, extIndex);
+                    break;
+                  }
+                }
                 
                 // Decode URL if it contains encoded characters
                 if (cleanUrl.includes('%')) {
@@ -1994,10 +2018,22 @@ export const StreamingResponseExtension = {
               if (line) {
                 // Check if line contains citations (numbers in brackets)
                 if (line.match(/\[\d+\]/)) {
-                  // Process markdown links in citations with improved URL decoding
-                  line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                  // Process markdown links in citations with improved URL decoding and parentheses handling
+                  line = line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)]*)*)\)/g, function(linkMatch, linkText, url) {
                     let cleanUrl = url.trim();
                     let cleanLinkText = linkText.trim();
+                    
+                    // Smart file extension detection for proper URL truncation
+                    const fileExtensions = ['.pdf', '.docx', '.xlsx', '.pptx', '.doc', '.xls', '.ppt', '.txt', '.rtf', '.odt', '.ods', '.odp', '.csv', '.zip', '.rar', '.7z', '.tar', '.gz'];
+                    for (const ext of fileExtensions) {
+                      const extPattern = new RegExp('\\' + ext + '(?:[^a-zA-Z0-9]|$)', 'i');
+                      const extMatch = cleanUrl.match(extPattern);
+                      if (extMatch) {
+                        const extIndex = extMatch.index + ext.length;
+                        cleanUrl = cleanUrl.substring(0, extIndex);
+                        break;
+                      }
+                    }
                     
                     // Decode URL if it contains encoded characters
                     if (cleanUrl.includes('%')) {
@@ -2029,10 +2065,22 @@ export const StreamingResponseExtension = {
             .map(line => line.trim())
             .filter(line => line.length > 0)
             .map(line => {
-              // Process markdown links in the content with improved URL decoding
-              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+              // Process markdown links in the content with improved URL decoding and parentheses handling
+              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)]*)*)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
                 let cleanLinkText = linkText.trim();
+                
+                // Smart file extension detection for proper URL truncation
+                const fileExtensions = ['.pdf', '.docx', '.xlsx', '.pptx', '.doc', '.xls', '.ppt', '.txt', '.rtf', '.odt', '.ods', '.odp', '.csv', '.zip', '.rar', '.7z', '.tar', '.gz'];
+                for (const ext of fileExtensions) {
+                  const extPattern = new RegExp('\\' + ext + '(?:[^a-zA-Z0-9]|$)', 'i');
+                  const extMatch = cleanUrl.match(extPattern);
+                  if (extMatch) {
+                    const extIndex = extMatch.index + ext.length;
+                    cleanUrl = cleanUrl.substring(0, extIndex);
+                    break;
+                  }
+                }
                 
                 // Decode URL if it contains encoded characters
                 if (cleanUrl.includes('%')) {
@@ -2242,27 +2290,34 @@ export const StreamingResponseExtension = {
         .replace(/\*(.*?)\*/g, '<em style="font-style: italic; color: #6b7280;">$1</em>')
         // Code
         .replace(/`(.*?)`/g, '<code style="background-color: #f3f4f6; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; font-size: 0.9em; color: #dc2626;">$1</code>')
-        // Links - improved processing for streaming content with proper file extension handling
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
-          // Check if this is a complete link (not broken by streaming)
+        // Links - improved processing with smart file extension detection and parentheses handling
+        .replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)]*)*)\)/g, function(match, linkText, url) {
+          // Advanced link parsing that handles parentheses in filenames
+          // This regex captures URLs that may contain parentheses by looking for the last closing parenthesis
+          
           let trimmedUrl = url.trim();
           
           // Skip processing if URL looks incomplete due to streaming
-          // Only skip if URL is very short (less than 3 chars) or obviously incomplete
           if (trimmedUrl.length < 3) {
-            return match; // Return as-is for now, will be processed later
+            return match;
           }
           
-          // Special handling for file links - detect file extensions and stop the URL there
+          // Define file extensions to detect
           const fileExtensions = ['.pdf', '.docx', '.xlsx', '.pptx', '.doc', '.xls', '.ppt', '.txt', '.rtf', '.odt', '.ods', '.odp', '.csv', '.zip', '.rar', '.7z', '.tar', '.gz'];
           
-          // Check if this looks like a file link
+          // Smart file extension detection that handles parentheses in filenames
+          let foundExtension = false;
           for (const ext of fileExtensions) {
-            const extIndex = trimmedUrl.toLowerCase().indexOf(ext);
-            if (extIndex !== -1) {
-              // Found a file extension, truncate the URL right after the extension
-              const endIndex = extIndex + ext.length;
-              trimmedUrl = trimmedUrl.substring(0, endIndex);
+            // Look for the file extension in the URL
+            const extPattern = new RegExp('\\' + ext + '(?:[^a-zA-Z0-9]|$)', 'i');
+            const extMatch = trimmedUrl.match(extPattern);
+            
+            if (extMatch) {
+              // Found a file extension, find its position and truncate right after it
+              const extIndex = extMatch.index + ext.length;
+              trimmedUrl = trimmedUrl.substring(0, extIndex);
+              foundExtension = true;
+              
               if (trace.payload?.debugMode === 1) {
                 console.log("📄 FILE LINK: Truncated URL at file extension:", {
                   original: url,
@@ -2273,6 +2328,11 @@ export const StreamingResponseExtension = {
               }
               break;
             }
+          }
+          
+          // If no file extension found, use the original URL processing
+          if (!foundExtension) {
+            trimmedUrl = url.trim();
           }
           
           // Clean up URL encoding and ensure proper format

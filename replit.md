@@ -10,6 +10,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### January 15, 2025 - Fixed File Download Link Formatting with Parentheses in Filenames
+- **Enhanced markdown link processing**: Updated regex pattern from `\[([^\]]+)\]\(([^)]+)\)` to `\[([^\]]+)\]\(([^)]+(?:\)[^)]*)*)\)` to properly handle parentheses in filenames
+- **Smart file extension detection**: Added intelligent file extension detection that truncates URLs at the correct file extension (`.pdf`, `.docx`, `.xlsx`, etc.) even when parentheses are present in the filename
+- **Professional solution**: Implemented a comprehensive fix that handles complex filename patterns like `filename(with_parentheses).pdf)` by finding the actual file extension and stopping there
+- **Applied to all extensions**: Fixed the issue in both StreamingResponseExtension.js and PerplexityStreamingExtension.js
+- **Enhanced all special sections**: Updated POSTUP, Database Sources, Web Search Sources, and Database_Sources_End sections to use the new robust link processing
+- **Comprehensive file type support**: Added support for common file extensions including PDF, DOCX, XLSX, PPTX, DOC, XLS, PPT, TXT, RTF, ODT, ODS, ODP, CSV, ZIP, RAR, 7Z, TAR, GZ
+
 ### January 14, 2025 - Fixed Bold Text Color in Streaming Extensions
 - **Changed bold text color from blue to black**: Updated all instances of bold text formatting in both StreamingResponseExtension.js and PerplexityStreamingExtension.js
 - **Preserved blue color for URLs**: Kept the blue color styling for URL links as requested

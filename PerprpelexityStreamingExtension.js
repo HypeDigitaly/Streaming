@@ -871,7 +871,21 @@ export const PerplexityReasonerExtension = {
             // Code
             .replace(/`(.*?)`/g, '<code>$1</code>')
             // Links
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+            .replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)]*)*)\)/g, function(match, linkText, url) {
+              // Smart file extension detection for proper URL truncation
+              let cleanUrl = url.trim();
+              const fileExtensions = ['.pdf', '.docx', '.xlsx', '.pptx', '.doc', '.xls', '.ppt', '.txt', '.rtf', '.odt', '.ods', '.odp', '.csv', '.zip', '.rar', '.7z', '.tar', '.gz'];
+              for (const ext of fileExtensions) {
+                const extPattern = new RegExp('\\' + ext + '(?:[^a-zA-Z0-9]|$)', 'i');
+                const extMatch = cleanUrl.match(extPattern);
+                if (extMatch) {
+                  const extIndex = extMatch.index + ext.length;
+                  cleanUrl = cleanUrl.substring(0, extIndex);
+                  break;
+                }
+              }
+              return `<a href="${cleanUrl}">${linkText}</a>`;
+            })
             // Emojis (preserve as is)
             .replace(/[\u{1F300}-\u{1F9FF}]/gu, (match) => match)
             // Clean up any extra newlines between elements
