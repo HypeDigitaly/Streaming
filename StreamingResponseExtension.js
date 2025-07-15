@@ -2242,15 +2242,37 @@ export const StreamingResponseExtension = {
         .replace(/\*(.*?)\*/g, '<em style="font-style: italic; color: #6b7280;">$1</em>')
         // Code
         .replace(/`(.*?)`/g, '<code style="background-color: #f3f4f6; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; font-size: 0.9em; color: #dc2626;">$1</code>')
-        // Links - improved processing for streaming content
+        // Links - improved processing for streaming content with proper file extension handling
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
           // Check if this is a complete link (not broken by streaming)
-          const trimmedUrl = url.trim();
+          let trimmedUrl = url.trim();
           
           // Skip processing if URL looks incomplete due to streaming
           // Only skip if URL is very short (less than 3 chars) or obviously incomplete
           if (trimmedUrl.length < 3) {
             return match; // Return as-is for now, will be processed later
+          }
+          
+          // Special handling for file links - detect file extensions and stop the URL there
+          const fileExtensions = ['.pdf', '.docx', '.xlsx', '.pptx', '.doc', '.xls', '.ppt', '.txt', '.rtf', '.odt', '.ods', '.odp', '.csv', '.zip', '.rar', '.7z', '.tar', '.gz'];
+          
+          // Check if this looks like a file link
+          for (const ext of fileExtensions) {
+            const extIndex = trimmedUrl.toLowerCase().indexOf(ext);
+            if (extIndex !== -1) {
+              // Found a file extension, truncate the URL right after the extension
+              const endIndex = extIndex + ext.length;
+              trimmedUrl = trimmedUrl.substring(0, endIndex);
+              if (trace.payload?.debugMode === 1) {
+                console.log("📄 FILE LINK: Truncated URL at file extension:", {
+                  original: url,
+                  truncated: trimmedUrl,
+                  extension: ext,
+                  linkText: linkText
+                });
+              }
+              break;
+            }
           }
           
           // Clean up URL encoding and ensure proper format
