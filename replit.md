@@ -10,6 +10,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### January 15, 2025 - Fixed Database Section Packing Issue
+- **Fixed Database Section citation containment**: Updated regex pattern from `\[\[Database_Sources_End\]\]([\s\S]*)` to `\[\[Database_Sources_End\]\]\s*\n((?:\[\d+\][\s\S]*?\n)*)`
+- **Improved citation filtering**: Added logic to only process lines that start with `[digits]` and stop at non-database content
+- **Enhanced streaming buffer management**: Added special handling for incomplete Database_Sources_End markers to prevent premature processing
+- **Fixed citation overflow**: Citations [1], [2], [3] now properly contained within Database Sources section instead of appearing outside
+- **Better content validation**: Added checks for database-related content (file-, .pdf, .txt, .doc) to ensure proper section boundaries
+- **Streaming-aware processing**: Added delay logic for incomplete citations after Database_Sources_End markers
+
 ### January 15, 2025 - Fixed Download Links with Parentheses in Filenames
 - **Fixed file link parsing issue**: Updated markdown link regex from `/\[([^\]]+)\]\(([^)]+)\)/g` to `/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g` to properly handle parentheses in filenames
 - **Unique symbol wrapping**: Added `⟨⟨FILELINK_START⟩⟩` and `⟨⟨FILELINK_END⟩⟩` symbols around file links during processing to prevent conflicts with other formatting

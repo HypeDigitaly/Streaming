@@ -1889,6 +1889,31 @@ export const StreamingResponseExtension = {
         }
       }
       
+      // Special handling for Database_Sources_End markers - delay processing if incomplete
+      if (buffer.includes('[[Database_Sources_End]]') && !buffer.endsWith('\n\n')) {
+        const endMarkerIndex = buffer.lastIndexOf('[[Database_Sources_End]]');
+        if (endMarkerIndex !== -1) {
+          const afterMarker = buffer.substring(endMarkerIndex + 23); // 23 = length of "[[Database_Sources_End]]"
+          
+          // If we have incomplete citations after the marker, delay processing
+          if (afterMarker.includes('[') && !afterMarker.includes('\n\n')) {
+            // Check if we have incomplete citation lines
+            const citationLines = afterMarker.split('\n').filter(line => line.trim().startsWith('['));
+            const incompleteCitations = citationLines.filter(line => 
+              line.includes('[') && line.includes('](') && !line.endsWith(')')
+            );
+            
+            if (incompleteCitations.length > 0) {
+              // Process up to the Database_Sources_End marker
+              processBuffer = buffer.substring(0, endMarkerIndex + 23);
+              if (trace.payload?.debugMode === 1) {
+                console.log("🗄️ DELAY: Incomplete database citations detected, delaying processing:", incompleteCitations[0].substring(0, 50) + "...");
+              }
+            }
+          }
+        }
+      }
+      
       // Handle incomplete markdown links - delay processing if link appears incomplete
       if (buffer.includes('[') && buffer.includes('](') && !buffer.endsWith(')')) {
         // Check if we have an incomplete link at the end
@@ -1973,9 +1998,9 @@ export const StreamingResponseExtension = {
             .join('<br>\n');
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
         })
-        // Handle standalone Database_Sources_End markers - wrap citations after the marker
-        // Process each citation individually to avoid packing them together
-        .replace(/\[\[Database_Sources_End\]\]([\s\S]*)/g, function(match, content) {
+        // Handle standalone Database_Sources_End markers - wrap citations that come immediately after
+        // This addresses the streaming issue where citations are processed separately from database sections
+        .replace(/\[\[Database_Sources_End\]\]\s*\n((?:\[\d+\][\s\S]*?\n)*)/g, function(match, content) {
           if (content.trim()) {
             if (trace.payload?.debugMode === 1) {
               console.log("🗄️ Database_Sources_End processing:", {
@@ -1990,12 +2015,14 @@ export const StreamingResponseExtension = {
             // Split into lines and process each line that contains citations
             const lines = content.split('\n');
             const processedLines = [];
+            let hasValidContent = false;
             
             for (let line of lines) {
               line = line.trim();
               if (line) {
-                // Check if line contains citations (numbers in brackets)
-                if (line.match(/\[\d+\]/)) {
+                // Only process lines that contain citations or database-related content
+                if (line.match(/^\[\d+\]/)) {
+                  hasValidContent = true;
                   // Process markdown links in citations with improved URL decoding
                   // Use improved regex to handle parentheses in filenames
                   line = line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
@@ -2014,13 +2041,24 @@ export const StreamingResponseExtension = {
                     
                     return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
                   });
+                  processedLines.push(line);
+                } else if (line.includes('file-') || line.includes('.pdf') || line.includes('.txt') || line.includes('.doc')) {
+                  // This looks like database-related content
+                  hasValidContent = true;
+                  processedLines.push(line);
+                } else {
+                  // Stop processing if we hit non-database content
+                  break;
                 }
-                processedLines.push(line);
               }
             }
             
-            const processedContent = processedLines.join('<br>\n');
-            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedContent}</div></div>`;
+            if (hasValidContent) {
+              const processedContent = processedLines.join('<br>\n');
+              // Return database section and any remaining content after citations
+              const remainingContent = content.substring(processedLines.join('\n').length);
+              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedContent}</div></div>${remainingContent}`;
+            }
           }
           return '';
         })
