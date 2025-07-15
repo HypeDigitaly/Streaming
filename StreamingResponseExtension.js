@@ -1922,7 +1922,8 @@ export const StreamingResponseExtension = {
             .filter(line => line.length > 0)
             .map(line => {
               // Process markdown links in the content with improved URL decoding
-              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+              // Use improved regex to handle parentheses in filenames
+              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
                 let cleanLinkText = linkText.trim();
                 
@@ -1936,7 +1937,7 @@ export const StreamingResponseExtension = {
                   cleanLinkText = decodeUrlSafely(cleanLinkText);
                 }
                 
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
+                return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
               });
             })
             .join('<br>\n');
@@ -1951,7 +1952,8 @@ export const StreamingResponseExtension = {
             .filter(line => line.length > 0)
             .map(line => {
               // Process markdown links in the content with improved URL decoding
-              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+              // Use improved regex to handle parentheses in filenames
+              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
                 let cleanLinkText = linkText.trim();
                 
@@ -1965,7 +1967,7 @@ export const StreamingResponseExtension = {
                   cleanLinkText = decodeUrlSafely(cleanLinkText);
                 }
                 
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
+                return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
               });
             })
             .join('<br>\n');
@@ -1995,7 +1997,8 @@ export const StreamingResponseExtension = {
                 // Check if line contains citations (numbers in brackets)
                 if (line.match(/\[\d+\]/)) {
                   // Process markdown links in citations with improved URL decoding
-                  line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+                  // Use improved regex to handle parentheses in filenames
+                  line = line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
                     let cleanUrl = url.trim();
                     let cleanLinkText = linkText.trim();
                     
@@ -2009,7 +2012,7 @@ export const StreamingResponseExtension = {
                       cleanLinkText = decodeUrlSafely(cleanLinkText);
                     }
                     
-                    return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
+                    return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
                   });
                 }
                 processedLines.push(line);
@@ -2030,7 +2033,8 @@ export const StreamingResponseExtension = {
             .filter(line => line.length > 0)
             .map(line => {
               // Process markdown links in the content with improved URL decoding
-              return line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(linkMatch, linkText, url) {
+              // Use improved regex to handle parentheses in filenames
+              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
                 let cleanUrl = url.trim();
                 let cleanLinkText = linkText.trim();
                 
@@ -2044,7 +2048,7 @@ export const StreamingResponseExtension = {
                   cleanLinkText = decodeUrlSafely(cleanLinkText);
                 }
                 
-                return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
+                return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
               });
             })
             .join('<br>\n');
@@ -2243,7 +2247,8 @@ export const StreamingResponseExtension = {
         // Code
         .replace(/`(.*?)`/g, '<code style="background-color: #f3f4f6; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; font-size: 0.9em; color: #dc2626;">$1</code>')
         // Links - improved processing for streaming content with proper file extension handling
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+        // Use improved regex to handle parentheses in filenames
+        .replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(match, linkText, url) {
           // Check if this is a complete link (not broken by streaming)
           let trimmedUrl = url.trim();
           
@@ -2287,7 +2292,7 @@ export const StreamingResponseExtension = {
             cleanLinkText = decodeUrlSafely(cleanLinkText);
           }
           
-          return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; text-decoration-color: #93c5fd;">${cleanLinkText}</a>`;
+          return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; text-decoration-color: #93c5fd;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
         })
         // Tables - Improved processing for markdown tables
         .replace(
@@ -2417,8 +2422,13 @@ export const StreamingResponseExtension = {
       // Process file citations in the cleaned HTML
       const htmlWithCitations = processFileCitations(cleanedHtml);
       
+      // Remove unique symbols used for file link processing
+      const finalHtml = htmlWithCitations
+        .replace(/⟨⟨FILELINK_START⟩⟩/g, '')
+        .replace(/⟨⟨FILELINK_END⟩⟩/g, '');
+      
       // Update content with formatting using the processed HTML
-      responseContent.innerHTML = htmlWithCitations;
+      responseContent.innerHTML = finalHtml;
 
       // Add URL preview functionality for citation links (from PerplexityExtension)
       addUrlPreviewHandlers();

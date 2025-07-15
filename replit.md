@@ -10,6 +10,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### January 15, 2025 - Fixed Download Links with Parentheses in Filenames
+- **Fixed file link parsing issue**: Updated markdown link regex from `/\[([^\]]+)\]\(([^)]+)\)/g` to `/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g` to properly handle parentheses in filenames
+- **Unique symbol wrapping**: Added `⟨⟨FILELINK_START⟩⟩` and `⟨⟨FILELINK_END⟩⟩` symbols around file links during processing to prevent conflicts with other formatting
+- **Symbol removal**: Added code to remove unique symbols after all markdown processing is complete
+- **Multiple file fixes**: Updated both StreamingResponseExtension.js and PerplexityStreamingExtension.js
+- **Affected sections**: Fixed link processing in POSTUP, Database Sources, Web Search Sources, and general markdown sections
+- **Examples fixed**: Links like `0350(2025)/BOD.pdf)` now work correctly instead of being truncated at the first parenthesis
+
 ### January 14, 2025 - Fixed Bold Text Color in Streaming Extensions
 - **Changed bold text color from blue to black**: Updated all instances of bold text formatting in both StreamingResponseExtension.js and PerplexityStreamingExtension.js
 - **Preserved blue color for URLs**: Kept the blue color styling for URL links as requested

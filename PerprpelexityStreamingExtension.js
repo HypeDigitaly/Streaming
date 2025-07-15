@@ -870,8 +870,30 @@ export const PerplexityReasonerExtension = {
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
             // Code
             .replace(/`(.*?)`/g, '<code>$1</code>')
-            // Links
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+            // Links - improved regex to handle parentheses in filenames
+            .replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(match, linkText, url) {
+              // Decode URL if it contains encoded characters
+              let cleanUrl = url.trim();
+              if (cleanUrl.includes('%')) {
+                try {
+                  cleanUrl = decodeURIComponent(cleanUrl);
+                } catch (e) {
+                  // If decoding fails, keep original URL
+                }
+              }
+              
+              // Decode link text if it contains encoded characters
+              let cleanLinkText = linkText.trim();
+              if (cleanLinkText.includes('%')) {
+                try {
+                  cleanLinkText = decodeURIComponent(cleanLinkText);
+                } catch (e) {
+                  // If decoding fails, keep original text
+                }
+              }
+              
+              return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
+            })
             // Emojis (preserve as is)
             .replace(/[\u{1F300}-\u{1F9FF}]/gu, (match) => match)
             // Clean up any extra newlines between elements
@@ -884,6 +906,11 @@ export const PerplexityReasonerExtension = {
       function updateAnswerContent(text) {
         const trimmedText = text.trim()
         const formattedHtml = markdownToHtml(trimmedText)
+        
+        // Remove unique symbols used for file link processing
+        const finalHtml = formattedHtml
+          .replace(/⟨⟨FILELINK_START⟩⟩/g, '')
+          .replace(/⟨⟨FILELINK_END⟩⟩/g, '');
   
         // Add styles for answer content
         const styles = `
@@ -944,7 +971,7 @@ export const PerplexityReasonerExtension = {
           </style>
         `
   
-        answerContent.innerHTML = styles + formattedHtml
+        answerContent.innerHTML = styles + finalHtml
       }
   
       // Function to create checkbox SVGs
