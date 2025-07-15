@@ -1996,11 +1996,11 @@ export const StreamingResponseExtension = {
               });
             })
             .join('<br>\n');
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
+          return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>⟨⟨DBSOURCE_END⟩⟩`;
         })
         // Handle standalone Database_Sources_End markers - wrap citations that come immediately after
         // This addresses the streaming issue where citations are processed separately from database sections
-        .replace(/\[\[Database_Sources_End\]\]\s*\n((?:\[\d+\][\s\S]*?\n)*)/g, function(match, content) {
+        .replace(/\[\[Database_Sources_End\]\]\s*\n?((?:\s*\[\d+\][\s\S]*?(?:\n|$))*)/g, function(match, content) {
           if (content.trim()) {
             if (trace.payload?.debugMode === 1) {
               console.log("🗄️ Database_Sources_End processing:", {
@@ -2057,10 +2057,18 @@ export const StreamingResponseExtension = {
               const processedContent = processedLines.join('<br>\n');
               // Return database section and any remaining content after citations
               const remainingContent = content.substring(processedLines.join('\n').length);
-              return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedContent}</div></div>${remainingContent}`;
+              return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedContent}</div></div>⟨⟨DBSOURCE_END⟩⟩${remainingContent}`;
             }
           }
           return '';
+        })
+        // Handle isolated Database_Sources_End markers without immediate citations
+        // This catches cases where citations come in separate streaming chunks
+        .replace(/\[\[Database_Sources_End\]\]/g, function(match) {
+          if (trace.payload?.debugMode === 1) {
+            console.log("🗄️ Database_Sources_End isolated marker detected");
+          }
+          return `⟨⟨DBSOURCE_MARKER⟩⟩`;
         })
         // Process Web Search Sources tags
         .replace(/\[\[Web_Search_Sources_Start\]\]([\s\S]*?)\[\[Web_Search_Sources_End\]\]/g, function(match, content) {
@@ -2277,13 +2285,53 @@ export const StreamingResponseExtension = {
       }
       
       // Join lines and apply remaining markdown formatting
-      const formattedContent = processedLines.join('\n')
+      let formattedContent = processedLines.join('\n')
         // Bold
         .replace(/\*\*(.*?)\*\*/g, '<strong style="font-weight: bold; color: #000000;">$1</strong>')
         // Italic
         .replace(/\*(.*?)\*/g, '<em style="font-style: italic; color: #6b7280;">$1</em>')
         // Code
         .replace(/`(.*?)`/g, '<code style="background-color: #f3f4f6; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; font-size: 0.9em; color: #dc2626;">$1</code>')
+        // Process citations that come after database markers in streaming
+        .replace(/⟨⟨DBSOURCE_MARKER⟩⟩\s*\n?((?:\s*\[\d+\][\s\S]*?(?:\n|$))*)/g, function(match, citationContent) {
+          if (citationContent.trim()) {
+            if (trace.payload?.debugMode === 1) {
+              console.log("🗄️ Processing streaming database marker with citations:", citationContent.substring(0, 100) + "...");
+            }
+            
+            // Process the citation content to handle links properly
+            const processedCitationContent = citationContent.trim()
+              .split('\n')
+              .map(line => line.trim())
+              .filter(line => line.length > 0)
+              .map(line => {
+                // Only process lines that contain citations
+                if (line.match(/^\[\d+\]/)) {
+                  return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
+                    let cleanUrl = url.trim();
+                    let cleanLinkText = linkText.trim();
+                    
+                    // Decode URL if it contains encoded characters
+                    if (cleanUrl.includes('%')) {
+                      cleanUrl = decodeUrlSafely(cleanUrl);
+                    }
+                    
+                    // Decode link text if it contains encoded characters
+                    if (cleanLinkText.includes('%')) {
+                      cleanLinkText = decodeUrlSafely(cleanLinkText);
+                    }
+                    
+                    return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
+                  });
+                }
+                return line;
+              })
+              .join('<br>\n');
+            
+            return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedCitationContent}</div></div>⟨⟨DBSOURCE_END⟩⟩`;
+          }
+          return '';
+        })
         // Links - improved processing for streaming content with proper file extension handling
         // Use improved regex to handle parentheses in filenames
         .replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(match, linkText, url) {
@@ -2397,6 +2445,8 @@ export const StreamingResponseExtension = {
         .replace(/<br>\s*<br>/g, '<br>') // Remove duplicate line breaks
         .replace(/<\/p>\s*<br>/g, '</p>') // Remove unnecessary line breaks after paragraphs
         .replace(/<br>\s*<p>/g, '<p>') // Remove unnecessary line breaks before paragraphs
+        // Remove any remaining isolated database markers
+        .replace(/⟨⟨DBSOURCE_MARKER⟩⟩/g, '')
         .replace(/<\/h[1-6]>\s*<br>/g, function(match) {
           return match.replace('<br>', ''); // Remove line breaks after headers
         })
@@ -2460,10 +2510,33 @@ export const StreamingResponseExtension = {
       // Process file citations in the cleaned HTML
       const htmlWithCitations = processFileCitations(cleanedHtml);
       
-      // Remove unique symbols used for file link processing
-      const finalHtml = htmlWithCitations
+      // Process isolated database markers with citations that come after
+      let processedHtml = htmlWithCitations;
+      
+      // Handle case where Database_Sources_End marker is followed by citations in streaming
+      processedHtml = processedHtml.replace(/⟨⟨DBSOURCE_MARKER⟩⟩((?:\s*\[\d+\][\s\S]*?(?:<br>|$))*)/g, function(match, citationContent) {
+        if (citationContent.trim()) {
+          if (trace.payload?.debugMode === 1) {
+            console.log("🗄️ Processing isolated database marker with citations:", citationContent.substring(0, 100) + "...");
+          }
+          
+          // Process the citation content
+          const cleanCitationContent = citationContent.trim().replace(/<br>\s*<br>/g, '<br>');
+          
+          return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${cleanCitationContent}</div></div>⟨⟨DBSOURCE_END⟩⟩`;
+        }
+        return '';
+      });
+      
+      // Remove any remaining isolated database markers
+      processedHtml = processedHtml.replace(/⟨⟨DBSOURCE_MARKER⟩⟩/g, '');
+      
+      // Remove unique symbols used for file link and database source processing
+      const finalHtml = processedHtml
         .replace(/⟨⟨FILELINK_START⟩⟩/g, '')
-        .replace(/⟨⟨FILELINK_END⟩⟩/g, '');
+        .replace(/⟨⟨FILELINK_END⟩⟩/g, '')
+        .replace(/⟨⟨DBSOURCE_START⟩⟩/g, '')
+        .replace(/⟨⟨DBSOURCE_END⟩⟩/g, '');
       
       // Update content with formatting using the processed HTML
       responseContent.innerHTML = finalHtml;
