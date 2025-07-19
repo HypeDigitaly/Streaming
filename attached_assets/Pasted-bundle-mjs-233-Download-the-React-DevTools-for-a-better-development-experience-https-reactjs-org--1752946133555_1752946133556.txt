@@ -1,0 +1,1001 @@
+bundle.mjs:233 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+fingerprint.js:221 Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+bundle.mjs:506 voiceflow webchat v2.93.1
+bundle.mjs:55 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2492)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+q @ bundle.mjs:55
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "5,20,4,1",
+  "max_tokens": 16000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-TMiJzuDn79hCitSGrxAaiZ\",\"filename\":\"Odbory_a_oddeleni.txt\",\"score\":0.5989416981631299,\"attributes\":{\"source_url\":\"https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/\",\"title\":\"Odbory a oddělení\",\"script_name\":\"scrape_sitemap_universal\",\"upload_timestamp\":\"2025-07-19T17:38:35.999588\"},\"content\":[{\"type\":\"text\",\"text\":\"cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/kancelar-tajemnika/)[Právní odbor](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/pravni-odbor/)[Odbor územního plánování a stavebního řádu](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-investic-uzemniho-planovani/)[Odbor správní a živnostenský](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/spravni-odbor/)[Odbor sociální péče](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-socialni-pece/)[Odbor životního prostředí](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-zivotniho-prostredi/)[Odbor přestupkových agend](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-prestupkovych-agend/)[Odbor dopravy a majetku](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-dopravy-majetku/)[Odbor školství, kultury a sportu](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-kultury-sportu-socialnich-sluzeb/)[Odbor městských organizací, strategického rozvoje a investic](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-mestskych-organizaci-skolstvi/)[Finanční odbor](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/financni-odbor/)[Odbor hospodářské správy](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-hospodarske-spravy/)[Archiv města Ústí nad Labem](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/archiv-mesta-usti-nad-labem/)\"}]},{\"file_id\":\"file-Tx3kiV5AsuzHrASM4r1L5u\",\"filename\":\"Odbor_skolstvi,_kultury_a_sportu.txt\",\"score\":0.5648766987597383,\"attributes\":{\"source_url\":\"https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-skolstvi-kultury-sportu/\",\"title\":\"Odbor školství, kultury a sportu\",\"script_name\":\"scrape_sitemap_universal\",\"upload_timestamp\":\"2025-07-19T17:41:44.281059\"},\"content\":[{\"type\":\"text\",\"text\":\"**\\r\\n*   **2025(NOVÉ)**\\r\\n    *   [Program pro poskytování dotací v oblasti VOLNOČASOVÝCH AKTIVIT v roce 2025 z rozpočtu Statutárního města Ústí nad Labem](https://usti.cz/files/formulare/osks_program-podavani-zadosti-dotace_volnocas-2025.pdf \\\"Soubor PDF, velikost 1,64 MB (Odkaz se otevře v novém okně)\\\") (.pdf, 404 kB)\\r\\n\\r\\n### Fond Rady města\\r\\n\\r\\n*   **Žádost o dotaci, žádost o změnu údajů a finanční vypořádání dotace podávejte prostřednictvím [https://dotace.usti.cz/](https://dotace.usti.cz/).**\\r\\n*   **2025 (NOVÉ)**\\r\\n    *   [Výzva k podávání žádostí v rámci poskytování dotací z Fondu Rady města Ústí nad Labem v roce 2025 z rozpočtu statutárního města Ústí nad Labem](https://usti.cz/files/formulare/osks_vyzva-fond-rm-2025.pdf \\\"Odkaz se otevře v novém okně\\\") (.pdf, 263 kB)\\r\\n    *   [Program pro poskytování dotací z Fondu Rady města Ústí nad Labem v roce 2025 z rozpočtu statutárního města Ústí nad Labem](https://usti.cz/files/formulare/osks_program-fond-rm-2025.pdf \\\"Soubor PDF, velikost 472,8 kB\\\") (.pdf, 473 kB)\\r\\n\\r\\nČmejlová Martina, Bc.\\r\\n---------------------\\r\\n\\r\\nvedoucí odboru, školství, kultury a sportu\\r\\n\\r\\n**Tel.:**[+420475271344](tel:+420475271344)\\r\\n\\r\\n**Email:**[martina.cmejlova@mag-ul.cz](javascript:decodeEmail('zc!lu-gam~avoljemc!anitram'))\\r\\n\\r\\n**Č. dveří:** 287\\r\\n\\r\\n| Jméno | Pozice | č. dveří | Telefon |\\r\\n| --- | --- | --- | --- |\\r\\n| [Kalitová Miroslava](javascript:decodeEmail('zc!lu-gam~avotilak!avalsorim')) | referent | 284 | [+420475271517](tel:+420475271517) |\\r\\n| [Popelková Klára](javascript:decodeEmail('zc!lu-gam~avoklepop!aralk')) | ekonom/asistent | 286 | [+420475271343](tel:+420475271343) |\\r\\n| ### Oddělení kultury a sportu |\\r\\n| [Krčilová Gabriela, Bc.\"}]},{\"file_id\":\"file-Py6tgB2pARUzKKC8Ew1XiV\",\"filename\":\"Uredni_deska_-_komplet.txt\",\"score\":0.5590763129373985,\"attributes\":{\"source_url\":\"https://usti.cz/cz/uredni-portal/sprava-mesta/uredni-deska/uredni-deska-komplet.html\",\"title\":\"Úřední deska - komplet\",\"script_name\":\"scrape_sitemap_universal\",\"upload_timestamp\":\"2025-07-19T17:47:44.679345\"},\"content\":[{\"type\":\"text\",\"text\":\"# 📄 Metadata souboru\\r\\n\\r\\n## 🔗 **ZDROJOVÁ URL:**\\r\\n### **https://usti.cz/cz/uredni-portal/sprava-mesta/uredni-deska/
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #4FA7FF
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3961 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3962 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3963 📋 Raw sequence: 5,20,4,1
+StreamingResponseExtension.js:3966 📋 Parsed IDs: [5,20,4,1]
+StreamingResponseExtension.js:3969 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3971 📌 Position 0: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+StreamingResponseExtension.js:3971 📌 Position 1: ID:20 | Gemini 2.5 Flash (openrouter) | Model: google/gemini-2.5-flash
+StreamingResponseExtension.js:3971 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3971 📌 Position 3: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3973 =============================
+StreamingResponseExtension.js:3999 
+🔄 ATTEMPT 1/4: Using model ID:5
+StreamingResponseExtension.js:4002 📌 Model: GPT-4.1 Mini (openai)
+StreamingResponseExtension.js:4003 📌 Model name: gpt-4.1-mini-2025-04-14
+StreamingResponseExtension.js:4004 📌 Endpoint: /api/openai-stream
+StreamingResponseExtension.js:4005 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3622 📦 Payload for /api/openai-stream: Object
+StreamingResponseExtension.js:3631 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openai-stream with TTFT 10000ms
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3757 ✅ First chunk received from /api/openai-stream within timeout.
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3906 TTFT met for /api/openai-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2159 🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3729 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:true, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample:   
+## 🏢 Kompletní seznam odborů městského úřadu města Ústí nad Labem v roce 2025 [1]
+
+1. Odbor hospodářské správy  
+2. Odbor územního plánování a stavebního řádu  
+3. Odbor dopravy a majetku  
+4. Odb...
+StreamingResponseExtension.js:2630 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2639 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2650 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:3688 [DONE] received for /api/openai-stream.
+StreamingResponseExtension.js:3696 🗄️ [FINAL] HTML check - DB sections: true, DB icon: true, thinking sections: true
+StreamingResponseExtension.js:3699 ✅ [FINAL] Database section successfully preserved in final HTML
+StreamingResponseExtension.js:3703 🔍 [FINAL] HTML sample with DB sections: px solid #e5e7eb; width: 100%;">
+<br>
+<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</di
+StreamingResponseExtension.js:3860 📤 Updating Voiceflow variable with response length: 1043
+StreamingResponseExtension.js:3882 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3885 Voiceflow update response: Object
+StreamingResponseExtension.js:4123 
+✅ SUCCESS: MODEL ID:5
+StreamingResponseExtension.js:4124 📌 Model: GPT-4.1 Mini (openai)
+StreamingResponseExtension.js:4125 📌 Model name: gpt-4.1-mini-2025-04-14
+StreamingResponseExtension.js:4126 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:4127 📌 Attempt: 1/4
+StreamingResponseExtension.js:4130 =============================
