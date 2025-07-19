@@ -10,13 +10,12 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### July 19, 2025 - Fixed Database and Web Sources Sections Visibility
-- **Made sections expanded by default**: Changed database sources and web sources sections to start in expanded state instead of collapsed
-- **Updated visual indicators**: Changed arrow from ▼ (collapsed) to ▲ (expanded) to reflect the new default state
-- **Applied expanded styling**: Sections now have `max-height: 1000px`, padding, and borders applied by default
-- **Enhanced user experience**: Users no longer need to click to expand these important reference sections
-- **Fixed multiple processing paths**: Updated all database source processing functions to use expanded state styling
-- **Root cause**: Sections were being created in collapsed state (max-height: 0) making them invisible until manually expanded
+### July 19, 2025 - Investigating Database and Web Sources Sections Visibility Issue
+- **Added visual debugging**: Temporarily added prominent styling to debug whether sections are being created but not visible
+- **Enhanced HTML logging**: Added detailed HTML output logging to trace section creation and positioning
+- **Improved CSS specificity**: Added z-index and min-height to ensure headers are visible even when collapsed
+- **Issue investigation**: Sections appear to be created correctly based on console logs, but users report they're not visible in the UI
+- **Status**: Under investigation - sections show as successfully preserved in HTML but may have CSS/positioning issues
 
 ### July 15, 2025 - Fixed FILELINK Tags Appearing in Database Section
 - **Fixed filelink tag output issue**: Resolved problem where `⟨⟨FILELINK_START⟩⟩` and `⟨⟨FILELINK_END⟩⟩` tags were sometimes appearing in the database section output

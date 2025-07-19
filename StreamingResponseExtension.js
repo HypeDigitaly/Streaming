@@ -750,6 +750,9 @@ export const StreamingResponseExtension = {
             gap: 6px;
             transition: background-color 0.2s ease, border-radius 0.3s ease;
             user-select: none;
+            min-height: 32px;
+            position: relative;
+            z-index: 1;
           }
           .ai-thinking-header:hover {
             background-color: ${darkerBgColour};
@@ -1996,7 +1999,7 @@ export const StreamingResponseExtension = {
               });
             })
             .join('<br>\n');
-          return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header expanded" style="background-color: ${darkerBgColour} !important; border-bottom: 1px solid #E2E8F0; border-radius: 6px 6px 0 0;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▲</div></div><div class="ai-thinking-content expanded" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden; max-height: 1000px; padding: 8px; border-top: 1px solid #F1F5F9; border-radius: 0 0 6px 6px;">${formattedContent}</div></div>⟨⟨DBSOURCE_END⟩⟩`;
+          return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>⟨⟨DBSOURCE_END⟩⟩`;
         })
         // Handle standalone Database_Sources_End markers - wrap citations that come immediately after
         // This addresses the streaming issue where citations are processed separately from database sections
@@ -2057,7 +2060,7 @@ export const StreamingResponseExtension = {
               const processedContent = processedLines.join('<br>\n');
               // Return database section and any remaining content after citations
               const remainingContent = content.substring(processedLines.join('\n').length);
-              return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header expanded" style="background-color: ${darkerBgColour} !important; border-bottom: 1px solid #E2E8F0; border-radius: 6px 6px 0 0;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▲</div></div><div class="ai-thinking-content expanded" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden; max-height: 1000px; padding: 8px; border-top: 1px solid #F1F5F9; border-radius: 0 0 6px 6px;">${processedContent}</div></div>⟨⟨DBSOURCE_END⟩⟩${remainingContent}`;
+              return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${processedContent}</div></div>⟨⟨DBSOURCE_END⟩⟩${remainingContent}`;
             }
           }
           return '';
@@ -2098,7 +2101,7 @@ export const StreamingResponseExtension = {
               });
             })
             .join('<br>\n');
-          return `<div class="ai-thinking-section"><div class="ai-thinking-header expanded" style="background-color: ${darkerBgColour} !important; border-bottom: 1px solid #E2E8F0; border-radius: 6px 6px 0 0;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▲</div></div><div class="ai-thinking-content expanded" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden; max-height: 1000px; padding: 8px; border-top: 1px solid #F1F5F9; border-radius: 0 0 6px 6px;">${formattedContent}</div></div>`;
+          return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
         })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
@@ -2523,7 +2526,7 @@ export const StreamingResponseExtension = {
           // Process the citation content
           const cleanCitationContent = citationContent.trim().replace(/<br>\s*<br>/g, '<br>');
           
-          return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header expanded" style="background-color: ${darkerBgColour} !important; border-bottom: 1px solid #E2E8F0; border-radius: 6px 6px 0 0;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▲</div></div><div class="ai-thinking-content expanded" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden; max-height: 1000px; padding: 8px; border-top: 1px solid #F1F5F9; border-radius: 0 0 6px 6px;">${cleanCitationContent}</div></div>⟨⟨DBSOURCE_END⟩⟩`;
+          return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${cleanCitationContent}</div></div>⟨⟨DBSOURCE_END⟩⟩`;
         }
         return '';
       });
@@ -2577,6 +2580,13 @@ export const StreamingResponseExtension = {
         
         if (hasDbSections && hasDbIcon && hasThinkingSection) {
           console.log(`✅ Database section successfully preserved in final HTML`);
+          // Log actual HTML for debugging visibility issues
+          const dbSectionIndex = finalHtml.indexOf('ai-thinking-section');
+          if (dbSectionIndex !== -1) {
+            console.log(`🔍 HTML sample with DB sections:`, finalHtml.substring(dbSectionIndex - 50, dbSectionIndex + 300));
+          }
+          // Add a temporary visual debug indicator to make sections visible
+          finalHtml = finalHtml.replace(/class="ai-thinking-header"/g, 'class="ai-thinking-header" style="border: 3px solid red !important; background-color: yellow !important;"');
         } else {
           console.log(`❌ Database section may have been lost during processing`);
         }
