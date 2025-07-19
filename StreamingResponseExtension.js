@@ -2787,6 +2787,13 @@ export const StreamingResponseExtension = {
         endpoint: "/api/openrouter-stream",
         displayName: "GPT-4.1",
       },
+      {
+        id: 24,
+        name: "moonshotai/kimi-k2:nitro",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Kimi-k2",
+      }
     ];
 
     // Function to process model sequence
