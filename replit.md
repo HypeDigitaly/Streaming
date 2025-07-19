@@ -10,13 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### July 19, 2025 - Fixed Incomplete Database and Web Sources Sections
+### July 19, 2025 - Fixed Incomplete Database and Web Sources Sections  
 - **Root cause identified**: LLM models sometimes start sections with `[[Web_Search_Sources_Start]]` or `[[Database_Sources_Start]]` but fail to generate the closing tags
 - **Added fallback processing**: Implemented detection and handling of incomplete sections missing end tags
 - **Enhanced debugging**: Added content marker tracking to identify when LLMs generate incomplete tag pairs
 - **Fallback mechanism**: Sections are now properly created even when LLM fails to generate closing tags
 - **Console analysis**: Examined logs showing `Web_Start:true, Web_End:false` pattern indicating LLM generation issues
 - **Fix scope**: Covers both Database Sources and Web Search Sources incomplete generation scenarios
+- **Debugging fix**: Moved final HTML validation to only run at stream completion (`[DONE]`) instead of during streaming chunks
+- **False negatives eliminated**: Previous logs showed sections being created successfully but then reported as missing due to premature validation
 
 ### July 15, 2025 - Fixed FILELINK Tags Appearing in Database Section
 - **Fixed filelink tag output issue**: Resolved problem where `⟨⟨FILELINK_START⟩⟩` and `⟨⟨FILELINK_END⟩⟩` tags were sometimes appearing in the database section output

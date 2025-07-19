@@ -2655,27 +2655,8 @@ export const StreamingResponseExtension = {
         .replace(/⟨⟨DBSOURCE_START⟩⟩/g, '')
         .replace(/⟨⟨DBSOURCE_END⟩⟩/g, '');
       
-      // Double-check for database sections in final HTML and log for debugging
-      if (trace.payload?.debugMode === 1) {
-        const hasDbSections = finalHtml.includes('Databázové zdroje');
-        const hasDbIcon = finalHtml.includes('🗄️');
-        const hasThinkingSection = finalHtml.includes('ai-thinking-section');
-        console.log(`🗄️ Final HTML check - DB sections: ${hasDbSections}, DB icon: ${hasDbIcon}, thinking sections: ${hasThinkingSection}`);
-        
-        if (hasDbSections && hasDbIcon && hasThinkingSection) {
-          console.log(`✅ Database section successfully preserved in final HTML`);
-          // Log actual HTML for debugging visibility issues
-          const dbSectionIndex = finalHtml.indexOf('ai-thinking-section');
-          if (dbSectionIndex !== -1) {
-            console.log(`🔍 HTML sample with DB sections:`, finalHtml.substring(dbSectionIndex - 50, dbSectionIndex + 300));
-          }
-        } else {
-          console.log(`❌ Database section may have been lost during processing`);
-          // Log the full final HTML to debug what's missing
-          console.log(`🔍 Full final HTML length:`, finalHtml.length);
-          console.log(`🔍 Final HTML sample:`, finalHtml.substring(0, 500));
-        }
-      }
+      // Store finalHtml for end-of-stream validation
+      window.lastProcessedHtml = finalHtml;
       
       // Update content with formatting using the processed HTML
       responseContent.innerHTML = finalHtml;
@@ -3705,6 +3686,30 @@ export const StreamingResponseExtension = {
               if (data === "[DONE]") {
                 if (payload.debugMode === 1)
                   console.log(`[DONE] received for ${endpoint}.`);
+                
+                // Final HTML validation check - only run when streaming is complete
+                if (payload.debugMode === 1 && window.lastProcessedHtml) {
+                  const finalHtml = window.lastProcessedHtml;
+                  const hasDbSections = finalHtml.includes('Databázové zdroje');
+                  const hasDbIcon = finalHtml.includes('🗄️');
+                  const hasThinkingSection = finalHtml.includes('ai-thinking-section');
+                  console.log(`🗄️ [FINAL] HTML check - DB sections: ${hasDbSections}, DB icon: ${hasDbIcon}, thinking sections: ${hasThinkingSection}`);
+                  
+                  if (hasDbSections && hasDbIcon && hasThinkingSection) {
+                    console.log(`✅ [FINAL] Database section successfully preserved in final HTML`);
+                    // Log actual HTML for debugging visibility issues
+                    const dbSectionIndex = finalHtml.indexOf('ai-thinking-section');
+                    if (dbSectionIndex !== -1) {
+                      console.log(`🔍 [FINAL] HTML sample with DB sections:`, finalHtml.substring(dbSectionIndex - 50, dbSectionIndex + 300));
+                    }
+                  } else {
+                    console.log(`❌ [FINAL] Database section may have been lost during processing`);
+                    // Log the full final HTML to debug what's missing
+                    console.log(`🔍 [FINAL] Full final HTML length:`, finalHtml.length);
+                    console.log(`🔍 [FINAL] Final HTML sample:`, finalHtml.substring(0, 500));
+                  }
+                }
+                
                 // Attempt Voiceflow update only if content was actually received and processed
                 if (receivedAnyContent) {
                   await updateVoiceflowVariable(payload, localCompleteResponse);

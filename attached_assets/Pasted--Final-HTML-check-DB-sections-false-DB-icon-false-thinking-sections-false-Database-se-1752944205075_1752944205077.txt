@@ -1,0 +1,2353 @@
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8022
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8023
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8026
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8029
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8031
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8032
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8034
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8040
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8042
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8044
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8046
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8048
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8050
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8052
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8054
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8055
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8058
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8061
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8063
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8064
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8202
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8257
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8308
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8312
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8315
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8323
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8325
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8328
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8328
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8332
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8332
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8336
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8336
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8340
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8340
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8395
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8446
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8447
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8449
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8451
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8452
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8454
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8457
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8465
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8467
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8470
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8473
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8474
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8476
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8477
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8478
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8585
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8586
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8588
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8592
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8593
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8596
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8597
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8604
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8606
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8607
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8608
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8615
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8808
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8809
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8811
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8814
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8822
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8824
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8827
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8829
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8831
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8834
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8837
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8840
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8840
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8895
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8946
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8947
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8952
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8960
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8962
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8965
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8967
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8969
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8971
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8974
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8975
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8978
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8981
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8983
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8984
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8986
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8992
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8993
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8996
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 8998
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9000
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9002
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9005
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9006
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9009
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9012
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9014
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9015
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9153
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9208
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9259
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9260
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9262
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9264
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9265
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9267
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9270
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9278
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9280
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9283
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9285
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9288
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9289
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9291
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9294
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9297
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9299
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9300
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9301
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9388
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9396
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9404
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9406
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9412
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9418
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9420
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9427
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9428
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9429
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9431
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9432
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9435
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9437
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9441
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9445
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9446
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9448
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9453
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9456
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9459
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9460
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9462
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9463
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9465
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9466
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9467
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9471
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9473
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9478
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9480
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9484
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9487
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9489
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9493
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9495
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9499
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9500
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9502
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9504
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+ 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 9508
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+ 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9511
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9513
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9516
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9518
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9522
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9524
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9532
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9540
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9542
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9548
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:false, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 9552
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">👤 Kompletní seznam členů Rady města Ústí nad Labem 2025</h2>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏢 <strong style="font-weight: bold; color: #000000;">Primátor města</strong></h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">PhDr. Ing. Petr Nedvědický</strong> [1]
+</p>
+<div style="margin: 0.3em 0;"></div>
+<ul style="margin: 0
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:true, DB_End:true, Web_Start:false, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 👤 Kompletní seznam členů Rady města Ústí nad Labem 2025
+
+### 🏢 **Primátor města**
+
+**PhDr. Ing. Petr Nedvědický** [1]
+- **Pozice:** Primátor města
+- **E-mail:** [primator@mag-ul.cz](mailto:primat...
+StreamingResponseExtension.js:2558 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2567 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2578 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: true, DB icon: true, thinking sections: true
+StreamingResponseExtension.js:2594 ✅ Database section successfully preserved in final HTML
+StreamingResponseExtension.js:2598 🔍 HTML sample with DB sections: px solid #e5e7eb; width: 100%;">
+<br>
+<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</di
+StreamingResponseExtension.js:3635 [DONE] received for /api/baseten-stream.
+StreamingResponseExtension.js:3783 📤 Updating Voiceflow variable with response length: 2289
+StreamingResponseExtension.js:3805 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3808 Voiceflow update response: Object
+StreamingResponseExtension.js:4046 
+✅ SUCCESS: MODEL ID:24
+StreamingResponseExtension.js:4047 📌 Model: Kimi K2 (baseten)
+StreamingResponseExtension.js:4048 📌 Model name: moonshotai/Kimi-K2-Instruct
+StreamingResponseExtension.js:4049 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:4050 📌 Attempt: 1/4
+StreamingResponseExtension.js:4053 =============================
