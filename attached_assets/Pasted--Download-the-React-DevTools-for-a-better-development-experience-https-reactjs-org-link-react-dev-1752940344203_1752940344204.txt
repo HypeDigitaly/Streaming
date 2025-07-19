@@ -1,0 +1,113 @@
+ Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+fingerprint.js:221 Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+bundle.mjs:506 voiceflow webchat v2.93.1
+bundle.mjs:55 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2492)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+q @ bundle.mjs:55
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render Object
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "20,4,1",
+  "max_tokens": 16000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-LLVMhCeNdgRv52BXqbsyB7\",\"filename\":\"Terminy_zasedani_Rady_mesta.txt\",\"score\":0.6726101366158659,\"attributes\":{\"source_url\":\"https://usti.cz/cz/uredni-portal/sprava-mesta/mesto-jeho-organy/rada-mesta/terminy-zasedani.html\",\"title\":\"Termíny zasedání Rady města\",\"script_name\":\"scrape_sitemap_universal\",\"upload_timestamp\":\"2025-07-19T17:34:22.741944\"},\"content\":[{\"type\":\"text\",\"text\":\"# 📄 Metadata souboru\\r\\n\\r\\n## 🔗 **ZDROJOVÁ URL:**\\r\\n### **https://usti.cz/cz/uredni-portal/sprava-mesta/mesto-jeho-organy/rada-mesta/terminy-zasedani.html**\\r\\n\\r\\n## 📝 **TITULEK:**\\r\\n### **Termíny zasedání Rady města**\\r\\n\\r\\n## 🧭 **CESTA/NAVIGACE KE ZDROJOVÉ URL NA WEBU:**\\r\\n### **Úřední portál > Správa města > Město a jeho orgány > Rada města > Termíny zasedání**\\r\\n\\r\\n## 📅 **DATUM POSLEDNÍ MODIFIKACE URL NA WEBU:**\\r\\n### **2019-11-20 00:00:00**\\r\\n\\r\\n## 📊 **TYP ZDROJE:**\\r\\n### **🗺️ Sitemap**\\r\\n\\r\\n---\\r\\n\\r\\nTermíny zasedání Rady města - Statutární město Ústí nad Labem\\r\\n\\r\\n===============\\r\\n\\r\\n[home](https://usti.cz/cz/)>[Úřední portál](https://usti.cz/cz/uredni-portal/)>[Správa města](https://usti.cz/cz/uredni-portal/sprava-mesta/)>[Město a jeho orgány](https://usti.cz/cz/uredni-portal/sprava-mesta/mesto-jeho-organy/)>[Rada města](https://usti.cz/cz/uredni-portal/sprava-mesta/mesto-jeho-organy/rada-mesta/)> Termíny zasedání \\r\\n\\r\\nTermíny zasedání Rady města\\r\\n===========================\\r\\n\\r\\n*   13. 1. 2025\\r\\n*   27. 1. 2025\\r\\n*   10. 2. 2025\\r\\n*   24. 2. 2025\\r\\n*   27. 2. 2025\\r\\n*   10. 3. 2025\\r\\n*   24. 3. 2025\\r\\n*   14. 4. 2025\\r\\n*   5. 5. 2025\\r\\n*   19. 5. 2025\\r\\n*   26. 5. 2025\\r\\n*   2. 6. 2025\\r\\n*   16. 6. 2025\\r\\n*   30. 6. 2025\\r\\n*   7. 7. 2025\\r\\n*   **21. 7. 2025**\\r\\n*   4. 8. 2025\\r\\n*   18. 8. 2025\\r\\n*   1. 9. 2025\\r\\n*   15. 9. 2025\\r\\n*   6. 10. 2025\\r\\n*   20. 10. 2025\\r\\n*   10. 11. 2025\\r\\n*   24. 11. 2025\\r\\n*   8. 12. 2025\"}]},{\"file_id\":\"file-Py6tgB2pARUzKKC8Ew1XiV\",\"filename\":\"Uredni_deska_-_komplet.txt\",\"score\":0.6415698157838561,\"attributes\":{\"source_url\":\"https://usti.cz/cz/uredni-portal/sprava-mesta/uredni-deska/uredni-deska-komplet.html\",\"title\":\"Úřední deska - komplet\",\"script_name\":\"scrape_sitemap_universal\",\"upload_timestamp\":\"2025-07-19T17:47:44.679345\"},\"content\":[{\"type\":\"text\",\"text\":\"# 📄 Metadata souboru\\r\\n\\r\\n## 🔗 **ZDROJOVÁ URL:**\\r\\n### **https://usti.cz/cz/uredni-portal/sprava-mesta/uredni-deska/uredni-deska-komplet.html**\\r\\n\\r\\n## 📝 **TITULEK:**\\r\\n### **Úřední deska - komplet**\\r\\n\\r\\n## 🧭 **CESTA/NAVIGACE KE ZDROJOVÉ URL NA WEBU:**\\r\\n### **Úřední portál > Správa města > Úřední deska > Úřední deska komplet**\\r\\n\\r\\n## 📅 **DATUM POSLEDNÍ MODIFIKACE URL NA WEBU:**\\r\\n### **2025-03-28 00:00:00**\\r\\n\\r\\n## 📊 **TYP ZDROJE:**\\r\\n### **🗺️ Sitemap**\\r\\n\\r\\n---\\r\\n\\r\\nÚřední deska - komplet - Statutární město Ústí nad Labem\\r\\n\\r\\n===============\\r\\n\\r\\n[home](https://usti.cz/cz/)>[Úřední portál](https://usti.cz/cz/uredni-portal/)>[Správa města](https://usti.cz/cz/uredni-portal/sprava-mesta/)>[Úřední deska](https://usti.cz/cz/uredni-portal/sprava-mesta/uredni-deska/)>[Úřední deska komplet](https://usti.cz/cz/uredni-portal/sprava-mesta/uredni-deska/uredni-deska-komplet.html)\\r\\n\\r\\nÚřední deska - komplet\\r\\n======================\\r\\n\\r\\nMagistrát města Ústí nad Labem\\r\\n==============================\\r\\n\\r\\nÚřední deska 19.7.2025\\r\\n----------------------\\r\\n\\r\\nVyvěšeno\\r\\n\\r\\nSejmuto\\r\\n\\r\\nDokument\\r\\n\\r\\n18.7.2025\\r\\n\\r\\n28.7.2025\\r\\n\\r\\n[EUD - PÚ - DZ odtahy - čištění komunikací Ústí nad Labem 2025 - II. kolo](https://www.usti.cz/components/magul/udelisa/priloha.php?did=3059093&pid=0)\\r\\n\\r\\n_10 dní veřejné vyhlášky a OZV_\\r\\n\\r\\n18.7.2025\\r\\n\\r\\n1.8.2025\\r\\n\\r\\n[EUD JES: Stavební úpravy bytů v objektu Resslova 42, Ústí nad Labem](https://www.usti.cz/components/magul/udelisa/priloha.php?did=3058899&pid=0)\\r\\n\\r\\n_15 dní veřejné vyhlášky a OZV_\\r\\n\\r\\n18.7.2025\\r\\n\\r\\n1.8.2025\\r\\n\\r\\n[EUD JES: Zastřešení bytového domu v Ústí nad Labem, Jizerská 2929/34, 2930/36](https://www.usti.cz/components/magul/udelisa/priloha.php?did=3058918&pid=0)\\r\\n\\r\\n_15 dní veřejné vyhlášky a OZV_\\r\\n\\r\\n18.7.2025\\r\\n\\r\\n1.8.2025\\r\\n\\r\\n[EUD JES: Zastřešení bytového domu v Ústí nad Labem,\"}]},{\"file_id\":\"file-7vv9dA3KCqqWPskyHiBDYh\",\"filename\":\"Terminy_zasedani_Zastupitelstva_mesta.txt\",\"score\":0.6214292369537012,\"attributes\":{\"source_url\":\"https://usti.cz/cz/uredni-portal/sprava-mesta/mesto-jeho-organy/zastupitelstvo-mesta/terminy-zasedani.html\",\"title\":\"Ter
+StreamingResponseExtension.js:14 🌍 Language setting: cs
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #4FA7FF
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: Object
+StreamingResponseExtension.js:3861 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:3862 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:3863 📋 Raw sequence: 20,4,1
+StreamingResponseExtension.js:3866 📋 Parsed IDs: [20,4,1]
+StreamingResponseExtension.js:3869 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:3871 📌 Position 0: ID:20 | Gemini 2.5 Flash (openrouter) | Model: google/gemini-2.5-flash
+StreamingResponseExtension.js:3871 📌 Position 1: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+StreamingResponseExtension.js:3871 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:3873 =============================
+StreamingResponseExtension.js:3899 
+🔄 ATTEMPT 1/3: Using model ID:20
+StreamingResponseExtension.js:3902 📌 Model: Gemini 2.5 Flash (openrouter)
+StreamingResponseExtension.js:3903 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:3904 📌 Endpoint: /api/openrouter-stream
+StreamingResponseExtension.js:3905 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3546 📦 Payload for /api/openrouter-stream: Object
+StreamingResponseExtension.js:3555 �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openrouter-stream with TTFT 10000ms
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:3657 ✅ First chunk received from /api/openrouter-stream within timeout.
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3806 TTFT met for /api/openrouter-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2581 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3629 📥 Frontend chunk from /api/openrouter-stream: Object
+StreamingResponseExtension.js:2543 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2552 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2563 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:2576 🗄️ Final HTML check - DB sections: true, DB icon: true, thinking sections: true
+StreamingResponseExtension.js:2579 ✅ Database section successfully preserved in final HTML
+StreamingResponseExtension.js:3612 [DONE] received for /api/openrouter-stream.
+StreamingResponseExtension.js:3760 📤 Updating Voiceflow variable with response length: 2340
+StreamingResponseExtension.js:3782 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3785 Voiceflow update response: Object
+StreamingResponseExtension.js:4023 
+✅ SUCCESS: MODEL ID:20
+StreamingResponseExtension.js:4024 📌 Model: Gemini 2.5 Flash (openrouter)
+StreamingResponseExtension.js:4025 📌 Model name: google/gemini-2.5-flash
+StreamingResponseExtension.js:4026 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:4027 📌 Attempt: 1/3
+StreamingResponseExtension.js:4030 =============================
