@@ -2115,6 +2115,78 @@ export const StreamingResponseExtension = {
             .join('<br>\n');
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
         })
+        // Handle incomplete Web Search Sources (missing end tag) - FALLBACK for LLM generation issues
+        .replace(/\[\[Web_Search_Sources_Start\]\]([\s\S]*?)$/g, function(match, content) {
+          // Only process if there's no matching end tag in the content
+          if (!content.includes('[[Web_Search_Sources_End]]')) {
+            if (trace.payload?.debugMode === 1) {
+              console.log("🌐 FALLBACK: Processing incomplete Web Search Sources (missing end tag)");
+            }
+            // Apply formatting to the content within Web Search Sources
+            const formattedContent = content.trim()
+              .split('\n')
+              .map(line => line.trim())
+              .filter(line => line.length > 0)
+              .map(line => {
+                // Process markdown links in the content with improved URL decoding
+                return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
+                  let cleanUrl = url.trim();
+                  let cleanLinkText = linkText.trim();
+                  
+                  // Decode URL if it contains encoded characters
+                  if (cleanUrl.includes('%')) {
+                    cleanUrl = decodeUrlSafely(cleanUrl);
+                  }
+                  
+                  // Decode link text if it contains encoded characters
+                  if (cleanLinkText.includes('%')) {
+                    cleanLinkText = decodeUrlSafely(cleanLinkText);
+                  }
+                  
+                  return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
+                });
+              })
+              .join('<br>\n');
+            return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
+          }
+          return match; // Return unchanged if it has an end tag
+        })
+        // Handle incomplete Database Sources (missing end tag) - FALLBACK for LLM generation issues
+        .replace(/\[\[Database_Sources_Start\]\]([\s\S]*?)$/g, function(match, content) {
+          // Only process if there's no matching end tag in the content
+          if (!content.includes('[[Database_Sources_End]]')) {
+            if (trace.payload?.debugMode === 1) {
+              console.log("🗄️ FALLBACK: Processing incomplete Database Sources (missing end tag)");
+            }
+            // Apply markdown formatting to the content within Database Sources
+            const formattedContent = content.trim()
+              .split('\n')
+              .map(line => line.trim())
+              .filter(line => line.length > 0)
+              .map(line => {
+                // Process markdown links in the content with improved URL decoding
+                return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
+                  let cleanUrl = url.trim();
+                  let cleanLinkText = linkText.trim();
+                  
+                  // Decode URL if it contains encoded characters
+                  if (cleanUrl.includes('%')) {
+                    cleanUrl = decodeUrlSafely(cleanUrl);
+                  }
+                  
+                  // Decode link text if it contains encoded characters
+                  if (cleanLinkText.includes('%')) {
+                    cleanLinkText = decodeUrlSafely(cleanLinkText);
+                  }
+                  
+                  return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
+                });
+              })
+              .join('<br>\n');
+            return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>⟨⟨DBSOURCE_END⟩⟩`;
+          }
+          return match; // Return unchanged if it has an end tag
+        })
         // Remove empty paragraphs and extra whitespace around thinking sections
         .replace(/<p>\s*<\/p>/g, '')
         .replace(/\n\s*<div class="ai-thinking-section">/g, '<div class="ai-thinking-section">')

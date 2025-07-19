@@ -10,12 +10,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### July 19, 2025 - Investigating Database and Web Sources Sections Visibility Issue
-- **Added content debugging**: Added logging to track whether Database_Sources markers are present in streamed content
-- **Enhanced HTML logging**: Added detailed HTML output logging to trace section creation and positioning  
-- **Improved CSS specificity**: Added z-index and min-height to ensure headers are visible even when collapsed
-- **Root cause identified**: Console logs show two different scenarios - some responses successfully create sections, others never receive the Database_Sources markers from AI models
-- **Status**: Under investigation - inconsistent behavior where some AI model responses include required markers while others don't
+### July 19, 2025 - Fixed Incomplete Database and Web Sources Sections
+- **Root cause identified**: LLM models sometimes start sections with `[[Web_Search_Sources_Start]]` or `[[Database_Sources_Start]]` but fail to generate the closing tags
+- **Added fallback processing**: Implemented detection and handling of incomplete sections missing end tags
+- **Enhanced debugging**: Added content marker tracking to identify when LLMs generate incomplete tag pairs
+- **Fallback mechanism**: Sections are now properly created even when LLM fails to generate closing tags
+- **Console analysis**: Examined logs showing `Web_Start:true, Web_End:false` pattern indicating LLM generation issues
+- **Fix scope**: Covers both Database Sources and Web Search Sources incomplete generation scenarios
 
 ### July 15, 2025 - Fixed FILELINK Tags Appearing in Database Section
 - **Fixed filelink tag output issue**: Resolved problem where `⟨⟨FILELINK_START⟩⟩` and `⟨⟨FILELINK_END⟩⟩` tags were sometimes appearing in the database section output

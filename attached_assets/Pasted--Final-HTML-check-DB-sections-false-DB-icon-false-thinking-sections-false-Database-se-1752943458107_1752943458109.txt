@@ -1,0 +1,2687 @@
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5565
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5567
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5568
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5571
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5573
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔗 URL DECODE: Starting decode for: https://www.yelp.com/search?find_desc=Restaurants&find_loc=%C3%9Ast%C3%AD+nad+Labem
+ 🔗 URL DECODE: Attempt 1: https://www.yelp.com/search?find_desc=Restaurants&find_loc=Ústí+nad+Labem
+ 🔗 URL DECODE: Final result: https://www.yelp.com/search?find_desc=Restaurants&find_loc=Ústí+nad+Labem
+ 🔗 URL DECODE: Fixed encoded URL in buffer: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5701
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5708
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5709
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5710
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5712
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5716
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5719
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5722
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5726
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5730
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5733
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5735
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5738
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5739
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5740
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5742
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5747
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5750
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5753
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5755
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5757
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5759
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5762
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5765
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5769
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5771
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5772
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5911
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5918
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5919
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5920
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5922
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5923
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5925
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5928
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5931
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5932
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5934
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5939
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5942
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5945
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5946
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5948
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5951
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5954
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5955
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5957
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 5958
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6097
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6104
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6105
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6106
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6108
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6112
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6115
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6118
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6122
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6123
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6127
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6129
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6134
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6137
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6141
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6144
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6146
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6149
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6150
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6153
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6155
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6157
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6158
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6297
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6304
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6306
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6307
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6309
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6310
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6311
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6314
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6316
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6318
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6323
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6326
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6329
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6331
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6334
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6335
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6338
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6340
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6342
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6347
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6350
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6353
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6355
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6358
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6359
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6361
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6363
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6364
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6503
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6510
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6512
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6513
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6515
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6516
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6518
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6520
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6523
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6524
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6525
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6527
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6529
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6532
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6534
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6536
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6541
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6544
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6547
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6549
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6551
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6553
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6556
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6559
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+ 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+ 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 🔍 Full final HTML length: 6561
+ 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+ 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6564
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6566
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6568
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6569
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6708
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6716
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6719
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6726
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6728
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6734
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:false
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 6738
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3652 📥 Frontend chunk from /api/baseten-stream: Object
+StreamingResponseExtension.js:1887 🔍 CONTENT DEBUG: Found markers - DB_Start:false, DB_End:false, Web_Start:true, Web_End:true
+StreamingResponseExtension.js:1888 🔍 Buffer sample: ## 🍽️ Nejlepší restaurace v Ústí nad Labem (2025)
+
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+
+### 🏆 TOP 10 restaurací
+
+**Gastro šamp...
+StreamingResponseExtension.js:2591 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: true
+StreamingResponseExtension.js:2601 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:2603 🔍 Full final HTML length: 7754
+StreamingResponseExtension.js:2604 🔍 Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">🍽️ Nejlepší restaurace v Ústí nad Labem (2025)</h2>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+Podle aktuálních informací jsou nejlepšími restauracemi v Ústí nad Labem v roce 2025 tyto podniky [1]-[11]:
+</p>
+<h3 style="margin: 1em 0 0.5em 0; font-weight: bold; color: #333;">🏆 TOP 10 restaurací</h3>
+<p style="margin: 0.25em 0; line-height: 1.4;">
+<strong style="font-weight: bold; color: #000000;">Gastro 
+StreamingResponseExtension.js:3635 [DONE] received for /api/baseten-stream.
+StreamingResponseExtension.js:3783 📤 Updating Voiceflow variable with response length: 2515
+StreamingResponseExtension.js:3805 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3808 Voiceflow update response: Object
+StreamingResponseExtension.js:4046 
+✅ SUCCESS: MODEL ID:24
+StreamingResponseExtension.js:4047 📌 Model: Kimi K2 (baseten)
+StreamingResponseExtension.js:4048 📌 Model name: moonshotai/Kimi-K2-Instruct
+StreamingResponseExtension.js:4049 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:4050 📌 Attempt: 1/4
+StreamingResponseExtension.js:4053 =============================
+StreamingResponseExtension.js:4131 🔍 FINALIZE: Processing remaining buffer content
+StreamingResponseExtension.js:4132 🗄️ FINALIZE: Database sections already present: false
