@@ -1,0 +1,1014 @@
+ Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+ Generated Device Fingerprint: 3e7b963a4774e29f6a0361cd32a28b0984b27f5d297232adbb7603a4535d2346
+ voiceflow webchat v2.93.1
+ Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `x7`. See https://reactjs.org/link/warning-keys for more information.
+    at Uw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2360)
+    at x7 (https://cdn.voiceflow.com/widget-next/bundle.mjs:448:2492)
+    at div
+    at div
+    at Fw (https://cdn.voiceflow.com/widget-next/bundle.mjs:234:2079)
+    at lq (https://cdn.voiceflow.com/widget-next/bundle.mjs:505:7367)
+    at ED (https://cdn.voiceflow.com/widget-next/bundle.mjs:330:7525)
+q @ bundle.mjs:55
+ 🚀 StreamingResponseExtension: Starting render Object
+ 📦 Full trace payload: {
+  "modelSequence": "5,20,4,1",
+  "max_tokens": 16000,
+  "temperature": 0,
+  "userData": "\n# DATA SOURCES\n## 🔍 \"Reference Information\" (Primary Source)\n\"\"\"[{\"file_id\":\"file-Py6tgB2pARUzKKC8Ew1XiV\",\"filename\":\"Uredni_deska_-_komplet.txt\",\"score\":0.6485966150561334,\"attributes\":{\"source_url\":\"https://usti.cz/cz/uredni-portal/sprava-mesta/uredni-deska/uredni-deska-komplet.html\",\"title\":\"Úřední deska - komplet\",\"script_name\":\"scrape_sitemap_universal\",\"upload_timestamp\":\"2025-07-19T17:47:44.679345\"},\"content\":[{\"type\":\"text\",\"text\":\"cz/components/magul/udelisa/priloha.php?did=3055632&pid=0)\\r\\n\\r\\n_Odbor městských organizací, strategického rozvoje a investic MmÚ_\\r\\n\\r\\n14.7.2025\\r\\n\\r\\n30.7.2025\\r\\n\\r\\n[EUD - Referent/ka oddělení vodního hospodářství Odbor životního prostředí MmÚ](https://www.usti.cz/components/magul/udelisa/priloha.php?did=3055634&pid=0)\\r\\n\\r\\n14.7.2025\\r\\n\\r\\n30.7.2025\\r\\n\\r\\n[EUD - Sociální pracovník, Oddělení sociálně-právní ochrany dětí, Odbor sociální péče MmÚ](https://www.usti.cz/components/magul/udelisa/priloha.php?did=3055630&pid=0)\\r\\n\\r\\n14.7.2025\\r\\n\\r\\n30.7.2025\\r\\n\\r\\n[EUD - rozhodnutí - Změna využití území pozemku parc.č. 377/5 v k.ú. Chuderov](https://www.usti.cz/components/magul/udelisa/priloha.php?did=3055282&pid=0)\\r\\n\\r\\n_rozhodnutí - povolení změny využití území, první úkon: Změna využití území pozemku parc.č. 377/5 v k.ú. Chuderov_\\r\\n\\r\\n14.7.2025\\r\\n\\r\\n20.8.2025\\r\\n\\r\\n[EUD - Dražební vyhláška č.j. 1593538/25/2500-80541-508296](https://www.usti.cz/components/magul/udelisa/priloha.php?did=3055235&pid=0)\\r\\n\\r\\n14.7.2025\\r\\n\\r\\n20.8.2025\\r\\n\\r\\n[EUD - Dražební vyhláška č.j. 1594802/25/2500-80541-508296](https://www.usti.cz/components/magul/udelisa/priloha.php?did=3055218&pid=0)\\r\\n\\r\\n14.7.2025\\r\\n\\r\\n22.8.2025\\r\\n\\r\\n[EUD - Dražební vyhláška č.j. 1593525/25/2500-80541-501448](https://www.usti.cz/components/magul/udelisa/priloha.php?did=3055239&pid=0)\\r\\n\\r\\n14.7.2025\\r\\n\\r\\n31.12.2025\\r\\n\\r\\n[EUD - Rozpočtová opatření z 19. zastupitelstva města Ústí nad Labem ze dne 30. 6.\"}]},{\"file_id\":\"file-TMiJzuDn79hCitSGrxAaiZ\",\"filename\":\"Odbory_a_oddeleni.txt\",\"score\":0.6000179434311645,\"attributes\":{\"source_url\":\"https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/\",\"title\":\"Odbory a oddělení\",\"script_name\":\"scrape_sitemap_universal\",\"upload_timestamp\":\"2025-07-19T17:38:35.999588\"},\"content\":[{\"type\":\"text\",\"text\":\"cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/kancelar-tajemnika/)[Právní odbor](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/pravni-odbor/)[Odbor územního plánování a stavebního řádu](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-investic-uzemniho-planovani/)[Odbor správní a živnostenský](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/spravni-odbor/)[Odbor sociální péče](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-socialni-pece/)[Odbor životního prostředí](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-zivotniho-prostredi/)[Odbor přestupkových agend](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-prestupkovych-agend/)[Odbor dopravy a majetku](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-dopravy-majetku/)[Odbor školství, kultury a sportu](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-kultury-sportu-socialnich-sluzeb/)[Odbor městských organizací, strategického rozvoje a investic](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-mestskych-organizaci-skolstvi/)[Finanční odbor](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/financni-odbor/)[Odbor hospodářské správy](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-hospodarske-spravy/)[Archiv města Ústí nad Labem](https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/archiv-mesta-usti-nad-labem/)\"}]},{\"file_id\":\"file-9zdPXuKAazUTB5L4JMLgyT\",\"filename\":\"Odbor_spravni_a_zivnostensky.txt\",\"score\":0.5597819628937715,\"attributes\":{\"source_url\":\"https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-spravni-zivnostensky/\",\"title\":\"Odbor správní a živnostenský\",\"script_name\":\"scrape_sitemap_universal\",\"upload_timestamp\":\"2025-07-19T17:39:47.452511\"},\"content\":[{\"type\":\"text\",\"text\":\"# 📄 Metadata souboru\\r\\n\\r\\n## 🔗 **ZDROJOVÁ URL:**\\r\\n### **https://usti.cz/cz/uredni-portal/sprava-mesta/magistrat/odbory-oddeleni/odbor-spravni-zivnostensky/**\\r\\n\\r\\n## 📝 **TITULEK:**\\r\\n### **Odbor správní a živnostenský**\\r\\n\\r\\n## 🧭 **CESTA/NAVIGACE KE ZDROJOVÉ URL NA WEBU:**\\r\\n### **Úřední portál > Správa města > M
+ 🌍 Language setting: cs
+ 🎨 Reasoning background colour: #4FA7FF
+ 🎨 Generated color scheme for thinking sections: Object
+ 📊 MODEL SEQUENCE DEBUG INFO:
+ === CONFIGURED MODEL SEQUENCE ===
+ 📋 Raw sequence: 5,20,4,1
+ 📋 Parsed IDs: [5,20,4,1]
+ === MODELS IN SEQUENCE ===
+ 📌 Position 0: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+ 📌 Position 1: ID:20 | Gemini 2.5 Flash (openrouter) | Model: google/gemini-2.5-flash
+ 📌 Position 2: ID:4 | GPT-4.1 (openai) | Model: gpt-4.1-2025-04-14
+ 📌 Position 3: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+ =============================
+ 
+🔄 ATTEMPT 1/4: Using model ID:5
+ 📌 Model: GPT-4.1 Mini (openai)
+ 📌 Model name: gpt-4.1-mini-2025-04-14
+ 📌 Endpoint: /api/openai-stream
+ 📌 Status: STARTING REQUEST
+ 📦 Payload for /api/openai-stream: Object
+ �� Calling proxy URL: https://utils.hypedigitaly.ai/api/openai-stream with TTFT 10000ms
+ 📥 Frontend chunk from /api/openai-stream: Object
+ ✅ First chunk received from /api/openai-stream within timeout.
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ TTFT met for /api/openai-stream. Waiting for stream completion...
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+ 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+ ❌ Database section may have been lost during processing
+ 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:2591 ❌ Database section may have been lost during processing
+StreamingResponseExtension.js:3639 📥 Frontend chunk from /api/openai-stream: Object
+StreamingResponseExtension.js:2546 🗄️ Storing database section DB_SECTION_0: <div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !i...
+StreamingResponseExtension.js:2555 🗄️ Restoring database section DB_SECTION_0
+StreamingResponseExtension.js:2566 🗄️ Database sections in final HTML: true
+StreamingResponseExtension.js:2579 🗄️ Final HTML check - DB sections: true, DB icon: true, thinking sections: true
+StreamingResponseExtension.js:2582 ✅ Database section successfully preserved in final HTML
+StreamingResponseExtension.js:2586 🔍 HTML sample with DB sections: px solid #e5e7eb; width: 100%;">
+<br>
+<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: #4FA7FF !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</di
+StreamingResponseExtension.js:3622 [DONE] received for /api/openai-stream.
+StreamingResponseExtension.js:3770 📤 Updating Voiceflow variable with response length: 916
+StreamingResponseExtension.js:3792 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:3795 Voiceflow update response: Object
+StreamingResponseExtension.js:4033 
+✅ SUCCESS: MODEL ID:5
+StreamingResponseExtension.js:4034 📌 Model: GPT-4.1 Mini (openai)
+StreamingResponseExtension.js:4035 📌 Model name: gpt-4.1-mini-2025-04-14
+StreamingResponseExtension.js:4036 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:4037 📌 Attempt: 1/4
+StreamingResponseExtension.js:4040 =============================

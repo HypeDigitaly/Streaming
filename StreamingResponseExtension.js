@@ -1877,6 +1877,18 @@ export const StreamingResponseExtension = {
 
 
       
+      // Debug: Log what content we're actually receiving
+      if (trace.payload?.debugMode === 1) {
+        const hasDbStart = buffer.includes('[[Database_Sources_Start]]');
+        const hasDbEnd = buffer.includes('[[Database_Sources_End]]');
+        const hasWebStart = buffer.includes('[[Web_Search_Sources_Start]]');
+        const hasWebEnd = buffer.includes('[[Web_Search_Sources_End]]');
+        if (hasDbStart || hasDbEnd || hasWebStart || hasWebEnd) {
+          console.log(`🔍 CONTENT DEBUG: Found markers - DB_Start:${hasDbStart}, DB_End:${hasDbEnd}, Web_Start:${hasWebStart}, Web_End:${hasWebEnd}`);
+          console.log(`🔍 Buffer sample:`, buffer.substring(0, 200) + (buffer.length > 200 ? '...' : ''));
+        }
+      }
+      
       // Special handling for streaming content - process only complete elements
       let processBuffer = buffer;
       
@@ -2585,10 +2597,11 @@ export const StreamingResponseExtension = {
           if (dbSectionIndex !== -1) {
             console.log(`🔍 HTML sample with DB sections:`, finalHtml.substring(dbSectionIndex - 50, dbSectionIndex + 300));
           }
-          // Add a temporary visual debug indicator to make sections visible
-          finalHtml = finalHtml.replace(/class="ai-thinking-header"/g, 'class="ai-thinking-header" style="border: 3px solid red !important; background-color: yellow !important;"');
         } else {
           console.log(`❌ Database section may have been lost during processing`);
+          // Log the full final HTML to debug what's missing
+          console.log(`🔍 Full final HTML length:`, finalHtml.length);
+          console.log(`🔍 Final HTML sample:`, finalHtml.substring(0, 500));
         }
       }
       

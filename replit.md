@@ -11,11 +11,11 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### July 19, 2025 - Investigating Database and Web Sources Sections Visibility Issue
-- **Added visual debugging**: Temporarily added prominent styling to debug whether sections are being created but not visible
-- **Enhanced HTML logging**: Added detailed HTML output logging to trace section creation and positioning
+- **Added content debugging**: Added logging to track whether Database_Sources markers are present in streamed content
+- **Enhanced HTML logging**: Added detailed HTML output logging to trace section creation and positioning  
 - **Improved CSS specificity**: Added z-index and min-height to ensure headers are visible even when collapsed
-- **Issue investigation**: Sections appear to be created correctly based on console logs, but users report they're not visible in the UI
-- **Status**: Under investigation - sections show as successfully preserved in HTML but may have CSS/positioning issues
+- **Root cause identified**: Console logs show two different scenarios - some responses successfully create sections, others never receive the Database_Sources markers from AI models
+- **Status**: Under investigation - inconsistent behavior where some AI model responses include required markers while others don't
 
 ### July 15, 2025 - Fixed FILELINK Tags Appearing in Database Section
 - **Fixed filelink tag output issue**: Resolved problem where `⟨⟨FILELINK_START⟩⟩` and `⟨⟨FILELINK_END⟩⟩` tags were sometimes appearing in the database section output
