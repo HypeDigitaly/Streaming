@@ -2789,10 +2789,10 @@ export const StreamingResponseExtension = {
       },
       {
         id: 24,
-        name: "moonshotai/kimi-k2:nitro",
-        type: "openrouter",
-        endpoint: "/api/openrouter-stream",
-        displayName: "Kimi-k2",
+        name: "moonshotai/Kimi-K2-Instruct",
+        type: "baseten",
+        endpoint: "/api/baseten-stream",
+        displayName: "Kimi K2",
       }
     ];
 
