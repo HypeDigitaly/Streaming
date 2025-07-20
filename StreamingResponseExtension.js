@@ -3581,40 +3581,16 @@ export const StreamingResponseExtension = {
                     if (responseContent) {
                       responseContent.innerHTML = finalHtml;
                       window.lastProcessedHtml = finalHtml;
-                      if (payload.debugMode === 1) {
-                        console.log("🔄 [FINAL FALLBACK] Updated HTML with completed sections");
-                      }
+
                     }
                   }
                   
-                  // Final HTML validation check
-                  if (payload.debugMode === 1) {
-                    const hasDbSections = finalHtml.includes('Databázové zdroje');
-                    const hasDbIcon = finalHtml.includes('🗄️');
-                    const hasThinkingSection = finalHtml.includes('ai-thinking-section');
-                    console.log(`🗄️ [FINAL] HTML check - DB sections: ${hasDbSections}, DB icon: ${hasDbIcon}, thinking sections: ${hasThinkingSection}`);
-                    
-                    if (hasDbSections && hasDbIcon && hasThinkingSection) {
-                      console.log(`✅ [FINAL] Database section successfully preserved in final HTML`);
-                      const dbSectionIndex = finalHtml.indexOf('ai-thinking-section');
-                      if (dbSectionIndex !== -1) {
-                        console.log(`🔍 [FINAL] HTML sample with DB sections:`, finalHtml.substring(dbSectionIndex - 50, dbSectionIndex + 300));
-                      }
-                    } else {
-                      console.log(`❌ [FINAL] Database section may have been lost during processing`);
-                      console.log(`🔍 [FINAL] Full final HTML length:`, finalHtml.length);
-                      console.log(`🔍 [FINAL] Final HTML sample:`, finalHtml.substring(0, 500));
-                    }
-                  }
+
                 }
                 
                 // Attempt Voiceflow update only if content was actually received and processed
                 if (receivedAnyContent) {
                   await updateVoiceflowVariable(payload, localCompleteResponse);
-                } else if (payload.debugMode === 1) {
-                  console.log(
-                    "⚠️ No content received before [DONE], skipping Voiceflow update.",
-                  );
                 }
                 return { success: true }; // Signal successful completion
               }
@@ -3634,9 +3610,7 @@ export const StreamingResponseExtension = {
                   // Handle different types of content
                   if (parsed.type === 'annotations') {
                     // Handle file search annotations (citations)
-                    if (payload.debugMode === 1) {
-                      console.log('📎 Processing file search annotations:', parsed.content);
-                    }
+
                     handleFileSearchAnnotations(parsed.content);
                     receivedAnyContent = true;
                   } else {
@@ -3649,10 +3623,7 @@ export const StreamingResponseExtension = {
                       // --- TTFT Logic ---
                       if (!firstChunkReceived) {
                         firstChunkReceived = true;
-                        if (payload.debugMode === 1)
-                          console.log(
-                            `✅ First chunk received from ${endpoint} within timeout.`,
-                          );
+
                         // Crucially, clear the TTFT timer now
                         if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
                         // Signal that the TTFT hurdle is passed
@@ -3673,7 +3644,7 @@ export const StreamingResponseExtension = {
                   }
 
               } catch (parseError) {
-
+                // Handle parsing errors silently or with minimal logging if needed
               }
             } // End line processing loop
 
