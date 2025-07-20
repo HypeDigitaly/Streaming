@@ -5,7 +5,21 @@ export const StreamingResponseExtension = {
     trace.type === "ext_streamingResponse" ||
     trace.payload?.name === "ext_streamingResponse",
   render: async ({ trace, element }) => {
-
+    if (trace.payload?.debugMode === 1) {
+      console.log("🚀 StreamingResponseExtension: Starting render", { trace });
+      console.log(
+        "📦 Full trace payload:",
+        JSON.stringify(trace.payload, null, 2),
+      );
+      console.log(
+        "🌍 Language setting:",
+        trace.payload?.lang || "cs (default)",
+      );
+      console.log(
+        "🎨 Reasoning background colour:",
+        trace.payload?.reasoningBgColour || "#EBF5FF (default)",
+      );
+    }
 
     const container = document.createElement("div");
     container.className = "streaming-response-container";
@@ -29,7 +43,14 @@ export const StreamingResponseExtension = {
     const lighterBgColour = adjustColorBrightness(reasoningBgColour, 0.1);
     const darkerBgColour = adjustColorBrightness(reasoningBgColour, -0.1);
 
-
+    if (trace.payload?.debugMode === 1) {
+      console.log("🎨 Generated color scheme for thinking sections:", {
+        background: reasoningBgColour,
+        backgroundLighter: lighterBgColour,
+        backgroundDarker: darkerBgColour,
+        textColor: "#333333 (dark gray for contrast)"
+      });
+    }
 
     // Add variables to track streaming state for Perplexity reasoning
     let isStreaming = false;
@@ -1532,7 +1553,13 @@ export const StreamingResponseExtension = {
             
             citationsList.appendChild(citationItem);
             
-
+            if (trace.payload?.debugMode === 1) {
+              console.log('📎 Added citation to UI:', {
+                file_id: annotation.file_id,
+                filename: annotation.filename,
+                citation_number: citationNumber
+              });
+            }
           }
         }
       });
@@ -1574,7 +1601,9 @@ export const StreamingResponseExtension = {
     // Function to add citation link handlers
     // Function to decode URL-encoded Czech characters
     function decodeUrlSafely(url) {
-
+      if (trace.payload?.debugMode === 1) {
+        console.log('🔗 URL DECODE: Starting decode for:', url);
+      }
       
       try {
         // First try standard decoding - keep decoding until no more changes
@@ -1590,21 +1619,31 @@ export const StreamingResponseExtension = {
             if (nextDecoded !== decodedUrl) {
               decodedUrl = nextDecoded;
               attempts++;
-
+              if (trace.payload?.debugMode === 1) {
+                console.log(`🔗 URL DECODE: Attempt ${attempts}:`, decodedUrl);
+              }
             } else {
               break;
             }
           } catch (e) {
-
+            // If decoding fails, try manual character replacement
+            if (trace.payload?.debugMode === 1) {
+              console.log('🔗 URL DECODE: decodeURIComponent failed, trying manual:', e.message);
+            }
             break;
           }
         }
         
-
+        if (trace.payload?.debugMode === 1) {
+          console.log('🔗 URL DECODE: Final result:', decodedUrl);
+        }
         
         return decodedUrl;
       } catch (e) {
-
+        // If standard decoding fails, try manual fixes for common encoded characters
+        if (trace.payload?.debugMode === 1) {
+          console.log('🔗 URL DECODE: Starting manual decode for:', url);
+        }
         
         let manualDecoded = url;
         let previousManual = '';
@@ -1676,10 +1715,14 @@ export const StreamingResponseExtension = {
             .replace(/%7E/g, '~');
           attempts++;
           
-
+          if (trace.payload?.debugMode === 1) {
+            console.log(`🔗 URL DECODE: Manual attempt ${attempts}:`, manualDecoded);
+          }
         }
         
-
+        if (trace.payload?.debugMode === 1) {
+          console.log('🔗 URL DECODE: Final manual result:', manualDecoded);
+        }
         
         return manualDecoded;
       }
@@ -1752,7 +1795,13 @@ export const StreamingResponseExtension = {
         let cleanUrl = url.trim();
         if (cleanUrl.includes('%')) {
           cleanUrl = decodeUrlSafely(cleanUrl);
-
+          if (trace.payload?.debugMode === 1) {
+            console.log("🔗 URL DECODE: Fixed encoded URL in buffer:", {
+              original: url,
+              cleaned: cleanUrl,
+              linkText: linkText
+            });
+          }
         }
         return `[${linkText}](${cleanUrl})`;
       });
@@ -1828,7 +1877,17 @@ export const StreamingResponseExtension = {
 
 
       
-
+      // Debug: Log what content we're actually receiving
+      if (trace.payload?.debugMode === 1) {
+        const hasDbStart = buffer.includes('[[Database_Sources_Start]]');
+        const hasDbEnd = buffer.includes('[[Database_Sources_End]]');
+        const hasWebStart = buffer.includes('[[Web_Search_Sources_Start]]');
+        const hasWebEnd = buffer.includes('[[Web_Search_Sources_End]]');
+        if (hasDbStart || hasDbEnd || hasWebStart || hasWebEnd) {
+          console.log(`🔍 CONTENT DEBUG: Found markers - DB_Start:${hasDbStart}, DB_End:${hasDbEnd}, Web_Start:${hasWebStart}, Web_End:${hasWebEnd}`);
+          console.log(`🔍 Buffer sample:`, buffer.substring(0, 200) + (buffer.length > 200 ? '...' : ''));
+        }
+      }
       
       // Special handling for streaming content - process only complete elements
       let processBuffer = buffer;
@@ -1862,7 +1921,9 @@ export const StreamingResponseExtension = {
             if (incompleteCitations.length > 0) {
               // Process up to the Database_Sources_End marker
               processBuffer = buffer.substring(0, endMarkerIndex + 23);
-
+              if (trace.payload?.debugMode === 1) {
+                console.log("🗄️ DELAY: Incomplete database citations detected, delaying processing:", incompleteCitations[0].substring(0, 50) + "...");
+              }
             }
           }
         }
@@ -1883,7 +1944,9 @@ export const StreamingResponseExtension = {
           // But be more permissive with Czech websites that may have longer encoded URLs
           if (afterLink.includes('%') && afterLink.length - linkStart < 30 && !afterLink.includes('stredoceskykraj.cz')) {
             processBuffer = beforeLink;
-
+            if (trace.payload?.debugMode === 1) {
+              console.log("🔗 DELAY: Incomplete link detected, delaying processing:", afterLink.substring(0, 50) + "...");
+            }
           }
         }
       }
@@ -2070,7 +2133,13 @@ export const StreamingResponseExtension = {
           // Use alt text if provided, otherwise use empty string
           const altText = alt ? alt.trim() : "";
 
-
+          if (trace.payload?.debugMode === 1) {
+            console.log("Converting markdown image to HTML:", {
+              original: match,
+              cleanUrl,
+              altText,
+            });
+          }
 
           return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
         })
@@ -2301,7 +2370,14 @@ export const StreamingResponseExtension = {
               // Found a file extension, truncate the URL right after the extension
               const endIndex = extIndex + ext.length;
               trimmedUrl = trimmedUrl.substring(0, endIndex);
-
+              if (trace.payload?.debugMode === 1) {
+                console.log("📄 FILE LINK: Truncated URL at file extension:", {
+                  original: url,
+                  truncated: trimmedUrl,
+                  extension: ext,
+                  linkText: linkText
+                });
+              }
               break;
             }
           }
@@ -3069,7 +3145,9 @@ export const StreamingResponseExtension = {
           const contentDiv = step.querySelector('.step-content');
           if (contentDiv) {
             contentDiv.innerHTML = processCitations(content, citations, true);
-
+            if (payload.debugMode === 1) {
+              console.log('🔄 Updated step with citations:', citations?.length || 0);
+            }
           }
           
           if (complete && !completedSteps.includes(step)) {
@@ -3137,7 +3215,11 @@ export const StreamingResponseExtension = {
           // Process citations first
           const textWithCitations = processCitations(trimmedText, citations, false);
           
-
+          if (payload.debugMode === 1) {
+            console.log('🔍 PERPLEXITY DEBUG: Raw text for formatting:', textWithCitations.substring(0, 200) + '...');
+            console.log('🔍 PERPLEXITY DEBUG: Contains ###?', textWithCitations.includes('###'));
+            console.log('🔍 PERPLEXITY DEBUG: Contains line breaks?', textWithCitations.includes('\n'));
+          }
           
           // First, normalize line breaks and ensure proper formatting for streaming content
           let normalizedText = textWithCitations
@@ -3150,7 +3232,9 @@ export const StreamingResponseExtension = {
             // Ensure line breaks after sentences for better processing
             .replace(/([.!?])\s+([A-ZČŠŽŘŮĚÝÁÍÉÓÚĎ])/g, '$1\n$2');
           
-
+          if (payload.debugMode === 1) {
+            console.log('🔍 PERPLEXITY DEBUG: After normalization:', normalizedText.substring(0, 300) + '...');
+          }
           
           // Simplified markdown processing for Perplexity complete text
           let formattedContent = normalizedText
@@ -3254,11 +3338,21 @@ export const StreamingResponseExtension = {
           // Convert remaining line breaks to HTML breaks for better formatting
           formattedContent = formattedContent.replace(/\n\n+/g, '<br><br>').replace(/\n/g, '<br>');
           
-
+          if (payload.debugMode === 1) {
+            console.log('🔍 PERPLEXITY DEBUG: Final formatted content:', formattedContent.substring(0, 300) + '...');
+            if (formattedContent.includes('<h3>')) {
+              console.log('🔍 PERPLEXITY DEBUG: Successfully found H3 tags!');
+            }
+            if (formattedContent.includes('<li>')) {
+              console.log('🔍 PERPLEXITY DEBUG: Successfully found LI tags!');
+            }
+          }
           
           if (answerContent) {
             answerContent.innerHTML = formattedContent;
-
+            if (payload.debugMode === 1) {
+              console.log('📝 Updated answer content with citations:', citations?.length || 0);
+            }
           }
         }
 
@@ -3289,7 +3383,9 @@ export const StreamingResponseExtension = {
               
               if (data.citations) {
                 citations = data.citations;
-
+                if (payload.debugMode === 1) {
+                  console.log('📎 Citations updated:', citations);
+                }
                 
                 // Re-process all existing reasoning steps with new citations
                 if (activeReasoningGroup) {
@@ -3581,16 +3677,40 @@ export const StreamingResponseExtension = {
                     if (responseContent) {
                       responseContent.innerHTML = finalHtml;
                       window.lastProcessedHtml = finalHtml;
-
+                      if (payload.debugMode === 1) {
+                        console.log("🔄 [FINAL FALLBACK] Updated HTML with completed sections");
+                      }
                     }
                   }
                   
-
+                  // Final HTML validation check
+                  if (payload.debugMode === 1) {
+                    const hasDbSections = finalHtml.includes('Databázové zdroje');
+                    const hasDbIcon = finalHtml.includes('🗄️');
+                    const hasThinkingSection = finalHtml.includes('ai-thinking-section');
+                    console.log(`🗄️ [FINAL] HTML check - DB sections: ${hasDbSections}, DB icon: ${hasDbIcon}, thinking sections: ${hasThinkingSection}`);
+                    
+                    if (hasDbSections && hasDbIcon && hasThinkingSection) {
+                      console.log(`✅ [FINAL] Database section successfully preserved in final HTML`);
+                      const dbSectionIndex = finalHtml.indexOf('ai-thinking-section');
+                      if (dbSectionIndex !== -1) {
+                        console.log(`🔍 [FINAL] HTML sample with DB sections:`, finalHtml.substring(dbSectionIndex - 50, dbSectionIndex + 300));
+                      }
+                    } else {
+                      console.log(`❌ [FINAL] Database section may have been lost during processing`);
+                      console.log(`🔍 [FINAL] Full final HTML length:`, finalHtml.length);
+                      console.log(`🔍 [FINAL] Final HTML sample:`, finalHtml.substring(0, 500));
+                    }
+                  }
                 }
                 
                 // Attempt Voiceflow update only if content was actually received and processed
                 if (receivedAnyContent) {
                   await updateVoiceflowVariable(payload, localCompleteResponse);
+                } else if (payload.debugMode === 1) {
+                  console.log(
+                    "⚠️ No content received before [DONE], skipping Voiceflow update.",
+                  );
                 }
                 return { success: true }; // Signal successful completion
               }
@@ -3599,7 +3719,9 @@ export const StreamingResponseExtension = {
                 if (data.startsWith("{") && data.endsWith("}")) {
                   const parsed = JSON.parse(data);
 
-
+                  if (payload.debugMode === 1) {
+                    console.log(`📥 Frontend chunk from ${endpoint}:`, parsed);
+                  }
 
                   if (parsed.error) {
                     throw new Error(
@@ -3610,7 +3732,9 @@ export const StreamingResponseExtension = {
                   // Handle different types of content
                   if (parsed.type === 'annotations') {
                     // Handle file search annotations (citations)
-
+                    if (payload.debugMode === 1) {
+                      console.log('📎 Processing file search annotations:', parsed.content);
+                    }
                     handleFileSearchAnnotations(parsed.content);
                     receivedAnyContent = true;
                   } else {
@@ -3623,7 +3747,10 @@ export const StreamingResponseExtension = {
                       // --- TTFT Logic ---
                       if (!firstChunkReceived) {
                         firstChunkReceived = true;
-
+                        if (payload.debugMode === 1)
+                          console.log(
+                            `✅ First chunk received from ${endpoint} within timeout.`,
+                          );
                         // Crucially, clear the TTFT timer now
                         if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
                         // Signal that the TTFT hurdle is passed
@@ -3637,22 +3764,42 @@ export const StreamingResponseExtension = {
                         localCompleteResponse += content;
                       } else {
                         // Should theoretically not happen if abort check is robust, but good failsafe
-
+                        if (payload.debugMode === 1)
+                          console.warn(
+                            `⚠️ Content received for ${endpoint} *after* abort signal. Discarding.`,
+                          );
                         // Do not update UI or localCompleteResponse if aborted
                       }
                     }
                   }
-
+                } else if (payload.debugMode === 1 && data) {
+                  console.log(
+                    `Received non-JSON data chunk from ${endpoint}:`,
+                    data,
+                  );
+                }
               } catch (parseError) {
-                // Handle parsing errors silently or with minimal logging if needed
+                if (payload.debugMode === 1)
+                  console.warn(
+                    `Failed to parse SSE data line for ${endpoint}:`,
+                    parseError,
+                    "Data:",
+                    data,
+                  );
               }
             } // End line processing loop
 
             if (done) {
-
+              if (payload.debugMode === 1)
+                console.log(
+                  `Stream ended naturally (done=true) for ${endpoint}.`,
+                );
               // If stream ends without [DONE], but we got content, consider it success
               if (receivedAnyContent) {
-
+                if (payload.debugMode === 1)
+                  console.log(
+                    "Attempting Voiceflow update on natural stream end.",
+                  );
                 await updateVoiceflowVariable(payload, localCompleteResponse);
                 return { success: true };
               } else {
@@ -3667,10 +3814,17 @@ export const StreamingResponseExtension = {
           // Catch all errors from fetch, reading, processing
           if (error.name === "AbortError") {
             // Log abort reason, but the failure is handled by the Promise.race outcome
-
+            if (payload.debugMode === 1)
+              console.log(
+                `Fetch aborted for ${endpoint}. Reason: ${abortController.signal.reason || "Unknown"}`,
+              );
           } else {
             // Log other errors
-
+            if (payload.debugMode === 1)
+              console.error(
+                `Error during stream processing for ${endpoint}:`,
+                error,
+              );
           }
           // If an error occurs *before* the first chunk, reject the firstChunkPromise
           if (!firstChunkReceived) {
@@ -3797,7 +3951,21 @@ export const StreamingResponseExtension = {
       // Parse the model sequence
       const modelSequence = parseModelSequence(trace.payload.modelSequence);
 
+      if (trace.payload.debugMode === 1) {
+        console.log("📊 MODEL SEQUENCE DEBUG INFO:");
+        console.log("=== CONFIGURED MODEL SEQUENCE ===");
+        console.log(
+          `📋 Raw sequence: ${trace.payload.modelSequence || "Default"}`,
+        );
+        console.log(`📋 Parsed IDs: ${JSON.stringify(modelSequence)}`);
 
+        // Print detailed model info
+        console.log("=== MODELS IN SEQUENCE ===");
+        modelSequence.forEach((modelId, index) => {
+          console.log(`📌 Position ${index}: ${getModelDetailById(modelId)}`);
+        });
+        console.log("=============================");
+      }
 
       // Keep track of models attempted and their outcome
       const attemptedModels = [];
@@ -3811,7 +3979,9 @@ export const StreamingResponseExtension = {
         const model = modelsRegistry.find((m) => m.id === modelId);
 
         if (!model) {
-
+          if (trace.payload.debugMode === 1) {
+            console.log(`⚠️ Unknown model ID ${modelId}, skipping`);
+          }
           continue;
         }
 
@@ -3819,7 +3989,15 @@ export const StreamingResponseExtension = {
         const currentAttempt = { id: model.id, success: null };
         attemptedModels.push(currentAttempt);
 
-
+        if (trace.payload.debugMode === 1) {
+          console.log(
+            `\n🔄 ATTEMPT ${attemptedModels.length}/${modelSequence.length}: Using model ID:${model.id}`,
+          );
+          console.log(`📌 Model: ${model.displayName} (${model.type})`);
+          console.log(`📌 Model name: ${model.name}`);
+          console.log(`📌 Endpoint: ${model.endpoint}`);
+          console.log(`📌 Status: STARTING REQUEST`);
+        }
 
         // Prepare payload for API call
         const payload = {
