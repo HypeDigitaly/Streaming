@@ -2879,10 +2879,39 @@ export const StreamingResponseExtension = {
         },
       };
 
-      // Get language from payload, default to Czech
-      const userLang = trace.payload?.lang || "cs";
-      // Get language messages or fall back to Czech if not supported
-      const messages = languageMessages[userLang] || languageMessages.cs;
+      // Language name to code mapping
+      const languageNameToCode = {
+        "Čeština": "cs",
+        "Deutsch": "de", 
+        "українська": "uk",
+        "English": "en",
+        "Polski": "pl",
+        "Slovenština": "sk",
+        "Slovenščina": "sl" // Adding Slovenian name as well
+      };
+
+      // Function to normalize language input to language code
+      function normalizeLanguage(lang) {
+        if (!lang) return "cs"; // Default to Czech
+        
+        // If it's already a language code, return it
+        if (languageMessages[lang]) {
+          return lang;
+        }
+        
+        // If it's a language name, convert to code
+        if (languageNameToCode[lang]) {
+          return languageNameToCode[lang];
+        }
+        
+        // Fallback to Czech for unsupported languages
+        return "cs";
+      }
+
+      // Get language from payload, default to Czech, support both codes and names
+      const userLang = normalizeLanguage(trace.payload?.lang);
+      // Get language messages (already normalized to code)
+      const messages = languageMessages[userLang];
 
       if (wasSuccess) {
         aiInfoText.textContent = messages.success;
@@ -2942,8 +2971,8 @@ export const StreamingResponseExtension = {
         },
       };
 
-      // Get tooltip messages or fall back to Czech if not supported
-      const tooltipText = tooltipMessages[userLang] || tooltipMessages.cs;
+      // Get tooltip messages (userLang is already normalized to a valid code)
+      const tooltipText = tooltipMessages[userLang];
 
       let tooltipHTML = `<strong>${tooltipText.title}</strong> `;
       if (attemptedModels.length > 0) {
