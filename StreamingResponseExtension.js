@@ -2798,6 +2798,20 @@ export const StreamingResponseExtension = {
         type: "baseten",
         endpoint: "/api/baseten-stream",
         displayName: "Kimi K2",
+      },
+      {
+        id: 25,
+        name: "qwen/qwen3-235b-a22b-2507",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "HypeDigitaly AI model",
+      },
+      {
+        id: 26,
+        name: "z-ai/glm-4.5",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "HypeDigitaly AI model",
       }
     ];
 
