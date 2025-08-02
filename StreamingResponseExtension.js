@@ -1806,10 +1806,10 @@ export const StreamingResponseExtension = {
         return `[${linkText}](${cleanUrl})`;
       });
 
-      // Pattern 1: Complete URLs with image extensions (including query parameters) - ONLY if extension is at the end
+      // Pattern 1: Complete URLs with image extensions - FIXED to capture full URLs first
       buffer = buffer.replace(
-        /\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?)\b/gi,
-        function (match, imageUrl) {
+        /\b(https?:\/\/[^\s]+)\b/gi,
+        function (match, fullUrl) {
           // Skip if already in markdown or HTML format
           const beforeMatch = buffer.substring(0, buffer.indexOf(match));
           if (
@@ -1822,58 +1822,26 @@ export const StreamingResponseExtension = {
             return match;
           }
           
-          // NEW: Check if this is actually an image at the end of URL path, not a folder with image extension
+          // NOW: Check if this FULL URL actually ends with an image extension
           // Remove query params first to check the path
-          const urlWithoutQuery = imageUrl.split('?')[0];
+          const urlWithoutQuery = fullUrl.split('?')[0];
           const pathParts = urlWithoutQuery.split('/');
           const lastPart = pathParts[pathParts.length - 1];
           
-          // Only convert to image if the last part of the path has the image extension
+          // Only convert to image if the LAST part of the FULL URL path has the image extension
           // This prevents conversion of URLs like: /folder.jpg/something-else
           if (!lastPart.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
-            return match; // Not a real image, return unchanged
+            return match; // Not a real image URL, return unchanged as normal URL
           }
           
-          return `![Image](${imageUrl})`;
+          return `![Image](${fullUrl})`;
         },
       );
 
-      // Pattern 2: Image filenames with query parameters (e.g., DSC_6532.jpg?tok=xyz) - ONLY if extension is at the end
-      buffer = buffer.replace(
-        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_.-]+)\b/gi,
-        function (match, imageUrl) {
-          // Skip if already in markdown or HTML format
-          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-          if (
-            beforeMatch.includes("![") &&
-            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
-          ) {
-            return match;
-          }
-          if (beforeMatch.includes("<img")) {
-            return match;
-          }
-          
-          // NEW: Check context to ensure this isn't part of a longer URL path
-          const contextBefore = buffer.substring(
-            Math.max(0, buffer.indexOf(match) - 15),
-            buffer.indexOf(match),
-          );
-          const contextAfter = buffer.substring(
-            buffer.indexOf(match) + match.length,
-            buffer.indexOf(match) + match.length + 15,
-          );
-          
-          // If there's a slash before or after, this might be part of a longer URL path
-          if (contextBefore.endsWith('/') && contextAfter.startsWith('/')) {
-            return match; // This looks like /filename.jpg?params/ - part of a path, not an image
-          }
-          
-          return `![Image](${imageUrl})`;
-        },
-      );
+      // Pattern 2: Image filenames with query parameters - DISABLED (handled by Pattern 1)
+      // This pattern is now redundant since Pattern 1 handles full URLs properly
 
-      // Pattern 3: Standalone image filenames (without query params) - ONLY if extension is at the end
+      // Pattern 3: Standalone image filenames (without query params) - ONLY for truly standalone files
       buffer = buffer.replace(
         /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi,
         function (match, filename) {
@@ -1891,26 +1859,22 @@ export const StreamingResponseExtension = {
           
           // Enhanced context checking to avoid converting URLs with image extensions in the middle
           const contextBefore = buffer.substring(
-            Math.max(0, buffer.indexOf(match) - 15),
+            Math.max(0, buffer.indexOf(match) - 20),
             buffer.indexOf(match),
           );
           const contextAfter = buffer.substring(
             buffer.indexOf(match) + match.length,
-            buffer.indexOf(match) + match.length + 15,
+            buffer.indexOf(match) + match.length + 20,
           );
           
-          // Skip if this looks like it might be part of a larger URL
-          if (contextBefore.includes("?") || contextAfter.match(/^[\?=&]/)) {
-            return match; // Skip fragments that will be processed by other patterns
-          }
-          
-          // NEW: Skip if there's a slash after the filename - indicates it's part of a path, not final image
-          if (contextAfter.startsWith('/')) {
-            return match; // This is something like /logo.gif/other-stuff - not a final image
-          }
-          
-          // NEW: Skip if this appears to be part of a full URL path (contains protocol or multiple slashes)
-          if (contextBefore.includes('://') || contextBefore.includes('/')) {
+          // STRICT: Skip if this is part of ANY URL structure
+          if (contextBefore.includes('://') || 
+              contextBefore.includes('/') || 
+              contextBefore.includes('\\') ||
+              contextAfter.includes('/') || 
+              contextAfter.includes('\\') ||
+              contextBefore.includes("?") || 
+              contextAfter.match(/^[\?=&]/)) {
             return match; // This is part of a URL path, not a standalone image filename
           }
           
