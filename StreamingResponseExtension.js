@@ -1820,6 +1820,12 @@ export const StreamingResponseExtension = {
       // First, let's fix any broken URL encoding that might be causing issues with links
       // This is particularly important for PDF links and other document links
       buffer = buffer.replace(/\[([^\]]+)\]\(([^)]*%[^)]*)\)/g, function(match, linkText, url) {
+        // Skip if this link is already processed (contains HTML elements)
+        if (linkText.includes('<a ') || linkText.includes('target="_blank"') || 
+            linkText.includes('⟨⟨FILELINK_START⟩⟩') || linkText.includes('⟨⟨FILELINK_END⟩⟩')) {
+          return match; // Return as-is, already processed
+        }
+        
         // If URL contains % encoding, try to decode it properly
         let cleanUrl = url.trim();
         if (cleanUrl.includes('%')) {
@@ -2293,6 +2299,13 @@ export const StreamingResponseExtension = {
                 // Only process lines that contain citations
                 if (line.match(/^\[\d+\]/)) {
                   return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
+                    // Skip if this link is already processed (contains HTML elements)
+                    if (linkText.includes('<a ') || linkText.includes('target="_blank"') || 
+                        linkText.includes('⟨⟨FILELINK_START⟩⟩') || linkText.includes('⟨⟨FILELINK_END⟩⟩') ||
+                        url.includes('target="_blank"') || url.includes('rel="noopener"')) {
+                      return linkMatch; // Return as-is, already processed
+                    }
+                    
                     let cleanUrl = url.trim();
                     let cleanLinkText = linkText.trim();
                     
@@ -3651,6 +3664,13 @@ export const StreamingResponseExtension = {
                         .filter(line => line.length > 0)
                         .map(line => {
                           return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
+                            // Skip if this link is already processed (contains HTML elements)
+                            if (linkText.includes('<a ') || linkText.includes('target="_blank"') || 
+                                linkText.includes('⟨⟨FILELINK_START⟩⟩') || linkText.includes('⟨⟨FILELINK_END⟩⟩') ||
+                                url.includes('target="_blank"') || url.includes('rel="noopener"')) {
+                              return linkMatch; // Return as-is, already processed
+                            }
+                            
                             let cleanUrl = url.trim();
                             let cleanLinkText = linkText.trim();
                             if (cleanUrl.includes('%')) cleanUrl = decodeUrlSafely(cleanUrl);
@@ -3676,6 +3696,13 @@ export const StreamingResponseExtension = {
                         .filter(line => line.length > 0)
                         .map(line => {
                           return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
+                            // Skip if this link is already processed (contains HTML elements)
+                            if (linkText.includes('<a ') || linkText.includes('target="_blank"') || 
+                                linkText.includes('⟨⟨FILELINK_START⟩⟩') || linkText.includes('⟨⟨FILELINK_END⟩⟩') ||
+                                url.includes('target="_blank"') || url.includes('rel="noopener"')) {
+                              return linkMatch; // Return as-is, already processed
+                            }
+                            
                             let cleanUrl = url.trim();
                             let cleanLinkText = linkText.trim();
                             if (cleanUrl.includes('%')) cleanUrl = decodeUrlSafely(cleanUrl);
@@ -4245,6 +4272,13 @@ export const StreamingResponseExtension = {
         
         // Process any remaining incomplete markdown links with more aggressive URL decoding
         finalContent = finalContent.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+          // Skip if this link is already processed (contains HTML elements)
+          if (linkText.includes('<a ') || linkText.includes('target="_blank"') || 
+              linkText.includes('⟨⟨FILELINK_START⟩⟩') || linkText.includes('⟨⟨FILELINK_END⟩⟩') ||
+              url.includes('target="_blank"') || url.includes('rel="noopener"')) {
+            return match; // Return as-is, already processed
+          }
+          
           let cleanUrl = url.trim();
           
           // More aggressive URL decoding for final processing
