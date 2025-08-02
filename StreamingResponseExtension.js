@@ -1599,9 +1599,38 @@ export const StreamingResponseExtension = {
     }
 
     // Function to add citation link handlers
+    
+    // Helper function to process markdown links consistently
+    function processMarkdownLink(linkMatch, linkText, url, extraStyles = "") {
+      // Skip if this link is already processed (contains FILELINK markers)
+      if (linkText.includes('⟨⟨FILELINK_START⟩⟩') || linkText.includes('⟨⟨FILELINK_END⟩⟩') || 
+          linkText.includes('target="_blank"') || linkText.includes('rel="noopener"')) {
+        return linkMatch; // Return as-is, already processed
+      }
+      
+      let cleanUrl = url.trim();
+      let cleanLinkText = linkText.trim();
+      
+      // Decode URL if it contains encoded characters
+      if (cleanUrl.includes('%')) {
+        cleanUrl = decodeUrlSafely(cleanUrl);
+      }
+      
+      // Decode link text if it contains encoded characters
+      if (cleanLinkText.includes('%')) {
+        cleanLinkText = decodeUrlSafely(cleanLinkText);
+      }
+      
+      const baseStyles = "color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;";
+      const finalStyles = extraStyles ? `${baseStyles} ${extraStyles}` : baseStyles;
+      
+      return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="${finalStyles}">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
+    }
+    
     // Function to decode URL-encoded Czech characters
     function decodeUrlSafely(url) {
-      if (trace.payload?.debugMode === 1) {
+      // Reduced debug logging - only show for verbose debug mode
+      if (trace.payload?.debugMode === 2) {
         console.log('🔗 URL DECODE: Starting decode for:', url);
       }
       
@@ -1619,7 +1648,7 @@ export const StreamingResponseExtension = {
             if (nextDecoded !== decodedUrl) {
               decodedUrl = nextDecoded;
               attempts++;
-              if (trace.payload?.debugMode === 1) {
+              if (trace.payload?.debugMode === 2) {
                 console.log(`🔗 URL DECODE: Attempt ${attempts}:`, decodedUrl);
               }
             } else {
@@ -1627,21 +1656,21 @@ export const StreamingResponseExtension = {
             }
           } catch (e) {
             // If decoding fails, try manual character replacement
-            if (trace.payload?.debugMode === 1) {
+            if (trace.payload?.debugMode === 2) {
               console.log('🔗 URL DECODE: decodeURIComponent failed, trying manual:', e.message);
             }
             break;
           }
         }
         
-        if (trace.payload?.debugMode === 1) {
+        if (trace.payload?.debugMode === 2) {
           console.log('🔗 URL DECODE: Final result:', decodedUrl);
         }
         
         return decodedUrl;
       } catch (e) {
         // If standard decoding fails, try manual fixes for common encoded characters
-        if (trace.payload?.debugMode === 1) {
+        if (trace.payload?.debugMode === 2) {
           console.log('🔗 URL DECODE: Starting manual decode for:', url);
         }
         
@@ -1715,12 +1744,12 @@ export const StreamingResponseExtension = {
             .replace(/%7E/g, '~');
           attempts++;
           
-          if (trace.payload?.debugMode === 1) {
+          if (trace.payload?.debugMode === 2) {
             console.log(`🔗 URL DECODE: Manual attempt ${attempts}:`, manualDecoded);
           }
         }
         
-        if (trace.payload?.debugMode === 1) {
+        if (trace.payload?.debugMode === 2) {
           console.log('🔗 URL DECODE: Final manual result:', manualDecoded);
         }
         
@@ -1795,7 +1824,7 @@ export const StreamingResponseExtension = {
         let cleanUrl = url.trim();
         if (cleanUrl.includes('%')) {
           cleanUrl = decodeUrlSafely(cleanUrl);
-          if (trace.payload?.debugMode === 1) {
+          if (trace.payload?.debugMode === 2) {
             console.log("🔗 URL DECODE: Fixed encoded URL in buffer:", {
               original: url,
               cleaned: cleanUrl,
@@ -1963,22 +1992,7 @@ export const StreamingResponseExtension = {
             .map(line => {
               // Process markdown links in the content with improved URL decoding
               // Use improved regex to handle parentheses in filenames
-              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
-                let cleanUrl = url.trim();
-                let cleanLinkText = linkText.trim();
-                
-                // Decode URL if it contains encoded characters
-                if (cleanUrl.includes('%')) {
-                  cleanUrl = decodeUrlSafely(cleanUrl);
-                }
-                
-                // Decode link text if it contains encoded characters
-                if (cleanLinkText.includes('%')) {
-                  cleanLinkText = decodeUrlSafely(cleanLinkText);
-                }
-                
-                return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
-              });
+              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, processMarkdownLink);
             })
             .join('<br>\n');
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🔎</div><div class="ai-thinking-title" style="color: #333333;">Myšlenkový proces</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
@@ -1993,22 +2007,7 @@ export const StreamingResponseExtension = {
             .map(line => {
               // Process markdown links in the content with improved URL decoding
               // Use improved regex to handle parentheses in filenames
-              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
-                let cleanUrl = url.trim();
-                let cleanLinkText = linkText.trim();
-                
-                // Decode URL if it contains encoded characters
-                if (cleanUrl.includes('%')) {
-                  cleanUrl = decodeUrlSafely(cleanUrl);
-                }
-                
-                // Decode link text if it contains encoded characters
-                if (cleanLinkText.includes('%')) {
-                  cleanLinkText = decodeUrlSafely(cleanLinkText);
-                }
-                
-                return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
-              });
+              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, processMarkdownLink);
             })
             .join('<br>\n');
           return `⟨⟨DBSOURCE_START⟩⟩<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🗄️</div><div class="ai-thinking-title" style="color: #333333;">Databázové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>⟨⟨DBSOURCE_END⟩⟩`;
@@ -2040,22 +2039,7 @@ export const StreamingResponseExtension = {
                   hasValidContent = true;
                   // Process markdown links in citations with improved URL decoding
                   // Use improved regex to handle parentheses in filenames
-                  line = line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
-                    let cleanUrl = url.trim();
-                    let cleanLinkText = linkText.trim();
-                    
-                    // Decode URL if it contains encoded characters
-                    if (cleanUrl.includes('%')) {
-                      cleanUrl = decodeUrlSafely(cleanUrl);
-                    }
-                    
-                    // Decode link text if it contains encoded characters
-                    if (cleanLinkText.includes('%')) {
-                      cleanLinkText = decodeUrlSafely(cleanLinkText);
-                    }
-                    
-                    return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
-                  });
+                  line = line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, processMarkdownLink);
                   processedLines.push(line);
                 } else if (line.includes('file-') || line.includes('.pdf') || line.includes('.txt') || line.includes('.doc')) {
                   // This looks like database-related content
@@ -2095,22 +2079,7 @@ export const StreamingResponseExtension = {
             .map(line => {
               // Process markdown links in the content with improved URL decoding
               // Use improved regex to handle parentheses in filenames
-              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
-                let cleanUrl = url.trim();
-                let cleanLinkText = linkText.trim();
-                
-                // Decode URL if it contains encoded characters
-                if (cleanUrl.includes('%')) {
-                  cleanUrl = decodeUrlSafely(cleanUrl);
-                }
-                
-                // Decode link text if it contains encoded characters
-                if (cleanLinkText.includes('%')) {
-                  cleanLinkText = decodeUrlSafely(cleanLinkText);
-                }
-                
-                return `⟨⟨FILELINK_START⟩⟩<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>⟨⟨FILELINK_END⟩⟩`;
-              });
+              return line.replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, processMarkdownLink);
             })
             .join('<br>\n');
           return `<div class="ai-thinking-section"><div class="ai-thinking-header" style="background-color: ${reasoningBgColour} !important;"><div class="ai-thinking-icon" style="color: #333333;">🌐</div><div class="ai-thinking-title" style="color: #333333;">Webové zdroje</div><div class="ai-thinking-arrow" style="color: #333333;">▼</div></div><div class="ai-thinking-content" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; overflow: hidden;">${formattedContent}</div></div>`;
@@ -2133,7 +2102,7 @@ export const StreamingResponseExtension = {
           // Use alt text if provided, otherwise use empty string
           const altText = alt ? alt.trim() : "";
 
-          if (trace.payload?.debugMode === 1) {
+          if (trace.payload?.debugMode === 2) {
             console.log("Converting markdown image to HTML:", {
               original: match,
               cleanUrl,
@@ -2351,6 +2320,12 @@ export const StreamingResponseExtension = {
         // Links - improved processing for streaming content with proper file extension handling
         // Use improved regex to handle parentheses in filenames
         .replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(match, linkText, url) {
+          // Skip if this link is already processed (contains FILELINK markers)
+          if (linkText.includes('⟨⟨FILELINK_START⟩⟩') || linkText.includes('⟨⟨FILELINK_END⟩⟩') || 
+              linkText.includes('target="_blank"') || linkText.includes('rel="noopener"')) {
+            return match; // Return as-is, already processed
+          }
+          
           // Check if this is a complete link (not broken by streaming)
           let trimmedUrl = url.trim();
           
@@ -2370,7 +2345,7 @@ export const StreamingResponseExtension = {
               // Found a file extension, truncate the URL right after the extension
               const endIndex = extIndex + ext.length;
               trimmedUrl = trimmedUrl.substring(0, endIndex);
-              if (trace.payload?.debugMode === 1) {
+              if (trace.payload?.debugMode === 2) {
                 console.log("📄 FILE LINK: Truncated URL at file extension:", {
                   original: url,
                   truncated: trimmedUrl,
