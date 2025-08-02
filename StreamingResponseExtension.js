@@ -2847,6 +2847,13 @@ export const StreamingResponseExtension = {
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
         displayName: "HypeDigitaly AI model",
+      },
+      {
+        id: 27,
+        name: "mistralai/mistral-medium-3",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Mistral Medium 3",
       }
     ];
 
