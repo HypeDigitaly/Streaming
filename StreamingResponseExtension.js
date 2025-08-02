@@ -1841,9 +1841,9 @@ export const StreamingResponseExtension = {
         return `[${linkText}](${cleanUrl})`;
       });
 
-      // Pattern 1: Complete URLs with image extensions (including query parameters)
+      // Pattern 1: Complete URLs with image extensions (including query parameters and paths after extension)
       buffer = buffer.replace(
-        /\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\?[^\s]*)?)\b/gi,
+        /\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\/[^\s?]*)?(?:\?[^\s]*)?)\b/gi,
         function (match, imageUrl) {
           // Skip if already in markdown or HTML format
           const beforeMatch = buffer.substring(0, buffer.indexOf(match));
