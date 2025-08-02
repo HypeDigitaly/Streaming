@@ -1815,15 +1815,122 @@ export const StreamingResponseExtension = {
       // Keep track of complete response for final processing
       completeResponse += text;
 
-      // Post-process buffer to handle various image URL patterns and fix URL encoding issues
+      // Post-process buffer to handle various image URL patterns FIRST, then fix URL encoding
+      // Image processing must come BEFORE URL decoding to prevent conflicts
       
-      // First, let's fix any broken URL encoding that might be causing issues with links
-      // This is particularly important for PDF links and other document links
+      // Pattern 1: Complete URLs with image extensions (including paths and query parameters after extension)
+      // This handles URLs like: domain.com/path/image.jpg/additional-path?query=value
+      buffer = buffer.replace(
+        /\b(https?:\/\/[^\s<>"'()[\]{}]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\/[^\s<>"'()[\]{}?]*)?(?:\?[^\s<>"'()[\]{}]*)?)\b/gi,
+        function (match, imageUrl) {
+          // Enhanced skip logic - check for existing processing
+          if (match.includes('![') || match.includes('<img') || match.includes('⟨⟨FILELINK_START⟩⟩')) {
+            return match;
+          }
+          
+          // Check surrounding context more thoroughly
+          const matchIndex = buffer.indexOf(match);
+          const beforeMatch = buffer.substring(Math.max(0, matchIndex - 50), matchIndex);
+          const afterMatch = buffer.substring(matchIndex + match.length, matchIndex + match.length + 10);
+          
+          // Skip if already part of markdown link or image
+          if (beforeMatch.includes('![') && !beforeMatch.includes(')') && beforeMatch.lastIndexOf('![') > beforeMatch.lastIndexOf(')')) {
+            return match;
+          }
+          if (beforeMatch.includes('[') && !beforeMatch.includes(')') && beforeMatch.lastIndexOf('[') > beforeMatch.lastIndexOf(')')) {
+            return match;
+          }
+          if (beforeMatch.includes('<img') || afterMatch.includes('alt=')) {
+            return match;
+          }
+          
+          if (trace.payload?.debugMode === 2) {
+            console.log("🖼️ IMAGE DETECT: Converting URL to markdown image:", {
+              original: match,
+              url: imageUrl
+            });
+          }
+          
+          return `![Image](${imageUrl})`;
+        },
+      );
+
+      // Pattern 2: Image filenames with query parameters (e.g., DSC_6532.jpg?tok=xyz)
+      buffer = buffer.replace(
+        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_.-]+)\b/gi,
+        function (match, imageUrl) {
+          // Enhanced skip logic consistent with Pattern 1
+          if (match.includes('![') || match.includes('<img') || match.includes('⟨⟨FILELINK_START⟩⟩')) {
+            return match;
+          }
+          
+          const matchIndex = buffer.indexOf(match);
+          const beforeMatch = buffer.substring(Math.max(0, matchIndex - 50), matchIndex);
+          
+          // Skip if already part of markdown link or image
+          if (beforeMatch.includes('![') && !beforeMatch.includes(')') && beforeMatch.lastIndexOf('![') > beforeMatch.lastIndexOf(')')) {
+            return match;
+          }
+          if (beforeMatch.includes('[') && !beforeMatch.includes(')') && beforeMatch.lastIndexOf('[') > beforeMatch.lastIndexOf(')')) {
+            return match;
+          }
+          if (beforeMatch.includes('<img')) {
+            return match;
+          }
+          
+          return `![Image](${imageUrl})`;
+        },
+      );
+
+      // Pattern 3: Standalone image filenames (without query params)
+      buffer = buffer.replace(
+        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi,
+        function (match, filename) {
+          // Enhanced skip logic consistent with other patterns
+          if (match.includes('![') || match.includes('<img') || match.includes('⟨⟨FILELINK_START⟩⟩')) {
+            return match;
+          }
+          
+          const matchIndex = buffer.indexOf(match);
+          const beforeMatch = buffer.substring(Math.max(0, matchIndex - 50), matchIndex);
+          const afterMatch = buffer.substring(matchIndex + match.length, matchIndex + match.length + 10);
+          
+          // Skip if already part of markdown link or image
+          if (beforeMatch.includes('![') && !beforeMatch.includes(')') && beforeMatch.lastIndexOf('![') > beforeMatch.lastIndexOf(')')) {
+            return match;
+          }
+          if (beforeMatch.includes('[') && !beforeMatch.includes(')') && beforeMatch.lastIndexOf('[') > beforeMatch.lastIndexOf(')')) {
+            return match;
+          }
+          if (beforeMatch.includes('<img')) {
+            return match;
+          }
+          
+          // Skip if this looks like it might be part of a larger URL (but with better logic)
+          if (beforeMatch.includes("?") || afterMatch.match(/^[\?=&]/)) {
+            return match; // Skip fragments that will be processed by other patterns
+          }
+          
+          // Skip if part of a longer URL structure
+          if (beforeMatch.includes('://') || beforeMatch.includes('/') && !beforeMatch.includes(' ')) {
+            return match;
+          }
+          
+          return `![Image](${filename})`;
+        },
+      );
+
+      // NOW process URL encoding fixes for remaining links AFTER image processing
       buffer = buffer.replace(/\[([^\]]+)\]\(([^)]*%[^)]*)\)/g, function(match, linkText, url) {
         // Skip if this link is already processed (contains HTML elements)
         if (linkText.includes('<a ') || linkText.includes('target="_blank"') || 
             linkText.includes('⟨⟨FILELINK_START⟩⟩') || linkText.includes('⟨⟨FILELINK_END⟩⟩')) {
           return match; // Return as-is, already processed
+        }
+        
+        // Skip if this is actually an image that was just processed
+        if (linkText === 'Image' || match.includes('![')) {
+          return match;
         }
         
         // If URL contains % encoding, try to decode it properly
@@ -1840,75 +1947,6 @@ export const StreamingResponseExtension = {
         }
         return `[${linkText}](${cleanUrl})`;
       });
-
-      // Pattern 1: Complete URLs with image extensions (including query parameters and paths after extension)
-      buffer = buffer.replace(
-        /\b(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|svg)(?:\/[^\s?]*)?(?:\?[^\s]*)?)\b/gi,
-        function (match, imageUrl) {
-          // Skip if already in markdown or HTML format
-          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-          if (
-            beforeMatch.includes("![") &&
-            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
-          ) {
-            return match;
-          }
-          if (beforeMatch.includes("<img")) {
-            return match;
-          }
-          return `![Image](${imageUrl})`;
-        },
-      );
-
-      // Pattern 2: Image filenames with query parameters (e.g., DSC_6532.jpg?tok=xyz)
-      buffer = buffer.replace(
-        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg)\?[a-zA-Z0-9=&_.-]+)\b/gi,
-        function (match, imageUrl) {
-          // Skip if already in markdown or HTML format
-          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-          if (
-            beforeMatch.includes("![") &&
-            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
-          ) {
-            return match;
-          }
-          if (beforeMatch.includes("<img")) {
-            return match;
-          }
-          return `![Image](${imageUrl})`;
-        },
-      );
-
-      // Pattern 3: Standalone image filenames (without query params)
-      buffer = buffer.replace(
-        /\b([a-zA-Z0-9_.-]+\.(?:jpg|jpeg|png|gif|webp|svg))\b/gi,
-        function (match, filename) {
-          // Skip if already in markdown or HTML format
-          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
-          if (
-            beforeMatch.includes("![") &&
-            beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
-          ) {
-            return match;
-          }
-          if (beforeMatch.includes("<img")) {
-            return match;
-          }
-          // Skip if this looks like it might be part of a larger URL
-          const contextBefore = buffer.substring(
-            Math.max(0, buffer.indexOf(match) - 10),
-            buffer.indexOf(match),
-          );
-          const contextAfter = buffer.substring(
-            buffer.indexOf(match) + match.length,
-            buffer.indexOf(match) + match.length + 10,
-          );
-          if (contextBefore.includes("?") || contextAfter.match(/^[\?=&]/)) {
-            return match; // Skip fragments that will be processed by other patterns
-          }
-          return `![Image](${filename})`;
-        },
-      );
 
 
       
@@ -2097,6 +2135,11 @@ export const StreamingResponseExtension = {
         .replace(/<\/div>\s*\n/g, '</div>')
         // Images: Convert markdown images to HTML (MUST be done BEFORE italic formatting to prevent URL corruption)
         .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
+          // Skip if already processed as HTML
+          if (match.includes('<img') || match.includes('src=')) {
+            return match;
+          }
+          
           // Clean and validate the URL
           let cleanUrl = url.trim();
 
@@ -2109,7 +2152,7 @@ export const StreamingResponseExtension = {
           const altText = alt ? alt.trim() : "";
 
           if (trace.payload?.debugMode === 2) {
-            console.log("Converting markdown image to HTML:", {
+            console.log("🖼️ MARKDOWN→HTML: Converting markdown image to HTML:", {
               original: match,
               cleanUrl,
               altText,
@@ -3284,13 +3327,27 @@ export const StreamingResponseExtension = {
             .replace(/\*(.*?)\*/g, "<em>$1</em>")
             // Code
             .replace(/`([^`]+)`/g, "<code>$1</code>")
-            // Images
+            // Images (Perplexity-specific processing with duplicate protection)
             .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (match, alt, url) {
+              // Skip if already processed as HTML (prevents duplicate processing)
+              if (match.includes('<img') || match.includes('src=')) {
+                return match;
+              }
+              
               let cleanUrl = url.trim();
               if (cleanUrl.match(/^http:\/\//i)) {
                 cleanUrl = cleanUrl.replace(/^http:\/\//i, "https://");
               }
               const altText = alt ? alt.trim() : "";
+              
+              if (payload.debugMode === 2) {
+                console.log("🖼️ PERPLEXITY→HTML: Converting markdown image to HTML:", {
+                  original: match,
+                  cleanUrl,
+                  altText,
+                });
+              }
+              
               return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
             })
             // Links (but not citations which are already processed)
