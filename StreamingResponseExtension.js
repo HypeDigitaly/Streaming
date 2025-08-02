@@ -1806,19 +1806,47 @@ export const StreamingResponseExtension = {
         return `[${linkText}](${cleanUrl})`;
       });
 
-      // Pattern 1: Complete URLs with image extensions - FIXED to capture full URLs first
+      // Pattern 1: Complete URLs with image extensions - ENHANCED detection for already processed links
       buffer = buffer.replace(
-        /\b(https?:\/\/[^\s]+)\b/gi,
+        /\b(https?:\/\/[^\s\)]+(?:\([^\)]*\))*[^\s\)]*)\b/gi,
         function (match, fullUrl) {
-          // Skip if already in markdown or HTML format
-          const beforeMatch = buffer.substring(0, buffer.indexOf(match));
+          // Get context around the match for better detection
+          const matchIndex = buffer.indexOf(match);
+          const beforeMatch = buffer.substring(Math.max(0, matchIndex - 50), matchIndex);
+          const afterMatch = buffer.substring(matchIndex + match.length, matchIndex + match.length + 10);
+          
+          // Skip if already in markdown image format
           if (
             beforeMatch.includes("![") &&
             beforeMatch.lastIndexOf("![") > beforeMatch.lastIndexOf(")")
           ) {
             return match;
           }
+          
+          // Skip if already in HTML img tag
           if (beforeMatch.includes("<img")) {
+            return match;
+          }
+          
+          // CRITICAL: Skip if URL is already part of HTML link (<a href="URL")
+          if (beforeMatch.includes('href="') && 
+              beforeMatch.lastIndexOf('href="') > beforeMatch.lastIndexOf('"')) {
+            return match;
+          }
+          
+          // CRITICAL: Skip if URL is already part of markdown link ([text](URL))
+          if (beforeMatch.includes('](') && 
+              beforeMatch.lastIndexOf('](') > beforeMatch.lastIndexOf(')')) {
+            return match;
+          }
+          
+          // Skip if URL is part of processed special tags (FILELINK, DBSOURCE, etc.)
+          if (beforeMatch.includes('⟨⟨') && !beforeMatch.includes('⟩⟩')) {
+            return match;
+          }
+          
+          // Skip if URL is within parentheses (likely already a markdown link)
+          if (beforeMatch.endsWith('(') && afterMatch.startsWith(')')) {
             return match;
           }
           
