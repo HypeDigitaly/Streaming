@@ -2861,7 +2861,14 @@ export const StreamingResponseExtension = {
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
         displayName: "GPT 5 Chat",
-      }
+      },
+      {
+        id: 29,
+        name: "openai/gpt-4.1-mini",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "GPT 4.1 Mini",
+      },
     ];
 
     // Function to process model sequence
