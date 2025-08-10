@@ -2854,6 +2854,13 @@ export const StreamingResponseExtension = {
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
         displayName: "Mistral Medium 3",
+      },
+      {
+        id: 28,
+        name: "openai/gpt-5-chat",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "GPT 5",
       }
     ];
 
