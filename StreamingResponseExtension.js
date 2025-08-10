@@ -2860,7 +2860,7 @@ export const StreamingResponseExtension = {
         name: "openai/gpt-5-chat",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "GPT 5",
+        displayName: "GPT 5 Chat",
       }
     ];
 
