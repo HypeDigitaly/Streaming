@@ -3177,19 +3177,8 @@ export const StreamingResponseExtension = {
 
         const response = await fetch(proxyUrl, {
           method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Connection': 'keep-alive',
-            'Cache-Control': 'no-cache',
-            'Accept': 'text/event-stream, application/json',
-            'User-Agent': 'StreamingResponseExtension/1.0'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
-          // Network optimizations for corporate environments
-          keepalive: true,
-          mode: 'cors',
-          credentials: 'omit',
-          redirect: 'follow'
         });
 
         if (!response.ok) {
@@ -3608,57 +3597,24 @@ export const StreamingResponseExtension = {
       }
     }
 
-    // Function to detect corporate network environment
+    // Simplified function to detect corporate network environment
     async function detectCorporateNetwork() {
       try {
-        // Multiple indicators of corporate network
-        const indicators = [];
-        
-        // 1. Check for proxy server (common in corporate environments)
+        // Simple detection based on connection type only
         if (typeof navigator !== 'undefined' && navigator.connection) {
-          // Check connection type - corporate networks often show 'unknown' or specific types
           const connection = navigator.connection;
-          if (connection.type === 'unknown' || connection.effectiveType === 'slow-2g') {
-            indicators.push('connection_type');
-          }
+          // Only flag as corporate if connection type is explicitly unknown
+          return connection.type === 'unknown';
         }
-        
-        // 2. Measure DNS resolution time for known external domains
-        const dnsStart = performance.now();
-        try {
-          // Quick test to external domain - corporate networks often have slower DNS
-          await fetch('https://www.google.com/favicon.ico', { 
-            method: 'HEAD', 
-            mode: 'no-cors',
-            cache: 'no-cache',
-            signal: AbortSignal.timeout(3000) // 3 second timeout for DNS test
-          });
-        } catch (e) {
-          // DNS resolution issues or timeouts indicate potential corporate filtering
-          indicators.push('dns_slow');
-        }
-        const dnsTime = performance.now() - dnsStart;
-        
-        // 3. Check for corporate network patterns
-        if (dnsTime > 1000) { // DNS taking more than 1 second
-          indicators.push('slow_dns');
-        }
-        
-        // 4. Check user agent for corporate management software
-        if (typeof navigator !== 'undefined') {
-          const userAgent = navigator.userAgent.toLowerCase();
-          if (userAgent.includes('corporate') || userAgent.includes('enterprise') || userAgent.includes('managed')) {
-            indicators.push('managed_browser');
-          }
-        }
-        
-        // Return true if we have 2+ indicators of corporate network
-        return indicators.length >= 1; // Lowered threshold for better detection
+        // Default to false (public network) if no clear indicators
+        return false;
         
       } catch (error) {
-        // If detection fails, assume corporate network for safety
-        console.warn('Corporate network detection failed, assuming corporate environment:', error);
-        return true;
+        // If detection fails, default to public network to avoid issues
+        if (console && console.warn) {
+          console.warn('Corporate network detection failed, defaulting to public network:', error);
+        }
+        return false;
       }
     }
 
@@ -3670,7 +3626,7 @@ export const StreamingResponseExtension = {
       // Detect potential corporate network environment
       const isCorporateNetwork = await detectCorporateNetwork();
       
-      // Adaptive timeout based on network environment
+      // Adaptive timeout based on network environment - only extend for confirmed corporate networks
       let baseTimeout = hasWebSearch ? 30000 : 10000;
       const TTFT_TIMEOUT_MS = isCorporateNetwork ? baseTimeout * 2 : baseTimeout; // Double timeout for corporate networks
       
@@ -3741,23 +3697,14 @@ export const StreamingResponseExtension = {
             console.log(`📊 Network diagnostics started at: ${networkStart}ms`);
           }
 
-          // Enhanced fetch configuration for corporate networks
+          // Simplified fetch configuration - only essential headers to avoid CORS issues
           response = await fetch(proxyUrl, {
             method: "POST",
             headers: { 
-              "Content-Type": "application/json",
-              "Connection": "keep-alive",
-              "Cache-Control": "no-cache",
-              "Accept": "text/event-stream, application/json",
-              "User-Agent": "StreamingResponseExtension/1.0"
+              "Content-Type": "application/json"
             },
             body: JSON.stringify(payload),
-            signal: abortController.signal,
-            // Network optimizations for corporate environments
-            keepalive: true,
-            mode: 'cors',
-            credentials: 'omit',
-            redirect: 'follow'
+            signal: abortController.signal
           });
 
           // Log connection establishment time
