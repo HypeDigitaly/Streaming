@@ -3177,8 +3177,19 @@ export const StreamingResponseExtension = {
 
         const response = await fetch(proxyUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Connection': 'keep-alive',
+            'Cache-Control': 'no-cache',
+            'Accept': 'text/event-stream, application/json',
+            'User-Agent': 'StreamingResponseExtension/1.0'
+          },
           body: JSON.stringify(payload),
+          // Network optimizations for corporate environments
+          keepalive: true,
+          mode: 'cors',
+          credentials: 'omit',
+          redirect: 'follow'
         });
 
         if (!response.ok) {
@@ -3597,11 +3608,75 @@ export const StreamingResponseExtension = {
       }
     }
 
+    // Function to detect corporate network environment
+    async function detectCorporateNetwork() {
+      try {
+        // Multiple indicators of corporate network
+        const indicators = [];
+        
+        // 1. Check for proxy server (common in corporate environments)
+        if (typeof navigator !== 'undefined' && navigator.connection) {
+          // Check connection type - corporate networks often show 'unknown' or specific types
+          const connection = navigator.connection;
+          if (connection.type === 'unknown' || connection.effectiveType === 'slow-2g') {
+            indicators.push('connection_type');
+          }
+        }
+        
+        // 2. Measure DNS resolution time for known external domains
+        const dnsStart = performance.now();
+        try {
+          // Quick test to external domain - corporate networks often have slower DNS
+          await fetch('https://www.google.com/favicon.ico', { 
+            method: 'HEAD', 
+            mode: 'no-cors',
+            cache: 'no-cache',
+            signal: AbortSignal.timeout(3000) // 3 second timeout for DNS test
+          });
+        } catch (e) {
+          // DNS resolution issues or timeouts indicate potential corporate filtering
+          indicators.push('dns_slow');
+        }
+        const dnsTime = performance.now() - dnsStart;
+        
+        // 3. Check for corporate network patterns
+        if (dnsTime > 1000) { // DNS taking more than 1 second
+          indicators.push('slow_dns');
+        }
+        
+        // 4. Check user agent for corporate management software
+        if (typeof navigator !== 'undefined') {
+          const userAgent = navigator.userAgent.toLowerCase();
+          if (userAgent.includes('corporate') || userAgent.includes('enterprise') || userAgent.includes('managed')) {
+            indicators.push('managed_browser');
+          }
+        }
+        
+        // Return true if we have 2+ indicators of corporate network
+        return indicators.length >= 1; // Lowered threshold for better detection
+        
+      } catch (error) {
+        // If detection fails, assume corporate network for safety
+        console.warn('Corporate network detection failed, assuming corporate environment:', error);
+        return true;
+      }
+    }
+
     // Generic function to call any LLM API provider with TTFT timeout
     async function callLLMAPI(endpoint, payload) {
-      // Determine TTFT timeout based on web search usage
+      // Determine TTFT timeout based on web search usage and network environment
       const hasWebSearch = payload.enableWebSearch || payload.forceWebSearch;
-      const TTFT_TIMEOUT_MS = hasWebSearch ? 30000 : 10000; // 30s for web search, 10s otherwise
+      
+      // Detect potential corporate network environment
+      const isCorporateNetwork = await detectCorporateNetwork();
+      
+      // Adaptive timeout based on network environment
+      let baseTimeout = hasWebSearch ? 30000 : 10000;
+      const TTFT_TIMEOUT_MS = isCorporateNetwork ? baseTimeout * 2 : baseTimeout; // Double timeout for corporate networks
+      
+      if (payload.debugMode === 1) {
+        console.log(`🌐 Network environment detected: ${isCorporateNetwork ? 'Corporate' : 'Public'}, TTFT timeout: ${TTFT_TIMEOUT_MS}ms`);
+      }
       
       const abortController = new AbortController();
       let ttftTimeoutId = null;
@@ -3646,6 +3721,10 @@ export const StreamingResponseExtension = {
 
         try {
           const proxyUrl = `https://utils.hypedigitaly.ai${endpoint}`;
+          
+          // Network diagnostics
+          const networkStart = performance.now();
+          
           if (payload.debugMode === 1) {
             console.log(`📦 Payload for ${endpoint}:`, {
               model: payload.model,
@@ -3657,16 +3736,35 @@ export const StreamingResponseExtension = {
               user_id: payload.user_id,
             });
             console.log(
-              `�� Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms`,
+              `🌐 Calling proxy URL: ${proxyUrl} with TTFT ${TTFT_TIMEOUT_MS}ms (Corporate network: ${isCorporateNetwork})`,
             );
+            console.log(`📊 Network diagnostics started at: ${networkStart}ms`);
           }
 
+          // Enhanced fetch configuration for corporate networks
           response = await fetch(proxyUrl, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+              "Content-Type": "application/json",
+              "Connection": "keep-alive",
+              "Cache-Control": "no-cache",
+              "Accept": "text/event-stream, application/json",
+              "User-Agent": "StreamingResponseExtension/1.0"
+            },
             body: JSON.stringify(payload),
-            signal: abortController.signal, // Use the abort signal
+            signal: abortController.signal,
+            // Network optimizations for corporate environments
+            keepalive: true,
+            mode: 'cors',
+            credentials: 'omit',
+            redirect: 'follow'
           });
+
+          // Log connection establishment time
+          const connectionTime = performance.now() - networkStart;
+          if (payload.debugMode === 1) {
+            console.log(`⚡ Connection established in ${connectionTime.toFixed(2)}ms`);
+          }
 
           if (!response.ok) {
             let errorText = `HTTP error! status: ${response.status}`;
@@ -3674,6 +3772,10 @@ export const StreamingResponseExtension = {
               errorText += `, body: ${await response.text()}`;
             } catch (e) {
               /* ignore */
+            }
+            // Log connection failure details
+            if (payload.debugMode === 1) {
+              console.error(`❌ Connection failed after ${connectionTime.toFixed(2)}ms: ${errorText}`);
             }
             // Reject the firstChunkPromise if the initial fetch fails
             throw new Error(errorText);
@@ -3846,10 +3948,14 @@ export const StreamingResponseExtension = {
                       // --- TTFT Logic ---
                       if (!firstChunkReceived) {
                         firstChunkReceived = true;
-                        if (payload.debugMode === 1)
+                        const ttftTime = performance.now() - networkStart;
+                        if (payload.debugMode === 1) {
                           console.log(
                             `✅ First chunk received from ${endpoint} within timeout.`,
                           );
+                          console.log(`📊 TTFT achieved in ${ttftTime.toFixed(2)}ms (Limit: ${TTFT_TIMEOUT_MS}ms)`);
+                          console.log(`🌐 Network type: ${isCorporateNetwork ? 'Corporate' : 'Public'}`);
+                        }
                         // Crucially, clear the TTFT timer now
                         if (ttftTimeoutId) clearTimeout(ttftTimeoutId);
                         // Signal that the TTFT hurdle is passed
