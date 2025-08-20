@@ -3626,9 +3626,9 @@ export const StreamingResponseExtension = {
       // Detect potential corporate network environment
       const isCorporateNetwork = await detectCorporateNetwork();
       
-      // Adaptive timeout based on network environment - only extend for confirmed corporate networks
-      let baseTimeout = hasWebSearch ? 30000 : 10000;
-      const TTFT_TIMEOUT_MS = isCorporateNetwork ? baseTimeout * 2 : baseTimeout; // Double timeout for corporate networks
+      // Doubled timeout for all network types to handle various network conditions
+      let baseTimeout = hasWebSearch ? 60000 : 20000; // 2x original timeouts (was 30s/10s, now 60s/20s)
+      const TTFT_TIMEOUT_MS = isCorporateNetwork ? baseTimeout * 1.5 : baseTimeout; // Extra 50% for corporate networks
       
       if (payload.debugMode === 1) {
         console.log(`🌐 Network environment detected: ${isCorporateNetwork ? 'Corporate' : 'Public'}, TTFT timeout: ${TTFT_TIMEOUT_MS}ms`);
