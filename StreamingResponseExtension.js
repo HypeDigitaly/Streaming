@@ -2869,6 +2869,50 @@ export const StreamingResponseExtension = {
         endpoint: "/api/openrouter-stream",
         displayName: "GPT 4.1 Mini",
       },
+
+      // Mistral models (native API)
+      {
+        id: 30,
+        name: "mistral-small-latest",
+        type: "mistral",
+        endpoint: "/api/mistral-stream",
+        displayName: "Mistral Small",
+      },
+      {
+        id: 31,
+        name: "mistral-medium-latest",
+        type: "mistral",
+        endpoint: "/api/mistral-stream",
+        displayName: "Mistral Medium",
+      },
+      {
+        id: 32,
+        name: "mistral-large-latest",
+        type: "mistral",
+        endpoint: "/api/mistral-stream",
+        displayName: "Mistral Large",
+      },
+      {
+        id: 33,
+        name: "mistral-7b-instruct",
+        type: "mistral",
+        endpoint: "/api/mistral-stream",
+        displayName: "Mistral 7B Instruct",
+      },
+      {
+        id: 34,
+        name: "mixtral-8x7b-instruct",
+        type: "mistral",
+        endpoint: "/api/mistral-stream",
+        displayName: "Mixtral 8x7B Instruct",
+      },
+      {
+        id: 35,
+        name: "mixtral-8x22b-instruct",
+        type: "mistral",
+        endpoint: "/api/mistral-stream",
+        displayName: "Mixtral 8x22B Instruct",
+      },
     ];
 
     // Function to process model sequence
