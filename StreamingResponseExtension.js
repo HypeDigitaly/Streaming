@@ -2913,6 +2913,13 @@ export const StreamingResponseExtension = {
         endpoint: "/api/mistral-stream",
         displayName: "Mixtral 8x22B Instruct",
       },
+      {
+        id: 36,
+        name: "gpt-5-chat-latest",
+        type: "openai",
+        endpoint: "/api/openai-stream",
+        displayName: "GPT-5",
+      }
     ];
 
     // Function to process model sequence
