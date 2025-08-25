@@ -2927,10 +2927,30 @@ export const StreamingResponseExtension = {
       if (!sequenceStr) return [1]; // Default to first model if none specified
 
       // Parse sequence string to array of numbers
-      return sequenceStr
-        .split(",")
-        .map((id) => parseInt(id.trim()))
-        .filter((id) => !isNaN(id) && modelsRegistry.some((m) => m.id === id));
+      const splitIds = sequenceStr.split(",").map((id) => id.trim());
+      const parsedIds = splitIds.map((id) => parseInt(id));
+      
+      // Debug logging to track what's happening with ID 36
+      console.log("🔍 PARSE DEBUG - Split IDs:", splitIds);
+      console.log("🔍 PARSE DEBUG - Parsed IDs:", parsedIds);
+      
+      const filteredIds = parsedIds.filter((id) => {
+        const isNumber = !isNaN(id);
+        const existsInRegistry = modelsRegistry.some((m) => m.id === id);
+        
+        console.log(`🔍 PARSE DEBUG - ID ${id}: isNumber=${isNumber}, existsInRegistry=${existsInRegistry}`);
+        
+        if (id === 36) {
+          console.log("🔍 PARSE DEBUG - ID 36 SPECIAL CHECK:");
+          console.log("🔍 PARSE DEBUG - modelsRegistry length:", modelsRegistry.length);
+          console.log("🔍 PARSE DEBUG - ID 36 in registry:", modelsRegistry.find(m => m.id === 36));
+        }
+        
+        return isNumber && existsInRegistry;
+      });
+      
+      console.log("🔍 PARSE DEBUG - Final filtered IDs:", filteredIds);
+      return filteredIds;
     }
 
     // Function to get detailed model info by ID
