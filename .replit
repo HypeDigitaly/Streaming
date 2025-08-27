@@ -27,3 +27,6 @@ externalPort = 80
 [[ports]]
 localPort = 3001
 externalPort = 3001
+
+[agent]
+integrations = ["javascript_xai==1.0.0"]

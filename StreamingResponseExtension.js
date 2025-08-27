@@ -2919,6 +2919,22 @@ export const StreamingResponseExtension = {
         type: "openai",
         endpoint: "/api/openai-stream",
         displayName: "GPT-5",
+      },
+
+      // X.AI models
+      {
+        id: 37,
+        name: "grok-4",
+        type: "xai",
+        endpoint: "/api/xai-stream",
+        displayName: "Grok 4",
+      },
+      {
+        id: 38,
+        name: "grok-code-fast-1",
+        type: "xai",
+        endpoint: "/api/xai-stream",
+        displayName: "Grok Code Fast 1",
       }
     ];
 
