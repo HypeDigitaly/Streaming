@@ -3455,7 +3455,22 @@ export const StreamingResponseExtension = {
               return `<img src="${cleanUrl}" alt="${altText}" style="max-width:100%; height:auto; display:block; margin:0.5em 0;">`;
             })
             // Links (but not citations which are already processed)
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+            .replace(/\[([^\]]+)\]\(([^)]+(?:\)[^)\s]*)*[^)\s]*)\)/g, function(linkMatch, linkText, url) {
+              let cleanUrl = url.trim();
+              let cleanLinkText = linkText.trim();
+              
+              // Decode URL if it contains encoded characters
+              if (cleanUrl.includes('%')) {
+                cleanUrl = decodeUrlSafely(cleanUrl);
+              }
+              
+              // Decode link text if it contains encoded characters  
+              if (cleanLinkText.includes('%')) {
+                cleanLinkText = decodeUrlSafely(cleanLinkText);
+              }
+              
+              return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all; display: inline-block; max-width: 100%; overflow-wrap: break-word;">${cleanLinkText}</a>`;
+            })
             // Line separators
             .replace(/^-{3,}$/gm, '<hr class="markdown-separator" />')
             // Lists - bullet points (both at line start and after line breaks)
