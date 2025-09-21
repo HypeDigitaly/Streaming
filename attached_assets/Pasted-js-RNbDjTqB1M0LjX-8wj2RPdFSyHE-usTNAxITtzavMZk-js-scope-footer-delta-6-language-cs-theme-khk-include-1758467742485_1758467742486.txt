@@ -1,0 +1,309 @@
+js_RNbDjTqB1M0LjX_8wj2RPdFSyHE_usTNAxITtzavMZk.js?scope=footer&delta=6&language=cs&theme=khk&include=eJxtkOuOAjEIhV-o2sQXIrSDlZSBSct4eXvRbNzsxl-c84V7IXcaQPfNJi1wZgk784JOG9ceOpXvKY2UBkqiHapZZ4qwbsKolfI3mOjuwtrzMvYN5fhjUzNrQoCK8nCu0fkfSP3ScxMrKIfpjyhqLwQFJ9f8UW_GgxbLH5VWVraB2ghOZ8x_7bHu022FXhCuKBxXs2la5y3WVif1WELN3xhwd8sznhHzZ7oy3Sb4IMq_8gnk24Sf:11 IREDO module loaded
+custom.js?v=1:175 ce.fn.init
+bundle.mjs:233 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+bundle.mjs:520 voiceflow webchat v2.104.3
+StreamingResponseExtension.js:9 🚀 StreamingResponseExtension: Starting render {trace: {…}}
+StreamingResponseExtension.js:10 📦 Full trace payload: {
+  "modelSequence": "36,5,1",
+  "max_tokens": 8000,
+  "temperature": 0.1,
+  "userData": "\n# DATA SOURCES\n## \"Reference Information\" (Primary Source)\n\n### Q&A data chunks - HIGHEST PRIORITY\n\"\"\"[]\"\"\"\n\n### Standard content (use only if no Q&A match found):\n\"\"\"[{\"file_id\":\"file-3hZeWdGRhUn7XV4PKHhyi3\",\"filename\":\"Urad_Uredni_Hodiny_Sluzby_Objednavka_Zasedacich_Prostor_0.txt\",\"score\":0.7348216757135512,\"attributes\":{\"lookup_source_url\":\"https://www.khk.cz/urad/uredni-hodiny-sluzby/objednavka-zasedacich-prostor-0\",\"source_url\":\"https://www.khk.cz/urad/uredni-hodiny-sluzby/objednavka-zasedacich-prostor-0\",\"title\":\"Objednávka zasedacích prostor | Královéhradecký kraj\",\"script_name\":\"scrape_sitemap_universal\",\"upload_timestamp\":\"2025-09-21T00:44:54.004746\"},\"content\":[{\"type\":\"text\",\"text\":\"# 📄 Metadata souboru\\r\\n\\r\\n## 🔗 **ZDROJOVÁ URL:**\\r\\n### **https://www.khk.cz/urad/uredni-hodiny-sluzby/objednavka-zasedacich-prostor-0**\\r\\n\\r\\n## 📝 **TITULEK:**\\r\\n### **Objednávka zasedacích prostor | Královéhradecký kraj**\\r\\n\\r\\n## 🧭 **CESTA/NAVIGACE KE ZDROJOVÉ URL NA WEBU:**\\r\\n### **HTML Sitemap > Objednávka zasedacích prostor**\\r\\n\\r\\n## 📅 **DATUM POSLEDNÍ MODIFIKACE URL NA WEBU:**\\r\\n### **2025-03-24 09:05:00**\\r\\n\\r\\n## 📊 **SOURCE PAGE SUMMARY:**\\r\\n### **Tato stránka Královéhradeckého kraje popisuje proces objednávání zasedacích prostor v RegioCentru Nový pivovar. Uživatelé mohou využít formuláře ve formátu MS Word (45,5 KB) nebo PDF (906,96 KB), které je nutné vyplnit, podepsat a odeslat poštou na adresu Krajského úřadu Královéhradeckého kraje.\\r\\n\\r\\nKontaktní osobou pro objednávky je Mgr. Miloš Benák (telefon: 722 979 269, e-mail: mbenak@khk.cz). K dispozici jsou také soubory ke stažení s přehledem místností (XLSX, 11,91 KB) a seznamem zasedacích místností (PDF, 297,37 KB), které poskytují detailní informace pro výběr a rezervaci.**\\r\\n\\r\\n## 📊 **TYP ZDROJE:**\\r\\n### **🗺️ Sitemap**\\r\\n\\r\\n---\\r\\n\\r\\n# **QUESTION:**\\r\\n\\r\\nObjednávka zasedacích prostor | Královéhradecký kraj | zasedací prostory | Jak objednat zasedací prostory v Královéhradeckém kraji? | Kde mohu najít informace o objednávce zasedacích prostor Královéhradeckého kraje? | Jaký je proces objednávky zasedacích prostor u Královéhradeckého kraje?\\r\\n\\r\\n# **ANSWER:**\\r\\n\\r\\nObjednávka zasedacích prostor | Královéhradecký kraj\\r\\n\\r\\n===============\\r\\n[Přejít k hlavnímu obsahu](https://www.khk.cz/urad/uredni-hodiny-sluzby/objednavka-zasedacich-prostor-0#main-content)\\r\\n\\r\\n[Domů](https://www.khk.cz/)[Úřad](https://www.khk.cz/urad)[Úřední Hodiny a Služby](https://www.khk.cz/urad/uredni-hodiny-sluzby)**Objednávka Zasedacích Prostor**\\r\\n\\r\\nObjednávka zasedacích prostor\\r\\n=============================\\r\\n\\r\\n[Kontakt](https://www.khk.cz/urad/uredni-hodiny-sluzby/objednavka-zasedacich-prostor-0#anchor-contact)\\r\\n\\r\\nKrálovéhradecký kraj nabízí ke krátkodobému využití zasedací místnosti v RegioCentru Nový pivovar.\\r\\n\\r\\n* * *\\r\\n\\r\\nObjednat zasedací místnosti můžete:\\r\\n\\r\\nVyplněním a zasláním formuláře\\r\\n------------------------------\\r\\n\\r\\n_(dokument MS Word nebo PDF)_\\r\\n\\r\\nPro objednání zasedacích prostor v RegioCentru můžete použít objednávku ve formátu MS Word. Tuto objednávku vyplňte, podepište a odešlete na adresu krajského úřadu.\\r\\n\\r\\n[Objednávka zasedacích prostor (45,5 KB, DOC)](https://www.khk.cz/system/files/objednavka-zasedacich-prostor.doc)\\r\\n\\r\\nObjednávku též můžete vyplnit v Acrobat Readreu verze 7 a vyšší. Tento formulář obsahuje rozbalovací seznam místností. Lze ho též elektronicky podepsat, ale neumožňuje on-line rezervaci.\\r\\n\\r\\n[Objednávka zasedacích prostor (906,96 KB, PDF)](https://www.khk.cz/system/files/objednavka-formular.pdf)\\r\\n\\r\\nKontakt\\r\\n-------\\r\\n\\r\\nAdresa pro zaslání objednávky poštou:\\r\\n\\r\\n**Krajský úřad Královéhradeckého kraje**\\r\\n\\r\\n**objednávka zasedacích prostor**\\r\\n\\r\\n**Pivovarské náměstí 1245**\\r\\n\\r\\n**500 03 Hradec Králové**\\r\\n\\r\\n**Kontaktní osoba:**\\r\\n\\r\\n**Mgr. Miloš Benák**\\r\\n\\r\\n**telefon: 722 979 269**\\r\\n\\r\\n**e-mail:**[**mbenak@khk.cz**](mailto:mbenak@khk.cz)\\r\\n\\r\\nSoubory ke stažení\\r\\n------------------\\r\\n\\r\\n[Přehled místností - názvy, umístění (11,91 KB, XLSX)](https://www.khk.cz/system/files/mistnosti.xlsx)\\r\\n\\r\\n[Seznam zasedacích místností (297,37 KB, PDF)](https://www.khk.cz/system/files/Seznam-zasedacich-mistnosti.pdf)\"}]},{\"file_id\":\"file-M7vrS6uGNLuy363XqWtvNk\",\"filename\":\"Urad_Organizacni_Struktura_Odbory_Odbor_Kancelar_Reditele.txt\",\"score\":0.7288421989467809,\"attributes\":{\"lookup_source_url\":\"https://www.khk.cz/urad/organizacni-struktura/odbory/odbor-kancelar-reditele\",\"source_url\":\"https://www.khk.cz/urad/organizacni-struktura/odbory/odbor-kancelar-reditele\",\"title\":\"Odbor kancelář ředitele | Královéhr
+StreamingResponseExtension.js:14 🌍 Language setting: Čeština
+StreamingResponseExtension.js:18 🎨 Reasoning background colour: #EBF5FF (default)
+StreamingResponseExtension.js:47 🎨 Generated color scheme for thinking sections: {background: '#EBF5FF', backgroundLighter: '#ffffff', backgroundDarker: '#d2dce6', textColor: '#333333 (dark gray for contrast)'}
+StreamingResponseExtension.js:2951 🔍 PARSE DEBUG - Split IDs: (3) ['36', '5', '1']
+StreamingResponseExtension.js:2952 🔍 PARSE DEBUG - Parsed IDs: (3) [36, 5, 1]
+StreamingResponseExtension.js:2960 🔍 PARSE DEBUG - ID 36: isNumber=true, existsInRegistry=true
+StreamingResponseExtension.js:2963 🔍 PARSE DEBUG - ID 36 SPECIAL CHECK:
+StreamingResponseExtension.js:2964 🔍 PARSE DEBUG - modelsRegistry length: 38
+StreamingResponseExtension.js:2965 🔍 PARSE DEBUG - ID 36 in registry: {id: 36, name: 'gpt-5-chat-latest', type: 'openai', endpoint: '/api/openai-stream', displayName: 'GPT-5'}
+StreamingResponseExtension.js:2960 🔍 PARSE DEBUG - ID 5: isNumber=true, existsInRegistry=true
+StreamingResponseExtension.js:2960 🔍 PARSE DEBUG - ID 1: isNumber=true, existsInRegistry=true
+StreamingResponseExtension.js:2973 🔍 PARSE DEBUG - Final filtered IDs: (3) [36, 5, 1]
+StreamingResponseExtension.js:4200 📊 MODEL SEQUENCE DEBUG INFO:
+StreamingResponseExtension.js:4201 === CONFIGURED MODEL SEQUENCE ===
+StreamingResponseExtension.js:4202 📋 Raw sequence: 36,5,1
+StreamingResponseExtension.js:4205 📋 Parsed IDs: [36,5,1]
+StreamingResponseExtension.js:4208 === MODELS IN SEQUENCE ===
+StreamingResponseExtension.js:4210 📌 Position 0: ID:36 | GPT-5 (openai) | Model: gpt-5-chat-latest
+StreamingResponseExtension.js:4210 📌 Position 1: ID:5 | GPT-4.1 Mini (openai) | Model: gpt-4.1-mini-2025-04-14
+StreamingResponseExtension.js:4210 📌 Position 2: ID:1 | Claude 4 Sonnet (claude) | Model: claude-sonnet-4-20250514
+StreamingResponseExtension.js:4212 =============================
+StreamingResponseExtension.js:4238 
+🔄 ATTEMPT 1/3: Using model ID:36
+StreamingResponseExtension.js:4241 📌 Model: GPT-5 (openai)
+StreamingResponseExtension.js:4242 📌 Model name: gpt-5-chat-latest
+StreamingResponseExtension.js:4243 📌 Endpoint: /api/openai-stream
+StreamingResponseExtension.js:4244 📌 Status: STARTING REQUEST
+StreamingResponseExtension.js:3727 🌐 Network environment detected: Public, TTFT timeout: 20000ms
+StreamingResponseExtension.js:3778 📦 Payload for /api/openai-stream: {model: 'gpt-5-chat-latest', max_tokens: 8000, temperature: 0.1, debugMode: 1, projectName: 'KHK', …}
+StreamingResponseExtension.js:3787 🌐 Calling proxy URL: https://utils.hypedigitaly.ai/api/openai-stream with TTFT 20000ms (Corporate network: false)
+StreamingResponseExtension.js:3790 📊 Network diagnostics started at: 22508.799999952316ms
+StreamingResponseExtension.js:3806 ⚡ Connection established in 1987.60ms
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '##'}
+StreamingResponseExtension.js:3993 ✅ First chunk received from /api/openai-stream within timeout.
+StreamingResponseExtension.js:3996 📊 TTFT achieved in 1988.40ms (Limit: 20000ms)
+StreamingResponseExtension.js:3997 🌐 Network type: Public
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' O'}
+StreamingResponseExtension.js:4145 TTFT met for /api/openai-stream. Waiting for stream completion...
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'db'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'or'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' inform'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'atik'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'y'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' –'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' kontak'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'tní'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' úd'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'aje'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '\n\n'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '*'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' **'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'J'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'mé'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'no'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ':**'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' Ing'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' Boh'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'um'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'il'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' Pec'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'old'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '  \n'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '*'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' **'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Poz'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ice'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ':**'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' ved'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ouc'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'í'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' odb'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'oru'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' inform'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'atik'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'y'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '  \n'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '*'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' **'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Email'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ':**'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' ['}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'b'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'pec'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'old'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '@'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'kh'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'k'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.cz'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ']('}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'mailto'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ':b'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'pec'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'old'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '@'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'kh'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'k'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.cz'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ')'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '  \n'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '*'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' **'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Telefon'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ':**'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' '}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '495'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' '}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '817'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' '}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '281'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ','}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' '}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '736'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' '}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '521'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' '}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '849'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '  \n'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '*'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' **'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'K'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ancel'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ář'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ':**'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' Reg'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'io'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Cent'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'rum'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' Nov'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ý'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' piv'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ovar'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ','}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' dve'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ře'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' ['}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'a'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '-N'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '201'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ']('}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'http'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '://'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'map'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'y'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.k'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'hk'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.cz'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/reg'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ioc'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'entrum'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/is'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'api'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.dll'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '?'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'GEN'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '=L'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ST'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '&'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'MAP'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '='}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'reg'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ioc'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'entrum'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '&'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'TM'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '=*'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'N'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '*N'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '_'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/P'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/P'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '_'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/P'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '_'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '2'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '&'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'CF'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '_TM'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '=*'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'N'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '*N'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '_'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/P'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/P'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '_'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/P'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '_'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '2'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '&'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'CF'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '_S'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Q'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Y'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '=L'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '[C'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'IS'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'LO'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '2'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ']'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'N'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '201'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '%'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '0'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'A'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '&'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'CF'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '_S'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'XX'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '=N'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '1'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ')'}
+StreamingResponseExtension.js:1605 🔗 URL DECODE: Starting decode for: http://mapy.khk.cz/regiocentrum/isapi.dll?GEN=LST&MAP=regiocentrum&TM=*N1*N1_1/P1/P1_1/P1_2&CF_TM=*N1*N1_1/P1/P1_1/P1_2&CF_SQY=L[CISLO2]N1.201%0A&CF_SXX=N1
+StreamingResponseExtension.js:1623 🔗 URL DECODE: Attempt 1: http://mapy.khk.cz/regiocentrum/isapi.dll?GEN=LST&MAP=regiocentrum&TM=*N1*N1_1/P1/P1_1/P1_2&CF_TM=*N1*N1_1/P1/P1_1/P1_2&CF_SQY=L[CISLO2]N1.201
+&CF_SXX=N1
+StreamingResponseExtension.js:1638 🔗 URL DECODE: Final result: http://mapy.khk.cz/regiocentrum/isapi.dll?GEN=LST&MAP=regiocentrum&TM=*N1*N1_1/P1/P1_1/P1_2&CF_TM=*N1*N1_1/P1/P1_1/P1_2&CF_SQY=L[CISLO2]N1.201
+&CF_SXX=N1
+StreamingResponseExtension.js:1799 🔗 URL DECODE: Fixed encoded URL in buffer: {original: 'http://mapy.khk.cz/regiocentrum/isapi.dll?GEN=LST&…/P1/P1_1/P1_2&CF_SQY=L[CISLO2]N1.201%0A&CF_SXX=N1', cleaned: 'http://mapy.khk.cz/regiocentrum/isapi.dll?GEN=LST&…_1/P1/P1_1/P1_2&CF_SQY=L[CISLO2]N1.201\n&CF_SXX=N1', linkText: '1a-N1.201'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '  \n\n'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '**'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Zd'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'roj'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' inform'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ací'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ':**'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' ['}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'Kont'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'akty'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ','}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' Telefon'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ní'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' seznam'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' |'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' Kr'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ál'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ové'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'hr'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ade'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ck'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ý'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ' kraj'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ']('}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'https'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '://'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'www'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.k'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'hk'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '.cz'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ur'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ad'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '/k'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ont'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'akty'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '-'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'telefon'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'ni'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: '-se'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: 'znam'}
+StreamingResponseExtension.js:3964 📥 Frontend chunk from /api/openai-stream: {type: 'content', content: ')'}
+StreamingResponseExtension.js:3858 [DONE] received for /api/openai-stream.
+StreamingResponseExtension.js:3932 🗄️ [FINAL] HTML check - DB sections: false, DB icon: false, thinking sections: false
+StreamingResponseExtension.js:3941 ❌ [FINAL] Database section may have been lost during processing
+StreamingResponseExtension.js:3942 🔍 [FINAL] Full final HTML length: 2347
+StreamingResponseExtension.js:3943 🔍 [FINAL] Final HTML sample: <h2 style="margin: 1.2em 0 0.6em 0; font-weight: bold; color: #333; font-size: 1.2em;">Odbor informatiky – kontaktní údaje</h2>
+<ul style="margin: 0.5em 0; padding-left: 1.5em;">
+<li style="margin: 0.2em 0; line-height: 1.4;"><strong style="font-weight: bold; color: #000000;">Jméno:</strong> Ing. Bohumil Pecold</li>
+<li style="margin: 0.2em 0; line-height: 1.4;"><strong style="font-weight: bold; color: #000000;">Pozice:</strong> vedoucí odboru informatiky</li>
+<li style="margin: 0.2em 0; line-he
+StreamingResponseExtension.js:4099 📤 Updating Voiceflow variable with response length: 559
+StreamingResponseExtension.js:4121 ✅ Voiceflow update attempted successfully.
+StreamingResponseExtension.js:4124 Voiceflow update response: {success: true, status: 200, message: '{"_id":"684451e57c807e02974b2824","projectID":"680…},{"role":"user","content":"Pecold kancelář"}]}}}'}
+StreamingResponseExtension.js:4362 
+✅ SUCCESS: MODEL ID:36
+StreamingResponseExtension.js:4363 📌 Model: GPT-5 (openai)
+StreamingResponseExtension.js:4364 📌 Model name: gpt-5-chat-latest
+StreamingResponseExtension.js:4365 📌 Status: COMPLETED SUCCESSFULLY
+StreamingResponseExtension.js:4366 📌 Attempt: 1/3
+StreamingResponseExtension.js:4369 =============================
+StreamingResponseExtension.js:4447 🔍 FINALIZE: Processing remaining buffer content
+StreamingResponseExtension.js:4448 🗄️ FINALIZE: Database sections already present: false
