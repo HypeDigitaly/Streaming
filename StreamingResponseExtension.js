@@ -2339,8 +2339,6 @@ export const StreamingResponseExtension = {
       let formattedContent = processedLines.join('\n')
         // Bold
         .replace(/\*\*(.*?)\*\*/g, '<strong style="font-weight: bold; color: #000000;">$1</strong>')
-        // Italic
-        .replace(/\*(.*?)\*/g, '<em style="font-style: italic; color: #6b7280;">$1</em>')
         // Code
         .replace(/`(.*?)`/g, '<code style="background-color: #f3f4f6; padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; font-size: 0.9em; color: #dc2626;">$1</code>')
         // Process citations that come after database markers in streaming
@@ -3440,9 +3438,8 @@ export const StreamingResponseExtension = {
             .replace(/\n### ([^\n]+)\n/g, '\n<h3>$1</h3>\n')
             .replace(/\n## ([^\n]+)\n/g, '\n<h2>$1</h2>\n')
             .replace(/\n# ([^\n]+)\n/g, '\n<h1>$1</h1>\n')
-            // Bold and italic
+            // Bold
             .replace(/\*\*(.*?)\*\*/g, "<strong style=\"font-weight: bold; color: #000000;\">$1</strong>")
-            .replace(/\*(.*?)\*/g, "<em>$1</em>")
             // Code
             .replace(/`([^`]+)`/g, "<code>$1</code>")
             // Images
