@@ -11,7 +11,13 @@ const whitelistedDomains = [
   'hypedigitaly.ai',
   'litomerice.cz',
   'khk.cz',
-  'stredoceskykraj.cz'
+  'stredoceskykraj.cz',
+  'usti.cz',
+  'strekov.cz',
+  'nestemice.eu',
+  'severni-terasa.cz',
+  'mesto-ul.cz',
+  'kr-karlovarsky.cz'
 ];
 
 module.exports = {
