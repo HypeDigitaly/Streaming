@@ -2855,17 +2855,17 @@ export const StreamingResponseExtension = {
       // Claude models
       {
         id: 1,
-        name: "claude-sonnet-4-20250514",
+        name: "claude-sonnet-4-5-20250929",
         type: "claude",
         endpoint: "/api/claude-stream",
-        displayName: "Claude 4 Sonnet",
+        displayName: "Claude 4.5 Sonnet",
       },
       {
         id: 2,
-        name: "claude-3-5-haiku-20241022",
+        name: "claude-haiku-4-5-20251001",
         type: "claude",
         endpoint: "/api/claude-stream",
-        displayName: "Claude 3.5 Haiku",
+        displayName: "Claude 4.5 Haiku",
       },
       {
         id: 3,
