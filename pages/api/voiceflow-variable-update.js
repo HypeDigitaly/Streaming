@@ -52,6 +52,23 @@ export default async function handler(req, res) {
         updateStateConverted: updateStateNum,
         endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`
       });
+      console.log('🔍 REQUEST BODY RECEIVED - RAW VALUES:', {
+        debugMode_RAW: debugMode,
+        debugMode_TYPE: typeof debugMode,
+        updateState_RAW: updateState,
+        updateState_TYPE: typeof updateState
+      });
+      console.log('🔍 REQUEST BODY RECEIVED - CONVERTED VALUES:', {
+        debugModeNum,
+        debugModeNum_TYPE: typeof debugModeNum,
+        updateStateNum,
+        updateStateNum_TYPE: typeof updateStateNum
+      });
+      console.log('🔍 CONDITIONAL CHECK - Will PUT state be executed?', {
+        condition: 'updateStateNum === 1',
+        updateStateNum_value: updateStateNum,
+        will_execute_PUT: updateStateNum === 1
+      });
     }
 
     // Step 1: PATCH variables
@@ -104,7 +121,20 @@ export default async function handler(req, res) {
     }
 
     // Step 2: PUT state (if updateState is enabled)
+    if (debugModeNum === 1) {
+      console.log('🔍 STEP 2 - PUT STATE CHECK:', {
+        updateStateNum,
+        condition: 'updateStateNum === 1',
+        result: updateStateNum === 1,
+        will_execute: updateStateNum === 1 ? 'YES - Executing PUT request' : 'NO - Skipping PUT request'
+      });
+    }
+    
     if (updateStateNum === 1) {
+      if (debugModeNum === 1) {
+        console.log('✅ PUT STATE - CONDITION MET! Proceeding with PUT request...');
+      }
+      
       // Ensure stack, storage, and variables exist - use empty if not present
       const putBody = {
         stack: stateData.stack !== undefined ? stateData.stack : [],
@@ -119,6 +149,7 @@ export default async function handler(req, res) {
           endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`,
           bodyFromPatchResponse: putBody
         });
+        console.log('🔍 PUT REQUEST - Full Body:', JSON.stringify(putBody, null, 2));
       }
 
       const stateResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}`, {
@@ -176,6 +207,14 @@ export default async function handler(req, res) {
         console.log('✅ PUT /state/user/{userID} - SUCCESS');
         console.log('📊 PUT Response Status:', stateResponse.status);
         console.log('📦 FULL PUT API Response:', JSON.stringify(updatedStateData, null, 2));
+        console.log('🔍 PUT RESPONSE - Analysis:', {
+          hasStack: !!updatedStateData.stack,
+          hasStorage: !!updatedStateData.storage,
+          hasVariables: !!updatedStateData.variables,
+          stackLength: updatedStateData.stack?.length,
+          storageKeys: Object.keys(updatedStateData.storage || {}),
+          variableKeys: Object.keys(updatedStateData.variables || {})
+        });
       }
 
       return res.status(200).json({ 
@@ -199,7 +238,18 @@ export default async function handler(req, res) {
       });
     }
 
-    res.status(200).json({ 
+    // This block only executes if updateStateNum !== 1
+    if (debugModeNum === 1) {
+      console.log('ℹ️ FINAL RESPONSE - updateState was NOT 1, returning without PUT execution');
+      console.log('🔍 FINAL RESPONSE - Returning data:', {
+        success: true,
+        variablesUpdated: true,
+        stateUpdated: false,
+        updateStateNum
+      });
+    }
+    
+    res.status(200).json({
       success: true,
       status: response.status,
       variablesUpdated: true,
@@ -210,7 +260,9 @@ export default async function handler(req, res) {
           patchResponse: {
             status: response.status,
             data: stateData
-          }
+          },
+          updateStateReceived: updateStateNum,
+          putExecuted: false
         }
       })
     });

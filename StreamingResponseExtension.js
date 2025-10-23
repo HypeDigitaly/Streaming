@@ -4455,23 +4455,42 @@ export const StreamingResponseExtension = {
           return;
         }
         try {
-          if (payload.debugMode === 1)
+          if (payload.debugMode === 1) {
             console.log(
               "📤 Updating Voiceflow variable with response length:",
               completeResponse.length,
             );
+            console.log("🔍 VOICEFLOW UPDATE - Input Payload Analysis:", {
+              user_id: payload.user_id,
+              projectName: payload.projectName,
+              debugMode: payload.debugMode,
+              updateState_RAW: payload.updateState,
+              updateState_TYPE: typeof payload.updateState,
+              updateState_CONVERTED: payload.updateState || 0,
+              willSendUpdateState: payload.updateState || 0
+            });
+          }
+          
+          const requestBody = {
+            user_id: payload.user_id,
+            projectName: payload.projectName,
+            variables: { LLM_Main_Response: completeResponse },
+            debugMode: payload.debugMode || 0,
+            updateState: payload.updateState || 0,
+          };
+          
+          if (payload.debugMode === 1) {
+            console.log("🔍 VOICEFLOW UPDATE - Request Body Being Sent:",
+              JSON.stringify(requestBody, null, 2)
+            );
+          }
+          
           const updateResponse = await fetch(
             "https://utils.hypedigitaly.ai/api/voiceflow-variable-update",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                user_id: payload.user_id,
-                projectName: payload.projectName,
-                variables: { LLM_Main_Response: completeResponse },
-                debugMode: payload.debugMode || 0,
-                updateState: payload.updateState || 0,
-              }),
+              body: JSON.stringify(requestBody),
             },
           );
           if (!updateResponse.ok) {
