@@ -113,10 +113,15 @@ export default async function handler(req, res) {
       console.log('✅ PATCH /state/user/{userID}/variables - SUCCESS');
       console.log('📊 PATCH Response Status:', response.status);
       console.log('📦 FULL PATCH API Response:', JSON.stringify(stateData, null, 2));
+      const attributes = stateData.attributes || stateData;
       console.log('🔍 PATCH Response Analysis:', {
-        hasStack: !!stateData.stack,
-        hasStorage: !!stateData.storage,
-        hasVariables: !!stateData.variables
+        hasAttributes: !!stateData.attributes,
+        hasStack: !!attributes.stack,
+        hasStorage: !!attributes.storage,
+        hasVariables: !!attributes.variables,
+        stackLength: attributes.stack?.length,
+        storageKeys: Object.keys(attributes.storage || {}).length,
+        variableKeys: Object.keys(attributes.variables || {}).length
       });
     }
 
@@ -136,10 +141,12 @@ export default async function handler(req, res) {
       }
       
       // Ensure stack, storage, and variables exist - use empty if not present
+      // Extract from attributes object if present, otherwise from root level
+      const attributes = stateData.attributes || stateData;
       const putBody = {
-        stack: stateData.stack !== undefined ? stateData.stack : [],
-        storage: stateData.storage !== undefined ? stateData.storage : {},
-        variables: stateData.variables !== undefined ? stateData.variables : {}
+        stack: attributes.stack !== undefined ? attributes.stack : [],
+        storage: attributes.storage !== undefined ? attributes.storage : {},
+        variables: attributes.variables !== undefined ? attributes.variables : {}
       };
 
       // Server-side logging
