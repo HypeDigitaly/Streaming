@@ -125,6 +125,15 @@ export default async function handler(req, res) {
       });
     }
 
+    // Add 5 second delay before PUT request
+    if (debugModeNum === 1) {
+      console.log('⏳ Waiting 5 seconds before executing PUT request...');
+    }
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    if (debugModeNum === 1) {
+      console.log('✅ Delay complete, proceeding with PUT request check');
+    }
+
     // Step 2: PUT state (if updateState is enabled)
     if (debugModeNum === 1) {
       console.log('🔍 STEP 2 - PUT STATE CHECK:', {
