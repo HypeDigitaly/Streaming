@@ -85,6 +85,7 @@ export default async function handler(req, res) {
       });
     }
 
+    // Server-side logging
     if (debugMode === 1) {
       console.log('✅ PATCH /state/user/{userID}/variables - SUCCESS');
       console.log('📊 PATCH Response Status:', response.status);
@@ -105,6 +106,7 @@ export default async function handler(req, res) {
         variables: stateData.variables !== undefined ? stateData.variables : {}
       };
 
+      // Server-side logging
       if (debugMode === 1) {
         console.log('📡 Voiceflow State Update Request (PUT):', {
           user_id,
@@ -134,6 +136,7 @@ export default async function handler(req, res) {
       }
 
       if (!stateResponse.ok) {
+        // Server-side logging
         if (debugMode === 1) {
           console.error('❌ Voiceflow State Update Error:', {
             status: stateResponse.status,
@@ -146,10 +149,23 @@ export default async function handler(req, res) {
           error: 'Failed to update Voiceflow state',
           status: stateResponse.status,
           message: updatedStateData,
-          variablesUpdated: true
+          variablesUpdated: true,
+          ...(debugMode === 1 && {
+            debug: {
+              patchResponse: {
+                status: response.status,
+                data: stateData
+              },
+              putResponse: {
+                status: stateResponse.status,
+                data: updatedStateData
+              }
+            }
+          })
         });
       }
 
+      // Server-side logging
       if (debugMode === 1) {
         console.log('✅ PUT /state/user/{userID} - SUCCESS');
         console.log('📊 PUT Response Status:', stateResponse.status);
@@ -161,7 +177,19 @@ export default async function handler(req, res) {
         status: stateResponse.status,
         variablesUpdated: true,
         stateUpdated: true,
-        message: updatedStateData || 'Variables and state updated successfully'
+        message: updatedStateData || 'Variables and state updated successfully',
+        ...(debugMode === 1 && {
+          debug: {
+            patchResponse: {
+              status: response.status,
+              data: stateData
+            },
+            putResponse: {
+              status: stateResponse.status,
+              data: updatedStateData
+            }
+          }
+        })
       });
     }
 
@@ -170,7 +198,15 @@ export default async function handler(req, res) {
       status: response.status,
       variablesUpdated: true,
       stateUpdated: false,
-      message: stateData || 'Variables updated successfully'
+      message: stateData || 'Variables updated successfully',
+      ...(debugMode === 1 && {
+        debug: {
+          patchResponse: {
+            status: response.status,
+            data: stateData
+          }
+        }
+      })
     });
   } catch (error) {
     console.error('Error updating Voiceflow variables:', error);
