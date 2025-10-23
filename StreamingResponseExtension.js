@@ -4634,6 +4634,7 @@ export const StreamingResponseExtension = {
           debugMode: trace.payload.debugMode || 0,
           projectName: trace.payload.projectName,
           user_id: trace.payload.user_id,
+          updateState: trace.payload.updateState || 0,
         };
 
         // Add OpenAI-specific web search and file search parameters
