@@ -31,6 +31,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required parameters' });
     }
 
+    // Convert debugMode and updateState to numbers (handle both string and number inputs)
+    const debugModeNum = Number(debugMode);
+    const updateStateNum = Number(updateState);
+
     // Select API key based on projectName - follows the same pattern as Claude API key selection
     const apiKey = process.env[`VOICEFLOW_API_KEY_${projectName?.toUpperCase()}`] || process.env.VOICEFLOW_API_KEY;
 
@@ -38,12 +42,14 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: `API key not found for project: ${projectName}` });
     }
 
-    if (debugMode === 1) {
+    if (debugModeNum === 1) {
       console.log('📡 Voiceflow Variable Update Request:', {
         user_id,
         projectName,
         variableKeys: Object.keys(variables),
-        updateState: updateState === 1,
+        updateState: updateStateNum,
+        updateStateType: typeof updateState,
+        updateStateConverted: updateStateNum,
         endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`
       });
     }
@@ -70,7 +76,7 @@ export default async function handler(req, res) {
     }
     
     if (!response.ok) {
-      if (debugMode === 1) {
+      if (debugModeNum === 1) {
         console.error('❌ Voiceflow Variable Update Error:', {
           status: response.status,
           statusText: response.statusText,
@@ -86,7 +92,7 @@ export default async function handler(req, res) {
     }
 
     // Server-side logging
-    if (debugMode === 1) {
+    if (debugModeNum === 1) {
       console.log('✅ PATCH /state/user/{userID}/variables - SUCCESS');
       console.log('📊 PATCH Response Status:', response.status);
       console.log('📦 FULL PATCH API Response:', JSON.stringify(stateData, null, 2));
@@ -98,7 +104,7 @@ export default async function handler(req, res) {
     }
 
     // Step 2: PUT state (if updateState is enabled)
-    if (updateState === 1) {
+    if (updateStateNum === 1) {
       // Ensure stack, storage, and variables exist - use empty if not present
       const putBody = {
         stack: stateData.stack !== undefined ? stateData.stack : [],
@@ -107,7 +113,7 @@ export default async function handler(req, res) {
       };
 
       // Server-side logging
-      if (debugMode === 1) {
+      if (debugModeNum === 1) {
         console.log('📡 Voiceflow State Update Request (PUT):', {
           user_id,
           endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`,
@@ -137,7 +143,7 @@ export default async function handler(req, res) {
 
       if (!stateResponse.ok) {
         // Server-side logging
-        if (debugMode === 1) {
+        if (debugModeNum === 1) {
           console.error('❌ Voiceflow State Update Error:', {
             status: stateResponse.status,
             statusText: stateResponse.statusText,
@@ -150,7 +156,7 @@ export default async function handler(req, res) {
           status: stateResponse.status,
           message: updatedStateData,
           variablesUpdated: true,
-          ...(debugMode === 1 && {
+          ...(debugModeNum === 1 && {
             debug: {
               patchResponse: {
                 status: response.status,
@@ -166,7 +172,7 @@ export default async function handler(req, res) {
       }
 
       // Server-side logging
-      if (debugMode === 1) {
+      if (debugModeNum === 1) {
         console.log('✅ PUT /state/user/{userID} - SUCCESS');
         console.log('📊 PUT Response Status:', stateResponse.status);
         console.log('📦 FULL PUT API Response:', JSON.stringify(updatedStateData, null, 2));
@@ -178,7 +184,7 @@ export default async function handler(req, res) {
         variablesUpdated: true,
         stateUpdated: true,
         message: updatedStateData || 'Variables and state updated successfully',
-        ...(debugMode === 1 && {
+        ...(debugModeNum === 1 && {
           debug: {
             patchResponse: {
               status: response.status,
@@ -199,7 +205,7 @@ export default async function handler(req, res) {
       variablesUpdated: true,
       stateUpdated: false,
       message: stateData || 'Variables updated successfully',
-      ...(debugMode === 1 && {
+      ...(debugModeNum === 1 && {
         debug: {
           patchResponse: {
             status: response.status,
