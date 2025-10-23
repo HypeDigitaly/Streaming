@@ -98,32 +98,14 @@ export default async function handler(req, res) {
 
     // Step 2: PUT state (if updateState is enabled)
     if (updateState === 1) {
-      if (!stateData.stack || !stateData.storage || !stateData.variables) {
-        if (debugMode === 1) {
-          console.error('❌ Cannot update state: PATCH response missing required fields:', {
-            hasStack: !!stateData.stack,
-            hasStorage: !!stateData.storage,
-            hasVariables: !!stateData.variables,
-            patchResponse: stateData
-          });
-        }
-        
-        return res.status(500).json({ 
-          error: 'PATCH response missing stack, storage, or variables',
-          variablesUpdated: true,
-          stateUpdated: false,
-          patchResponse: stateData
-        });
-      }
-
       if (debugMode === 1) {
         console.log('📡 Voiceflow State Update Request (PUT):', {
           user_id,
           endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`,
-          stateKeys: {
-            stack: stateData.stack?.length || 0,
-            storage: Object.keys(stateData.storage || {}).length,
-            variables: Object.keys(stateData.variables || {}).length
+          bodyFromPatchResponse: {
+            stack: stateData.stack,
+            storage: stateData.storage,
+            variables: stateData.variables
           }
         });
       }
