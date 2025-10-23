@@ -98,15 +98,18 @@ export default async function handler(req, res) {
 
     // Step 2: PUT state (if updateState is enabled)
     if (updateState === 1) {
+      // Ensure stack, storage, and variables exist - use empty if not present
+      const putBody = {
+        stack: stateData.stack !== undefined ? stateData.stack : [],
+        storage: stateData.storage !== undefined ? stateData.storage : {},
+        variables: stateData.variables !== undefined ? stateData.variables : {}
+      };
+
       if (debugMode === 1) {
         console.log('📡 Voiceflow State Update Request (PUT):', {
           user_id,
           endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`,
-          bodyFromPatchResponse: {
-            stack: stateData.stack,
-            storage: stateData.storage,
-            variables: stateData.variables
-          }
+          bodyFromPatchResponse: putBody
         });
       }
 
@@ -118,11 +121,7 @@ export default async function handler(req, res) {
           'versionID': 'production',
           'Authorization': apiKey
         },
-        body: JSON.stringify({
-          stack: stateData.stack,
-          storage: stateData.storage,
-          variables: stateData.variables
-        })
+        body: JSON.stringify(putBody)
       });
 
       const stateResponseText = await stateResponse.text();
