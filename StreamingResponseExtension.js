@@ -4470,6 +4470,7 @@ export const StreamingResponseExtension = {
                 projectName: payload.projectName,
                 variables: { LLM_Main_Response: completeResponse },
                 debugMode: payload.debugMode || 0,
+                updateState: payload.updateState || 0,
               }),
             },
           );
