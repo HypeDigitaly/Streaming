@@ -156,11 +156,16 @@ export default async function handler(req, res) {
         console.log('🚀 EXECUTING PUT REQUEST TO UPDATE STATE');
         console.log('='.repeat(80));
         console.log('📡 Endpoint:', `https://general-runtime.voiceflow.com/state/user/${user_id}`);
-        console.log('📦 PUT Request Body (from PATCH response):');
+        console.log('📦 PUT Request Body Components:');
+        console.log('  - stack (length):', putBody.stack?.length || 0);
         console.log('  - stack:', JSON.stringify(putBody.stack, null, 2));
+        console.log('  - storage (keys count):', Object.keys(putBody.storage || {}).length);
         console.log('  - storage:', JSON.stringify(putBody.storage, null, 2));
+        console.log('  - variables (keys count):', Object.keys(putBody.variables || {}).length);
         console.log('  - variables (keys):', Object.keys(putBody.variables));
-        console.log('🔍 Full PUT Body:', JSON.stringify(putBody, null, 2));
+        console.log('');
+        console.log('🔍 COMPLETE PUT REQUEST BODY (EXACT JSON BEING SENT):');
+        console.log(JSON.stringify(putBody, null, 2));
         console.log('='.repeat(80));
       }
 
