@@ -88,20 +88,76 @@ export default async function handler(req, res) {
     if (debugMode === 1) {
       console.log('✅ Voiceflow Variable Update Success:', {
         status: response.status,
-        response: stateData
+        response: stateData,
+        hasStack: !!stateData.stack,
+        hasStorage: !!stateData.storage,
+        hasVariables: !!stateData.variables
       });
     }
 
     // Step 2: PUT state (if updateState is enabled)
-    if (updateState === 1 && stateData.stack && stateData.storage && stateData.variables) {
+    if (updateState === 1) {
+      // If PATCH response doesn't contain full state, GET it first
+      let fullStateData = stateData;
+      
+      if (!stateData.stack || !stateData.storage || !stateData.variables) {
+        if (debugMode === 1) {
+          console.log('📡 PATCH response incomplete, fetching current state via GET:', {
+            user_id,
+            endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`
+          });
+        }
+
+        const getStateResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}`, {
+          method: 'GET',
+          headers: {
+            'accept': 'application/json',
+            'versionID': 'production',
+            'Authorization': apiKey
+          }
+        });
+
+        const getStateText = await getStateResponse.text();
+        
+        try {
+          fullStateData = getStateText ? JSON.parse(getStateText) : {};
+        } catch (parseError) {
+          fullStateData = { raw: getStateText };
+        }
+
+        if (!getStateResponse.ok) {
+          if (debugMode === 1) {
+            console.error('❌ Failed to GET state:', {
+              status: getStateResponse.status,
+              response: fullStateData
+            });
+          }
+          
+          return res.status(getStateResponse.status).json({ 
+            error: 'Failed to get Voiceflow state',
+            status: getStateResponse.status,
+            message: fullStateData,
+            variablesUpdated: true
+          });
+        }
+
+        if (debugMode === 1) {
+          console.log('✅ Got current state:', {
+            hasStack: !!fullStateData.stack,
+            hasStorage: !!fullStateData.storage,
+            hasVariables: !!fullStateData.variables
+          });
+        }
+      }
+
       if (debugMode === 1) {
-        console.log('📡 Voiceflow State Update Request:', {
+        console.log('📡 Voiceflow State Update Request (PUT):', {
           user_id,
           endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`,
           stateKeys: {
-            stack: stateData.stack?.length || 0,
-            storage: Object.keys(stateData.storage || {}).length,
-            variables: Object.keys(stateData.variables || {}).length
+            stack: fullStateData.stack?.length || 0,
+            storage: Object.keys(fullStateData.storage || {}).length,
+            variables: Object.keys(fullStateData.variables || {}).length
           }
         });
       }
@@ -115,9 +171,9 @@ export default async function handler(req, res) {
           'Authorization': apiKey
         },
         body: JSON.stringify({
-          stack: stateData.stack,
-          storage: stateData.storage,
-          variables: stateData.variables
+          stack: fullStateData.stack,
+          storage: fullStateData.storage,
+          variables: fullStateData.variables
         })
       });
 
