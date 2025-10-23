@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { user_id, projectName, variables, debugMode } = req.body;
+    const { user_id, projectName, variables, debugMode, updateState } = req.body;
 
     if (!user_id || !variables) {
       return res.status(400).json({ error: 'Missing required parameters' });
@@ -43,10 +43,12 @@ export default async function handler(req, res) {
         user_id,
         projectName,
         variableKeys: Object.keys(variables),
+        updateState: updateState === 1,
         endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`
       });
     }
 
+    // Step 1: PATCH variables
     const response = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}/variables`, {
       method: 'PATCH',
       headers: {
@@ -58,35 +60,115 @@ export default async function handler(req, res) {
       body: JSON.stringify(variables)
     });
 
-    const responseData = await response.text();
+    const responseText = await response.text();
+    let stateData;
+    
+    try {
+      stateData = responseText ? JSON.parse(responseText) : {};
+    } catch (parseError) {
+      stateData = { raw: responseText };
+    }
     
     if (!response.ok) {
       if (debugMode === 1) {
         console.error('❌ Voiceflow Variable Update Error:', {
           status: response.status,
           statusText: response.statusText,
-          response: responseData
+          response: stateData
         });
       }
       
       return res.status(response.status).json({ 
         error: 'Failed to update Voiceflow variables',
         status: response.status,
-        message: responseData
+        message: stateData
       });
     }
 
     if (debugMode === 1) {
       console.log('✅ Voiceflow Variable Update Success:', {
         status: response.status,
-        response: responseData || 'No response body'
+        response: stateData
+      });
+    }
+
+    // Step 2: PUT state (if updateState is enabled)
+    if (updateState === 1 && stateData.stack && stateData.storage && stateData.variables) {
+      if (debugMode === 1) {
+        console.log('📡 Voiceflow State Update Request:', {
+          user_id,
+          endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`,
+          stateKeys: {
+            stack: stateData.stack?.length || 0,
+            storage: Object.keys(stateData.storage || {}).length,
+            variables: Object.keys(stateData.variables || {}).length
+          }
+        });
+      }
+
+      const stateResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}`, {
+        method: 'PUT',
+        headers: {
+          'accept': 'application/json',
+          'content-type': 'application/json',
+          'versionID': 'production',
+          'Authorization': apiKey
+        },
+        body: JSON.stringify({
+          stack: stateData.stack,
+          storage: stateData.storage,
+          variables: stateData.variables
+        })
+      });
+
+      const stateResponseText = await stateResponse.text();
+      let updatedStateData;
+      
+      try {
+        updatedStateData = stateResponseText ? JSON.parse(stateResponseText) : {};
+      } catch (parseError) {
+        updatedStateData = { raw: stateResponseText };
+      }
+
+      if (!stateResponse.ok) {
+        if (debugMode === 1) {
+          console.error('❌ Voiceflow State Update Error:', {
+            status: stateResponse.status,
+            statusText: stateResponse.statusText,
+            response: updatedStateData
+          });
+        }
+        
+        return res.status(stateResponse.status).json({ 
+          error: 'Failed to update Voiceflow state',
+          status: stateResponse.status,
+          message: updatedStateData,
+          variablesUpdated: true
+        });
+      }
+
+      if (debugMode === 1) {
+        console.log('✅ Voiceflow State Update Success:', {
+          status: stateResponse.status,
+          response: updatedStateData
+        });
+      }
+
+      return res.status(200).json({ 
+        success: true,
+        status: stateResponse.status,
+        variablesUpdated: true,
+        stateUpdated: true,
+        message: updatedStateData || 'Variables and state updated successfully'
       });
     }
 
     res.status(200).json({ 
       success: true,
       status: response.status,
-      message: responseData || 'Variables updated successfully'
+      variablesUpdated: true,
+      stateUpdated: false,
+      message: stateData || 'Variables updated successfully'
     });
   } catch (error) {
     console.error('Error updating Voiceflow variables:', error);

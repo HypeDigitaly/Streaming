@@ -1,0 +1,347 @@
+# Update state
+
+Update the user's current state.
+
+This is useful for externally updating the user's state or resetting the state.
+
+# OpenAPI definition
+
+```json
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.1.0",
+    "title": "Voiceflow Dialog Management API",
+    "description": "# Overview\nThe **Dialog Manager API (DM API)** exposes the Voiceflow runtime and allows clients to start a conversation with a Voiceflow project.\n\nYou can design a conversational interface using our [Voiceflow Creator](https://creator.voiceflow.com), then easily integrate the conversation into a variety of interfaces: chatbot, voice assistant, IVR, web chat, and more.\n\n<img src=\"https://uploads-ssl.webflow.com/5bddf05642686caf6d17eb58/6036dc95761e92262c2f4bd6_IVR%20(3)-p-1080.png\" alt=\"Voiceflow IVR Integration\" style=\"zoom:50%;\"/>\n\n**Note**: The Dialog Manager API can only be used to integrate Voiceflow **general projects**, that is, projects without a pre-existing third-party upload.\n\nThus, Alexa, Google Actions, and Dialogflow ES projects on Voiceflow are instead accessed through their associated 3rd party platform, e.g, Alexa projects can be accessed by an Amazon Alexa device.\n\n# Quick Start\nTo see the DM API in action, follow these steps:\n1. **Create a project** - Build a conversational flow on the [Voiceflow Creator](https://creator.voiceflow.com).\n\n2. **Render your project** - Ensure you're on the Designer tab by checking the left side bar. Then, click the Run button on the top-right corner to compile your project and make it available through the DM API.\n\n3. **Get an API key** - Go to the Integration tab using the left sidebar and copy your project's API key.\n\n4. **Copy a test call** - Copy one of the \"API Call Examples\" below and replace the API key variable with the API key you copied in step 2.\n\n5. **Start the conversation** - Execute the API call to start a conversation and get a response from your Voiceflow app.\n\n6. **Continue the conversation** - Change the user input variable and execute the API call again. The DM API tracks the current state of the conversation and may produce a different response to advance the conversation.\n\n<details>\n  <summary><b>View API Call Examples</b></summary>\n\n  <details>\n    <summary>cURL command line</summary>\n\n    API_KEY='VF.DM.xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'\n\n    USER_ID='user_123'\n    USER_INPUT='Hello world!'\n\n    curl --request POST \"https://general-runtime.voiceflow.com/state/user/$USER_ID/interact\" \\\n        --header \"Authorization: $API_KEY\" \\\n        --header \"Content-Type: application/json\" \\\n        --header \"versionID: 'development'\" \\\n        --data-raw \"{\n            \\\"request\\\": { \\\"type\\\": \\\"text\\\", \\\"payload\\\": \\\"$USER_INPUT\\\" }\n        }\"\n\n  </details>\n\n  <details>\n    <summary>Node.js</summary>\n\n    const axios = require('axios');\n\n    const apiKey = 'VF.DM.xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';\n\n    const userID = 'user_123'; // Unique ID used to track conversation state\n    const userInput = 'Hello world!'; // User's message to your Voiceflow project\n\n    const body = {\n      action: {\n        type: 'text',\n        payload: userInput,\n      },\n    };\n\n    async function startInteract() {\n      // Start a conversation\n      const response = await axios({\n        method: 'POST',\n        baseURL: 'https://general-runtime.voiceflow.com',\n        url: `/state/user/${userID}/interact`,\n        headers: {\n          Authorization: apiKey,\n          versionID: 'development',\n        },\n        data: body,\n      });\n\n      // Log the response\n      console.log(response.data);\n    }\n\n    startInteract().catch((error) => console.error(error));\n\n  </details>\n\n  <details>\n    <summary>Python</summary>\n\n    import requests\n\n    api_key = \"VF.DM.xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n\n    user_id = \"user_123\"  # Unique ID used to track conversation state\n    user_input = \"Hello world!\"  # User's message to your Voiceflow project\n\n    body = {\"action\": {\"type\": \"text\", \"payload\": user_input}}\n\n    # Start a conversation\n    response = requests.post(\n        f\"https://general-runtime.voiceflow.com/state/user/{user_id}/interact\",\n        json=body,\n        headers={\n          \"Authorization\": api_key,\n          \"versionID\": \"development\"\n        },\n    )\n\n    # Log the response\n    print(response.json())\n\n  </details>\n</details>\n\n# Endpoint URL\n\nThe standard URL base for all Dialog Management API calls is shown below:\n```\nhttps://general-runtime.voiceflow.com\n```\n*Note: This will be different if you are self-hosting or on a private cloud.*\n"
+  },
+  "tags": [
+    {
+      "name": "API Reference",
+      "description": "The Dialog Manager API (DM API) allows any application to talk with a Voiceflow diagram using HTTP calls to the **interact endpoint**.\n## Conversation State\nThe DM API automatically creates and manages the conversation state. Identical requests to the DM API may produce different responses depending on your diagram's logic and the previous request that the API received.\n\nNote that this means the DM API is **not a REST API** as it does not satisfy the [statelessness property](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). The DM API's responses depend not only on the request, but also stored state within the server. Keep this in mind while working with the DM API.\n\n### Tracking conversation state\n\nAll endpoints take in a `userID` parameter, which is used to identify the caller and assign them a unique conversation state object.\n\nThe interact endpoint can also receive updated variables via the `state.variables` body parameter.\n\n#### Multiple conversation sessions\n\nMultiple conversation sessions to the same Voiceflow project can be running simultaneously. Each session is identified by the `userID` that you specify.\n\nFor example, customer A should communicate with `/state/user/customerA/interact` whereas customer B should communicate with `/state/user/customerB/interact`.\n\nWhen customer A gives a response, such as \"I would like a large pizza\", it will advance their specific conversation session identified by `/state/user/customerA/interact`. For example, the app might then ask what toppings customer A wants.\n\nMeanwhile, `/state/user/customerB/interact`'s session remains unchanged, e.g, it might be waiting for customer B to give their order.\n\n\n#### Format of `userID`\nThe format of `userID` is up to you. You can choose any string that fits your particular domain such as `user1234` or `507f191e810c19729de860ea`.\n\nThere are a few best practices to defining a `userID` format:\n\n1. **Unique** - The `userID` should be unique to each user. Otherwise, if two users share the same `userID`, the Voiceflow app may leak information about user A's conversation to user B, which is a potential privacy violation.\n\n2. **Non-sensitive** - It is not recommended to use sensitive or private information in the `userID` such as emails, real names, or phone numbers.\n\n## versionID\nDM API endpoints also accept a `versionID` header whose value is a **version alias** that points to a particular version of your Voiceflow project.\n\nThe currently supported aliases are:\n- `development` - The version displayed on the Voiceflow Creator's canvas\n- `production` - The version that has been published\n\nUse the `development` alias whenever you are experimenting with your API and the `production` version when integrating Voiceflow with your web app.\n\n### Updating your version\nTo update the `'development'` version exposed by the DM API, you must:\n1. Make your changes on the canvas and NLU manager\n2. Hit the blue Run button in the Voiceflow canvas to compile the diagram\n3. Hit the \"Train Assistant\" button in the Prototype tool to train the NLU model\n\nTo update the `'production'` version exposed by the DM API, you must:\n1. Make your changes on the canvas and NLU manager\n2. Hit the Publish button at the top-right corner of the Voiceflow canvas\n"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://general-runtime.voiceflow.com"
+    }
+  ],
+  "paths": {
+    "/state/user/{userID}": {
+      "parameters": [
+        {
+          "name": "versionID",
+          "description": "The version of your Voiceflow project to contact.\n\nUse `'development'` to contact the version on canvas or `'production'` to contact the published version.\n",
+          "in": "header",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "example": [
+            "development",
+            "production"
+          ]
+        },
+        {
+          "name": "userID",
+          "description": "A unique user ID specified by the caller.\n\nThe Dialog Manager API creates an independent conversation session for each user ID, allowing your app to talk with different users simultaneously.\n",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "pizza-app-user-123"
+          }
+        }
+      ],
+      "put": {
+        "summary": "Update state",
+        "tags": [
+          "API Reference"
+        ],
+        "operationId": "postState",
+        "security": [
+          {
+            "DialogManagerAPIKey": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "State",
+                  "type": "object",
+                  "x-examples": {
+                    "Example State": {
+                      "stack": [
+                        {
+                          "programID": "6062631246b44d80a8a345b4",
+                          "diagramID": "653fb8df7d32ab70457438f4",
+                          "nodeID": "60626307fd9a230006a5e289"
+                        }
+                      ],
+                      "storage": {},
+                      "variables": {
+                        "pizza_type": "pepperoni",
+                        "sessions": 5,
+                        "payment": "credit"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "stack": {
+                      "type": "array",
+                      "description": "Contains all of the user's active flows",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "programID": {
+                            "type": "string",
+                            "description": "The flow that the user has on the stack",
+                            "example": "6062631246b44d80a8a345b4"
+                          },
+                          "diagramID": {
+                            "type": "string",
+                            "description": "The ID of the diagram the flow belongs to",
+                            "example": "653fb8df7d32ab70457438f4"
+                          },
+                          "nodeID": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "The current block this flow is on",
+                            "example": "60626307fd9a230006a5e289"
+                          },
+                          "variables": {
+                            "type": "object",
+                            "description": "The flow-scoped variables"
+                          },
+                          "storage": {
+                            "type": "object",
+                            "description": "Internal flow parameters used by the runtime"
+                          },
+                          "commands": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "push",
+                                    "jump"
+                                  ]
+                                },
+                                "event": {
+                                  "type": "object"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "programID",
+                          "diagramID"
+                        ]
+                      }
+                    },
+                    "storage": {
+                      "type": "object"
+                    },
+                    "variables": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "stack",
+                    "storage",
+                    "variables"
+                  ],
+                  "description": "user metadata - what block they are currently on, what flow they are on, their variables",
+                  "x-readme-ref-name": "State"
+                },
+                "examples": {
+                  "Example State": {
+                    "value": {
+                      "stack": [
+                        {
+                          "programID": "6062631246b44d80a8a345b4",
+                          "diagramID": "653fb8df7d32ab70457438f4",
+                          "nodeID": "60626307fd9a230006a5e289"
+                        }
+                      ],
+                      "storage": {},
+                      "variables": {
+                        "pizza_type": "pepperoni",
+                        "sessions": 5,
+                        "payment": "credit"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Update the user's current state.\n\nThis is useful for externally updating the user's state or resetting the state.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "title": "State",
+                    "type": "object",
+                    "x-examples": {
+                      "Example State": {
+                        "stack": [
+                          {
+                            "programID": "6062631246b44d80a8a345b4",
+                            "diagramID": "653fb8df7d32ab70457438f4",
+                            "nodeID": "60626307fd9a230006a5e289"
+                          }
+                        ],
+                        "storage": {},
+                        "variables": {
+                          "pizza_type": "pepperoni",
+                          "sessions": 5,
+                          "payment": "credit"
+                        }
+                      }
+                    },
+                    "properties": {
+                      "stack": {
+                        "type": "array",
+                        "description": "Contains all of the user's active flows",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "programID": {
+                              "type": "string",
+                              "description": "The flow that the user has on the stack",
+                              "example": "6062631246b44d80a8a345b4"
+                            },
+                            "diagramID": {
+                              "type": "string",
+                              "description": "The ID of the diagram the flow belongs to",
+                              "example": "653fb8df7d32ab70457438f4"
+                            },
+                            "nodeID": {
+                              "type": "string",
+                              "nullable": true,
+                              "description": "The current block this flow is on",
+                              "example": "60626307fd9a230006a5e289"
+                            },
+                            "variables": {
+                              "type": "object",
+                              "description": "The flow-scoped variables"
+                            },
+                            "storage": {
+                              "type": "object",
+                              "description": "Internal flow parameters used by the runtime"
+                            },
+                            "commands": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "enum": [
+                                      "push",
+                                      "jump"
+                                    ]
+                                  },
+                                  "event": {
+                                    "type": "object"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "programID",
+                            "diagramID"
+                          ]
+                        }
+                      },
+                      "storage": {
+                        "type": "object"
+                      },
+                      "variables": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "stack",
+                      "storage",
+                      "variables"
+                    ],
+                    "description": "user metadata - what block they are currently on, what flow they are on, their variables",
+                    "x-readme-ref-name": "State"
+                  }
+                ],
+                "properties": {
+                  "stack": {
+                    "items": {
+                      "properties": {
+                        "diagramID": {
+                          "description": "The ID of the diagram the flow belongs to. This can be retrieve either on the response of the interact call (when called using the verbose flag) or by fetching the current state."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example State": {
+                  "value": {
+                    "stack": [
+                      {
+                        "programID": "6062631246b44d80a8a345b4",
+                        "diagramID": "653fb8df7d32ab70457438f4",
+                        "nodeID": "60626307fd9a230006a5e289"
+                      }
+                    ],
+                    "storage": {},
+                    "variables": {
+                      "pizza_type": "pepperoni",
+                      "sessions": 5,
+                      "payment": "credit"
+                    }
+                  }
+                },
+                "Empty State": {
+                  "value": {
+                    "stack": [],
+                    "storage": {},
+                    "variables": {}
+                  }
+                }
+              }
+            }
+          },
+          "description": "Valid new user state"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about OpenAPI",
+    "url": "https://spec.openapis.org/oas/latest.html"
+  },
+  "components": {
+    "securitySchemes": {
+      "DialogManagerAPIKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "All requests made to the Dialog Management API must be validated with a Dialog Manager API Key.\n\nTo obtain a Dialog Manager API key, open the project you want to integrate on the Voiceflow Creator, go to the Integration tab, and click the \"Copy API key\" button.\n"
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+```
