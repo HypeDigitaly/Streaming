@@ -4545,6 +4545,22 @@ export const StreamingResponseExtension = {
                 if (responseData.debug.putEndpoint) {
                   console.log("  - PUT Endpoint:", responseData.debug.putEndpoint);
                 }
+                
+                // Display the EXACT PUT request body that was sent to the API
+                if (responseData.debug.putRequestBody) {
+                  console.log("");
+                  console.log("=".repeat(80));
+                  console.log("📤 EXACT PUT REQUEST BODY SENT TO VOICEFLOW API");
+                  console.log("=".repeat(80));
+                  console.log(JSON.stringify(responseData.debug.putRequestBody, null, 2));
+                  console.log("");
+                  console.log("🔍 PUT Request Body Structure Analysis:");
+                  console.log("  📊 Stack items:", responseData.debug.putRequestBody.stack?.length || 0);
+                  console.log("  📊 Storage keys:", Object.keys(responseData.debug.putRequestBody.storage || {}).length);
+                  console.log("  📊 Variables keys:", Object.keys(responseData.debug.putRequestBody.variables || {}).length);
+                  console.log("  📄 Total JSON size:", JSON.stringify(responseData.debug.putRequestBody).length, "characters");
+                  console.log("=".repeat(80));
+                }
               }
               
               console.log("=".repeat(80));

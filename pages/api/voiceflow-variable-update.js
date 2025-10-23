@@ -166,8 +166,14 @@ export default async function handler(req, res) {
         console.log('');
         console.log('🔍 COMPLETE PUT REQUEST BODY (EXACT JSON BEING SENT):');
         console.log(JSON.stringify(putBody, null, 2));
+        console.log('');
+        console.log('⚠️ VERIFICATION: This is the EXACT stringified JSON that will be sent in body:');
+        console.log('📄 Raw JSON String Length:', JSON.stringify(putBody).length, 'characters');
         console.log('='.repeat(80));
       }
+      
+      // Create the exact JSON string that will be sent
+      const putBodyJSON = JSON.stringify(putBody);
 
       const stateResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}`, {
         method: 'PUT',
@@ -177,7 +183,7 @@ export default async function handler(req, res) {
           'versionID': 'production',
           'Authorization': apiKey
         },
-        body: JSON.stringify(putBody)
+        body: putBodyJSON
       });
 
       const stateResponseText = await stateResponse.text();
