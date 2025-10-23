@@ -144,12 +144,17 @@ export default async function handler(req, res) {
 
       // Server-side logging
       if (debugModeNum === 1) {
-        console.log('📡 Voiceflow State Update Request (PUT):', {
-          user_id,
-          endpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`,
-          bodyFromPatchResponse: putBody
-        });
-        console.log('🔍 PUT REQUEST - Full Body:', JSON.stringify(putBody, null, 2));
+        console.log('');
+        console.log('='.repeat(80));
+        console.log('🚀 EXECUTING PUT REQUEST TO UPDATE STATE');
+        console.log('='.repeat(80));
+        console.log('📡 Endpoint:', `https://general-runtime.voiceflow.com/state/user/${user_id}`);
+        console.log('📦 PUT Request Body (from PATCH response):');
+        console.log('  - stack:', JSON.stringify(putBody.stack, null, 2));
+        console.log('  - storage:', JSON.stringify(putBody.storage, null, 2));
+        console.log('  - variables (keys):', Object.keys(putBody.variables));
+        console.log('🔍 Full PUT Body:', JSON.stringify(putBody, null, 2));
+        console.log('='.repeat(80));
       }
 
       const stateResponse = await fetch(`https://general-runtime.voiceflow.com/state/user/${user_id}`, {
@@ -175,28 +180,37 @@ export default async function handler(req, res) {
       if (!stateResponse.ok) {
         // Server-side logging
         if (debugModeNum === 1) {
-          console.error('❌ Voiceflow State Update Error:', {
-            status: stateResponse.status,
-            statusText: stateResponse.statusText,
-            response: updatedStateData
-          });
+          console.error('');
+          console.error('='.repeat(80));
+          console.error('❌ PUT REQUEST FAILED');
+          console.error('='.repeat(80));
+          console.error('Status:', stateResponse.status);
+          console.error('Status Text:', stateResponse.statusText);
+          console.error('Response:', JSON.stringify(updatedStateData, null, 2));
+          console.error('='.repeat(80));
         }
         
-        return res.status(stateResponse.status).json({ 
+        return res.status(stateResponse.status).json({
           error: 'Failed to update Voiceflow state',
+          success: false,
           status: stateResponse.status,
-          message: updatedStateData,
           variablesUpdated: true,
+          stateUpdated: false,
+          patchResponse: {
+            status: response.status,
+            data: stateData
+          },
+          putResponse: {
+            status: stateResponse.status,
+            data: updatedStateData,
+            error: true
+          },
           ...(debugModeNum === 1 && {
             debug: {
-              patchResponse: {
-                status: response.status,
-                data: stateData
-              },
-              putResponse: {
-                status: stateResponse.status,
-                data: updatedStateData
-              }
+              message: 'PATCH succeeded but PUT failed',
+              patchEndpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`,
+              putEndpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`,
+              putRequestBody: putBody
             }
           })
         });
@@ -204,35 +218,44 @@ export default async function handler(req, res) {
 
       // Server-side logging
       if (debugModeNum === 1) {
-        console.log('✅ PUT /state/user/{userID} - SUCCESS');
+        console.log('');
+        console.log('='.repeat(80));
+        console.log('✅ PUT REQUEST SUCCESSFUL');
+        console.log('='.repeat(80));
         console.log('📊 PUT Response Status:', stateResponse.status);
+        console.log('📦 PUT Response Data Structure:');
+        console.log('  - Has stack:', !!updatedStateData.stack, '(length:', updatedStateData.stack?.length + ')');
+        console.log('  - Has storage:', !!updatedStateData.storage, '(keys:', Object.keys(updatedStateData.storage || {}).length + ')');
+        console.log('  - Has variables:', !!updatedStateData.variables, '(keys:', Object.keys(updatedStateData.variables || {}).length + ')');
         console.log('📦 FULL PUT API Response:', JSON.stringify(updatedStateData, null, 2));
-        console.log('🔍 PUT RESPONSE - Analysis:', {
-          hasStack: !!updatedStateData.stack,
-          hasStorage: !!updatedStateData.storage,
-          hasVariables: !!updatedStateData.variables,
-          stackLength: updatedStateData.stack?.length,
-          storageKeys: Object.keys(updatedStateData.storage || {}),
-          variableKeys: Object.keys(updatedStateData.variables || {})
-        });
+        console.log('');
+        console.log('📤 SUMMARY - FINAL RESPONSE TO FRONTEND:');
+        console.log('  ✅ PATCH /variables - Status:', response.status);
+        console.log('  ✅ PUT /state - Status:', stateResponse.status);
+        console.log('  📊 Both requests completed successfully');
+        console.log('='.repeat(80));
+        console.log('');
       }
 
-      return res.status(200).json({ 
+      return res.status(200).json({
         success: true,
         status: stateResponse.status,
         variablesUpdated: true,
         stateUpdated: true,
-        message: updatedStateData || 'Variables and state updated successfully',
+        patchResponse: {
+          status: response.status,
+          data: stateData
+        },
+        putResponse: {
+          status: stateResponse.status,
+          data: updatedStateData
+        },
         ...(debugModeNum === 1 && {
           debug: {
-            patchResponse: {
-              status: response.status,
-              data: stateData
-            },
-            putResponse: {
-              status: stateResponse.status,
-              data: updatedStateData
-            }
+            message: 'Both PATCH and PUT requests completed successfully',
+            patchEndpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}/variables`,
+            putEndpoint: `https://general-runtime.voiceflow.com/state/user/${user_id}`,
+            putRequestBody: putBody
           }
         })
       });

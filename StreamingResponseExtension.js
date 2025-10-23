@@ -4501,9 +4501,57 @@ export const StreamingResponseExtension = {
             console.log("✅ Voiceflow update attempted successfully.");
             try {
               const responseData = await updateResponse.json();
-              console.log("Voiceflow update response:", responseData);
+              console.log("");
+              console.log("=".repeat(80));
+              console.log("📨 VOICEFLOW UPDATE API RESPONSE");
+              console.log("=".repeat(80));
+              console.log("✅ Success:", responseData.success);
+              console.log("📊 Status Code:", responseData.status);
+              console.log("📝 Variables Updated:", responseData.variablesUpdated);
+              console.log("🔄 State Updated:", responseData.stateUpdated);
+              
+              if (responseData.patchResponse) {
+                console.log("");
+                console.log("📦 PATCH /variables Response:");
+                console.log("  - Status:", responseData.patchResponse.status);
+                console.log("  - Data:", JSON.stringify(responseData.patchResponse.data, null, 2));
+              }
+              
+              if (responseData.putResponse) {
+                console.log("");
+                console.log("📦 PUT /state Response:");
+                console.log("  - Status:", responseData.putResponse.status);
+                console.log("  - Full Response Data:");
+                console.log(JSON.stringify(responseData.putResponse.data, null, 2));
+                
+                // Highlight key fields from PUT response
+                if (responseData.putResponse.data) {
+                  const putData = responseData.putResponse.data;
+                  console.log("");
+                  console.log("  🔑 Key Fields in PUT Response:");
+                  console.log("    - Has stack:", !!putData.stack, "(length:", putData.stack?.length + ")");
+                  console.log("    - Has storage:", !!putData.storage, "(keys:", Object.keys(putData.storage || {}).length + ")");
+                  console.log("    - Has variables:", !!putData.variables, "(keys:", Object.keys(putData.variables || {}).length + ")");
+                }
+              }
+              
+              if (responseData.debug) {
+                console.log("");
+                console.log("🔍 Debug Info:");
+                console.log("  - Message:", responseData.debug.message);
+                if (responseData.debug.patchEndpoint) {
+                  console.log("  - PATCH Endpoint:", responseData.debug.patchEndpoint);
+                }
+                if (responseData.debug.putEndpoint) {
+                  console.log("  - PUT Endpoint:", responseData.debug.putEndpoint);
+                }
+              }
+              
+              console.log("=".repeat(80));
+              console.log("");
             } catch (e) {
               console.log("Voiceflow update status:", updateResponse.status);
+              console.log("⚠️ Could not parse response as JSON:", e.message);
             }
           }
         } catch (error) {
