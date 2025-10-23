@@ -86,9 +86,10 @@ export default async function handler(req, res) {
     }
 
     if (debugMode === 1) {
-      console.log('✅ Voiceflow Variable Update Success:', {
-        status: response.status,
-        response: stateData,
+      console.log('✅ PATCH /state/user/{userID}/variables - SUCCESS');
+      console.log('📊 PATCH Response Status:', response.status);
+      console.log('📦 FULL PATCH API Response:', JSON.stringify(stateData, null, 2));
+      console.log('🔍 PATCH Response Analysis:', {
         hasStack: !!stateData.stack,
         hasStorage: !!stateData.storage,
         hasVariables: !!stateData.variables
@@ -169,10 +170,9 @@ export default async function handler(req, res) {
       }
 
       if (debugMode === 1) {
-        console.log('✅ Voiceflow State Update Success:', {
-          status: stateResponse.status,
-          response: updatedStateData
-        });
+        console.log('✅ PUT /state/user/{userID} - SUCCESS');
+        console.log('📊 PUT Response Status:', stateResponse.status);
+        console.log('📦 FULL PUT API Response:', JSON.stringify(updatedStateData, null, 2));
       }
 
       return res.status(200).json({ 
