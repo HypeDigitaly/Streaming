@@ -4455,42 +4455,22 @@ export const StreamingResponseExtension = {
           return;
         }
         try {
-          if (payload.debugMode === 1) {
+          if (payload.debugMode === 1)
             console.log(
               "📤 Updating Voiceflow variable with response length:",
               completeResponse.length,
             );
-            console.log("🔍 VOICEFLOW UPDATE - Input Payload Analysis:", {
-              user_id: payload.user_id,
-              projectName: payload.projectName,
-              debugMode: payload.debugMode,
-              updateState_RAW: payload.updateState,
-              updateState_TYPE: typeof payload.updateState,
-              updateState_CONVERTED: payload.updateState || 0,
-              willSendUpdateState: payload.updateState || 0
-            });
-          }
-          
-          const requestBody = {
-            user_id: payload.user_id,
-            projectName: payload.projectName,
-            variables: { LLM_Main_Response: completeResponse },
-            debugMode: payload.debugMode || 0,
-            updateState: payload.updateState || 0,
-          };
-          
-          if (payload.debugMode === 1) {
-            console.log("🔍 VOICEFLOW UPDATE - Request Body Being Sent:",
-              JSON.stringify(requestBody, null, 2)
-            );
-          }
-          
           const updateResponse = await fetch(
             "https://utils.hypedigitaly.ai/api/voiceflow-variable-update",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(requestBody),
+              body: JSON.stringify({
+                user_id: payload.user_id,
+                projectName: payload.projectName,
+                variables: { LLM_Main_Response: completeResponse },
+                debugMode: payload.debugMode || 0,
+              }),
             },
           );
           if (!updateResponse.ok) {
@@ -4501,73 +4481,9 @@ export const StreamingResponseExtension = {
             console.log("✅ Voiceflow update attempted successfully.");
             try {
               const responseData = await updateResponse.json();
-              console.log("");
-              console.log("=".repeat(80));
-              console.log("📨 VOICEFLOW UPDATE API RESPONSE");
-              console.log("=".repeat(80));
-              console.log("✅ Success:", responseData.success);
-              console.log("📊 Status Code:", responseData.status);
-              console.log("📝 Variables Updated:", responseData.variablesUpdated);
-              console.log("🔄 State Updated:", responseData.stateUpdated);
-              
-              if (responseData.patchResponse) {
-                console.log("");
-                console.log("📦 PATCH /variables Response:");
-                console.log("  - Status:", responseData.patchResponse.status);
-                console.log("  - Data:", JSON.stringify(responseData.patchResponse.data, null, 2));
-              }
-              
-              if (responseData.putResponse) {
-                console.log("");
-                console.log("📦 PUT /state Response:");
-                console.log("  - Status:", responseData.putResponse.status);
-                console.log("  - Full Response Data:");
-                console.log(JSON.stringify(responseData.putResponse.data, null, 2));
-                
-                // Highlight key fields from PUT response
-                if (responseData.putResponse.data) {
-                  const putData = responseData.putResponse.data;
-                  console.log("");
-                  console.log("  🔑 Key Fields in PUT Response:");
-                  console.log("    - Has stack:", !!putData.stack, "(length:", putData.stack?.length + ")");
-                  console.log("    - Has storage:", !!putData.storage, "(keys:", Object.keys(putData.storage || {}).length + ")");
-                  console.log("    - Has variables:", !!putData.variables, "(keys:", Object.keys(putData.variables || {}).length + ")");
-                }
-              }
-              
-              if (responseData.debug) {
-                console.log("");
-                console.log("🔍 Debug Info:");
-                console.log("  - Message:", responseData.debug.message);
-                if (responseData.debug.patchEndpoint) {
-                  console.log("  - PATCH Endpoint:", responseData.debug.patchEndpoint);
-                }
-                if (responseData.debug.putEndpoint) {
-                  console.log("  - PUT Endpoint:", responseData.debug.putEndpoint);
-                }
-                
-                // Display the EXACT PUT request body that was sent to the API
-                if (responseData.debug.putRequestBody) {
-                  console.log("");
-                  console.log("=".repeat(80));
-                  console.log("📤 EXACT PUT REQUEST BODY SENT TO VOICEFLOW API");
-                  console.log("=".repeat(80));
-                  console.log(JSON.stringify(responseData.debug.putRequestBody, null, 2));
-                  console.log("");
-                  console.log("🔍 PUT Request Body Structure Analysis:");
-                  console.log("  📊 Stack items:", responseData.debug.putRequestBody.stack?.length || 0);
-                  console.log("  📊 Storage keys:", Object.keys(responseData.debug.putRequestBody.storage || {}).length);
-                  console.log("  📊 Variables keys:", Object.keys(responseData.debug.putRequestBody.variables || {}).length);
-                  console.log("  📄 Total JSON size:", JSON.stringify(responseData.debug.putRequestBody).length, "characters");
-                  console.log("=".repeat(80));
-                }
-              }
-              
-              console.log("=".repeat(80));
-              console.log("");
+              console.log("Voiceflow update response:", responseData);
             } catch (e) {
               console.log("Voiceflow update status:", updateResponse.status);
-              console.log("⚠️ Could not parse response as JSON:", e.message);
             }
           }
         } catch (error) {
@@ -4698,7 +4614,6 @@ export const StreamingResponseExtension = {
           debugMode: trace.payload.debugMode || 0,
           projectName: trace.payload.projectName,
           user_id: trace.payload.user_id,
-          updateState: trace.payload.updateState || 0,
         };
 
         // Add OpenAI-specific web search and file search parameters
