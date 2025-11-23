@@ -3070,59 +3070,52 @@ export const StreamingResponseExtension = {
         endpoint: "/api/openrouter-stream",
         displayName: "GPT 4.1 Mini",
       },
-      {
-        id: 30,
-        name: "openai/gpt-5.1",
-        type: "openrouter",
-        endpoint: "/api/openrouter-stream",
-        displayName: "GPT 5.1",
-      },
 
       // Mistral models (native API)
       {
-        id: 31,
+        id: 30,
         name: "mistral-small-latest",
         type: "mistral",
         endpoint: "/api/mistral-stream",
         displayName: "Mistral Small",
       },
       {
-        id: 32,
+        id: 31,
         name: "mistral-medium-latest",
         type: "mistral",
         endpoint: "/api/mistral-stream",
         displayName: "Mistral Medium",
       },
       {
-        id: 33,
+        id: 32,
         name: "mistral-large-latest",
         type: "mistral",
         endpoint: "/api/mistral-stream",
         displayName: "Mistral Large",
       },
       {
-        id: 34,
+        id: 33,
         name: "mistral-7b-instruct",
         type: "mistral",
         endpoint: "/api/mistral-stream",
         displayName: "Mistral 7B Instruct",
       },
       {
-        id: 35,
+        id: 34,
         name: "mixtral-8x7b-instruct",
         type: "mistral",
         endpoint: "/api/mistral-stream",
         displayName: "Mixtral 8x7B Instruct",
       },
       {
-        id: 36,
+        id: 35,
         name: "mixtral-8x22b-instruct",
         type: "mistral",
         endpoint: "/api/mistral-stream",
         displayName: "Mixtral 8x22B Instruct",
       },
       {
-        id: 37,
+        id: 36,
         name: "gpt-5-chat-latest",
         type: "openai",
         endpoint: "/api/openai-stream",
@@ -3131,18 +3124,25 @@ export const StreamingResponseExtension = {
 
       // X.AI models
       {
-        id: 38,
+        id: 37,
         name: "grok-4",
         type: "xai",
         endpoint: "/api/xai-stream",
         displayName: "Grok 4",
       },
       {
-        id: 39,
+        id: 38,
         name: "grok-code-fast-1",
         type: "xai",
         endpoint: "/api/xai-stream",
         displayName: "Grok Code Fast 1",
+      },
+      {
+        id: 39,
+        name: "openai/gpt-5.1",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "GPT 5.1",
       },
     ];
 
