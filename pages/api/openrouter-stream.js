@@ -59,7 +59,9 @@ export default async function handler(req, res) {
       stop,
       // OpenRouter headers
       site_url,
-      site_name
+      site_name,
+      // Reasoning parameter
+      reasoning
     } = req.body;
 
     // Validate required parameters
@@ -90,7 +92,8 @@ export default async function handler(req, res) {
         plugins,
         enableWebSearch,
         site_url,
-        site_name
+        site_name,
+        reasoning
       });
     }
 
@@ -140,6 +143,7 @@ export default async function handler(req, res) {
     if (tool_choice) payload.tool_choice = tool_choice;
     if (seed !== undefined) payload.seed = seed;
     if (stop) payload.stop = stop;
+    if (reasoning) payload.reasoning = reasoning;
 
     // Add OpenRouter-specific parameters
     if (models && models.length > 1) {
