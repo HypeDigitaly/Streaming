@@ -3142,7 +3142,37 @@ export const StreamingResponseExtension = {
         name: "openai/gpt-5.1",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "GPT 5.1",
+        displayName: "GPT 5.1 (OpenRouter)",
+      },
+
+      // OpenAI GPT-5.1 models (native API)
+      {
+        id: 40,
+        name: "gpt-5.1",
+        type: "openai",
+        endpoint: "/api/openai-stream",
+        displayName: "GPT-5.1",
+      },
+      {
+        id: 41,
+        name: "gpt-5-mini",
+        type: "openai",
+        endpoint: "/api/openai-stream",
+        displayName: "GPT-5 Mini",
+      },
+      {
+        id: 42,
+        name: "gpt-5-nano",
+        type: "openai",
+        endpoint: "/api/openai-stream",
+        displayName: "GPT-5 Nano",
+      },
+      {
+        id: 43,
+        name: "gpt-5",
+        type: "openai",
+        endpoint: "/api/openai-stream",
+        displayName: "GPT-5",
       },
     ];
 
