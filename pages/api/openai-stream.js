@@ -663,9 +663,11 @@ export default async function handler(req, res) {
       }
     } else {
       // Use Chat Completions API for non-reasoning models
+      const currentModel = model || 'gpt-4.1-2025-04-14';
+      const isGPT5Model = currentModel.includes('gpt-5') || currentModel.includes('gpt-5.1');
+      
       const chatPayload = {
-        model: model || 'gpt-4.1-2025-04-14',
-        max_tokens: max_tokens || 4096,
+        model: currentModel,
         messages: [
           {
             role: 'system',
@@ -679,6 +681,13 @@ export default async function handler(req, res) {
         stream: true,
         temperature: temperature || 0,
       };
+
+      // GPT-5.x models use max_completion_tokens instead of max_tokens
+      if (isGPT5Model) {
+        chatPayload.max_completion_tokens = max_tokens || 4096;
+      } else {
+        chatPayload.max_tokens = max_tokens || 4096;
+      }
 
       const response = await openai.chat.completions.create(chatPayload);
 
