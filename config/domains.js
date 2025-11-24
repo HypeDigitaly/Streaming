@@ -17,6 +17,8 @@ const whitelistedDomains = [
   "severni-terasa.cz",
   "mesto-ul.cz",
   "kr-karlovarsky.cz",
+  "extranet.kr-karlovarsky.cz",
+  "wwwtest.kr-karlovarsky.cz"
 ];
 
 module.exports = {
