@@ -3174,6 +3174,13 @@ export const StreamingResponseExtension = {
         endpoint: "/api/openai-stream",
         displayName: "GPT-5",
       },
+      {
+        id: 44,
+        name: "google/gemini-3-flash-preview",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Gemini 3 Flash Preview",
+      },
     ];
 
     // Function to process model sequence
