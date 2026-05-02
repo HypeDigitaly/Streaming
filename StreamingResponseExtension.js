@@ -3058,10 +3058,10 @@ export const StreamingResponseExtension = {
       },
       {
         id: 28,
-        name: "openai/gpt-5-chat",
+        name: "openai/gpt-5.3-chat",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "GPT 5 Chat",
+        displayName: "GPT 5.3 Chat",
       },
       {
         id: 29,
@@ -3139,10 +3139,10 @@ export const StreamingResponseExtension = {
       },
       {
         id: 39,
-        name: "openai/gpt-5.1",
+        name: "openai/gpt-5.3-chat",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "GPT 5.1 (OpenRouter)",
+        displayName: "GPT 5.3 (OpenRouter)",
       },
 
       // OpenAI GPT-5.1 models (native API)
@@ -3176,7 +3176,7 @@ export const StreamingResponseExtension = {
       },
       {
         id: 44,
-        name: "google/gemini-3-flash-preview",
+        name: "google/gemini-3.1-flash-lite-preview",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
         displayName: "Gemini 3 Flash Preview",
