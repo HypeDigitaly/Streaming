@@ -31,7 +31,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== 'POST') {
-    if (req.headers.debug === '1' || req.body.debugMode === 1) {
+    if (req.headers.debug === '1' || req.body?.debugMode === 1) {
       console.error('❌ Proxy: Invalid method', req.method);
     }
     return res.status(405).json({ error: 'Method not allowed' });
@@ -118,7 +118,7 @@ export default async function handler(req, res) {
     res.end();
 
   } catch (error) {
-    if (req.body.debugMode === 1) {
+    if (req.body?.debugMode === 1) {
       console.error('Stream Error:', error);
     }
     res.write(`data: ${JSON.stringify({ error: error.message })}\n\n`);

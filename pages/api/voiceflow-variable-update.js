@@ -4,16 +4,24 @@ import { whitelistedDomains } from '../../config/domains';
 export default async function handler(req, res) {
   const origin = req.headers.origin;
 
-  // Check if origin is in whitelist
-  const hostname = new URL(origin).hostname.replace(/^www\./, '');
-  if (!origin || !whitelistedDomains.includes(hostname)) {
-    return res.status(403).json({ error: 'Access denied - domain not whitelisted' });
+  // Set CORS headers first so error responses are readable by browsers
+  if (origin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
   }
-
-  res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'false');
+
+  // Check if origin is in whitelist
+  let hostname = null;
+  try {
+    hostname = origin ? new URL(origin).hostname.replace(/^www\./, '') : null;
+  } catch (e) {
+    hostname = null;
+  }
+  if (!hostname || !whitelistedDomains.includes(hostname)) {
+    return res.status(403).json({ error: 'Access denied - domain not whitelisted' });
+  }
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
