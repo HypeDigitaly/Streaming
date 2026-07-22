@@ -2995,14 +2995,14 @@ export const StreamingResponseExtension = {
       },
       {
         id: 19,
-        name: "google/gemini-2.5-pro-preview",
+        name: "google/gemini-2.5-pro",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
         displayName: "Gemini 2.5 Pro",
       },
       {
         id: 20,
-        name: "google/gemini-2.5-flash-preview",
+        name: "google/gemini-2.5-flash",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
         displayName: "Gemini 2.5 Flash",
@@ -3058,10 +3058,10 @@ export const StreamingResponseExtension = {
       },
       {
         id: 28,
-        name: "openai/gpt-5.3-chat",
+        name: "openai/gpt-5.4",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "GPT 5.3 Chat",
+        displayName: "GPT-5.4",
       },
       {
         id: 29,
@@ -3139,10 +3139,10 @@ export const StreamingResponseExtension = {
       },
       {
         id: 39,
-        name: "openai/gpt-5.3-chat",
+        name: "openai/gpt-5.4",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "GPT 5.3 (OpenRouter)",
+        displayName: "GPT-5.4 (OpenRouter)",
       },
 
       // OpenAI GPT-5.1 models (native API)
@@ -3176,10 +3176,10 @@ export const StreamingResponseExtension = {
       },
       {
         id: 44,
-        name: "google/gemini-3-flash-lite-preview",
+        name: "google/gemini-3.1-flash-lite-preview",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "Gemini 3 Flash Lite Preview",
+        displayName: "Gemini 3.1 Flash Lite Preview",
       },
     ];
 
