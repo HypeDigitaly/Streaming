@@ -6,16 +6,24 @@ export default async function handler(req, res) {
 
   const origin = req.headers.origin;
 
+  // Set CORS headers before any checks so error responses also carry proper CORS context
+  if (origin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'false');
+  }
+
   // Check if origin is in whitelist
-  const hostname = new URL(origin).hostname.replace(/^www\./, '');
+  let hostname = '';
+  try {
+    hostname = origin ? new URL(origin).hostname.replace(/^www\./, '') : '';
+  } catch (e) {
+    hostname = '';
+  }
   if (!origin || !whitelistedDomains.includes(hostname)) {
     return res.status(403).json({ error: 'Access denied - domain not whitelisted' });
   }
-
-  res.setHeader('Access-Control-Allow-Origin', origin);
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'false');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
