@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       throw new Error(`API key not found for project: ${projectName}`);
     }
 
-    const modelName = model || 'gemini-2.5-pro-preview-03-25';
+    const modelName = model || 'gemini-2.5-pro';
 
     if (debugMode === 1) {
       console.log('📡 Gemini Payload values:', {
