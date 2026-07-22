@@ -2981,17 +2981,17 @@ export const StreamingResponseExtension = {
       },
       {
         id: 17,
-        name: "anthropic/claude-3.5-sonnet",
+        name: "anthropic/claude-sonnet-4.6",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "Claude 3.5 Sonnet",
+        displayName: "Claude Sonnet 4.6",
       },
       {
         id: 18,
-        name: "meta-llama/llama-3.1-70b-instruct",
+        name: "meta-llama/llama-3.3-70b-instruct",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "Llama 3.1 70B",
+        displayName: "Llama 3.3 70B",
       },
       {
         id: 19,
@@ -3002,7 +3002,7 @@ export const StreamingResponseExtension = {
       },
       {
         id: 20,
-        name: "google/gemini-2.5-flash-preview-09-2025",
+        name: "google/gemini-2.5-flash-preview",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
         displayName: "Gemini 2.5 Flash",
