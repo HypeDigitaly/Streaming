@@ -3176,10 +3176,10 @@ export const StreamingResponseExtension = {
       },
       {
         id: 44,
-        name: "google/gemini-3.7-flash",
+        name: "google/gemini-3.1-flash-lite",
         type: "openrouter",
         endpoint: "/api/openrouter-stream",
-        displayName: "Gemini 3.7 Flash Lite",
+        displayName: "Gemini 3.1 Flash Lite",
       },
     ];
 
