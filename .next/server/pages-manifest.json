@@ -1,6 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/": "pages/index.js"
-}
+{"/_app":"pages/_app.js","/api/claude-stream":"pages/api/claude-stream.js","/api/baseten-stream":"pages/api/baseten-stream.js","/api/gemini-stream":"pages/api/gemini-stream.js","/api/groq-stream":"pages/api/groq-stream.js","/api/mistral-stream":"pages/api/mistral-stream.js","/api/openai-stream":"pages/api/openai-stream.js","/api/openrouter-stream":"pages/api/openrouter-stream.js","/api/perplexity-stream":"pages/api/perplexity-stream.js","/api/sambanova-stream":"pages/api/sambanova-stream.js","/api/xai-stream":"pages/api/xai-stream.js","/":"pages/index.html","/_error":"pages/_error.js","/api/voiceflow-variable-update":"pages/api/voiceflow-variable-update.js","/_document":"pages/_document.js","/404":"pages/404.html"}
