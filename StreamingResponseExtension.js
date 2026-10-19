@@ -3182,6 +3182,13 @@ export const StreamingResponseExtension = {
         endpoint: "/api/openrouter-stream",
         displayName: "Gemini 3.5 Flash Lite",
       },
+      {
+        id: 45,
+        name: "anthropic/claude-haiku-5.5",
+        type: "openrouter",
+        endpoint: "/api/openrouter-stream",
+        displayName: "Claude Haiku 5.5",
+      },
     ];
 
     // Function to process model sequence
@@ -4429,6 +4436,9 @@ export const StreamingResponseExtension = {
                   );
                 }
               } catch (parseError) {
+                // Provider errors must fail this attempt, not be swallowed
+                // as malformed JSON (including errors after partial content).
+                if (!(parseError instanceof SyntaxError)) throw parseError;
                 if (payload.debugMode === 1)
                   console.warn(
                     `Failed to parse SSE data line for ${endpoint}:`,
@@ -4792,6 +4802,17 @@ export const StreamingResponseExtension = {
           if (trace.payload.site_url) payload.site_url = trace.payload.site_url;
           if (trace.payload.site_name)
             payload.site_name = trace.payload.site_name;
+
+          // Only this opt-in model has different sampling capabilities.
+          // payload is fresh for each attempt; never change trace.payload.
+          if (model.name === "anthropic/claude-haiku-5.5") {
+            for (const key of ["temperature", "top_p", "top_k",
+              "presence_penalty", "frequency_penalty", "seed"]) {
+              delete payload[key];
+            }
+            if (trace.payload.reasoning !== undefined)
+              payload.reasoning = trace.payload.reasoning;
+          }
         }
 
         // Call the appropriate LLM API based on model type

@@ -126,6 +126,30 @@ Each LLM provider has its own dedicated streaming endpoint:
 
 ## Data Flow
 
+### Opt-in Claude Haiku 5.5
+
+- Use `modelSequence: "45"` for Haiku 5.5, or `"45,2"` to explicitly
+  fall back to Haiku 4.5. `"2"` still selects Haiku 4.5; default sequences
+  and existing IDs are unchanged.
+- ID 45 uses OpenRouter `anthropic/claude-haiku-5.5`. Both client and proxy
+  omit `temperature`, `top_p`, `top_k`, `presence_penalty`,
+  `frequency_penalty`, and `seed` for this model only.
+- The proxy applies this rule to the primary `model` (or `models[0]`
+  when `model` is absent), including colon suffixes. An OpenRouter `models`
+  fallback array shares one payload; use `modelSequence: "45,2"` for
+  separate attempts that preserve each model's sampling parameters.
+- `tool_choice` supports `auto` and `none`; unsupported choices produce
+  an explicit SSE error rather than silently changing the caller's intent.
+- `reasoning` uses the OpenRouter object format, not native Anthropic
+  `thinking`. It is optional; provider defaults remain in effect when omitted.
+  Reasoning can consume the `max_tokens` budget before visible output.
+- Contract checked against the model's public endpoints API and OpenRouter
+  parameter/reasoning documentation on 2026-10-19:
+  https://openrouter.ai/api/v1/models/anthropic/claude-haiku-5.5/endpoints
+  https://openrouter.ai/docs/api/reference/parameters
+  https://openrouter.ai/docs/guides/best-practices/reasoning-tokens
+- Run regression checks with `npm test`.
+
 1. **Request Validation**: Origin domain checked against whitelist
 2. **API Key Selection**: Project-specific or default API key selection
 3. **Provider Routing**: Request forwarded to appropriate LLM provider

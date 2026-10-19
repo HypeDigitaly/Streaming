@@ -200,6 +200,20 @@ export default async function handler(req, res) {
       }
     }
 
+    // Normalize the final primary model, including OpenRouter variant suffixes.
+    // Keep this narrowly scoped so older clients and Haiku 4.5 stay unchanged.
+    if (typeof payload.model === 'string' &&
+        payload.model.split(':')[0] === 'anthropic/claude-haiku-5.5') {
+      for (const key of ['temperature', 'top_p', 'top_k',
+        'presence_penalty', 'frequency_penalty', 'seed']) {
+        delete payload[key];
+      }
+      if (tool_choice !== undefined &&
+          tool_choice !== 'auto' && tool_choice !== 'none') {
+        throw new Error('Claude Haiku 5.5 supports tool_choice only "auto" or "none"; required or named function choices are not supported.');
+      }
+    }
+
     // Prepare headers
     const headers = {
       'Authorization': `Bearer ${openrouterApiKey}`,
@@ -289,7 +303,11 @@ export default async function handler(req, res) {
               }
 
               if (parsed.error) {
-                throw new Error(`OpenRouter API error: ${parsed.error.message || parsed.error}`);
+                // This is an upstream failure, not malformed JSON. Forward it
+                // so the client can attempt the next configured model.
+                res.write(`data: ${JSON.stringify({ error: `OpenRouter API error: ${parsed.error.message || parsed.error}` })}\n\n`);
+                res.end();
+                return;
               }
 
               // Handle different response formats
